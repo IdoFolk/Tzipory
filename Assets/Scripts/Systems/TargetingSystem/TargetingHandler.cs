@@ -6,10 +6,11 @@ namespace Tzipory.EntitySystem.TargetingSystem
 {
     public class TargetingHandler : MonoBehaviour
     {
+        [SerializeField] private Collider2D _targetingCollider2D;
+        
         private IEntityTargetingComponent _entityTargetingComponent;
         private List<IEntityTargetAbleComponent> _availableTargets;
-
-
+        
         public bool HaveTarget => CurrentTarget != null;
         public IEntityTargetAbleComponent CurrentTarget { get; private set; }
         
@@ -19,13 +20,20 @@ namespace Tzipory.EntitySystem.TargetingSystem
         {
             _availableTargets = new List<IEntityTargetAbleComponent>();
             _entityTargetingComponent = targetingComponent;
-            
         }
 
         public void Init(IEntityTargetingComponent targetingComponent)
         {
             _availableTargets = new List<IEntityTargetAbleComponent>();
             _entityTargetingComponent = targetingComponent;
+            _targetingCollider2D.isTrigger  = true;
+            _targetingCollider2D.transform.localScale = new Vector3(_entityTargetingComponent.TargetingRange.CurrentValue* 1.455f, _entityTargetingComponent.TargetingRange.CurrentValue,1f);//temp
+            _entityTargetingComponent.TargetingRange.OnValueChanged += UpdateTargetingRange;
+        }
+
+        private void UpdateTargetingRange(float value)
+        {
+            _targetingCollider2D.transform.localScale = new Vector3(value * 1.455f, value,1f);//temp
         }
 
         public void SetAttackTarget(IEntityTargetAbleComponent target)
@@ -78,6 +86,11 @@ namespace Tzipory.EntitySystem.TargetingSystem
                 if (targetAbleComponent.EntityInstanceID == CurrentTarget.EntityInstanceID)
                     GetPriorityTarget();
             }
+        }
+
+        private void OnDestroy()
+        {
+            //_entityTargetingComponent.TargetingRange.OnValueChanged -= UpdateTargetingRange;
         }
     }
 }

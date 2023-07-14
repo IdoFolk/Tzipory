@@ -12,14 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseEnemyEntity
       objectReference: {fileID: 0}
-    - target: {fileID: 2750211597899472799, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
-    - target: {fileID: 2750211597899472799, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7921501042575430128, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -379,7 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   basicMoveComponent: {fileID: 4723283581889533953}
-  privateRabbitIncrement: 1
+  privateRabbitIncrement: 5
   acceptableDistanceFromPath: 1.5
   acceptableDistanceToCompletion: 2
   finalLoopSpeed: 0.5

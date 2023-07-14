@@ -8,7 +8,7 @@ namespace Tzipory.EntitySystem.StatusSystem
     public class Stat
     {
         //TEMP!
-        public event Action<float> OnCurrentValueChanged;
+        public event Action<float> OnValueChanged;
         
         [SerializeField,ReadOnly] private string _name;
         [SerializeField,ReadOnly] private int _id;
@@ -47,7 +47,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         private void ChangeValue(float value)
         {
             _currentValue = value;
-            OnCurrentValueChanged?.Invoke(_currentValue);
+            OnValueChanged?.Invoke(_currentValue);
         }
 
         public void SetValue(float amount) =>

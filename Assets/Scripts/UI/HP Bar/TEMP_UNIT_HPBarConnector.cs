@@ -21,7 +21,6 @@ public class TEMP_UNIT_HPBarConnector : MonoBehaviour
     //}
     public void Init(BaseUnitEntity unit)
     {
-
         _unit = unit;
         hP_Bar.Init(_unit.HP.BaseValue);
         //_unit.OnHealthChanged += SetBarToHealth;

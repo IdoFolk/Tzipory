@@ -22,13 +22,13 @@ namespace GameplayeLogic.UIElements
 
         public override void Show()
         {
-            _shaman.HP.OnCurrentValueChanged += UpdateUIData;
+            _shaman.HP.OnValueChanged += UpdateUIData;
             base.Show();
         }
 
         public override void Hide()
         {
-            _shaman.HP.OnCurrentValueChanged -= UpdateUIData;
+            _shaman.HP.OnValueChanged -= UpdateUIData;
             base.Hide();
         }
 

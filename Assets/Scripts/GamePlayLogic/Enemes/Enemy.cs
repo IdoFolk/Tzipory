@@ -30,7 +30,6 @@ namespace Enemes
         public override void Init(BaseUnitEntityConfig parameter)
         {
             base.Init(parameter);
-            gameObject.SetActive(false);
             EntityTeamType = EntityTeamType.Enemy;
             timer = 0;
             _currentDecisionInterval = _decisionInterval;

@@ -22,7 +22,7 @@ namespace Tzipory.EntitySystem.EntityComponents
         public void Init(Stat newSpeed)
         {
             _speedStat = newSpeed;
-            _speedStat.OnCurrentValueChanged += AdjustAgentSpeed;
+            _speedStat.OnValueChanged += AdjustAgentSpeed;
             AdjustAgentSpeed(_speedStat.CurrentValue);
         }
 
@@ -76,7 +76,7 @@ namespace Tzipory.EntitySystem.EntityComponents
         {
             GAME_TIME.OnTimeRateChange -= AdjustAgentSpeedTime;
             if(_speedStat != null)
-                _speedStat.OnCurrentValueChanged -= AdjustAgentSpeed;
+                _speedStat.OnValueChanged -= AdjustAgentSpeed;
         }
 
     }

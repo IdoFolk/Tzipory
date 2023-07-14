@@ -12,7 +12,7 @@
 
         public override void Show()
         {
-            _coreTemple.HP.OnCurrentValueChanged += UpdateUiData;
+            _coreTemple.HP.OnValueChanged += UpdateUiData;
             _maxCount.text = $"/{_coreTemple.HP.BaseValue}";
             UpdateUiData(_coreTemple.HP.CurrentValue);
             base.Show();
@@ -20,7 +20,7 @@
 
         public override void Hide()
         {
-            _coreTemple.HP.OnCurrentValueChanged -= UpdateUiData;
+            _coreTemple.HP.OnValueChanged -= UpdateUiData;
             base.Hide();
         }
     }

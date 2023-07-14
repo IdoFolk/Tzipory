@@ -9,12 +9,12 @@ namespace SerializeData.LevalSerializeData.PartySerializeData
     {
         [SerializeField] private Shaman  _shamanPrefab;
         [SerializeField] private Transform _partyParent;
-        [SerializeField] private BaseUnitEntityConfig[] _entityConfigs;
+        [SerializeField] private ShamanConfig[] _entityConfigs;
 
         public Shaman ShamanPrefab => _shamanPrefab;
 
         public Transform PartyParent => _partyParent;
 
-        public BaseUnitEntityConfig[] EntityConfigs => _entityConfigs;
+        public ShamanConfig[] EntityConfigs => _entityConfigs;
     }
 }

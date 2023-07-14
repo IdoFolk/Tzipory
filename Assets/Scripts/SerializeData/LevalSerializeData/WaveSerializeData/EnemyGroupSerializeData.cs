@@ -9,7 +9,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
     [System.Serializable]
     public class EnemyGroupSerializeData
     {
-        [SerializeField,AssetsOnly,Required] private BaseUnitEntityConfig _enemyConfig;
+        [SerializeField,AssetsOnly,Required] private EnemyConfig _enemyConfig;
         [SerializeField] private  float _groupStartDelay;
         [SerializeField] private int _totalSpawnAmount;
         [SerializeField] private int _spawnAmountPreInterval;
@@ -44,7 +44,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         [ShowInInspector, ReadOnly,PropertyOrder(-1)]
         public float EndTime => _startTime + TotalGroupSpawnTime;
 
-        public BaseUnitEntityConfig EnemyConfig => _enemyConfig;
+        public EnemyConfig EnemyConfig => _enemyConfig;
 
         public int TotalSpawnAmount => _totalSpawnAmount;
         

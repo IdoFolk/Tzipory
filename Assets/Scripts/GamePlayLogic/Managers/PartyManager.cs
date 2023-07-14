@@ -21,7 +21,7 @@ namespace GameplayeLogic.Managers
             _partyParent = partySerializeData.PartyParent;
         }
 
-        private IEnumerable<Shaman> CreateParty(IEnumerable<BaseUnitEntityConfig> party)
+        private IEnumerable<Shaman> CreateParty(IEnumerable<ShamanConfig> party)
         {
             foreach (var entityConfig in party)
             {

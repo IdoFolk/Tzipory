@@ -101,7 +101,6 @@ public class WaveSpawner : MonoBehaviour , IProgress
             if (!enemyGroup.TryGetEnemy(out var entityConfig))
                 return;
             
-            
             var enemy = PoolManager.EnemyPool.GetObject();
             
             enemy.Init(entityConfig);

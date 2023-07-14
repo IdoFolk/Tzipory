@@ -6,16 +6,17 @@ using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.Systems.PoolSystem;
+using Tzipory.Tools.Interface;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Enemes
 {
-    public class Enemy : BaseUnitEntity , IPoolable<Enemy>
+    public class Enemy : BaseUnitEntity , IPoolable<Enemy> , IInitialization<EnemyConfig>
     {
-        [SerializeField,TabGroup("AI")] private float _decisionInterval;//temp
-        [SerializeField,TabGroup("AI")] private float _aggroLevel;//temp
-        [SerializeField,TabGroup("AI")] private float _returnLevel;//temp
+        private float _decisionInterval;//temp
+        private float _aggroLevel;//temp
+        private float _returnLevel;//temp
 
         private bool _isAttacking;
 
@@ -26,6 +27,14 @@ namespace Enemes
         public BasicMoveComponent BasicMoveComponent;
 
         float timer;
+        
+        public void Init(EnemyConfig parameter)
+        {
+            _decisionInterval = parameter.DecisionInterval;
+            _aggroLevel = parameter.AggroLevel;
+            _returnLevel = parameter.ReturnLevel;
+            Init((BaseUnitEntityConfig)parameter);
+        }
         
         public override void Init(BaseUnitEntityConfig parameter)
         {

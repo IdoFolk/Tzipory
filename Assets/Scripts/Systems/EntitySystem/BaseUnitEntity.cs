@@ -192,9 +192,8 @@ namespace Tzipory.EntitySystem.Entitys
             }
         }
 
-        protected override void OnDestroy()
+        protected virtual void OnDestroy()
         {
-            base.OnDestroy();
             if (!IsInitialization)
                 return;
 

@@ -9,10 +9,8 @@ using UnityEngine.Serialization;
 
 namespace Tzipory.EntitySystem.EntityConfigSystem
 {
-
-    [CreateAssetMenu(fileName = "NewEntityConfig", menuName = "ScriptableObjects/Entity/New Entity config", order = 0)]
     //Alon TBC - is this ok? is there a rule/convention that I maybe missed here?
-    public class BaseUnitEntityConfig : ScriptableObject
+    public abstract class BaseUnitEntityConfig : ScriptableObject
     {
         [SerializeField,Tooltip(""),TabGroup("Stats")] private Stat _health;
         [SerializeField,Tooltip(""),TabGroup("Stats")] private Stat _invincibleTime;

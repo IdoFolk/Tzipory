@@ -6,11 +6,12 @@ using Tzipory.EntitySystem.Entitys;
 using Tzipory.Helpers;
 using Sirenix.OdinInspector;
 using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.Tools.Interface;
 using UnityEngine;
 
 namespace Shamans
 {
-    public class Shaman : BaseUnitEntity // may need to make poolable
+    public class Shaman : BaseUnitEntity ,IInitialization<ShamanConfig>
     {
 
         [SerializeField, TabGroup("Proximity Indicator")] private ProximityIndicatorHandler _proximityHandler;
@@ -22,6 +23,11 @@ namespace Shamans
         [SerializeField] private Temp_HeroMovement _tempHeroMovement;
         
         private float _currentAttackRate;
+        
+        public void Init(ShamanConfig parameter)
+        {
+            Init((BaseUnitEntityConfig)parameter);
+        }
 
         public override void Init(BaseUnitEntityConfig parameter)
         {

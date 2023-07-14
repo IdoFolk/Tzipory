@@ -8,7 +8,7 @@ namespace Tzipory.WaveSystem
 {
     public class EnemyGroup : WaveComponent<EnemyGroupSerializeData>
     {
-        private BaseUnitEntityConfig _enemyConfig;
+        private EnemyConfig _enemyConfig;
         
         private int _spawnAmountPreInterval;
 
@@ -31,7 +31,7 @@ namespace Tzipory.WaveSystem
             _spawnAmountPreInterval = enemyGroupSerializeData.SpawnAmountPreInterval;
         }
 
-        public bool TryGetEnemy(out BaseUnitEntityConfig enemyPrefab)
+        public bool TryGetEnemy(out EnemyConfig enemyPrefab)
         {
             if (TotalSpawnAmount <= 0)
             {

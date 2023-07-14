@@ -54,9 +54,9 @@ namespace Tzipory.EntitySystem.Entitys
         
         public bool IsInitialization { get; private set; }
 
-        public virtual void Init(BaseUnitEntityConfig parameter)
+        public virtual void Init(BaseUnitEntityConfig parameter)//need to oder logic to many responsibility
         {
-            gameObject.name = parameter.name;
+            gameObject.name =  $"{parameter.name} InstanceID: {EntityInstanceID}";
 
             List<Stat> stats = new List<Stat>();
             
@@ -80,8 +80,38 @@ namespace Tzipory.EntitySystem.Entitys
             _stats = stats;
 #endif
                
-            StatusHandler = new StatusHandler(stats,this);
+            StatusHandler = new StatusHandler(stats,this);//may need to work in init!
+            
+            DefaultPriorityTargeting =
+                Factory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
+            
+            Targeting.Init(this);
+            
+            StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
+            StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
+            
+            AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
+            
+            SpriteRenderer.sprite = parameter.Sprite;
+            
+            //init Hp_bar
+            if (_doShowHPBar)//Temp!
+                HP.OnValueChanged += _hpBarConnector.SetBarToHealth;
 
+            if (_doShowHPBar)
+                _hpBarConnector.Init(this);
+            else
+                _hpBarConnector.gameObject.SetActive(false);
+            
+            gameObject.SetActive(true);
+            IsInitialization = true;
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            Targeting = GetComponentInChildren<TargetingHandler>();//temp
+            
             _onDeath.ID = Constant.EffectSequenceIds.OnDeath;
             _onAttack.ID = Constant.EffectSequenceIds.OnAttack;
             _onCritAttack.ID = Constant.EffectSequenceIds.OnCritAttack;
@@ -105,37 +135,11 @@ namespace Tzipory.EntitySystem.Entitys
                 _onGetHit,
                 _onGetCritHit
             };
-            
-            DefaultPriorityTargeting =
-                Factory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
-            
-            Targeting = GetComponentInChildren<TargetingHandler>();//temp
-            Targeting.Init(this);
 
             EffectSequenceHandler = new EffectSequenceHandler(this,effectSequence);
-
-            StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
-            StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
-            
-            
-            AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
-            
-            SpriteRenderer.sprite = parameter.Sprite;
-            
-            //init Hp_bar
-            if (_doShowHPBar)//Temp!
-                HP.OnValueChanged += _hpBarConnector.SetBarToHealth;
-
-            if (_doShowHPBar)
-                _hpBarConnector.Init(this);
-            else
-                _hpBarConnector.gameObject.SetActive(false);
-            
-            gameObject.SetActive(true);
-            IsInitialization = true;
         }
 
-       
+
         protected override void Update()
         {
             base.Update();

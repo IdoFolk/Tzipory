@@ -26,8 +26,10 @@ namespace Tzipory.EntitySystem.TargetingSystem
         {
             _availableTargets = new List<IEntityTargetAbleComponent>();
             _entityTargetingComponent = targetingComponent;
+            
             _targetingCollider2D.isTrigger  = true;
-            _targetingCollider2D.transform.localScale = new Vector3(_entityTargetingComponent.TargetingRange.CurrentValue* 1.455f, _entityTargetingComponent.TargetingRange.CurrentValue,1f);//temp
+            _targetingCollider2D.transform.localScale = new Vector3(_entityTargetingComponent.TargetingRange.CurrentValue* 1.455f, _entityTargetingComponent.TargetingRange.CurrentValue,1f);//temp need to be const
+            
             _entityTargetingComponent.TargetingRange.OnValueChanged += UpdateTargetingRange;
         }
 

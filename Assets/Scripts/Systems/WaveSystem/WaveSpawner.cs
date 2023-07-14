@@ -109,9 +109,6 @@ public class WaveSpawner : MonoBehaviour , IProgress
             var enemyMoveComponent = enemy.GetComponent<MovementOnPath>();//temp!
             enemyMoveComponent.SetPath(myPathCreator);
             enemyMoveComponent.AdvanceOnPath();
-#if UNITY_EDITOR
-            enemy.gameObject.name = $"Enemy InstanceID: {enemy.EntityInstanceID}";
-#endif
         }
     }
 

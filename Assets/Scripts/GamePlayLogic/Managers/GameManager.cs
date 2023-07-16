@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     public static LevelManager LevelManager { get; private set; }
     public static CoreTemple CoreTemplete { get; private set; }
     
+    public bool IsGameRunning { get; private set; }
+    
     [SerializeField, TabGroup("Level manager")]
     private Transform _levelParent;
     [SerializeField, TabGroup("Level manager")]
@@ -38,7 +40,7 @@ public class GameManager : MonoBehaviour
         PartyManager = new PartyManager(_partySerializeData);
         LevelManager  = new LevelManager(_levelSerializeData,_levelParent);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
-
+        IsGameRunning = true;
     }
 
     private void Update()
@@ -69,7 +71,10 @@ public class GameManager : MonoBehaviour
 
     private void EndGame(bool isWon)
     {
+        if (!IsGameRunning) return;
+        
         OnEndGame?.Invoke(isWon);
+        IsGameRunning = false;
     }
 
     public void Quit()

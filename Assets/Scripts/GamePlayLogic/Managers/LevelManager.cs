@@ -78,12 +78,13 @@ namespace Tzipory.Leval
             _delayBetweenWavesTimer = null;
             _delayBetweenWaves = _levelSerializeData.DelayBetweenWaves;
             CurrentWave.EndWave();
-            _currentWaveIndex++;
+
+            if (_currentWaveIndex + 1 < _waves.Count)
+                _currentWaveIndex++;
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using ConfigFiles;
 using Systems.UISystem;
 using TMPro;
 using UnityEngine;
@@ -8,6 +8,8 @@ namespace GameplayeLogic.UIElements
     public class EndScreenUiHandler : BaseUIElement
     {
         [SerializeField] private TMP_Text _title;
+        [SerializeField] private TMP_Text _tips;
+        [SerializeField] private EndScreenTextsConfig _config;
         [SerializeField] private EndScreenEnemiesKilledUIHandler  _enemiesKilledHandler;
         [SerializeField] private EndScreenTimeUIHandler _timeHandler;
         [SerializeField] private EndScreenWaveUIHandler _waveUIHandler;
@@ -15,6 +17,7 @@ namespace GameplayeLogic.UIElements
         private void Awake()
         {
             GameManager.OnEndGame += OpenEndScreen;
+            Hide();//temp
         }
 
         private void OnDestroy()
@@ -25,6 +28,7 @@ namespace GameplayeLogic.UIElements
         private void OpenEndScreen(bool isWon)
         { 
             _title.text = isWon ? "You won!" : "You lost!";
+            _tips.text  = isWon ? _config.WinText[Random.Range(0,_config.WinText.Length)] : _config.LoseText[Random.Range(0,_config.LoseText.Length)];
             Show();
         }
 

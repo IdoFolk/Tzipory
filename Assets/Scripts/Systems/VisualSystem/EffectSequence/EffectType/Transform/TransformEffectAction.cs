@@ -1,12 +1,13 @@
 ﻿using System;
 using SerializeData.VisualSystemSerializeData;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.PoolSystem;
 using Tzipory.VisualSystem.EffectSequence.EffectActionTypeSO;
 using UnityEngine;
 
 namespace Tzipory.VisualSystem.EffectSequence.EffectType
 {
-    public class TransformEffectAction : BaseEffectAction
+    public class TransformEffectAction : BaseEffectAction , IPoolable<TransformEffectAction>
     {
         private TransformEffectActionSO _transformEffectActionSO;
 
@@ -33,14 +34,16 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
                 return Mathf.Max(moveDuration,scaleDuration,rotationDuration);
             }
         }
-        
-        public TransformEffectAction(EffectActionContainerData actionContainerData,IEntityVisualComponent visualComponent) : base(actionContainerData,visualComponent)
+
+        public override void Init(EffectActionContainerData actionContainerData, IEntityVisualComponent visualComponent)
         {
+            base.Init(actionContainerData, visualComponent);
+            
             var config = GetConfig<TransformEffectActionSO>(actionContainerData.EffectActionSo);
             
             _transformEffectActionSO  = config;
         }
-        
+
         protected override void OnStartEffectAction()
         {
             _originalPosition = VisualComponent.EntityTransform.position;
@@ -70,6 +73,18 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
         {
             OnCompleteEffectAction();
         }
+
+        #region PoolObject
+
+        public event Action<TransformEffectAction> OnDispose;
+        public void Dispose() => OnDispose?.Invoke(this);
+
+        public void Free()
+        {
+            _transformEffectActionSO = null;
+        }
+
+        #endregion
     }
     
     [Serializable]

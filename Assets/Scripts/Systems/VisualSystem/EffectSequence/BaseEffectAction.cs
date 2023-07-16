@@ -1,40 +1,53 @@
 ﻿using System;
-using System.Timers;
 using SerializeData.VisualSystemSerializeData;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Tools.Interface;
 
 namespace Tzipory.VisualSystem.EffectSequence
 {
-    public abstract class BaseEffectAction
+    public abstract class BaseEffectAction : IInitialization<EffectActionContainerData,IEntityVisualComponent>
     {
         public event Action<BaseEffectAction> OnEffectActionComplete;
         
-        private readonly float _startDelay;
+        private float _startDelay;
         
         private ITimer _startDelayTimer;
         private ITimer _endDelayTimer;
         private ITimer _completeTimer;
         
-        public EffectActionStartType ActionStartType { get; }
+        public EffectActionStartType ActionStartType { get; private set; }
         public bool IsActive { get; private set; }
         
         protected abstract float Duration { get; }
-        protected IEntityVisualComponent VisualComponent { get; }
+        protected IEntityVisualComponent VisualComponent { get; private set; }
 
-        private bool DisableUndo { get; }
+        private bool _disableUndo;
         private bool IsStarted { get; set; }
-
-        protected BaseEffectAction(EffectActionContainerData actionContainerData,IEntityVisualComponent visualComponent)
+        
+        public bool IsInitialization { get; private set; }
+        
+        protected BaseEffectAction()
+        {
+            IsActive = false;
+            IsStarted = false;
+            IsInitialization = false;
+        }
+        
+        public virtual void Init(EffectActionContainerData actionContainerData, IEntityVisualComponent visualComponent)
         {
             VisualComponent = visualComponent;
             _startDelay = actionContainerData.StartDelay;
             ActionStartType = actionContainerData.EffectActionStart;
-            DisableUndo = actionContainerData.DisableUndo;
+            _disableUndo = actionContainerData.DisableUndo;
+            IsInitialization = true;
         }
         
         public void ActivateActionEffect()                                                           
-        {                                                                                            
+        {
+            if (!IsInitialization)
+                throw  new Exception("EffectAction not initialized!");
+            
             IsActive = true;                                                                         
             _startDelayTimer = VisualComponent.GameEntity.EntityTimer.StartNewTimer(_startDelay);    
         }                                                                                            
@@ -48,7 +61,7 @@ namespace Tzipory.VisualSystem.EffectSequence
         
         private void CompleteEffectAction()
         {
-            if (!DisableUndo)
+            if (!_disableUndo)
                 OnUndoEffectAction();
             
             OnCompleteEffectAction();
@@ -67,7 +80,7 @@ namespace Tzipory.VisualSystem.EffectSequence
             VisualComponent.GameEntity.EntityTimer.StopTimer(_completeTimer);
             //need to add more logic!
 
-            if (!DisableUndo)
+            if (!_disableUndo)
                 OnUndoEffectAction();
 
             OnInterruptEffectAction();

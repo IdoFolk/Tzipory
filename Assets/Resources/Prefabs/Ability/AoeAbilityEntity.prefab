@@ -58,11 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5602764745902702606, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: _scale
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5602764745902702606, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: _isoOffSet
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: m_Size.x
@@ -75,10 +75,22 @@ PrefabInstance:
     - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+      objectReference: {fileID: 21300000, guid: e9abd7edf398419468425e0f742da96a, type: 3}
     - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: m_Color.a
-      value: 0.28235295
+      value: 0.4627451
+      objectReference: {fileID: 0}
+    - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
+      propertyPath: m_Color.b
+      value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
+      propertyPath: m_Color.g
+      value: 0.990566
+      objectReference: {fileID: 0}
+    - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
+      propertyPath: m_Color.r
+      value: 0.990566
       objectReference: {fileID: 0}
     - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: m_WasSpriteAssigned
@@ -86,11 +98,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8200931897204109112, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8200931897204109112, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

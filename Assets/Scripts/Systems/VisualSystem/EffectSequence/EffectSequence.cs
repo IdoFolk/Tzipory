@@ -1,20 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Factory;
 using SerializeData.VisualSystemSerializeData;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.GamePlayLogic.ObjectPools;
+using Tzipory.Systems.PoolSystem;
+using Tzipory.Tools.Interface;
 
 namespace Tzipory.VisualSystem.EffectSequence
 {
-    public class EffectSequence
+    public class EffectSequence : IInitialization<IEntityVisualComponent,EffectSequenceData> , IPoolable<EffectSequence>
     {
         public event Action<EffectSequence> OnEffectSequenceComplete;
 
         #region Fields
 
-        private readonly float _startDelay;
+        private float _startDelay;
         
         private List<BaseEffectAction> _effectActions;
 
@@ -33,46 +35,56 @@ namespace Tzipory.VisualSystem.EffectSequence
         public bool IsActive { get; private set; }
 
 
-        public bool IsInterruptable { get; }
+        public bool IsInterruptable { get; private set; }
         
-        public string SequenceName { get; }
+        public string SequenceName { get; private set; }
 
-        public int ID { get; }
+        public int ID { get; private set; }
 
+        public bool IsInitialization { get; private  set; }
         public bool AllEffectActionDone => _effectActions.All(effectAction => !effectAction.IsActive);
         
         #endregion
 
         #region PublicMethod
 
-        public EffectSequence(IEntityVisualComponent visualComponent,EffectSequenceData sequenceData)
+        public EffectSequence()
         {
-            SequenceName = sequenceData.SequenceName;
-            ID = sequenceData.ID;
-            _startDelay = sequenceData.StartDelay;
-            IsInterruptable = sequenceData.IsInterruptable;
+            IsInitialization  = false;
+        }
+
+
+        public void Init(IEntityVisualComponent parameter1, EffectSequenceData parameter2)
+        {
+            SequenceName = parameter2.SequenceName;
+            ID = parameter2.ID;
+            _startDelay = parameter2.StartDelay;
+            IsInterruptable = parameter2.IsInterruptable;
 
             IsActive = false;
             _isStarted = false;
             
-            _entityVisualComponent  = visualComponent;
+            _entityVisualComponent  = parameter1;
             _effectActions = new List<BaseEffectAction>();
 
-            foreach (var effectActionContainer in sequenceData.EffectActionContainers)
+            foreach (var effectActionContainer in parameter2.EffectActionContainers)
             {
-                var effectAction = EffectActionFactory.GetEffectAction(effectActionContainer,visualComponent);
+                BaseEffectAction effectAction = PoolManager.VisualSystemPool.GetEffectAction(effectActionContainer);
+                effectAction.Init(effectActionContainer,_entityVisualComponent);
                 effectAction.OnEffectActionComplete += OnActionComplete;
                 _effectActions.Add(effectAction);
             }
             
             _currentEffectActionIndex = 0;
+            
+            IsInitialization = true;
         }
         
 
         #endregion
 
         #region PrivateMethod
-
+        
         private void OnCompleteEffectSequence()
         {
             IsActive = false;
@@ -131,6 +143,9 @@ namespace Tzipory.VisualSystem.EffectSequence
 
         public void StartEffectSequence()
         {
+            if (!IsInitialization)
+                throw  new Exception("EffectSequence is not initialized");
+
             _startDelayTimer = _entityVisualComponent.GameEntity.EntityTimer.StartNewTimer(_startDelay);
             
             IsActive = true;
@@ -156,12 +171,27 @@ namespace Tzipory.VisualSystem.EffectSequence
 
         #endregion
 
-        ~EffectSequence()
+        // ~EffectSequence()
+        // {
+        //     foreach (var effectAction in _effectActions)
+        //     {
+        //         effectAction.OnEffectActionComplete -= OnActionComplete;
+        //     }
+        // }
+
+        #region PoolObject
+
+        public event Action<EffectSequence> OnDispose;
+        public void Dispose()=>
+            OnDispose?.Invoke(this);
+
+        public void Free()
         {
-            foreach (var effectAction in _effectActions)
-            {
-                effectAction.OnEffectActionComplete -= OnActionComplete;
-            }
+            _effectActions = null;
+            _startDelayTimer = null;
+            _entityVisualComponent = null;
         }
+
+        #endregion
     }
 }

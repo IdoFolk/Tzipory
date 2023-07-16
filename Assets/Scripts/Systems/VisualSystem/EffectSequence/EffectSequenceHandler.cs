@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using SerializeData.VisualSystemSerializeData;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.GamePlayLogic.ObjectPools;
 using UnityEngine;
 
 namespace Tzipory.VisualSystem.EffectSequence
@@ -29,7 +30,9 @@ namespace Tzipory.VisualSystem.EffectSequence
             if (effectSequenceData.IsInterruptable)
                 RemoveEffectSequence(effectSequenceData.ID);
 
-            var effectSequence = new EffectSequence(_entityVisualComponent,effectSequenceData);
+            EffectSequence effectSequence = PoolManager.VisualSystemPool.GetEffectSequence(effectSequenceData);
+            
+            effectSequence.Init(_entityVisualComponent,effectSequenceData);      
             
             effectSequence.StartEffectSequence();
             

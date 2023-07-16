@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fefaa5ef5471cc4ebfa0a75d56ffeb7, type: 3}
+  m_Name: Level 1
+  m_EditorClassIdentifier: 
+  _level: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+  _levelStartDelay: 1
+  _delayBetweenWaves: 0
+  _waves:
+  - _name: Wave 1
+    _waveSpawnerSerializeDatas:
+    - _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
+        _groupStartDelay: 0
+        _totalSpawnAmount: 5
+        _spawnAmountPreInterval: 5
+        _spawnInterval: 1
+        _startType: 0
+        _startTime: 1
+    - _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups: []
+    - _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups: []

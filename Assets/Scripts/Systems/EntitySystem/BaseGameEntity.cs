@@ -31,11 +31,6 @@ namespace Tzipory.EntitySystem
         {
             EntityTimer.TickAllTimers();
         }
-
-        protected  virtual void OnDestroy()
-        {
-            
-        }
     }
     
 }

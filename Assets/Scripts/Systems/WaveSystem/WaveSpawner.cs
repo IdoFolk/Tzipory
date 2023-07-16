@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.Tools.Enums;
 using Tzipory.Tools.Interface;
@@ -97,18 +98,16 @@ public class WaveSpawner : MonoBehaviour , IProgress
 
         foreach (var enemyGroup in _activeEnemyGroup)
         {
-            if (!enemyGroup.TryGetEnemy(out var enemyPrefab))
+            if (!enemyGroup.TryGetEnemy(out var entityConfig))
                 return;
-
-            var enemy = Instantiate(enemyPrefab, _spawnPositions[Random.Range(0, _spawnPositions.Length)].position,
-                Quaternion.identity); //temp!! need to add pool system
-
+            
+            var enemy = PoolManager.EnemyPool.GetObject();
+            
+            enemy.Init(entityConfig);
+            enemy.transform.position = _spawnPositions[Random.Range(0, _spawnPositions.Length)].position;
             var enemyMoveComponent = enemy.GetComponent<MovementOnPath>();//temp!
             enemyMoveComponent.SetPath(myPathCreator);
             enemyMoveComponent.AdvanceOnPath();
-#if UNITY_EDITOR
-            enemy.gameObject.name = $"Enemy InstanceID: {enemy.EntityInstanceID}";
-#endif
         }
     }
 

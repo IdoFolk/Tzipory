@@ -1,7 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
+
 namespace Tzipory.EntitySystem.TargetingSystem.TargetingPriorites
 {
 

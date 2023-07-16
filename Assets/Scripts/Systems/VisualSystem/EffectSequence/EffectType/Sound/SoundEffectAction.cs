@@ -1,11 +1,14 @@
-﻿using SerializeData.VisualSystemSerializeData;
+﻿using System;
+using SerializeData.VisualSystemSerializeData;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.PoolSystem;
 using Tzipory.VisualSystem.EffectSequence.EffectActionTypeSO;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-namespace Tzipory.VisualSystem.EffectSequence.EffectType.Sound
+namespace Tzipory.VisualSystem.EffectSequence.EffectType
 {
-    public class SoundEffectAction : BaseEffectAction
+    public class SoundEffectAction : BaseEffectAction , IPoolable<SoundEffectAction>
     {
         private AudioClip[] _audioClips;
         
@@ -19,8 +22,10 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType.Sound
 
         protected override float Duration => _selectedAudioClip.length;
 
-        public SoundEffectAction(EffectActionContainerData actionContainerData,IEntityVisualComponent visualComponent) : base(actionContainerData,visualComponent)
+        public override void Init(EffectActionContainerData actionContainerData, IEntityVisualComponent visualComponent)
         {
+            base.Init(actionContainerData, visualComponent);
+            
             var config = GetConfig<SoundEffectActionSO>(actionContainerData.EffectActionSo);
 
             _audioClips = config.AudioClips;
@@ -29,7 +34,7 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType.Sound
             _pitchRange = config.PitchRange;
             _randomVolume = config.RandomVolume;
         }
-        
+
         protected override void OnStartEffectAction()
         {
             float pitch = 1;
@@ -59,6 +64,15 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType.Sound
 
         protected override void OnInterruptEffectAction()
         {
+        }
+
+        public event Action<SoundEffectAction> OnDispose;
+        public void Dispose() => OnDispose?.Invoke(this);
+        
+        public void Free()
+        {
+            _audioClips = null;
+            _selectedAudioClip = null;
         }
     }
 }

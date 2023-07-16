@@ -9,27 +9,22 @@ using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.EntitySystem.TargetingSystem;
+using Tzipory.Tools.Interface;
 using Tzipory.Tools.Sound;
 using Tzipory.VisualSystem.EffectSequence;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.Entitys
 {
-    public abstract class BaseUnitEntity : BaseGameEntity , IEntityTargetAbleComponent , IEntityCombatComponent , IEntityMovementComponent , IEntityTargetingComponent , IEntityAbilitiesComponent,IEntityVisualComponent
+    public abstract class BaseUnitEntity : BaseGameEntity , IEntityTargetAbleComponent , IEntityCombatComponent , IEntityMovementComponent , 
+        IEntityTargetingComponent , IEntityAbilitiesComponent,IEntityVisualComponent,IInitialization<BaseUnitEntityConfig>
     {
-
         #region Fields
-        
-        [Header("Entity config")]
-        [SerializeField] private BaseUnitEntityConfig _config;
-      
-        
+
 #if UNITY_EDITOR
         [SerializeField, ReadOnly,TabGroup("Stats")] private List<Stat> _stats;
 #endif
         [SerializeField,TabGroup("Component")] private CircleCollider2D _bodyCollider;
-        //[SerializeField,TabGroup("Component")] private CircleCollider2D _rangeCollider;
-        [SerializeField,TabGroup("Component")] private Collider2D _rangeCollider;
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private SpriteRenderer _spriteRenderer;
         [SerializeField,TabGroup("Component")] private Transform _visualQueueEffectPosition;
@@ -57,33 +52,28 @@ namespace Tzipory.EntitySystem.Entitys
         #endregion
 
         #region UnityCallBacks
+        
+        public bool IsInitialization { get; private set; }
 
-        protected override void Awake()//temp!!!
+        public virtual void Init(BaseUnitEntityConfig parameter)//need to oder logic to many responsibility
         {
-            base.Awake();
-            DefaultPriorityTargeting =
-                Factory.TargetingPriorityFactory.GetTargetingPriority(this, _config.TargetingPriority);
-            
-            Targeting = GetComponentInChildren<TargetingHandler>();//temp
-            Targeting.Init(this);
-
-            //TEMP HP BAR INIT
+            gameObject.name =  $"{parameter.name} InstanceID: {EntityInstanceID}";
 
             List<Stat> stats = new List<Stat>();
             
-            stats.Add(new Stat(Constant.Stats.Health.ToString(), _config.Health.BaseValue, _config.Health.MaxValue,                         (int)Constant.Stats.Health));
-            stats.Add(new Stat(Constant.Stats.InvincibleTime.ToString(), _config.InvincibleTime.BaseValue, _config.InvincibleTime.MaxValue, (int)Constant.Stats.InvincibleTime));
-            stats.Add(new Stat(Constant.Stats.AttackDamage.ToString(), _config.AttackDamage.BaseValue, _config.AttackDamage.MaxValue,       (int)Constant.Stats.AttackDamage));
-            stats.Add(new Stat(Constant.Stats.CritDamage.ToString(), _config.CritDamage.BaseValue, _config.CritDamage.MaxValue,             (int)Constant.Stats.CritDamage));
-            stats.Add(new Stat(Constant.Stats.CritChance.ToString(), _config.CritChance.BaseValue, _config.CritChance.MaxValue,             (int)Constant.Stats.CritChance));
-            stats.Add(new Stat(Constant.Stats.AttackRate.ToString(), _config.AttackRate.BaseValue, _config.AttackRate.MaxValue,             (int)Constant.Stats.AttackRate));
-            stats.Add(new Stat(Constant.Stats.AttackRange.ToString(), _config.AttackRange.BaseValue, _config.AttackRange.MaxValue,          (int)Constant.Stats.AttackRange));
-            stats.Add(new Stat(Constant.Stats.TargetingRange.ToString(), _config.TargetingRange.BaseValue, _config.TargetingRange.MaxValue, (int)Constant.Stats.TargetingRange));
-            stats.Add(new Stat(Constant.Stats.MovementSpeed.ToString(), _config.MovementSpeed.BaseValue, _config.MovementSpeed.MaxValue,    (int)Constant.Stats.MovementSpeed));
+            stats.Add(new Stat(Constant.Stats.Health.ToString(), parameter.Health.BaseValue, parameter.Health.MaxValue,                         (int)Constant.Stats.Health));
+            stats.Add(new Stat(Constant.Stats.InvincibleTime.ToString(), parameter.InvincibleTime.BaseValue, parameter.InvincibleTime.MaxValue, (int)Constant.Stats.InvincibleTime));
+            stats.Add(new Stat(Constant.Stats.AttackDamage.ToString(), parameter.AttackDamage.BaseValue, parameter.AttackDamage.MaxValue,       (int)Constant.Stats.AttackDamage));
+            stats.Add(new Stat(Constant.Stats.CritDamage.ToString(), parameter.CritDamage.BaseValue, parameter.CritDamage.MaxValue,             (int)Constant.Stats.CritDamage));
+            stats.Add(new Stat(Constant.Stats.CritChance.ToString(), parameter.CritChance.BaseValue, parameter.CritChance.MaxValue,             (int)Constant.Stats.CritChance));
+            stats.Add(new Stat(Constant.Stats.AttackRate.ToString(), parameter.AttackRate.BaseValue, parameter.AttackRate.MaxValue,             (int)Constant.Stats.AttackRate));
+            stats.Add(new Stat(Constant.Stats.AttackRange.ToString(), parameter.AttackRange.BaseValue, parameter.AttackRange.MaxValue,          (int)Constant.Stats.AttackRange));
+            stats.Add(new Stat(Constant.Stats.TargetingRange.ToString(), parameter.TargetingRange.BaseValue, parameter.TargetingRange.MaxValue, (int)Constant.Stats.TargetingRange));
+            stats.Add(new Stat(Constant.Stats.MovementSpeed.ToString(), parameter.MovementSpeed.BaseValue, parameter.MovementSpeed.MaxValue,    (int)Constant.Stats.MovementSpeed));
             
-            if (_config.Stats != null && _config.Stats.Count > 0)
+            if (parameter.Stats != null && parameter.Stats.Count > 0)
             {
-                foreach (var stat in _config.Stats)
+                foreach (var stat in parameter.Stats)
                     stats.Add(new Stat(stat.Name, stat.BaseValue, stat.MaxValue, stat.Id));
             }
             
@@ -91,8 +81,38 @@ namespace Tzipory.EntitySystem.Entitys
             _stats = stats;
 #endif
                
-            StatusHandler = new StatusHandler(stats,this);
+            StatusHandler = new StatusHandler(stats,this);//may need to work in init!
+            
+            DefaultPriorityTargeting =
+                Factory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
+            
+            Targeting.Init(this);
+            
+            StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
+            StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
+            
+            AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
+            
+            SpriteRenderer.sprite = parameter.Sprite;
+            
+            //init Hp_bar
+            if (_doShowHPBar)//Temp!
+                HP.OnValueChanged += _hpBarConnector.SetBarToHealth;
 
+            if (_doShowHPBar)
+                _hpBarConnector.Init(this);
+            else
+                _hpBarConnector.gameObject.SetActive(false);
+            
+            gameObject.SetActive(true);
+            IsInitialization = true;
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            Targeting = GetComponentInChildren<TargetingHandler>();//temp
+            
             _onDeath.ID = Constant.EffectSequenceIds.OnDeath;
             _onAttack.ID = Constant.EffectSequenceIds.OnAttack;
             _onCritAttack.ID = Constant.EffectSequenceIds.OnCritAttack;
@@ -118,31 +138,16 @@ namespace Tzipory.EntitySystem.Entitys
             };
 
             EffectSequenceHandler = new EffectSequenceHandler(this,effectSequence);
-
-            StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
-            StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
-            
-            
-            AbilityHandler = new AbilityHandler(this,this, _config.AbilityConfigs);
-
-            _rangeCollider.isTrigger = true;
-
         }
-        protected virtual void Start()
-        {
-            if (_doShowHPBar)//Temp!
-                HP.OnCurrentValueChanged += _hpBarConnector.SetBarToHealth;
 
-            if (_doShowHPBar)
-                _hpBarConnector.Init(this);
-            else
-                _hpBarConnector.gameObject.SetActive(false);
-        }
 
         protected override void Update()
         {
             base.Update();
-            
+
+            if (!IsInitialization)
+                return;
+
             HealthComponentUpdate();
             StatusHandler.UpdateStatusEffects();
 
@@ -150,9 +155,6 @@ namespace Tzipory.EntitySystem.Entitys
                 Targeting.GetPriorityTarget();
             
             EffectSequenceHandler.UpdateEffectHandler();
-            
-            //TEMP AF!!!
-            _rangeCollider.transform.localScale = new Vector3(TargetingRange.CurrentValue* 1.455f, TargetingRange.CurrentValue,1f);//temp
             
             UpdateEntity();
         }
@@ -163,23 +165,23 @@ namespace Tzipory.EntitySystem.Entitys
         {
             _soundHandler ??= GetComponentInChildren<SoundHandler>();
 
-            if (_bodyCollider == null || _rangeCollider == null)
-            {
-                var colliders = GetComponents<CircleCollider2D>();
-
-                foreach (var collider in colliders)
-                {
-                    if (collider.isTrigger)
-                        _rangeCollider = collider;
-                    else
-                        _bodyCollider = collider;
-                }
-            }
+            // if (_bodyCollider == null || _rangeCollider == null)
+            // {
+            //     var colliders = GetComponents<CircleCollider2D>();
+            //
+            //     foreach (var collider in colliders)
+            //     {
+            //         if (collider.isTrigger)
+            //             _rangeCollider = collider;
+            //         else
+            //             _bodyCollider = collider;
+            //     }
+            // }
         }
 
         private void OnDrawGizmosSelected()
         {
-            Gizmos.DrawWireSphere(transform.position,_config.AttackRange.BaseValue / 2);
+           // Gizmos.DrawWireSphere(transform.position,_config.AttackRange.BaseValue / 2);
 
             if (Targeting != null)
             {
@@ -191,12 +193,15 @@ namespace Tzipory.EntitySystem.Entitys
             }
         }
 
-        private void OnDisable()
+        protected virtual void OnDestroy()
         {
+            if (!IsInitialization)
+                return;
+
             StatusHandler.OnStatusEffectInterrupt -= EffectSequenceHandler.RemoveEffectSequence;
             StatusHandler.OnStatusEffectAdded -= AddStatusEffectVisual;
 
-            HP.OnCurrentValueChanged  -= _hpBarConnector.SetBarToHealth;
+            HP.OnValueChanged  -= _hpBarConnector.SetBarToHealth;
         }
 
         #endregion
@@ -204,14 +209,13 @@ namespace Tzipory.EntitySystem.Entitys
         #region TargetingComponent
 
         public Stat TargetingRange => StatusHandler.GetStatById((int)Constant.Stats.TargetingRange);
+        public bool IsTargetAble { get; }
         public EntityTeamType EntityTeamType { get; protected set; }
-        
         public IPriorityTargeting DefaultPriorityTargeting { get; private set; }
         public TargetingHandler Targeting { get; set; }
+        
         public float GetDistanceToTarget(IEntityTargetAbleComponent targetAbleComponent)
-        {
-            return Vector2.Distance(transform.position, targetAbleComponent.EntityTransform.position);
-        }
+            => Vector2.Distance(transform.position, targetAbleComponent.EntityTransform.position);
 
         #endregion
 
@@ -220,7 +224,6 @@ namespace Tzipory.EntitySystem.Entitys
         private float  _currentInvincibleTime;
 
         public Stat HP => StatusHandler.GetStatById((int)Constant.Stats.Health);
-        
         public Stat InvincibleTime => StatusHandler.GetStatById((int)Constant.Stats.InvincibleTime);
         public bool IsDamageable { get; private set; }
         public bool IsEntityDead => HP.CurrentValue <= 0;
@@ -258,13 +261,9 @@ namespace Tzipory.EntitySystem.Entitys
                     _currentInvincibleTime = InvincibleTime.CurrentValue;
                 }
             }
-            
+
             if (HP.CurrentValue < 0)
-            {
-                gameObject.SetActive(false);
-                EntityTimer.StartNewTimer(2f, () => { Destroy(gameObject); });
-                //effectplay
-            }
+                OnEntityDead();
         }
 
         #endregion
@@ -278,10 +277,9 @@ namespace Tzipory.EntitySystem.Entitys
         public Stat CritChance => StatusHandler.GetStatById((int)Constant.Stats.CritChance);
         public Stat AttackRate => StatusHandler.GetStatById((int)Constant.Stats.AttackRate);
         public Stat AttackRange => StatusHandler.GetStatById((int)Constant.Stats.AttackRange);
-        
-        public virtual void Attack()
-        {
-        }
+
+        public abstract void Attack();
+        public abstract void OnEntityDead();
 
         #endregion
 

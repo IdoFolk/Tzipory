@@ -2882,12 +2882,12 @@ PrefabInstance:
       objectReference: {fileID: 7330099708541644612, guid: 653c4468a24830841aa7c6d5cc9ef9b1, type: 3}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 99af30be8cda2534b9ade94303b13d40, type: 2}
+      objectReference: {fileID: 11400000, guid: 565eedfaa42b4574ebe5073c49f8f341, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.data[1]
       value: 

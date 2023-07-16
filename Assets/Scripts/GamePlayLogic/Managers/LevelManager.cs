@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.WaveSystem;
@@ -8,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace Tzipory.Leval
 {
-    public class LevelManager
+    public class LevelManager : IDisposable
     {
         public event Action<int> OnNewWaveStarted;
         
@@ -28,6 +29,10 @@ namespace Tzipory.Leval
         public int WaveNumber => _currentWaveIndex + 1;
 
         public int TotalNumberOfWaves => _waves.Count;
+        
+        public  bool IsLastWave => _currentWaveIndex == _waves.Count - 1;
+
+        public bool AllWaveAreDone => _waves.All(wave => wave.IsDone);
         
         private Wave CurrentWave => _waves[_currentWaveIndex];
 
@@ -74,6 +79,11 @@ namespace Tzipory.Leval
             _delayBetweenWaves = _levelSerializeData.DelayBetweenWaves;
             CurrentWave.EndWave();
             _currentWaveIndex++;
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

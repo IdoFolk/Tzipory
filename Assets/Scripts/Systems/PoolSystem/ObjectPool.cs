@@ -6,6 +6,8 @@ namespace Tzipory.Systems.PoolSystem
 {
     public class ObjectPool<T> where T : class, IPoolable<T> 
     {
+        public event Action<T> OnObjectGet;
+
         private readonly Action<T> OnGet;
         private readonly Action<T> OnReturn;
 
@@ -111,6 +113,7 @@ namespace Tzipory.Systems.PoolSystem
             {
                 newObject.OnDispose += Return;
                 OnGet?.Invoke(newObject);
+                OnObjectGet?.Invoke(newObject);
                 return newObject;
             }
 
@@ -120,6 +123,7 @@ namespace Tzipory.Systems.PoolSystem
             newObject.OnDispose += Return;
             OnGet?.Invoke(newObject);
             AddObject(newObject);
+            OnObjectGet?.Invoke(newObject);
             return newObject;
         }
 

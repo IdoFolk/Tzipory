@@ -1,7 +1,7 @@
-﻿namespace GameplayeLogic.Managers
+﻿
+namespace GameplayeLogic.Managers
 {
     public class WaveManager
     {
-        
     }
 }

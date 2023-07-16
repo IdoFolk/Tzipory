@@ -1,27 +1,27 @@
 using System;
-using System.Collections;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Tzipory.BaseSystem.TimeSystem
 {
     public class GAME_TIME : MonoBehaviour
     {
-        //[SerializeField, Tooltip("Base duration for one Tick of game time.")]
-        private const float BASE_TIME = 1f;
+        public static event Action OnTimeRateChange;
+        
         private static float _timeRate = 1f;
         private static TimerHandler _timerHandler;
+        private static float _startGameTime;
+
+        private float _tempTimeData = 1;
         
+        public static float TimePlayed => Time.realtimeSinceStartup - _startGameTime;
         public static float GetCurrentTimeRate => _timeRate;
         public static float GameDeltaTime => Time.deltaTime * _timeRate;
         public static TimerHandler TimerHandler => _timerHandler;
         
-        public static Action OnTimeRateChange;
-        private float _tempTimeData = 1;
-
         private void Start()
         {
             _timerHandler = new TimerHandler();
+            _startGameTime = Time.realtimeSinceStartup;
         }
 
         private void Update()
@@ -29,7 +29,6 @@ namespace Tzipory.BaseSystem.TimeSystem
             _timerHandler.TickAllTimers();
         }
         
-        [Button("Set time step")]
         public static void SetTimeStep(float time)
         {
             if (time < 0)

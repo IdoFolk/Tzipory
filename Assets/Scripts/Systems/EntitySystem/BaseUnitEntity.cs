@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Helpers.Consts;
 using SerializeData.VisualSystemSerializeData;
 using Sirenix.OdinInspector;
@@ -260,7 +261,7 @@ namespace Tzipory.EntitySystem.Entitys
                     _currentInvincibleTime = InvincibleTime.CurrentValue;
                 }
             }
-            
+
             if (HP.CurrentValue < 0)
                 OnEntityDead();
         }

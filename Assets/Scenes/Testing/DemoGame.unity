@@ -2887,7 +2887,7 @@ PrefabInstance:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 565eedfaa42b4574ebe5073c49f8f341, type: 2}
+      objectReference: {fileID: 11400000, guid: 30f9a8be5b455df43889c58abd08ad78, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.data[1]
       value: 

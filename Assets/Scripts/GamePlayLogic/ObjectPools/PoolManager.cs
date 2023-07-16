@@ -17,13 +17,13 @@ namespace Tzipory.GamePlayLogic.ObjectPools
         public PoolManager()
         {
            VisualSystemPool  = new VisualSystemPool();
-            EnemyPool = new ObjectPool<Enemy>(new EnemyFactory(),30);
+            EnemyPool = new ObjectPool<Enemy>(new EnemyFactory(),50);
         }
     }
 
     public class VisualSystemPool
     {
-        private  ObjectPool<EffectSequence> EffectActionPool { get; set; }
+        private ObjectPool<EffectSequence> EffectActionPool { get; set; }
         private ObjectPool<ColorEffectAction> ColorEffectPool { get; set; }
         private ObjectPool<SoundEffectAction> SoundEffectPool { get; set; }
         private ObjectPool<TransformEffectAction> TransformEffectPool { get; set; }

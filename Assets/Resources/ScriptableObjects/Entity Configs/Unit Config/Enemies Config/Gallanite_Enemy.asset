@@ -10,58 +10,58 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42ee311548384ecc85e91ba2b85a84ea, type: 3}
-  m_Name: Test_Enemy
+  m_Name: Gallanite_Enemy
   m_EditorClassIdentifier: 
   _health:
-    _name: Health
+    _name: 
     _id: 0
-    _baseValue: 150
+    _baseValue: 0
     _currentValue: 0
   _invincibleTime:
-    _name: InvincibleTime
-    _id: 8
+    _name: 
+    _id: 0
     _baseValue: 0
     _currentValue: 0
   _attackDamage:
-    _name: AttackDamage
-    _id: 1
-    _baseValue: 10
+    _name: 
+    _id: 0
+    _baseValue: 0
     _currentValue: 0
   _AttackRate:
-    _name: AttackRate
-    _id: 2
-    _baseValue: 1
+    _name: 
+    _id: 0
+    _baseValue: 0
     _currentValue: 0
   _attackRange:
-    _name: AttackRange
-    _id: 3
-    _baseValue: 1
+    _name: 
+    _id: 0
+    _baseValue: 0
     _currentValue: 0
   _targetingRange:
-    _name: TargetingRange
-    _id: 4
-    _baseValue: 5
+    _name: 
+    _id: 0
+    _baseValue: 0
     _currentValue: 0
   _CritDamage:
-    _name: CritDamage
-    _id: 6
-    _baseValue: 15
+    _name: 
+    _id: 0
+    _baseValue: 0
     _currentValue: 0
   _CritChance:
-    _name: CritChance
-    _id: 7
-    _baseValue: 20
+    _name: 
+    _id: 0
+    _baseValue: 0
     _currentValue: 0
   _movementSpeed:
-    _name: MovementSpeed
-    _id: 5
-    _baseValue: 4
+    _name: 
+    _id: 0
+    _baseValue: 0
     _currentValue: 0
   _stats: []
   _abilityConfigs: []
-  _sprite: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
-  _icon: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
-  _targetingPriority: 2
-  _decisionInterval: 5
-  _aggroLevel: 30
-  _returnLevel: 10
+  _sprite: {fileID: 0}
+  _icon: {fileID: 0}
+  _targetingPriority: 0
+  _decisionInterval: 0
+  _aggroLevel: 0
+  _returnLevel: 0

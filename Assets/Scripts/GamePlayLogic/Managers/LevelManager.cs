@@ -85,6 +85,7 @@ namespace Tzipory.Leval
 
         public void Dispose()
         {
+            //throw new NotImplementedException();
         }
     }
 }

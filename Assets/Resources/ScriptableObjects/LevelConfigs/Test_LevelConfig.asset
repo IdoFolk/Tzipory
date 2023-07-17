@@ -35,3 +35,14 @@ MonoBehaviour:
     - _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
       _enemyGroups: []
+  - _name: Wave 2
+    _waveSpawnerSerializeDatas:
+    - _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups: []
+    - _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups: []
+    - _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups: []

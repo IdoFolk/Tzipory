@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Temp_Projectile : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _particleSystem;
     private IEntityTargetAbleComponent _target;
     private float _speed;
 
@@ -28,6 +29,8 @@ public class Temp_Projectile : MonoBehaviour
 
     void Update()
     {
+        _particleSystem.playbackSpeed = 1 * GAME_TIME.GetCurrentTimeRate;
+
         if (!_target.EntityTransform.gameObject.activeInHierarchy)
         {
             transform.Translate(_dir * (_speed * GAME_TIME.GameDeltaTime));

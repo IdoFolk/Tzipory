@@ -25,7 +25,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         [Button("Add new wave"),PropertyOrder(0)]
         public void AddWave()
         {
-            var waveData = new WaveSerializeData(_level.WaveSpawners,this);
+            var waveData = new WaveSerializeData(_level.WaveSpawnersSerialize,this);
             waveData.SetName($"Wave {_waves.Count + 1}"); 
             _waves.Add(waveData);
         }

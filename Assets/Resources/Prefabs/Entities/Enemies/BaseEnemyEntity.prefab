@@ -64,7 +64,8 @@ PrefabInstance:
       propertyPath: _agentAuthoring
       value: 
       objectReference: {fileID: 7221615852569552283}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8783141836976998822, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -95,12 +96,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1420442367539004591, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4723283581889533953}
+    - targetCorrespondingSourceObject: {fileID: 1420442367539004591, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4159569051386712687}
   m_SourcePrefab: {fileID: 100100000, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
---- !u!60 &3028739526709266390 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 6887608391384273710, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
-  m_PrefabInstance: {fileID: 8475086043216172280}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4613587498334124606 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3862765461723033286, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
@@ -157,10 +156,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timerHandler:
     _timerSerializeDatas: []
-  _config: {fileID: 11400000, guid: fd7bf99da41054542921947d038de0bd, type: 2}
   _stats: []
   _bodyCollider: {fileID: 4453479690777420381}
-  _rangeCollider: {fileID: 3028739526709266390}
   _spriteRenderer: {fileID: 6032355350260239207}
   _visualQueueEffectPosition: {fileID: 5055015959598962312}
   _particleEffectPosition: {fileID: 6503520961240737061}
@@ -239,9 +236,7 @@ MonoBehaviour:
       _effectActionSO: {fileID: 11400000, guid: 1b22e0a237eeefa448293adc8adacc19, type: 2}
   _doShowHPBar: 1
   _hpBarConnector: {fileID: 4613587498334124606}
-  _decisionInterval: 5
-  _aggroLevel: 60
-  _returnLevel: 50
+  IsAttckingCore: 0
   _movementOnPath: {fileID: 5674738988083909809}
   BasicMoveComponent: {fileID: 4723283581889533953}
 --- !u!114 &7221615852569552283
@@ -390,3 +385,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 7221615852569552283}
+--- !u!114 &4159569051386712687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362225495168421975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcdaf3dbb7b79946b5f6d0a4dff86fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flipPrefs:
+    DeadZone: 0.05
+    TestFreq: 6
+  _doLookAtTemple: 0
+  _spriteRenderer: {fileID: 6032355350260239207}
+  _tgt: {fileID: 0}

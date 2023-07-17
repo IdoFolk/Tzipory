@@ -109,7 +109,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7921501042575430128, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7921501042575430128, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -159,7 +159,8 @@ PrefabInstance:
       propertyPath: _agentAuthoring
       value: 
       objectReference: {fileID: 5023256848365871121}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8783141836976998822, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4357314417853133059, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
@@ -196,6 +197,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1420442367539004591, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 143218788485601627}
+    - targetCorrespondingSourceObject: {fileID: 1420442367539004591, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1406767238908262820}
   m_SourcePrefab: {fileID: 100100000, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
 --- !u!4 &349210660837484951 stripped
 Transform:
@@ -247,10 +251,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timerHandler:
     _timerSerializeDatas: []
-  _config: {fileID: 11400000, guid: d70639d457685f643a3e0fc3fc9e32aa, type: 2}
   _stats: []
   _bodyCollider: {fileID: 1800454651558910966}
-  _rangeCollider: {fileID: 7436951555214412730}
   _spriteRenderer: {fileID: 2200670044425848587}
   _visualQueueEffectPosition: {fileID: 800062657850464996}
   _particleEffectPosition: {fileID: 1692306035326806345}
@@ -476,6 +478,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 5023256848365871121}
+--- !u!114 &1406767238908262820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3104813651261807675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcdaf3dbb7b79946b5f6d0a4dff86fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flipPrefs:
+    DeadZone: 0.05
+    TestFreq: 6
+  _doLookAtTemple: 0
+  _spriteRenderer: {fileID: 2200670044425848587}
+  _tgt: {fileID: 0}
 --- !u!114 &3215233828703679931 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458640161773333807, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
@@ -487,8 +507,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e520c11413546fb949992f53bbef688, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!60 &7436951555214412730 stripped
-PolygonCollider2D:
-  m_CorrespondingSourceObject: {fileID: 6887608391384273710, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
-  m_PrefabInstance: {fileID: 4080524451218561172}
-  m_PrefabAsset: {fileID: 0}

@@ -15,8 +15,8 @@ using UnityEngine;
 
 namespace Tzipory.EntitySystem.Entitys
 {
-    public abstract class BaseUnitEntity : BaseGameEntity , IEntityTargetAbleComponent , IEntityCombatComponent , IEntityMovementComponent , 
-        IEntityTargetingComponent , IEntityAbilitiesComponent,IEntityVisualComponent,IInitialization<BaseUnitEntityConfig>
+    public abstract class BaseUnitEntity : BaseGameEntity, IEntityTargetAbleComponent, IEntityCombatComponent, IEntityMovementComponent, 
+        IEntityTargetingComponent, IEntityAbilitiesComponent, IEntityVisualComponent, IInitialization<BaseUnitEntityConfig>
     {
         #region Fields
 
@@ -58,22 +58,23 @@ namespace Tzipory.EntitySystem.Entitys
         {
             gameObject.name =  $"{parameter.name} InstanceID: {EntityInstanceID}";
 
-            List<Stat> stats = new List<Stat>();
-            
-            stats.Add(new Stat(Constant.Stats.Health.ToString(), parameter.Health.BaseValue, parameter.Health.MaxValue,                         (int)Constant.Stats.Health));
-            stats.Add(new Stat(Constant.Stats.InvincibleTime.ToString(), parameter.InvincibleTime.BaseValue, parameter.InvincibleTime.MaxValue, (int)Constant.Stats.InvincibleTime));
-            stats.Add(new Stat(Constant.Stats.AttackDamage.ToString(), parameter.AttackDamage.BaseValue, parameter.AttackDamage.MaxValue,       (int)Constant.Stats.AttackDamage));
-            stats.Add(new Stat(Constant.Stats.CritDamage.ToString(), parameter.CritDamage.BaseValue, parameter.CritDamage.MaxValue,             (int)Constant.Stats.CritDamage));
-            stats.Add(new Stat(Constant.Stats.CritChance.ToString(), parameter.CritChance.BaseValue, parameter.CritChance.MaxValue,             (int)Constant.Stats.CritChance));
-            stats.Add(new Stat(Constant.Stats.AttackRate.ToString(), parameter.AttackRate.BaseValue, parameter.AttackRate.MaxValue,             (int)Constant.Stats.AttackRate));
-            stats.Add(new Stat(Constant.Stats.AttackRange.ToString(), parameter.AttackRange.BaseValue, parameter.AttackRange.MaxValue,          (int)Constant.Stats.AttackRange));
-            stats.Add(new Stat(Constant.Stats.TargetingRange.ToString(), parameter.TargetingRange.BaseValue, parameter.TargetingRange.MaxValue, (int)Constant.Stats.TargetingRange));
-            stats.Add(new Stat(Constant.Stats.MovementSpeed.ToString(), parameter.MovementSpeed.BaseValue, parameter.MovementSpeed.MaxValue,    (int)Constant.Stats.MovementSpeed));
-            
-            if (parameter.Stats != null && parameter.Stats.Count > 0)
+            List<Stat> stats = new List<Stat>
+            {
+                new Stat(parameter.Health),
+                new Stat(parameter.InvincibleTime),
+                new Stat(parameter.AttackDamage),
+                new Stat(parameter.CritDamage),
+                new Stat(parameter.CritChance),
+                new Stat(parameter.AttackRate),
+                new Stat(parameter.AttackRange),
+                new Stat(parameter.TargetingRange),
+                new Stat(parameter.MovementSpeed)
+            };
+
+            if (parameter.Stats is { Count: > 0 })
             {
                 foreach (var stat in parameter.Stats)
-                    stats.Add(new Stat(stat.Name, stat.BaseValue, stat.MaxValue, stat.Id));
+                    stats.Add(stat);
             }
             
 #if UNITY_EDITOR

@@ -67,15 +67,15 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
             _CritChance.Name =     Constant.Stats.CritChance.ToString();
             _movementSpeed.Name =  Constant.Stats.MovementSpeed.ToString();
 
-            _health.Id =         (int)Constant.Stats.Health;
-            _invincibleTime.Id = (int)Constant.Stats.InvincibleTime;
-            _attackDamage.Id =   (int)Constant.Stats.AttackDamage;
-            _AttackRate.Id =     (int)Constant.Stats.AttackRate;
-            _targetingRange.Id = (int)Constant.Stats.TargetingRange;
-            _attackRange.Id =    (int)Constant.Stats.AttackRange;
-            _CritDamage.Id =     (int)Constant.Stats.CritDamage;
-            _CritChance.Id =     (int)Constant.Stats.CritChance;
-            _movementSpeed.Id =  (int)Constant.Stats.MovementSpeed;
+            _health.Id =           (int)Constant.Stats.Health;
+            _invincibleTime.Id =   (int)Constant.Stats.InvincibleTime;
+            _attackDamage.Id =     (int)Constant.Stats.AttackDamage;
+            _AttackRate.Id =       (int)Constant.Stats.AttackRate;
+            _targetingRange.Id =   (int)Constant.Stats.TargetingRange;
+            _attackRange.Id =      (int)Constant.Stats.AttackRange;
+            _CritDamage.Id =       (int)Constant.Stats.CritDamage;
+            _CritChance.Id =       (int)Constant.Stats.CritChance;
+            _movementSpeed.Id =    (int)Constant.Stats.MovementSpeed;
 #endif
         }
     }

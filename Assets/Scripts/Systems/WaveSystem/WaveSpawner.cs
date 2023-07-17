@@ -10,6 +10,7 @@ using Random = UnityEngine.Random;
 
 public class WaveSpawner : MonoBehaviour , IProgress
 {
+    [SerializeField] private int _id;
     [SerializeField] private Transform[] _spawnPositions;
     [SerializeField] private PathCreator myPathCreator;
 
@@ -22,7 +23,9 @@ public class WaveSpawner : MonoBehaviour , IProgress
     private float _delayBetweenEnemyGroup;
 
     private List<EnemyGroup> _activeEnemyGroup;
-    
+
+    public int ID => _id;
+
     public Color WaveSpawnerColor { get; private set; }
 
     public bool IsSpawning { get; private set; }

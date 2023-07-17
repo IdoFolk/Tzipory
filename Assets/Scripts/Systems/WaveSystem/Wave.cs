@@ -37,9 +37,15 @@ namespace Tzipory.WaveSystem
 
         public void StartWave()
         {
-            for (int i = 0; i < _waveSpawners.Length; i++) 
-                _waveSpawners[i].Init(Data.WaveSpawnerSerializeDatas[i]);
-            
+            foreach (var waveSpawner in _waveSpawners)
+            {
+                foreach (var waveSpawnerSerializeData in Data.WaveSpawnerSerializeDatas)
+                {
+                    if (waveSpawner.ID == waveSpawnerSerializeData.ID)
+                        waveSpawner.Init(waveSpawnerSerializeData);
+                }
+            }
+
             IsStarted = true;
         }
         

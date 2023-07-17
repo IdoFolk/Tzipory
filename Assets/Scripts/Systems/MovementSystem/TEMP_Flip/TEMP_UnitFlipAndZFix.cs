@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tzipory.Leval;
 using UnityEngine;
 
-public class TEMP_UnitFlipper : MonoBehaviour
+public class TEMP_UnitFlipAndZFix : MonoBehaviour
 {
     [SerializeField] private FlipPrefs _flipPrefs; //TEMP! SHOULD NOT BE SERIALIZED BUT SET VIA THE UNIT's SCRIPT!
     [SerializeField] private bool _doLookAtTemple; 
@@ -11,7 +12,7 @@ public class TEMP_UnitFlipper : MonoBehaviour
 
     //Should probably be the targetting module instead
     [SerializeField] private Transform _tgt;
-
+ 
     //TEMP! MUST USE INIT INSTEAD!
     private void Start()
     {
@@ -21,6 +22,16 @@ public class TEMP_UnitFlipper : MonoBehaviour
         //Enemies look in the direction they are going -> then they look at CoreTrans or their attack target.
         _tgt = _doLookAtTemple? CoreTemple.CoreTrans : null;
     }
+    private void Update()
+    {
+        //do z fix
+        Vector3 v = LevelManager.FakeForward;
+        float f = v.x * transform.position.x  + v.y * transform.position.y;
+
+        _spriteRenderer.transform.localPosition = new Vector3(0, 0, f); 
+
+    }
+
     public void Init(FlipPrefs fp)
     {
         _flipPrefs = fp;

@@ -6,6 +6,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
 {
     public class Level : MonoBehaviour
     {
+        [SerializeField] private List<WaveSpawner> _waveSpawnersSerialize;
         private static List<WaveSpawner> _waveSpawners;
 
         private readonly List<Color> _spawnerColors = new()
@@ -20,6 +21,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         };
 
         public IEnumerable<WaveSpawner> WaveSpawners => _waveSpawners;
+        public IEnumerable<WaveSpawner> WaveSpawnersSerialize => _waveSpawnersSerialize;
 
         public int NumberOfWaveSpawners => _waveSpawners.Count;
 

@@ -14,7 +14,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
         [SerializeField,Tooltip(""),TabGroup("Stats")] private StatSerializeData _health;
         [SerializeField,Tooltip(""),TabGroup("Stats")] private StatSerializeData _invincibleTime;
         [SerializeField,Tooltip(""),TabGroup("Stats")] private StatSerializeData _attackDamage;
-        [SerializeField,Tooltip(""),TabGroup("Stats")] private StatSerializeData _AttackRate;
+        [SerializeField,Tooltip(""),TabGroup("Stats")] private StatSerializeData _attackRate;
         [SerializeField,Tooltip(""),TabGroup("Stats")] private StatSerializeData _attackRange;
         [SerializeField,Tooltip(""),TabGroup("Stats")] private StatSerializeData _targetingRange;
         [SerializeField,Tooltip(""),TabGroup("Stats")] private StatSerializeData _CritDamage;
@@ -34,7 +34,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
 
         public StatSerializeData AttackDamage => _attackDamage;
 
-        public StatSerializeData AttackRate => _AttackRate;
+        public StatSerializeData AttackRate => _attackRate;
 
         public StatSerializeData AttackRange => _attackRange;
 
@@ -60,7 +60,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
             _health.Name =         Constant.Stats.Health.ToString();
             _invincibleTime.Name = Constant.Stats.InvincibleTime.ToString();
             _attackDamage.Name =   Constant.Stats.AttackDamage.ToString();
-            _AttackRate.Name =     Constant.Stats.AttackRate.ToString();
+            _attackRate.Name =     Constant.Stats.AttackRate.ToString();
             _targetingRange.Name = Constant.Stats.TargetingRange.ToString();
             _attackRange.Name =    Constant.Stats.AttackRange.ToString();
             _CritDamage.Name =     Constant.Stats.CritDamage.ToString();
@@ -70,7 +70,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
             _health.Id =           (int)Constant.Stats.Health;
             _invincibleTime.Id =   (int)Constant.Stats.InvincibleTime;
             _attackDamage.Id =     (int)Constant.Stats.AttackDamage;
-            _AttackRate.Id =       (int)Constant.Stats.AttackRate;
+            _attackRate.Id =       (int)Constant.Stats.AttackRate;
             _targetingRange.Id =   (int)Constant.Stats.TargetingRange;
             _attackRange.Id =      (int)Constant.Stats.AttackRange;
             _CritDamage.Id =       (int)Constant.Stats.CritDamage;

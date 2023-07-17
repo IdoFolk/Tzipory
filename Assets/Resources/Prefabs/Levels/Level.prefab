@@ -279,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe968c09d6234406b4d9572f5ea3a0fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waveSpawners:
+  _waveSpawnersSerialize:
   - {fileID: 3043122261658430425}
   - {fileID: 8447700894918197012}
   - {fileID: 4211340967263065871}

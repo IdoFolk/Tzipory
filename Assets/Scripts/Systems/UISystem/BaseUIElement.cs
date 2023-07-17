@@ -1,4 +1,5 @@
 ﻿using System;
+using GamePlayLogic.Managers;
 using Tzipory.BaseSystem.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -23,6 +24,11 @@ namespace Systems.UISystem
         private int _clickNum;
 
         private ITimer _doubleClickTimer;
+
+        private void Awake()
+        {
+            UIManager.AddObserverObject(this);
+        }
 
         public virtual void Show()
         {

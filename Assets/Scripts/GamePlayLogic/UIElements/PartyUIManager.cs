@@ -1,5 +1,4 @@
-﻿using System;
-using Systems.UISystem;
+﻿using Systems.UISystem;
 using UnityEngine;
 
 namespace GameplayeLogic.UIElements
@@ -8,12 +7,7 @@ namespace GameplayeLogic.UIElements
     {
         [SerializeField] private RectTransform _heroContainer;
         [SerializeField] private ShamanUiHandler _shamanUiHanlder;
-
-        private void Start()
-        {
-            Show();
-        }
-
+        
         public override void Show()
         {
             var shamans = GameManager.PartyManager.Party;

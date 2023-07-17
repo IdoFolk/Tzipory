@@ -5,7 +5,7 @@ using Tzipory.GamePlayLogic.ObjectPools;
 
 public class EnemyManager : IDisposable
 {
-    private List<Enemy> _enemies;
+    private readonly List<Enemy> _enemies;
 
     public bool AllEnemiesArDead => _enemies.Count == 0;
 

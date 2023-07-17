@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Helpers.Consts;
 using SerializeData.VisualSystemSerializeData;
 using Sirenix.OdinInspector;

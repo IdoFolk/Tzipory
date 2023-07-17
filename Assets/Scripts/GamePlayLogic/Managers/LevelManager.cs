@@ -13,12 +13,9 @@ namespace Tzipory.Leval
     {
         public event Action<int> OnNewWaveStarted;
         
-        private LevelSerializeData _levelSerializeData;
-        private Transform _levelPerant;
+        private readonly LevelSerializeData _levelSerializeData;
         private List<Wave> _waves;
-    
-        private IEnumerable<WaveSpawner> _waveSpawners;
-
+        
         private float _levelStartDelay;
         private float _delayBetweenWaves;
         
@@ -38,20 +35,19 @@ namespace Tzipory.Leval
 
         public LevelManager(LevelSerializeData levelSerializeData,Transform levelPerant)
         {
-            _levelPerant  = levelPerant;
             _levelSerializeData = levelSerializeData;
-            
+            _waves = new List<Wave>();
             _currentWaveIndex = 0;
             _levelStartDelay = _levelSerializeData.LevelStartDelay;
             _delayBetweenWaves = _levelSerializeData.DelayBetweenWaves;
 
-            Object.Instantiate(_levelSerializeData.Level,_levelPerant);
-            _waveSpawners = GameManager.GetWaveSpawners();//temppp
-            
-            _waves = new List<Wave>();
+            Object.Instantiate(_levelSerializeData.Level,levelPerant);
+        }
         
+        public void StartLevel()
+        {
             foreach (var waveSerialize in _levelSerializeData.Waves)
-                _waves.Add(new Wave(_waveSpawners,waveSerialize));
+                _waves.Add(new Wave(_levelSerializeData.Level.WaveSpawners,waveSerialize));
         }
 
         public void UpdateLevel()

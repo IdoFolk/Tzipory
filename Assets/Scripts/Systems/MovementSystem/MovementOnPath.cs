@@ -1,6 +1,5 @@
 using UnityEngine;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.BaseSystem.TimeSystem;
 using PathCreation;
 using Enemes;
 
@@ -36,11 +35,6 @@ public class MovementOnPath : MonoBehaviour
     [SerializeField, Tooltip("Set to true if you want this Unit's Rabbit-gizmo to draw at all times (Default: false, only draws gizmo for this Unit when it is Selected in the editor (inspector)")]
     private bool alwaysShowGizmo = false;
 #endif
-    
-    IEntityTargetAbleComponent attackTarget;
-    /// <summary>
-    /// Basically THE method which sets the Unit on a path and hooks the AdvanceOnPath method.
-    /// Starts following the path.
 
     /// </summary>
     /// <param name="pc"></param>
@@ -71,7 +65,8 @@ public class MovementOnPath : MonoBehaviour
             privateRabbitProgress += privateRabbitIncrement;
             if (privateRabbitProgress > pathCreator.path.length && Vector3.Distance(transform.position, _currentPointOnPath) <= acceptableDistanceToCompletion)
             {
-                //CircleFinalDestination();
+                finalDestinaion = GameManager.CoreTemplete.PatrolPath;
+                CircleFinalDestination();
             }
         }
     }
@@ -86,7 +81,9 @@ public class MovementOnPath : MonoBehaviour
         basicMoveComponent.SetDestination(_currentPointOnPath, MoveType.Free);
 
         //TEMP!!!!!!
-        GetComponent<Enemy>().SetAttackTarget(attackTarget);
+        Enemy enemy = GetComponent<Enemy>();
+        enemy.SetAttackTarget(GameManager.CoreTemplete);
+        enemy.IsAttckingCore = true;
     }
 
     #region Callbacks

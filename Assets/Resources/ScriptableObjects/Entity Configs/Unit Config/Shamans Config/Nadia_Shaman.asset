@@ -23,7 +23,7 @@ MonoBehaviour:
   _attackDamage:
     _name: AttackDamage
     _id: 1
-    _baseValue: 55
+    _baseValue: 40
   _attackRate:
     _name: AttackRate
     _id: 2
@@ -53,4 +53,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 75928f8badccef2498c77125ef0f7375, type: 2}
   _sprite: {fileID: 21300000, guid: fc2805c32b6ccbe429d23e618777dbee, type: 3}
   _icon: {fileID: 0}
-  _targetingPriority: 2
+  _targetingPriority: 6

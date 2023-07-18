@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _winText:
   - You defeated the enemy bravely
+  - You were a badass, you won!
   _loseText:
   - You have been defeated and had to abandon the core

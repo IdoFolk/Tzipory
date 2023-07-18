@@ -23,7 +23,7 @@ MonoBehaviour:
   _attackDamage:
     _name: AttackDamage
     _id: 1
-    _baseValue: 50
+    _baseValue: 35
   _attackRate:
     _name: AttackRate
     _id: 2

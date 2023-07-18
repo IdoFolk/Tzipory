@@ -20,21 +20,20 @@ MonoBehaviour:
   _interval: 0
   _statModifier:
   - _statusModifierType: 2
-    _modifier: 75
+    _modifier: 100
   _effectSequence:
     _sequenceName: 
     _id: 0
     _startDelay: 0
     _endDelay: 0
-    isInterruptable: 0
+    _isStackable: 0
+    _isInterruptable: 0
     _effectActionContainers:
     - _disableUndo: 0
       _startDelay: 0
-      _endDelay: 0
       _effectActionStart: 0
       _effectActionSO: {fileID: 11400000, guid: efd2a47c331e44c4d80a605273ecc06f, type: 2}
     - _disableUndo: 0
       _startDelay: 0
-      _endDelay: 0
       _effectActionStart: 0
       _effectActionSO: {fileID: 11400000, guid: a623487578b155d448fa5c0657da923b, type: 2}

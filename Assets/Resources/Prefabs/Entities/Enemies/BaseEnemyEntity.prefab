@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseEnemyEntity
       objectReference: {fileID: 0}
+    - target: {fileID: 2750211597899472799, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7921501042575430128, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -398,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _flipPrefs:
-    DeadZone: 0.05
+    DeadZone: 0.01
     TestFreq: 6
   _doLookAtTemple: 0
   _spriteRenderer: {fileID: 6032355350260239207}

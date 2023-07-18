@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ebc501b8b04e44a9a4be329f9c6d44, type: 3}
-  m_Name: EndScreenText
+  m_Script: {fileID: 11500000, guid: 1fefaa5ef5471cc4ebfa0a75d56ffeb7, type: 3}
+  m_Name: Level 2
   m_EditorClassIdentifier: 
-  _winText:
-  - You defeated the enemy bravely
-  - You were a badass, you won!
-  _loseText:
-  - You have been defeated and had to abandon the core
+  _level: {fileID: 0}
+  _levelStartDelay: 0.2
+  _delayBetweenWaves: 0
+  _waves: []

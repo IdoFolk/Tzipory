@@ -9,9 +9,6 @@ public class Shadow : MonoBehaviour
 
     [SerializeField] private LineRenderer _lineRenderer;
 
-    [SerializeField] private NavMeshAgent _agent;
-    //private AgentNavMeshAuthoring _agentNavMesh;
-
     public bool IsOn;
 
     private Transform _shamanTrans;
@@ -27,10 +24,10 @@ public class Shadow : MonoBehaviour
         _lineRenderer.gameObject.SetActive(true);
         _shadowRenderer.gameObject.SetActive(true);
         _proximityRenderer.transform.localScale = new Vector3(range, range, 1);
-        _agent.transform.position = _shamanTrans.position;
+        //_agent.transform.position = _shamanTrans.position;
 
-        _agent.speed = 0; //make sure it doesnt really move
-        _agent.SetDestination(transform.position);
+        //_agent.speed = 0; //make sure it doesnt really move
+        //_agent.SetDestination(transform.position);
     }
 
     public void ClearShadow()
@@ -42,13 +39,10 @@ public class Shadow : MonoBehaviour
 
     private void Update()
     {
-        if (false) // need to be IsOn
+        if (IsOn) // need to be IsOn
         {
-            _agent.transform.position = _shamanTrans.position;
-            _agent.SetDestination(transform.position); //resets destination, in case mouse moves? HEAVY AND BAD! 
-            //_lineRenderer.positionCount = _agent.path.corners.Length;
             _lineRenderer.positionCount = 2;
-            _lineRenderer.SetPositions(new Vector3[] {_agent.transform.position, transform.position });
+            _lineRenderer.SetPositions(new Vector3[] { _shamanTrans.position, transform.position });
             //TEMP!
             //END TEMP!
         }

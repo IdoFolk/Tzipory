@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Level 1
   m_EditorClassIdentifier: 
   _level: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+  _fakeForwardVector: {x: -0.08, y: 0.4, z: 0}
   _levelStartDelay: 0
   _delayBetweenWaves: 0
   _waves:

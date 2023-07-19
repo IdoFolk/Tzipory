@@ -7,9 +7,8 @@ public class ProximityIndicatorHandler
 {
     public static System.Action TEMP_CallAll_TAB;
 
-    [SerializeField] private Transform _scaler;
+    [SerializeField] private Transform _scaler; 
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Sprite _currentSprite;
     [SerializeField] private ProximityConfig _proximityConfig;
     [SerializeField] Tzipory.Helpers.ClickHelper clickHelper;
     
@@ -27,9 +26,9 @@ public class ProximityIndicatorHandler
 
         //TEMP AF!!!!
 
-        //_spriteRenderer.transform.parent.localScale = new Vector3(_range, _range,1);
-        float ratio = _scaler.localScale.x / _scaler.localScale.y;
-        _scaler.localScale = new Vector3(_range * ratio, _range, 1);
+        //float ratio = _scaler.localScale.x / _scaler.localScale.y;
+        //_scaler.localScale = new Vector3(_range * ratio, _range, 1);
+        _scaler.localScale = new Vector3(_range/2f , _range/2f, 1);
         //TEMP AF!!!!
 
         _spriteRenderer.color = _proximityConfig.Color;

@@ -403,7 +403,7 @@ MonoBehaviour:
     _spriteRenderer: {fileID: 5849980795243983862}
     _currentSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     _proximityConfig:
-      IndicatorConditions: 000000000200000001000000
+      IndicatorConditions: 0200000001000000
       Color: {r: 1, g: 1, b: 1, a: 0.34901962}
     clickHelper: {fileID: 6944006319847339363}
   _shotVisual: {fileID: 1713223655816970375}

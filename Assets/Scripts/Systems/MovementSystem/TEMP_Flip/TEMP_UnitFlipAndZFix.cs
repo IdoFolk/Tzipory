@@ -12,11 +12,15 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
 
     //Should probably be the targetting module instead
     [SerializeField] private Transform _tgt;
- 
+
+    Vector3 _fakeForward;
+
+
     //TEMP! MUST USE INIT INSTEAD!
     private void Start()
     {
         StartCoroutine(nameof(CheckForFlip));
+        _fakeForward = LevelManager.FakeForward;
 
         //This should be applied differently between Shamans and Enemies.
         //Enemies look in the direction they are going -> then they look at CoreTrans or their attack target.
@@ -25,8 +29,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     private void Update()
     {
         //do z fix
-        Vector3 v = LevelManager.FakeForward;
-        float f = v.x * transform.position.x  + v.y * transform.position.y;
+        float f = _fakeForward.x * transform.position.x  + _fakeForward.y * transform.position.y;
 
         _spriteRenderer.transform.localPosition = new Vector3(0, 0, f); 
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using Tzipory.BaseScripts;
 using UnityEngine;
@@ -19,22 +21,28 @@ namespace MovementSystem.HerosMovementSystem
         private bool _isValidClick;
 
         [SerializeField] private Shadow _shadow;
-       
+
+        
+        //temp?
+        bool isCooldown;
 
 
         private void Start()
         {
             _shadow.gameObject.SetActive(false);
+            isCooldown = false;
             _camera = Camera.main;
         }
 
-        public void SelectTarget(Temp_HeroMovement  target)
-        {
-            _currentTarget = target;
-            OnAnyShamanSelected?.Invoke();
-        }
+        //public void SelectTarget(Temp_HeroMovement  target)
+        //{
+        //    _currentTarget = target;
+        //    OnAnyShamanSelected?.Invoke();
+        //}
         public void SelectTarget(Temp_HeroMovement  target, Sprite shadowSprite, float range)
         {
+            if (isCooldown)
+                return;
             _currentTarget = target;
             _shadow.SetShadow(target.transform, shadowSprite, range);
 
@@ -48,8 +56,16 @@ namespace MovementSystem.HerosMovementSystem
             _currentTarget = null;
             _shadow.ClearShadow();
             Cursor.visible = true;
+            isCooldown = true;
+            StartCoroutine(SetIsCooldownWaitOneFrame(false));
+            //Invoke(nameof(SetIsCooldown),)
 
             OnAnyShamanDeselected?.Invoke();
+        }
+        private IEnumerator SetIsCooldownWaitOneFrame(bool isIt)
+        {
+            yield return new WaitForSeconds(.1f);
+            isCooldown = isIt;
         }
 
         private void Update()
@@ -72,7 +88,7 @@ namespace MovementSystem.HerosMovementSystem
                 newPos.z = 0f; //TEMP, needs to be set to same Z as shaman
                 _shadow.transform.position = newPos;
             }
-
+            
             if (Mouse.current.leftButton.wasPressedThisFrame && _isValidClick)
             {
                 var screenPos = Mouse.current.position.ReadValue();

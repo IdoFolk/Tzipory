@@ -27,6 +27,8 @@ namespace Tzipory.SerializeData.LevalSerializeData
 
         public static void AddWaveSpawner(WaveSpawner waveSpawner)
         {
+            _waveSpawners ??= new List<WaveSpawner>();
+            
             if (_waveSpawners.Contains(waveSpawner))
                 return;
             _waveSpawners.Add(waveSpawner);
@@ -35,7 +37,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         [Button("Rest waveSpawnerList")]
         private void RestWaveSpawnerList()
         {
-            _waveSpawners = new List<WaveSpawner>();
+            _waveSpawnersSerialize = new List<WaveSpawner>();
             OnValidate();
         }
 
@@ -46,10 +48,10 @@ namespace Tzipory.SerializeData.LevalSerializeData
 
         private void OnValidate()
         {
-            _waveSpawners ??= new List<WaveSpawner>();
+            _waveSpawnersSerialize ??= new List<WaveSpawner>();
 
-            for (int i = 0; i < _waveSpawners.Count; i++)
-                _waveSpawners[i].SetColor(_spawnerColors[i]);
+            for (int i = 0; i < _waveSpawnersSerialize.Count; i++)
+                _waveSpawnersSerialize[i].SetColor(_spawnerColors[i]);
         }
     }
 }

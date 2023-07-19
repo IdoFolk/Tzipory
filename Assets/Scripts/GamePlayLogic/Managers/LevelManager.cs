@@ -47,7 +47,7 @@ namespace Tzipory.Leval
             Object.Instantiate(_levelSerializeData.Level,levelPerant);
             FakeForward = _levelSerializeData.FakeForwardVector; //temp?
 
-            Debug.LogError($"fake forward set to: {FakeForward}");
+            Debug.Log($"fake forward set to: {FakeForward}");
         }
         
         public void StartLevel()

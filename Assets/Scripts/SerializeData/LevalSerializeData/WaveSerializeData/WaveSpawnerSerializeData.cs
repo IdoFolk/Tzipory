@@ -7,7 +7,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
     [System.Serializable]
     public class WaveSpawnerSerializeData
     {
-        private int _id;
+        [SerializeField,ReadOnly] private int _id;
         
         [SerializeField,ReadOnly,PropertyOrder(-3)] private Color _waveSpawnerColor;
         [SerializeField,PropertyOrder(-2)] private float _delayBetweenEnemyGroup;

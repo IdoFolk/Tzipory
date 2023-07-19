@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tzipory.EntitySystem.Entitys;
+using Tzipory.EntitySystem.TargetingSystem;
 using Tzipory.Leval;
 using UnityEngine;
 
@@ -15,13 +17,14 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
 
     Vector3 _fakeForward;
 
-
-    //TEMP! MUST USE INIT INSTEAD!
+    [SerializeField] BaseUnitEntity _baseUnitEntity;
+    TargetingHandler _targeting;
+    //TEMP! Should USE Init(BaseUnitEntity) INSTEAD 
     private void Start()
     {
         StartCoroutine(nameof(CheckForFlip));
         _fakeForward = LevelManager.FakeForward;
-
+        _targeting = _baseUnitEntity.Targeting;
         //This should be applied differently between Shamans and Enemies.
         //Enemies look in the direction they are going -> then they look at CoreTrans or their attack target.
         _tgt = _doLookAtTemple? CoreTemple.CoreTrans : null;
@@ -31,8 +34,12 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
         //do z fix
         float f = _fakeForward.x * transform.position.x  + _fakeForward.y * transform.position.y;
 
-        _spriteRenderer.transform.localPosition = new Vector3(0, 0, f); 
+        _spriteRenderer.transform.localPosition = new Vector3(0, 0, f);
 
+        if (_targeting.HaveTarget)
+            _tgt = _targeting.CurrentTarget.EntityTransform;
+        else
+            _tgt = null;
     }
 
     public void Init(FlipPrefs fp)

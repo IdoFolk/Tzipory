@@ -28,7 +28,7 @@ namespace Shamans
             EntityTeamType = EntityTeamType.Hero;
             _clickHelper.OnClick += _tempHeroMovement.SelectHero;
             
-            _proximityHandler.Init(AttackRange.CurrentValue * 2f);//MAY need to move to OnEnable - especially if we use ObjectPooling instead of instantiate
+            _proximityHandler.Init(AttackRange.CurrentValue);//MAY need to move to OnEnable - especially if we use ObjectPooling instead of instantiate
         }
         private void OnDisable()
         {

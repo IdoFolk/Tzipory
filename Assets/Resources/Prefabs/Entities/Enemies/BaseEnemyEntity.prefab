@@ -411,3 +411,4 @@ MonoBehaviour:
   _doLookAtTemple: 0
   _spriteRenderer: {fileID: 6032355350260239207}
   _tgt: {fileID: 0}
+  _baseUnitEntity: {fileID: 7854104335867524329}

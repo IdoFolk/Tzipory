@@ -17,8 +17,5 @@ namespace Tzipory.BaseScripts
                     Destroy(this);
             }
         }
-    
-    
     }
-
 }

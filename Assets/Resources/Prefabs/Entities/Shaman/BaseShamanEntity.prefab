@@ -401,7 +401,6 @@ MonoBehaviour:
   _proximityHandler:
     _scaler: {fileID: 3059467290716554064}
     _spriteRenderer: {fileID: 5849980795243983862}
-    _currentSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
     _proximityConfig:
       IndicatorConditions: 0200000001000000
       Color: {r: 1, g: 1, b: 1, a: 0.34901962}
@@ -579,6 +578,7 @@ MonoBehaviour:
   _doLookAtTemple: 0
   _spriteRenderer: {fileID: 5910139917985477431}
   _tgt: {fileID: 0}
+  _baseUnitEntity: {fileID: 7330099708541644612}
 --- !u!114 &3215233828703679931 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1458640161773333807, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}

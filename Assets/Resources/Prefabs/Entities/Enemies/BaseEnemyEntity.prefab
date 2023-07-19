@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseEnemyEntity
       objectReference: {fileID: 0}
+    - target: {fileID: 2501377926167560866, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2750211597899472799, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_SortingOrder
       value: 2

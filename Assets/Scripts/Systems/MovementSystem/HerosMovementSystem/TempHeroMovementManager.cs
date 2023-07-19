@@ -62,6 +62,12 @@ namespace MovementSystem.HerosMovementSystem
 
             if (_shadow.IsOn)
             {
+                if(Mouse.current.rightButton.wasPressedThisFrame)
+                {
+                    _shadow.ClearShadow();
+                    ClearTarget();
+                    return;
+                }
                 Vector3 newPos = _camera.ScreenToWorldPoint(Input.mousePosition);
                 newPos.z = 0f; //TEMP, needs to be set to same Z as shaman
                 _shadow.transform.position = newPos;

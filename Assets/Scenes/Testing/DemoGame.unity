@@ -277,7 +277,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1954388464}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
@@ -466,6 +466,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686507896}
   m_CullTransparentMesh: 1
+--- !u!1 &820133340 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9050466102398453298, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+  m_PrefabInstance: {fileID: 5961108832015238254}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &820133346 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7209629764102485073, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+  m_PrefabInstance: {fileID: 5961108832015238254}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &820133347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820133340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0dbe6fe82297d14a9d6158312376708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 820133346}
+  doGoOn: 1
 --- !u!1 &832971459
 GameObject:
   m_ObjectHideFlags: 0
@@ -2904,6 +2928,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _levelSerializeData
+      value: 
+      objectReference: {fileID: 11400000, guid: b2410bd7672fb3c44a347198cb6e74fa, type: 2}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _party.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -2931,6 +2959,10 @@ PrefabInstance:
       propertyPath: _partySerializeData._entityConfigs.Array.data[1]
       value: 
       objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _partySerializeData._entityConfigs.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1860914778f26304ebb1455b9221a5ef, type: 2}
     - target: {fileID: 3616092513852329415, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -3060,10 +3092,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7209629764102485073, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5776897059597873247, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9050466102398453298, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 820133347}
   m_SourcePrefab: {fileID: 100100000, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
 --- !u!1001 &8635508654159977162
 PrefabInstance:

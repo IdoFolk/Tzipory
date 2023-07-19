@@ -11,6 +11,9 @@ namespace Tzipory.Leval
 {
     public class LevelManager : IDisposable
     {
+        public static Vector3 FakeForward;
+
+
         public event Action<int> OnNewWaveStarted;
         
         private readonly LevelSerializeData _levelSerializeData;
@@ -42,6 +45,9 @@ namespace Tzipory.Leval
             _delayBetweenWaves = _levelSerializeData.DelayBetweenWaves;
 
             Object.Instantiate(_levelSerializeData.Level,levelPerant);
+            FakeForward = _levelSerializeData.FakeForwardVector; //temp?
+
+            Debug.Log($"fake forward set to: {FakeForward}");
         }
         
         public void StartLevel()

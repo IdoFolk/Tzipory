@@ -8,11 +8,13 @@ namespace Tzipory.SerializeData.LevalSerializeData
     public class LevelSerializeData : ScriptableObject
     {
         [SerializeField,PropertyOrder(-1)] private Level _level;
+        [SerializeField,PropertyOrder(-1)] private Vector3 _fakeForwardVector;
         [SerializeField,PropertyOrder(-1)] private float _levelStartDelay = 0.2f;
         [SerializeField,PropertyOrder(-1)] private float _delayBetweenWaves;
         [SerializeField,PropertyOrder(1),ListDrawerSettings(HideAddButton = true,HideRemoveButton = true)] private List<WaveSerializeData> _waves;
         
         public Level Level => _level;
+        public Vector3 FakeForwardVector => _fakeForwardVector;
 
         public List<WaveSerializeData> Waves => _waves;
 

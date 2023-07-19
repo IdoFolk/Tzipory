@@ -16,50 +16,41 @@ MonoBehaviour:
     _name: Health
     _id: 0
     _baseValue: 400
-    _currentValue: 0
   _invincibleTime:
     _name: InvincibleTime
     _id: 8
     _baseValue: 0
-    _currentValue: 0
   _attackDamage:
     _name: AttackDamage
     _id: 1
-    _baseValue: 55
-    _currentValue: 0
-  _AttackRate:
+    _baseValue: 40
+  _attackRate:
     _name: AttackRate
     _id: 2
     _baseValue: 0.9
-    _currentValue: 0
   _attackRange:
     _name: AttackRange
     _id: 3
     _baseValue: 5
-    _currentValue: 0
   _targetingRange:
     _name: TargetingRange
     _id: 4
     _baseValue: 5
-    _currentValue: 0
   _CritDamage:
     _name: CritDamage
     _id: 6
     _baseValue: 115
-    _currentValue: 0
   _CritChance:
     _name: CritChance
     _id: 7
     _baseValue: 15
-    _currentValue: 0
   _movementSpeed:
     _name: MovementSpeed
     _id: 5
     _baseValue: 3.5
-    _currentValue: 0
   _stats: []
   _abilityConfigs:
   - {fileID: 11400000, guid: 75928f8badccef2498c77125ef0f7375, type: 2}
   _sprite: {fileID: 21300000, guid: fc2805c32b6ccbe429d23e618777dbee, type: 3}
   _icon: {fileID: 0}
-  _targetingPriority: 2
+  _targetingPriority: 6

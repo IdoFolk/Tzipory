@@ -6,8 +6,8 @@ namespace Tzipory.SerializeData.LevalSerializeData
 {
     public class Level : MonoBehaviour
     {
-        //[SerializeField] private 
-        [SerializeField] private List<WaveSpawner> _waveSpawners;
+        [SerializeField] private List<WaveSpawner> _waveSpawnersSerialize;
+        private static List<WaveSpawner> _waveSpawners;
 
         private readonly List<Color> _spawnerColors = new()
         {
@@ -21,14 +21,27 @@ namespace Tzipory.SerializeData.LevalSerializeData
         };
 
         public IEnumerable<WaveSpawner> WaveSpawners => _waveSpawners;
+        public IEnumerable<WaveSpawner> WaveSpawnersSerialize => _waveSpawnersSerialize;
 
         public int NumberOfWaveSpawners => _waveSpawners.Count;
+
+        public static void AddWaveSpawner(WaveSpawner waveSpawner)
+        {
+            if (_waveSpawners.Contains(waveSpawner))
+                return;
+            _waveSpawners.Add(waveSpawner);
+        }
 
         [Button("Rest waveSpawnerList")]
         private void RestWaveSpawnerList()
         {
             _waveSpawners = new List<WaveSpawner>();
             OnValidate();
+        }
+
+        private void OnDestroy()
+        {
+            _waveSpawners.Clear();
         }
 
         private void OnValidate()

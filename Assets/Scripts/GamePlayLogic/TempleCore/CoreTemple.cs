@@ -1,3 +1,4 @@
+using PathCreation;
 using UnityEngine;
 using Tzipory.EntitySystem;
 using Tzipory.EntitySystem.EntityComponents;
@@ -6,12 +7,17 @@ using Sirenix.OdinInspector;
 
 public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 {
+    [SerializeField] private PathCreator _patrolPath;
+    
     [SerializeField]
     float _hp;
 
     [SerializeField,ReadOnly] private Stat _hpStat;
 
     public bool IsTargetAble => true;
+
+    public PathCreator PatrolPath => _patrolPath;
+
     public EntityTeamType EntityTeamType => EntityTeamType.Hero;
 
     public Stat InvincibleTime => throw new System.NotImplementedException();
@@ -49,6 +55,9 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 
     public void TakeDamage(float damage, bool isCrit)
     {
+        if (_hpStat.CurrentValue <= 0)
+            return;
+        
         _hpStat.ReduceFromValue(damage);
         OnHealthChanged?.Invoke();
 

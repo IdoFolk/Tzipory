@@ -49,7 +49,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         public WaveSpawnerSerializeData(WaveSpawner waveSpawner)
         {
             _waveSpawnerColor = waveSpawner.WaveSpawnerColor;
-            _id = waveSpawner.ID;
+           _id = waveSpawner.ID;
         }
         
         public void OnValidate(float startTime)

@@ -9,6 +9,7 @@ namespace GameplayeLogic.UIElements
     {
         public event Action<TimeButtonsUI> OnTurnOn;
         [SerializeField] private float  _time;
+        
         protected override void On()
         {
             GAME_TIME.SetTimeStep(_time);

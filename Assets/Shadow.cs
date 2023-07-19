@@ -1,6 +1,3 @@
-using ProjectDawn.Navigation.Hybrid;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -45,7 +42,7 @@ public class Shadow : MonoBehaviour
 
     private void Update()
     {
-        if (IsOn)
+        if (false) // need to be IsOn
         {
             _agent.transform.position = _shamanTrans.position;
             _agent.SetDestination(transform.position); //resets destination, in case mouse moves? HEAVY AND BAD! 

@@ -70,6 +70,11 @@ public class WaveSpawner : MonoBehaviour , IProgress
         }
     }
 
+    private void Awake()
+    {
+        Level.AddWaveSpawner(this);
+    }
+
     public void Init(WaveSpawnerSerializeData waveSpawnerSerializeData)
     {
         _activeEnemyGroup = new List<EnemyGroup>();

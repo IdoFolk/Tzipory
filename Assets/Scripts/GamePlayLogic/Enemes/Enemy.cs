@@ -17,10 +17,12 @@ namespace Enemes
         private float _decisionInterval;//temp
         private float _aggroLevel;//temp
         private float _returnLevel;//temp
-
+        
         private bool _isAttacking;
 
         private float _currentDecisionInterval;
+
+        public bool IsAttckingCore;
         
         //TEMP!
         [SerializeField] private MovementOnPath _movementOnPath;
@@ -30,6 +32,7 @@ namespace Enemes
         
         public void Init(EnemyConfig parameter)
         {
+            IsAttckingCore = false;
             _decisionInterval = parameter.DecisionInterval;
             _aggroLevel = parameter.AggroLevel;
             _returnLevel = parameter.ReturnLevel;
@@ -48,6 +51,9 @@ namespace Enemes
 
         protected override void UpdateEntity()
         {
+            if (IsAttckingCore)
+                Attack();
+            
             if (_currentDecisionInterval < 0)
             {
                 if (!_isAttacking)

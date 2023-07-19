@@ -9,11 +9,16 @@ namespace GameplayeLogic.UIElements
         [SerializeField] private List<TimeButtonsUI> _timeButtons;
         
         private TimeButtonsUI  _currentButton;
-        
-        private void Start()
+
+        public override void Show()
         {
             foreach (var timeButtonsUI in _timeButtons)
+            {
                 timeButtonsUI.OnTurnOn  += OnButtonPressed;
+                if(timeButtonsUI.State == ButtonState.On)
+                    _currentButton = timeButtonsUI;
+            }
+            base.Show();
         }
 
         private void OnButtonPressed(TimeButtonsUI timeButtonsUI)

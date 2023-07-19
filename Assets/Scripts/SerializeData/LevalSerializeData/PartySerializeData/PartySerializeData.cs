@@ -16,5 +16,6 @@ namespace SerializeData.LevalSerializeData.PartySerializeData
         public Transform PartyParent => _partyParent;
 
         public ShamanConfig[] EntityConfigs => _entityConfigs;
+
     }
 }

@@ -43,21 +43,22 @@ namespace Tzipory.EntitySystem.TargetingSystem
             CurrentTarget = target;
         }
 
-        public void GetPriorityTarget(IPriorityTargeting priorityTargeting = null)
+        public bool GetPriorityTarget(IPriorityTargeting priorityTargeting = null)
         {
             if (CurrentTarget is { IsEntityDead: true })
                 CurrentTarget = null;
 
             if (_availableTargets.Count == 0)
-                return;
+                return false;
 
             if (priorityTargeting == null)
             {
                 CurrentTarget = _entityTargetingComponent.DefaultPriorityTargeting.GetPriorityTarget(_availableTargets);
-                return;
+                return true;
             }
             
             CurrentTarget = priorityTargeting.GetPriorityTarget(_availableTargets);
+            return true;
         }
 
         private void AddTarget(IEntityTargetAbleComponent targetAbleComponent)

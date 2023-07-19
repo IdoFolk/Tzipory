@@ -54,5 +54,5 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _targetingPriority: 2
   _decisionInterval: 5
-  _aggroLevel: 5
-  _returnLevel: 1
+  _aggroLevel: 80
+  _returnLevel: 0

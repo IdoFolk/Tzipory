@@ -2930,7 +2930,7 @@ PrefabInstance:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelSerializeData
       value: 
-      objectReference: {fileID: 11400000, guid: 962c0de1a4cb1b14ab67a6f2204ba677, type: 2}
+      objectReference: {fileID: 11400000, guid: b2410bd7672fb3c44a347198cb6e74fa, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _party.Array.data[0]
       value: 

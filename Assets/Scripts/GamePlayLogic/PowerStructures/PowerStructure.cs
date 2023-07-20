@@ -70,7 +70,7 @@ public class PowerStructure : BaseGameEntity
                 _activeStatusEffectOnShaman.Remove(shaman.EntityInstanceID);
             }
         }
-        else if (collision.gameObject.CompareTag("ShadowShaman"))
+        else if (collision.gameObject.CompareTag("ShadowShaman"))//temp
         {
             _proximityIndicatorHandler.ResetColor();
         }

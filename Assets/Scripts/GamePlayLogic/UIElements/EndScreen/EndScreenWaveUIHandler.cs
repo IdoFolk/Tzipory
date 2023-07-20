@@ -10,7 +10,7 @@ namespace GameplayeLogic.UIElements
 
         public override void Show()
         {
-            _text.text = $"{GameManager.LevelManager.WaveNumber}/{GameManager.LevelManager.TotalNumberOfWaves}";
+            _text.text = $"{GameManager.WaveManager.WaveNumber}/{GameManager.WaveManager.TotalNumberOfWaves}";
             base.Show();
         }
     }

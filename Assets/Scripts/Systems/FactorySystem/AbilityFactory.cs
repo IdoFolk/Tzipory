@@ -15,7 +15,7 @@ namespace Tzipory.Factory
                 case AbilityCastType.Projectile:
                     return new ProjectileAbilityCaster(entityCasterTargetingComponent,abilityConfig);
                 case AbilityCastType.Instant:
-                    return  new InstantAbility(entityCasterTargetingComponent,abilityConfig);
+                    return  new InstantAbilityCaster(entityCasterTargetingComponent,abilityConfig);
                 case AbilityCastType.Self:
                     break;
                 default:

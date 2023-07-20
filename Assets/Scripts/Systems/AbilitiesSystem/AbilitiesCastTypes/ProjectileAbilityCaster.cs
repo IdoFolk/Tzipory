@@ -14,7 +14,7 @@ namespace Tzipory.AbilitiesSystem
         private const string ProjectilePrefabPath = "Prefabs/Ability/ProjectileAbilityEntity";
 
         public event Action OnCast;
-        public AbilityCastType AbilityCastType { get; }
+       //public AbilityCastType AbilityCastType { get; }
         
         public IEntityTargetingComponent EntityCasterTargetingComponent { get; }
 
@@ -38,7 +38,7 @@ namespace Tzipory.AbilitiesSystem
             if (_projectilePrefab is null)
                 throw  new System.Exception($"{nameof(ProjectileAbilityCaster)} ProjectilePrefab not found");
         }
-        
+
         public void Cast(IEntityTargetAbleComponent target, IAbilityExecutor abilityExecutor)
         {
             OnCast?.Invoke();

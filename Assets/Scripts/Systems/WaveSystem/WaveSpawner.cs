@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using Tzipory.EntitySystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.Tools.Enums;
@@ -10,7 +11,7 @@ using Random = UnityEngine.Random;
 
 public class WaveSpawner : MonoBehaviour , IProgress
 {
-    [SerializeField] private int _id;
+    [SerializeField,HideInInspector] private int _id;
     [SerializeField] private Transform[] _spawnPositions;
     [SerializeField] private PathCreator myPathCreator;
 
@@ -102,6 +103,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
             
             if (!TryGetNextEnemyGroup())
                 return;
+            Debug.Log($"#<color=2eff00>WaveManager:</color> start enemyGroup-{_currentEnemyGroupIndex + 1}");
         }
 
         foreach (var enemyGroup in _activeEnemyGroup)
@@ -138,8 +140,9 @@ public class WaveSpawner : MonoBehaviour , IProgress
     
     public void SetColor(Color color)=>
         WaveSpawnerColor = color;
-    
-    
+
+    public void SetId(int id) => _id = id;
+
     private void OnDrawGizmos()
     {
         Gizmos.color = WaveSpawnerColor;

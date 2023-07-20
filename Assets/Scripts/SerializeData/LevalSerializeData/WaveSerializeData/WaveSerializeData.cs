@@ -46,29 +46,9 @@ namespace Tzipory.SerializeData.LevalSerializeData
                 _waveSpawnerSerializeDatas.Add(new WaveSpawnerSerializeData(waveSpawner));
             }
         }
-        
-        public void SetWaveSpawners(IEnumerable<WaveSpawner> waveSpawners)
-        {
-            if (_waveSpawnerSerializeDatas == null)
-                _waveSpawnerSerializeDatas = new List<WaveSpawnerSerializeData>();
 
-            foreach (var waveSpawner in waveSpawners)
-            {
-                _waveSpawnerSerializeDatas.Add(new WaveSpawnerSerializeData(waveSpawner));
-            }
-        }
-        
         public void SetName(string  name)=>
             _name = name;
-
-        public void AddWaveSpawner(WaveSpawner waveSpawner)
-        {
-            _waveSpawnerSerializeDatas.Add(new WaveSpawnerSerializeData(waveSpawner));
-        }
-        
-        public void RemoveWaveSpawner(WaveSpawner waveSpawner)
-        {
-        }
 
         [Button("Delete wave")]
         public void DeleteWave()=>

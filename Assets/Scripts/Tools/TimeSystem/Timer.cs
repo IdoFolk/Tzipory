@@ -15,6 +15,7 @@ namespace Tzipory.BaseSystem.TimeSystem
         public float TimeRemaining { get; }
         
         public void TickTimer();
+        public void StopTimer(bool executeOnComplete = false);
     }
 
     public class Timer : ITimer
@@ -50,6 +51,14 @@ namespace Tzipory.BaseSystem.TimeSystem
                 _onComplete?.Invoke();
                 OnTimerComplete?.Invoke(this);
             }
+        }
+
+        public void StopTimer(bool executeOnComplete = false)
+        {
+            OnTimerComplete?.Invoke(this);
+            
+            if (executeOnComplete)
+                _onComplete?.Invoke();
         }
     }
     
@@ -89,6 +98,14 @@ namespace Tzipory.BaseSystem.TimeSystem
                 _onComplete?.Invoke(_parameter);
                 OnTimerComplete?.Invoke(this);
             }
+        }
+
+        public void StopTimer(bool executeOnComplete = false)
+        {
+            OnTimerComplete?.Invoke(this);
+            
+            if (executeOnComplete)
+                _onComplete?.Invoke(_parameter);
         }
     }
     
@@ -130,6 +147,14 @@ namespace Tzipory.BaseSystem.TimeSystem
                 _onComplete?.Invoke(_parameter1,_parameter2);
                 OnTimerComplete?.Invoke(this);
             }
+        }
+
+        public void StopTimer(bool executeOnComplete = false)
+        {
+            OnTimerComplete?.Invoke(this);
+            
+            if (executeOnComplete)
+                _onComplete?.Invoke(_parameter1,_parameter2);
         }
     }
     
@@ -173,6 +198,14 @@ namespace Tzipory.BaseSystem.TimeSystem
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3);
                 OnTimerComplete?.Invoke(this);
             }
+        }
+
+        public void StopTimer(bool executeOnComplete = false)
+        {
+            OnTimerComplete?.Invoke(this);
+            
+            if (executeOnComplete)
+                _onComplete?.Invoke(_parameter1,_parameter2,_parameter3);
         }
     }
     
@@ -218,6 +251,14 @@ namespace Tzipory.BaseSystem.TimeSystem
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3,_parameter4);
                 OnTimerComplete?.Invoke(this);
             }
+        }
+
+        public void StopTimer(bool executeOnComplete = false)
+        {
+            OnTimerComplete?.Invoke(this);
+            
+            if (executeOnComplete)
+                _onComplete?.Invoke(_parameter1,_parameter2,_parameter3,_parameter4);
         }
     }
     
@@ -265,6 +306,14 @@ namespace Tzipory.BaseSystem.TimeSystem
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3,_parameter4,_parameter5);
                 OnTimerComplete?.Invoke(this);
             }
+        }
+
+        public void StopTimer(bool executeOnComplete = false)
+        {
+            OnTimerComplete?.Invoke(this);
+            
+            if (executeOnComplete)
+                _onComplete?.Invoke(_parameter1,_parameter2,_parameter3,_parameter4,_parameter5);
         }
     }
 }

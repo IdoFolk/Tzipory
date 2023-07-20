@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Tzipory.SerializeData.LevalSerializeData;
 using UnityEngine;
 
 public class TEMP_SoloZFixer : MonoBehaviour
@@ -11,17 +10,17 @@ public class TEMP_SoloZFixer : MonoBehaviour
     [SerializeField] bool doGoOn; 
     void Start()
     {
-        Vector3 v = Tzipory.Leval.WaveManager.FakeForward;
+        Vector3 v = Level.FakeForward;
         float f = v.x * transform.position.x + v.y * transform.position.y;
 
         _spriteRenderer.transform.localPosition += new Vector3(0, 0, f);
         if(!doGoOn)
-        Destroy(this);
+            Destroy(this);
     }
 
     private void Update()
     {
-        Vector3 v = Tzipory.Leval.WaveManager.FakeForward;
+        Vector3 v = Level.FakeForward;
         float f = v.x * transform.position.x + v.y * transform.position.y;
 
         _spriteRenderer.transform.localPosition = new Vector3(_spriteRenderer.transform.localPosition.x, _spriteRenderer.transform.localPosition.y, f);

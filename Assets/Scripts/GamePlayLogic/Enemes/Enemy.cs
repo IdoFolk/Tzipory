@@ -60,7 +60,12 @@ namespace Enemes
                     if (Random.Range(0, 100) < _aggroLevel)
                     {
                         if (Targeting.HaveTarget)
+                        {
                             _isAttacking  = true;
+#if UNITY_EDITOR
+                            Debug.Log($"{gameObject.name} InstanceID: {EntityInstanceID} is attacking {Targeting.CurrentTarget.EntityTransform.name}");
+#endif
+                        }
                     }
                 }
 

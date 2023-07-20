@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tzipory.EntitySystem;
 using UnityEngine;
@@ -7,6 +8,8 @@ namespace Tzipory.SerializeData.LevalSerializeData
 {
     public class Level : MonoBehaviour
     {
+        public static Vector3 FakeForward;
+        [SerializeField] private Vector3 _fakeForward;
         [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         private static List<WaveSpawner> _waveSpawners;
 
@@ -25,6 +28,11 @@ namespace Tzipory.SerializeData.LevalSerializeData
         public IEnumerable<WaveSpawner> WaveSpawnersSerialize => _waveSpawnersSerialize;
 
         public int NumberOfWaveSpawners => _waveSpawners.Count;
+
+        private void Awake()
+        {
+            FakeForward = _fakeForward;
+        }
 
         public static void AddWaveSpawner(WaveSpawner waveSpawner)
         {

@@ -95,7 +95,6 @@ namespace MovementSystem.HerosMovementSystem
                 var worldPos = _camera.ScreenToWorldPoint(screenPos);
                 worldPos = new Vector3(worldPos.x, worldPos.y, 0);
                 _currentTarget.SetTarget(worldPos);
-                Debug.Log("Set new pos");
                 OnMove?.Invoke(worldPos);
 
                 ClearTarget();

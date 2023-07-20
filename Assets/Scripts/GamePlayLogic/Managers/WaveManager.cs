@@ -11,8 +11,6 @@ namespace Tzipory.Leval
 {
     public class WaveManager : IDisposable
     {
-        public static Vector3 FakeForward;
-        
         public event Action<int> OnNewWaveStarted;
         
         private readonly LevelSerializeData _levelSerializeData;
@@ -44,9 +42,6 @@ namespace Tzipory.Leval
             _delayBetweenWaves = _levelSerializeData.DelayBetweenWaves;
 
             Object.Instantiate(_levelSerializeData.Level,levelPerant);
-            FakeForward = _levelSerializeData.FakeForwardVector; //temp?
-
-            Debug.Log($"fake forward set to: {FakeForward}");
         }
         
         public void StartLevel()
@@ -65,7 +60,9 @@ namespace Tzipory.Leval
 
             if (!CurrentWave.IsStarted)
             {
+#if UNITY_EDITOR
                 Debug.Log($"<color=#2eff00>WaveManager:</color> start wave-{_currentWaveIndex + 1}");
+#endif
                 CurrentWave.StartWave();
                 OnNewWaveStarted?.Invoke(_currentWaveIndex + 1);
             }
@@ -79,7 +76,9 @@ namespace Tzipory.Leval
 
             _delayBetweenWavesTimer = null;
             _delayBetweenWaves = _levelSerializeData.DelayBetweenWaves;
+#if UNITY_EDITOR
             Debug.Log($"<color=#2eff00>WaveManager:</color> ended wave-{_currentWaveIndex + 1}");
+#endif
             CurrentWave.EndWave();
 
             if (_currentWaveIndex + 1 < _waves.Count)

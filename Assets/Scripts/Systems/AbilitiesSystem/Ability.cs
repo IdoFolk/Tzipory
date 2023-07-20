@@ -58,7 +58,10 @@ namespace Tzipory.AbilitiesSystem
 
             _isReady = false;
             IsCasting = true;
+#if UNITY_EDITOR
             Debug.Log($"<color=#0008ff>AbilityHandler:</color> {_entityTargetingComponent.GameEntity.name} start casting ability {AbilityName} castTime: {CastTime.CurrentValue}");
+            
+#endif
             _castTimer = _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(CastTime.CurrentValue, Cast,ref availableTarget);
         }
 
@@ -68,13 +71,17 @@ namespace Tzipory.AbilitiesSystem
             
             if (currentTarget == null)
                 return;
+#if UNITY_EDITOR
             Debug.Log($"<color=#0008ff>AbilityHandler:</color> {_entityTargetingComponent.GameEntity.name} cast ability {AbilityName} on {currentTarget.GameEntity.name}");
+#endif
             _abilityCaster.Cast(currentTarget,_abilityExecutor);
         }
         
         public void CancelCast()
         {
+#if UNITY_EDITOR
             Debug.Log($"<color=#0008ff>AbilityHandler:</color> {_entityTargetingComponent.GameEntity.name} ability {AbilityName} cancel cast {_castTimer.TimeRemaining}");
+#endif
             _castTimer.StopTimer();
             IsCasting = false;
             _isReady = true;

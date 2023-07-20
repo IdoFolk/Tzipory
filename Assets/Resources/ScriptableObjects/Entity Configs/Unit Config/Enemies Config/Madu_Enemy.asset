@@ -31,7 +31,7 @@ MonoBehaviour:
   _attackRange:
     _name: AttackRange
     _id: 3
-    _baseValue: 1
+    _baseValue: 2
   _targetingRange:
     _name: TargetingRange
     _id: 4
@@ -54,5 +54,5 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _targetingPriority: 2
   _decisionInterval: 5
-  _aggroLevel: 80
-  _returnLevel: 0
+  _aggroLevel: 30
+  _returnLevel: 10

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
+using Tzipory.EntitySystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.Tools.Enums;
@@ -10,7 +11,7 @@ using Random = UnityEngine.Random;
 
 public class WaveSpawner : MonoBehaviour , IProgress
 {
-    [SerializeField] private int _id;
+    [SerializeField,HideInInspector] private int _id;
     [SerializeField] private Transform[] _spawnPositions;
     [SerializeField] private PathCreator myPathCreator;
 
@@ -138,8 +139,13 @@ public class WaveSpawner : MonoBehaviour , IProgress
     
     public void SetColor(Color color)=>
         WaveSpawnerColor = color;
-    
-    
+
+    private void OnValidate()
+    {
+        if (_id == 0)
+            _id = EntityIDGenerator.GetInstanceID();
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = WaveSpawnerColor;

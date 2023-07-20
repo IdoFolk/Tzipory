@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
         PartyManager.SpawnShaman();
         LevelManager.StartLevel();
         UIManager.Initialize();
-        
+        GAME_TIME.SetTimeStep(1);
         IsGameRunning = true;
     }
 
@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
     {
         if (!IsGameRunning) return;
         
+        GAME_TIME.SetTimeStep(0);
         OnEndGame?.Invoke(isWon);
         IsGameRunning = false;
     }

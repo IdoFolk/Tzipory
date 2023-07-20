@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Tzipory.EntitySystem;
 using UnityEngine;
 
 namespace Tzipory.SerializeData.LevalSerializeData
 {
     public class Level : MonoBehaviour
     {
-        [SerializeField] private List<WaveSpawner> _waveSpawnersSerialize;
+        [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         private static List<WaveSpawner> _waveSpawners;
 
         private readonly List<Color> _spawnerColors = new()
@@ -34,24 +35,25 @@ namespace Tzipory.SerializeData.LevalSerializeData
             _waveSpawners.Add(waveSpawner);
         }
 
-        [Button("Rest waveSpawnerList")]
-        private void RestWaveSpawnerList()
-        {
-            _waveSpawnersSerialize = new List<WaveSpawner>();
-            OnValidate();
-        }
+        // [Button("Refresh waveSpawnerList")]
+        // private void RestWaveSpawnerList()
+        // {
+        //     _waveSpawnersSerialize = new List<WaveSpawner>();
+        //     GetWaveSpawners();
+        // }
 
         private void OnDestroy()
         {
             _waveSpawners.Clear();
         }
 
-        private void OnValidate()
+        private void GetWaveSpawners()
         {
-            _waveSpawnersSerialize ??= new List<WaveSpawner>();
-
             for (int i = 0; i < _waveSpawnersSerialize.Count; i++)
+            {
                 _waveSpawnersSerialize[i].SetColor(_spawnerColors[i]);
+                _waveSpawnersSerialize[i].SetId(i);
+            }
         }
     }
 }

@@ -141,11 +141,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
     public void SetColor(Color color)=>
         WaveSpawnerColor = color;
 
-    private void OnValidate()
-    {
-        if (_id == 0)
-            _id = EntityIDGenerator.GetInstanceID();
-    }
+    public void SetId(int id) => _id = id;
 
     private void OnDrawGizmos()
     {

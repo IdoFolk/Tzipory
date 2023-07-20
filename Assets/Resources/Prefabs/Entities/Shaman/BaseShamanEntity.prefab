@@ -144,6 +144,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3448816137356898781, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
   m_PrefabInstance: {fileID: 4080524451218561172}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &2200670044425848587 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2750211597899472799, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+  m_PrefabInstance: {fileID: 4080524451218561172}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3104813651261807675 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1420442367539004591, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
@@ -165,7 +170,7 @@ MonoBehaviour:
     _timerSerializeDatas: []
   _stats: []
   _bodyCollider: {fileID: 1800454651558910966}
-  _spriteRenderer: {fileID: 0}
+  _spriteRenderer: {fileID: 2200670044425848587}
   _visualQueueEffectPosition: {fileID: 800062657850464996}
   _particleEffectPosition: {fileID: 1692306035326806345}
   _soundHandler: {fileID: 3215233828703679931}
@@ -405,7 +410,7 @@ MonoBehaviour:
     DeadZone: 0.05
     TestFreq: 6
   _doLookAtTemple: 0
-  _spriteRenderer: {fileID: 0}
+  _spriteRenderer: {fileID: 2200670044425848587}
   _tgt: {fileID: 0}
   _baseUnitEntity: {fileID: 7330099708541644612}
 --- !u!114 &3215233828703679931 stripped

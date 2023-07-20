@@ -55,6 +55,12 @@ namespace Tzipory.SerializeData.LevalSerializeData
             _waveSpawners.Clear();
         }
 
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(Vector3.zero, _fakeForward.normalized * 5);
+        }
+
         private void GetWaveSpawners()
         {
             for (int i = 0; i < _waveSpawnersSerialize.Count; i++)

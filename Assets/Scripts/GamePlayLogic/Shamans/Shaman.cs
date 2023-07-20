@@ -37,8 +37,8 @@ namespace Shamans
 
         protected override void UpdateEntity()
         {
-             if (Targeting.CurrentTarget != null)//temp
-                 Attack();
+            if (Targeting.CurrentTarget != null)//temp
+                Attack();
         }
 
         protected override void OnDestroy()
@@ -50,7 +50,10 @@ namespace Shamans
         public override void Attack()
         {
             if (_tempHeroMovement.IsMoveing)
+            {
+                AbilityHandler.CancelCast();
                 return;
+            }
             
             AbilityHandler.CastAbility(Targeting.AvailableTargets);
             
@@ -58,7 +61,8 @@ namespace Shamans
 
             if (AbilityHandler.IsCasting)//temp!!!
             {
-                 return;
+                _currentAttackRate = AttackRate.CurrentValue;
+                return;
             }
             
             _currentAttackRate -= GAME_TIME.GameDeltaTime;

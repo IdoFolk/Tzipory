@@ -6,14 +6,14 @@ namespace GameplayeLogic.UIElements
     {
         public override void Show()
         {
-            _maxCount.text = $"/{GameManager.LevelManager.TotalNumberOfWaves}";
-            GameManager.LevelManager.OnNewWaveStarted += UpdateUiData;
+            _maxCount.text = $"/{GameManager.WaveManager.TotalNumberOfWaves}";
+            GameManager.WaveManager.OnNewWaveStarted += UpdateUiData;
             base.Show();
         }
 
         public override void Hide()
         {
-            GameManager.LevelManager.OnNewWaveStarted -= UpdateUiData;
+            GameManager.WaveManager.OnNewWaveStarted -= UpdateUiData;
             base.Hide();
         }
     }

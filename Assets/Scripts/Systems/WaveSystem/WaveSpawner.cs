@@ -103,6 +103,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
             
             if (!TryGetNextEnemyGroup())
                 return;
+            Debug.Log($"#<color=2eff00>WaveManager:</color> start enemyGroup-{_currentEnemyGroupIndex + 1}");
         }
 
         foreach (var enemyGroup in _activeEnemyGroup)

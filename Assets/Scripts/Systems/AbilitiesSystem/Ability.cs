@@ -1,29 +1,32 @@
 ﻿using System.Collections.Generic;
 using Helpers.Consts;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
+using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.EntitySystem.TargetingSystem;
+using UnityEngine;
 
 namespace Tzipory.AbilitiesSystem
 {
     public class Ability
     {
         private readonly IEntityTargetingComponent _entityTargetingComponent;
-        private IPriorityTargeting _priorityTargeting;
+        private readonly IAbilityCaster _abilityCaster;
+        private readonly IAbilityExecutor _abilityExecutor;
+        private readonly IPriorityTargeting _priorityTargeting;
+        
         private bool _isReady;
+        
+        private ITimer _castTimer;
+        private ITimer _cooldownTimer;
 
         public string AbilityName { get; }
         public int AbilityId { get; }
         public bool IsCasting { get; private set; }
-
         private Stat Cooldown { get; }
         private Stat CastTime { get; }
         
-        private IAbilityExecutor AbilityExecutor { get; }
-        private IAbilityCaster AbilityCaster { get; }
-
-
         public Ability(IEntityTargetAbleComponent caster,IEntityTargetingComponent entityTargetingComponent, AbilityConfig config)
         {
             _entityTargetingComponent = entityTargetingComponent;
@@ -36,10 +39,10 @@ namespace Tzipory.AbilitiesSystem
             CastTime = new Stat(Constant.Stats.AbilityCastTime.ToString(), config.CastTime, int.MaxValue,
                 (int)Constant.Stats.AbilityCastTime);
 
-            AbilityCaster = Factory.AbilityFactory.GetAbilityCaster(entityTargetingComponent,config);
-            AbilityExecutor = Factory.AbilityFactory.GetAbilityExecutor(caster,config);
+            _abilityCaster = Factory.AbilityFactory.GetAbilityCaster(entityTargetingComponent,config);
+            _abilityExecutor = Factory.AbilityFactory.GetAbilityExecutor(caster,config);
 
-            AbilityCaster.OnCast += StartCooldown;
+            _abilityCaster.OnCast += StartCooldown;
             
             _priorityTargeting =
                 Factory.TargetingPriorityFactory.GetTargetingPriority(entityTargetingComponent,
@@ -55,7 +58,8 @@ namespace Tzipory.AbilitiesSystem
 
             _isReady = false;
             IsCasting = true;
-            _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(CastTime.CurrentValue, Cast,ref availableTarget);
+            Debug.Log($"<color=#0008ff>AbilityHandler:</color> {_entityTargetingComponent.GameEntity.name} start casting ability {AbilityName} castTime: {CastTime.CurrentValue}");
+            _castTimer = _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(CastTime.CurrentValue, Cast,ref availableTarget);
         }
 
         private void Cast(IEnumerable<IEntityTargetAbleComponent> availableTarget)
@@ -64,8 +68,16 @@ namespace Tzipory.AbilitiesSystem
             
             if (currentTarget == null)
                 return;
-            
-            AbilityCaster.Cast(currentTarget,AbilityExecutor);
+            Debug.Log($"<color=#0008ff>AbilityHandler:</color> {_entityTargetingComponent.GameEntity.name} cast ability {AbilityName} on {currentTarget.GameEntity.name}");
+            _abilityCaster.Cast(currentTarget,_abilityExecutor);
+        }
+        
+        public void CancelCast()
+        {
+            Debug.Log($"<color=#0008ff>AbilityHandler:</color> {_entityTargetingComponent.GameEntity.name} ability {AbilityName} cancel cast {_castTimer.TimeRemaining}");
+            _castTimer.StopTimer();
+            IsCasting = false;
+            _isReady = true;
         }
 
         private void StartCooldown()
@@ -79,7 +91,7 @@ namespace Tzipory.AbilitiesSystem
 
         ~Ability()
         {
-            AbilityCaster.OnCast -= StartCooldown;
+            _abilityCaster.OnCast -= StartCooldown;
         }
 
     }

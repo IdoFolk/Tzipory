@@ -11,7 +11,7 @@ public class TEMP_SoloZFixer : MonoBehaviour
     [SerializeField] bool doGoOn; 
     void Start()
     {
-        Vector3 v = Tzipory.Leval.LevelManager.FakeForward;
+        Vector3 v = Tzipory.Leval.WaveManager.FakeForward;
         float f = v.x * transform.position.x + v.y * transform.position.y;
 
         _spriteRenderer.transform.localPosition += new Vector3(0, 0, f);
@@ -21,7 +21,7 @@ public class TEMP_SoloZFixer : MonoBehaviour
 
     private void Update()
     {
-        Vector3 v = Tzipory.Leval.LevelManager.FakeForward;
+        Vector3 v = Tzipory.Leval.WaveManager.FakeForward;
         float f = v.x * transform.position.x + v.y * transform.position.y;
 
         _spriteRenderer.transform.localPosition = new Vector3(_spriteRenderer.transform.localPosition.x, _spriteRenderer.transform.localPosition.y, f);

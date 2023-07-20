@@ -23,7 +23,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     private void Start()
     {
         StartCoroutine(nameof(CheckForFlip));
-        _fakeForward = LevelManager.FakeForward;
+        _fakeForward = WaveManager.FakeForward;
         _targeting = _baseUnitEntity.Targeting;
         //This should be applied differently between Shamans and Enemies.
         //Enemies look in the direction they are going -> then they look at CoreTrans or their attack target.

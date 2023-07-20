@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public static PartyManager PartyManager { get; private set; }
     public static EnemyManager EnemyManager { get; private set; }
     public static PlayerManager PlayerManager { get; private set; }
-    public static LevelManager LevelManager { get; private set; }
+    public static WaveManager WaveManager { get; private set; }
     public static UIManager UIManager { get; private set; }
     public static CoreTemple CoreTemplete { get; private set; }
     
@@ -42,14 +42,14 @@ public class GameManager : MonoBehaviour
         EnemyManager = new EnemyManager();
         PlayerManager = new PlayerManager();
         PartyManager = new PartyManager(_partySerializeData);
-        LevelManager  = new LevelManager(_levelSerializeData,_levelParent);//temp!
+        WaveManager  = new WaveManager(_levelSerializeData,_levelParent);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
     }
 
     private void Start()
     {
         PartyManager.SpawnShaman();
-        LevelManager.StartLevel();
+        WaveManager.StartLevel();
         UIManager.Initialize();
         GAME_TIME.SetTimeStep(1);
         IsGameRunning = true;
@@ -60,12 +60,12 @@ public class GameManager : MonoBehaviour
         if (!IsGameRunning)
             return;
         
-        LevelManager.UpdateLevel();
+        WaveManager.UpdateLevel();
 
         if (CoreTemplete.IsEntityDead)
             EndGame(false);
 
-        if (LevelManager.AllWaveAreDone && EnemyManager.AllEnemiesArDead)
+        if (WaveManager.AllWaveAreDone && EnemyManager.AllEnemiesArDead)
             EndGame(true);
     }
     
@@ -75,12 +75,12 @@ public class GameManager : MonoBehaviour
         EnemyManager.Dispose();
         PlayerManager.Dispose();
         PartyManager.Dispose();
-        LevelManager.Dispose();
+        WaveManager.Dispose();
         
         PartyManager = null;
         EnemyManager = null;
         PlayerManager = null;
-        LevelManager = null;
+        WaveManager = null;
     }
 
     private void EndGame(bool isWon)

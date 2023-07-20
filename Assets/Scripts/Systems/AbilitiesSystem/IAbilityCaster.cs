@@ -7,8 +7,7 @@ namespace Tzipory.AbilitiesSystem
     public interface IAbilityCaster
     {
         public event Action OnCast;
-        public AbilityCastType AbilityCastType  { get; }//how
-
+       // public void CancelCast();
         public void Cast(IEntityTargetAbleComponent target,IAbilityExecutor abilityExecutor);
     }
 }

@@ -77,11 +77,11 @@ namespace Systems.UISystem
                 case 0:
                     OnClick?.Invoke();
                     _clickNum++;
-                    Debug.Log("Onclick");
+                    //Debug.Log("Onclick");
                     return;
                 case 1:
                     OnDoubleClick?.Invoke();
-                    Debug.Log("OnDoubleClick");
+                    //Debug.Log("OnDoubleClick");
                     _doubleClickTimer = null;
                     _clickNum = 0;
                     return;

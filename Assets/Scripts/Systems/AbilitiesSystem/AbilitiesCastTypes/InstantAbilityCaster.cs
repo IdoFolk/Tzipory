@@ -4,12 +4,12 @@ using Tzipory.EntitySystem.EntityComponents;
 
 namespace Tzipory.AbilitiesSystem
 {
-    public class InstantAbility : IAbilityCaster
+    public class InstantAbilityCaster : IAbilityCaster
     {
         public event Action OnCast;
-        public AbilityCastType AbilityCastType => AbilityCastType.Instant;
+       // public AbilityCastType AbilityCastType => AbilityCastType.Instant;
         
-        public InstantAbility(IEntityTargetingComponent entityCasterTargetingComponent,AbilityConfig config)
+        public InstantAbilityCaster(IEntityTargetingComponent entityCasterTargetingComponent,AbilityConfig config)
         {
         }
 

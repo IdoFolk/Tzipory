@@ -34,5 +34,14 @@ namespace Tzipory.AbilitiesSystem
         {
             Abilities.First().Value?.ExecuteAbility(availableTargets);
         }
+
+        public void CancelCast()
+        {
+            foreach (var abilities in Abilities.Values)
+            {
+                if (abilities.IsCasting)
+                    abilities.CancelCast();
+            }
+        }
     }
 }

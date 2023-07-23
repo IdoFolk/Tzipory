@@ -12,3 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b806ea3731144ce8be6d3b5a64ac263e, type: 3}
   m_Name: BattleMapNode 1
   m_EditorClassIdentifier: 
+  battleMapNode:
+    nodeID: 
+    leadToNodes: []
+    unlockNodes: []
+    leadAndUnlockNodesSame: 1
+    startingNodeState: 0
+  overrideSprite: {fileID: 0}

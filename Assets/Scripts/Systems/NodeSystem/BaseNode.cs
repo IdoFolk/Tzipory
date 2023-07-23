@@ -8,8 +8,10 @@ namespace Tzipory.Systems.NodeSystem
     public abstract class BaseNode
     {
         public string nodeID;
-        public List<BaseNode> leadToNodes;
-        public List<BaseNode> unlockNodes;
-        public bool leadAndUnlockNodesSame = true;
+
+        public virtual void FillInfo(BaseNode newBaseNode)
+        {
+            nodeID = newBaseNode.nodeID;
+        }
     }
 }

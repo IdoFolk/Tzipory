@@ -5,7 +5,7 @@ public class TEMP_SoloZFixer : MonoBehaviour
 {
     [SerializeField] SpriteRenderer _spriteRenderer;
     /// <summary>
-    /// Tick this V to keep this script in the scene. If this is false -> the script will destory itself after start
+    /// Tick this V to keep this script in the sceneType. If this is false -> the script will destory itself after start
     /// </summary>
     [SerializeField] bool doGoOn; 
     void Start()

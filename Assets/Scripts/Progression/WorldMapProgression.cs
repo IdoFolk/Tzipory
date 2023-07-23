@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using GameplayeLogic.Nodes;
 using Tzipory.Systems.NodeSystem;
 using UnityEngine;
 
@@ -8,14 +9,14 @@ namespace Tzipory.Progression
     [System.Serializable]
     public class WorldMapProgression
     {
-        [SerializeField] List<BaseNode> nodesStatus;
-
-        public void AddNodeStatus(BaseNode newBaseNode)
+        [SerializeField] List<WorldMapNode> nodesStatus;
+        
+        public void AddNodeStatus(WorldMapNode newBaseNode)
         {
-            BaseNode currentBaseNode = nodesStatus.Find(node => node.nodeID == newBaseNode.nodeID);
-            if (currentBaseNode != null)
+            WorldMapNode currentWorldMapNode = nodesStatus.Find(node => node.nodeID == newBaseNode.nodeID);
+            if (currentWorldMapNode != null)
             {
-                currentBaseNode.FillInfo(newBaseNode);
+                currentWorldMapNode.FillInfo(newBaseNode);
             }
             else
             {
@@ -23,10 +24,10 @@ namespace Tzipory.Progression
             }
         }
 
-        public BaseNode GetNodeStatus(string nodeID)
+        public WorldMapNode GetWorldMapNodeStatus(string nodeID)
         {
-            BaseNode currentBaseNode = nodesStatus.Find(node => node.nodeID == nodeID);
-            return currentBaseNode;
+            WorldMapNode currentWorldMapNode = nodesStatus.Find(node => node.nodeID == nodeID);
+            return currentWorldMapNode;
         }
     }
 }

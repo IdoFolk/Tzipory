@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using SerializeData.LevalSerializeData.PartySerializeData;
 using Shamans;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = UnityEngine.Random;
 
 namespace GameplayeLogic.Managers
 {
@@ -43,16 +45,19 @@ namespace GameplayeLogic.Managers
 
         private Vector3 GetSpawnPoint()
         {
-            foreach (var spawnPoint in _partySpawnPoints)
+            if (_partySpawnPoints.All(spawnPoint => spawnPoint.Value))
+                return Vector3.zero;
+
+            while (true)
             {
-                if (!spawnPoint.Value) 
+                var spawnPoint = _partySpawnPoints.ElementAt(Random.Range(0, _partySpawnPoints.Count));
+
+                if (!spawnPoint.Value)
                 {
                     _partySpawnPoints[spawnPoint.Key] = true;
                     return spawnPoint.Key;
                 }
             }
-            
-            return Vector3.zero;
         }
 
         public void Dispose()

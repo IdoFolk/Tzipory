@@ -8,9 +8,13 @@ namespace SerializeData.Nodes
     [System.Serializable]
     public abstract class BaseNodeSerializeData
     {
-      //  public string NodeID => nodeID;
+        public string NodeID
+        {
+            get { return nodeID; }
+            set => nodeID = value;
+        }
         
-        public string NodeID;
+        public string nodeID;
         private bool visitedByPlayer;
 
 

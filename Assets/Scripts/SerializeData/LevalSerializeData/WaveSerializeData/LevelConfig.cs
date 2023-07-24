@@ -5,14 +5,17 @@ using UnityEngine;
 namespace Tzipory.SerializeData.LevalSerializeData
 {
     [CreateAssetMenu(fileName = "NewLevelConfig", menuName = "ScriptableObjects/New level config", order = 0)]
-    public class LevelSerializeData : ScriptableObject
+    public class LevelConfig : ScriptableObject
     {
+        [SerializeField,PropertyOrder(-2)] private int _levelId;
         [SerializeField,PropertyOrder(-1)] private Level _level;
         [SerializeField,PropertyOrder(-1)] private Vector3 _fakeForwardVector;
         [SerializeField,PropertyOrder(-1)] private float _levelStartDelay = 0.2f;
         [SerializeField,PropertyOrder(-1)] private float _delayBetweenWaves;
         [SerializeField,PropertyOrder(1),ListDrawerSettings(HideAddButton = true,HideRemoveButton = true)] private List<WaveSerializeData> _waves;
-        
+
+        public int LevelId => _levelId;
+
         public Level Level => _level;
         public Vector3 FakeForwardVector => _fakeForwardVector;
 

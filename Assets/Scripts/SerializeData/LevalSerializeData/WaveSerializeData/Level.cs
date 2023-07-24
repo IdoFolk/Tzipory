@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using Tzipory.EntitySystem;
 using UnityEngine;
 
 namespace Tzipory.SerializeData.LevalSerializeData
@@ -42,13 +40,6 @@ namespace Tzipory.SerializeData.LevalSerializeData
                 return;
             _waveSpawners.Add(waveSpawner);
         }
-
-        // [Button("Refresh waveSpawnerList")]
-        // private void RestWaveSpawnerList()
-        // {
-        //     _waveSpawnersSerialize = new List<WaveSpawner>();
-        //     GetWaveSpawners();
-        // }
 
         private void OnDestroy()
         {

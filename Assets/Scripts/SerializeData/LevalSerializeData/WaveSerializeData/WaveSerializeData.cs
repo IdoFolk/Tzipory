@@ -33,12 +33,12 @@ namespace Tzipory.SerializeData.LevalSerializeData
             }
         }
         
-        private LevelSerializeData  _levelSerializeData;
+        private LevelConfig  _levelConfig;
         public List<WaveSpawnerSerializeData> WaveSpawnerSerializeDatas => _waveSpawnerSerializeDatas;
 
-        public WaveSerializeData(IEnumerable<WaveSpawner> waveSpawners,LevelSerializeData levelSerializeData)
+        public WaveSerializeData(IEnumerable<WaveSpawner> waveSpawners,LevelConfig levelConfig)
         {
-            _levelSerializeData = levelSerializeData;
+            _levelConfig = levelConfig;
             _waveSpawnerSerializeDatas = new List<WaveSpawnerSerializeData>();
 
             foreach (var waveSpawner in waveSpawners)
@@ -52,7 +52,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
 
         [Button("Delete wave")]
         public void DeleteWave()=>
-            _levelSerializeData.RemoveWave(this);
+            _levelConfig.RemoveWave(this);
 
         public void OnValidate(float startTime)
         {

@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField, TabGroup("Level manager")]
     private Transform _levelParent;
     [SerializeField, TabGroup("Level manager")]
-    private LevelSerializeData _levelSerializeData;
+    private LevelConfig _levelConfig;
     
     private void Awake()
     {
@@ -42,7 +42,7 @@ public class LevelManager : MonoBehaviour
         EnemyManager = new EnemyManager();
         PlayerData = new PlayerData();
         PartyManager = new PartyManager(_partySerializeData);
-        WaveManager  = new WaveManager(_levelSerializeData,_levelParent);//temp!
+        WaveManager  = new WaveManager(_levelConfig,_levelParent);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
     }
 

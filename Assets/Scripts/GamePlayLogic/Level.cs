@@ -7,6 +7,13 @@ namespace Tzipory.SerializeData.LevalSerializeData
     public class Level : MonoBehaviour
     {
         public static Vector3 FakeForward;
+        public static Vector2 MapSize;
+
+
+        /// <summary>
+        /// Basically, the Map's resolution
+        /// </summary>
+        [SerializeField] Vector2 _mapSize; //this could be taken from the map's actual texture if we want an easier life TBD
         [SerializeField] private Vector3 _fakeForward;
         [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         private static List<WaveSpawner> _waveSpawners;
@@ -30,6 +37,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         private void Awake()
         {
             FakeForward = _fakeForward;
+            MapSize = _mapSize;
         }
 
         public static void AddWaveSpawner(WaveSpawner waveSpawner)

@@ -21,22 +21,27 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     [SerializeField] BaseUnitEntity _baseUnitEntity;
     TargetingHandler _targeting;
     //TEMP! Should USE Init(BaseUnitEntity) INSTEAD 
+
+    Vector3 _cachedScaledMapSize;
     private void Start()
     {
         StartCoroutine(nameof(CheckForFlip));
-        _fakeForward = Level.FakeForward;
         _targeting = _baseUnitEntity.Targeting;
+
+        _fakeForward = Level.FakeForward;
+        _cachedScaledMapSize = Level.MapSize * .01f;
         //This should be applied differently between Shamans and Enemies.
         //Enemies look in the direction they are going -> then they look at CoreTrans or their attack target.
-        _tgt = _doLookAtTemple? CoreTemple.CoreTrans : null;
+        _tgt = _doLookAtTemple? CoreTemple.CoreTrans : null; // MUST change TBD
+
     }
     private void Update()
     {
+        //Vector3 v = 
         //do z fix
         float f = _fakeForward.x * transform.position.x  + _fakeForward.y * transform.position.y;
-
-        _spriteRenderer.transform.localPosition = new Vector3(0, 0, f);
-
+        float offset = _fakeForward.x * _cachedScaledMapSize.x + _fakeForward.y * _cachedScaledMapSize.y; //should cause the bottom most point to be the flat-height
+        _spriteRenderer.transform.localPosition = new Vector3(0, 0, -f);
         if (_targeting.HaveTarget)
             _tgt = _targeting.CurrentTarget.EntityTransform;
         else

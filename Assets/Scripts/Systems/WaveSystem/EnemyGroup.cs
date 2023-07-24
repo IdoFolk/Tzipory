@@ -6,7 +6,7 @@ using Tzipory.SerializeData.LevalSerializeData;
 
 namespace Tzipory.WaveSystem
 {
-    public class EnemyGroup : WaveComponent<EnemyGroupSerializeData>
+    public class EnemyGroup : WaveComponent<EnemyGroupConfig>
     {
         private EnemyConfig _enemyConfig;
         
@@ -17,18 +17,18 @@ namespace Tzipory.WaveSystem
         private float _spawnInterval;
         public int TotalSpawnAmount { get; private set; }
 
-        public override EnemyGroupSerializeData Data { get; }
+        public override EnemyGroupConfig Data { get; }
         public override float CompletionPercentage => throw new NotImplementedException();
         public override bool IsDone => TotalSpawnAmount <= 0;
         
-        public EnemyGroup(EnemyGroupSerializeData enemyGroupSerializeData)
+        public EnemyGroup(EnemyGroupConfig enemyGroupConfig)
         {
-            Data = enemyGroupSerializeData;
-            _startDelay = enemyGroupSerializeData.GroupStartDelay;
-            _enemyConfig = enemyGroupSerializeData.EnemyConfig;
-            TotalSpawnAmount = enemyGroupSerializeData.TotalSpawnAmount;
+            Data = enemyGroupConfig;
+            _startDelay = enemyGroupConfig.GroupStartDelay;
+            _enemyConfig = enemyGroupConfig.EnemyConfig;
+            TotalSpawnAmount = enemyGroupConfig.TotalSpawnAmount;
             _spawnInterval = 0;
-            _spawnAmountPreInterval = enemyGroupSerializeData.SpawnAmountPreInterval;
+            _spawnAmountPreInterval = enemyGroupConfig.SpawnAmountPreInterval;
         }
 
         public bool TryGetEnemy(out EnemyConfig enemyPrefab)

@@ -36,9 +36,9 @@ namespace Tzipory.GamePlayLogic.ObjectPools
             TransformEffectPool = new ObjectPool<TransformEffectAction>(new TransformEffectActionFactory(),15);
         }
         
-        public BaseEffectAction GetEffectAction(EffectActionContainerData actionContainerData)
+        public BaseEffectAction GetEffectAction(EffectActionContainerConfig actionContainerConfig)
         {
-            return actionContainerData.EffectActionSo.ActionType switch
+            return actionContainerConfig.EffectActionConfig.ActionType switch
             {
                 EffectActionType.Transform => TransformEffectPool.GetObject(),
                 EffectActionType.Color => ColorEffectPool.GetObject(),
@@ -50,7 +50,7 @@ namespace Tzipory.GamePlayLogic.ObjectPools
             };
         }
 
-        public EffectSequence GetEffectSequence(EffectSequenceData sequenceData)
+        public EffectSequence GetEffectSequence(EffectSequenceConfig sequenceConfig)
         {
             return  EffectActionPool.GetObject();
         }

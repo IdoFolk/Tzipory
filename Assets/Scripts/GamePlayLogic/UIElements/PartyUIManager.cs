@@ -10,7 +10,7 @@ namespace GameplayeLogic.UIElements
         
         public override void Show()
         {
-            var shamans = GameManager.PartyManager.Party;
+            var shamans = LevelManager.PartyManager.Party;
 
             foreach (var shaman in shamans)
             {

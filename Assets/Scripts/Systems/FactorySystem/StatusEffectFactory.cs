@@ -5,13 +5,13 @@ namespace Tzipory.Factory
 {
     public class StatusEffectFactory
     {
-        public static BaseStatusEffect GetStatusEffect(StatusEffectConfigSo statusEffectConfigSo,Stat statToEffect)
+        public static BaseStatusEffect GetStatusEffect(StatusEffectConfig statusEffectConfig,Stat statToEffect)
         {
-            return statusEffectConfigSo.StatusEffectType switch
+            return statusEffectConfig.StatusEffectType switch
             {
-                StatusEffectType.OverTime => new OverTimeStatusEffect(statusEffectConfigSo,statToEffect),
-                StatusEffectType.Instant => new InstantStatusEffect(statusEffectConfigSo,statToEffect),
-                StatusEffectType.Interval => new IntervalStatusEffect(statusEffectConfigSo,statToEffect),
+                StatusEffectType.OverTime => new OverTimeStatusEffect(statusEffectConfig,statToEffect),
+                StatusEffectType.Instant => new InstantStatusEffect(statusEffectConfig,statToEffect),
+                StatusEffectType.Interval => new IntervalStatusEffect(statusEffectConfig,statToEffect),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

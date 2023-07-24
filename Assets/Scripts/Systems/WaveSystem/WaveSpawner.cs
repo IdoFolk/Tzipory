@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using PathCreation;
-using Tzipory.EntitySystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.Tools.Enums;
@@ -11,13 +10,14 @@ using Random = UnityEngine.Random;
 
 public class WaveSpawner : MonoBehaviour , IProgress
 {
+    [SerializeField, HideInInspector] private Color _color;
     [SerializeField,HideInInspector] private int _id;
     [SerializeField] private Transform[] _spawnPositions;
     [SerializeField] private PathCreator myPathCreator;
 
     private List<IProgress> _completedEnemyGroups;
 
-    private EnemyGroupSerializeData[] _enemyGroups;
+    private EnemyGroupConfig[] _enemyGroups;
 
     private int _currentEnemyGroupIndex;
     
@@ -27,7 +27,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
 
     public int ID => _id;
 
-    public Color WaveSpawnerColor { get; private set; }
+    public Color WaveSpawnerColor => _color;
 
     public bool IsSpawning { get; private set; }
     
@@ -76,12 +76,12 @@ public class WaveSpawner : MonoBehaviour , IProgress
         Level.AddWaveSpawner(this);
     }
 
-    public void Init(WaveSpawnerSerializeData waveSpawnerSerializeData)
+    public void Init(WaveSpawnerConfig waveSpawnerConfig)
     {
         _activeEnemyGroup = new List<EnemyGroup>();
         _completedEnemyGroups = new List<IProgress>();
-        _enemyGroups = waveSpawnerSerializeData.EnemyGroups;
-        _delayBetweenEnemyGroup = waveSpawnerSerializeData.DelayBetweenEnemyGroup;
+        _enemyGroups = waveSpawnerConfig.EnemyGroups;
+        _delayBetweenEnemyGroup = waveSpawnerConfig.DelayBetweenEnemyGroup;
         _currentEnemyGroupIndex = 0;
         
         foreach (var enemyGroupSerializeData in _enemyGroups)
@@ -139,7 +139,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
     }
     
     public void SetColor(Color color)=>
-        WaveSpawnerColor = color;
+        _color = color;
 
     public void SetId(int id) => _id = id;
 

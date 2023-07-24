@@ -13,7 +13,7 @@ namespace Tzipory.Leval
     {
         public event Action<int> OnNewWaveStarted;
         
-        private readonly LevelSerializeData _levelSerializeData;
+        private readonly LevelConfig _levelConfig;
         private List<Wave> _waves;
         
         private float _levelStartDelay;
@@ -33,21 +33,21 @@ namespace Tzipory.Leval
         
         private Wave CurrentWave => _waves[_currentWaveIndex];
 
-        public WaveManager(LevelSerializeData levelSerializeData,Transform levelPerant)
+        public WaveManager(LevelConfig levelConfig,Transform levelPerant)
         {
-            _levelSerializeData = levelSerializeData;
+            _levelConfig = levelConfig;
             _waves = new List<Wave>();
             _currentWaveIndex = 0;
-            _levelStartDelay = _levelSerializeData.LevelStartDelay;
-            _delayBetweenWaves = _levelSerializeData.DelayBetweenWaves;
+            _levelStartDelay = _levelConfig.LevelStartDelay;
+            _delayBetweenWaves = _levelConfig.DelayBetweenWaves;
 
-            Object.Instantiate(_levelSerializeData.Level,levelPerant);
+            Object.Instantiate(_levelConfig.Level,levelPerant);
         }
         
         public void StartLevel()
         {
-            foreach (var waveSerialize in _levelSerializeData.Waves)
-                _waves.Add(new Wave(_levelSerializeData.Level.WaveSpawners,waveSerialize));
+            foreach (var waveSerialize in _levelConfig.Waves)
+                _waves.Add(new Wave(_levelConfig.Level.WaveSpawners,waveSerialize));
         }
 
         public void UpdateLevel()
@@ -75,7 +75,7 @@ namespace Tzipory.Leval
                 return;
 
             _delayBetweenWavesTimer = null;
-            _delayBetweenWaves = _levelSerializeData.DelayBetweenWaves;
+            _delayBetweenWaves = _levelConfig.DelayBetweenWaves;
 #if UNITY_EDITOR
             Debug.Log($"<color=#2eff00>WaveManager:</color> ended wave-{_currentWaveIndex + 1}");
 #endif

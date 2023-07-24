@@ -31,24 +31,24 @@ namespace Tzipory.EntitySystem.StatusSystem
 
         public bool IsDone { get; private set; }
 
-        public EffectSequenceData EffectSequence { get; }
+        public EffectSequenceConfig EffectSequence { get; }
 
-        public List<StatusEffectConfigSo> StatusEffectToInterrupt { get; }
+        public List<StatusEffectConfig> StatusEffectToInterrupt { get; }
 
         #endregion
        
         
-        protected BaseStatusEffect(StatusEffectConfigSo statusEffectConfigSo,Stat statToEffectToEffect)
+        protected BaseStatusEffect(StatusEffectConfig statusEffectConfig,Stat statToEffectToEffect)
         {
-            StatusEffectName = statusEffectConfigSo.StatusEffectName;
-            StatusEffectToInterrupt = statusEffectConfigSo.StatusEffectToInterrupt;
-            EffectSequence = statusEffectConfigSo.EffectSequence;
+            StatusEffectName = statusEffectConfig.StatusEffectName;
+            StatusEffectToInterrupt = statusEffectConfig.StatusEffectToInterrupt;
+            EffectSequence = statusEffectConfig.EffectSequence;
 
             StatToEffect = statToEffectToEffect;
 
             modifiers = new List<StatModifier>();
 
-            foreach (var modifier in statusEffectConfigSo.StatModifier)
+            foreach (var modifier in statusEffectConfig.StatModifier)
             {
                 modifiers.Add(new StatModifier(modifier.Modifier, modifier.StatusModifierType));
             }

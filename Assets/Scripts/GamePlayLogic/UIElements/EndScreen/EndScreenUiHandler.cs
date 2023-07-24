@@ -16,13 +16,13 @@ namespace GameplayeLogic.UIElements
 
         private void Awake()
         {
-            GameManager.OnEndGame += OpenEndScreen;
+            LevelManager.OnEndGame += OpenEndScreen;
             Hide();//temp
         }
 
         private void OnDestroy()
         {
-            GameManager.OnEndGame -= OpenEndScreen;
+            LevelManager.OnEndGame -= OpenEndScreen;
         }
 
         private void OpenEndScreen(bool isWon)

@@ -8,6 +8,7 @@ namespace GameplayeLogic.Nodes
     [System.Serializable]
     public abstract class WorldMapNode : BaseNode
     {
+        
         public override void FillInfo(BaseNode newBaseNode)
         {
             base.FillInfo(newBaseNode);

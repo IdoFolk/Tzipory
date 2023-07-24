@@ -1,4 +1,5 @@
 ﻿using Systems.NodeSystem.Config;
+using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.Tools.Enums;
 using UnityEngine;
 
@@ -11,7 +12,8 @@ namespace GameplayeLogic.Nodes.Config
         {
             get { return startingNodeState; }
         }
-        
+
+        [SerializeField] protected LevelSerializeData level;
         [SerializeField] protected BattleMapNodeState startingNodeState;
     }
 }

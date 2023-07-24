@@ -9,26 +9,28 @@ namespace Tzipory.Progression
     [System.Serializable]
     public class WorldMapProgression
     {
-        [SerializeField] List<WorldMapNode> nodesStatus;
+        [SerializeField] List<WorldMapNode> unlockedNodes;
         
         public void AddNodeStatus(WorldMapNode newBaseNode)
         {
-            WorldMapNode currentWorldMapNode = nodesStatus.Find(node => node.nodeID == newBaseNode.nodeID);
+            WorldMapNode currentWorldMapNode = unlockedNodes.Find(node => node.NodeID == newBaseNode.NodeID);
             if (currentWorldMapNode != null)
             {
                 currentWorldMapNode.FillInfo(newBaseNode);
             }
             else
             {
-                nodesStatus.Add(newBaseNode);
+                unlockedNodes.Add(newBaseNode);
             }
         }
 
         public WorldMapNode GetWorldMapNodeStatus(string nodeID)
         {
-            WorldMapNode currentWorldMapNode = nodesStatus.Find(node => node.nodeID == nodeID);
+            WorldMapNode currentWorldMapNode = unlockedNodes.Find(node => node.NodeID == nodeID);
             return currentWorldMapNode;
         }
+        
+        //add check is node open
     }
 }
 

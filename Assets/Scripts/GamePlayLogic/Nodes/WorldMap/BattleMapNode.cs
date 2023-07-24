@@ -11,7 +11,8 @@ namespace GameplayeLogic.Nodes
     public class BattleMapNode : WorldMapNode
     {
         public BattleMapNodeState nodeState;
-        public DateTime lastBattleTime;
+        public int lastBattleMoveIndex;
+        public int levelID;
 
         public override void FillInfo(BaseNode newBaseNode)
         {
@@ -19,7 +20,7 @@ namespace GameplayeLogic.Nodes
             if (newBaseNode is BattleMapNode battleMapNodeMapNode)
             {
                 nodeState = battleMapNodeMapNode.nodeState;
-                lastBattleTime = battleMapNodeMapNode.lastBattleTime;
+                lastBattleMoveIndex = battleMapNodeMapNode.lastBattleMoveIndex;
             }
         }
     }

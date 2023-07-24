@@ -4,9 +4,9 @@
     {
         HeldByEnemy,
         HeldByPlayer,
-        ConqueredByEnemyFromPlayer,
         DefendedByPlayer,
         DefendedByEnemy,
+        IncomingAttackByEnemy,
         Neutral
     }
 }

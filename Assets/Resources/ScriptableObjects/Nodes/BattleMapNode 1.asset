@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: BattleMapNode 1
   m_EditorClassIdentifier: 
   battleMapNode:
-    nodeID: 
+    nodeName: 
+    nodeID: 0
     leadToNodes: []
     unlockNodes: []
     leadAndUnlockNodesSame: 1

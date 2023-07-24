@@ -5,11 +5,11 @@ using Tzipory.SerializeData.LevalSerializeData;
 
 namespace Tzipory.WaveSystem
 {
-    public class Wave : WaveComponent<WaveSerializeData>
+    public class Wave : WaveComponent<WaveConfig>
     {
         private readonly WaveSpawner[] _waveSpawners;
         
-        public override WaveSerializeData Data { get; }
+        public override WaveConfig Data { get; }
 
         public bool IsStarted { get; private set; }
         
@@ -29,9 +29,9 @@ namespace Tzipory.WaveSystem
             }
         }
 
-        public Wave(IEnumerable<WaveSpawner> waveSpawners,WaveSerializeData waveSerializeData)
+        public Wave(IEnumerable<WaveSpawner> waveSpawners,WaveConfig waveConfig)
         {
-            Data = waveSerializeData;
+            Data = waveConfig;
             _waveSpawners  = waveSpawners.ToArray();
         }
 

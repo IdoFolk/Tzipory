@@ -8,13 +8,13 @@ namespace Tzipory.VisualSystem.EffectSequence
 {
     public class EffectSequenceHandler
     {
-        private readonly Dictionary<int, EffectSequenceData> _sequencesDictionary;
+        private readonly Dictionary<int, EffectSequenceConfig> _sequencesDictionary;
 
         private List<EffectSequence> _activeSequences;
 
         private IEntityVisualComponent _entityVisualComponent;
 
-        public EffectSequenceHandler(IEntityVisualComponent visualComponent,IEnumerable<EffectSequenceData> sequencesDatas)
+        public EffectSequenceHandler(IEntityVisualComponent visualComponent,IEnumerable<EffectSequenceConfig> sequencesDatas)
         {
             _sequencesDictionary = new();
             _activeSequences = new();
@@ -25,14 +25,14 @@ namespace Tzipory.VisualSystem.EffectSequence
                 _sequencesDictionary.Add(sequenceData.ID, sequenceData);
         }
 
-        private void PlaySequence(EffectSequenceData effectSequenceData)
+        private void PlaySequence(EffectSequenceConfig effectSequenceConfig)
         {
-            if (effectSequenceData.IsInterruptable)
-                RemoveEffectSequence(effectSequenceData.ID);
+            if (effectSequenceConfig.IsInterruptable)
+                RemoveEffectSequence(effectSequenceConfig.ID);
 
-            EffectSequence effectSequence = PoolManager.VisualSystemPool.GetEffectSequence(effectSequenceData);
+            EffectSequence effectSequence = PoolManager.VisualSystemPool.GetEffectSequence(effectSequenceConfig);
             
-            effectSequence.Init(_entityVisualComponent,effectSequenceData);      
+            effectSequence.Init(_entityVisualComponent,effectSequenceConfig);      
             
             effectSequence.StartEffectSequence();
             
@@ -60,11 +60,11 @@ namespace Tzipory.VisualSystem.EffectSequence
             _activeSequences.Remove(effectSequence);
         }
 
-        private bool CanPlaySequence(EffectSequenceData sequenceData,out int interrupterSequenceIndex)
+        private bool CanPlaySequence(EffectSequenceConfig sequenceConfig,out int interrupterSequenceIndex)
         {
             for (var i = 0; i < _activeSequences.Count; i++)
             {
-                if (_activeSequences[i].ID != sequenceData.ID) 
+                if (_activeSequences[i].ID != sequenceConfig.ID) 
                     continue;
 
                 if (_activeSequences[i].IsInterruptable)
@@ -92,12 +92,12 @@ namespace Tzipory.VisualSystem.EffectSequence
             PlaySequence(effectSequenceData);
         }
         
-        public void PlaySequenceByData(EffectSequenceData effectSequenceData)
+        public void PlaySequenceByData(EffectSequenceConfig effectSequenceConfig)
         {
-            if (effectSequenceData.EffectActionContainers.Count == 0)
+            if (effectSequenceConfig.EffectActionContainers.Count == 0)
                 return;
             
-            PlaySequence(effectSequenceData);
+            PlaySequence(effectSequenceConfig);
         }
 
         public void RemoveEffectSequence(int effectSequenceId)

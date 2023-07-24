@@ -10,7 +10,7 @@ using Tzipory.Tools.Interface;
 
 namespace Tzipory.VisualSystem.EffectSequence
 {
-    public class EffectSequence : IInitialization<IEntityVisualComponent,EffectSequenceData> , IPoolable<EffectSequence>
+    public class EffectSequence : IInitialization<IEntityVisualComponent,EffectSequenceConfig> , IPoolable<EffectSequence>
     {
         public event Action<EffectSequence> OnEffectSequenceComplete;
 
@@ -54,7 +54,7 @@ namespace Tzipory.VisualSystem.EffectSequence
         }
 
 
-        public void Init(IEntityVisualComponent parameter1, EffectSequenceData parameter2)
+        public void Init(IEntityVisualComponent parameter1, EffectSequenceConfig parameter2)
         {
             SequenceName = parameter2.SequenceName;
             ID = parameter2.ID;

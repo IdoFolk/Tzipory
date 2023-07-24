@@ -6,7 +6,7 @@ using Tzipory.Tools.Interface;
 
 namespace Tzipory.VisualSystem.EffectSequence
 {
-    public abstract class BaseEffectAction : IInitialization<EffectActionContainerData,IEntityVisualComponent>
+    public abstract class BaseEffectAction : IInitialization<EffectActionContainerConfig,IEntityVisualComponent>
     {
         public event Action<BaseEffectAction> OnEffectActionComplete;
         
@@ -34,12 +34,12 @@ namespace Tzipory.VisualSystem.EffectSequence
             IsInitialization = false;
         }
         
-        public virtual void Init(EffectActionContainerData actionContainerData, IEntityVisualComponent visualComponent)
+        public virtual void Init(EffectActionContainerConfig actionContainerConfig, IEntityVisualComponent visualComponent)
         {
             VisualComponent = visualComponent;
-            _startDelay = actionContainerData.StartDelay;
-            ActionStartType = actionContainerData.EffectActionStart;
-            _disableUndo = actionContainerData.DisableUndo;
+            _startDelay = actionContainerConfig.StartDelay;
+            ActionStartType = actionContainerConfig.EffectActionStart;
+            _disableUndo = actionContainerConfig.DisableUndo;
             IsInitialization = true;
         }
         
@@ -103,12 +103,12 @@ namespace Tzipory.VisualSystem.EffectSequence
                 CompleteEffectAction();
         }
         
-        protected T GetConfig<T>(BaseEffectActionSO effectActionSO) where T : BaseEffectActionSO
+        protected T GetConfig<T>(BaseEffectActionConfig effectActionConfig) where T : BaseEffectActionConfig
         {
-            if (effectActionSO is T effectActionSo)
+            if (effectActionConfig is T effectActionSo)
                 return  effectActionSo;
 
-            throw new Exception($"Can't cast {effectActionSO.GetType()} to {typeof(T)}");
+            throw new Exception($"Can't cast {effectActionConfig.GetType()} to {typeof(T)}");
         }
         
         protected abstract void OnStartEffectAction();

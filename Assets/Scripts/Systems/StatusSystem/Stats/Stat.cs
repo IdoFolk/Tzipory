@@ -24,16 +24,16 @@ namespace Tzipory.EntitySystem.StatusSystem
         public float MaxValue { get; private set; }
 
         
-        public Stat(StatSerializeData statSerializeData)
+        public Stat(StatConfig statConfig)
         {
-            _name = statSerializeData.Name;
-            _id = statSerializeData.Id;
-            _baseValue = statSerializeData.BaseValue;
+            _name = statConfig.Name;
+            _id = statConfig.Id;
+            _baseValue = statConfig.BaseValue;
             _currentValue = _baseValue;
             MaxValue = StatLimiters.MaxStatValue;
         }
         
-        [Obsolete("Use StatSerializeData as a parameter")]
+        [Obsolete("Use StatConfig as a parameter")]
         public Stat(string name, float baseValue,float maxValue,int id)
         {
             _name = name;

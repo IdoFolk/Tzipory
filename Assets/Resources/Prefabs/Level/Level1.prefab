@@ -1188,6 +1188,22 @@ PrefabInstance:
       propertyPath: _id
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5318435613015951157, guid: c7f9b974472905440b283763aaa694da, type: 3}
+      propertyPath: _color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318435613015951157, guid: c7f9b974472905440b283763aaa694da, type: 3}
+      propertyPath: _color.b
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318435613015951157, guid: c7f9b974472905440b283763aaa694da, type: 3}
+      propertyPath: _color.g
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318435613015951157, guid: c7f9b974472905440b283763aaa694da, type: 3}
+      propertyPath: _color.r
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2206,6 +2222,14 @@ PrefabInstance:
       propertyPath: _id
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5318435613015951157, guid: c7f9b974472905440b283763aaa694da, type: 3}
+      propertyPath: _color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318435613015951157, guid: c7f9b974472905440b283763aaa694da, type: 3}
+      propertyPath: _color.g
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2484,6 +2508,14 @@ PrefabInstance:
     - target: {fileID: 5318435613015951157, guid: c7f9b974472905440b283763aaa694da, type: 3}
       propertyPath: _id
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318435613015951157, guid: c7f9b974472905440b283763aaa694da, type: 3}
+      propertyPath: _color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5318435613015951157, guid: c7f9b974472905440b283763aaa694da, type: 3}
+      propertyPath: _color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

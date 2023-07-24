@@ -11,11 +11,10 @@ namespace Systems.NodeSystem
         public override void FillInfo(BaseNodeSerializeData newBaseNodeSerializeData)
         {
             base.FillInfo(newBaseNodeSerializeData);
-            if (newBaseNodeSerializeData is BattleMapNodeSerializeData battleMapNodeMapNode)
-            {
-                battleMapNodeSerializeData.nodeState = battleMapNodeMapNode.nodeState;
-                battleMapNodeSerializeData.lastBattleMoveIndex = battleMapNodeMapNode.lastBattleMoveIndex;
-            }
+             var serializeData = GetConfig<BattleMapNodeSerializeData>(newBaseNodeSerializeData);
+             serializeData.nodeState = serializeData.nodeState;
+             serializeData.lastBattleMoveIndex = serializeData.lastBattleMoveIndex;
+            
         }
     }
 }

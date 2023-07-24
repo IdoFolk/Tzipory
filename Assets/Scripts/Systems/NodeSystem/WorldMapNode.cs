@@ -14,10 +14,7 @@ namespace Systems.NodeSystem
         public override void FillInfo(BaseNodeSerializeData newBaseNodeSerializeData)
         {
             base.FillInfo(newBaseNodeSerializeData);
-            if (newBaseNodeSerializeData is WorldMapNodeSerializeData worldMapNode)
-            {
-                //Add information only relvavnt to worldmap
-            }
+            var serializeData = GetConfig<WorldMapNodeSerializeData>(newBaseNodeSerializeData);
         }
         
     }

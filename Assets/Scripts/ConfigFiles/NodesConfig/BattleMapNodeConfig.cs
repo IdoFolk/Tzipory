@@ -18,7 +18,7 @@ namespace Tzipory.Nodes.Config
             get { return overrideSprite; }
         }
 
-        [SerializeField] protected LevelSerializeData level;
+        [SerializeField] protected LevelConfig level;
         [SerializeField] protected BattleMapNodeState startingNodeState;
         [SerializeField] private Sprite overrideSprite;
     }

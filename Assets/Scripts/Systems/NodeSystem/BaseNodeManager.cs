@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Systems.NodeSystem.Config;
-using Tzipory.Systems.NodeSystem;
+using Tzipory.Nodes.Config;
 using UnityEngine;
 
 public abstract class BaseNodeManager : MonoBehaviour
 {
-    public virtual void UnlockNodes(BaseNodeData baseNodeData)
+    public virtual void UnlockNodes(BaseNodeConfig baseNodeConfig)
     {
-        foreach (BaseNodeSO node in baseNodeData.UnlockNodes)
+        foreach (BaseNodeConfig node in baseNodeConfig.UnlockNodes)
         {
             
         }

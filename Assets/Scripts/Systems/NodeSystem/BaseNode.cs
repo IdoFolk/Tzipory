@@ -1,21 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using SerializeData.Nodes;
 
-namespace Tzipory.Systems.NodeSystem
+namespace Systems.NodeSystem
 {
-    [System.Serializable]
     public abstract class BaseNode
     {
-        public string NodeID => nodeID;
+        private BaseNodeSerializeData baseNodeSerializeData;
         
-        private string nodeID;
-        private bool visitedByPlayer;
-        
-        public virtual void FillInfo(BaseNode newBaseNode)
+        public virtual void FillInfo(BaseNodeSerializeData newBaseNodeSerializeData)
         {
-            nodeID = newBaseNode.NodeID;
+            baseNodeSerializeData.NodeID = newBaseNodeSerializeData.NodeID;
         }
     }
 }

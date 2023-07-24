@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using GameplayeLogic.Nodes;
-using Tzipory.Systems.NodeSystem;
+using SerializeData.Nodes;
+using Systems.NodeSystem;
 using UnityEngine;
 
 namespace Tzipory.Progression
@@ -11,23 +11,23 @@ namespace Tzipory.Progression
     {
         [SerializeField] List<WorldMapNode> unlockedNodes;
         
-        public void AddNodeStatus(WorldMapNode newBaseNode)
+        public void AddNodeStatus(WorldMapNodeSerializeData newBaseNodeSerializeData)
         {
-            WorldMapNode currentWorldMapNode = unlockedNodes.Find(node => node.NodeID == newBaseNode.NodeID);
-            if (currentWorldMapNode != null)
+            WorldMapNodeSerializeData currentWorldMapNodeSerializeData = unlockedNodes.Find(node => node.NodeID == newBaseNodeSerializeData.NodeID);
+            if (currentWorldMapNodeSerializeData != null)
             {
-                currentWorldMapNode.FillInfo(newBaseNode);
+                currentWorldMapNodeSerializeData.FillInfo(newBaseNodeSerializeData);
             }
             else
             {
-                unlockedNodes.Add(newBaseNode);
+                unlockedNodes.Add(newBaseNodeSerializeData);
             }
         }
 
-        public WorldMapNode GetWorldMapNodeStatus(string nodeID)
+        public WorldMapNodeSerializeData GetWorldMapNodeStatus(string nodeID)
         {
-            WorldMapNode currentWorldMapNode = unlockedNodes.Find(node => node.NodeID == nodeID);
-            return currentWorldMapNode;
+            WorldMapNodeSerializeData currentWorldMapNodeSerializeData = unlockedNodes.Find(node => node.NodeID == nodeID);
+            return currentWorldMapNodeSerializeData;
         }
         
         //add check is node open

@@ -12,8 +12,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fefaa5ef5471cc4ebfa0a75d56ffeb7, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
+  _levelId: 0
   _level: {fileID: 1758735506430089248, guid: 51f66e84bd4af3d4e9a7829a8d2b38fa, type: 3}
-  _fakeForwardVector: {x: -0.08, y: 0.4, z: 0}
   _levelStartDelay: 0
-  _delayBetweenWaves: 0
-  _waves: []
+  _delayBetweenWaves: 40
+  _waves:
+  - _name: Wave 1
+    _waveSpawnerSerializeDatas:
+    - _id: 0
+      _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
+        _groupStartDelay: 0
+        _totalSpawnAmount: 5
+        _spawnAmountPreInterval: 5
+        _spawnInterval: 1
+        _startType: 0
+        _startTime: 0
+    - _id: 1
+      _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
+        _groupStartDelay: 10
+        _totalSpawnAmount: 3
+        _spawnAmountPreInterval: 1
+        _spawnInterval: 1
+        _startType: 0
+        _startTime: 0
+    - _id: 2
+      _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
+        _groupStartDelay: 20
+        _totalSpawnAmount: 6
+        _spawnAmountPreInterval: 3
+        _spawnInterval: 1
+        _startType: 0
+        _startTime: 0
+  - _name: Wave 2
+    _waveSpawnerSerializeDatas:
+    - _id: 0
+      _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
+        _groupStartDelay: 0
+        _totalSpawnAmount: 10
+        _spawnAmountPreInterval: 3
+        _spawnInterval: 1
+        _startType: 0
+        _startTime: 62
+    - _id: 1
+      _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups: []
+    - _id: 2
+      _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups: []

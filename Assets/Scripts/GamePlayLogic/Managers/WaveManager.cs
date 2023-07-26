@@ -29,7 +29,7 @@ namespace Tzipory.Leval
         
         public  bool IsLastWave => _currentWaveIndex == _waves.Count - 1;
 
-        public bool AllWaveAreDone => _waves.All(wave => wave.IsDone);
+        public bool AllWaveAreDone => _waves.All(wave => wave.IsDone) && _currentWaveIndex  == _waves.Count - 1;
         
         private Wave CurrentWave => _waves[_currentWaveIndex];
 
@@ -69,6 +69,8 @@ namespace Tzipory.Leval
 
             if (!CurrentWave.IsDone) return;
             
+            CurrentWave.EndWave();
+
             _delayBetweenWavesTimer ??= GAME_TIME.TimerHandler.StartNewTimer(_delayBetweenWaves);
                 
             if (!_delayBetweenWavesTimer.IsDone)
@@ -79,7 +81,6 @@ namespace Tzipory.Leval
 #if UNITY_EDITOR
             Debug.Log($"<color=#2eff00>WaveManager:</color> ended wave-{_currentWaveIndex + 1}");
 #endif
-            CurrentWave.EndWave();
 
             if (_currentWaveIndex + 1 < _waves.Count)
                 _currentWaveIndex++;

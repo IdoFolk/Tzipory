@@ -25,26 +25,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
 
     static Vector3 cachedScaledMapSize => Level.MapSize * .01f;
     static float zDistanceModifier = .5f;
-    public static Vector3 GetZFixedLocalPosition(Vector3 _currentPos)
-    {
-        float _newZ = Level.FakeForward.x * _currentPos.x + Level.FakeForward.y * _currentPos.y;
-        float _mapOffset = Mathf.Abs(Level.FakeForward.x) * cachedScaledMapSize.x + Mathf.Abs(Level.FakeForward.y) * cachedScaledMapSize.y; //should cause the bottom most point to be the flat-height
-
-        _newZ += _mapOffset;
-        _newZ *= zDistanceModifier;
-        //return new Vector3(0, 0, -_newZ - _mapOffset);
-        return new Vector3(_currentPos.x, _currentPos.y, -_newZ);
-    }
-    public static Vector3 GetZFixedLocalPositionForTransform(Transform t)
-    {
-        float _newZ = Level.FakeForward.x * t.position.x + Level.FakeForward.y * t.position.y;
-        float _mapOffset = Mathf.Abs(Level.FakeForward.x) * cachedScaledMapSize.x + Mathf.Abs(Level.FakeForward.y) * cachedScaledMapSize.y; //should cause the bottom most point to be the flat-height
-
-        _newZ += _mapOffset;
-        _newZ *= zDistanceModifier;
-        //return new Vector3(0, 0, -_newZ - _mapOffset);
-        return new Vector3(t.localPosition.x, t.localPosition.y, -_newZ);
-    }
+    
     public static float GetZForLocalPosition(Transform t)
     {
         float _newZ = Level.FakeForward.x * t.position.x + Level.FakeForward.y * t.position.y;
@@ -52,8 +33,6 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
 
         _newZ += _mapOffset;
         _newZ *= zDistanceModifier;
-        //return new Vector3(0, 0, -_newZ - _mapOffset);
-        //return new Vector3(t.localPosition.x, t.localPosition.y, -_newZ);
         return -_newZ;
     }
 
@@ -62,8 +41,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
         StartCoroutine(nameof(CheckForFlip));
         _targeting = _baseUnitEntity.Targeting;
 
-        //zDistanceModifier = _zDistanceModifier;
-        //_cachedScaledMapSize = Level.MapSize * .01f;
+
         //This should be applied differently between Shamans and Enemies.
         //Enemies look in the direction they are going -> then they look at CoreTrans or their attack target.
         _tgt = _doLookAtTemple? CoreTemple.CoreTrans : null; // MUST change TBD

@@ -133,8 +133,8 @@ MonoBehaviour:
   _timerHandler:
     _timerSerializeDatas: []
   _range: 6
-  effectArea: {fileID: 0}
-  _myEffect: {fileID: 0}
+  effectArea: {fileID: 5679466174791393494}
+  _myEffect: {fileID: 11400000, guid: 0339e834abce62c4c9f54be4eb4e2141, type: 2}
   _proximityIndicatorHandler:
     _scaler: {fileID: 2062197455431657528}
     _spriteRenderer: {fileID: 5768232329460113364}
@@ -324,6 +324,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6918628788688364820, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 3583
+      objectReference: {fileID: 0}
+    - target: {fileID: 6918628788688364820, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -332,6 +340,11 @@ PrefabInstance:
 --- !u!4 &2062197455431657528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3624282760470982138, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
+  m_PrefabInstance: {fileID: 3373878226211702210}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &5679466174791393494 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6918628788688364820, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
   m_PrefabInstance: {fileID: 3373878226211702210}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &5768232329460113364 stripped

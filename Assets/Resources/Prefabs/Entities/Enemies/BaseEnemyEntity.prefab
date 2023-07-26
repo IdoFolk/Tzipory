@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseEnemyEntity
       objectReference: {fileID: 0}
+    - target: {fileID: 1420442367539004591, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2501377926167560866, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -19,6 +23,10 @@ PrefabInstance:
     - target: {fileID: 2750211597899472799, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_SortingOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887608391384273710, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 7921501042575430128, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_RootOrder
@@ -181,11 +189,11 @@ MonoBehaviour:
     - _disableUndo: 0
       _startDelay: 0
       _effectActionStart: 0
-      _effectActionSO: {fileID: 11400000, guid: efd2a47c331e44c4d80a605273ecc06f, type: 2}
+      _effectActionConfig: {fileID: 0}
     - _disableUndo: 0
       _startDelay: 0
       _effectActionStart: 0
-      _effectActionSO: {fileID: 11400000, guid: 6c0015ba36e55234b97a8e707264ae82, type: 2}
+      _effectActionConfig: {fileID: 0}
   _onAttack:
     _sequenceName: 
     _id: 0
@@ -221,11 +229,11 @@ MonoBehaviour:
     - _disableUndo: 0
       _startDelay: 0
       _effectActionStart: 0
-      _effectActionSO: {fileID: 11400000, guid: efd2a47c331e44c4d80a605273ecc06f, type: 2}
+      _effectActionConfig: {fileID: 0}
     - _disableUndo: 0
       _startDelay: 0
       _effectActionStart: 0
-      _effectActionSO: {fileID: 11400000, guid: a623487578b155d448fa5c0657da923b, type: 2}
+      _effectActionConfig: {fileID: 0}
   _onGetCritHit:
     _sequenceName: 
     _id: 0
@@ -237,11 +245,11 @@ MonoBehaviour:
     - _disableUndo: 0
       _startDelay: 0
       _effectActionStart: 0
-      _effectActionSO: {fileID: 11400000, guid: efd2a47c331e44c4d80a605273ecc06f, type: 2}
+      _effectActionConfig: {fileID: 0}
     - _disableUndo: 0
       _startDelay: 0
       _effectActionStart: 0
-      _effectActionSO: {fileID: 11400000, guid: 1b22e0a237eeefa448293adc8adacc19, type: 2}
+      _effectActionConfig: {fileID: 0}
   _doShowHPBar: 1
   _hpBarConnector: {fileID: 4613587498334124606}
   IsAttckingCore: 0
@@ -411,4 +419,5 @@ MonoBehaviour:
   _doLookAtTemple: 0
   _spriteRenderer: {fileID: 6032355350260239207}
   _tgt: {fileID: 0}
+  _zDistanceModifier: 0
   _baseUnitEntity: {fileID: 7854104335867524329}

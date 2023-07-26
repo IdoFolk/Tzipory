@@ -15,21 +15,55 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
 
     //Should probably be the targetting module instead
     [SerializeField] private Transform _tgt;
+    [SerializeField] private float _zDistanceModifier;
 
-    Vector3 _fakeForward;
+    
 
     [SerializeField] BaseUnitEntity _baseUnitEntity;
     TargetingHandler _targeting;
     //TEMP! Should USE Init(BaseUnitEntity) INSTEAD 
 
-    Vector3 _cachedScaledMapSize;
+    static Vector3 cachedScaledMapSize => Level.MapSize * .01f;
+    static float zDistanceModifier = .5f;
+    public static Vector3 GetZFixedLocalPosition(Vector3 _currentPos)
+    {
+        float _newZ = Level.FakeForward.x * _currentPos.x + Level.FakeForward.y * _currentPos.y;
+        float _mapOffset = Mathf.Abs(Level.FakeForward.x) * cachedScaledMapSize.x + Mathf.Abs(Level.FakeForward.y) * cachedScaledMapSize.y; //should cause the bottom most point to be the flat-height
+
+        _newZ += _mapOffset;
+        _newZ *= zDistanceModifier;
+        //return new Vector3(0, 0, -_newZ - _mapOffset);
+        return new Vector3(_currentPos.x, _currentPos.y, -_newZ);
+    }
+    public static Vector3 GetZFixedLocalPositionForTransform(Transform t)
+    {
+        float _newZ = Level.FakeForward.x * t.position.x + Level.FakeForward.y * t.position.y;
+        float _mapOffset = Mathf.Abs(Level.FakeForward.x) * cachedScaledMapSize.x + Mathf.Abs(Level.FakeForward.y) * cachedScaledMapSize.y; //should cause the bottom most point to be the flat-height
+
+        _newZ += _mapOffset;
+        _newZ *= zDistanceModifier;
+        //return new Vector3(0, 0, -_newZ - _mapOffset);
+        return new Vector3(t.localPosition.x, t.localPosition.y, -_newZ);
+    }
+    public static float GetZForLocalPosition(Transform t)
+    {
+        float _newZ = Level.FakeForward.x * t.position.x + Level.FakeForward.y * t.position.y;
+        float _mapOffset = Mathf.Abs(Level.FakeForward.x) * cachedScaledMapSize.x + Mathf.Abs(Level.FakeForward.y) * cachedScaledMapSize.y; //should cause the bottom most point to be the flat-height
+
+        _newZ += _mapOffset;
+        _newZ *= zDistanceModifier;
+        //return new Vector3(0, 0, -_newZ - _mapOffset);
+        //return new Vector3(t.localPosition.x, t.localPosition.y, -_newZ);
+        return -_newZ;
+    }
+
     private void Start()
     {
         StartCoroutine(nameof(CheckForFlip));
         _targeting = _baseUnitEntity.Targeting;
 
-        _fakeForward = Level.FakeForward;
-        _cachedScaledMapSize = Level.MapSize * .01f;
+        //zDistanceModifier = _zDistanceModifier;
+        //_cachedScaledMapSize = Level.MapSize * .01f;
         //This should be applied differently between Shamans and Enemies.
         //Enemies look in the direction they are going -> then they look at CoreTrans or their attack target.
         _tgt = _doLookAtTemple? CoreTemple.CoreTrans : null; // MUST change TBD
@@ -37,23 +71,14 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     }
     private void Update()
     {
-        //Vector3 v = 
-        //do z fix
-        float f = _fakeForward.x * transform.position.x  + _fakeForward.y * transform.position.y;
-        float offset = _fakeForward.x * _cachedScaledMapSize.x + _fakeForward.y * _cachedScaledMapSize.y; //should cause the bottom most point to be the flat-height
-        _spriteRenderer.transform.localPosition = new Vector3(0, 0, -f);
+        
+        //_spriteRenderer.transform.localPosition = GetZFixedLocalPositionForTransform(_spriteRenderer.transform);\
+        _spriteRenderer.transform.localPosition = new Vector3(_spriteRenderer.transform.localPosition.x, _spriteRenderer.transform.localPosition.y, GetZForLocalPosition(transform));
+
         if (_targeting.HaveTarget)
             _tgt = _targeting.CurrentTarget.EntityTransform;
         else
             _tgt = null;
-    }
-
-    public void Init(FlipPrefs fp)
-    {
-        _flipPrefs = fp;
-
-        //start timer/coroutine/whatever repeating invoke or what have you
-        StartCoroutine(nameof(CheckForFlip));
     }
 
     //TEMP - should be TIMER based
@@ -74,10 +99,8 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
                 if(_tgt)
                 {
                     _spriteRenderer.flipX = (_tgt.position - transform.position).x >0;
-
                 }
             }
-            //lastPos = transform.position; //it'll happen either way when it loops back around before it yields to wait
         }
     }
 }

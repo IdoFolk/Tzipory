@@ -332,6 +332,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc53443698c95204bbe8a19e83f4eb9f, type: 3}
+--- !u!212 &1105782447574503915 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 569256301726469489, guid: cc53443698c95204bbe8a19e83f4eb9f, type: 3}
+  m_PrefabInstance: {fileID: 630188182373489818}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2861779743719461983 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3389509933984368837, guid: cc53443698c95204bbe8a19e83f4eb9f, type: 3}
@@ -1780,6 +1785,10 @@ PrefabInstance:
       propertyPath: _mapSize.y
       value: 2048
       objectReference: {fileID: 0}
+    - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: _bgRenderer
+      value: 
+      objectReference: {fileID: 1105782447574503915}
     - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
       propertyPath: _fakeForward.x
       value: 1

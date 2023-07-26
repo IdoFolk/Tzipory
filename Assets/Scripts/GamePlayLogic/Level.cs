@@ -13,7 +13,11 @@ namespace Tzipory.SerializeData.LevalSerializeData
         /// <summary>
         /// Basically, the Map's resolution
         /// </summary>
-        [SerializeField] Vector2 _mapSize; //this could be taken from the map's actual texture if we want an easier life TBD
+        //[SerializeField] Vector2 _mapSize; //this could be taken from the map's actual texture if we want an easier life TBD
+        /// <summary>
+        /// The renderer for the map/floor
+        /// </summary>
+        [SerializeField] SpriteRenderer _bgRenderer; 
         [SerializeField] private Vector3 _fakeForward;
         [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         private static List<WaveSpawner> _waveSpawners;
@@ -37,7 +41,10 @@ namespace Tzipory.SerializeData.LevalSerializeData
         private void Awake()
         {
             FakeForward = _fakeForward;
-            MapSize = _mapSize;
+            MapSize = new Vector2(_bgRenderer.sprite.texture.width, _bgRenderer.sprite.texture.height);
+            
+            //MapSize = _mapSize;
+
         }
 
         public static void AddWaveSpawner(WaveSpawner waveSpawner)

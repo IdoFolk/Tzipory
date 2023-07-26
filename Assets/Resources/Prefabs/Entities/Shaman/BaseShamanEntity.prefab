@@ -217,6 +217,10 @@ PrefabInstance:
       propertyPath: _agentAuthoring
       value: 
       objectReference: {fileID: 5023256848365871121}
+    - target: {fileID: 8833005964467276708, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: _targetingCollider2D
+      value: 
+      objectReference: {fileID: 7367472208213174774}
     m_RemovedComponents:
     - {fileID: 0}
     m_RemovedGameObjects: []
@@ -557,6 +561,11 @@ MonoBehaviour:
 --- !u!4 &6146916942116931940 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7921501042575430128, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+  m_PrefabInstance: {fileID: 4080524451218561172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &7367472208213174774 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 6818005281947414882, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
   m_PrefabInstance: {fileID: 4080524451218561172}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8444177392835317460

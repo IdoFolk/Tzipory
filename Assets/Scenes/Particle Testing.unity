@@ -14762,8 +14762,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385350834}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.13, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -14778,7 +14778,7 @@ Transform:
   - {fileID: 120730390}
   - {fileID: 2045248702}
   - {fileID: 1947046474}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 986619154}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &398821039
 GameObject:
@@ -14885,9 +14885,9 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -19625,7 +19625,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &432409231
 Transform:
   m_ObjectHideFlags: 0
@@ -34336,6 +34336,60 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e64a8a0f859a6954cab1ec02005d3f61, type: 3}
+--- !u!1 &986619152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 986619154}
+  - component: {fileID: 986619153}
+  m_Layer: 0
+  m_Name: Piercing arrow Holder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &986619153
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986619152}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 30e1e8924894a62488e843ab0906859d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!4 &986619154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 986619152}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 385350838}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1004622748
 GameObject:
   m_ObjectHideFlags: 0
@@ -44326,7 +44380,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -49154,7 +49208,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -54055,7 +54109,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: -2132937470
@@ -54118,7 +54172,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 4.5
+      scalar: 0
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -55767,7 +55821,7 @@ ParticleSystem:
     orbitalZ:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 7.92
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -56082,7 +56136,7 @@ ParticleSystem:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    inWorldSpace: 0
+    inWorldSpace: 1
   InheritVelocityModule:
     enabled: 0
     m_Mode: 0
@@ -58003,7 +58057,7 @@ ParticleSystem:
     textureScale: {x: 1, y: 1}
     ribbonCount: 3
     shadowBias: 0.5
-    worldSpace: 0
+    worldSpace: 1
     dieWithParticles: 1
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 1
@@ -58886,7 +58940,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -78397,6 +78451,58 @@ PrefabInstance:
       propertyPath: m_Name
       value: Piercing Arrow moving ref
       objectReference: {fileID: 0}
+    - target: {fileID: 557676635485851009, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.3254717
+      objectReference: {fileID: 0}
+    - target: {fileID: 557676635485851009, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.52152765
+      objectReference: {fileID: 0}
+    - target: {fileID: 557676635485851009, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362931589372578228, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362931589372578228, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.58108115
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362931589372578228, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3362931589372578228, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startSpeed.minMaxState
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092457606653769950, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092457606653769950, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.36002648
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092457606653769950, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.9811321
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838292841798905725, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.5330188
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838292841798905725, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.6539663
+      objectReference: {fileID: 0}
+    - target: {fileID: 7838292841798905725, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8462316803096575473, guid: 53b97770d776523448e6b5943b632283, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.48
@@ -78437,6 +78543,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8707686264031810485, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8707686264031810485, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: lengthInSec
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8707686264031810485, guid: 53b97770d776523448e6b5943b632283, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -78449,8 +78567,8 @@ SceneRoots:
   - {fileID: 1449004727}
   - {fileID: 1593371216}
   - {fileID: 4908560155487985440}
-  - {fileID: 385350838}
-  - {fileID: 1485225840}
+  - {fileID: 986619154}
   - {fileID: 398821042}
+  - {fileID: 1485225840}
   - {fileID: 2020478812}
   - {fileID: 931075463}

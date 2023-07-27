@@ -4,15 +4,15 @@
     {
         public override void Show()
         {
-            LevelManager.CoreTemplete.HP.OnValueChanged += UpdateUiData;
-            _maxCount.text = $"/{LevelManager.CoreTemplete.HP.BaseValue}";
-            UpdateUiData(LevelManager.CoreTemplete.HP.CurrentValue);
+            LevelManager.CoreTemplete.Health.OnValueChanged += UpdateUiData;
+            _maxCount.text = $"/{LevelManager.CoreTemplete.Health.BaseValue}";
+            UpdateUiData(LevelManager.CoreTemplete.Health.CurrentValue);
             base.Show();
         }
 
         public override void Hide()
         {
-            LevelManager.CoreTemplete.HP.OnValueChanged -= UpdateUiData;
+            LevelManager.CoreTemplete.Health.OnValueChanged -= UpdateUiData;
             base.Hide();
         }
     }

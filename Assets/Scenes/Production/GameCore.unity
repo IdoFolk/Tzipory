@@ -2916,7 +2916,7 @@ PrefabInstance:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelConfig
       value: 
-      objectReference: {fileID: 11400000, guid: f57e878089a79e9498b44e2406967206, type: 2}
+      objectReference: {fileID: 11400000, guid: 962c0de1a4cb1b14ab67a6f2204ba677, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelParent
       value: 

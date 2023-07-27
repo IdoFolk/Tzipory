@@ -1,5 +1,6 @@
 ﻿using System;
 using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.SerializeData.StatSystemSerilazeData;
 
 namespace Tzipory.Factory
 {

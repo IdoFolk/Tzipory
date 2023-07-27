@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using Helpers.Consts;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.EntityConfigSystem
@@ -15,5 +16,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
         public float AggroLevel => _aggroLevel;
 
         public float ReturnLevel => _returnLevel;
+
+        public override int ConfigTypeId => Constant.DataId.ENEMY_DATA_ID;
     }
 }

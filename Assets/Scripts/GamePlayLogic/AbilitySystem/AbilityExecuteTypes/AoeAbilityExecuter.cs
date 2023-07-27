@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Helpers.Consts;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.SerializeData.AbilitySystemSerializeData;
+using Tzipory.SerializeData.StatSystemSerilazeData;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
 {
@@ -21,7 +25,7 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
         public IEntityTargetAbleComponent Caster { get; }
         public List<StatusEffectConfig> StatusEffects { get; }
 
-
+        [Obsolete("Use AbilitySerializeData")]
         public AoeAbilityExecuter(IEntityTargetAbleComponent caster,AbilityConfig abilityConfig)
         {
             Caster = caster;
@@ -34,7 +38,7 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
 
             _aoePrefab = Resources.Load<GameObject>(AoePrefabPath);
         }
-
+        
         public void Init(IEntityTargetAbleComponent target)//temp
         {
             var aoeGameobject = Object.Instantiate(_aoePrefab,target.EntityTransform.position,Quaternion.identity).GetComponent<AoeAbilityEntity>();

@@ -15,14 +15,14 @@ public class TEMP_UNIT_HPBarConnector : MonoBehaviour
     //    if (_unit == null)
     //        return;
 
-    //    hP_Bar.Init(_unit.HP.BaseValue);
+    //    hP_Bar.Init(_unit.Health.BaseValue);
     //    _unit.OnHealthChanged += SetBarToHealth;
 
     //}
     public void Init(BaseUnitEntity unit)
     {
         _unit = unit;
-        hP_Bar.Init(_unit.HP.BaseValue);
+        hP_Bar.Init(_unit.Health.BaseValue);
         //_unit.OnHealthChanged += SetBarToHealth;
     }
 

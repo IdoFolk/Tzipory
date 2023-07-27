@@ -1,46 +1,52 @@
 ﻿using System;
 using SerializeData.StatSerializeData;
 using Sirenix.OdinInspector;
+using Tzipory.SerializeData.StatSystemSerilazeData;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.StatusSystem
 {
-    [System.Serializable]
+    [Serializable]
     public class Stat
     {
-        //TEMP!
         public event Action<float> OnValueChanged;
         
         [SerializeField,ReadOnly] private string _name;
-        [SerializeField,ReadOnly] private int _id;
-        [SerializeField,ReadOnly] private float _baseValue;
-        [SerializeField,ReadOnly] float _currentValue;
+        [SerializeField,ReadOnly] private float _currentValue;
 
         public string Name => _name;
-        public int Id => _id;
-        public float BaseValue => _baseValue;
         public float CurrentValue => _currentValue;
-        
+        public int Id { get; }
+        public float BaseValue { get; }
         public float MaxValue { get; private set; }
-
         
+        [Obsolete("Use StatSerializeData as a parameter")]
         public Stat(StatConfig statConfig)
         {
             _name = statConfig.Name;
-            _id = statConfig.Id;
-            _baseValue = statConfig.BaseValue;
-            _currentValue = _baseValue;
+            Id = statConfig.Id;
+            BaseValue = statConfig.BaseValue;
+            _currentValue = BaseValue;
             MaxValue = StatLimiters.MaxStatValue;
         }
         
-        [Obsolete("Use StatConfig as a parameter")]
+        public Stat(StatSerializeData statSerializeData)
+        {
+            _name = statSerializeData.Name;
+            Id = statSerializeData.ID;
+            BaseValue = statSerializeData.BaseValue;
+            _currentValue = BaseValue;
+            MaxValue = StatLimiters.MaxStatValue;
+        }
+        
+        [Obsolete("Use StatSerializeData as a parameter")]
         public Stat(string name, float baseValue,float maxValue,int id)
         {
             _name = name;
-            _id = id;  
-            _baseValue = baseValue;
+            Id = id;  
+            BaseValue = baseValue;
             MaxValue = StatLimiters.MaxStatValue; //TBD is this still a thing?
-            _currentValue = _baseValue;
+            _currentValue = BaseValue;
         }
 
         private void ChangeValue(float value)
@@ -66,6 +72,6 @@ namespace Tzipory.EntitySystem.StatusSystem
             ChangeValue(_currentValue - amount);
         
         public void ResetValue() =>
-            ChangeValue(_baseValue);
+            ChangeValue(BaseValue);
     }
 }

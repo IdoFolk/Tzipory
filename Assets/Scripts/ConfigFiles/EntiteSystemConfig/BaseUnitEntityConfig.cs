@@ -3,13 +3,15 @@ using Helpers.Consts;
 using SerializeData.StatSerializeData;
 using Sirenix.OdinInspector;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
+using Tzipory.ConfigFiles;
+using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
 using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.EntitySystem.TargetingSystem;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.EntityConfigSystem
 {
-    public abstract class BaseUnitEntityConfig : ScriptableObject
+    public abstract class BaseUnitEntityConfig : ScriptableObject , IConfigFile
     {
         [SerializeField,Tooltip(""),TabGroup("Stats")] private StatConfig _health;
         [SerializeField,Tooltip(""),TabGroup("Stats")] private StatConfig _invincibleTime;
@@ -21,9 +23,8 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
         [SerializeField,Tooltip(""),TabGroup("Stats")] private StatConfig _CritChance;
         [SerializeField,Tooltip(""),TabGroup("Stats")] private StatConfig _movementSpeed;
         [SerializeField,Tooltip(""),TabGroup("Stats")] private List<Stat> _stats;
-        [SerializeField,TabGroup("Abilities")] private List<AbilityConfig> _abilityConfigs;
-        [SerializeField,TabGroup("Visual")] private Sprite _sprite;
-        [SerializeField,TabGroup("Visual")] private Sprite _icon;
+        [SerializeField,TabGroup("Abilities")] private AbilityConfig[] _abilityConfigs;
+        [SerializeField,TabGroup("Visual")] private BaseEntityVisualConfig _entityVisualConfig;
         [SerializeField] private TargetingPriorityType _targetingPriority;
         
         public List<Stat> Stats => _stats;
@@ -48,11 +49,10 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
 
         public TargetingPriorityType TargetingPriority => _targetingPriority;
 
-        public List<AbilityConfig> AbilityConfigs => _abilityConfigs;
+        public AbilityConfig[] AbilityConfigs => _abilityConfigs;
 
-        public Sprite Sprite => _sprite;
+        public BaseEntityVisualConfig EntityVisualConfig => _entityVisualConfig;
 
-        public Sprite Icon => _icon;
 
         private void OnValidate()
         {
@@ -78,5 +78,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
             _movementSpeed.Id =    (int)Constant.Stats.MovementSpeed;
 #endif
         }
+
+        public abstract int ConfigTypeId { get; }
     }
 }

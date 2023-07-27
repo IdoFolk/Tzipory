@@ -11,7 +11,7 @@ namespace Tzipory.SerializeData.StatSystemSerilazeData
     [System.Serializable]
     public class StatusEffectSerializeData : ISerializeData
     {
-        public int SerializeTypeId => Constant.DataId.STATUS_EFFECT_DATA_ID;
+        public int SerializeTypeId => Constant.DataId.StatusEffectDataID;
         
         [Header("Status Effect Config")] 
         [SerializeField, Tooltip("")] private string _StatusEffectName;

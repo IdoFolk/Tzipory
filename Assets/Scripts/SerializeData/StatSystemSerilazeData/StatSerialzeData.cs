@@ -19,7 +19,7 @@ namespace Tzipory.SerializeData.StatSystemSerilazeData
 
         public float BaseValue => _baseValue;
         
-        public int SerializeTypeId => Constant.DataId.STAT_DATA_ID;
+        public int SerializeTypeId => Constant.DataId.StatDataID;
 
         public StatSerializeData(StatConfig statConfig)
         {

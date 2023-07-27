@@ -27,6 +27,7 @@ namespace SerializeData.StatSerializeData
         }
         public float BaseValue => _baseValue;
 
-        public int ConfigTypeId => Constant.DataId.STAT_DATA_ID;
+        public int ConfigObjectId { get; }
+        public int ConfigTypeId => Constant.DataId.StatDataID;
     }
 }

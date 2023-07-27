@@ -58,7 +58,7 @@ namespace Tzipory.SerializeData.AbilitySystemSerializeData
 
         public List<StatusEffectSerializeData> StatusEffectConfigs => _statusEffectConfigs;
 
-        public int SerializeTypeId => Constant.DataId.ABILITY_DATA_ID;
+        public int SerializeTypeId => Constant.DataId.AbilityDataID;
 
         public AbilitySerializeData(AbilityConfig abilityConfig)
         {

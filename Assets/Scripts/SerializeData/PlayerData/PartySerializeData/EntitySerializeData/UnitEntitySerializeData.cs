@@ -55,7 +55,7 @@ namespace Tzipory.SerializeData.ShamanSerializeData
 
         public StatSerializeData MovementSpeed => _movementSpeed;
         
-        public int SerializeTypeId => Constant.DataId.SHAMAN_DATA_ID;
+        public int SerializeTypeId => Constant.DataId.ShamanDataID;
         
 
         public UnitEntitySerializeData(BaseUnitEntityConfig shamanConfig)

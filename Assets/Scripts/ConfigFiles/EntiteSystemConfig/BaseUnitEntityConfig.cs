@@ -53,7 +53,9 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
 
         public BaseEntityVisualConfig EntityVisualConfig => _entityVisualConfig;
 
-
+        public abstract int ConfigObjectId { get; }
+        public abstract int ConfigTypeId { get; }
+        
         private void OnValidate()
         {
 #if UNITY_EDITOR
@@ -78,7 +80,5 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
             _movementSpeed.Id =    (int)Constant.Stats.MovementSpeed;
 #endif
         }
-
-        public abstract int ConfigTypeId { get; }
     }
 }

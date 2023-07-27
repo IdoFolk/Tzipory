@@ -1,4 +1,9 @@
-﻿namespace Helpers.Consts
+﻿using SerializeData.StatSerializeData;
+using Tzipory.AbilitiesSystem.AbilityConfigSystem;
+using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.EntitySystem.StatusSystem;
+
+namespace Helpers.Consts
 {
     public static class Constant
     {
@@ -14,12 +19,27 @@
         
         public static class DataId
         {
-            public const int SHAMAN_DATA_ID = 1;
-            public const int ENEMY_DATA_ID = 2;
-            public const int STAT_DATA_ID = 3;
-            public const int ITEM_DATA_ID = 4;
-            public const int ABILITY_DATA_ID = 5;
-            public const int STATUS_EFFECT_DATA_ID = 6;
+            public static readonly int ShamanDataID = typeof(ShamanConfig).GetHashCode();
+            public static readonly int EnemyDataID = typeof(EnemyConfig).GetHashCode();
+            public static readonly int StatDataID = typeof(StatConfig).GetHashCode();
+            // public const int ITEM_DATA_ID = typeof(It).GetHashCode();
+            public static readonly int AbilityDataID = typeof(AbilityConfig).GetHashCode();
+            public static readonly int StatusEffectDataID = typeof(StatusEffectConfig).GetHashCode();
+        }
+
+
+        // public static class ShamanId
+        // {
+        //     public const int  toor_ID = 1;
+        //     public const int  nadia_ID = 1;
+        //     public const int  SHAMAN_ID = 1;
+        //     public const int  SHAMAN_ID = 1;
+        //     public const int  SHAMAN_ID = 1;
+        // }
+        //
+        public static class EnemyId
+        {
+            
         }
 
         public enum Stats

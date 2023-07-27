@@ -7,6 +7,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
     [CreateAssetMenu(fileName = "New enemy config", menuName = "ScriptableObjects/Entity/New enemy config", order = 0)]
     public class EnemyConfig : BaseUnitEntityConfig
     {
+        [SerializeField] private int _enemyId;
         [SerializeField,TabGroup("AI")] private float _decisionInterval;//temp
         [SerializeField,TabGroup("AI")] private float _aggroLevel;//temp
         [SerializeField,TabGroup("AI")] private float _returnLevel;//temp
@@ -17,6 +18,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
 
         public float ReturnLevel => _returnLevel;
 
-        public override int ConfigTypeId => Constant.DataId.ENEMY_DATA_ID;
+        public override int ConfigObjectId => _enemyId;
+        public override int ConfigTypeId => Constant.DataId.EnemyDataID;
     }
 }

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42ee311548384ecc85e91ba2b85a84ea, type: 3}
-  m_Name: Gallanite_Enemy
+  m_Name: StrongGallanite_Enemy 1
   m_EditorClassIdentifier: 
   _health:
     _name: Health
     _id: 0
-    _baseValue: 150
+    _baseValue: 1500
   _invincibleTime:
     _name: InvincibleTime
     _id: 8
@@ -47,12 +47,12 @@ MonoBehaviour:
   _movementSpeed:
     _name: MovementSpeed
     _id: 5
-    _baseValue: 1.5
+    _baseValue: 0.6
   _stats: []
   _abilityConfigs: []
   _sprite: {fileID: 21300000, guid: e8c46cb19ba485349b2b77615cca385d, type: 3}
   _icon: {fileID: 0}
   _targetingPriority: 2
-  _decisionInterval: 0
-  _aggroLevel: 0
-  _returnLevel: 0
+  _decisionInterval: 5
+  _aggroLevel: 30
+  _returnLevel: 10

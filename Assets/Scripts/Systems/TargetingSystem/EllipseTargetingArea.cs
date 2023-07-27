@@ -5,18 +5,30 @@ using UnityEngine;
 
 public class EllipseTargetingArea : MonoBehaviour
 {
-    public List<IEntityTargetAbleComponent> GetInsiders => _insiders;
-    List<IEntityTargetAbleComponent> _insiders = new List<IEntityTargetAbleComponent>();
+    private ITargetableReciever _reciever;
+
+    private void Awake()
+    {
+        _reciever = GetComponentInParent(typeof(ITargetableReciever)) as ITargetableReciever;
+        
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
-        _insiders.Add(targetAbleComponent);
+        _reciever.RecieveTargetableEntry(targetAbleComponent);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
         if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
-        _insiders.Remove(targetAbleComponent);
+        _reciever.RecieveTargetableExit(targetAbleComponent);
     }
 
+}
+
+public interface ITargetableReciever
+{
+    void RecieveTargetableEntry(IEntityTargetAbleComponent targetable);
+    void RecieveTargetableExit(IEntityTargetAbleComponent targetable);
 }

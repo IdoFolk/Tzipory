@@ -330,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6918628788688364820, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
       propertyPath: m_IncludeLayers.m_Bits
-      value: 512
+      value: 4608
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

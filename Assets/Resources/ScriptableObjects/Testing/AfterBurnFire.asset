@@ -12,30 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbec1bc4bb0b4e8391bcef723400cf0d, type: 3}
   m_Name: AfterBurnFire
   m_EditorClassIdentifier: 
-  _statName: Health
-  _statusEffectId: 0
-  _statusEffectParameter:
-  - _name: Interval
-    _id: 0
-    _baseValue: 1
-    _currentValue: 0
-  - _name: Duration
-    _id: 0
-    _baseValue: 60
-    _currentValue: 0
+  _StatusEffectName: 
+  _affectedStat: 0
   _statusEffectToInterrupt: []
   _statusEffectType: 2
+  _duration: 2
+  _interval: 0.2
   _statModifier:
-  - _statusModifierType: 1
-    _modifier:
-      _name: HpRedus
-      _id: 10
-      _baseValue: -2
-      _currentValue: 0
+  - _statusModifierType: 2
+    _modifier: 20
   _effectSequence:
     _sequenceName: 
     _id: 0
     _startDelay: 0
     _endDelay: 0
-    isInterruptable: 0
+    _isStackable: 0
+    _isInterruptable: 0
     _effectActionContainers: []

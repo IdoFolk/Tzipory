@@ -23,17 +23,17 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     TargetingHandler _targeting;
     //TEMP! Should USE Init(BaseUnitEntity) INSTEAD 
 
-    static Vector3 cachedScaledMapSize => Level.MapSize * .01f;
-    static float zDistanceModifier = .5f;
-    
+    static Vector3 cachedScaledMapSize => Level.MapSize * .01f; //fix take from consts
+    static float zDistanceModifier = .5f; //fix take from consts
+
     public static float GetZForLocalPosition(Transform t)
     {
-        float _newZ = Level.FakeForward.x * t.position.x + Level.FakeForward.y * t.position.y;
-        float _mapOffset = Mathf.Abs(Level.FakeForward.x) * cachedScaledMapSize.x + Mathf.Abs(Level.FakeForward.y) * cachedScaledMapSize.y; //should cause the bottom most point to be the flat-height
+        float newZ = Level.FakeForward.x * t.position.x + Level.FakeForward.y * t.position.y;
+        float mapOffset = Mathf.Abs(Level.FakeForward.x) * cachedScaledMapSize.x + Mathf.Abs(Level.FakeForward.y) * cachedScaledMapSize.y; //should cause the bottom most point to be the flat-height
 
-        _newZ += _mapOffset;
-        _newZ *= zDistanceModifier;
-        return -_newZ;
+        newZ += mapOffset;
+        newZ *= zDistanceModifier;
+        return -newZ;
     }
 
     private void Start()
@@ -49,8 +49,6 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     }
     private void Update()
     {
-        
-        //_spriteRenderer.transform.localPosition = GetZFixedLocalPositionForTransform(_spriteRenderer.transform);\
         _spriteRenderer.transform.localPosition = new Vector3(_spriteRenderer.transform.localPosition.x, _spriteRenderer.transform.localPosition.y, GetZForLocalPosition(transform));
 
         if (_targeting.HaveTarget)

@@ -5,7 +5,7 @@ using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
-public class AoeAbilityEntity : BaseAbilityEntity
+public class AoeAbilityEntity : BaseAbilityEntity, ITargetableReciever
 {
     private float _duration;
     private AoeAbilityExecuter _aoeAbilityExecuter;
@@ -49,19 +49,16 @@ public class AoeAbilityEntity : BaseAbilityEntity
         visualTransform.localScale = new Vector3(radius , radius, 1); //why *2.5?
         _collider2D.transform.localScale = new Vector3(radius , radius, 1); //why *2.5?
 
+    }
 
-        
-        //var colliders = Physics2D.OverlapCircleAll(transform.position, _collider2D.transform.localScale.x);
+    public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
+    {
+        _aoeAbilityExecuter.Execute(targetable);
+    }
 
-
-        //foreach (var collider in colliders)
-        //{
-        //    if (collider.isTrigger)
-        //        continue;
-
-        //    if (collider.TryGetComponent(out IEntityTargetAbleComponent entityTargetAbleComponent))
-        //        Cast(entityTargetAbleComponent);
-        //}
+    public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
+    {
+        _aoeAbilityExecuter.ExecuteOnExit(targetable);
     }
 
     protected override void Update()
@@ -73,24 +70,4 @@ public class AoeAbilityEntity : BaseAbilityEntity
         if(_duration <= 0)
             Destroy(gameObject);//temp need to add pool
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
-            
-        if (targetAbleComponent.EntityInstanceID == _abilityExecutor.Caster.EntityInstanceID) return;
-
-        _aoeAbilityExecuter.Execute(targetAbleComponent);
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
-            
-        if (targetAbleComponent.EntityInstanceID == _abilityExecutor.Caster.EntityInstanceID) return;
-
-        _aoeAbilityExecuter.ExecuteOnExit(targetAbleComponent);
-    }
-
-
 }

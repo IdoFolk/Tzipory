@@ -31,4 +31,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 893d57d2a93463f4a9e65298f82c1bf0, type: 2}
   _doExitEffects: 1
   _statusEffectConfigsOnExit:
-  - {fileID: 11400000, guid: b88d00e68281c724c889c9df070b136a, type: 2}
+  - {fileID: 11400000, guid: e7427a79d167bea4594221bf85656b17, type: 2}

@@ -6,14 +6,12 @@ namespace Tzipory.SerializeData.LevalSerializeData
 {
     public class Level : MonoBehaviour
     {
-        public static Vector3 FakeForward;
-        public static Vector2 MapSize;
-
-
+        public static Vector3 FakeForward { get; private set;}
         /// <summary>
         /// Basically, the Map's resolution
         /// </summary>
-        //[SerializeField] Vector2 _mapSize; //this could be taken from the map's actual texture if we want an easier life TBD
+        public static Vector2 MapSize { get; private set; }
+        
         /// <summary>
         /// The renderer for the map/floor
         /// </summary>
@@ -42,9 +40,6 @@ namespace Tzipory.SerializeData.LevalSerializeData
         {
             FakeForward = _fakeForward;
             MapSize = new Vector2(_bgRenderer.sprite.texture.width, _bgRenderer.sprite.texture.height);
-            
-            //MapSize = _mapSize;
-
         }
 
         public static void AddWaveSpawner(WaveSpawner waveSpawner)

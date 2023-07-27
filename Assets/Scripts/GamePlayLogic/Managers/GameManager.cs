@@ -1,105 +1,35 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using GameplayeLogic.Managers;
-using GamePlayLogic.Managers;
-using SerializeData.LevalSerializeData.PartySerializeData;
-using Sirenix.OdinInspector;
-using Tzipory.BaseSystem.TimeSystem;
-using Tzipory.GamePlayLogic.ObjectPools;
-using Tzipory.Leval;
-using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.Systems.SceneSystem;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-[DefaultExecutionOrder(-1)]
 public class GameManager : MonoBehaviour
 {
-    public static event Action<bool> OnEndGame;
-
-    [SerializeField,TabGroup("Party manager")] private PartySerializeData _partySerializeData;
+    [SerializeField] private SceneHandler _sceneHandler;
     
-    private PoolManager _poolManager;
-   
-    public static PartyManager PartyManager { get; private set; }
-    public static EnemyManager EnemyManager { get; private set; }
-    public static PlayerManager PlayerManager { get; private set; }
-    public static WaveManager WaveManager { get; private set; }
-    public static UIManager UIManager { get; private set; }
-    public static CoreTemple CoreTemplete { get; private set; }
+    //playerData
     
-    public bool IsGameRunning { get; private set; }
-    
-    [SerializeField, TabGroup("Level manager")]
-    private Transform _levelParent;
-    [SerializeField, TabGroup("Level manager")]
-    private LevelSerializeData _levelSerializeData;
-    
-    private void Awake()
+    void Start()
     {
-        UIManager = new UIManager();
-        _poolManager = new PoolManager();
-        EnemyManager = new EnemyManager();
-        PlayerManager = new PlayerManager();
-        PartyManager = new PartyManager(_partySerializeData);
-        WaveManager  = new WaveManager(_levelSerializeData,_levelParent);//temp!
-        CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
+        _sceneHandler.LoadScene(SceneType.MainMenu);
     }
 
-    private void Start()
+    // Update is called once per frame
+    void Update()
     {
-        PartyManager.SpawnShaman();
-        WaveManager.StartLevel();
-        UIManager.Initialize();
-        GAME_TIME.SetTimeStep(1);
-        IsGameRunning = true;
-    }
-
-    private void Update()
-    {
-        if (!IsGameRunning)
-            return;
         
-        WaveManager.UpdateLevel();
-
-        if (CoreTemplete.IsEntityDead)
-            EndGame(false);
-
-        if (WaveManager.AllWaveAreDone && EnemyManager.AllEnemiesArDead)
-            EndGame(true);
-    }
-    
-    private void OnDestroy()
-    {
-        UIManager.Dispose();
-        EnemyManager.Dispose();
-        PlayerManager.Dispose();
-        PartyManager.Dispose();
-        WaveManager.Dispose();
-        
-        PartyManager = null;
-        EnemyManager = null;
-        PlayerManager = null;
-        WaveManager = null;
     }
 
-    private void EndGame(bool isWon)
+    #region Test
+    [ContextMenu("LoadMap")]
+    public void LoadScene()
     {
-        if (!IsGameRunning) return;
-        
-        GAME_TIME.SetTimeStep(0);
-        OnEndGame?.Invoke(isWon);
-        IsGameRunning = false;
+        _sceneHandler.LoadScene(SceneType.Map);
     }
 
-    public void Quit()
-    {
-        Application.Quit();
-    }
+    #endregion
 
-    public void Reset()
+    private void OnValidate()
     {
-        GAME_TIME.SetTimeStep(1);
-        SceneManager.LoadScene(0);
+        if (_sceneHandler == null)
+            _sceneHandler = FindObjectOfType<SceneHandler>();
     }
 }

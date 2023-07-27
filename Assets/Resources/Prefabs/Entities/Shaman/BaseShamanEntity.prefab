@@ -193,7 +193,7 @@ MonoBehaviour:
     - _disableUndo: 0
       _startDelay: 0
       _effectActionStart: 0
-      _effectActionSO: {fileID: 11400000, guid: 6081846283e0d3c409354e7b11a1bd3a, type: 2}
+      _effectActionConfig: {fileID: 11400000, guid: 6081846283e0d3c409354e7b11a1bd3a, type: 2}
   _onCritAttack:
     _sequenceName: 
     _id: 0
@@ -221,7 +221,7 @@ MonoBehaviour:
     - _disableUndo: 0
       _startDelay: 0
       _effectActionStart: 0
-      _effectActionSO: {fileID: 11400000, guid: efd2a47c331e44c4d80a605273ecc06f, type: 2}
+      _effectActionConfig: {fileID: 11400000, guid: efd2a47c331e44c4d80a605273ecc06f, type: 2}
   _onGetCritHit:
     _sequenceName: 
     _id: 0

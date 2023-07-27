@@ -10,7 +10,7 @@ namespace GameplayeLogic.UIElements
 
         public override void Show()
         {
-            _countText.text = GameManager.EnemyManager.NumberOfEnemiesKilled.ToString();
+            _countText.text = LevelManager.EnemyManager.NumberOfEnemiesKilled.ToString();
             base.Show();
         }
     }

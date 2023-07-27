@@ -30,12 +30,12 @@ namespace Tzipory.EntitySystem.Entitys
         [SerializeField,TabGroup("Component")] private Transform _particleEffectPosition;
         [SerializeField,TabGroup("Component")] private SoundHandler _soundHandler;
 
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceData _onDeath;
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceData _onAttack;
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceData _onCritAttack;
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceData _onMove;
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceData _onGetHit;
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceData _onGetCritHit;
+        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onDeath;
+        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onAttack;
+        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onCritAttack;
+        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onMove;
+        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetHit;
+        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetCritHit;
 
         #endregion
 
@@ -127,7 +127,7 @@ namespace Tzipory.EntitySystem.Entitys
             _onGetHit.SequenceName = "OnGetHit";
             _onGetCritHit.SequenceName = "OnGetCritHit";
             
-            var effectSequence = new EffectSequenceData[]
+            var effectSequence = new EffectSequenceConfig[]
             {
                 _onDeath,
                 _onAttack,

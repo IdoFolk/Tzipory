@@ -65,7 +65,7 @@ public class MovementOnPath : MonoBehaviour
             privateRabbitProgress += privateRabbitIncrement;
             if (privateRabbitProgress > pathCreator.path.length && Vector3.Distance(transform.position, _currentPointOnPath) <= acceptableDistanceToCompletion)
             {
-                finalDestinaion = GameManager.CoreTemplete.PatrolPath;
+                finalDestinaion = LevelManager.CoreTemplete.PatrolPath;
                 CircleFinalDestination();
             }
         }
@@ -82,7 +82,7 @@ public class MovementOnPath : MonoBehaviour
 
         //TEMP!!!!!!
         Enemy enemy = GetComponent<Enemy>();
-        enemy.SetAttackTarget(GameManager.CoreTemplete);
+        enemy.SetAttackTarget(LevelManager.CoreTemplete);
         enemy.IsAttckingCore = true;
     }
 

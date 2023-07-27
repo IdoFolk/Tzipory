@@ -29,9 +29,12 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
         {
             Caster = caster;
             OnEnterStatusEffects = new List<StatusEffectConfig>();
+            OnExitStatusEffects = new List<StatusEffectConfig>();
             
             OnEnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
-            
+            if(abilityConfig.DoExitEffects)
+            OnExitStatusEffects.AddRange(abilityConfig.OnExitStatusEffectConfigs);
+
             Radius = new Stat("AoeRadius", abilityConfig.AoeRadius, int.MaxValue, (int)Constant.Stats.AoeRadius);
             Duration = new Stat("AoeDuration", abilityConfig.AoeDuration, int.MaxValue, (int)Constant.Stats.AoeDuration);
 

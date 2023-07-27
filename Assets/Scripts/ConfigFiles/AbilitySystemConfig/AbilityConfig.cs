@@ -58,6 +58,7 @@ namespace Tzipory.AbilitiesSystem.AbilityConfigSystem
         public float Cooldown => _cooldown;
         public float CastTime => _castTime;
         public List<StatusEffectConfig> StatusEffectConfigs => _statusEffectConfigs;
+        public bool DoExitEffects => _doExitEffects;
         public List<StatusEffectConfig> OnExitStatusEffectConfigs => _doExitEffects? _statusEffectConfigsOnExit : null;
     }
 

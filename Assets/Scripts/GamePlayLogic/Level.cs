@@ -6,7 +6,16 @@ namespace Tzipory.SerializeData.LevalSerializeData
 {
     public class Level : MonoBehaviour
     {
-        public static Vector3 FakeForward;
+        public static Vector3 FakeForward { get; private set;}
+        /// <summary>
+        /// Basically, the Map's resolution
+        /// </summary>
+        public static Vector2 MapSize { get; private set; }
+        
+        /// <summary>
+        /// The renderer for the map/floor
+        /// </summary>
+        [SerializeField] SpriteRenderer _bgRenderer; 
         [SerializeField] private Vector3 _fakeForward;
         [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         private static List<WaveSpawner> _waveSpawners;
@@ -30,6 +39,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         private void Awake()
         {
             FakeForward = _fakeForward;
+            MapSize = new Vector2(_bgRenderer.sprite.texture.width, _bgRenderer.sprite.texture.height);
         }
 
         public static void AddWaveSpawner(WaveSpawner waveSpawner)

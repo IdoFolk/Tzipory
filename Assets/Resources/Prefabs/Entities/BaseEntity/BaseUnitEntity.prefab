@@ -342,6 +342,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7921501042575430128}
     m_Modifications:
+    - target: {fileID: 4061905898862799202, guid: 7cf74ddf32e5e5c4098129768eefab1c, type: 3}
+      propertyPath: _targetingCollider2D
+      value: 
+      objectReference: {fileID: 6818005281947414882}
     - target: {fileID: 5682615713657979573, guid: 7cf74ddf32e5e5c4098129768eefab1c, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -398,6 +402,11 @@ PrefabInstance:
 --- !u!4 &871263075911491699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5682615713657979573, guid: 7cf74ddf32e5e5c4098129768eefab1c, type: 3}
+  m_PrefabInstance: {fileID: 4813202057110315718}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &6818005281947414882 stripped
+PolygonCollider2D:
+  m_CorrespondingSourceObject: {fileID: 2041685799212880804, guid: 7cf74ddf32e5e5c4098129768eefab1c, type: 3}
   m_PrefabInstance: {fileID: 4813202057110315718}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6825582365965666706

@@ -38,7 +38,7 @@ public class PowerStructure : BaseGameEntity
         if (collision.gameObject.CompareTag("Shaman"))
         {
 
-            Shaman shaman = collision.GetComponentInParent<Shaman>();
+            Shaman shaman = collision.GetComponent<Shaman>();
             Debug.LogWarning($"ENTER {shaman.name}");
 
             if (_activeStatusEffectOnShaman.ContainsKey(shaman.EntityInstanceID))//temp!!!
@@ -58,7 +58,7 @@ public class PowerStructure : BaseGameEntity
     {
         if (collision.gameObject.CompareTag("Shaman"))
         {
-            Shaman shaman = collision.GetComponentInParent<Shaman>();
+            Shaman shaman = collision.GetComponent<Shaman>();
             Debug.LogWarning($"EXIT {shaman.name}");
 
             if (shaman is null)

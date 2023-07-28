@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbec1bc4bb0b4e8391bcef723400cf0d, type: 3}
   m_Name: Slow
   m_EditorClassIdentifier: 
-  _statName: Move Speed
-  _statId: 0
-  _statusEffectParameter:
-  - _name: Duration
-    _id: 0
-    _baseValue: 20
-    _currentValue: 0
+  _StatusEffectName: 
+  _affectedStat: 5
+  _statusEffectToInterrupt: []
   _statusEffectType: 0
+  _duration: 3
+  _interval: 0
   _statModifier:
   - _statusModifierType: 0
-    _modifier:
-      _name: amount
-      _id: 0
-      _baseValue: 0
-      _currentValue: 0
+    _modifier: 0
+  _effectSequence:
+    _sequenceName: 
+    _id: 0
+    _startDelay: 0
+    _endDelay: 0
+    _isStackable: 0
+    _isInterruptable: 0
+    _effectActionContainers: []

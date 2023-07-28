@@ -17,7 +17,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
 
     private List<IProgress> _completedEnemyGroups;
 
-    private EnemyGroupConfig[] _enemyGroups;
+    private EnemyGroupConfig[] _enemyGroupsConfig;
 
     private int _currentEnemyGroupIndex;
     
@@ -59,7 +59,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
             if (_completedEnemyGroups == null)
                 return false;
             
-            if (_completedEnemyGroups.Count != _enemyGroups.Length) 
+            if (_completedEnemyGroups.Count != _enemyGroupsConfig.Length) 
                 return false;
             
             foreach (var completedEnemyGroup in _completedEnemyGroups)
@@ -80,11 +80,11 @@ public class WaveSpawner : MonoBehaviour , IProgress
     {
         _activeEnemyGroup = new List<EnemyGroup>();
         _completedEnemyGroups = new List<IProgress>();
-        _enemyGroups = waveSpawnerConfig.EnemyGroups;
+        _enemyGroupsConfig = waveSpawnerConfig.EnemyGroups;
         _delayBetweenEnemyGroup = waveSpawnerConfig.DelayBetweenEnemyGroup;
         _currentEnemyGroupIndex = 0;
         
-        foreach (var enemyGroupSerializeData in _enemyGroups)
+        foreach (var enemyGroupSerializeData in _enemyGroupsConfig)
             TotalNumberOfEnemiesPreWave += enemyGroupSerializeData.TotalSpawnAmount;
 
         if (!TryGetNextEnemyGroup())
@@ -123,16 +123,16 @@ public class WaveSpawner : MonoBehaviour , IProgress
 
     private bool TryGetNextEnemyGroup()
     {
-        if (_enemyGroups.Length == 0) return false;
-        if (_currentEnemyGroupIndex >= _enemyGroups.Length) return false;
+        if (_enemyGroupsConfig.Length == 0) return false;
+        if (_currentEnemyGroupIndex >= _enemyGroupsConfig.Length) return false;
             
-        _activeEnemyGroup.Add(new EnemyGroup(_enemyGroups[_currentEnemyGroupIndex]));
+        _activeEnemyGroup.Add(new EnemyGroup(_enemyGroupsConfig[_currentEnemyGroupIndex]));
         _currentEnemyGroupIndex++;
 
-        if (_currentEnemyGroupIndex == _enemyGroups.Length)
+        if (_currentEnemyGroupIndex == _enemyGroupsConfig.Length)
             return false;
 
-        if (_enemyGroups[_currentEnemyGroupIndex].StartType == ActionStartType.WithPrevious)
+        if (_enemyGroupsConfig[_currentEnemyGroupIndex].StartType == ActionStartType.WithPrevious)
             TryGetNextEnemyGroup();
 
         return true;

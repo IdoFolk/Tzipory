@@ -28,6 +28,8 @@ namespace Tzipory.GamePlayLogic.ObjectPools
         private ObjectPool<SoundEffectAction> SoundEffectPool { get; set; }
         private ObjectPool<TransformEffectAction> TransformEffectPool { get; set; }
 
+        // textpopup pool
+
         public VisualSystemPool()
         {
             EffectActionPool = new ObjectPool<EffectSequence>(new EffectSequenceFactory(),10);
@@ -54,5 +56,7 @@ namespace Tzipory.GamePlayLogic.ObjectPools
         {
             return  EffectActionPool.GetObject();
         }
+
+        //getpopup (popupconfig)
     }
 }

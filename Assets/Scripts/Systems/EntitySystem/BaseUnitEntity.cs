@@ -18,7 +18,7 @@ using UnityEngine;
 namespace Tzipory.EntitySystem.Entitys
 {
     public abstract class BaseUnitEntity : BaseGameEntity, IEntityTargetAbleComponent, IEntityCombatComponent, IEntityMovementComponent, 
-        IEntityTargetingComponent, IEntityAbilitiesComponent, IEntityVisualComponent, IInitialization<BaseUnitEntityConfig> , IInitialization<UnitEntitySerializeData,BaseEntityVisualConfig>
+        IEntityTargetingComponent, IEntityAbilitiesComponent, IEntityVisualComponent, IInitialization<BaseUnitEntityConfig> , IInitialization<UnitEntitySerializeData,BaseUnitEntityVisualConfig>
     {
         #region Fields
 
@@ -60,7 +60,7 @@ namespace Tzipory.EntitySystem.Entitys
             throw new System.NotImplementedException();
         }
 
-        public void Init(UnitEntitySerializeData parameter, BaseEntityVisualConfig visualConfig)
+        public void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
             gameObject.name =  $"{parameter.EntityName} InstanceID: {EntityInstanceID}";
 
@@ -153,7 +153,7 @@ namespace Tzipory.EntitySystem.Entitys
             
             AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
             
-            SpriteRenderer.sprite = parameter.EntityVisualConfig.Sprite;
+            SpriteRenderer.sprite = parameter.UnitEntityVisualConfig.Sprite;
             
             //init Hp_bar
             if (_doShowHPBar)//Temp!

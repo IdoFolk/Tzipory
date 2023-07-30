@@ -24,7 +24,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
         [SerializeField,Tooltip(""),TabGroup("Stats")] private StatConfig _movementSpeed;
         [SerializeField,Tooltip(""),TabGroup("Stats")] private List<Stat> _stats;
         [SerializeField,TabGroup("Abilities")] private AbilityConfig[] _abilityConfigs;
-        [SerializeField,TabGroup("Visual")] private BaseEntityVisualConfig _entityVisualConfig;
+        [SerializeField,TabGroup("Visual")] private BaseUnitEntityVisualConfig _unitEntityVisualConfig;
         [SerializeField] private TargetingPriorityType _targetingPriority;
         
         public List<Stat> Stats => _stats;
@@ -51,7 +51,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
 
         public AbilityConfig[] AbilityConfigs => _abilityConfigs;
 
-        public BaseEntityVisualConfig EntityVisualConfig => _entityVisualConfig;
+        public BaseUnitEntityVisualConfig UnitEntityVisualConfig => _unitEntityVisualConfig;
 
         public abstract int ConfigObjectId { get; }
         public abstract int ConfigTypeId { get; }

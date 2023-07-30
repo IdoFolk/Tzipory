@@ -1,6 +1,7 @@
 ﻿using Helpers.Consts;
 using SerializeData.StatSerializeData;
 using Sirenix.OdinInspector;
+using Tzipory.ConfigFiles;
 using Tzipory.EntitySystem.StatusSystem;
 using UnityEngine;
 
@@ -33,6 +34,12 @@ namespace Tzipory.SerializeData.StatSystemSerilazeData
             _name  = stat.Name;
             _id = stat.Id;
             _baseValue = stat.BaseValue;
+        }
+
+        public bool IsInitialization { get; }
+        public void Init(IConfigFile parameter)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

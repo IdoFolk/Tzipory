@@ -21,6 +21,8 @@ namespace Shamans
         [SerializeField] private ClickHelper _clickHelper;
         [SerializeField] private Temp_HeroMovement _tempHeroMovement;
         
+        private ShamanSerializeData  _serializeData;
+        
         private float _currentAttackRate;
         
         public void Init(ShamanSerializeData parameter)
@@ -45,6 +47,7 @@ namespace Shamans
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            _serializeData.UpdateData(this);
             _clickHelper.OnClick -= _tempHeroMovement.SelectHero;
         }
 

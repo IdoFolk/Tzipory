@@ -2,6 +2,7 @@
 using Helpers.Consts;
 using Tzipory.AbilitiesSystem;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
+using Tzipory.ConfigFiles;
 using Tzipory.SerializeData.StatSystemSerilazeData;
 using UnityEngine;
 
@@ -59,15 +60,12 @@ namespace Tzipory.SerializeData.AbilitySystemSerializeData
         public List<StatusEffectSerializeData> StatusEffectConfigs => _statusEffectConfigs;
 
         public int SerializeTypeId => Constant.DataId.AbilityDataID;
+        
 
-        public AbilitySerializeData(AbilityConfig abilityConfig)
+        public bool IsInitialization { get; }
+        public void Init(IConfigFile parameter)
         {
-            
-        }
-
-        public AbilitySerializeData(Ability ability)
-        {
-            
+            throw new System.NotImplementedException();
         }
     }
 }

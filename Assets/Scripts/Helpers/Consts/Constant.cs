@@ -28,18 +28,19 @@ namespace Helpers.Consts
         }
 
 
-        // public static class ShamanId
-        // {
-        //     public const int  toor_ID = 1;
-        //     public const int  nadia_ID = 1;
-        //     public const int  SHAMAN_ID = 1;
-        //     public const int  SHAMAN_ID = 1;
-        //     public const int  SHAMAN_ID = 1;
-        // }
-        //
+        public static class ShamanId
+        {
+            public const int  TOOR_ID = 0;
+            public const int  NADIA_ID = 1;
+            public const int  JAVAN_ID = 2;
+            public const int  GUNI_ID = 3;
+            public const int  NANA_ID = 4;
+        }
+        
         public static class EnemyId
         {
-            
+            public const int  MUDU_ID = 0;
+            public const int  GALLANITE_ID = 1;
         }
 
         public enum Stats

@@ -2,8 +2,7 @@
 using Helpers.Consts;
 using Sirenix.OdinInspector;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.EntitySystem.EntityConfigSystem;
-using Tzipory.EntitySystem.Entitys;
+using Tzipory.ConfigFiles;
 using Tzipory.SerializeData.AbilitySystemSerializeData;
 using Tzipory.SerializeData.StatSystemSerilazeData;
 using UnityEngine;
@@ -58,38 +57,43 @@ namespace Tzipory.SerializeData.ShamanSerializeData
         public int SerializeTypeId => Constant.DataId.ShamanDataID;
         
 
-        public UnitEntitySerializeData(BaseUnitEntityConfig shamanConfig)
+        // public UnitEntitySerializeData(BaseUnitEntityConfig shamanConfig)
+        // {
+        //     _entityName = shamanConfig.name;
+        //    
+        //     _abilityConfigs  = shamanConfig.AbilityConfigs;
+        //     
+        //     _targetingPriority = (int)shamanConfig.TargetingPriority;
+        //     
+        //     _health = new StatSerializeData(shamanConfig.Health);
+        //     _invincibleTime = new StatSerializeData(shamanConfig.InvincibleTime);
+        //     _attackDamage = new StatSerializeData(shamanConfig.AttackDamage);
+        //     _attackRate = new StatSerializeData(shamanConfig.AttackRate);
+        //     _attackRange = new StatSerializeData(shamanConfig.AttackRange);
+        //     _targetingRange = new StatSerializeData(shamanConfig.TargetingRange);
+        //     _critDamage = new StatSerializeData(shamanConfig.CritDamage);
+        //     _critChance = new StatSerializeData(shamanConfig.CritChance);
+        //     _movementSpeed = new StatSerializeData(shamanConfig.MovementSpeed);
+        // }
+        //
+        // public UnitEntitySerializeData(BaseUnitEntity shaman)
+        // {
+        //     _entityName = shaman.name;
+        //
+        //     _health = new StatSerializeData(shaman.Health);
+        //     _invincibleTime = new StatSerializeData(shaman.InvincibleTime);
+        //     _attackDamage = new StatSerializeData(shaman.AttackDamage);
+        //     _attackRate = new StatSerializeData(shaman.AttackRate);
+        //     _attackRange = new StatSerializeData(shaman.AttackRange);
+        //     _targetingRange = new StatSerializeData(shaman.TargetingRange);
+        //     _critDamage = new StatSerializeData(shaman.CritDamage);
+        //     _critChance = new StatSerializeData(shaman.CritChance);
+        //     _movementSpeed = new StatSerializeData(shaman.MovementSpeed);
+        // }
+        public bool IsInitialization { get; }
+        public virtual void Init(IConfigFile parameter)
         {
-            _entityName = shamanConfig.name;
-           
-            _abilityConfigs  = shamanConfig.AbilityConfigs;
-            
-            _targetingPriority = (int)shamanConfig.TargetingPriority;
-            
-            _health = new StatSerializeData(shamanConfig.Health);
-            _invincibleTime = new StatSerializeData(shamanConfig.InvincibleTime);
-            _attackDamage = new StatSerializeData(shamanConfig.AttackDamage);
-            _attackRate = new StatSerializeData(shamanConfig.AttackRate);
-            _attackRange = new StatSerializeData(shamanConfig.AttackRange);
-            _targetingRange = new StatSerializeData(shamanConfig.TargetingRange);
-            _critDamage = new StatSerializeData(shamanConfig.CritDamage);
-            _critChance = new StatSerializeData(shamanConfig.CritChance);
-            _movementSpeed = new StatSerializeData(shamanConfig.MovementSpeed);
-        }
-
-        public UnitEntitySerializeData(BaseUnitEntity shaman)
-        {
-            _entityName = shaman.name;
-
-            _health = new StatSerializeData(shaman.Health);
-            _invincibleTime = new StatSerializeData(shaman.InvincibleTime);
-            _attackDamage = new StatSerializeData(shaman.AttackDamage);
-            _attackRate = new StatSerializeData(shaman.AttackRate);
-            _attackRange = new StatSerializeData(shaman.AttackRange);
-            _targetingRange = new StatSerializeData(shaman.TargetingRange);
-            _critDamage = new StatSerializeData(shaman.CritDamage);
-            _critChance = new StatSerializeData(shaman.CritChance);
-            _movementSpeed = new StatSerializeData(shaman.MovementSpeed);
+            throw new NotImplementedException();
         }
     }
 }

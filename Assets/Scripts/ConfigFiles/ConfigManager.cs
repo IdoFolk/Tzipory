@@ -10,19 +10,10 @@ namespace Tzipory.ConfigFiles
         [SerializeField] private ConfigHandler<ShamanConfig> _shamanConfig;
         [SerializeField] private ConfigHandler<EnemyConfig> _enemyConfig;
         [SerializeField] private ConfigHandler<AbilityConfig> _abilityConfig;
-
-        public T GetConfig<T>(int objectId) where  T : class, IConfigFile
+        //add item config handler
+        
+        public IConfigFile GetConfig(int dataId,int objectId)
         {
-            if(typeof(T) == typeof(ShamanConfig))
-                return _shamanConfig.GetConfigFile(objectId) as T;
-
-            if (typeof(T) == typeof(EnemyConfig))
-                return _enemyConfig.GetConfigFile(objectId) as T;
-            
-            if (typeof(T) == typeof(AbilityConfig))
-                return _abilityConfig.GetConfigFile(objectId) as T;
-
-            Debug.LogError("ConfigManager.GetConfig() - Unknown config type: " + typeof(T));
             return null;
         }
     }

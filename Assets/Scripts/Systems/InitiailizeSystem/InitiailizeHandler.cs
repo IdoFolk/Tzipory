@@ -2,7 +2,7 @@
 
 namespace Tzipory.Systems.InitiailizeSystem
 {
-    public class InitiailizeHandler<T> where T : ISerializeData
+    public class InitiailizeHandler<T>
     {
         public void Initiailize(T data)
         {

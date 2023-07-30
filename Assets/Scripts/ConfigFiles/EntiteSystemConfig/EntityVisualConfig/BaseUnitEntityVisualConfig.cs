@@ -3,7 +3,7 @@
 namespace Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig
 {
     [System.Serializable]
-    public class BaseEntityVisualConfig
+    public class BaseUnitEntityVisualConfig
     {
         [SerializeField] private Sprite _sprite;
         [SerializeField] private Sprite _icon;

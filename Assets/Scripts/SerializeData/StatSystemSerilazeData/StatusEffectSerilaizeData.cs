@@ -3,6 +3,7 @@ using Helpers.Consts;
 using SerializeData.StatSerializeData;
 using SerializeData.VisualSystemSerializeData;
 using Sirenix.OdinInspector;
+using Tzipory.ConfigFiles;
 using Tzipory.EntitySystem.StatusSystem;
 using UnityEngine;
 
@@ -24,5 +25,11 @@ namespace Tzipory.SerializeData.StatSystemSerilazeData
         [SerializeField, Tooltip("")] private List<StatModifierConfig> _statModifier;
         [Header("Status effect visual")]
         [SerializeField, Tooltip("")] private EffectSequenceConfig _effectSequence;
+
+        public bool IsInitialization { get; }
+        public void Init(IConfigFile parameter)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -1,5 +1,4 @@
-﻿using GameplayeLogic.Managersp;
-using Systems.SaveLoadSystem;
+﻿using Systems.SaveLoadSystem;
 using Tzipory.ConfigFiles;
 using Tzipory.SerializeData;
 using UnityEngine;
@@ -11,20 +10,19 @@ namespace Systems.DataManagerSystem
         [SerializeField] private ConfigManager _configManager;
         private SaveAndLoadManager _saveAndLoadManager;
         
-        private PlayerSerializeData _playerData;
-        //PlayerSerializeData
-        //MapData
-        //GameData
-
         public static IDataRequester DataRequester { get; private set; }
+        
+        public ConfigManager ConfigManager { get; private set;}
         
         private void Awake()
         {
+            ConfigManager = _configManager;
             _saveAndLoadManager = new SaveAndLoadManager();
             
             if (DataRequester == null)
                 DataRequester = this;
         }
+
 
         public T GetData<T>(IConfigFile configFile) where T : class, ISerializeData , new()
         {

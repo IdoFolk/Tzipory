@@ -2,11 +2,13 @@
 
 namespace GamePlayLogic.Managers
 {
-    public class PlayerData
+    public class PlayerManager
     {
         private PlayerSerializeData  _playerSerializeData;
-        
-        public PlayerData(PlayerSerializeData playerSerializeData)
+
+        public PlayerSerializeData PlayerSerializeData => _playerSerializeData;
+
+        public PlayerManager(PlayerSerializeData playerSerializeData)
         {
             _playerSerializeData = playerSerializeData;
         }

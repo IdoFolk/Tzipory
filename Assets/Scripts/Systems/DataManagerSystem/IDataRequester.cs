@@ -5,6 +5,8 @@ namespace Systems.DataManagerSystem
 {
     public interface IDataRequester
     {
+
+        public ConfigManager ConfigManager { get;}
         public T GetData<T>(IConfigFile configFile) where T : class, ISerializeData, new();
         public T GetData<T>(int objectId) where T : class, ISerializeData, new();
     }

@@ -55,12 +55,8 @@ namespace Tzipory.EntitySystem.Entitys
         #region UnityCallBacks
         
         public bool IsInitialization { get; private set; }
-        public void Init(UnitEntitySerializeData parameter)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
+        
+        public virtual void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
             gameObject.name =  $"{parameter.EntityName} InstanceID: {EntityInstanceID}";
 

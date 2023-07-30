@@ -5,13 +5,13 @@ using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.Helpers;
 using Sirenix.OdinInspector;
+using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
 using Tzipory.SerializeData;
-using Tzipory.Tools.Interface;
 using UnityEngine;
 
 namespace Shamans
 {
-    public class Shaman : BaseUnitEntity ,IInitialization<ShamanSerializeData>
+    public class Shaman : BaseUnitEntity
     {
         [SerializeField, TabGroup("Proximity Indicator")] private ProximityIndicatorHandler _proximityHandler;
 
@@ -24,14 +24,23 @@ namespace Shamans
         private ShamanSerializeData  _serializeData;
         
         private float _currentAttackRate;
-        
-        public void Init(ShamanSerializeData parameter)
+
+        public override void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
+            base.Init(parameter, visualConfig);
+            var config = (ShamanSerializeData)parameter;
+            //add shaman config
+            
             EntityTeamType = EntityTeamType.Hero;
             _clickHelper.OnClick += _tempHeroMovement.SelectHero;
             
             _proximityHandler.Init(AttackRange.CurrentValue);//MAY need to move to OnEnable - especially if we use ObjectPooling instead of instantiate
         }
+
+        // public void Init(ShamanSerializeData parameter)
+        // {
+        //     
+        // }
 
         private void OnDisable()
         {

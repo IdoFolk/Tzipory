@@ -13,8 +13,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerConfig _playerConfig;
     [SerializeField] private SceneHandler _sceneHandler;
     
-    //playerData
-    private PlayerData _playerData;
+    private static PlayerManager _playerManager;
+    //MapData
+    //GameData
+
+    public static PlayerManager PlayerManager => _playerManager;
 
     private void Awake()
     {
@@ -27,7 +30,7 @@ public class GameManager : MonoBehaviour
         _sceneHandler.LoadScene(SceneType.MainMenu);
         
         var playerSerializeData = DataManager.DataRequester.GetData<PlayerSerializeData>(_playerConfig); 
-        _playerData = new PlayerData(playerSerializeData);
+        _playerManager = new PlayerManager(playerSerializeData);
     }
 
     // Update is called once per frame

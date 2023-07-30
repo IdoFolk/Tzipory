@@ -14,8 +14,6 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public static event Action<bool> OnEndGame;
-
-    [SerializeField,TabGroup("Party manager")] private PartySerializeData _partySerializeData;
     
     private PoolManager _poolManager;
    
@@ -37,7 +35,7 @@ public class LevelManager : MonoBehaviour
         UIManager = new UIManager();
         _poolManager = new PoolManager();
         EnemyManager = new EnemyManager();
-        PartyManager = new PartyManager(_partySerializeData,_levelConfig.EntityParent);
+        PartyManager = new PartyManager(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData,_levelConfig.EntityParent);
         WaveManager  = new WaveManager(_levelConfig,_levelParent);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
     }

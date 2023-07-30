@@ -1,4 +1,5 @@
 ﻿using System;
+using Helpers.Consts;
 using Systems.DataManagerSystem;
 using Tzipory.ConfigFiles;
 using Tzipory.SerializeData;
@@ -14,9 +15,11 @@ namespace GameplayeLogic.Managersp
         private PartySerializeData _partySerializeData;
         //camp serializeData 
         //map serializeData  
-        
+
+        public PartySerializeData PartySerializeData => _partySerializeData;
+
         public bool IsInitialization { get; private set; }
-        public int SerializeTypeId { get; }
+        public int SerializeTypeId => Constant.DataId.PLAYER_DATA_ID;
         
         public void Init(IConfigFile parameter)
         {

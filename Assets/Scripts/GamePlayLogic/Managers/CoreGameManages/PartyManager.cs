@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Shamans;
+using Systems.DataManagerSystem;
+using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.SerializeData;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -15,7 +17,7 @@ namespace GameplayeLogic.Managers
         private readonly Transform _partyParent;
         private readonly Dictionary<Vector3, bool> _partySpawnPoints;
         private readonly PartySerializeData _partySerializeData;
-        private const string SHAMAN_PREFAB_PATH = "Assets/Resources/Prefabs/Entities/Shaman/BaseShamanEntity";
+        private const string SHAMAN_PREFAB_PATH = "Prefabs/Entities/Shaman/BaseShamanEntity";
 
         public IEnumerable<Shaman> Party { get; private set; }
         
@@ -35,10 +37,15 @@ namespace GameplayeLogic.Managers
 
         private IEnumerable<Shaman> CreateParty(IEnumerable<ShamanSerializeData> party)
         {
-            foreach (var entityConfig in party)
+            foreach (var shamanSerializeData in party)
             {
                 var shaman = Object.Instantiate(_shamanPrefab,GetSpawnPoint(),Quaternion.identity,_partyParent);
-                shaman.Init(entityConfig);
+                
+                var shamanVisual =
+                    (ShamanConfig)DataManager.DataRequester.ConfigManager.GetConfig(shamanSerializeData.SerializeTypeId,
+                        shamanSerializeData.ShamanId);//temp!!!
+                
+                shaman.Init(shamanSerializeData,shamanVisual.UnitEntityVisualConfig);
                 yield return shaman;
             }
         }

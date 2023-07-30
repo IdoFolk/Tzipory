@@ -1,13 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using GameplayeLogic.Managers;
 using GamePlayLogic.Managers;
-using SerializeData.LevalSerializeData.PartySerializeData;
 using Sirenix.OdinInspector;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.Leval;
+using Tzipory.SerializeData;
 using Tzipory.SerializeData.LevalSerializeData;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -23,7 +21,6 @@ public class LevelManager : MonoBehaviour
    
     public static PartyManager PartyManager { get; private set; }
     public static EnemyManager EnemyManager { get; private set; }
-    public static PlayerData PlayerData { get; private set; }
     public static WaveManager WaveManager { get; private set; }
     public static UIManager UIManager { get; private set; }
     public static CoreTemple CoreTemplete { get; private set; }
@@ -40,8 +37,7 @@ public class LevelManager : MonoBehaviour
         UIManager = new UIManager();
         _poolManager = new PoolManager();
         EnemyManager = new EnemyManager();
-        PlayerData = new PlayerData();
-        PartyManager = new PartyManager(_partySerializeData);
+        PartyManager = new PartyManager(_partySerializeData,_levelConfig.EntityParent);
         WaveManager  = new WaveManager(_levelConfig,_levelParent);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
     }
@@ -73,13 +69,11 @@ public class LevelManager : MonoBehaviour
     {
         UIManager.Dispose();
         EnemyManager.Dispose();
-        PlayerData.Dispose();
         PartyManager.Dispose();
         WaveManager.Dispose();
         
         PartyManager = null;
         EnemyManager = null;
-        PlayerData = null;
         WaveManager = null;
     }
 

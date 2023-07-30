@@ -9,7 +9,7 @@ using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
 using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.EntitySystem.TargetingSystem;
-using Tzipory.SerializeData.ShamanSerializeData;
+using Tzipory.SerializeData;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.Sound;
 using Tzipory.VisualSystem.EffectSequence;

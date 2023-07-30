@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Tzipory.Systems.SceneSystem
 {
-    public class SceneHandler : MonoBehaviour
+    public class SceneHandler : MonoBehaviour , ISceneHandler
     {
         public static event Action<SceneType> OnSceneLoaded;
         
@@ -105,6 +105,11 @@ namespace Tzipory.Systems.SceneSystem
             if (_loadingScreenHandler == null)
                 _loadingScreenHandler = GetComponent<LoadingScreenHandler>();
         }
+    }
+
+    public interface ISceneHandler
+    {
+        public void LoadScene(SceneType sceneType);
     }
 
     public enum SceneType

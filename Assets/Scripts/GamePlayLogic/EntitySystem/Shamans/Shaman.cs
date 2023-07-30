@@ -5,7 +5,7 @@ using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.Helpers;
 using Sirenix.OdinInspector;
-using Tzipory.SerializeData.ShamanSerializeData;
+using Tzipory.SerializeData;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 

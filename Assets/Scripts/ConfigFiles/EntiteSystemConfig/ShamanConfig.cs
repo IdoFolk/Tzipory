@@ -9,6 +9,6 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
         [SerializeField] private int _shamanId;
         
         public override int ConfigObjectId => _shamanId;
-        public override int ConfigTypeId => Constant.DataId.ShamanDataID;
+        public override int ConfigTypeId => Constant.DataId.SHAMAN_DATA_ID;
     }
 }

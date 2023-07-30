@@ -17,6 +17,8 @@ namespace Tzipory.SerializeData.LevalSerializeData
 
         public Level Level => _level;
 
+        public Transform EntityParent => _level.EntityParent;
+
         public List<WaveConfig> Waves => _waves;
 
         public float LevelStartDelay => _levelStartDelay;

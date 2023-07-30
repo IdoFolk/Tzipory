@@ -4,7 +4,7 @@ using Tzipory.ConfigFiles;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.ShamanSerializeData
+namespace Tzipory.SerializeData
 {
     [System.Serializable]
     public class ShamanSerializeData : UnitEntitySerializeData , IUpdateData<Shaman>
@@ -19,18 +19,21 @@ namespace Tzipory.SerializeData.ShamanSerializeData
         public int ShamanId => _shamanId;
         public int ShamanLevel => _shamanLevel;
         public int ShamanExp => _shamanExp;
-
-        public bool IsInitialization { get; }
         
         public override void Init(IConfigFile parameter)
         {
             base.Init(parameter);
             var config = (ShamanConfig)parameter;
+            
+            _shamanId = config.ConfigObjectId;
+            
+            //need to add more shaman config logic
         }
 
         public void UpdateData(Shaman data)
         {
-            throw new System.NotImplementedException();
+            base.UpdateData(data);
+            //need to add dataUpdate for shaman
         }
     }
 }

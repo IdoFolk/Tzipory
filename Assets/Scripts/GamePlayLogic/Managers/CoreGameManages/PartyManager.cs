@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SerializeData.LevalSerializeData.PartySerializeData;
 using Shamans;
-using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.SerializeData;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -16,24 +15,25 @@ namespace GameplayeLogic.Managers
         private readonly Transform _partyParent;
         private readonly Dictionary<Vector3, bool> _partySpawnPoints;
         private readonly PartySerializeData _partySerializeData;
+        private const string SHAMAN_PREFAB_PATH = "Assets/Resources/Prefabs/Entities/Shaman/BaseShamanEntity";
+
         public IEnumerable<Shaman> Party { get; private set; }
         
-        public PartyManager(PartySerializeData partySerializeData)
+        public PartyManager(PartySerializeData partySerializeData,Transform  partyParent)
         {
             _partySerializeData  = partySerializeData;
-            
             _partySpawnPoints = new Dictionary<Vector3,bool>();
-            _shamanPrefab = _partySerializeData.ShamanPrefab;
-            _partyParent = _partySerializeData.PartyParent;
+            _shamanPrefab = Resources.Load<Shaman>(SHAMAN_PREFAB_PATH);
+            _partyParent = partyParent;
         }
 
         public void SpawnShaman()=>
-            Party = CreateParty(_partySerializeData.EntityConfigs);
+            Party = CreateParty(_partySerializeData.ShamanSerializeDatas);
 
         public void AddSpawnPoint(Vector3 spawnPoint)=>
             _partySpawnPoints.Add(spawnPoint, false);
 
-        private IEnumerable<Shaman> CreateParty(IEnumerable<ShamanConfig> party)
+        private IEnumerable<Shaman> CreateParty(IEnumerable<ShamanSerializeData> party)
         {
             foreach (var entityConfig in party)
             {

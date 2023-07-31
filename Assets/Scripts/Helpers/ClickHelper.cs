@@ -22,7 +22,7 @@ namespace Tzipory.Helpers
         public void OnPointerClick(PointerEventData eventData)
         {
             if(eventData.button == PointerEventData.InputButton.Left)
-            OnClick?.Invoke();
+                OnClick?.Invoke();
         }
 
         public void OnPointerEnter(PointerEventData eventData)

@@ -9,7 +9,7 @@ namespace Tzipory.Progression
     [System.Serializable]
     public class WorldMapProgression
     {
-        public List<WorldMapNode> UnlockedNodes => new List<WorldMapNode>(unlockedNodes);
+        public IReadOnlyList<WorldMapNode> UnlockedNodes => unlockedNodes;
         private List<WorldMapNode> unlockedNodes;
         
         public void AddNodeStatus(WorldMapNodeSerializeData newBaseNodeSerializeData)

@@ -6,6 +6,6 @@ namespace SerializeData.Progression
     [System.Serializable]
     public class WorldMapProgressionSerializeData
     {
-         List<WorldMapNode> unlockedNodes;
+         List<WorldMapProgressionSerializeData> unlockedNodes;
     }
 }

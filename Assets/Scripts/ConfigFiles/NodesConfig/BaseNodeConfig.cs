@@ -12,6 +12,7 @@ namespace Tzipory.Nodes.Config
 
         public string NodeName => nodeName;
         
+        [Header("Base Node")]
         [SerializeField] protected string nodeName;
         [SerializeField] protected int nodeID;
         [SerializeField] protected List<BaseNodeConfig> leadToNodes;

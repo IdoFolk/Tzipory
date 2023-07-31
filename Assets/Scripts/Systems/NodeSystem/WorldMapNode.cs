@@ -4,6 +4,7 @@ namespace Systems.NodeSystem
 {
     public class WorldMapNode : BaseNode
     {
+        //ask yonatan this too
         public WorldMapNodeSerializeData WorldMapNodeSerializeData
         {
             get { return worldMapNodeSerializeData; }

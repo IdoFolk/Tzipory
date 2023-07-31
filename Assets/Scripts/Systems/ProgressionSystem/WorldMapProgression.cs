@@ -1,16 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using SerializeData.Nodes;
+using SerializeData.Progression;
 using Systems.NodeSystem;
+using Tzipory.Tools.Interface;
 using UnityEngine;
 
 namespace Tzipory.Progression
 {
-    [System.Serializable]
-    public class WorldMapProgression
+    public class WorldMapProgression : IInitialization<WorldMapProgressionSerializeData>
     {
         public IReadOnlyList<WorldMapNode> UnlockedNodes => unlockedNodes;
         private List<WorldMapNode> unlockedNodes;
+
+        public bool IsInitialization { get; }
+        
+        public void Init(WorldMapProgressionSerializeData parameter)
+        {
+            unlockedNodes = parameter.GetUnlockedWorldMapNodes();
+        }
         
         public void AddNodeStatus(WorldMapNodeSerializeData newBaseNodeSerializeData)
         {

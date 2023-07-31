@@ -37,6 +37,11 @@ namespace Tzipory.EntitySystem.Entitys
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetHit;
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetCritHit;
 
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpTexter _popUpTexter;
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _defaultPopUpText_Config;
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _critPopUpText_Config;
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _healPopUpText_Config;
+
         #endregion
 
         #region Temps
@@ -231,6 +236,7 @@ namespace Tzipory.EntitySystem.Entitys
         public void Heal(float amount)
         {
             HP.AddToValue(amount);
+            _popUpTexter.SpawnPopUp($"+{amount}", _healPopUpText_Config);
             //OnHealthChanged?.Invoke();
             // if (HP.CurrentValue > HP.BaseValue)
             //     HP.ResetValue();
@@ -245,7 +251,15 @@ namespace Tzipory.EntitySystem.Entitys
                     : Constant.EffectSequenceIds.OnGetHit);
                 
                 HP.ReduceFromValue(damage);
-                IsDamageable = false;
+                IsDamageable = false; // Is this what turns on InvincibleTime?
+                if (isCrit)
+                {
+                    _popUpTexter.SpawnPopUp($"-{damage}", _defaultPopUpText_Config);
+                }
+                else
+                {
+                    _popUpTexter.SpawnPopUp($"-{damage}!", _critPopUpText_Config);
+                }
             }
         }
 

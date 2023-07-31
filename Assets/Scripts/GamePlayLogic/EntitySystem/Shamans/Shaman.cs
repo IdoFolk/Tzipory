@@ -86,6 +86,11 @@ namespace Shamans
             _shotVisual.Shot(Targeting.CurrentTarget,AttackDamage.CurrentValue,false);
         }
 
+        //public override void TakeDamage(float damage, bool isCrit)
+        //{
+        //    base.TakeDamage(damage, isCrit);
+
+        //}
         public override void OnEntityDead()
         {
             Debug.Log($"{gameObject.name} as Died!");

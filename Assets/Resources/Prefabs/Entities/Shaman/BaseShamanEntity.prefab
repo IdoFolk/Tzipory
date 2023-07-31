@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4260648962361223910
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4036969249178469319}
+  m_Layer: 0
+  m_Name: PopUpTexter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4036969249178469319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4260648962361223910}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 349210660837484951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4080524451218561172
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -83,6 +114,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4357314417853133059, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5144156884191978286}
+    - targetCorrespondingSourceObject: {fileID: 4357314417853133059, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4036969249178469319}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1420442367539004591, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       insertIndex: -1
@@ -230,6 +264,49 @@ MonoBehaviour:
     _isStackable: 0
     _isInterruptable: 0
     _effectActionContainers: []
+  _popUpTexter:
+    _textBoxPrefab: {fileID: 6879172769592693696, guid: 0a0724f7566067d478ba48523e410bbf, type: 3}
+    _textSpawnPoint: {fileID: 4036969249178469319}
+    _textGrad:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_ColorSpace: -1
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+  _defaultPopUpText_Config:
+    color: {r: 0.9528302, g: 0.9528302, b: 0.9528302, a: 1}
+    size: 5
+    riseSpeed: 0.05
+    TTL: 3
+  _critPopUpText_Config:
+    color: {r: 0.9622642, g: 0.42772233, b: 0.09531862, a: 1}
+    size: 10
+    riseSpeed: 0.05
+    TTL: 3
   _doShowHPBar: 0
   _hpBarConnector: {fileID: 953535957855614546}
   _proximityHandler:
@@ -412,6 +489,7 @@ MonoBehaviour:
   _doLookAtTemple: 0
   _spriteRenderer: {fileID: 2200670044425848587}
   _tgt: {fileID: 0}
+  _zDistanceModifier: 0
   _baseUnitEntity: {fileID: 7330099708541644612}
 --- !u!114 &3215233828703679931 stripped
 MonoBehaviour:

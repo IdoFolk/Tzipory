@@ -50,9 +50,11 @@ MonoBehaviour:
     _baseValue: 1.5
   _stats: []
   _abilityConfigs: []
-  _sprite: {fileID: 21300000, guid: e8c46cb19ba485349b2b77615cca385d, type: 3}
-  _icon: {fileID: 0}
+  _unitEntityVisualConfig:
+    _sprite: {fileID: 21300000, guid: e8c46cb19ba485349b2b77615cca385d, type: 3}
+    _icon: {fileID: 0}
   _targetingPriority: 2
+  _enemyId: 0
   _decisionInterval: 0
   _aggroLevel: 0
   _returnLevel: 0

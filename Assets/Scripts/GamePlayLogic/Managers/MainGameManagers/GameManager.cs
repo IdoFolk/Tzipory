@@ -1,4 +1,3 @@
-using System;
 using GameplayeLogic.Managersp;
 using GamePlayLogic.Managers;
 using Systems.DataManagerSystem;
@@ -14,7 +13,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneHandler _sceneHandler;
     
     private static PlayerManager _playerManager;
-    //MapData
     //GameData
 
     public static PlayerManager PlayerManager => _playerManager;
@@ -27,23 +25,17 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        _sceneHandler.LoadScene(SceneType.MainMenu);
+        SceneHandler.LoadScene(SceneType.MainMenu);
         
         var playerSerializeData = DataManager.DataRequester.GetData<PlayerSerializeData>(_playerConfig); 
         _playerManager = new PlayerManager(playerSerializeData);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     #region Test
     [ContextMenu("LoadMap")]
     public void LoadScene()
     {
-        _sceneHandler.LoadScene(SceneType.Map);
+        SceneHandler.LoadScene(SceneType.Map);
     }
 
     #endregion

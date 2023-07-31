@@ -32,8 +32,9 @@ namespace Systems.DataManagerSystem
             {
                 //return save data
             }
-            
-            output.Init(configFile);
+
+            if (!output.IsInitialization)
+                output.Init(configFile);
             
             return output;
         }
@@ -47,9 +48,10 @@ namespace Systems.DataManagerSystem
                 //return save data
             }
             
-            var config = _configManager.GetConfig(output.SerializeTypeId,objectId);
+            var configFile = _configManager.GetConfig(output.SerializeTypeId,objectId);
             
-            output.Init(config);
+            if (!output.IsInitialization)
+                output.Init(configFile);
             
             return output;
         }

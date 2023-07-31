@@ -1,5 +1,6 @@
 ﻿using System;
 using Helpers.Consts;
+using SerializeData.Progression;
 using Systems.DataManagerSystem;
 using Tzipory.ConfigFiles;
 using Tzipory.SerializeData;
@@ -13,10 +14,12 @@ namespace GameplayeLogic.Managersp
         //eficId
 
         private PartySerializeData _partySerializeData;
-        //camp serializeData 
-        //map serializeData  
+        private CampSerializeData _campSerializeData;
+        private WorldMapProgressionSerializeData _mapProgressionSerializeData;
 
         public PartySerializeData PartySerializeData => _partySerializeData;
+        public CampSerializeData CampSerializeData => _campSerializeData;
+        public WorldMapProgressionSerializeData WorldMapProgressionSerializeData => _mapProgressionSerializeData;
 
         public bool IsInitialization { get; private set; }
         public int SerializeTypeId => Constant.DataId.PLAYER_DATA_ID;

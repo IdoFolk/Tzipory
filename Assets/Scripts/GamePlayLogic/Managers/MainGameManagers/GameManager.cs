@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneHandler _sceneHandler;
     
     private static PlayerManager _playerManager;
-    //MapData
     //GameData
 
     public static PlayerManager PlayerManager => _playerManager;

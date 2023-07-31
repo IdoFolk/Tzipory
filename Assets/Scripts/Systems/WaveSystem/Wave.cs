@@ -14,7 +14,7 @@ namespace Tzipory.WaveSystem
         public bool IsStarted { get; private set; }
         
         public override float CompletionPercentage => throw new NotImplementedException();
-        public override bool IsDone => _waveSpawners.All(waveSpawner => waveSpawner.IsDone);
+        public override bool IsDone => _waveSpawners.All(waveSpawner => waveSpawner.IsDone) && IsStarted;
 
         public int NumberOfEnemiesInWave
         {

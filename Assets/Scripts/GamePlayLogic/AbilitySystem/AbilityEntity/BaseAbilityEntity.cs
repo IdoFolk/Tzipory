@@ -6,7 +6,7 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
 {
     public abstract class BaseAbilityEntity : BaseGameEntity
     {
-        [SerializeField] protected CircleCollider2D _collider2D;
+        [SerializeField] protected Collider2D _collider2D;
         [SerializeField] protected Transform visualTransform;
         
         protected IAbilityExecutor _abilityExecutor;

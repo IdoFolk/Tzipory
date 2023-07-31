@@ -9,14 +9,14 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
     {
         public AbilityExecuteType AbilityExecuteType { get; }
         public IEntityTargetAbleComponent Caster { get; }
-        public List<StatusEffectConfig> StatusEffects { get; }
+        public List<StatusEffectConfig> OnEnterStatusEffects { get; }
 
         public SingleAbilityExecuter(IEntityTargetAbleComponent caster,AbilityConfig abilityConfig)
         {
             Caster = caster;
-            StatusEffects = new List<StatusEffectConfig>();
+            OnEnterStatusEffects = new List<StatusEffectConfig>();
 
-           StatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
+           OnEnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
         }
         
         public void Init(IEntityTargetAbleComponent target)
@@ -26,7 +26,7 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
 
         public void Execute(IEntityTargetAbleComponent target)
         {
-            foreach (var statusEffect in StatusEffects)
+            foreach (var statusEffect in OnEnterStatusEffects)
                 target.StatusHandler.AddStatusEffect(statusEffect);
         }
     }

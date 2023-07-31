@@ -24,8 +24,8 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 
     public bool IsDamageable => true; //temp
 
-    public Stat HP => _hpStat;
-    public bool IsEntityDead => HP.CurrentValue <= 0;
+    public Stat Health => _hpStat;
+    public bool IsEntityDead => Health.CurrentValue <= 0;
 
     public StatusHandler StatusHandler => throw new System.NotImplementedException();
 

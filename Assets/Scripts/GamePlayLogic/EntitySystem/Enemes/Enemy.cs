@@ -38,7 +38,7 @@ namespace Enemes
             EntityTeamType = EntityTeamType.Enemy;
             timer = 0;
             _isAttacking  = false;
-            BasicMoveComponent.Init(MoveSpeed);//temp!
+            BasicMoveComponent.Init(MovementSpeed);//temp!
             
             var enemyConfig = (EnemyConfig)parameter;
             

@@ -6,7 +6,7 @@ namespace Tzipory.EntitySystem.EntityComponents
     {
         public Stat InvincibleTime { get; }
         public bool IsDamageable { get; }
-        public Stat HP { get; }
+        public Stat Health { get; }
         public bool IsEntityDead { get; }
         
         public void Heal(float amount);

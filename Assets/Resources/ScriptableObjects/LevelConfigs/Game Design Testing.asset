@@ -31,7 +31,7 @@ MonoBehaviour:
       _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
       _enemyGroups:
-      - _enemyConfig: {fileID: 11400000, guid: f0c216285b82c004eb14f9fafdba1df5, type: 2}
+      - _enemyConfig: {fileID: 11400000, guid: e81e5d6c33b1ca845a4caf36f8b3a399, type: 2}
         _groupStartDelay: 0
         _totalSpawnAmount: 1
         _spawnAmountPreInterval: 1

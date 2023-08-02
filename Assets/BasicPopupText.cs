@@ -22,15 +22,33 @@ public class BasicPopupText : MonoBehaviour
     }
 
 
-     public void Set(string text, PopUpText_Config popUpText_Config)
+    // public void Set(string text, PopUpText_Config popUpText_Config)
+    //{
+    //    _text.text = text;
+    //    _text.color = popUpText_Config.color;
+    //    _text.fontSize = popUpText_Config.size;
+    //    _riseSpeed = popUpText_Config.riseSpeed;
+
+    //    //Calling the kill
+    //    Invoke("Unset", popUpText_Config.TTL);
+    //}
+    public void Set(PopUpText_Config popUpText_Config)
     {
-        _text.text = text;
+        _text.text = popUpText_Config.text;
         _text.color = popUpText_Config.color;
         _text.fontSize = popUpText_Config.size;
         _riseSpeed = popUpText_Config.riseSpeed;
-
+        _ttl = popUpText_Config.TTL;
         //Calling the kill
-        Invoke("Unset", popUpText_Config.TTL);
+        //Invoke("Unset", popUpText_Config.TTL);
+
+        StartCoroutine(nameof(KillMe));
+    }
+
+    IEnumerator KillMe() //THIS SHOULD GO BACK IN THE POOL INSTEAD!
+    {
+        yield return new WaitForSeconds(_ttl);
+        Destroy(gameObject);
     }
 
     public void UnSet()

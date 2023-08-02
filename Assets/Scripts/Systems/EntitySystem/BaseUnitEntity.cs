@@ -236,7 +236,9 @@ namespace Tzipory.EntitySystem.Entitys
         public void Heal(float amount)
         {
             HP.AddToValue(amount);
-            _popUpTexter.SpawnPopUp($"+{amount}", _healPopUpText_Config);
+            _healPopUpText_Config.text = $"+{amount}";
+            _popUpTexter.SpawnPopUp(_healPopUpText_Config);
+            //_popUpTexter.SpawnPopUp($"+{amount}", _healPopUpText_Config);
             //OnHealthChanged?.Invoke();
             // if (HP.CurrentValue > HP.BaseValue)
             //     HP.ResetValue();
@@ -254,11 +256,13 @@ namespace Tzipory.EntitySystem.Entitys
                 IsDamageable = false; // Is this what turns on InvincibleTime?
                 if (isCrit)
                 {
-                    _popUpTexter.SpawnPopUp($"-{damage}", _defaultPopUpText_Config);
+                    _critPopUpText_Config.text = $"-{damage}!";
+                    _popUpTexter.SpawnPopUp(_critPopUpText_Config);
                 }
                 else
                 {
-                    _popUpTexter.SpawnPopUp($"-{damage}!", _critPopUpText_Config);
+                    _defaultPopUpText_Config.text = $"-{damage}";
+                    _popUpTexter.SpawnPopUp(_defaultPopUpText_Config);
                 }
             }
         }
@@ -330,6 +334,8 @@ namespace Tzipory.EntitySystem.Entitys
         public SoundHandler SoundHandler => _soundHandler;
         public Transform ParticleEffectPosition => _particleEffectPosition;
         public Transform VisualQueueEffectPosition => _visualQueueEffectPosition;
+
+        public PopUpTexter PopUpTexter => _popUpTexter;
 
         private void AddStatusEffectVisual(BaseStatusEffect baseStatusEffect) =>
             EffectSequenceHandler.PlaySequenceByData(baseStatusEffect.EffectSequence);//temp

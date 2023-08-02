@@ -11,11 +11,18 @@ public class PopUpTexter
     [SerializeField] Gradient _textGrad;
     
 
-    public void SpawnPopUp(string text, PopUpText_Config config)
+    //public void SpawnPopUp(string text, PopUpText_Config config)
+    //{
+    //    //Position is going to assume as the texter's position for now
+    //    BasicPopupText popupText = GameObject.Instantiate(_textBoxPrefab, _textSpawnPoint.position, Quaternion.identity).GetComponent<BasicPopupText>();
+    //    popupText.Set(text, config);
+    //}
+     public void SpawnPopUp(PopUpText_Config config)
     {
         //Position is going to assume as the texter's position for now
         BasicPopupText popupText = GameObject.Instantiate(_textBoxPrefab, _textSpawnPoint.position, Quaternion.identity).GetComponent<BasicPopupText>();
-        popupText.Set(text, config);
+        //popupText.Set(config.text, config);
+        popupText.Set(config);
     }
 
 }
@@ -23,6 +30,7 @@ public class PopUpTexter
 [System.Serializable]
 public struct PopUpText_Config
 {
+    public string text;
     public Color color;
     public float size;
     public float riseSpeed;

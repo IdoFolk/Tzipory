@@ -334,7 +334,6 @@ namespace Tzipory.EntitySystem.Entitys
         public SoundHandler SoundHandler => _soundHandler;
         public Transform ParticleEffectPosition => _particleEffectPosition;
         public Transform VisualQueueEffectPosition => _visualQueueEffectPosition;
-
         public PopUpTexter PopUpTexter => _popUpTexter;
 
         private void AddStatusEffectVisual(BaseStatusEffect baseStatusEffect) =>

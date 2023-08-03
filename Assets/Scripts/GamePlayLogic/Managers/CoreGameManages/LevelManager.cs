@@ -39,7 +39,8 @@ public class LevelManager : MonoBehaviour
         _poolManager = new PoolManager();
         EnemyManager = new EnemyManager();
         PartyManager = new PartyManager(_levelConfig.EntityParent);
-        WaveManager  = new WaveManager(_levelConfig,_levelParent);//temp!
+        Instantiate(_levelConfig.Level, _levelParent);
+        WaveManager  = new WaveManager(_levelConfig);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
     }
 

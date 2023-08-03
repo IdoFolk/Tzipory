@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Tzipory.Progression;
 using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.Tools.Enums;
 using UnityEngine;
@@ -30,6 +29,10 @@ namespace Tzipory.Nodes.Config
 public class BattleMapNodeStateConfig
 {
     public BattleMapNodeState nodeState;
-    [SerializeField] protected LevelConfig level;
+    [SerializeField] protected LevelConfig _levelToOpen;
     [SerializeField] private Sprite overrideSprite;
+
+    public LevelConfig LevelToOpen => _levelToOpen;
+
+    public Sprite OverrideSprite => overrideSprite;
 }

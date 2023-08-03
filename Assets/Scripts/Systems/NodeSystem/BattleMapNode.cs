@@ -4,17 +4,13 @@ namespace Systems.NodeSystem
 {
     public class BattleMapNode : WorldMapNode
     {
-        public BattleMapNodeSerializeData BattleMapNodeSerializeData => battleMapNodeSerializeData;
-        
-        private BattleMapNodeSerializeData battleMapNodeSerializeData;
-        
+        public BattleMapNodeSerializeData BattleMapNodeSerializeData { get; private set; }
+
         public override void FillInfo(BaseNodeSerializeData newBaseNodeSerializeData)
         {
             base.FillInfo(newBaseNodeSerializeData);
              var serializeData = GetConfig<BattleMapNodeSerializeData>(newBaseNodeSerializeData);
-             serializeData.nodeState = serializeData.nodeState;
-             serializeData.lastBattleMoveIndex = serializeData.lastBattleMoveIndex;
-            
+             BattleMapNodeSerializeData = serializeData;
         }
     }
 }

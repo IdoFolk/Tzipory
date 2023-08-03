@@ -1,22 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Serialization;
+using Helpers.Consts;
+using Tzipory.ConfigFiles;
+using Tzipory.Nodes.Config;
+using Tzipory.SerializeData;
 
 namespace SerializeData.Nodes
 {
     [System.Serializable]
-    public abstract class BaseNodeSerializeData
+    public abstract class BaseNodeSerializeData : ISerializeData
     {
-        public string NodeID
+        private bool _visitedByPlayer;
+        public int NodeId { get; protected set; }
+        public bool IsInitialization { get; protected set; }
+        public int SerializeTypeId => Constant.DataId.NODE_DATA_ID;
+
+        public virtual void Init(IConfigFile parameter)
         {
-            get { return nodeID; }
-            set => nodeID = value;
+            var config = (BaseNodeConfig)parameter;
+            
+            NodeId = config.ConfigObjectId;
         }
-        
-        public string nodeID;
-        private bool visitedByPlayer;
-
-
     }
 }

@@ -5,7 +5,6 @@ using Sirenix.OdinInspector;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.Leval;
-using Tzipory.SerializeData;
 using Tzipory.SerializeData.LevalSerializeData;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,13 +24,17 @@ public class LevelManager : MonoBehaviour
     
     public bool IsGameRunning { get; private set; }
     
-    [SerializeField, TabGroup("Level manager")]
+    [SerializeField, TabGroup("LevelToOpen manager")]
     private Transform _levelParent;
-    [SerializeField, TabGroup("Level manager")]
+    [Header("Testing")]
+    [SerializeField, TabGroup("LevelToOpen manager")]
     private LevelConfig _levelConfig;
     
     private void Awake()
     {
+        if (GameManager.GameData != null)//for Testing(Start form level scene)
+            _levelConfig = GameManager.GameData.LevelConfig;
+
         UIManager = new UIManager();
         _poolManager = new PoolManager();
         EnemyManager = new EnemyManager();

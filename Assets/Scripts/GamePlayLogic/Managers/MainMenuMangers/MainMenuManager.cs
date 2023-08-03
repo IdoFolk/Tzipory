@@ -7,7 +7,7 @@ namespace Tzipory.SerializeData.LevalSerializeData.Managers.MainMenuMangers
     {
         public void Play()
         {
-            GameManager.SceneHandler.LoadScene(SceneType.Game);
+            GameManager.SceneHandler.LoadScene(SceneType.Map);
         }
     }
 }

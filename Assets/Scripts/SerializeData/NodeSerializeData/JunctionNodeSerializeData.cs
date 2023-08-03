@@ -1,11 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+
+using Tzipory.ConfigFiles;
 
 namespace SerializeData.Nodes
 {
-    public class JunctionNodeSerializeData : BaseNodeSerializeData
+    public class JunctionNodeSerializeData : WorldMapNodeSerializeData
     {
-
+        public override void Init(IConfigFile parameter)
+        {
+            base.Init(parameter);
+            WorldMapNodeType = WorldMapNodeType.JunctionNode;
+        }
     }
 }

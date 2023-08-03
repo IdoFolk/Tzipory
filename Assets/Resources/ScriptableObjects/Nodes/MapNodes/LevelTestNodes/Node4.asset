@@ -10,13 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b806ea3731144ce8be6d3b5a64ac263e, type: 3}
-  m_Name: BattleMapNode Test
+  m_Name: Node4
   m_EditorClassIdentifier: 
   nodeName: 
   nodeID: 0
   leadToNodes: []
   unlockNodes: []
   leadAndUnlockNodesSame: 1
-  level: {fileID: 0}
   startingNodeState: 0
-  overrideSprite: {fileID: 0}
+  battleMapNodeStateConfigs:
+  - nodeState: 0
+    _levelToOpen: {fileID: 11400000, guid: f57e878089a79e9498b44e2406967206, type: 2}
+    overrideSprite: {fileID: 7482667652216324306, guid: d651bd555e52fa14c831b4894c1c0a26, type: 3}
+  - nodeState: 0
+    _levelToOpen: {fileID: 0}
+    overrideSprite: {fileID: -2413806693520163455, guid: bf5fa35dfe5519c488c5cf271beb8f13, type: 3}

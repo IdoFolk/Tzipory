@@ -14,11 +14,11 @@ namespace Shamans
     public class Shaman : BaseUnitEntity
     {
         [SerializeField, TabGroup("Proximity Indicator")] private ProximityIndicatorHandler _proximityHandler;
+        [SerializeField,TabGroup("Component")] private ClickHelper _clickHelper;
 
         [Space]
         [Header("Temps")]
         [SerializeField] private Temp_ShamanShotVisual _shotVisual;
-        [SerializeField] private ClickHelper _clickHelper;
         [SerializeField] private Temp_HeroMovement _tempHeroMovement;
         
         private ShamanSerializeData  _serializeData;
@@ -56,7 +56,7 @@ namespace Shamans
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            _serializeData.UpdateData(this);
+            _serializeData.UpdateData(this);//need to make endGame logic
             _clickHelper.OnClick -= _tempHeroMovement.SelectHero;
         }
 

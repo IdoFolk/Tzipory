@@ -25,12 +25,11 @@ namespace Tzipory.EntitySystem.Entitys
 #if UNITY_EDITOR
         [SerializeField, ReadOnly,TabGroup("Stats")] private List<Stat> _stats;
 #endif
-        [SerializeField,TabGroup("Component")] private CircleCollider2D _bodyCollider;
+        [SerializeField,TabGroup("Component")] private Transform _particleEffectPosition;
+        [SerializeField,TabGroup("Component")] private SoundHandler _soundHandler;
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private SpriteRenderer _spriteRenderer;
         [SerializeField,TabGroup("Component")] private Transform _visualQueueEffectPosition;
-        [SerializeField,TabGroup("Component")] private Transform _particleEffectPosition;
-        [SerializeField,TabGroup("Component")] private SoundHandler _soundHandler;
 
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onDeath;
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onAttack;

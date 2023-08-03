@@ -1,22 +1,24 @@
 ﻿using System;
 using Helpers.Consts;
+using SerializeData.Progression;
 using Systems.DataManagerSystem;
 using Tzipory.ConfigFiles;
 using Tzipory.SerializeData;
+using UnityEngine;
 
 namespace GameplayeLogic.Managersp
 {
+    [Serializable]
     public class PlayerSerializeData : ISerializeData, IDisposable
     {
         //staemID
         
         //eficId
 
-        private PartySerializeData _partySerializeData;
+        [SerializeField] private int _currentWord;
+        public WorldMapProgressionSerializeData WorldMapProgression { get; private set; }
+        public PartySerializeData PartySerializeData { get; private set; }
         //camp serializeData 
-        //map serializeData  
-
-        public PartySerializeData PartySerializeData => _partySerializeData;
 
         public bool IsInitialization { get; private set; }
         public int SerializeTypeId => Constant.DataId.PLAYER_DATA_ID;
@@ -24,7 +26,8 @@ namespace GameplayeLogic.Managersp
         public void Init(IConfigFile parameter)
         {
             var config = (PlayerConfig)parameter;
-            _partySerializeData = DataManager.DataRequester.GetData<PartySerializeData>(config.PartyConfig);
+            PartySerializeData = DataManager.DataRequester.GetData<PartySerializeData>(config.PartyConfig);
+            WorldMapProgression = DataManager.DataRequester.GetData<WorldMapProgressionSerializeData>(_currentWord);
             
             IsInitialization = true;
         }

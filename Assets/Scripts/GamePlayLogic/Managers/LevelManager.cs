@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using GameplayeLogic.Managers;
 using GamePlayLogic.Managers;
 using SerializeData.LevalSerializeData.PartySerializeData;
@@ -37,12 +35,13 @@ public class LevelManager : MonoBehaviour
     
     private void Awake()
     {
+        PartyManager = new PartyManager(_partySerializeData);
+        Instantiate(_levelConfig.Level,_levelParent);
         UIManager = new UIManager();
         _poolManager = new PoolManager();
         EnemyManager = new EnemyManager();
         PlayerData = new PlayerData();
-        PartyManager = new PartyManager(_partySerializeData);
-        WaveManager  = new WaveManager(_levelConfig,_levelParent);//temp!
+        WaveManager  = new WaveManager(_levelConfig);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
     }
 

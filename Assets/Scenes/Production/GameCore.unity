@@ -326,6 +326,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 621309741}
   m_CullTransparentMesh: 1
+--- !u!1 &633388370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 633388371}
+  - component: {fileID: 633388374}
+  - component: {fileID: 633388372}
+  - component: {fileID: 633388373}
+  m_Layer: 0
+  m_Name: NavMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &633388371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633388370}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1182395357}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &633388372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633388370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e04976799df50f54ba128eff723155a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 1
+  m_TileSize: 1024
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.06666667
+  m_BuildHeightMesh: 0
+  m_HideEditorLogs: 0
+  m_NavMeshData: {fileID: 23800000, guid: b61fde97bf4acda40b687235f2d6dcfd, type: 2}
+--- !u!114 &633388373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633388370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bd44a44cd62c64fbfc1eea95b24880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideByGrid: 0
+  m_UseMeshPrefab: {fileID: 0}
+  m_CompressBounds: 0
+  m_OverrideVector: {x: 1, y: 1, z: 1}
+--- !u!114 &633388374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 633388370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 605bf9f55bae5284e961c2947cada068, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _navMeshSurface: {fileID: 633388372}
 --- !u!4 &683912511 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1413134937648979510, guid: a9f563e6963a30b44b74eed244d82043, type: 3}
@@ -1607,6 +1700,7 @@ Transform:
   - {fileID: 73375197}
   - {fileID: 1243779357}
   - {fileID: 1521469693}
+  - {fileID: 633388371}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1204548120
@@ -2892,7 +2986,7 @@ PrefabInstance:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelConfig
       value: 
-      objectReference: {fileID: 11400000, guid: bb6c0f5a51c5ea54986f520370226ee9, type: 2}
+      objectReference: {fileID: 11400000, guid: 19ab654e3cb8f3c4a94313085d6e084b, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelParent
       value: 
@@ -2923,12 +3017,12 @@ PrefabInstance:
       objectReference: {fileID: 7330099708541644612, guid: 653c4468a24830841aa7c6d5cc9ef9b1, type: 3}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
+      objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.data[1]
       value: 

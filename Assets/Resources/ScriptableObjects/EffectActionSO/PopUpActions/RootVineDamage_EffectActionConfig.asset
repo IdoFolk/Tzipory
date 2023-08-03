@@ -17,4 +17,4 @@ MonoBehaviour:
     color: {r: 0.36666673, g: 1, b: 0.69473314, a: 1}
     size: 4
     riseSpeed: 0.05
-    TTL: 1.5
+    TTL: 1

@@ -17,6 +17,8 @@ public class PopUpTexter
     
      public void SpawnPopUp(PopUpText_Config config)
     {
+        //Resize Text //may need to be moved somewhere else TBD
+
         //Position is going to assume as the texter's position for now
         Vector3 value = _textSpawnPoint.localPosition;
         switch (_repeatPattern)

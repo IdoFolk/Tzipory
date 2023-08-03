@@ -10,15 +10,25 @@ public class BasicPopupText : MonoBehaviour
     /// <summary>
     /// At fixed delta time
     /// </summary>
-    [SerializeField] private float _riseSpeed;
+    [SerializeField] private float _moveSpeed;
     /// <summary>
     /// Time to Live
     /// </summary>
-    [SerializeField] private float _ttl;
+    [SerializeField] private float _timeToLive;
 
+    float _timeAlive;
+    Vector3 _originalocalScale;
+    private void Awake()
+    {
+        _timeAlive = 0f;
+        _originalocalScale = transform.localScale;
+    }
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.up * _riseSpeed);
+        //transform.Translate(Vector3.up * _riseSpeed);
+        transform.Translate(Vector3.up * TEMP_VisualCruves.PopUpText_MoveCurve.Evaluate(_timeAlive / _timeToLive) * _moveSpeed);
+        transform.localScale = _originalocalScale * (TEMP_VisualCruves.PopUpText_ScaleCurve.Evaluate(_timeAlive / _timeToLive));
+        _timeAlive += Time.fixedDeltaTime;
     }
 
 
@@ -37,8 +47,8 @@ public class BasicPopupText : MonoBehaviour
         _text.text = popUpText_Config.text;
         _text.color = popUpText_Config.color;
         _text.fontSize = popUpText_Config.size;
-        _riseSpeed = popUpText_Config.riseSpeed;
-        _ttl = popUpText_Config.TTL;
+        _moveSpeed = popUpText_Config.riseSpeed;
+        _timeToLive = popUpText_Config.TTL;
         //Calling the kill
         //Invoke("Unset", popUpText_Config.TTL);
 
@@ -47,7 +57,7 @@ public class BasicPopupText : MonoBehaviour
 
     IEnumerator KillMe() //THIS SHOULD GO BACK IN THE POOL INSTEAD!
     {
-        yield return new WaitForSeconds(_ttl);
+        yield return new WaitForSeconds(_timeToLive);
         Destroy(gameObject);
     }
 

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c89cefaeaab2c545b80079ff596cc7c, type: 3}
-  m_Name: RootVineDamage_EffectActionConfig
+  m_Name: PiercingArrow_EffectActionConfig
   m_EditorClassIdentifier: 
   PopUpText_Config:
-    text: -20
-    color: {r: 0.36666673, g: 1, b: 0.69473314, a: 1}
-    size: 4
-    riseSpeed: 0.05
+    text: -100
+    color: {r: 1, g: 0.46160102, b: 0.36862743, a: 1}
+    size: 11
+    riseSpeed: 0.1
     TTL: 1.5

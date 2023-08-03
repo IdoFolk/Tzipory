@@ -37,19 +37,3 @@ MonoBehaviour:
       _startDelay: 0
       _effectActionStart: 0
       _effectActionConfig: {fileID: 11400000, guid: bbc3634bffc015d4a941fd5bf2f22e3d, type: 2}
-    - _disableUndo: 0
-      _startDelay: 1
-      _effectActionStart: 1
-      _effectActionConfig: {fileID: 11400000, guid: bbc3634bffc015d4a941fd5bf2f22e3d, type: 2}
-    - _disableUndo: 0
-      _startDelay: 2
-      _effectActionStart: 0
-      _effectActionConfig: {fileID: 11400000, guid: bbc3634bffc015d4a941fd5bf2f22e3d, type: 2}
-    - _disableUndo: 0
-      _startDelay: 3
-      _effectActionStart: 0
-      _effectActionConfig: {fileID: 11400000, guid: bbc3634bffc015d4a941fd5bf2f22e3d, type: 2}
-    - _disableUndo: 0
-      _startDelay: 4
-      _effectActionStart: 0
-      _effectActionConfig: {fileID: 11400000, guid: bbc3634bffc015d4a941fd5bf2f22e3d, type: 2}

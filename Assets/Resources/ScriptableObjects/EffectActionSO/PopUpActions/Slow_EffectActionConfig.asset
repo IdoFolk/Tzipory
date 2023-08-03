@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Slow_EffectActionConfig
   m_EditorClassIdentifier: 
   PopUpText_Config:
-    text: SLOW~
-    color: {r: 0.56354785, g: 0, b: 0.5943396, a: 1}
+    text: Slow
+    color: {r: 0.16477363, g: 0.24594839, b: 0.7735849, a: 1}
     size: 5
-    riseSpeed: 0.01
+    riseSpeed: 0.0005
     TTL: 2
+    damage: 0

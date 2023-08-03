@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: PiercingArrow_EffectActionConfig
   m_EditorClassIdentifier: 
   PopUpText_Config:
-    text: -100
+    text: 100
     color: {r: 1, g: 0.46160102, b: 0.36862743, a: 1}
-    size: 11
-    riseSpeed: 0.05
-    TTL: 2
+    size: 8.071428
+    riseSpeed: 0.1
+    TTL: 1
+    damage: 100

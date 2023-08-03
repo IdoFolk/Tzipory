@@ -12,5 +12,14 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectActionTypeSO
         public PopUpText_Config PopUpText_Config;
 
         public override EffectActionType ActionType => EffectActionType.PopUp;
+
+#if UNITY_EDITOR
+        [ContextMenu("Set Size Relative to Damage")]
+        public void CallConfigSizeFix()
+        {
+            PopUpText_Config.SetSizeRelativeToDamage();
+        }
+#endif 
     }
+
 }

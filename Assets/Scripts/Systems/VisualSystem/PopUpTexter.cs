@@ -13,7 +13,7 @@ public class PopUpTexter
 
     [SerializeField] float _lineMagnitude;
     [SerializeField] float _lineStep;
-    float _currentSinePlace = 0f;
+    float _currentPointerPlace = 0f;
     
      public void SpawnPopUp(PopUpText_Config config)
     {
@@ -24,24 +24,24 @@ public class PopUpTexter
         switch (_repeatPattern)
         {
             case TextSpawnRepeatPatterns.PingPong:
-                value.x = Mathf.Sin(_currentSinePlace) * _lineMagnitude;
-                _currentSinePlace += _lineStep;
+                value.x = Mathf.Sin(_currentPointerPlace) * _lineMagnitude;
+                _currentPointerPlace += _lineStep;
 
                 break;
             case TextSpawnRepeatPatterns.LoopRight:
-                if (_currentSinePlace >= _lineMagnitude)
-                    _currentSinePlace = _lineMagnitude * -1f;
+                if (_currentPointerPlace >= _lineMagnitude)
+                    _currentPointerPlace = _lineMagnitude * -1f;
 
-                value.x = _currentSinePlace;
-                _currentSinePlace += _lineStep;
+                value.x = _currentPointerPlace;
+                _currentPointerPlace += _lineStep;
 
                 break;
             case TextSpawnRepeatPatterns.LoopLeft:
-                if (_currentSinePlace <= _lineMagnitude *-1f)
-                    _currentSinePlace = _lineMagnitude;
+                if (_currentPointerPlace <= _lineMagnitude *-1f)
+                    _currentPointerPlace = _lineMagnitude;
 
-                value.x = _currentSinePlace;
-                _currentSinePlace -= _lineStep;
+                value.x = _currentPointerPlace;
+                _currentPointerPlace -= _lineStep;
                 break;
             default:
                 break;
@@ -62,4 +62,15 @@ public struct PopUpText_Config
     public float size;
     public float riseSpeed;
     public float TTL;
+
+
+    //THIS IS ONLY FOR EASY CALCULATION OF SIZES THAT NEED TO BE SET MANUALLY
+#if UNITY_EDITOR
+    public float damage;
+    public void SetSizeRelativeToDamage()
+    {
+        size = Helpers.Consts.Constant.VisualConstants.GetRelativeFontSizeForDamage(damage);
+    }
+#endif
+
 }

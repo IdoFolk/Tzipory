@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c89cefaeaab2c545b80079ff596cc7c, type: 3}
-  m_Name: RootVineDamage_EffectActionConfig
+  m_Name: FireDamage_EffectActionConfig 1
   m_EditorClassIdentifier: 
   PopUpText_Config:
-    text: 20
-    color: {r: 0.36666673, g: 1, b: 0.69473314, a: 1}
-    size: 1.785714
+    text: 25
+    color: {r: 0.9150943, g: 0.2099054, b: 0.082013145, a: 1}
+    size: 2.1785715
     riseSpeed: 0.05
     TTL: 1
-    damage: 20
+    damage: 25

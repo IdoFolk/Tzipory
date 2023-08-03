@@ -285,8 +285,8 @@ MonoBehaviour:
     _repeatPattern: 0
     _textBoxPrefab: {fileID: 6879172769592693696, guid: 0a0724f7566067d478ba48523e410bbf, type: 3}
     _textSpawnPoint: {fileID: 8000410366679377436}
-    _sineMagnitude: 1
-    _sineStep: 1
+    _lineMagnitude: 1
+    _lineStep: 0.2
   _defaultPopUpText_Config:
     text: 
     color: {r: 0.936, g: 0.936, b: 0.936, a: 1}

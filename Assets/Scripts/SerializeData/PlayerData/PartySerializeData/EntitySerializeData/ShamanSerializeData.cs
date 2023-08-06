@@ -1,4 +1,5 @@
-﻿using Shamans;
+﻿using System.Collections.Generic;
+using Shamans;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles;
 using Tzipory.EntitySystem.EntityConfigSystem;
@@ -9,11 +10,13 @@ namespace Tzipory.SerializeData
     [System.Serializable]
     public class ShamanSerializeData : UnitEntitySerializeData , IUpdateData<Shaman>
     {
-        [SerializeField,TabGroup("General"),ReadOnly] private int _shamanId;
+        public IReadOnlyList<ShamanItemSerializeData> ItemsSerializeData => itemsSerializeData;
+        //changed to public for testing until i figure ouot that data requester
+        [SerializeField,TabGroup("General"),ReadOnly] public int _shamanId;
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanLevel;
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanExp;
-        
-        //add Item serializeData
+
+        private List<ShamanItemSerializeData> itemsSerializeData;
         //add consumables serializeData
         
         public int ShamanId => _shamanId;
@@ -26,7 +29,8 @@ namespace Tzipory.SerializeData
             var config = (ShamanConfig)parameter;
             
             _shamanId = config.ConfigObjectId;
-            
+            //Need to be in config?
+            itemsSerializeData = new List<ShamanItemSerializeData>();
             //need to add more shaman config logic
         }
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Helpers.Consts;
 using SerializeData.Progression;
 using Systems.DataManagerSystem;
@@ -34,6 +35,12 @@ namespace GameplayeLogic.Managersp
         
         public void Dispose()
         {
+            
+        }
+
+        public void SetPartyMembers(List<ShamanSerializeData> shamanSerializeDatas)
+        {
+            _partySerializeData.SetPartyMembers(shamanSerializeDatas);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Tzipory.SerializeData;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,21 +7,25 @@ namespace Systems.CampSystem
 {
     public class ShamanPartyMemberSelectUI : MonoBehaviour
     {
-        public int AssociatedShamanID
+        public ShamanSerializeData AssociatedShamanData
         {
-            get { return _associatedShamanID; }
+            get { return _associatedShamanData; }
         }
         public Toggle toggle;
         public Image shamanImage;
 
-        public Action<int> onToggleChanged;
+        public Action<ShamanSerializeData> onToggleChanged;
+        
+        private ShamanSerializeData _associatedShamanData;
 
-        //TODO asked yonatan if he prefer shamanSerialzeData
-        private int _associatedShamanID;
-
+        public void SetShamanData(ShamanSerializeData newShamanData)
+        {
+            _associatedShamanData = newShamanData;
+        }
+        
         public void ToggleChanged(bool isActive)
         {
-            onToggleChanged?.Invoke(_associatedShamanID);
+            onToggleChanged?.Invoke(_associatedShamanData);
         }
     }
 }

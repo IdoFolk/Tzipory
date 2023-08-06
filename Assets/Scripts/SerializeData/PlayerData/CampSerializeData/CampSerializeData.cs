@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameplayeLogic.Managers;
 using Systems.CampSystem;
 using Tzipory.ConfigFiles;
@@ -12,6 +13,8 @@ namespace Tzipory.SerializeData
         public List<CampBuildingSerializeData> CampBuildingSerializeDatas => _campBuildingSerializeDatas;
 
         private List<CampBuildingSerializeData> _campBuildingSerializeDatas;
+
+        public Action onCampDataChanged;
         
         public bool IsInitialization { get; }
         public void Init(IConfigFile parameter)
@@ -44,13 +47,13 @@ namespace Tzipory.SerializeData
             return null;
         }
 
-        public CampBuildingSubFacilitySerializeData GetCampBuildingFacilityData(CampBuildingType campBuildingType,
+        public CampFacilitySerializeData GetCampBuildingFacilityData(CampBuildingType campBuildingType,
             int facilityID)
         {
             CampBuildingSerializeData campBuildingSerializeData = GetCampBuildingData(campBuildingType);
             if (campBuildingSerializeData != null)
             {
-                foreach (CampBuildingSubFacilitySerializeData campBuildingSubFacilitySerializeData
+                foreach (CampFacilitySerializeData campBuildingSubFacilitySerializeData
                          in campBuildingSerializeData.CampBuildingSubFacilitySerializeDatas)
                 {
                     if (campBuildingSubFacilitySerializeData.FacilityID == facilityID)
@@ -66,12 +69,13 @@ namespace Tzipory.SerializeData
 
         public void UpgradeBuilding(CampBuildingType campBuildingType, int facilityID)
         {
-            CampBuildingSubFacilitySerializeData campBuildingSubFacilitySerializeData
+            CampFacilitySerializeData campFacilitySerializeData
                 = GetCampBuildingFacilityData(campBuildingType, facilityID);
 
-            if (campBuildingSubFacilitySerializeData != null)
+            if (campFacilitySerializeData != null)
             {
-                campBuildingSubFacilitySerializeData.AddLevels(1);
+                campFacilitySerializeData.AddLevels(1);
+                onCampDataChanged.Invoke();
             }
         }
 

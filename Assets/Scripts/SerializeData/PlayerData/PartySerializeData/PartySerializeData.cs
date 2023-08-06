@@ -25,5 +25,10 @@ namespace Tzipory.SerializeData
         }
 
         public int SerializeTypeId => Constant.DataId.PARTY_DATA_ID;
+
+        public void SetPartyMembers(List<ShamanSerializeData> shamanSerializeDatas)
+        {
+            _shamanSerializeDatas = shamanSerializeDatas;
+        }
     }
 }

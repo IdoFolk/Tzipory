@@ -4,7 +4,7 @@ using Tzipory.ConfigFiles;
 namespace Tzipory.SerializeData 
 {
     [System.Serializable]
-    public class CampBuildingSubFacilitySerializeData : ISerializeData
+    public class CampFacilitySerializeData : ISerializeData
     {
         public int FacilityID => _facilityID;
 
@@ -22,7 +22,7 @@ namespace Tzipory.SerializeData
         
         public bool IsInitialization { get; }
 
-        public CampBuildingSubFacilitySerializeData(int level, int facilityID)
+        public CampFacilitySerializeData(int level, int facilityID)
         {
             _level = level;
             _facilityID = facilityID;

@@ -8,7 +8,6 @@ namespace Tzipory.SerializeData
     [System.Serializable]
     public class PartySerializeData : ISerializeData
     {
-        //TODO when changing party members, change it here
         private List<ShamanSerializeData> _shamanSerializeDatas;
         
         public List<ShamanSerializeData> ShamanSerializeDatas => _shamanSerializeDatas;

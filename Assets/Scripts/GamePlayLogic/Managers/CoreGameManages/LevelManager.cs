@@ -36,7 +36,7 @@ public class LevelManager : MonoBehaviour
         _poolManager = new PoolManager();
         EnemyManager = new EnemyManager();
         PartyManager = new PartyManager(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData,_levelConfig.EntityParent);
-        WaveManager  = new WaveManager(_levelConfig,_levelParent);//temp!
+        WaveManager  = new WaveManager(_levelConfig);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
     }
 

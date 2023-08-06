@@ -40,6 +40,11 @@ namespace Helpers.Consts
             public const int  MUDU_ID = 0;
             public const int  GALLANITE_ID = 1;
         }
+        
+        public static class CampBuildingFacilityId
+        {
+            public const int WORKSHOP_ITEMS_FACILITY = 0;
+        }
 
         public enum Stats
         {

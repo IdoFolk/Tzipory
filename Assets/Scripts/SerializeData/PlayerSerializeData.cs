@@ -12,7 +12,7 @@ namespace GameplayeLogic.Managersp
         //staemID
         
         //eficId
-
+        //TODO when changing party members, change it here
         private PartySerializeData _partySerializeData;
         private CampSerializeData _campSerializeData;
         private WorldMapProgressionSerializeData _mapProgressionSerializeData;

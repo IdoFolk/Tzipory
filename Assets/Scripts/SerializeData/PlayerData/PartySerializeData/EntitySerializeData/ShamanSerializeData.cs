@@ -16,7 +16,7 @@ namespace Tzipory.SerializeData
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanLevel;
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanExp;
 
-        private List<ShamanItemSerializeData> itemsSerializeData;
+        private List<ShamanItemSerializeData> itemsSerializeData = new List<ShamanItemSerializeData>();
         //add consumables serializeData
         
         public int ShamanId => _shamanId;
@@ -38,6 +38,25 @@ namespace Tzipory.SerializeData
         {
             base.UpdateData(data);
             //need to add dataUpdate for shaman
+        }
+
+        //TODO fix remvoing while itereitaing 
+        public void AttachItem(ShamanItemSerializeData itemToAttach)
+        {
+            foreach (ShamanItemSerializeData shamanItemSerializeData in itemsSerializeData)
+            {
+                if (shamanItemSerializeData.TargetSlot == itemToAttach.TargetSlot)
+                {
+                    RemoveItem(shamanItemSerializeData);
+                }
+            }
+            
+            itemsSerializeData.Add(itemToAttach);
+        }
+
+        public void RemoveItem(ShamanItemSerializeData shamanItemSerializeData)
+        {
+            itemsSerializeData.Remove(shamanItemSerializeData);
         }
     }
 }

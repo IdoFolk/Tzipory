@@ -26,7 +26,6 @@ namespace GameplayeLogic.Managers
         [Header("Buildings")]
         public CampBuildingObject[] campBuildingObjects;
         #endregion
- 
         
         public CampSerializeData CampSerializeData => _campSerializeData;
         private CampSerializeData _campSerializeData;
@@ -64,6 +63,7 @@ namespace GameplayeLogic.Managers
             onGraphicsRefresh?.Invoke();
         }
 
+        #region Buildings
         public void RefreshCampGraphics()
         {
             foreach (CampBuildingObject campBuildingObject in campBuildingObjects)
@@ -74,8 +74,6 @@ namespace GameplayeLogic.Managers
             }
         }
         
-        #region Buildings
-
         public void UpgradeCampBuildingFacility(CampBuildingType campBuildingType, int facilityID)
         {
             _campSerializeData.UpgradeBuilding(campBuildingType, facilityID);
@@ -90,18 +88,26 @@ namespace GameplayeLogic.Managers
         }
 
         #endregion
- 
+
+        #region Party
+
         public void ApplyPartyMembers()
         {
             List<ShamanSerializeData> selectedShamans = GetSelectedShamans();
             GameManager.PlayerManager.PlayerSerializeData.SetPartyMembers(selectedShamans);
         }
-        
-        public void Dispose()
-        {
-             
-        }
 
+        public void AttachItemToShaman(ShamanSerializeData shamanToAttach, ShamanItemSerializeData itemToAttach)
+        {
+            shamanToAttach.AttachItem(itemToAttach);
+        }
+        
+        [ContextMenu("Attach item to shaman")]
+        public void AttachItemToShamanTest()
+        {
+            AttachItemToShaman(shamanToggles[1].AssociatedShamanData, new ShamanItemSerializeData());
+        }
+        
         List<ShamanSerializeData> GetSelectedShamans()
         {
             //Change to whatever the ui is setting which shamans to take
@@ -116,5 +122,14 @@ namespace GameplayeLogic.Managers
 
             return selectedShamans;
         }
+        #endregion
+
+        
+        public void Dispose()
+        {
+             
+        }
+
+
     }
 }

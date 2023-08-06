@@ -35,6 +35,8 @@ namespace Tzipory.AbilitiesSystem
 
         public void CastAbility(IEnumerable<IEntityTargetAbleComponent> availableTargets)
         {
+            if (Abilities.Count == 0)
+                return;
             Abilities.First().Value?.ExecuteAbility(availableTargets);
         }
 

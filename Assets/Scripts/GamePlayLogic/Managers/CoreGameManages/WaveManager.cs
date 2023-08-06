@@ -33,15 +33,13 @@ namespace Tzipory.Leval
         
         private Wave CurrentWave => _waves[_currentWaveIndex];
 
-        public WaveManager(LevelConfig levelConfig,Transform levelPerant)
+        public WaveManager(LevelConfig levelConfig)
         {
             _levelConfig = levelConfig;
             _waves = new List<Wave>();
             _currentWaveIndex = 0;
             _levelStartDelay = _levelConfig.LevelStartDelay;
             _delayBetweenWaves = _levelConfig.DelayBetweenWaves;
-
-            Object.Instantiate(_levelConfig.Level,levelPerant);
         }
         
         public void StartLevel()

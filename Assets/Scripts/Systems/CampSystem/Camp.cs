@@ -24,6 +24,7 @@ namespace Systems.CampSystem
                     {
                         if (campBuildingSubFacilitySerializeData.FacilityID == facilityID)
                         {
+                            //TODO add material deduction
                             campBuildingSubFacilitySerializeData.Level++;
                             buildingFound = true;
                             break;

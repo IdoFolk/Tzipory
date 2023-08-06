@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8239401519988415976}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7511411553648010338}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!198 &6433208726984939997
 ParticleSystem:
@@ -4895,18 +4895,22 @@ PrefabInstance:
     - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: eecc9d0510e0aca40a9fa9f8bbd96b46, type: 3}
+      objectReference: {fileID: 21300000, guid: 65c85486f20901e4d81b5397961b2cd0, type: 3}
     - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7754473551597568420, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: m_WasSpriteAssigned

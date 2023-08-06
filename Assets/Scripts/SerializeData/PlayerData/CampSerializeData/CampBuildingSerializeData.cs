@@ -14,6 +14,7 @@ namespace Tzipory.SerializeData
 
         public int SerializeTypeId { get; }
 
+        //use as id for factrory
         public CampBuildingType buildingType;
 
         public List<CampBuildingSubFacilitySerializeData> CampBuildingSubFacilitySerializeDatas =>

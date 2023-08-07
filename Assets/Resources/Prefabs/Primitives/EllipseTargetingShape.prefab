@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3188521854641296319}
   - component: {fileID: 8130238235047404096}
-  m_Layer: 10
+  m_Layer: 3
   m_Name: EllipseTargetingShape
   m_TagString: Untagged
   m_Icon: {fileID: 0}

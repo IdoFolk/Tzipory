@@ -8,6 +8,7 @@ using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.Leval;
 using Tzipory.SerializeData;
 using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.Systems.SceneSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -100,6 +101,10 @@ public class LevelManager : MonoBehaviour
         if (!IsGameRunning) return;
         
         GAME_TIME.SetTimeStep(0);
+
+        if (isWon)
+            GameManager.GameData.SetCompletedNodeStat(_levelConfig.LevelId,true);
+
         OnEndGame?.Invoke(isWon);
         IsGameRunning = false;
     }
@@ -112,6 +117,21 @@ public class LevelManager : MonoBehaviour
     public void Reset()
     {
         GAME_TIME.SetTimeStep(1);
-        SceneManager.LoadScene(0);
+        GameManager.SceneHandler.LoadScene(SceneType.Map);
     }
+
+#if UNITY_EDITOR
+    [Button("Win")]
+    public void Win()
+    {
+        EndGame(true);
+    }
+
+    [Button("Lose")] 
+    public void Lose()
+    {
+        EndGame(false);
+    }
+
+#endif
 }

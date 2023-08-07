@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5232318383689287296}
-  - component: {fileID: 6184315847122900867}
+  - component: {fileID: 6586841249859402961}
   m_Layer: 0
   m_Name: MapNode
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 7158172246845069303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6184315847122900867
+--- !u!114 &6586841249859402961
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,12 +43,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7947276915454292336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f1cd49533d664647b6192e6d49b1931, type: 3}
+  m_Script: {fileID: 11500000, guid: ea062b73e70193c4db81d3c3726a4225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseNodeConfig: {fileID: 0}
-  _spriteRenderer: {fileID: 8720115925193685355}
   _clickHelper: {fileID: 6061506417753830879}
+  _levelConfig: {fileID: 0}
+  _nextNodes: []
+  _spriteRenderer: {fileID: 8720115925193685355}
 --- !u!1001 &329112140069368356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,6 +101,14 @@ PrefabInstance:
     - target: {fileID: 7478176625026721235, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049190174793075535, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2413806693520163455, guid: bf5fa35dfe5519c488c5cf271beb8f13, type: 3}
+    - target: {fileID: 9049190174793075535, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -7,6 +7,7 @@ namespace Systems.CampSystem
 {
     public class ShamanPartyMemberSelectUI : MonoBehaviour
     {
+        //change it to consts
         public ShamanSerializeData AssociatedShamanData
         {
             get { return _associatedShamanData; }

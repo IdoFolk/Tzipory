@@ -75,7 +75,7 @@ namespace Tzipory.SerializeData
             if (campFacilitySerializeData != null)
             {
                 campFacilitySerializeData.AddLevels(1);
-                onCampDataChanged.Invoke();
+                onCampDataChanged?.Invoke();
             }
         }
 

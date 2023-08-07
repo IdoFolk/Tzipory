@@ -3,10 +3,12 @@ using GameplayeLogic.Managers;
 using GamePlayLogic.Managers;
 using Sirenix.OdinInspector;
 using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.Leval;
 using Tzipory.SerializeData;
 using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.Systems.SceneSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,17 +27,36 @@ public class LevelManager : MonoBehaviour
     
     public bool IsGameRunning { get; private set; }
     
-    [SerializeField, TabGroup("Level manager")]
+    [SerializeField,TabGroup("Party manager")] private ShamanConfig[] _shamanConfigs;
+    [SerializeField, TabGroup("LevelToOpen manager")]
     private Transform _levelParent;
-    [SerializeField, TabGroup("Level manager")]
+    [Header("Testing")]
+    [SerializeField, TabGroup("LevelToOpen manager")]
     private LevelConfig _levelConfig;
+    [SerializeField, TabGroup("Spawn parents")]
+    private Transform _shamanParent;
+    [SerializeField, TabGroup("Spawn parents")]
+    private Transform _enemiesParent;
     
     private void Awake()
     {
         UIManager = new UIManager();
         _poolManager = new PoolManager();
-        EnemyManager = new EnemyManager();
-        PartyManager = new PartyManager(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData,_levelConfig.EntityParent);
+        
+        if (GameManager.GameData == null)//for Testing(Start form level scene)
+        {
+            var partyData = new PartySerializeData();
+            partyData.Init(_shamanConfigs);
+            PartyManager = new PartyManager(partyData,_shamanParent);
+        }
+        else
+        {
+            _levelConfig = GameManager.GameData.LevelConfig;
+            PartyManager = new PartyManager(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData,_shamanParent);
+        }
+
+        Instantiate(_levelConfig.Level, _levelParent);
+        EnemyManager = new EnemyManager(_enemiesParent);
         WaveManager  = new WaveManager(_levelConfig);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
     }
@@ -80,6 +101,10 @@ public class LevelManager : MonoBehaviour
         if (!IsGameRunning) return;
         
         GAME_TIME.SetTimeStep(0);
+
+        if (isWon)
+            GameManager.GameData.SetCompletedNodeStat(_levelConfig.LevelId,true);
+
         OnEndGame?.Invoke(isWon);
         IsGameRunning = false;
     }
@@ -92,6 +117,21 @@ public class LevelManager : MonoBehaviour
     public void Reset()
     {
         GAME_TIME.SetTimeStep(1);
-        SceneManager.LoadScene(0);
+        GameManager.SceneHandler.LoadScene(SceneType.Map);
     }
+
+#if UNITY_EDITOR
+    [Button("Win")]
+    public void Win()
+    {
+        EndGame(true);
+    }
+
+    [Button("Lose")] 
+    public void Lose()
+    {
+        EndGame(false);
+    }
+
+#endif
 }

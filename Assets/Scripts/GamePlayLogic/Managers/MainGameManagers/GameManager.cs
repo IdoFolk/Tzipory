@@ -12,37 +12,37 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] private PlayerConfig _playerConfig;
     [SerializeField] private SceneHandler _sceneHandler;
-    
-    private static PlayerManager _playerManager;
-    //GameData
 
-    public static PlayerManager PlayerManager => _playerManager;
+    public static GameData GameData { get; private set; }
+    public static PlayerManager PlayerManager { get; private set; }
 
     private void Awake()
     {
         if (SceneHandler == null)
             SceneHandler = _sceneHandler;
+
+        GameData = new GameData();
     }
 
     void Start()
     {
-        _sceneHandler.LoadScene(SceneType.MainMenu);
+        SceneHandler.LoadScene(SceneType.MainMenu);
         
         var playerSerializeData = DataManager.DataRequester.GetData<PlayerSerializeData>(_playerConfig); 
-        _playerManager = new PlayerManager(playerSerializeData);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        PlayerManager = new PlayerManager(playerSerializeData);
     }
 
     #region Test
     [ContextMenu("LoadMap")]
     public void LoadScene()
     {
-        _sceneHandler.LoadScene(SceneType.Map);
+        SceneHandler.LoadScene(SceneType.Map);
+    }
+
+    private void OnDestroy()
+    {
+        GameData = null;
+        PlayerManager = null;
     }
 
     #endregion

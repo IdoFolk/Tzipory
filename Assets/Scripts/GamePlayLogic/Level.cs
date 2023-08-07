@@ -17,7 +17,6 @@ namespace Tzipory.SerializeData.LevalSerializeData
         /// </summary>
         [SerializeField] SpriteRenderer _bgRenderer; 
         [SerializeField] private Vector3 _fakeForward;
-        [SerializeField] private Transform _entityParent;
         [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         private static List<WaveSpawner> _waveSpawners;
 
@@ -36,9 +35,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         public IEnumerable<WaveSpawner> WaveSpawnersSerialize => _waveSpawnersSerialize;
         
         public int NumberOfWaveSpawners => _waveSpawners.Count;
-
-        public Transform EntityParent => _entityParent;
-
+        
         private void Awake()
         {
             FakeForward = _fakeForward;

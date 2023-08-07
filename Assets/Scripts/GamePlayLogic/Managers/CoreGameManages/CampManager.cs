@@ -15,7 +15,7 @@ namespace GameplayeLogic.Managers
    
     public class CampManager : MonoBehaviour, IInitialization<CampSerializeData>
     {
-        //Should stay here?
+        //Should stay here?//MAKE CampUIManager
         #region UI
         [Header("UI")] 
         public ShamanPartyMemberSelectUI[] shamanToggles;
@@ -43,10 +43,11 @@ namespace GameplayeLogic.Managers
             campSerializeData.GetCampBuildingData(CampBuildingType.Workshop).CampBuildingSubFacilitySerializeDatas
                 .Add(new CampFacilitySerializeData(0, Constant.CampBuildingFacilityId.WORKSHOP_ITEMS_FACILITY));
             Init(campSerializeData);
-            
+
             //How do we ask for data?
             //Just for testing, toggles will be created at runtime
-            shamanToggles[0].SetShamanData(new ShamanSerializeData(){_shamanId = 1});
+            ShamanSerializeData shamanSerializeData = DataManager.DataRequester.GetData<ShamanSerializeData>(Constant.ShamanId.TOOR_ID);
+            shamanToggles[0].SetShamanData(shamanSerializeData);
             shamanToggles[1].SetShamanData(new ShamanSerializeData(){_shamanId = 2});
             shamanToggles[2].SetShamanData(new ShamanSerializeData(){_shamanId = 3});
             // foreach (ShamanPartyMemberSelectUI shamanPartyMemberSelectUI in shamanToggles)
@@ -77,6 +78,8 @@ namespace GameplayeLogic.Managers
         public void UpgradeCampBuildingFacility(CampBuildingType campBuildingType, int facilityID)
         {
             _campSerializeData.UpgradeBuilding(campBuildingType, facilityID);
+            //TODO add the invoke here
+            onGraphicsRefresh.Invoke();
         }
 
         [ContextMenu("Upgrade Workshop Items Facility")]
@@ -93,6 +96,7 @@ namespace GameplayeLogic.Managers
 
         public void ApplyPartyMembers()
         {
+            //Make it happan witch each click
             List<ShamanSerializeData> selectedShamans = GetSelectedShamans();
             GameManager.PlayerManager.PlayerSerializeData.SetPartyMembers(selectedShamans);
         }

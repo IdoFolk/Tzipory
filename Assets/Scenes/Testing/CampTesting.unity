@@ -1096,7 +1096,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _configManager:
     _shamanConfig:
-      _config: []
+      _config:
+      - {fileID: 0}
     _enemyConfig:
       _config: []
     _abilityConfig:

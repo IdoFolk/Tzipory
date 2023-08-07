@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Shamans;
-using Systems.DataManagerSystem;
-using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.SerializeData;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -20,8 +18,8 @@ namespace GameplayeLogic.Managers
         private const string SHAMAN_PREFAB_PATH = "Prefabs/Entities/Shaman/BaseShamanEntity";
 
         public IEnumerable<Shaman> Party { get; private set; }
-        
-        public PartyManager(PartySerializeData partySerializeData,Transform  partyParent)
+
+        public PartyManager(PartySerializeData partySerializeData,Transform partyParent)
         {
             _partySerializeData  = partySerializeData;
             _partySpawnPoints = new Dictionary<Vector3,bool>();
@@ -30,22 +28,18 @@ namespace GameplayeLogic.Managers
         }
 
         public void SpawnShaman()=>
-            Party = CreateParty(_partySerializeData.ShamanSerializeDatas);
+            Party = CreateParty(_partySerializeData.ShamanDataContainers);
 
         public void AddSpawnPoint(Vector3 spawnPoint)=>
             _partySpawnPoints.Add(spawnPoint, false);
 
-        private IEnumerable<Shaman> CreateParty(IEnumerable<ShamanSerializeData> party)
+        private IEnumerable<Shaman> CreateParty(IEnumerable<ShamanDataContainer> party)
         {
-            foreach (var shamanSerializeData in party)
+            foreach (var shamanDataContainer in party)
             {
                 var shaman = Object.Instantiate(_shamanPrefab,GetSpawnPoint(),Quaternion.identity,_partyParent);
                 
-                var shamanVisual =
-                    (ShamanConfig)DataManager.DataRequester.ConfigManager.GetConfig(shamanSerializeData.SerializeTypeId,
-                        shamanSerializeData.ShamanId);//temp!!!
-                
-                shaman.Init(shamanSerializeData,shamanVisual.UnitEntityVisualConfig);
+                shaman.Init(shamanDataContainer.ShamanSerializeData,shamanDataContainer.UnitEntityVisualConfig);
                 yield return shaman;
             }
         }

@@ -52,7 +52,7 @@ MonoBehaviour:
   _abilityConfigs:
   - {fileID: 11400000, guid: 75928f8badccef2498c77125ef0f7375, type: 2}
   _unitEntityVisualConfig:
-    _sprite: {fileID: 0}
-    _icon: {fileID: 0}
+    _sprite: {fileID: 21300000, guid: fc2805c32b6ccbe429d23e618777dbee, type: 3}
+    _icon: {fileID: 21300000, guid: fc2805c32b6ccbe429d23e618777dbee, type: 3}
   _targetingPriority: 6
   _shamanId: 1

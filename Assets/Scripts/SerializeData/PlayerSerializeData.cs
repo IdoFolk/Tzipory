@@ -1,26 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using Helpers.Consts;
+using NUnit.Framework;
 using SerializeData.Progression;
 using Systems.DataManagerSystem;
 using Tzipory.ConfigFiles;
 using Tzipory.SerializeData;
+using UnityEngine;
 
 namespace GameplayeLogic.Managersp
 {
+    [Serializable]
     public class PlayerSerializeData : ISerializeData, IDisposable
     {
         //staemID
         
         //eficId
-        //TODO when changing party members, change it here
-        private PartySerializeData _partySerializeData;
-        private CampSerializeData _campSerializeData;
-        private WorldMapProgressionSerializeData _mapProgressionSerializeData;
 
-        public PartySerializeData PartySerializeData => _partySerializeData;
-        public CampSerializeData CampSerializeData => _campSerializeData;
-        public WorldMapProgressionSerializeData WorldMapProgressionSerializeData => _mapProgressionSerializeData;
+        [SerializeField] private int _currentWord;
+        public WorldMapProgressionSerializeData WorldMapProgression { get; private set; }
+        public PartySerializeData PartySerializeData { get; private set; }
+        //camp serializeData 
 
         public bool IsInitialization { get; private set; }
         public int SerializeTypeId => Constant.DataId.PLAYER_DATA_ID;
@@ -28,19 +28,19 @@ namespace GameplayeLogic.Managersp
         public void Init(IConfigFile parameter)
         {
             var config = (PlayerConfig)parameter;
-            _partySerializeData = DataManager.DataRequester.GetData<PartySerializeData>(config.PartyConfig);
+            PartySerializeData = DataManager.DataRequester.GetData<PartySerializeData>(config.PartyConfig);
+            WorldMapProgression = DataManager.DataRequester.GetData<WorldMapProgressionSerializeData>(_currentWord);
             
             IsInitialization = true;
         }
         
         public void Dispose()
         {
-            
         }
 
-        public void SetPartyMembers(List<ShamanSerializeData> shamanSerializeDatas)
+        public void SetPartyMembers(List<ShamanSerializeData> members)
         {
-            _partySerializeData.SetPartyMembers(shamanSerializeDatas);
+
         }
     }
 }

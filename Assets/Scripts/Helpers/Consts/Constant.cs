@@ -22,8 +22,10 @@ namespace Helpers.Consts
             public const int STATUS_EFFECT_DATA_ID = 4;
             public const int PARTY_DATA_ID = 5;
             public const int PLAYER_DATA_ID = 6;
-            public const int CAMP_BUILD_DATA_ID = 7;
-            public const int SHAMAN_ITEM_DATA_ID = 8;
+            public const int MAP_DATA_ID = 7;
+            public const int NODE_DATA_ID = 8;
+            public const int SHAMAN_ITEM_DATA_ID = 9;
+            public const int CAMP_BUILD_DATA_ID = 10;
         }
 
 

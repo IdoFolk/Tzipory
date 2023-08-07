@@ -5,11 +5,14 @@ namespace Systems.NodeSystem
 {
     public abstract class BaseNode
     {
-        private BaseNodeSerializeData baseNodeSerializeData;
+        public BaseNodeSerializeData NodeSerializeData { get; private set; }
+
+        public int NodeId { get; private set; }
         
         public virtual void FillInfo(BaseNodeSerializeData newBaseNodeSerializeData)
         {
-            baseNodeSerializeData.NodeID = newBaseNodeSerializeData.NodeID;
+            NodeSerializeData = newBaseNodeSerializeData;
+            NodeId  = newBaseNodeSerializeData.NodeId;
         }
         
         protected T GetConfig<T>(BaseNodeSerializeData effectActionConfig) where T : BaseNodeSerializeData

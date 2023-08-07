@@ -35,8 +35,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         public List<StatModifierConfig> StatModifier => _statModifier;
 
         public List<StatusEffectConfig> StatusEffectToInterrupt => _statusEffectToInterrupt;
-
-
+        
         public EffectSequenceConfig EffectSequence => _effectSequence;
     }
 }

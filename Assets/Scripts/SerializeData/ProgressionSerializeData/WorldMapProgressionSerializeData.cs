@@ -1,30 +1,57 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Helpers.Consts;
 using SerializeData.Nodes;
 using Systems.NodeSystem;
+using Tzipory.ConfigFiles;
+using Tzipory.SerializeData;
 
 namespace SerializeData.Progression
 {
-    [System.Serializable]
-    public class WorldMapProgressionSerializeData
+    [Serializable]
+    public class WorldMapProgressionSerializeData : ISerializeData
     {
-         List<WorldMapNodeSerializeData> unlockedNodes;
+        private List<WorldMapNodeSerializeData> _unlockedNodes;
+        
+        public int CurrentNodeId { get; private set; }
+        
+        public int SerializeTypeId => Constant.DataId.MAP_DATA_ID;
+        public bool IsInitialization { get; private set; }
 
-         public List<WorldMapNode> GetUnlockedWorldMapNodes()
-         {
-             List<WorldMapNode> worldMapNodes = new List<WorldMapNode>();
-             
-             foreach (WorldMapNodeSerializeData unlockedNode in unlockedNodes)
-             {
-                 if (unlockedNode is BattleMapNodeSerializeData battleMapNodeSerializeData)
-                 {
-                     worldMapNodes.Add(new BattleMapNode{ WorldMapNodeSerializeData = battleMapNodeSerializeData});;
-                 }
-                 else
-                 {
-                     worldMapNodes.Add(new WorldMapNode{ WorldMapNodeSerializeData = unlockedNode});;
-                 }
-             }
-             return worldMapNodes;
-         }
+        public void Init(IConfigFile parameter)
+        {
+            _unlockedNodes = new List<WorldMapNodeSerializeData>();
+            IsInitialization  = true;
+        }
+
+        public void AddUnlockNode(WorldMapNodeSerializeData worldMapNodeSerializeData)
+        {
+            _unlockedNodes.Add(worldMapNodeSerializeData);
+        }
+
+        public List<WorldMapNode> GetUnlockedWorldMapNodes()
+        {
+            List<WorldMapNode> worldMapNodes = new List<WorldMapNode>();
+
+            foreach (WorldMapNodeSerializeData unlockedNode in _unlockedNodes)
+            {
+                switch (unlockedNode.WorldMapNodeType)
+                {
+                    case WorldMapNodeType.BattleNode:
+                        var battleNode = new BattleMapNode();
+                        battleNode.FillInfo(unlockedNode);
+                        worldMapNodes.Add(battleNode);
+                        break;
+                    case WorldMapNodeType.JunctionNode:
+                        throw  new NotImplementedException();
+                    case WorldMapNodeType.QuestNode:
+                        throw  new NotImplementedException();
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            
+            return worldMapNodes;
+        }
     }
 }

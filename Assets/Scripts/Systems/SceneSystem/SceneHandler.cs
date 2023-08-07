@@ -26,6 +26,10 @@ namespace Tzipory.Systems.SceneSystem
         private void Start()
         {
             PresistanteScene = SceneManager.GetActiveScene();
+
+#if UNITY_EDITOR
+            _minLoadTime = 0;
+#endif
         }
 
         private IEnumerator LoadSceneAsync(SceneType sceneType)

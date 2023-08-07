@@ -15,7 +15,7 @@ namespace Tzipory.SerializeData
         
         private int _facilityID;
         private int _level;
-
+         
         #region ISerializeData
 
         public int SerializeTypeId { get; }

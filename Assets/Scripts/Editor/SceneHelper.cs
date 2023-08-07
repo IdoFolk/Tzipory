@@ -17,8 +17,8 @@ public enum SceneType
 public class SceneEditor : OdinMenuEditorWindow
 {
     private const string PRODUCTION_PATH = "Assets/Scenes/Production";
-    private const string TEST_PATH = "Assets/Scenes/Testing";
-    [MenuItem("Tools/Scenes")]
+    private const string TEST_PATH = "Assets/Scenes/Testing"; 
+    [MenuItem("Toolsss/Scenesss")] 
     private static void OpenWindow()
     {
         SceneEditor window = GetWindow<SceneEditor>();

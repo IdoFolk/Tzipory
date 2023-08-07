@@ -1,22 +1,25 @@
-using System.Collections;
 using System.Collections.Generic;
+using Helpers.Consts;
+using Tzipory.ConfigFiles;
 using UnityEngine;
 
 namespace Tzipory.Nodes.Config
 {
     [CreateAssetMenu(fileName = "BaseNode", menuName = "ScriptableObjects/Nodes/BaseNode", order = 1)]
-    public class BaseNodeConfig : ScriptableObject
+    public abstract class BaseNodeConfig : ScriptableObject , IConfigFile
     {
-        public List<BaseNodeConfig> UnlockNodes => new(unlockNodes);
+        public List<BaseNodeConfig> UnlockNodes => new(_unlockNodes);
         public List<BaseNodeConfig> LeadToNodes => new(LeadToNodes);
 
-        public string NodeName => nodeName;
-        
-        [Header("Base Node")]
-        [SerializeField] protected string nodeName;
-        [SerializeField] protected int nodeID;
-        [SerializeField] protected List<BaseNodeConfig> leadToNodes;
-        [SerializeField] protected List<BaseNodeConfig> unlockNodes;
-        [SerializeField] protected bool leadAndUnlockNodesSame = true;
+        [Header("Base Node")] 
+        [SerializeField] protected bool _isUnlock;
+        [SerializeField] protected string _nodeName;
+        [SerializeField] protected List<BaseNodeConfig> _leadToNodes;
+        [SerializeField] protected List<BaseNodeConfig> _unlockNodes;
+        [SerializeField] protected bool _leadAndUnlockNodesSame = true;
+        public string NodeName => _nodeName;
+        public bool IsUnlock => _isUnlock;
+        public int ConfigObjectId => name.GetHashCode();
+        public int ConfigTypeId => Constant.DataId.NODE_DATA_ID;
     }
 }

@@ -16,14 +16,14 @@ namespace Helpers.Consts
             public const int OnGetCritHit = 6;
         }
 
-        public static class VisualConstants
-        {
-            public static Vector2 DamageRange = new Vector2(10, 150);
-            public static Vector2 FontSizeRange = new Vector2(8, 17);
-            public static float Crit_FontSizeBonus = 0;
+        //public static class VisualConstants
+        //{
+        //    public static Vector2 DamageRange = new Vector2(10, 150);
+        //    public static Vector2 FontSizeRange = new Vector2(8, 17);
+        //    public static float Crit_FontSizeBonus = 5;
 
-            public static float GetRelativeFontSizeForDamage(float damage) => ( FontSizeRange.y - FontSizeRange.x) * (damage - DamageRange.x)/(DamageRange.y - DamageRange.x) + FontSizeRange.x;
-        }
+        //    public static float GetRelativeFontSizeForDamage(float damage) => ( FontSizeRange.y - FontSizeRange.x) * (damage - DamageRange.x)/(DamageRange.y - DamageRange.x) + FontSizeRange.x;
+        //}
 
         public enum Stats
         {

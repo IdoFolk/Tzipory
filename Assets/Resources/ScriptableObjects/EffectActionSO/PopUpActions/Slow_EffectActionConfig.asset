@@ -15,7 +15,7 @@ MonoBehaviour:
   PopUpText_Config:
     text: Slow
     color: {r: 0.16477363, g: 0.24594839, b: 0.7735849, a: 1}
-    size: 5
+    size: 8
     riseSpeed: 0.0005
     TTL: 2
     damage: 0

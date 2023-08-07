@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PopUpText_Config:
     text: 100
-    color: {r: 1, g: 0.46160102, b: 0.36862743, a: 1}
-    size: 8.071428
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 13.785714
     riseSpeed: 0.1
     TTL: 1
     damage: 100

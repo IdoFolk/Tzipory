@@ -26,8 +26,8 @@ public class BasicPopupText : MonoBehaviour
     private void FixedUpdate()
     {
         //transform.Translate(Vector3.up * _riseSpeed);
-        transform.Translate(Vector3.up * TEMP_VisualCruves.PopUpText_MoveCurve.Evaluate(_timeAlive / _timeToLive) * _moveSpeed);
-        transform.localScale = _originalocalScale * (TEMP_VisualCruves.PopUpText_ScaleCurve.Evaluate(_timeAlive / _timeToLive));
+        transform.Translate(Vector3.up * LevelVisualData_Monoton.Instance.PopUpText_MoveCurve.Evaluate(_timeAlive / _timeToLive) * _moveSpeed);
+        transform.localScale = _originalocalScale * (LevelVisualData_Monoton.Instance.PopUpText_ScaleCurve.Evaluate(_timeAlive / _timeToLive));
         _timeAlive += Time.fixedDeltaTime;
     }
 
@@ -48,7 +48,7 @@ public class BasicPopupText : MonoBehaviour
         _text.color = popUpText_Config.color;
         _text.fontSize = popUpText_Config.size;
         _moveSpeed = popUpText_Config.riseSpeed;
-        _timeToLive = popUpText_Config.TTL;
+        _timeToLive = popUpText_Config.timeToLive;
         //Calling the kill
         //Invoke("Unset", popUpText_Config.TTL);
 

@@ -61,7 +61,10 @@ public struct PopUpText_Config
     public Color color;
     public float size;
     public float riseSpeed;
-    public float TTL;
+    /// <summary>
+    /// In seconds
+    /// </summary>
+    public float timeToLive;
 
 
     //THIS IS ONLY FOR EASY CALCULATION OF SIZES THAT NEED TO BE SET MANUALLY
@@ -69,7 +72,7 @@ public struct PopUpText_Config
     public float damage;
     public void SetSizeRelativeToDamage()
     {
-        size = Helpers.Consts.Constant.VisualConstants.GetRelativeFontSizeForDamage(damage);
+        size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
     }
 #endif
 

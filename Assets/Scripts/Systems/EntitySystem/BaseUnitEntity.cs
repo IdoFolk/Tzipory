@@ -237,7 +237,7 @@ namespace Tzipory.EntitySystem.Entitys
         {
             HP.AddToValue(amount);
             _healPopUpText_Config.text = $"+{amount}";
-            _healPopUpText_Config.size = Constant.VisualConstants.GetRelativeFontSizeForDamage(amount);
+            _healPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(amount);
 
             _popUpTexter.SpawnPopUp(_healPopUpText_Config);
             //_popUpTexter.SpawnPopUp($"+{amount}", _healPopUpText_Config);
@@ -260,15 +260,15 @@ namespace Tzipory.EntitySystem.Entitys
                 {
                     //_critPopUpText_Config.text = $"-{damage}!";
                     _critPopUpText_Config.text = $"{damage}";
-                    _critPopUpText_Config.size = Constant.VisualConstants.GetRelativeFontSizeForDamage(damage);
-                    _critPopUpText_Config.size += Constant.VisualConstants.Crit_FontSizeBonus; //this is pretty bad imo
+                    _critPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
+                    _critPopUpText_Config.size += LevelVisualData_Monoton.Instance.Crit_FontSizeBonus; //this is pretty bad imo
                     _popUpTexter.SpawnPopUp(_critPopUpText_Config);
                 }
                 else
                 {
                     //_defaultPopUpText_Config.text = $"-{damage}";
                     _defaultPopUpText_Config.text = $"{damage}";
-                    _defaultPopUpText_Config.size = Constant.VisualConstants.GetRelativeFontSizeForDamage(damage);
+                    _defaultPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
                     _popUpTexter.SpawnPopUp(_defaultPopUpText_Config);
                 }
             }

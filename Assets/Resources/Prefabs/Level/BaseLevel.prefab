@@ -113,6 +113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bgRenderer: {fileID: 0}
   _fakeForward: {x: 0, y: 0, z: 0}
+  _shamanParent: {fileID: 0}
+  _enemiesParent: {fileID: 0}
   _waveSpawnersSerialize: []
 --- !u!1 &6935278741487808698
 GameObject:

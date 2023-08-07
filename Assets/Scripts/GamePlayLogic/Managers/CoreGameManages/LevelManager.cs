@@ -3,8 +3,10 @@ using GameplayeLogic.Managers;
 using GamePlayLogic.Managers;
 using Sirenix.OdinInspector;
 using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.Leval;
+using Tzipory.SerializeData;
 using Tzipory.SerializeData.LevalSerializeData;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,22 +26,36 @@ public class LevelManager : MonoBehaviour
     
     public bool IsGameRunning { get; private set; }
     
+    [SerializeField,TabGroup("Party manager")] private ShamanConfig[] _shamanConfigs;
     [SerializeField, TabGroup("LevelToOpen manager")]
     private Transform _levelParent;
     [Header("Testing")]
     [SerializeField, TabGroup("LevelToOpen manager")]
     private LevelConfig _levelConfig;
+    [SerializeField, TabGroup("Spawn parents")]
+    private Transform _shamanParent;
+    [SerializeField, TabGroup("Spawn parents")]
+    private Transform _enemiesParent;
     
     private void Awake()
     {
-        if (GameManager.GameData != null)//for Testing(Start form level scene)
-            _levelConfig = GameManager.GameData.LevelConfig;
-
         UIManager = new UIManager();
         _poolManager = new PoolManager();
-        EnemyManager = new EnemyManager();
-        PartyManager = new PartyManager(_levelConfig.EntityParent);
+        
+        if (GameManager.GameData == null)//for Testing(Start form level scene)
+        {
+            var partyData = new PartySerializeData();
+            partyData.Init(_shamanConfigs);
+            PartyManager = new PartyManager(partyData,_shamanParent);
+        }
+        else
+        {
+            _levelConfig = GameManager.GameData.LevelConfig;
+            PartyManager = new PartyManager(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData,_shamanParent);
+        }
+
         Instantiate(_levelConfig.Level, _levelParent);
+        EnemyManager = new EnemyManager(_enemiesParent);
         WaveManager  = new WaveManager(_levelConfig);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
     }

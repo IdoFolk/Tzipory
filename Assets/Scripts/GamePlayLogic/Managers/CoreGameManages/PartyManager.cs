@@ -18,10 +18,10 @@ namespace GameplayeLogic.Managers
         private const string SHAMAN_PREFAB_PATH = "Prefabs/Entities/Shaman/BaseShamanEntity";
 
         public IEnumerable<Shaman> Party { get; private set; }
-        
-        public PartyManager(Transform partyParent)
+
+        public PartyManager(PartySerializeData partySerializeData,Transform partyParent)
         {
-            _partySerializeData = GameManager.PlayerManager.PlayerSerializeData.PartySerializeData;
+            _partySerializeData  = partySerializeData;
             _partySpawnPoints = new Dictionary<Vector3,bool>();
             _shamanPrefab = Resources.Load<Shaman>(SHAMAN_PREFAB_PATH);
             _partyParent = partyParent;

@@ -2986,7 +2986,7 @@ PrefabInstance:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelConfig
       value: 
-      objectReference: {fileID: 11400000, guid: 19ab654e3cb8f3c4a94313085d6e084b, type: 2}
+      objectReference: {fileID: 11400000, guid: f57e878089a79e9498b44e2406967206, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelParent
       value: 
@@ -3017,7 +3017,7 @@ PrefabInstance:
       objectReference: {fileID: 7330099708541644612, guid: 653c4468a24830841aa7c6d5cc9ef9b1, type: 3}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.data[0]
@@ -3026,7 +3026,7 @@ PrefabInstance:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
+      objectReference: {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _partySerializeData._entityConfigs.Array.data[2]
       value: 

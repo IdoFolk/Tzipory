@@ -195,7 +195,7 @@ namespace Tzipory.BaseSystem.TimeSystem
                 return;
             }
 
-            Debug.LogError("Con not find time ro remove");
+            Debug.LogError("Could not find time to remove");
         }
     }
 }

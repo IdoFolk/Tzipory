@@ -187,6 +187,22 @@ PrefabInstance:
       propertyPath: _nextNodes.Array.data[0]
       value: 
       objectReference: {fileID: 1303281918}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1860914778f26304ebb1455b9221a5ef, type: 2}
     - target: {fileID: 7947276915454292336, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: m_Name
       value: MapNode (2)
@@ -462,6 +478,22 @@ PrefabInstance:
       propertyPath: _levelConfig
       value: 
       objectReference: {fileID: 11400000, guid: f57e878089a79e9498b44e2406967206, type: 2}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1860914778f26304ebb1455b9221a5ef, type: 2}
     - target: {fileID: 7947276915454292336, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: m_Name
       value: MapNode (3)
@@ -538,6 +570,18 @@ PrefabInstance:
       propertyPath: _levelConfig
       value: 
       objectReference: {fileID: 11400000, guid: 962c0de1a4cb1b14ab67a6f2204ba677, type: 2}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
     - target: {fileID: 7947276915454292336, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: m_Name
       value: MapNode (1)
@@ -630,6 +674,14 @@ PrefabInstance:
       propertyPath: _nextNodes.Array.data[1]
       value: 
       objectReference: {fileID: 416246837}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _shamanConfigs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
     - target: {fileID: 7947276915454292336, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: m_Name
       value: MapNode

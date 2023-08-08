@@ -26,7 +26,8 @@ namespace Tzipory.SerializeData
         public int ItemId => _itemId;
         public ItemSlot TargetSlot => targetSlot;
 
-        private int _itemId;
+//TODO return to private, temp for testing
+        public int _itemId;
         private ItemSlot targetSlot;
     }
 }

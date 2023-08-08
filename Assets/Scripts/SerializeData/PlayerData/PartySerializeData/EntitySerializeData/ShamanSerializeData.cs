@@ -12,10 +12,11 @@ namespace Tzipory.SerializeData
     {
         public IReadOnlyList<ShamanItemSerializeData> ItemsSerializeData => itemsSerializeData;
         //changed to public for testing until i figure ouot that data requester
-        [SerializeField,TabGroup("General"),ReadOnly] public int _shamanId;
+        [SerializeField,TabGroup("General"),ReadOnly] private int _shamanId;
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanLevel;
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanExp;
 
+        //
         private List<ShamanItemSerializeData> itemsSerializeData = new List<ShamanItemSerializeData>();
         //add consumables serializeData
         
@@ -40,14 +41,14 @@ namespace Tzipory.SerializeData
             //need to add dataUpdate for shaman
         }
 
-        //TODO fix remvoing while itereitaing 
+
         public void AttachItem(ShamanItemSerializeData itemToAttach)
         {
-            foreach (ShamanItemSerializeData shamanItemSerializeData in itemsSerializeData)
+            for (int i = itemsSerializeData.Count - 1; i >= 0; i--)
             {
-                if (shamanItemSerializeData.TargetSlot == itemToAttach.TargetSlot)
+                if (itemsSerializeData[i].TargetSlot == itemToAttach.TargetSlot)
                 {
-                    RemoveItem(shamanItemSerializeData);
+                    RemoveItem(itemsSerializeData[i]);
                 }
             }
             

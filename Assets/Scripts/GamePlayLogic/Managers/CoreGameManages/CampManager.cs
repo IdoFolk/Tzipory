@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameplayeLogic.UIElements;
 using Helpers.Consts;
 using Systems.CampSystem;
 using Systems.DataManagerSystem;
+using Tools.Enums;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.SerializeData;
 using Tzipory.Tools.Interface;
@@ -12,13 +14,12 @@ using UnityEngine.UI;
 
 namespace GameplayeLogic.Managers
 {
-   
     public class CampManager : MonoBehaviour, IInitialization<CampSerializeData>
     {
-        //Should stay here?//MAKE CampUIManager
+     
         #region UI
-        [Header("UI")] 
-        public ShamanPartyMemberSelectUI[] shamanToggles;
+        [Header("UI")]
+        [SerializeField] private CampUIManager _campUIManager;
         #endregion
 
         #region Buildings
@@ -34,6 +35,9 @@ namespace GameplayeLogic.Managers
         
         public bool IsInitialization { get; private set; }
 
+        private ShamanItemSerializeData testingItem;
+        private ShamanSerializeData testingCurrentShaman;
+        
         //Here for TESTING!!
         private void Start()
         {
@@ -47,14 +51,18 @@ namespace GameplayeLogic.Managers
             //How do we ask for data?
             //Just for testing, toggles will be created at runtime
             ShamanSerializeData shamanSerializeData = DataManager.DataRequester.GetData<ShamanSerializeData>(Constant.ShamanId.TOOR_ID);
-            shamanToggles[0].SetShamanData(shamanSerializeData);
-            shamanToggles[1].SetShamanData(new ShamanSerializeData(){_shamanId = 2});
-            shamanToggles[2].SetShamanData(new ShamanSerializeData(){_shamanId = 3});
-            // foreach (ShamanPartyMemberSelectUI shamanPartyMemberSelectUI in shamanToggles)
-            // {
-            //     
-            // }
-            
+            _campUIManager.shamanToggles[0].SetShamanData(shamanSerializeData);
+            shamanSerializeData = DataManager.DataRequester.GetData<ShamanSerializeData>(Constant.ShamanId.JAVAN_ID);
+            _campUIManager.shamanToggles[1].SetShamanData(shamanSerializeData);
+            shamanSerializeData = DataManager.DataRequester.GetData<ShamanSerializeData>(Constant.ShamanId.NADIA_ID);
+            _campUIManager.shamanToggles[2].SetShamanData(shamanSerializeData);
+
+            foreach (ShamanPartyMemberSelectUI shamanPartyMemberSelectUI in _campUIManager.shamanToggles)
+            {
+                shamanPartyMemberSelectUI.onToggleChanged += PartyMemberToggleChanged;
+            }
+            testingItem = new ShamanItemSerializeData();
+            testingItem._itemId = 10;
         }
 
         public void Init(CampSerializeData parameter)
@@ -93,7 +101,16 @@ namespace GameplayeLogic.Managers
         #endregion
 
         #region Party
+        
+        public void TogglePartyMember(ShamanSerializeData targetShaman, CollectionActionType actionType)
+        {
+            GameManager.PlayerManager.PlayerSerializeData.TogglePartyMember(targetShaman, actionType);
+        }
 
+        [Obsolete("Old method for setting party members")]
+        /// <summary>
+        /// Old party members apply method
+        /// </summary>
         public void ApplyPartyMembers()
         {
             //Make it happan witch each click
@@ -101,22 +118,16 @@ namespace GameplayeLogic.Managers
             GameManager.PlayerManager.PlayerSerializeData.SetPartyMembers(selectedShamans);
         }
 
-        public void AttachItemToShaman(ShamanSerializeData shamanToAttach, ShamanItemSerializeData itemToAttach)
+        void PartyMemberToggleChanged(ShamanSerializeData shamanSerializeData, bool isToggleActive)
         {
-            shamanToAttach.AttachItem(itemToAttach);
-        }
-        
-        [ContextMenu("Attach item to shaman")]
-        public void AttachItemToShamanTest()
-        {
-            AttachItemToShaman(shamanToggles[1].AssociatedShamanData, new ShamanItemSerializeData());
+            TogglePartyMember(shamanSerializeData, isToggleActive ? CollectionActionType.Add : CollectionActionType.Remove);
         }
         
         List<ShamanSerializeData> GetSelectedShamans()
         {
             //Change to whatever the ui is setting which shamans to take
             List<ShamanSerializeData> selectedShamans = new List<ShamanSerializeData>();
-            foreach (ShamanPartyMemberSelectUI shamanPartyMemberSelectUI in shamanToggles)
+            foreach (ShamanPartyMemberSelectUI shamanPartyMemberSelectUI in _campUIManager.shamanToggles)
             {
                 if (shamanPartyMemberSelectUI.toggle.isOn)
                 {
@@ -128,6 +139,32 @@ namespace GameplayeLogic.Managers
         }
         #endregion
 
+        #region ShamanManagment
+
+        public void ToggleItemOnShaman(ShamanSerializeData targetShaman, ShamanItemSerializeData targetItem,
+            CollectionActionType actionType)
+        {
+            if (actionType == CollectionActionType.Add)
+            {
+                targetShaman.AttachItem(targetItem);
+            }
+            else
+            {
+                targetShaman.RemoveItem(targetItem);
+            }
+        }
+        
+        public void AttachItemToShamanTest()
+        {
+            ToggleItemOnShaman(_campUIManager.shamanToggles[0].AssociatedShamanData, testingItem, CollectionActionType.Add);
+        }
+        
+        public void RemoveItemFromShamanTest()
+        {
+            ToggleItemOnShaman(_campUIManager.shamanToggles[0].AssociatedShamanData, testingItem, CollectionActionType.Remove);
+        }
+
+        #endregion
         
         public void Dispose()
         {

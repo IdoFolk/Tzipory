@@ -15,7 +15,7 @@ namespace Systems.CampSystem
         public Toggle toggle;
         public Image shamanImage;
 
-        public Action<ShamanSerializeData> onToggleChanged;
+        public Action<ShamanSerializeData, bool> onToggleChanged;
         
         private ShamanSerializeData _associatedShamanData;
 
@@ -26,7 +26,7 @@ namespace Systems.CampSystem
         
         public void ToggleChanged(bool isActive)
         {
-            onToggleChanged?.Invoke(_associatedShamanData);
+            onToggleChanged?.Invoke(_associatedShamanData,isActive);
         }
     }
 }

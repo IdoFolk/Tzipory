@@ -4,6 +4,7 @@ using Helpers.Consts;
 using NUnit.Framework;
 using SerializeData.Progression;
 using Systems.DataManagerSystem;
+using Tools.Enums;
 using Tzipory.ConfigFiles;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.SerializeData;
@@ -45,11 +46,29 @@ namespace GameplayeLogic.Managersp
         
         public void Dispose()
         {
+            
         }
-
-        public void SetPartyMembers(List<ShamanSerializeData> members)
+        
+        //send him id
+        public void TogglePartyMember(ShamanSerializeData targetShaman, CollectionActionType actionType)
         {
-
+          
+            if (actionType == CollectionActionType.Add)
+            {
+                PartySerializeData.AddPartyMember(targetShaman);
+            }
+            else
+            {
+                PartySerializeData.RemovePartyMember(targetShaman);
+            }
         }
+        
+        [Obsolete("Old method for setting party members")]
+        public void SetPartyMembers(List<ShamanSerializeData> shamanSerializeDatas)
+        {
+            PartySerializeData.SetPartyMembers(shamanSerializeDatas);
+        }
+
+      
     }
 }

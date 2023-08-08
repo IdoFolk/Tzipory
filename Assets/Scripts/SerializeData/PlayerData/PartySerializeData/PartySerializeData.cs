@@ -106,7 +106,7 @@ namespace Tzipory.SerializeData
                 shamanDataContainer.ShamanSerializeData.ShamanId == targetShamanID);
             if (shamanContainerDataFromRoster == null)
             {
-                Debug.LogError("Trying to toggle item on shaman who already has");
+                Debug.LogError("Trying to toggle item on shaman who does not exist?");
                 return;
             }
             

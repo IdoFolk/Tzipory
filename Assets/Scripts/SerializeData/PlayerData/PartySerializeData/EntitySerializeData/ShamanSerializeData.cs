@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Shamans;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles;
@@ -44,6 +45,11 @@ namespace Tzipory.SerializeData
 
         public void AttachItem(ShamanItemSerializeData itemToAttach)
         {
+            if (attachedItemsSerializeData.Contains(itemToAttach))
+            {
+                Debug.LogError("Item already attached");
+                return;
+            }
             for (int i = attachedItemsSerializeData.Count - 1; i >= 0; i--)
             {
                 if (attachedItemsSerializeData[i].TargetSlot == itemToAttach.TargetSlot)
@@ -57,6 +63,11 @@ namespace Tzipory.SerializeData
 
         public void RemoveItem(ShamanItemSerializeData shamanItemSerializeData)
         {
+            if (!attachedItemsSerializeData.Contains(shamanItemSerializeData))
+            {
+                Debug.LogError("Item does not exist for shaman! cannot remove it");
+                return;
+            }
             attachedItemsSerializeData.Remove(shamanItemSerializeData);
         }
     }

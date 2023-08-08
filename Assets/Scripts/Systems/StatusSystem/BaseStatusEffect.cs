@@ -51,8 +51,7 @@ namespace Tzipory.EntitySystem.StatusSystem
             foreach (var modifier in statusEffectConfig.StatModifier)
             {
                 modifiers.Add(new StatModifier(modifier.Modifier, modifier.StatusModifierType));
-            }
-            //need to add 
+            } 
         }
 
         public virtual void StatusEffectStart()

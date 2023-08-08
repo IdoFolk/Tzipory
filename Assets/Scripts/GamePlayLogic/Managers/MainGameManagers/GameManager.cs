@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     public static PlayerManager PlayerManager { get; private set; }
 
     private void Awake()
-    {
+    { 
         if (SceneHandler == null)
             SceneHandler = _sceneHandler;
 

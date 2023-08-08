@@ -5,6 +5,7 @@ using NUnit.Framework;
 using SerializeData.Progression;
 using Systems.DataManagerSystem;
 using Tzipory.ConfigFiles;
+using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.SerializeData;
 using UnityEngine;
 
@@ -33,6 +34,14 @@ namespace GameplayeLogic.Managersp
             
             IsInitialization = true;
         }
+        
+#if UNITY_EDITOR
+        public void SetPartyData(ShamanConfig[] shamanConfigs)
+        {
+            PartySerializeData = new PartySerializeData();
+            PartySerializeData.Init(shamanConfigs);
+        }
+#endif
         
         public void Dispose()
         {

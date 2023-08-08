@@ -1,3 +1,4 @@
+using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.Helpers;
 using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.Systems.SceneSystem;
@@ -5,9 +6,11 @@ using UnityEngine;
 
 public class TEMP_NodeObject : MonoBehaviour
 {
-    [SerializeField] private ClickHelper _clickHelper;
     [SerializeField] private LevelConfig _levelConfig;
+    [SerializeField] private ShamanConfig[] _shamanConfigs;
+    
     [SerializeField] private TEMP_NodeObject[] _nextNodes;
+    [SerializeField] private ClickHelper _clickHelper;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     
     public bool IsUnlock { get; private set; }
@@ -58,6 +61,7 @@ public class TEMP_NodeObject : MonoBehaviour
     private void OnNodeClick()
     {
         GameManager.GameData.LevelConfig  = _levelConfig;
+        GameManager.PlayerManager.PlayerSerializeData.SetPartyData(_shamanConfigs);
         GameManager.SceneHandler.LoadScene(SceneType.Game);//temp!
     }
 }

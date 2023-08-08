@@ -37,7 +37,7 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
             
             OnEnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
             if(abilityConfig.DoExitEffects)
-            OnExitStatusEffects.AddRange(abilityConfig.OnExitStatusEffectConfigs);
+                OnExitStatusEffects.AddRange(abilityConfig.OnExitStatusEffectConfigs);
 
             Radius = new Stat("AoeRadius", abilityConfig.AoeRadius, int.MaxValue, (int)Constant.Stats.AoeRadius);
             Duration = new Stat("AoeDuration", abilityConfig.AoeDuration, int.MaxValue, (int)Constant.Stats.AoeDuration);
@@ -57,7 +57,7 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
             foreach (var statusEffect in OnEnterStatusEffects)
                 target.StatusHandler.AddStatusEffect(statusEffect);
         }
-         public void ExecuteOnExit(IEntityTargetAbleComponent target)
+        public void ExecuteOnExit(IEntityTargetAbleComponent target)
         {
             foreach (var statusEffect in OnExitStatusEffects)
                 target.StatusHandler.AddStatusEffect(statusEffect);

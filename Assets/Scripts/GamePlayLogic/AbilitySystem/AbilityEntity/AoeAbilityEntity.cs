@@ -1,3 +1,4 @@
+using System;
 using Tzipory.AbilitiesSystem;
 using Tzipory.AbilitiesSystem.AbilityEntity;
 using Tzipory.AbilitiesSystem.AbilityExecuteTypes;
@@ -25,15 +26,16 @@ public class AoeAbilityEntity : BaseAbilityEntity, ITargetableReciever
         _collider2D.transform.localScale = new Vector3(radius * 2.5f, radius * 2.5f, 0); //why *2.5?
 
         var colliders = Physics2D.OverlapCircleAll(transform.position, _collider2D.transform.localScale.x);
-
-
+        
         foreach (var collider in colliders)
         {
             if (collider.isTrigger)
                 continue;
-            
+
             if (collider.TryGetComponent(out IEntityTargetAbleComponent entityTargetAbleComponent))
+            {
                 Cast(entityTargetAbleComponent);
+            }
         }
     }
     //GOOD INIT!
@@ -41,23 +43,25 @@ public class AoeAbilityEntity : BaseAbilityEntity, ITargetableReciever
     {
         base.Init(target,abilityExecutor);
         _aoeAbilityExecuter = abilityExecutor;
-        //_collider2D.radius = radius;
         _collider2D.isTrigger = true;
         _duration = duration;
-        //base.statusEffect = statusEffect;
-
-        visualTransform.localScale = new Vector3(radius , radius, 1); //why *2.5?
-        _collider2D.transform.localScale = new Vector3(radius , radius, 1); //why *2.5?
-
+        
+        transform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
     }
 
     public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
     {
+        if (targetable == _aoeAbilityExecuter.Caster)
+            return;
+        
         _aoeAbilityExecuter.Execute(targetable);
     }
 
     public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
     {
+        if (targetable == _aoeAbilityExecuter.Caster)
+            return;
+        
         _aoeAbilityExecuter.ExecuteOnExit(targetable);
     }
 

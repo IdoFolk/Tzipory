@@ -1,12 +1,10 @@
 ﻿using System;
 using Helpers.Consts;
-using Sirenix.OdinInspector;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.Systems.PoolSystem;
-using Tzipory.Tools.Interface;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

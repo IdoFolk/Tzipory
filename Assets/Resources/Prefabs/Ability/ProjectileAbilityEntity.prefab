@@ -4884,6 +4884,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProjectileAbilityEntity
       objectReference: {fileID: 0}
+    - target: {fileID: 4838851316483935421, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5602764745902702606, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       propertyPath: _scale
       value: 0.6

@@ -86,14 +86,9 @@ namespace Tzipory.EntitySystem.TargetingSystem
                 if (CurrentTarget == null)
                     return;
                 
-                if (targetAbleComponent.EntityInstanceID == CurrentTarget.EntityInstanceID)
+                if (targetAbleComponent.EntityInstanceID == CurrentTarget.EntityInstanceID) //TBD targeting could be improved here
                     GetPriorityTarget();
             }
-        }
-
-        private void OnDestroy()
-        {
-            //_entityTargetingComponent.TargetingRange.OnValueChanged -= UpdateTargetingRange;
         }
     }
 }

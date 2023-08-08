@@ -35,7 +35,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         public IEnumerable<WaveSpawner> WaveSpawnersSerialize => _waveSpawnersSerialize;
         
         public int NumberOfWaveSpawners => _waveSpawners.Count;
-
+        
         private void Awake()
         {
             FakeForward = _fakeForward;

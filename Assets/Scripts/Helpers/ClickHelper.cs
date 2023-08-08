@@ -21,8 +21,11 @@ namespace Tzipory.Helpers
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(eventData.button == PointerEventData.InputButton.Left)
-            OnClick?.Invoke();
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                Debug.Log("Click");
+                OnClick?.Invoke();
+            }
         }
 
         public void OnPointerEnter(PointerEventData eventData)

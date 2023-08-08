@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
@@ -10,7 +8,6 @@ public class EllipseTargetingArea : MonoBehaviour
     private void Awake()
     {
         _reciever = GetComponentInParent(typeof(ITargetableReciever)) as ITargetableReciever;
-        
     }
 
     private void OnTriggerEnter2D(Collider2D other)

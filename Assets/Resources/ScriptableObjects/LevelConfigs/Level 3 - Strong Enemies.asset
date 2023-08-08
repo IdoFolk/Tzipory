@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fefaa5ef5471cc4ebfa0a75d56ffeb7, type: 3}
   m_Name: Level 3 - Strong Enemies
   m_EditorClassIdentifier: 
-  _levelId: 0
+  _levelId: 2
   _level: {fileID: 1758735506430089248, guid: 51f66e84bd4af3d4e9a7829a8d2b38fa, type: 3}
   _levelStartDelay: 0.2
   _delayBetweenWaves: 60

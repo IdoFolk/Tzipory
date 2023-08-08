@@ -94,7 +94,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3642900099683438598, guid: 07e78e8ca5956a548b595cae0a400edf, type: 3}
       propertyPath: m_Name
-      value: Circle
+      value: EllipseTargetingShape
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

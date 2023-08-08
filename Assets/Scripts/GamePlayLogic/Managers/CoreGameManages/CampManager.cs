@@ -16,7 +16,6 @@ namespace GameplayeLogic.Managers
 {
     public class CampManager : MonoBehaviour, IInitialization<CampSerializeData>
     {
-     
         #region UI
         [Header("UI")]
         [SerializeField] private CampUIManager _campUIManager;
@@ -32,6 +31,7 @@ namespace GameplayeLogic.Managers
         private CampSerializeData _campSerializeData;
 
         public event Action onGraphicsRefresh;
+        public event Action onCampDataChanged;
         
         public bool IsInitialization { get; private set; }
 
@@ -82,12 +82,20 @@ namespace GameplayeLogic.Managers
                 campBuildingObject.RefreshGraphic(campBuildingSerializeData.HighestFacilityLevel);
             }
         }
+
+        public bool CheckIfGotEnoughResourcesForUpgrade(CampBuildingType campBuildingType, int facilityID)
+        {
+            return true;
+        }
         
         public void UpgradeCampBuildingFacility(CampBuildingType campBuildingType, int facilityID)
         {
-            _campSerializeData.UpgradeBuilding(campBuildingType, facilityID);
-            //TODO add the invoke here
-            onGraphicsRefresh.Invoke();
+            if (!CheckIfGotEnoughResourcesForUpgrade(campBuildingType, facilityID))
+            {
+                _campSerializeData.UpgradeBuilding(campBuildingType, facilityID);
+            }
+            onCampDataChanged?.Invoke();
+            onGraphicsRefresh?.Invoke();
         }
 
         [ContextMenu("Upgrade Workshop Items Facility")]

@@ -13,19 +13,17 @@ namespace Tzipory.SerializeData
         public List<CampBuildingSerializeData> CampBuildingSerializeDatas => _campBuildingSerializeDatas;
 
         private List<CampBuildingSerializeData> _campBuildingSerializeDatas;
-
-        public Action onCampDataChanged;
         
         public bool IsInitialization { get; }
         public void Init(IConfigFile parameter)
         {
-           //TODO add a lot
+           
         }
 
         public int SerializeTypeId { get; }
         public void UpdateData(CampManager data)
         {
-           //TODO add here logic
+           
         }
 
         public CampSerializeData()
@@ -75,7 +73,6 @@ namespace Tzipory.SerializeData
             if (campFacilitySerializeData != null)
             {
                 campFacilitySerializeData.AddLevels(1);
-                onCampDataChanged?.Invoke();
             }
         }
 

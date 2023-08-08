@@ -16,11 +16,8 @@ namespace Tzipory.SerializeData
         private List<ShamanDataContainer> _shamanDataContainers;
         
         public List<ShamanDataContainer> ShamanDataContainers => _shamanDataContainers;
-
-        //Add selected current party here + change to container
-        private List<ShamanDataContainer> _shamansInPartyDataContainers = new List<ShamanDataContainer>();
         
-    
+        private List<ShamanDataContainer> _shamansInPartyDataContainers = new List<ShamanDataContainer>();
 
         public bool IsInitialization { get; private set; }
         
@@ -63,8 +60,7 @@ namespace Tzipory.SerializeData
         {
             _shamansInPartyDataContainers = shamanSerializeDataContainers;
         }
-
-        //send here the id
+        
         public void AddPartyMember(int targetShamanID)
         {
             //Find the serializeData in the list

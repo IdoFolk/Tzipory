@@ -28,6 +28,7 @@ public class BasicPopupText : MonoBehaviour
         //transform.Translate(Vector3.up * _riseSpeed);
         transform.Translate(Vector3.up * LevelVisualData_Monoton.Instance.PopUpText_MoveCurve.Evaluate(_timeAlive / _timeToLive) * _moveSpeed);
         transform.localScale = _originalocalScale * (LevelVisualData_Monoton.Instance.PopUpText_ScaleCurve.Evaluate(_timeAlive / _timeToLive));
+        _text.alpha = LevelVisualData_Monoton.Instance.PopUpText_AlphaCurve.Evaluate(_timeAlive / _timeToLive);
         _timeAlive += Time.fixedDeltaTime;
     }
 

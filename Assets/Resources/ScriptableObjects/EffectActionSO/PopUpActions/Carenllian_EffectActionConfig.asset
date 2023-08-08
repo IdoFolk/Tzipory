@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PopUpText_Config:
     text: Damage x1.5
-    color: {r: 0.5707547, g: 1, b: 0.635813, a: 1}
+    color: {r: 0.6698113, g: 0.2432805, b: 0.31371665, a: 1}
     size: 8
     riseSpeed: 0.05
     timeToLive: 1
-    damage: 0
+    damage: 20

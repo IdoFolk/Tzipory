@@ -17,5 +17,5 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 8.642858
     riseSpeed: 0.05
-    TTL: 1
+    timeToLive: 1
     damage: 20

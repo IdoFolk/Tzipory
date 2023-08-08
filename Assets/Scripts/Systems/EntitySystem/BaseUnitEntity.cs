@@ -236,9 +236,10 @@ namespace Tzipory.EntitySystem.Entitys
         public void Heal(float amount)
         {
             HP.AddToValue(amount);
+            _healPopUpText_Config.damage = amount;
             _healPopUpText_Config.text = $"+{amount}";
             _healPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(amount);
-
+            
             _popUpTexter.SpawnPopUp(_healPopUpText_Config);
             //_popUpTexter.SpawnPopUp($"+{amount}", _healPopUpText_Config);
             //OnHealthChanged?.Invoke();
@@ -258,7 +259,7 @@ namespace Tzipory.EntitySystem.Entitys
                 IsDamageable = false; // Is this what turns on InvincibleTime?
                 if (isCrit)
                 {
-                    //_critPopUpText_Config.text = $"-{damage}!";
+                    _critPopUpText_Config.damage = damage;
                     _critPopUpText_Config.text = $"{damage}";
                     _critPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
                     _critPopUpText_Config.size += LevelVisualData_Monoton.Instance.Crit_FontSizeBonus; //this is pretty bad imo
@@ -267,6 +268,7 @@ namespace Tzipory.EntitySystem.Entitys
                 else
                 {
                     //_defaultPopUpText_Config.text = $"-{damage}";
+                    _defaultPopUpText_Config.damage = damage;
                     _defaultPopUpText_Config.text = $"{damage}";
                     _defaultPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
                     _popUpTexter.SpawnPopUp(_defaultPopUpText_Config);

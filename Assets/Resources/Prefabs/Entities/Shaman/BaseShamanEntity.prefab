@@ -260,6 +260,33 @@ MonoBehaviour:
     _isStackable: 0
     _isInterruptable: 0
     _effectActionContainers: []
+  _popUpTexter:
+    _repeatPattern: 0
+    _textBoxPrefab: {fileID: 6879172769592693696, guid: 0a0724f7566067d478ba48523e410bbf, type: 3}
+    _textSpawnPoint: {fileID: 800062657850464996}
+    _lineMagnitude: 1.2
+    _lineStep: 0.5
+  _defaultPopUpText_Config:
+    text: 
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 0
+    riseSpeed: 0.05
+    timeToLive: 0.8
+    damage: 0
+  _critPopUpText_Config:
+    text: 
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 0
+    riseSpeed: 0.05
+    timeToLive: 0.8
+    damage: 0
+  _healPopUpText_Config:
+    text: 
+    color: {r: 1, g: 1, b: 1, a: 1}
+    size: 0
+    riseSpeed: 0.05
+    timeToLive: 0.8
+    damage: 0
   _doShowHPBar: 0
   _hpBarConnector: {fileID: 953535957855614546}
   _proximityHandler:

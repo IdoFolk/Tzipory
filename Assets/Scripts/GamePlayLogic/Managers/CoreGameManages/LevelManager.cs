@@ -16,7 +16,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public static event Action<bool> OnEndGame;
-    
+
     private PoolManager _poolManager;
    
     public static PartyManager PartyManager { get; private set; }

@@ -103,7 +103,7 @@ public class LevelManager : MonoBehaviour
         GAME_TIME.SetTimeStep(0);
 
         if (isWon)
-            GameManager.GameData.SetCompletedNodeStat(_levelConfig.LevelId,true);
+            GameManager.GameData?.SetCompletedNodeStat(_levelConfig.LevelId,true);
 
         OnEndGame?.Invoke(isWon);
         IsGameRunning = false;

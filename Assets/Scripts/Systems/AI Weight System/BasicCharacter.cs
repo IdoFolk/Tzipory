@@ -10,7 +10,7 @@ namespace Tzipory.AI.WeightSystem
     /// </summary>
     public class BasicCharacter : MonoBehaviour, IActor
     {
-        [SerializeField, Tooltip("This list should be filled in the Perfab level. Use context-method 'Re-get Action Components' to make sure.")]
+        [SerializeField, Tooltip("This list should be filled in the Perfab _levelToOpen. Use context-method 'Re-get Action Components' to make sure.")]
         ActionComponent[] actionComponents;//may need to be a list
 
         List<ActionVariation> actionVariations;

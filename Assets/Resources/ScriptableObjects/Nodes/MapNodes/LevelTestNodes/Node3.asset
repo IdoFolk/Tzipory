@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b806ea3731144ce8be6d3b5a64ac263e, type: 3}
+  m_Name: Node3
+  m_EditorClassIdentifier: 
+  nodeName: 
+  nodeID: 0
+  leadToNodes: []
+  unlockNodes:
+  - {fileID: 11400000, guid: 905fba5af2d6e354a90d2ae8a7055ed4, type: 2}
+  leadAndUnlockNodesSame: 1
+  startingNodeState: 0
+  battleMapNodeStateConfigs:
+  - nodeState: 0
+    _levelToOpen: {fileID: 11400000, guid: bb6c0f5a51c5ea54986f520370226ee9, type: 2}
+    overrideSprite: {fileID: 7482667652216324306, guid: d651bd555e52fa14c831b4894c1c0a26, type: 3}
+  - nodeState: 1
+    _levelToOpen: {fileID: 0}
+    overrideSprite: {fileID: -2413806693520163455, guid: bf5fa35dfe5519c488c5cf271beb8f13, type: 3}

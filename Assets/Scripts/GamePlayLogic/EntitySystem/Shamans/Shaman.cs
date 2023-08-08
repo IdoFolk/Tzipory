@@ -5,7 +5,8 @@ using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.Helpers;
 using Sirenix.OdinInspector;
-using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
+using Tzipory.SerializeData;
 using UnityEngine;
 
 namespace Shamans
@@ -13,23 +14,34 @@ namespace Shamans
     public class Shaman : BaseUnitEntity
     {
         [SerializeField, TabGroup("Proximity Indicator")] private ProximityIndicatorHandler _proximityHandler;
+        [SerializeField,TabGroup("Component")] private ClickHelper _clickHelper;
 
         [Space]
         [Header("Temps")]
         [SerializeField] private Temp_ShamanShotVisual _shotVisual;
-        [SerializeField] private ClickHelper _clickHelper;
         [SerializeField] private Temp_HeroMovement _tempHeroMovement;
+        
+        private ShamanSerializeData  _serializeData;
         
         private float _currentAttackRate;
 
-        public override void Init(BaseUnitEntityConfig parameter)
+        public override void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
-            base.Init(parameter);
+            base.Init(parameter, visualConfig);
+            var config = (ShamanSerializeData)parameter;
+            //add shaman config
+            
             EntityTeamType = EntityTeamType.Hero;
             _clickHelper.OnClick += _tempHeroMovement.SelectHero;
             
             _proximityHandler.Init(AttackRange.CurrentValue);//MAY need to move to OnEnable - especially if we use ObjectPooling instead of instantiate
         }
+
+        // public void Init(ShamanSerializeData parameter)
+        // {
+        //     
+        // }
+
         private void OnDisable()
         {
             _proximityHandler.Disable();
@@ -44,6 +56,7 @@ namespace Shamans
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            _serializeData.UpdateData(this);//need to make endGame logic
             _clickHelper.OnClick -= _tempHeroMovement.SelectHero;
         }
 
@@ -78,11 +91,11 @@ namespace Shamans
             
             if (CritChance.CurrentValue > Random.Range(0, 100))
             {
-                EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.OnCritAttack);
+                EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
                 _shotVisual.Shot(Targeting.CurrentTarget,CritDamage.CurrentValue,true);
                 return;
             }
-            EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.OnAttack);
+            EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
             _shotVisual.Shot(Targeting.CurrentTarget,AttackDamage.CurrentValue,false);
         }
 

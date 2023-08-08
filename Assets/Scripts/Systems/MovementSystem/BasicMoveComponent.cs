@@ -26,7 +26,7 @@ namespace Tzipory.EntitySystem.EntityComponents
             AdjustAgentSpeed(_speedStat.CurrentValue);
         }
 
-        public Stat MoveSpeed => _speedStat;
+        public Stat MovementSpeed => _speedStat;
 
         public int EntityInstanceID => throw new System.NotImplementedException();
 

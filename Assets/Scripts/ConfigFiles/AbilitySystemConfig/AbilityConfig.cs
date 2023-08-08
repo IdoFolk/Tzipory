@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using Helpers.Consts;
 using Sirenix.OdinInspector;
+using Tzipory.ConfigFiles;
 using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.EntitySystem.TargetingSystem;
 using UnityEngine;
@@ -7,7 +9,7 @@ using UnityEngine;
 namespace Tzipory.AbilitiesSystem.AbilityConfigSystem
 {
     [CreateAssetMenu(fileName = "NewAbilityConfig", menuName = "ScriptableObjects/EntitySystem/AbilitySystem/New ability config", order = 0)]
-    public class AbilityConfig : ScriptableObject
+    public class AbilityConfig : ScriptableObject , IConfigFile
     {
         [SerializeField,Tooltip("")] private int _abilityId;
         [SerializeField,Tooltip("")] private string _abilityName;
@@ -58,6 +60,9 @@ namespace Tzipory.AbilitiesSystem.AbilityConfigSystem
         public float Cooldown => _cooldown;
         public float CastTime => _castTime;
         public List<StatusEffectConfig> StatusEffectConfigs => _statusEffectConfigs;
+
+        public int ConfigObjectId => _abilityId;
+        public int ConfigTypeId => Constant.DataId.ABILITY_DATA_ID;
         public bool DoExitEffects => _doExitEffects;
         public List<StatusEffectConfig> OnExitStatusEffectConfigs => _doExitEffects? _statusEffectConfigsOnExit : null;
     }

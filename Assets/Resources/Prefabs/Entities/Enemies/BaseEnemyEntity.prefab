@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseEnemyEntity
       objectReference: {fileID: 0}
+    - target: {fileID: 2072831625575990052, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_Name
+      value: EllipseTargetingShape
+      objectReference: {fileID: 0}
     - target: {fileID: 2501377926167560866, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -204,11 +208,10 @@ MonoBehaviour:
   _timerHandler:
     _timerSerializeDatas: []
   _stats: []
-  _bodyCollider: {fileID: 4453479690777420381}
-  _spriteRenderer: {fileID: 6032355350260239207}
-  _visualQueueEffectPosition: {fileID: 5055015959598962312}
   _particleEffectPosition: {fileID: 6503520961240737061}
   _soundHandler: {fileID: 7035656871031306711}
+  _spriteRenderer: {fileID: 6032355350260239207}
+  _visualQueueEffectPosition: {fileID: 5055015959598962312}
   _onDeath:
     _sequenceName: 
     _id: 0

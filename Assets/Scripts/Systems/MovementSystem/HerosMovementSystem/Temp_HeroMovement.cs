@@ -15,7 +15,7 @@ namespace MovementSystem.HerosMovementSystem
         
         private void Start()
         {
-            _moveComponent.Init(_shaman.MoveSpeed);
+            _moveComponent.Init(_shaman.MovementSpeed);
         }
         public void SetTarget(Vector3 pos)
         {

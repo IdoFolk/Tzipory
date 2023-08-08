@@ -1,12 +1,10 @@
 ﻿using System;
 using Helpers.Consts;
-using Sirenix.OdinInspector;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.Systems.PoolSystem;
-using Tzipory.Tools.Interface;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -38,7 +36,7 @@ namespace Enemes
             EntityTeamType = EntityTeamType.Enemy;
             timer = 0;
             _isAttacking  = false;
-            BasicMoveComponent.Init(MoveSpeed);//temp!
+            BasicMoveComponent.Init(MovementSpeed);//temp!
             
             var enemyConfig = (EnemyConfig)parameter;
             

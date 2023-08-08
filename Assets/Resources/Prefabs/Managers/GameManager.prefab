@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3616092513852329415}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &711364138736782852
 MonoBehaviour:
@@ -44,9 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f476b98b261e0840b8ef4cc606da198, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _partySerializeData:
-    _shamanPrefab: {fileID: 7330099708541644612, guid: 653c4468a24830841aa7c6d5cc9ef9b1, type: 3}
-    _partyParent: {fileID: 0}
-    _entityConfigs: []
+  _shamanConfigs:
+  - {fileID: 11400000, guid: 1860914778f26304ebb1455b9221a5ef, type: 2}
+  - {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
+  - {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
   _levelParent: {fileID: 0}
-  _levelSerializeData: {fileID: 11400000, guid: b2410bd7672fb3c44a347198cb6e74fa, type: 2}
+  _levelConfig: {fileID: 11400000, guid: 19ab654e3cb8f3c4a94313085d6e084b, type: 2}
+  _shamanParent: {fileID: 0}
+  _enemiesParent: {fileID: 0}

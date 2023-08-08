@@ -3,11 +3,14 @@ using Tzipory.AbilitiesSystem;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.AbilitiesSystem.AbilityExecuteTypes;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.SerializeData.AbilitySystemSerializeData;
 
 namespace Tzipory.Factory
 {
     public class AbilityFactory
     {
+        
+        [Obsolete("Use AbilitySerializeData")]
         public static IAbilityCaster GetAbilityCaster(IEntityTargetingComponent entityCasterTargetingComponent,AbilityConfig abilityConfig)
         {
             switch (abilityConfig.AbilityCastType)
@@ -25,6 +28,7 @@ namespace Tzipory.Factory
             return null; //temp
         }
 
+        [Obsolete("Use AbilitySerializeData")]
         public static IAbilityExecutor GetAbilityExecutor(IEntityTargetAbleComponent caster,AbilityConfig abilityConfig)
         {
             switch (abilityConfig.AbilityExecuteType)

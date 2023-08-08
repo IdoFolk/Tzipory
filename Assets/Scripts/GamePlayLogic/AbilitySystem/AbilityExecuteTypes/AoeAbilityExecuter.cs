@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Helpers.Consts;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.SerializeData.AbilitySystemSerializeData;
+using Tzipory.SerializeData.StatSystemSerilazeData;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
 {
@@ -24,7 +28,7 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
         public List<StatusEffectConfig> OnEnterStatusEffects { get; }
         public List<StatusEffectConfig> OnExitStatusEffects { get; }
 
-
+        [Obsolete("Use AbilitySerializeData")]
         public AoeAbilityExecuter(IEntityTargetAbleComponent caster,AbilityConfig abilityConfig)
         {
             Caster = caster;
@@ -33,14 +37,14 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
             
             OnEnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
             if(abilityConfig.DoExitEffects)
-            OnExitStatusEffects.AddRange(abilityConfig.OnExitStatusEffectConfigs);
+                OnExitStatusEffects.AddRange(abilityConfig.OnExitStatusEffectConfigs);
 
             Radius = new Stat("AoeRadius", abilityConfig.AoeRadius, int.MaxValue, (int)Constant.Stats.AoeRadius);
             Duration = new Stat("AoeDuration", abilityConfig.AoeDuration, int.MaxValue, (int)Constant.Stats.AoeDuration);
 
             _aoePrefab = Resources.Load<GameObject>(AoePrefabPath);
         }
-
+        
         public void Init(IEntityTargetAbleComponent target)//temp
         {
             var aoeGameobject = Object.Instantiate(_aoePrefab,target.EntityTransform.position,Quaternion.identity).GetComponent<AoeAbilityEntity>();
@@ -53,7 +57,7 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
             foreach (var statusEffect in OnEnterStatusEffects)
                 target.StatusHandler.AddStatusEffect(statusEffect);
         }
-         public void ExecuteOnExit(IEntityTargetAbleComponent target)
+        public void ExecuteOnExit(IEntityTargetAbleComponent target)
         {
             foreach (var statusEffect in OnExitStatusEffects)
                 target.StatusHandler.AddStatusEffect(statusEffect);

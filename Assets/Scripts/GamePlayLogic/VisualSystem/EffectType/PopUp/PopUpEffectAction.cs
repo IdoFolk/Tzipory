@@ -26,8 +26,6 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
 
         protected override void OnStartEffectAction()
         {
-           
-            Debug.LogError("Pop up called");
             VisualComponent.PopUpTexter.SpawnPopUp(_config.PopUpText_Config);
         }
 

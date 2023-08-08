@@ -5,12 +5,10 @@ using Tzipory.BaseScripts;
 
 public class LevelVisualData_Monoton : MonoSingleton<LevelVisualData_Monoton> //TODO: This will probably be integrated into LevelData TBF 
 {
-    //public static LevelVisualData_Monoton Instance;
 
     [SerializeField] LevelVisualDataSO defualtSO;
     Level_VisualData visualData;
 
-    //public Vector2 DamageRange = new Vector2(10, 150); // 8 17
     public Vector2 DamageRange => visualData.DamageRange;
     public Vector2 FontSizeRange => visualData.FontSizeRange;
     public float Crit_FontSizeBonus => visualData.Crit_FontSizeBonus;
@@ -31,6 +29,7 @@ public class LevelVisualData_Monoton : MonoSingleton<LevelVisualData_Monoton> //
         visualData = levelVisualDataSO.level_VisualData;
     }
 
+  
 }
 [System.Serializable]
 public struct Level_VisualData

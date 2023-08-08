@@ -11,9 +11,6 @@ public class BasicPopupText : MonoBehaviour
     /// At fixed delta time
     /// </summary>
     [SerializeField] private float _moveSpeed;
-    /// <summary>
-    /// Time to Live
-    /// </summary>
     [SerializeField] private float _timeToLive;
 
     float _timeAlive;
@@ -25,7 +22,6 @@ public class BasicPopupText : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        //transform.Translate(Vector3.up * _riseSpeed);
         transform.Translate(Vector3.up * LevelVisualData_Monoton.Instance.PopUpText_MoveCurve.Evaluate(_timeAlive / _timeToLive) * _moveSpeed);
         transform.localScale = _originalocalScale * (LevelVisualData_Monoton.Instance.PopUpText_ScaleCurve.Evaluate(_timeAlive / _timeToLive));
         _text.alpha = LevelVisualData_Monoton.Instance.PopUpText_AlphaCurve.Evaluate(_timeAlive / _timeToLive);
@@ -33,16 +29,6 @@ public class BasicPopupText : MonoBehaviour
     }
 
 
-    // public void Set(string text, PopUpText_Config popUpText_Config)
-    //{
-    //    _text.text = text;
-    //    _text.color = popUpText_Config.color;
-    //    _text.fontSize = popUpText_Config.size;
-    //    _riseSpeed = popUpText_Config.riseSpeed;
-
-    //    //Calling the kill
-    //    Invoke("Unset", popUpText_Config.TTL);
-    //}
     public void Set(PopUpText_Config popUpText_Config)
     {
         _text.text = popUpText_Config.text;
@@ -50,8 +36,7 @@ public class BasicPopupText : MonoBehaviour
         _text.fontSize = popUpText_Config.size;
         _moveSpeed = popUpText_Config.riseSpeed;
         _timeToLive = popUpText_Config.timeToLive;
-        //Calling the kill
-        //Invoke("Unset", popUpText_Config.TTL);
+        
 
         StartCoroutine(nameof(KillMe));
     }
@@ -67,8 +52,7 @@ public class BasicPopupText : MonoBehaviour
         _text.text = "";
         _text.color = Color.black;
         _text.fontSize = 1;
-        //_riseSpeed = 0;
-
+     
         gameObject.SetActive(false);
     }
 

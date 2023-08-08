@@ -8,25 +8,25 @@ namespace Systems.CampSystem
     public class ShamanPartyMemberSelectUI : MonoBehaviour
     {
         //change it to consts
-        public ShamanSerializeData AssociatedShamanData
+        public int AssociatedShamanID
         {
-            get { return _associatedShamanData; }
+            get { return _associatedShamanID; }
         }
         public Toggle toggle;
         public Image shamanImage;
 
-        public Action<ShamanSerializeData, bool> onToggleChanged;
+        public Action<int, bool> onToggleChanged;
         
-        private ShamanSerializeData _associatedShamanData;
+        private int _associatedShamanID;
 
-        public void SetShamanData(ShamanSerializeData newShamanData)
+        public void SetShamanID(int newShamanID)
         {
-            _associatedShamanData = newShamanData;
+            _associatedShamanID = newShamanID;
         }
         
         public void ToggleChanged(bool isActive)
         {
-            onToggleChanged?.Invoke(_associatedShamanData,isActive);
+            onToggleChanged?.Invoke(_associatedShamanID,isActive);
         }
     }
 }

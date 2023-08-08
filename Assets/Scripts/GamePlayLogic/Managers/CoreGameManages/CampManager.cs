@@ -51,11 +51,11 @@ namespace GameplayeLogic.Managers
             //How do we ask for data?
             //Just for testing, toggles will be created at runtime
             ShamanSerializeData shamanSerializeData = DataManager.DataRequester.GetData<ShamanSerializeData>(Constant.ShamanId.TOOR_ID);
-            _campUIManager.shamanToggles[0].SetShamanData(shamanSerializeData);
+            _campUIManager.shamanToggles[0].SetShamanID(shamanSerializeData.ShamanId);
             shamanSerializeData = DataManager.DataRequester.GetData<ShamanSerializeData>(Constant.ShamanId.JAVAN_ID);
-            _campUIManager.shamanToggles[1].SetShamanData(shamanSerializeData);
+            _campUIManager.shamanToggles[1].SetShamanID(shamanSerializeData.ShamanId);
             shamanSerializeData = DataManager.DataRequester.GetData<ShamanSerializeData>(Constant.ShamanId.NADIA_ID);
-            _campUIManager.shamanToggles[2].SetShamanData(shamanSerializeData);
+            _campUIManager.shamanToggles[2].SetShamanID(shamanSerializeData.ShamanId);
 
             foreach (ShamanPartyMemberSelectUI shamanPartyMemberSelectUI in _campUIManager.shamanToggles)
             {
@@ -102,36 +102,37 @@ namespace GameplayeLogic.Managers
 
         #region Party
         
-        public void TogglePartyMember(ShamanSerializeData targetShaman, CollectionActionType actionType)
+        public void TogglePartyMember(int targetShamanID, CollectionActionType actionType)
         {
-            GameManager.PlayerManager.PlayerSerializeData.TogglePartyMember(targetShaman, actionType);
-        }
-
-        [Obsolete("Old method for setting party members")]
-        /// <summary>
-        /// Old party members apply method
-        /// </summary>
-        public void ApplyPartyMembers()
-        {
-            //Make it happan witch each click
-            List<ShamanSerializeData> selectedShamans = GetSelectedShamans();
-            GameManager.PlayerManager.PlayerSerializeData.SetPartyMembers(selectedShamans);
-        }
-
-        void PartyMemberToggleChanged(ShamanSerializeData shamanSerializeData, bool isToggleActive)
-        {
-            TogglePartyMember(shamanSerializeData, isToggleActive ? CollectionActionType.Add : CollectionActionType.Remove);
+            GameManager.PlayerManager.PlayerSerializeData.TogglePartyMember(targetShamanID, actionType);
         }
         
-        List<ShamanSerializeData> GetSelectedShamans()
+        //
+        // [Obsolete("Old method for setting party members")]
+        // /// <summary>
+        // /// Old party members apply method
+        // /// </summary>
+        // public void ApplyPartyMembers()
+        // {
+        //     //Make it happan witch each click
+        //     List<ShamanSerializeData> selectedShamans = GetSelectedShamans();
+        //     GameManager.PlayerManager.PlayerSerializeData.SetPartyMembers(selectedShamans);
+        // }
+
+        void PartyMemberToggleChanged(int shamanSerializeID, bool isToggleActive)
+        {
+            TogglePartyMember(shamanSerializeID, isToggleActive ? CollectionActionType.Add : CollectionActionType.Remove);
+        }
+        
+        List<int> GetSelectedShamans()
         {
             //Change to whatever the ui is setting which shamans to take
-            List<ShamanSerializeData> selectedShamans = new List<ShamanSerializeData>();
+            List<int> selectedShamans = new List<int>();
             foreach (ShamanPartyMemberSelectUI shamanPartyMemberSelectUI in _campUIManager.shamanToggles)
             {
                 if (shamanPartyMemberSelectUI.toggle.isOn)
                 {
-                    selectedShamans.Add(shamanPartyMemberSelectUI.AssociatedShamanData);
+                    selectedShamans.Add(shamanPartyMemberSelectUI.AssociatedShamanID);
                 }
             }
 
@@ -141,27 +142,22 @@ namespace GameplayeLogic.Managers
 
         #region ShamanManagment
 
-        public void ToggleItemOnShaman(ShamanSerializeData targetShaman, ShamanItemSerializeData targetItem,
+        public void ToggleItemOnShaman(int targetShamanID, int targetItemInstanceID,
             CollectionActionType actionType)
         {
-            if (actionType == CollectionActionType.Add)
-            {
-                targetShaman.AttachItem(targetItem);
-            }
-            else
-            {
-                targetShaman.RemoveItem(targetItem);
-            }
+            GameManager.PlayerManager.PlayerSerializeData
+                .ToggleItemOnShaman(targetShamanID, targetItemInstanceID, actionType);
+
         }
         
         public void AttachItemToShamanTest()
         {
-            ToggleItemOnShaman(_campUIManager.shamanToggles[0].AssociatedShamanData, testingItem, CollectionActionType.Add);
+            ToggleItemOnShaman(_campUIManager.shamanToggles[0].AssociatedShamanID, testingItem.ItemInstanceId, CollectionActionType.Add);
         }
         
         public void RemoveItemFromShamanTest()
         {
-            ToggleItemOnShaman(_campUIManager.shamanToggles[0].AssociatedShamanData, testingItem, CollectionActionType.Remove);
+            ToggleItemOnShaman(_campUIManager.shamanToggles[0].AssociatedShamanID, testingItem.ItemInstanceId, CollectionActionType.Remove);
         }
 
         #endregion

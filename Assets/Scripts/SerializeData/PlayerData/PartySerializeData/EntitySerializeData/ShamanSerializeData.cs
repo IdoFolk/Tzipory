@@ -10,14 +10,14 @@ namespace Tzipory.SerializeData
     [System.Serializable]
     public class ShamanSerializeData : UnitEntitySerializeData , IUpdateData<Shaman>
     {
-        public IReadOnlyList<ShamanItemSerializeData> ItemsSerializeData => itemsSerializeData;
+        public IReadOnlyList<ShamanItemSerializeData> AttachedItemsSerializeData => attachedItemsSerializeData;
         //changed to public for testing until i figure ouot that data requester
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanId;
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanLevel;
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanExp;
 
         //
-        private List<ShamanItemSerializeData> itemsSerializeData = new List<ShamanItemSerializeData>();
+        private List<ShamanItemSerializeData> attachedItemsSerializeData = new List<ShamanItemSerializeData>();
         //add consumables serializeData
         
         public int ShamanId => _shamanId;
@@ -31,7 +31,7 @@ namespace Tzipory.SerializeData
             
             _shamanId = config.ConfigObjectId;
             //Need to be in config?
-            itemsSerializeData = new List<ShamanItemSerializeData>();
+            attachedItemsSerializeData = new List<ShamanItemSerializeData>();
             //need to add more shaman config logic
         }
 
@@ -44,20 +44,20 @@ namespace Tzipory.SerializeData
 
         public void AttachItem(ShamanItemSerializeData itemToAttach)
         {
-            for (int i = itemsSerializeData.Count - 1; i >= 0; i--)
+            for (int i = attachedItemsSerializeData.Count - 1; i >= 0; i--)
             {
-                if (itemsSerializeData[i].TargetSlot == itemToAttach.TargetSlot)
+                if (attachedItemsSerializeData[i].TargetSlot == itemToAttach.TargetSlot)
                 {
-                    RemoveItem(itemsSerializeData[i]);
+                    RemoveItem(attachedItemsSerializeData[i]);
                 }
             }
             
-            itemsSerializeData.Add(itemToAttach);
+            attachedItemsSerializeData.Add(itemToAttach);
         }
 
         public void RemoveItem(ShamanItemSerializeData shamanItemSerializeData)
         {
-            itemsSerializeData.Remove(shamanItemSerializeData);
+            attachedItemsSerializeData.Remove(shamanItemSerializeData);
         }
     }
 }

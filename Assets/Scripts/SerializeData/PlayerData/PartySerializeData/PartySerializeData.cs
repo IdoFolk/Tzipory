@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Helpers.Consts;
 using Systems.DataManagerSystem;
+using Tools.Enums;
 using Tzipory.ConfigFiles;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.Tools.Interface;
@@ -17,7 +18,9 @@ namespace Tzipory.SerializeData
         public List<ShamanDataContainer> ShamanDataContainers => _shamanDataContainers;
 
         //Add selected current party here + change to container
-        private List<ShamanSerializeData> _shamansInPartySerializeDatas = new List<ShamanSerializeData>();
+        private List<ShamanDataContainer> _shamansInPartyDataContainers = new List<ShamanDataContainer>();
+        
+    
 
         public bool IsInitialization { get; private set; }
         
@@ -34,7 +37,7 @@ namespace Tzipory.SerializeData
                 _shamanDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanConfig.UnitEntityVisualConfig));
             }
 
-            _shamansInPartySerializeDatas = new List<ShamanSerializeData>();
+            _shamansInPartyDataContainers = new List<ShamanDataContainer>();
             
             IsInitialization = true;
         }
@@ -56,36 +59,64 @@ namespace Tzipory.SerializeData
             IsInitialization = true;
         }
 
-        public void SetPartyMembers(List<ShamanSerializeData> shamanSerializeDatas)
+        public void SetPartyMembers(List<ShamanDataContainer> shamanSerializeDataContainers)
         {
-            _shamansInPartySerializeDatas = shamanSerializeDatas;
+            _shamansInPartyDataContainers = shamanSerializeDataContainers;
         }
 
         //send here the id
-        public void AddPartyMember(ShamanSerializeData targetShaman)
+        public void AddPartyMember(int targetShamanID)
         {
             //Find the serializeData in the list
-            ShamanSerializeData shamanSerializeDataInParty = _shamansInPartySerializeDatas.Find(shamanSerializeData => shamanSerializeData.ShamanId == targetShaman.ShamanId);
-            if (shamanSerializeDataInParty == null)
+            ShamanDataContainer shamanContainerDataFromRoster = _shamanDataContainers.Find(shamanDataContainer =>
+                shamanDataContainer.ShamanSerializeData.ShamanId == targetShamanID);
+
+            if (shamanContainerDataFromRoster == null)
             {
-                _shamansInPartySerializeDatas.Add(targetShaman);
+                Debug.LogError("Why did we try to add shaman that is not in the roster?");
+                return;
             }
+
+            if (!_shamansInPartyDataContainers.Contains(shamanContainerDataFromRoster))
+                _shamansInPartyDataContainers.Add(shamanContainerDataFromRoster);
             else
             {
                 Debug.LogError("Why did we try to add shaman that is already in the party?");
             }
         }
-        
-        public void RemovePartyMember(ShamanSerializeData targetShaman)
+
+        public void RemovePartyMember(int targetShamanID)
         {
-            ShamanSerializeData shamanSerializeDataInParty = _shamansInPartySerializeDatas.Find(shamanSerializeData => shamanSerializeData.ShamanId == targetShaman.ShamanId);
-            if (shamanSerializeDataInParty != null)
+            ShamanDataContainer shamanContainerDataFromRoster = _shamansInPartyDataContainers.Find(
+                shamanDataContainer =>
+                    shamanDataContainer.ShamanSerializeData.ShamanId == targetShamanID);
+            if (shamanContainerDataFromRoster == null)
             {
-                _shamansInPartySerializeDatas.Remove(shamanSerializeDataInParty);
+                Debug.LogError("Why did we try to remove shaman that is not in the party?");
+                return;
+            }
+
+            _shamansInPartyDataContainers.Remove(shamanContainerDataFromRoster);
+        }
+
+        public void ToggleItemOnShaman(int targetShamanID, ShamanItemSerializeData targetItemSerializeData,
+            CollectionActionType actionType)
+        {
+            ShamanDataContainer shamanContainerDataFromRoster = _shamanDataContainers.Find(shamanDataContainer =>
+                shamanDataContainer.ShamanSerializeData.ShamanId == targetShamanID);
+            if (shamanContainerDataFromRoster == null)
+            {
+                Debug.LogError("Trying to toggle item on shaman who already has");
+                return;
+            }
+            
+            if (actionType == CollectionActionType.Add)
+            {
+                shamanContainerDataFromRoster.ShamanSerializeData.AttachItem(targetItemSerializeData);
             }
             else
             {
-                Debug.LogError("Why did we try to remove shaman that is not in the party?");
+                shamanContainerDataFromRoster.ShamanSerializeData.RemoveItem(targetItemSerializeData);
             }
         }
     }

@@ -22,6 +22,8 @@ namespace GameplayeLogic.Managersp
         [SerializeField] private int _currentWord;
         public WorldMapProgressionSerializeData WorldMapProgression { get; private set; }
         public PartySerializeData PartySerializeData { get; private set; }
+        
+        private List<ShamanItemSerializeData> _itemsSerializeData = new List<ShamanItemSerializeData>();
         //camp serializeData 
 
         public bool IsInitialization { get; private set; }
@@ -50,24 +52,38 @@ namespace GameplayeLogic.Managersp
         }
         
         //send him id
-        public void TogglePartyMember(ShamanSerializeData targetShaman, CollectionActionType actionType)
+        public void TogglePartyMember(int targetShamanID, CollectionActionType actionType)
         {
-          
             if (actionType == CollectionActionType.Add)
             {
-                PartySerializeData.AddPartyMember(targetShaman);
+                PartySerializeData.AddPartyMember(targetShamanID);
             }
             else
             {
-                PartySerializeData.RemovePartyMember(targetShaman);
+                PartySerializeData.RemovePartyMember(targetShamanID);
             }
         }
         
-        [Obsolete("Old method for setting party members")]
-        public void SetPartyMembers(List<ShamanSerializeData> shamanSerializeDatas)
+        public void ToggleItemOnShaman(int targetShamanID, int targetItemInstanceID,
+            CollectionActionType actionType)
         {
-            PartySerializeData.SetPartyMembers(shamanSerializeDatas);
+            ShamanItemSerializeData shamanItemData = _itemsSerializeData.Find(itemData =>
+                itemData.ItemInstanceId == targetItemInstanceID);
+
+            if (shamanItemData == null)
+            {
+                Debug.LogError("No item data found!");
+                return;
+            }
+            
+            PartySerializeData.ToggleItemOnShaman(targetShamanID, shamanItemData, actionType);
         }
+        
+        // [Obsolete("Old method for setting party members")]
+        // public void SetPartyMembers(List<ShamanSerializeData> shamanSerializeDatas)
+        // {
+        //     PartySerializeData.SetPartyMembers(shamanSerializeDatas);
+        // }
 
       
     }

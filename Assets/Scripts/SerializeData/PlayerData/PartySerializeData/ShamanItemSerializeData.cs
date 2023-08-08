@@ -24,10 +24,13 @@ namespace Tzipory.SerializeData
         public int SerializeTypeId => Constant.DataId.SHAMAN_ITEM_DATA_ID;
         
         public int ItemId => _itemId;
+
+        public int ItemInstanceId => _itemInstanceId;
         public ItemSlot TargetSlot => targetSlot;
 
 //TODO return to private, temp for testing
         public int _itemId;
+        public int _itemInstanceId;
         private ItemSlot targetSlot;
     }
 }

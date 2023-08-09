@@ -39,6 +39,11 @@ namespace Tzipory.EntitySystem.Entitys
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetHit;
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetCritHit;
 
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpTexter _popUpTexter;
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _defaultPopUpText_Config;
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _critPopUpText_Config;
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _healPopUpText_Config;
+
         #endregion
 
         #region Temps
@@ -285,6 +290,12 @@ namespace Tzipory.EntitySystem.Entitys
 
         public void Heal(float amount)
         {
+            _healPopUpText_Config.damage = amount;
+            _healPopUpText_Config.text = $"+{amount}";
+            _healPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(amount);
+            
+            _popUpTexter.SpawnPopUp(_healPopUpText_Config);
+            //_popUpTexter.SpawnPopUp($"+{amount}", _healPopUpText_Config);
             Health.AddToValue(amount);
             //OnHealthChanged?.Invoke();
             // if (Health.CurrentValue > Health.BaseValue)
@@ -299,6 +310,23 @@ namespace Tzipory.EntitySystem.Entitys
                     ? Constant.EffectSequenceIds.GET_CRIT_HIT
                     : Constant.EffectSequenceIds.GET_HIT);
                 
+                IsDamageable = false; // Is this what turns on InvincibleTime?
+                if (isCrit)
+                {
+                    _critPopUpText_Config.damage = damage;
+                    _critPopUpText_Config.text = $"{damage}";
+                    _critPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
+                    _critPopUpText_Config.size += LevelVisualData_Monoton.Instance.Crit_FontSizeBonus; //this is pretty bad imo
+                    _popUpTexter.SpawnPopUp(_critPopUpText_Config);
+                }
+                else
+                {
+                    //_defaultPopUpText_Config.text = $"-{damage}";
+                    _defaultPopUpText_Config.damage = damage;
+                    _defaultPopUpText_Config.text = $"{damage}";
+                    _defaultPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
+                    _popUpTexter.SpawnPopUp(_defaultPopUpText_Config);
+                }
                 Health.ReduceFromValue(damage);
                 IsDamageable = false;
             }
@@ -371,6 +399,7 @@ namespace Tzipory.EntitySystem.Entitys
         public SoundHandler SoundHandler => _soundHandler;
         public Transform ParticleEffectPosition => _particleEffectPosition;
         public Transform VisualQueueEffectPosition => _visualQueueEffectPosition;
+        public PopUpTexter PopUpTexter => _popUpTexter;
 
         private void AddStatusEffectVisual(BaseStatusEffect baseStatusEffect) =>
             EffectSequenceHandler.PlaySequenceByData(baseStatusEffect.EffectSequence);//temp

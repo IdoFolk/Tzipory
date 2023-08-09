@@ -8,7 +8,6 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
 {
     public class ProjectileAbilityEntity : BaseAbilityEntity , ITargetableReciever
     {
-        
         private float _penetrationNumber;
         private float _speed;
         private Vector3 _dir;

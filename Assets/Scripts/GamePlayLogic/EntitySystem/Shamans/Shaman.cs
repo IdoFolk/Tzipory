@@ -56,7 +56,7 @@ namespace Shamans
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            _serializeData.UpdateData(this);//need to make endGame logic
+            _serializeData?.UpdateData(this);//need to make endGame logic
             _clickHelper.OnClick -= _tempHeroMovement.SelectHero;
         }
 

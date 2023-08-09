@@ -16,7 +16,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public static event Action<bool> OnEndGame;
-    
+
     private PoolManager _poolManager;
    
     public static PartyManager PartyManager { get; private set; }
@@ -103,7 +103,7 @@ public class LevelManager : MonoBehaviour
         GAME_TIME.SetTimeStep(0);
 
         if (isWon)
-            GameManager.GameData.SetCompletedNodeStat(_levelConfig.LevelId,true);
+            GameManager.GameData?.SetCompletedNodeStat(_levelConfig.LevelId,true);
 
         OnEndGame?.Invoke(isWon);
         IsGameRunning = false;

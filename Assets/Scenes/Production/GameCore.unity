@@ -2933,6 +2933,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1182395357}
     m_Modifications:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _levelConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 962c0de1a4cb1b14ab67a6f2204ba677, type: 2}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelParent
       value: 
       objectReference: {fileID: 1680609405}
@@ -2944,6 +2948,18 @@ PrefabInstance:
       propertyPath: _enemiesParent
       value: 
       objectReference: {fileID: 1146192134}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _shamanConfigs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _shamanConfigs.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _shamanConfigs.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
     - target: {fileID: 3616092513852329415, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: m_Name
       value: GameManager

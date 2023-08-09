@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Torquize_EffectActionConfig
   m_EditorClassIdentifier: 
   PopUpText_Config:
-    text: Crit Damage +25
+    text: Crit Chance +25%
     color: {r: 0, g: 1, b: 0.94361687, a: 1}
     size: 8
     riseSpeed: 0.01

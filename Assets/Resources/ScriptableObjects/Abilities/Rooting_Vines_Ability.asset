@@ -18,7 +18,7 @@ MonoBehaviour:
   _projectileSpeed: 0
   _projectilePenetration: 0
   abilityExecuteType: 0
-  _aoeRadius: 3
+  _aoeRadius: 8
   _aoeDuration: 1
   _chainRadius: 0
   _chainDuration: 0
@@ -29,3 +29,5 @@ MonoBehaviour:
   _statusEffectConfigs:
   - {fileID: 11400000, guid: 8bb693849af258646b923c908f621942, type: 2}
   - {fileID: 11400000, guid: 7678dc94c3f364644b6e5f5e040d2afd, type: 2}
+  _doExitEffects: 0
+  _statusEffectConfigsOnExit: []

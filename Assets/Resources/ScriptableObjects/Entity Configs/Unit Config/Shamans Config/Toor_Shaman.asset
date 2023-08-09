@@ -31,11 +31,11 @@ MonoBehaviour:
   _attackRange:
     _name: AttackRange
     _id: 3
-    _baseValue: 8
+    _baseValue: 12
   _targetingRange:
     _name: TargetingRange
     _id: 4
-    _baseValue: 8
+    _baseValue: 12
   _CritDamage:
     _name: CritDamage
     _id: 6

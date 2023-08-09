@@ -286,7 +286,7 @@ MonoBehaviour:
     _repeatPattern: 0
     _textBoxPrefab: {fileID: 6879172769592693696, guid: 0a0724f7566067d478ba48523e410bbf, type: 3}
     _textSpawnPoint: {fileID: 800062657850464996}
-    _lineMagnitude: 0
+    _lineMagnitude: 0.4
     _lineStep: 0.5
   _defaultPopUpText_Config:
     text: 

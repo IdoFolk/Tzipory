@@ -30,7 +30,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
             waveData.SetName($"Wave {_waves.Count + 1}"); 
             _waves.Add(waveData);
         }
-        [Button("Reset data"),PropertyOrder(0)]
+        [Button("Continue data"),PropertyOrder(0)]
         public void ResetData()
         {
             _waves.Clear();

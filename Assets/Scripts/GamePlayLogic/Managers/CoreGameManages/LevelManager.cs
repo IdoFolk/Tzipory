@@ -108,13 +108,8 @@ public class LevelManager : MonoBehaviour
         OnEndGame?.Invoke(isWon);
         IsGameRunning = false;
     }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
-
-    public void Reset()
+    
+    public void Continue()
     {
         GAME_TIME.SetTimeStep(1);
         GameManager.SceneHandler.LoadScene(SceneType.Map);

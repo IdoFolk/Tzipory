@@ -63,7 +63,7 @@ public class RoundedBoxCollider_Editor : Editor {
         rb.radius = EditorGUILayout.Slider("Radius",rb.radius, 0f, lesser);
         rb.radius = Mathf.Clamp(rb.radius, 0f, lesser);
 
-        if (GUILayout.Button("Reset"))
+        if (GUILayout.Button("Continue"))
         {
             rb.smoothness = 15;
             rb.width = 2;

@@ -21,7 +21,7 @@ namespace Tzipory.Tools.Sound
             
             if (audioSources == null)
             {
-                Debug.LogWarning("did nit find any available audio source");
+                Debug.LogWarning("did not find any available audio source");
                 return;
             }
             

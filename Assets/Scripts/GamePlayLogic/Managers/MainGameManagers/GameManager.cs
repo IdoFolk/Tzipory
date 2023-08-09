@@ -1,7 +1,7 @@
-using System;
 using GameplayeLogic.Managersp;
 using GamePlayLogic.Managers;
 using Systems.DataManagerSystem;
+using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.ConfigFiles;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;
@@ -51,5 +51,10 @@ public class GameManager : MonoBehaviour
     {
         if (_sceneHandler == null)
             _sceneHandler = FindObjectOfType<SceneHandler>();
+    }
+    
+    public void Quit()
+    {
+        Application.Quit();
     }
 }

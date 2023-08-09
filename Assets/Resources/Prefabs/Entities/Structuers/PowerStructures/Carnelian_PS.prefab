@@ -58,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: _range
-      value: 4
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: _myEffect

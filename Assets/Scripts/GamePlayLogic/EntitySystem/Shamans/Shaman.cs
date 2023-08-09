@@ -92,7 +92,7 @@ namespace Shamans
             if (CritChance.CurrentValue > Random.Range(0, 100))
             {
                 EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
-                _shotVisual.Shot(TargetingHandler.CurrentTarget,CritDamage.CurrentValue,true);
+                _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true);
                 return;
             }
             EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);

@@ -73,9 +73,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
---- !u!114 &1599873742953895986 stripped
+--- !u!114 &5767230331226046982 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4692774958881295513, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
+  m_CorrespondingSourceObject: {fileID: 511897607666947757, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
   m_PrefabInstance: {fileID: 6274623994793170091}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -230,7 +230,7 @@ MonoBehaviour:
   _timerHandler:
     _timerSerializeDatas: []
   visualTransform: {fileID: 7304830557626300753}
-  _colliderTargetingArea: {fileID: 1599873742953895986}
+  _colliderTargetingArea: {fileID: 5767230331226046982}
 --- !u!4 &6759074531638166618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4431456642009094626, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}

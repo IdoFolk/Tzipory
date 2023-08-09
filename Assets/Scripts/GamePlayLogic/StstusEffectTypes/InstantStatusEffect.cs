@@ -1,4 +1,6 @@
 ﻿
+using UnityEngine;
+
 namespace Tzipory.EntitySystem.StatusSystem
 {
     internal sealed class InstantStatusEffect : BaseStatusEffect
@@ -11,7 +13,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         {
             foreach (var statModifier in modifiers)
                 statModifier.ProcessStatModifier(StatToEffect);
-
+            Debug.Log("ProcessStatusEffect");
             StatusEffectFinish();
         }
 

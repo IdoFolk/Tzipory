@@ -25,6 +25,7 @@ public class Temp_Projectile : MonoBehaviour
         _damage = damage;
         _isCrit = isCrit;
         _dir = (_target.EntityTransform.position - transform.position).normalized;
+        transform.up = _dir;
     }
 
     void Update()

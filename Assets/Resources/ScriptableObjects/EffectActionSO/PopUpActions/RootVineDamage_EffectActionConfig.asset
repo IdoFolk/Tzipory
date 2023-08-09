@@ -15,8 +15,8 @@ MonoBehaviour:
   PopUpText_Config:
     text: 20
     color: {r: 1, g: 1, b: 1, a: 1}
-    size: 6.8
-    riseSpeed: 0.05
+    size: 3.5555556
+    riseSpeed: 0.03
     timeToLive: 1
     damage: 20
   _levelVisualDataSO: {fileID: 11400000, guid: 1c477da2ae86013479986cb933c972e0, type: 2}

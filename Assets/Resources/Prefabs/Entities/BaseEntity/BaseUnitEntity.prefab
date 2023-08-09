@@ -302,7 +302,7 @@ PrefabInstance:
       addedObject: {fileID: 3188068211414569984}
     - targetCorrespondingSourceObject: {fileID: 3050176629895901538, guid: 9269dec163eba4548ad23545f9d185cc, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 5713858291629571756}
+      addedObject: {fileID: 742026710975737967}
   m_SourcePrefab: {fileID: 100100000, guid: 9269dec163eba4548ad23545f9d185cc, type: 3}
 --- !u!1 &1420442367539004591 stripped
 GameObject:
@@ -336,8 +336,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &5713858291629571756
-CircleCollider2D:
+--- !u!61 &742026710975737967
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -368,9 +368,19 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!4 &7921501042575430128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6056453708549399613, guid: 9269dec163eba4548ad23545f9d185cc, type: 3}

@@ -33,13 +33,13 @@ namespace GameplayeLogic.Managersp
             IsInitialization = true;
         }
         
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
         public void SetPartyData(ShamanConfig[] shamanConfigs)
         {
             PartySerializeData = new PartySerializeData();
             PartySerializeData.Init(shamanConfigs);
         }
-#endif
+//#endif
         
         public void Dispose()
         {

@@ -28,7 +28,7 @@ namespace Tzipory.Systems.SceneSystem
             PresistanteScene = SceneManager.GetActiveScene();
 
 #if UNITY_EDITOR
-            _minLoadTime = 0;
+           // _minLoadTime = 0;
 #endif
         }
 

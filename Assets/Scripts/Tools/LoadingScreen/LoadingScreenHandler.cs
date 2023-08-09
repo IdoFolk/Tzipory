@@ -12,6 +12,7 @@ namespace Tzipory.Tools.LoadingScreen
     { 
         [SerializeField,TabGroup("LoadingScreen")] private float _fadeInDuration = 1;
         [SerializeField,TabGroup("LoadingScreen")] private GameObject _viewPort;
+        [SerializeField,TabGroup("LoadingScreen")] private GameObject _uiScreen;
         [SerializeField,TabGroup("LoadingScreen")] private Image _backGround;
 
         [SerializeField,TabGroup("ToolTip")] private TMP_Text _toolTipText;
@@ -51,12 +52,15 @@ namespace Tzipory.Tools.LoadingScreen
             
             _toolTipDelayTimer = UnityEngine.Random.Range(_toolTipDelay.x, _toolTipDelay.y);
             _toolTipText.text = _toolTip.GetToolTip();
-
+            
+            _uiScreen.SetActive(true);
             IsFadeIn = true;
         }
 
         public IEnumerator FadeOut()
         {
+            _uiScreen.SetActive(false);
+            
             float fade = 1;
 
             while (fade > 0)

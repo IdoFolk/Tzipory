@@ -31,7 +31,7 @@ namespace Shamans
             var config = (ShamanSerializeData)parameter;
             //add shaman config
             
-            EntityTeamType = EntityTeamType.Hero;
+            EntityType = EntityType.Hero;
             _clickHelper.OnClick += _tempHeroMovement.SelectHero;
             
             _proximityHandler.Init(AttackRange.CurrentValue);//MAY need to move to OnEnable - especially if we use ObjectPooling instead of instantiate
@@ -49,7 +49,7 @@ namespace Shamans
 
         protected override void UpdateEntity()
         {
-            if (Targeting.CurrentTarget != null)//temp
+            if (TargetingHandler.CurrentTarget != null)//temp
                 Attack();
         }
 
@@ -68,7 +68,7 @@ namespace Shamans
                 return;
             }
             
-            AbilityHandler.CastAbility(Targeting.AvailableTargets);
+            AbilityHandler.CastAbility(TargetingHandler.AvailableTargets);
             
             bool canAttack = false;
 
@@ -92,11 +92,11 @@ namespace Shamans
             if (CritChance.CurrentValue > Random.Range(0, 100))
             {
                 EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
-                _shotVisual.Shot(Targeting.CurrentTarget,CritDamage.CurrentValue,true);
+                _shotVisual.Shot(TargetingHandler.CurrentTarget,CritDamage.CurrentValue,true);
                 return;
             }
             EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
-            _shotVisual.Shot(Targeting.CurrentTarget,AttackDamage.CurrentValue,false);
+            _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue,false);
         }
 
         public override void OnEntityDead()

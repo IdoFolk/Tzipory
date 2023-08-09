@@ -6,9 +6,9 @@ namespace Tzipory.EntitySystem.EntityComponents
     public interface IEntityTargetingComponent : IEntityComponent
     {
         public Stat TargetingRange { get; }
-        public EntityTeamType EntityTeamType { get; }//temp
+        public EntityType EntityType { get; }
         public IPriorityTargeting DefaultPriorityTargeting { get; }
-        public TargetingHandler Targeting { get; set; }
+        public TargetingHandler TargetingHandler { get; }
         public float GetDistanceToTarget(IEntityTargetAbleComponent targetAbleComponent);
     }
 }

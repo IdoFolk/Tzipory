@@ -3,6 +3,8 @@ namespace Helpers.Consts
 {
     public static class Constant
     {
+        public const float ISOMETRIC_SCALE = 1.455f;
+        
         public static class EffectSequenceIds
         {
             public const int DEATH = 1;

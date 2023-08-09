@@ -236,6 +236,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseUnitEntity
       objectReference: {fileID: 0}
+    - target: {fileID: 3050176629895901538, guid: 9269dec163eba4548ad23545f9d185cc, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6056453708549399613, guid: 9269dec163eba4548ad23545f9d185cc, type: 3}
       propertyPath: m_RootOrder
       value: 0

@@ -1,10 +1,12 @@
-﻿using Tzipory.BaseSystem.TimeSystem;
+﻿using Systems.TargetingSystem;
+using Tools.Enums;
+using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
 namespace Tzipory.AbilitiesSystem.AbilityEntity
 {
-    public class ProjectileAbilityEntity : BaseAbilityEntity
+    public class ProjectileAbilityEntity : BaseAbilityEntity , ITargetableReciever
     {
         
         private float _penetrationNumber;
@@ -30,14 +32,22 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
                 Destroy(gameObject);
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        public void RecieveCollision(Collider2D other, IOStatType ioStatType)
         {
-            if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
             
-            if (targetAbleComponent.EntityInstanceID == _abilityExecutor.Caster.EntityInstanceID) return;
+        }
+
+        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
+        {
+            if (targetable.EntityInstanceID == _abilityExecutor.Caster.EntityInstanceID) return;
             
-            _abilityExecutor.Init(targetAbleComponent);
+            _abilityExecutor.Init(targetable);
             _penetrationNumber--;
+        }
+
+        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
+        {
+            
         }
     }
 }

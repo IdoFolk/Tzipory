@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using GamePlayLogic.AbilitySystem.AbilityEntity;
 using Helpers.Consts;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.EntitySystem.EntityComponents;
@@ -49,7 +50,7 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
         {
             var aoeGameobject = Object.Instantiate(_aoePrefab,target.EntityTransform.position,Quaternion.identity).GetComponent<AoeAbilityEntity>();
             //aoeGameobject.Init(target,Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
-            aoeGameobject.InitSimple(target,Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
+            aoeGameobject.Init(target,Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
         }
 
         public void Execute(IEntityTargetAbleComponent target)

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BaseEnemyEntity
       objectReference: {fileID: 0}
+    - target: {fileID: 1420442367539004591, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2072831625575990052, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_Name
       value: EllipseTargetingShape
@@ -133,6 +137,17 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2750211597899472799, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
   m_PrefabInstance: {fileID: 8475086043216172280}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6465310389454080891 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3180922671702007683, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+  m_PrefabInstance: {fileID: 8475086043216172280}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff23114f060d4e029e94556756dd680f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6503520961240737061 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3448816137356898781, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
@@ -171,6 +186,7 @@ MonoBehaviour:
   _stats: []
   _particleEffectPosition: {fileID: 6503520961240737061}
   _soundHandler: {fileID: 7035656871031306711}
+  _targetingHandler: {fileID: 6465310389454080891}
   _spriteRenderer: {fileID: 6032355350260239207}
   _visualQueueEffectPosition: {fileID: 5055015959598962312}
   _onDeath:

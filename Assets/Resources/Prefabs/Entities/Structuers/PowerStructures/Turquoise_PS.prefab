@@ -176,6 +176,22 @@ PrefabInstance:
       propertyPath: m_Points.Array.data[30].y
       value: -0.34400022
       objectReference: {fileID: 0}
+    - target: {fileID: 4273722055985562272, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: m_Size.x
+      value: 1.4628571
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273722055985562272, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: m_Size.y
+      value: 1.4628571
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273722055985562272, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b1a33335676bae348b7c9e4bc0a7554a, type: 3}
+    - target: {fileID: 4273722055985562272, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4291540667549584041, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: m_Radius
       value: 0.56

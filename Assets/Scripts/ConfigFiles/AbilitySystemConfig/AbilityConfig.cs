@@ -25,7 +25,7 @@ namespace Tzipory.AbilitiesSystem.AbilityConfigSystem
         [SerializeField,ShowIf("abilityExecuteType",AbilityExecuteType.Chain)] private float _chainDuration;
         [SerializeField,ShowIf("abilityExecuteType",AbilityExecuteType.Chain)] private float _chainAmount;
         
-        [Header("Targeting")]
+        [Header("TargetingHandler")]
         [SerializeField,Tooltip("")] private TargetingPriorityType targetingPriorityType;
         [Header("Ability parameters")]
         [SerializeField,Tooltip("")] private float _cooldown;

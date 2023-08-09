@@ -16,8 +16,8 @@ TagManager:
   - Floor
   - Entity
   - Projectile
-  - Shamans
-  - PS
+  - NavMesh
+  - 
   - Clickable
   - Shadow
   - 

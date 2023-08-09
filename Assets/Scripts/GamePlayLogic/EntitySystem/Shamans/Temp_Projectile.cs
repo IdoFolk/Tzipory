@@ -50,7 +50,7 @@ public class Temp_Projectile : MonoBehaviour
     {
         if (other.TryGetComponent<IEntityTargetAbleComponent>(out var hitedTarget))
         {
-            if (hitedTarget.EntityTeamType == EntityTeamType.Hero) return;
+            if (hitedTarget.EntityType == EntityType.Hero) return;
             //if (target.EntityInstanceID == _casterId) return;
             
             hitedTarget.TakeDamage(_damage,_isCrit);

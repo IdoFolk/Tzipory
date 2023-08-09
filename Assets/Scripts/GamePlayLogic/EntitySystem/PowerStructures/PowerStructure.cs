@@ -12,9 +12,10 @@ using UnityEngine;
 public class PowerStructure : BaseGameEntity , ITargetableReciever 
 {
     //temp config stuff
-    [SerializeField] private Stat _range;
+    [SerializeField] private float _range;
     
     [SerializeField] private StatusEffectConfig _myEffect;
+    [SerializeField] private Transform _targetingTransform;
     [SerializeField] private ProximityIndicatorHandler _proximityIndicatorHandler;
     [SerializeField] private Color _activeColor;
 
@@ -24,7 +25,8 @@ public class PowerStructure : BaseGameEntity , ITargetableReciever
     {
         base.Awake();
         _activeStatusEffectOnShaman = new Dictionary<int, IDisposable>();
-        _proximityIndicatorHandler.Init(_range.CurrentValue); 
+        _targetingTransform.localScale = new Vector3(_range, _range, 1);
+        _proximityIndicatorHandler.Init(_range); 
     }
 
     private void OnDisable()

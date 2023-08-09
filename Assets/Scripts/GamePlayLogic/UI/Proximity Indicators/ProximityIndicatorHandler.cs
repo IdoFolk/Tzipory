@@ -22,7 +22,7 @@ public class ProximityIndicatorHandler
         _isLock = false;
         _isToggleOn = false;
         //TEMP AF!!!!
-        //_scaler.localScale = new Vector3(_range , _range, 1);
+        _scaler.localScale = new Vector3(_range , _range, 1);
         //TEMP AF!!!!
         _spriteRenderer.color = _proximityConfig.Color;
 

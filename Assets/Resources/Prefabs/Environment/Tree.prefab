@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2061498825937147702}
   - component: {fileID: 7444393912883127226}
   - component: {fileID: 2430489246545792977}
-  m_Layer: 10
+  m_Layer: 6
   m_Name: CarveObstale_Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}

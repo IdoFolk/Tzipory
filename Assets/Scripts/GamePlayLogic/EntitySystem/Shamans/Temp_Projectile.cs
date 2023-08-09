@@ -5,6 +5,8 @@ using UnityEngine;
 public class Temp_Projectile : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _particleSystem;
+    [SerializeField] private float _midDisToDeadTarget;
+    
     private IEntityTargetAbleComponent _target;
     private float _speed;
 
@@ -30,19 +32,20 @@ public class Temp_Projectile : MonoBehaviour
 
     void Update()
     {
+        var lastTargetPosition = _target.EntityTransform.position;
+        
         _particleSystem.playbackSpeed = 1 * GAME_TIME.GetCurrentTimeRate;
 
-        if (!_target.EntityTransform.gameObject.activeInHierarchy)
-        {
-            transform.Translate(_dir * (_speed * GAME_TIME.GameDeltaTime));
-            _timeToDie -= GAME_TIME.GameDeltaTime;
-        }
+        if (_target.IsEntityDead)
+            if (Vector2.Distance(lastTargetPosition,transform.position) < _midDisToDeadTarget)
+                _timeToDie = 0;
+            else
+                _timeToDie -= GAME_TIME.GameDeltaTime;
         else
-        {
-            _dir =(_target.EntityTransform.position - transform.position).normalized;
-            transform.position  += _dir * (_speed * GAME_TIME.GameDeltaTime);
-        }
-
+            _dir = (lastTargetPosition - transform.position).normalized;
+        
+        transform.position += _dir * (_speed * GAME_TIME.GameDeltaTime);
+        
         if (_timeToDie  <= 0f)
             Destroy(gameObject);
     }

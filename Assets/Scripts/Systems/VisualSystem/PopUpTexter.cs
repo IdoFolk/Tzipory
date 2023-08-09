@@ -68,12 +68,12 @@ public struct PopUpText_Config
 
 
     //THIS IS ONLY FOR EASY CALCULATION OF SIZES THAT NEED TO BE SET MANUALLY
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
     public float damage;
     public void SetSizeRelativeToDamage()
     {
         size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
     }
-#endif
+//#endif
 
 }

@@ -16,7 +16,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         [SerializeField, Tooltip("")] private List<StatusEffectConfig> _statusEffectToInterrupt;
         [Header("Stat Modifiers")] 
         [SerializeField, Tooltip("")] private StatusEffectType _statusEffectType;
-        [SerializeField, Tooltip(""),ShowIf("_showDuration")] private float _duration;
+        [SerializeField, Tooltip(""),HideIf("_statusEffectType",StatusEffectType.Instant)] private float _duration;
         [SerializeField, Tooltip(""),ShowIf("_statusEffectType",StatusEffectType.Interval)] private float _interval;
         [SerializeField, Tooltip("")] private List<StatModifierConfig> _statModifier;
         [Header("Status effect visual")]

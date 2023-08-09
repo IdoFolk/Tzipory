@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level Visual Data SO
   m_EditorClassIdentifier: 
   level_VisualData:
-    DamageRange: {x: 10, y: 100}
+    DamageRange: {x: 30, y: 100}
     FontSizeRange: {x: 3, y: 8}
     Crit_FontSizeBonus: 3
     PopUpText_MoveCurve:
@@ -71,8 +71,8 @@ MonoBehaviour:
         inWeight: 0.44339126
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.99285764
-        value: 0.6570467
+        time: 0.9879907
+        value: 0.6549022
         inSlope: -0.044562694
         outSlope: -0.044562694
         tangentMode: 0

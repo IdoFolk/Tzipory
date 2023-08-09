@@ -369,11 +369,19 @@ PrefabInstance:
     - target: {fileID: 4273722055985562272, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b1a33335676bae348b7c9e4bc0a7554a, type: 3}
+      objectReference: {fileID: 21300000, guid: a31897127adda5d40b30e78a29ddc5d5, type: 3}
     - target: {fileID: 4273722055985562272, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _range
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _myEffect
+      value: 
+      objectReference: {fileID: 11400000, guid: 85483954a8e608a4ba574de51e2a31c9, type: 2}
     - target: {fileID: 8275930077482909604, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: m_Name
       value: Onyx_PS

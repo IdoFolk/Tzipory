@@ -10,6 +10,8 @@ namespace GamePlayLogic.AbilitySystem.AbilityEntity
 {
     public class AoeAbilityEntity : BaseAbilityEntity, ITargetableReciever
     {
+        [SerializeField] private ColliderTargetingArea _colliderTargetingArea;
+        
         private float _duration;
         private AoeAbilityExecuter _aoeAbilityExecuter;
     
@@ -18,8 +20,8 @@ namespace GamePlayLogic.AbilitySystem.AbilityEntity
             base.Init(target,abilityExecutor);
             _aoeAbilityExecuter = abilityExecutor;
             _duration = duration;
-        
-            transform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
+            _colliderTargetingArea.Init(this);
+            visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
         }
 
         public void RecieveCollision(Collider2D other, IOStatType ioStatType)

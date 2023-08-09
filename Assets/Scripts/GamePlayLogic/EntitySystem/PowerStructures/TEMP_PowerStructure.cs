@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Shamans;
+using Sirenix.OdinInspector;
 using Systems.TargetingSystem;
 using Tools.Enums;
 using Tzipory.EntitySystem.StatusSystem;
@@ -9,13 +10,13 @@ using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
 //TEMP NAME! BAD NAME!
-public class PowerStructure : BaseGameEntity , ITargetableReciever 
+public class TEMP_PowerStructure : BaseGameEntity , ITargetableReciever 
 {
     //temp config stuff
     [SerializeField] private float _range;
     
-    [SerializeField] private StatusEffectConfig _myEffect;
-    [SerializeField] private Transform _targetingTransform;
+    [SerializeField,AssetsOnly,Required] private StatusEffectConfig _myEffect;
+    [SerializeField] private ColliderTargetingArea _colliderTargetingArea;
     [SerializeField] private ProximityIndicatorHandler _proximityIndicatorHandler;
     [SerializeField] private Color _activeColor;
 
@@ -25,7 +26,7 @@ public class PowerStructure : BaseGameEntity , ITargetableReciever
     {
         base.Awake();
         _activeStatusEffectOnShaman = new Dictionary<int, IDisposable>();
-        _targetingTransform.localScale = new Vector3(_range, _range, 1);
+        _colliderTargetingArea.Init(this);
         _proximityIndicatorHandler.Init(_range); 
     }
 

@@ -8,6 +8,8 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
 {
     public class ProjectileAbilityEntity : BaseAbilityEntity , ITargetableReciever
     {
+        [SerializeField] private ColliderTargetingArea _colliderTargeting;
+        
         private float _penetrationNumber;
         private float _speed;
         private Vector3 _dir;
@@ -15,6 +17,7 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
         public void Init(IEntityTargetAbleComponent target,float speed, float penetrationNumber,IAbilityExecutor abilityExecutor) 
         {
             base.Init(target, abilityExecutor);
+            _colliderTargeting.Init(this);
             _speed = speed;
             _penetrationNumber = penetrationNumber;
             _dir = (target.EntityTransform.position - transform.position).normalized;

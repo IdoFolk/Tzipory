@@ -46,7 +46,7 @@ public class EllipseCollider2D : MonoBehaviour {
     
     Vector2 origin, center;
     
-    public Vector2[] getPoints(Vector2 off)
+    public Vector2[] GetPoints(Vector2 off)
     {
         List<Vector2> points = new List<Vector2>();
 

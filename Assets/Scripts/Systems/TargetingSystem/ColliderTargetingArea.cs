@@ -9,13 +9,18 @@ namespace Systems.TargetingSystem
         [SerializeField] private bool _testing = false;
         
         private ITargetableReciever _reciever;
-
-        private void Awake()
+        
+        public void Init()
         {
             _reciever = GetComponentInParent(typeof(ITargetableReciever)) as ITargetableReciever;
 
             if (_reciever == null)
                 Debug.LogError($"{transform.parent.name} did not get a <color=#ff0000>ITargetableReciever:</color>");
+        }
+        
+        public void Init(ITargetableReciever  reciever)
+        {
+            _reciever = reciever;
         }
 
         private void OnTriggerEnter2D(Collider2D other)

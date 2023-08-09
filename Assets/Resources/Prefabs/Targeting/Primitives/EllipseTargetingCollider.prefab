@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6351368447852643461}
   - component: {fileID: 6115928288844018216}
   - component: {fileID: 2644792202382149405}
-  m_Layer: 0
-  m_Name: EllipseCollider
+  m_Layer: 3
+  m_Name: EllipseTargetingCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

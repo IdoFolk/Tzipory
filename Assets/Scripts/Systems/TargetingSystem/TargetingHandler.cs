@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Systems.TargetingSystem;
 using Tools.Enums;
 using Tzipory.EntitySystem.EntityComponents;
@@ -9,6 +10,8 @@ namespace Tzipory.EntitySystem.TargetingSystem
 {
     public class TargetingHandler : MonoBehaviour , ITargetableReciever
     {
+        [SerializeField,Required] private ColliderTargetingArea _targetingArea;
+
         private IEntityTargetingComponent _entityTargetingComponent;
         private List<IEntityTargetAbleComponent> _availableTargets;
         
@@ -28,6 +31,8 @@ namespace Tzipory.EntitySystem.TargetingSystem
         {
             _availableTargets = new List<IEntityTargetAbleComponent>();
             _entityTargetingComponent = targetingComponent;
+            
+            _targetingArea.Init(this);
             
             UpdateTargetingRange(_entityTargetingComponent.TargetingRange.CurrentValue);
             

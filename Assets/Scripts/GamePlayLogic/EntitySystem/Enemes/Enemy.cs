@@ -24,7 +24,7 @@ namespace Enemes
         
         //TEMP!
         [SerializeField] private MovementOnPath _movementOnPath;
-        public BasicMoveComponent BasicMoveComponent;
+        public TEMP_BasicMoveComponent _tempBasicMoveComponent;
 
         float timer;
         
@@ -36,7 +36,7 @@ namespace Enemes
             EntityType = EntityType.Enemy;
             timer = 0;
             _isAttacking  = false;
-            BasicMoveComponent.Init(MovementSpeed);//temp!
+            _tempBasicMoveComponent.Init(MovementSpeed);//temp!
             
             var enemyConfig = (EnemyConfig)parameter;
             
@@ -69,7 +69,7 @@ namespace Enemes
 
                 if (_isAttacking)
                 {
-                    BasicMoveComponent.SetDestination(TargetingHandler.CurrentTarget.EntityTransform.position, MoveType.Free);//temp!
+                    _tempBasicMoveComponent.SetDestination(TargetingHandler.CurrentTarget.EntityTransform.position, MoveType.Free);//temp!
 
                     if (Random.Range(0, 100) < _returnLevel +
                         Vector3.Distance(EntityTransform.position, _movementOnPath.CurrentPointOnPath) ||

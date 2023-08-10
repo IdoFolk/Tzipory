@@ -8,7 +8,7 @@ namespace MovementSystem.HerosMovementSystem
     {
 
         [SerializeField] private AgentAuthoring _agentAuthoring;
-        [SerializeField] private BasicMoveComponent _moveComponent;
+        [SerializeField] private TEMP_BasicMoveComponent _moveComponent;
         [SerializeField] Shamans.Shaman _shaman;
 
         public bool IsMoveing => _moveComponent.IsMoveing;

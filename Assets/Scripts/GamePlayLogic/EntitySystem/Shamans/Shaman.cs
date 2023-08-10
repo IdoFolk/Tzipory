@@ -28,19 +28,16 @@ namespace Shamans
         public override void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
             base.Init(parameter, visualConfig);
-            var config = (ShamanSerializeData)parameter;
-            //add shaman config
+            var shamanSerializeData = (ShamanSerializeData)parameter;
+            _serializeData = shamanSerializeData;
+            
+            _shotVisual.Init(this);
             
             EntityType = EntityType.Hero;
             _clickHelper.OnClick += _tempHeroMovement.SelectHero;
             
             _proximityHandler.Init(AttackRange.CurrentValue);//MAY need to move to OnEnable - especially if we use ObjectPooling instead of instantiate
         }
-
-        // public void Init(ShamanSerializeData parameter)
-        // {
-        //     
-        // }
 
         private void OnDisable()
         {

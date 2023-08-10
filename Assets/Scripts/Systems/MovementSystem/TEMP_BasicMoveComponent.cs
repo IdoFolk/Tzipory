@@ -1,3 +1,4 @@
+using System;
 using ProjectDawn.Navigation;
 using ProjectDawn.Navigation.Hybrid;
 using Tzipory.EntitySystem.StatusSystem;
@@ -6,12 +7,16 @@ using UnityEngine;
 
 namespace Tzipory.EntitySystem.EntityComponents
 {
-    public class BasicMoveComponent : MonoBehaviour, IEntityMovementComponent
+    public class TEMP_BasicMoveComponent : MonoBehaviour, IEntityMovementComponent
     {
         [SerializeField]
         private AgentAuthoring agent;
         
         private Stat _speedStat;
+
+        private float _speed;
+        
+        private Vector3 _lastPosition;
 
         private Vector2 _destination = Vector2.zero;
 
@@ -24,6 +29,7 @@ namespace Tzipory.EntitySystem.EntityComponents
             _speedStat = newSpeed;
             _speedStat.OnValueChanged += AdjustAgentSpeed;
             AdjustAgentSpeed(_speedStat.CurrentValue);
+            _lastPosition = transform.position;
         }
 
         public Stat MovementSpeed => _speedStat;
@@ -33,24 +39,35 @@ namespace Tzipory.EntitySystem.EntityComponents
         public Transform EntityTransform => agent.transform;
 
         public BaseGameEntity GameEntity => throw new System.NotImplementedException();
-        
-        public bool IsMoveing { get; private set; }
+
+        public bool IsMoveing { get; private set; }    
 
         public void SetDestination(Vector3 destination, MoveType moveType)
         {
             agent.SetDestination(destination);
             _destination  = destination;
-            IsMoveing = true;
+            IsMoveing  = true;
         }
 
         private void Update()
         {
+           
             if (_destination == Vector2.zero) return;
             
             if (Vector2.Distance(_destination, transform.position) > 0.2f) return;
             
             _destination = Vector2.zero;
             IsMoveing = false;
+        }
+
+        private void FixedUpdate()
+        { 
+            if (GAME_TIME.GameDeltaTime == 0)
+                _speed = 0;
+            else
+                _speed = Vector3.Distance(transform.position, _lastPosition) / Time.fixedDeltaTime;
+            
+            _lastPosition = transform.position;
         }
 
         void AdjustAgentSpeed(float currentSpeed) //subs to OnTimeRateChange

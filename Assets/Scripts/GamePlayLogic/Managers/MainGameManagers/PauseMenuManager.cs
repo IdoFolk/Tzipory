@@ -11,26 +11,37 @@ namespace GamePlayLogic.Managers.MainGameManagers
         [SerializeField] private EventSystem _eventSystem;
 
         private bool _isOpen;
+        private bool _isSkippedFrame;
         
         private void Awake()
         {
             _canvas.gameObject.SetActive(false);
             _isOpen = false;
+            _isSkippedFrame = false;
         }
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && !SceneHandler.IsLoading)
+            if (Input.GetKeyDown(KeyCode.Escape) && !SceneHandler.IsLoading && !_isOpen)
                 OpenPauseMenu();
+
+            if (!_isOpen)
+                return;
+
+            if (!_isSkippedFrame)
+            {
+                _isSkippedFrame = true;
+                return;
+            }
             
-            //TODO add the ability to close the pause menu by pressing Escape
-            // if (Input.GetKeyDown(KeyCode.Escape) && _isOpen)
-            //     Resume();
+            if (Input.GetKeyDown(KeyCode.Escape) && _isSkippedFrame && _isOpen)
+                Resume();
         }
 
         private void OpenPauseMenu()
         {
             _isOpen = true;
+            _isSkippedFrame = false;
             _canvas.gameObject.SetActive(true);
             GAME_TIME.Pause();
         }

@@ -5,8 +5,6 @@ using Helpers.Consts;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.StatusSystem;
-using Tzipory.SerializeData.AbilitySystemSerializeData;
-using Tzipory.SerializeData.StatSystemSerilazeData;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

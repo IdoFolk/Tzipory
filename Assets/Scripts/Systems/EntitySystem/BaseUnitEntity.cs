@@ -47,7 +47,8 @@ namespace Tzipory.EntitySystem.Entitys
         #endregion
 
         #region Temps
-        [Header("TEMPS")]
+        [Header("TEMPS")] [SerializeField]
+        private Transform _shotPosition;
         [SerializeField] private bool _doShowHPBar;
         [SerializeField] private TEMP_UNIT_HPBarConnector _hpBarConnector;
         #endregion
@@ -271,6 +272,7 @@ namespace Tzipory.EntitySystem.Entitys
         public Stat TargetingRange => StatusHandler.GetStatById((int)Constant.Stats.TargetingRange);
         public bool IsTargetAble { get; }
         public EntityType EntityType { get; protected set; }
+        public Vector2 ShotPosition => _shotPosition.position;
         public IPriorityTargeting DefaultPriorityTargeting { get; private set; }
         public TargetingHandler TargetingHandler => _targetingHandler;
         

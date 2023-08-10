@@ -27,7 +27,9 @@ namespace Helpers.Consts
             public const int MAP_DATA_ID = 7;
             public const int NODE_DATA_ID = 8;
             public const int SHAMAN_ITEM_DATA_ID = 9;
-            public const int CAMP_BUILD_DATA_ID = 10;
+            public const int CAMP_DATA_ID = 10;
+            public const int CAMP_BUILDING_DATA_ID = 11;
+            public const int CAMP_FACILITY_DATA_ID = 12;
         }
 
 

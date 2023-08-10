@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameplayeLogic.Managers;
-using Systems.CampSystem;
 using Tzipory.ConfigFiles;
 using UnityEngine;
 
 namespace Tzipory.SerializeData
 {
-    [System.Serializable]
+    [Serializable]
     public class CampSerializeData : ISerializeData, IUpdateData<CampManager>
     {
-        public List<CampBuildingSerializeData> CampBuildingSerializeDatas => _campBuildingSerializeDatas;
-
         private List<CampBuildingSerializeData> _campBuildingSerializeDatas;
+
+        public List<CampBuildingSerializeData> CampBuildingSerializeDatas => _campBuildingSerializeDatas;
         
-        public bool IsInitialization { get; }
+        public int SerializeTypeId { get; }
+        public bool IsInitialization { get; private set; }
+        
         public void Init(IConfigFile parameter)
         {
-           
+            
+            IsInitialization  = true;
         }
 
-        public int SerializeTypeId { get; }
         public void UpdateData(CampManager data)
         {
            
@@ -35,7 +36,7 @@ namespace Tzipory.SerializeData
         {
             foreach (CampBuildingSerializeData campBuildingSerializeData in _campBuildingSerializeDatas)
             {
-                if (campBuildingSerializeData.buildingType == campBuildingType)
+                if (campBuildingSerializeData.BuildingType == campBuildingType)
                 {
                     return campBuildingSerializeData;
                 }

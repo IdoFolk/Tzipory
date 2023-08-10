@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Helpers.Consts;
-using Systems.CampSystem;
 using Tzipory.ConfigFiles;
+using UnityEngine;
 
 namespace Tzipory.SerializeData
 {
@@ -10,18 +10,22 @@ namespace Tzipory.SerializeData
         Workshop,
         Fireplace,
     }
+    
+    [System.Serializable]
     public class CampBuildingSerializeData : ISerializeData
     {
+        private List<CampFacilitySerializeData> _campBuildingSubFacilitySerializeDatas;
+        [SerializeField] private CampBuildingType _buildingType;
+        
         public List<CampFacilitySerializeData> CampBuildingSubFacilitySerializeDatas =>
             _campBuildingSubFacilitySerializeDatas;
-        private List<CampFacilitySerializeData> _campBuildingSubFacilitySerializeDatas;
         
-        public bool IsInitialization { get; }
+        public bool IsInitialization { get; private set; }
 
-        public int SerializeTypeId => Constant.DataId.CAMP_BUILD_DATA_ID;
+        public int SerializeTypeId => Constant.DataId.CAMP_BUILDING_DATA_ID;
 
         //use as id for factrory
-        public CampBuildingType buildingType;
+        public CampBuildingType BuildingType => _buildingType;
 
         public int HighestFacilityLevel
         {
@@ -40,15 +44,13 @@ namespace Tzipory.SerializeData
 
         public void Init(IConfigFile parameter)
         {
-           
+           IsInitialization = true;
         }
         
         public CampBuildingSerializeData()
         {
             _campBuildingSubFacilitySerializeDatas = new List<CampFacilitySerializeData>();
         }
-
-        
     }
 }
 

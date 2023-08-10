@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Helpers.Consts;
 using Tzipory.ConfigFiles;
 
 namespace Tzipory.SerializeData 
@@ -6,19 +6,15 @@ namespace Tzipory.SerializeData
     [System.Serializable]
     public class CampFacilitySerializeData : ISerializeData
     {
-        public int FacilityID => _facilityID;
-
-        public int Level
-        {
-            get { return _level; }
-        }
-        
         private int _facilityID;
         private int _level;
-         
+        
+        public int FacilityID => _facilityID;
+        public int Level => _level;
+        
         #region ISerializeData
 
-        public int SerializeTypeId { get; }
+        public int SerializeTypeId => Constant.DataId.CAMP_FACILITY_DATA_ID;
         
         public bool IsInitialization { get; }
 
@@ -39,8 +35,5 @@ namespace Tzipory.SerializeData
         }
 
         #endregion
-     
-
-     
     }
 }

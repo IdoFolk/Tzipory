@@ -52,7 +52,7 @@ namespace GameplayeLogic.Managersp
         }
         
         //send him id
-        public void TogglePartyMember(int targetShamanID, CollectionActionType actionType)
+        public void ModifyPartyMember(int targetShamanID, CollectionActionType actionType)
         {
             if (actionType == CollectionActionType.Add)
             {

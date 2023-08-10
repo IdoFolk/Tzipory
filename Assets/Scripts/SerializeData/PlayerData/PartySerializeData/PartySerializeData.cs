@@ -13,11 +13,15 @@ namespace Tzipory.SerializeData
     public class PartySerializeData : ISerializeData , IInitialization<ShamanConfig[]>
     {
         //all shamans
-        private List<ShamanDataContainer> _shamanDataContainers;
+        private List<ShamanDataContainer> _shamanRosterDataContainers;
+
+        private List<ShamanDataContainer> _shamansPartyDataContainers;
         
-        public List<ShamanDataContainer> ShamanDataContainers => _shamanDataContainers;
-        
-        private List<ShamanDataContainer> _shamansInPartyDataContainers = new List<ShamanDataContainer>();
+        public List<ShamanDataContainer> ShamansPartyDataContainers => _shamansPartyDataContainers;
+
+        public List<ShamanDataContainer> ShamanRosterDataContainers => _shamanRosterDataContainers;
+
+
 
         public bool IsInitialization { get; private set; }
         
@@ -25,16 +29,17 @@ namespace Tzipory.SerializeData
         
         public void Init(ShamanConfig[] parameter)//for testing
         {
-            _shamanDataContainers = new List<ShamanDataContainer>();
-
+            _shamanRosterDataContainers = new List<ShamanDataContainer>();
+            _shamansPartyDataContainers = new List<ShamanDataContainer>();
+            
             foreach (var shamanConfig in parameter)
             {
                 var shamanSerializeData = new ShamanSerializeData();
                 shamanSerializeData.Init(shamanConfig);
-                _shamanDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanConfig.UnitEntityVisualConfig));
+                _shamanRosterDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanConfig.UnitEntityVisualConfig));
             }
 
-            _shamansInPartyDataContainers = new List<ShamanDataContainer>();
+            _shamansPartyDataContainers = new List<ShamanDataContainer>();
             
             IsInitialization = true;
         }
@@ -43,14 +48,14 @@ namespace Tzipory.SerializeData
         {
             var config = (PartyConfig)parameter;
             
-            _shamanDataContainers = new List<ShamanDataContainer>();
+            _shamanRosterDataContainers = new List<ShamanDataContainer>();
 
             foreach (var shamanConfig in config.PartyMembers)
             {
                 var shamanSerializeData = DataManager.DataRequester.GetData<ShamanSerializeData>(shamanConfig);
                 var shamanVisual =(ShamanConfig)DataManager.DataRequester.ConfigManager.GetConfig(shamanConfig.ConfigTypeId,
                     shamanConfig.ConfigObjectId);//temp!!!
-                _shamanDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanVisual.UnitEntityVisualConfig));
+                _shamanRosterDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanVisual.UnitEntityVisualConfig));
             }
             
             IsInitialization = true;
@@ -58,13 +63,13 @@ namespace Tzipory.SerializeData
 
         public void SetPartyMembers(List<ShamanDataContainer> shamanSerializeDataContainers)
         {
-            _shamansInPartyDataContainers = shamanSerializeDataContainers;
+            _shamansPartyDataContainers = shamanSerializeDataContainers;
         }
         
         public void AddPartyMember(int targetShamanID)
         {
             //Find the serializeData in the list
-            ShamanDataContainer shamanContainerDataFromRoster = _shamanDataContainers.Find(shamanDataContainer =>
+            ShamanDataContainer shamanContainerDataFromRoster = _shamanRosterDataContainers.Find(shamanDataContainer =>
                 shamanDataContainer.ShamanSerializeData.ShamanId == targetShamanID);
 
             if (shamanContainerDataFromRoster == null)
@@ -73,8 +78,8 @@ namespace Tzipory.SerializeData
                 return;
             }
 
-            if (!_shamansInPartyDataContainers.Contains(shamanContainerDataFromRoster))
-                _shamansInPartyDataContainers.Add(shamanContainerDataFromRoster);
+            if (!_shamansPartyDataContainers.Contains(shamanContainerDataFromRoster))
+                _shamansPartyDataContainers.Add(shamanContainerDataFromRoster);
             else
             {
                 Debug.LogError("Why did we try to add shaman that is already in the party?");
@@ -83,7 +88,7 @@ namespace Tzipory.SerializeData
 
         public void RemovePartyMember(int targetShamanID)
         {
-            ShamanDataContainer shamanContainerDataFromRoster = _shamansInPartyDataContainers.Find(
+            ShamanDataContainer shamanContainerDataFromRoster = _shamansPartyDataContainers.Find(
                 shamanDataContainer =>
                     shamanDataContainer.ShamanSerializeData.ShamanId == targetShamanID);
             if (shamanContainerDataFromRoster == null)
@@ -92,13 +97,13 @@ namespace Tzipory.SerializeData
                 return;
             }
 
-            _shamansInPartyDataContainers.Remove(shamanContainerDataFromRoster);
+            _shamansPartyDataContainers.Remove(shamanContainerDataFromRoster);
         }
 
         public void ToggleItemOnShaman(int targetShamanID, ShamanItemSerializeData targetItemSerializeData,
             CollectionActionType actionType)
         {
-            ShamanDataContainer shamanContainerDataFromRoster = _shamanDataContainers.Find(shamanDataContainer =>
+            ShamanDataContainer shamanContainerDataFromRoster = _shamanRosterDataContainers.Find(shamanDataContainer =>
                 shamanDataContainer.ShamanSerializeData.ShamanId == targetShamanID);
             if (shamanContainerDataFromRoster == null)
             {

@@ -28,7 +28,7 @@ namespace GameplayeLogic.Managers
         }
 
         public void SpawnShaman()=>
-            Party = CreateParty(_partySerializeData.ShamanDataContainers);
+            Party = CreateParty(_partySerializeData.ShamanRosterDataContainers);
 
         public void AddSpawnPoint(Vector3 spawnPoint)=>
             _partySpawnPoints.Add(spawnPoint, false);

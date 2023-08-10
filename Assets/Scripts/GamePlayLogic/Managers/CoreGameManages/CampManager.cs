@@ -90,10 +90,15 @@ namespace GameplayeLogic.Managers
         
         public void UpgradeCampBuildingFacility(CampBuildingType campBuildingType, int facilityID)
         {
-            if (!CheckIfGotEnoughResourcesForUpgrade(campBuildingType, facilityID))
+            if (CheckIfGotEnoughResourcesForUpgrade(campBuildingType, facilityID))
             {
                 _campSerializeData.UpgradeBuilding(campBuildingType, facilityID);
             }
+            else
+            {
+                Debug.Log("Tried to upgrade with no resources");
+            }
+            
             onCampDataChanged?.Invoke();
             onGraphicsRefresh?.Invoke();
         }
@@ -110,9 +115,9 @@ namespace GameplayeLogic.Managers
 
         #region Party
         
-        public void TogglePartyMember(int targetShamanID, CollectionActionType actionType)
+        public void ModifyPartyMember(int targetShamanID, CollectionActionType actionType)
         {
-            GameManager.PlayerManager.PlayerSerializeData.TogglePartyMember(targetShamanID, actionType);
+            GameManager.PlayerManager.PlayerSerializeData.ModifyPartyMember(targetShamanID, actionType);
         }
         
         //
@@ -129,7 +134,7 @@ namespace GameplayeLogic.Managers
 
         void PartyMemberToggleChanged(int shamanSerializeID, bool isToggleActive)
         {
-            TogglePartyMember(shamanSerializeID, isToggleActive ? CollectionActionType.Add : CollectionActionType.Remove);
+            ModifyPartyMember(shamanSerializeID, isToggleActive ? CollectionActionType.Add : CollectionActionType.Remove);
         }
         
         List<int> GetSelectedShamans()

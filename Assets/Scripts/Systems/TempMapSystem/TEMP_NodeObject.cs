@@ -12,7 +12,8 @@ public class TEMP_NodeObject : MonoBehaviour
     [SerializeField] private TEMP_NodeObject[] _nextNodes;
     [SerializeField] private ClickHelper _clickHelper;
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    
+    [SerializeField] private Color _winNodeColor;
+    [SerializeField] private Color _avilableNodeColor;
     public bool IsUnlock { get; private set; }
     public bool IsCompleted { get; private set; }
 
@@ -27,8 +28,7 @@ public class TEMP_NodeObject : MonoBehaviour
         IsCompleted = isCompleted;
 
         gameObject.SetActive(IsUnlock);
-        
-        _spriteRenderer.color = IsCompleted ? Color.green : Color.red;
+        _spriteRenderer.color = IsCompleted ? _winNodeColor : _avilableNodeColor;
     }
 
     public void Lock()
@@ -44,7 +44,7 @@ public class TEMP_NodeObject : MonoBehaviour
 
     public void Unlock()
     {
-        _spriteRenderer.color = Color.red;
+        _spriteRenderer.color = _avilableNodeColor;
         gameObject.SetActive(true);
         GameManager.GameData.SetLockNodeStat(_levelConfig.LevelId,true);
         IsUnlock = true;
@@ -52,7 +52,7 @@ public class TEMP_NodeObject : MonoBehaviour
 
     public void Completed()
     {
-        _spriteRenderer.color = Color.green;
+        _spriteRenderer.color = _winNodeColor;
         
         foreach (var node in _nextNodes)
             node.Unlock();

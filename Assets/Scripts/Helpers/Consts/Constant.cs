@@ -26,6 +26,8 @@ namespace Helpers.Consts
             public const int PLAYER_DATA_ID = 6;
             public const int MAP_DATA_ID = 7;
             public const int NODE_DATA_ID = 8;
+            public const int SHAMAN_ITEM_DATA_ID = 9;
+            public const int CAMP_BUILD_DATA_ID = 10;
         }
 
 
@@ -42,6 +44,11 @@ namespace Helpers.Consts
         {
             public const int  MUDU_ID = 0;
             public const int  GALLANITE_ID = 1;
+        }
+        
+        public static class CampBuildingFacilityId
+        {
+            public const int WORKSHOP_ITEMS_FACILITY = 0;
         }
 
         public enum Stats

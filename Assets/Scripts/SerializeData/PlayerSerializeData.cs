@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Helpers.Consts;
+using NUnit.Framework;
 using SerializeData.Progression;
 using Systems.DataManagerSystem;
+using Tools.Enums;
 using Tzipory.ConfigFiles;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.SerializeData;
@@ -19,6 +22,8 @@ namespace GameplayeLogic.Managersp
         [SerializeField] private int _currentWord;
         public WorldMapProgressionSerializeData WorldMapProgression { get; private set; }
         public PartySerializeData PartySerializeData { get; private set; }
+        
+        private List<ShamanItemSerializeData> _itemsSerializeData = new List<ShamanItemSerializeData>();
         //camp serializeData 
 
         public bool IsInitialization { get; private set; }
@@ -43,6 +48,43 @@ namespace GameplayeLogic.Managersp
         
         public void Dispose()
         {
+            
         }
+        
+        //send him id
+        public void ModifyPartyMember(int targetShamanID, CollectionActionType actionType)
+        {
+            if (actionType == CollectionActionType.Add)
+            {
+                PartySerializeData.AddPartyMember(targetShamanID);
+            }
+            else
+            {
+                PartySerializeData.RemovePartyMember(targetShamanID);
+            }
+        }
+        
+        public void ToggleItemOnShaman(int targetShamanID, int targetItemInstanceID,
+            CollectionActionType actionType)
+        {
+            ShamanItemSerializeData shamanItemData = _itemsSerializeData.Find(itemData =>
+                itemData.ItemInstanceId == targetItemInstanceID);
+
+            if (shamanItemData == null)
+            {
+                Debug.LogError("No item data found!");
+                return;
+            }
+            
+            PartySerializeData.ToggleItemOnShaman(targetShamanID, shamanItemData, actionType);
+        }
+        
+        // [Obsolete("Old method for setting party members")]
+        // public void SetPartyMembers(List<ShamanSerializeData> shamanSerializeDatas)
+        // {
+        //     PartySerializeData.SetPartyMembers(shamanSerializeDatas);
+        // }
+
+      
     }
 }

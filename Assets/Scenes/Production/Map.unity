@@ -836,10 +836,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6184315847122900867, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
-      propertyPath: _baseNodeConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: 130bb108f688b0a44bb746f78884d186, type: 2}
     - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: _startStat
       value: 1
@@ -848,22 +844,6 @@ PrefabInstance:
       propertyPath: _levelConfig
       value: 
       objectReference: {fileID: 11400000, guid: 19ab654e3cb8f3c4a94313085d6e084b, type: 2}
-    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
-      propertyPath: _winNodeColor.a
-      value: 0.12941177
-      objectReference: {fileID: 0}
-    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
-      propertyPath: _winNodeColor.b
-      value: 0.5582948
-      objectReference: {fileID: 0}
-    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
-      propertyPath: _winNodeColor.g
-      value: 0.9622642
-      objectReference: {fileID: 0}
-    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
-      propertyPath: _winNodeColor.r
-      value: 0.7057289
-      objectReference: {fileID: 0}
     - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: _avilableNodeColor.a
       value: 0.5019608
@@ -908,6 +888,10 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: _baseNodeConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 130bb108f688b0a44bb746f78884d186, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

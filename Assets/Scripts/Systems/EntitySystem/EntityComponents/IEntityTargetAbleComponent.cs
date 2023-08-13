@@ -5,12 +5,13 @@ namespace Tzipory.EntitySystem.EntityComponents
     public interface IEntityTargetAbleComponent : IEntityHealthComponent , IEntityStatusEffectComponent
     {
         public bool IsTargetAble { get; }
-        public EntityTeamType EntityTeamType { get; }
+        public EntityType EntityType { get; }
     }
 
-    public enum EntityTeamType
+    public enum EntityType
     {
         Hero,
-        Enemy
+        Enemy,
+        Structure
     }
 }

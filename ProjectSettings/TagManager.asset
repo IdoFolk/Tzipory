@@ -13,11 +13,11 @@ TagManager:
   - Targeting
   - Water
   - UI
-  - Floor
+  - NavMesh
   - Entity
   - Projectile
-  - Shamans
-  - PS
+  - NavMesh
+  - 
   - Clickable
   - Shadow
   - 

@@ -6,8 +6,10 @@ using Tzipory.AbilitiesSystem;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
 using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.EntitySystem.TargetingSystem;
+using Tzipory.SerializeData;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.Sound;
 using Tzipory.VisualSystem.EffectSequence;
@@ -16,19 +18,19 @@ using UnityEngine;
 namespace Tzipory.EntitySystem.Entitys
 {
     public abstract class BaseUnitEntity : BaseGameEntity, IEntityTargetAbleComponent, IEntityCombatComponent, IEntityMovementComponent, 
-        IEntityTargetingComponent, IEntityAbilitiesComponent, IEntityVisualComponent, IInitialization<BaseUnitEntityConfig>
+        IEntityTargetingComponent, IEntityAbilitiesComponent, IEntityVisualComponent, IInitialization<BaseUnitEntityConfig> , IInitialization<UnitEntitySerializeData,BaseUnitEntityVisualConfig>
     {
         #region Fields
 
 #if UNITY_EDITOR
         [SerializeField, ReadOnly,TabGroup("Stats")] private List<Stat> _stats;
 #endif
-        [SerializeField,TabGroup("Component")] private CircleCollider2D _bodyCollider;
+        [SerializeField,TabGroup("Component")] private Transform _particleEffectPosition;
+        [SerializeField,TabGroup("Component")] private SoundHandler _soundHandler;
+        [SerializeField,TabGroup("Component")] private TargetingHandler _targetingHandler;
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private SpriteRenderer _spriteRenderer;
         [SerializeField,TabGroup("Component")] private Transform _visualQueueEffectPosition;
-        [SerializeField,TabGroup("Component")] private Transform _particleEffectPosition;
-        [SerializeField,TabGroup("Component")] private SoundHandler _soundHandler;
 
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onDeath;
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onAttack;
@@ -37,10 +39,16 @@ namespace Tzipory.EntitySystem.Entitys
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetHit;
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetCritHit;
 
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpTexter _popUpTexter;
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _defaultPopUpText_Config;
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _critPopUpText_Config;
+        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _healPopUpText_Config;
+
         #endregion
 
         #region Temps
-        [Header("TEMPS")]
+        [Header("TEMPS")] [SerializeField]
+        private Transform _shotPosition;
         [SerializeField] private bool _doShowHPBar;
         [SerializeField] private TEMP_UNIT_HPBarConnector _hpBarConnector;
         #endregion
@@ -53,6 +61,60 @@ namespace Tzipory.EntitySystem.Entitys
         #region UnityCallBacks
         
         public bool IsInitialization { get; private set; }
+        
+        public virtual void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
+        {
+            gameObject.name =  $"{parameter.EntityName} InstanceID: {EntityInstanceID}";
+
+            List<Stat> stats = new List<Stat>
+            {
+                new(parameter.Health),
+                new(parameter.InvincibleTime),
+                new(parameter.AttackDamage),
+                new(parameter.CritDamage),
+                new(parameter.CritChance),
+                new(parameter.AttackRate),
+                new(parameter.AttackRange),
+                new(parameter.TargetingRange),
+                new(parameter.MovementSpeed)
+            };
+
+            // if (parameter.Stats is { Count: > 0 })
+            // {
+            //     foreach (var stat in parameter.Stats)
+            //         stats.Add(stat);
+            // }
+            
+#if UNITY_EDITOR
+            _stats = stats;
+#endif
+               
+            StatusHandler = new StatusHandler(stats,this);//may need to work in init!
+            
+            DefaultPriorityTargeting =
+                Factory.TargetingPriorityFactory.GetTargetingPriority(this, (TargetingPriorityType)parameter.TargetingPriority);
+            
+            TargetingHandler.Init(this);
+            
+            StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
+            StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
+            
+            AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
+            
+            SpriteRenderer.sprite = visualConfig.Sprite;
+            
+            //init Hp_bar
+            if (_doShowHPBar)//Temp!
+                Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
+
+            if (_doShowHPBar)
+                _hpBarConnector.Init(this);
+            else
+                _hpBarConnector.gameObject.SetActive(false);
+            
+            gameObject.SetActive(true);
+            IsInitialization = true;
+        }
 
         public virtual void Init(BaseUnitEntityConfig parameter)//need to oder logic to many responsibility
         {
@@ -86,18 +148,18 @@ namespace Tzipory.EntitySystem.Entitys
             DefaultPriorityTargeting =
                 Factory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
             
-            Targeting.Init(this);
+            TargetingHandler.Init(this);
             
             StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
             StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
             
             AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
             
-            SpriteRenderer.sprite = parameter.Sprite;
+            SpriteRenderer.sprite = parameter.UnitEntityVisualConfig.Sprite;
             
             //init Hp_bar
             if (_doShowHPBar)//Temp!
-                HP.OnValueChanged += _hpBarConnector.SetBarToHealth;
+                Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
 
             if (_doShowHPBar)
                 _hpBarConnector.Init(this);
@@ -111,14 +173,13 @@ namespace Tzipory.EntitySystem.Entitys
         protected override void Awake()
         {
             base.Awake();
-            Targeting = GetComponentInChildren<TargetingHandler>();//temp
             
-            _onDeath.ID = Constant.EffectSequenceIds.OnDeath;
-            _onAttack.ID = Constant.EffectSequenceIds.OnAttack;
-            _onCritAttack.ID = Constant.EffectSequenceIds.OnCritAttack;
-            _onMove.ID = Constant.EffectSequenceIds.OnMove;
-            _onGetHit.ID = Constant.EffectSequenceIds.OnGetHit;
-            _onGetCritHit.ID = Constant.EffectSequenceIds.OnGetCritHit;
+            _onDeath.ID = Constant.EffectSequenceIds.DEATH;
+            _onAttack.ID = Constant.EffectSequenceIds.ATTACK;
+            _onCritAttack.ID = Constant.EffectSequenceIds.CRIT_ATTACK;
+            _onMove.ID = Constant.EffectSequenceIds.MOVE;
+            _onGetHit.ID = Constant.EffectSequenceIds.GET_HIT;
+            _onGetCritHit.ID = Constant.EffectSequenceIds.GET_CRIT_HIT;
             
             _onDeath.SequenceName = "OnDeath";
             _onAttack.SequenceName = "OnAttack";
@@ -151,8 +212,8 @@ namespace Tzipory.EntitySystem.Entitys
             HealthComponentUpdate();
             StatusHandler.UpdateStatusEffects();
 
-            if (Targeting.CurrentTarget == null || Targeting.CurrentTarget.IsEntityDead)
-                Targeting.GetPriorityTarget();
+            if (TargetingHandler.CurrentTarget == null || TargetingHandler.CurrentTarget.IsEntityDead)
+                TargetingHandler.GetPriorityTarget();
             
             EffectSequenceHandler.UpdateEffectHandler();
             
@@ -183,12 +244,12 @@ namespace Tzipory.EntitySystem.Entitys
         {
            // Gizmos.DrawWireSphere(transform.position,_config.AttackRange.BaseValue / 2);
 
-            if (Targeting != null)
+            if (TargetingHandler != null)
             {
-                if (Targeting.CurrentTarget == null) return;
+                if (TargetingHandler.CurrentTarget == null) return;
                 
                 Gizmos.color = Color.red;
-                Gizmos.DrawLine(transform.position,Targeting.CurrentTarget.EntityTransform.position);
+                Gizmos.DrawLine(transform.position,TargetingHandler.CurrentTarget.EntityTransform.position);
                 Gizmos.color = Color.white;
             }
         }
@@ -201,7 +262,7 @@ namespace Tzipory.EntitySystem.Entitys
             StatusHandler.OnStatusEffectInterrupt -= EffectSequenceHandler.RemoveEffectSequence;
             StatusHandler.OnStatusEffectAdded -= AddStatusEffectVisual;
 
-            HP.OnValueChanged  -= _hpBarConnector.SetBarToHealth;
+            Health.OnValueChanged  -= _hpBarConnector.SetBarToHealth;
         }
 
         #endregion
@@ -210,9 +271,10 @@ namespace Tzipory.EntitySystem.Entitys
 
         public Stat TargetingRange => StatusHandler.GetStatById((int)Constant.Stats.TargetingRange);
         public bool IsTargetAble { get; }
-        public EntityTeamType EntityTeamType { get; protected set; }
+        public EntityType EntityType { get; protected set; }
+        public Vector2 ShotPosition => _shotPosition.position;
         public IPriorityTargeting DefaultPriorityTargeting { get; private set; }
-        public TargetingHandler Targeting { get; set; }
+        public TargetingHandler TargetingHandler => _targetingHandler;
         
         public float GetDistanceToTarget(IEntityTargetAbleComponent targetAbleComponent)
             => Vector2.Distance(transform.position, targetAbleComponent.EntityTransform.position);
@@ -223,17 +285,23 @@ namespace Tzipory.EntitySystem.Entitys
         
         private float  _currentInvincibleTime;
 
-        public Stat HP => StatusHandler.GetStatById((int)Constant.Stats.Health);
+        public Stat Health => StatusHandler.GetStatById((int)Constant.Stats.Health);
         public Stat InvincibleTime => StatusHandler.GetStatById((int)Constant.Stats.InvincibleTime);
         public bool IsDamageable { get; private set; }
-        public bool IsEntityDead => HP.CurrentValue <= 0;
+        public bool IsEntityDead => Health.CurrentValue <= 0;
 
         public void Heal(float amount)
         {
-            HP.AddToValue(amount);
+            _healPopUpText_Config.damage = amount;
+            _healPopUpText_Config.text = $"+{amount}";
+            _healPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(amount);
+            
+            _popUpTexter.SpawnPopUp(_healPopUpText_Config);
+            //_popUpTexter.SpawnPopUp($"+{amount}", _healPopUpText_Config);
+            Health.AddToValue(amount);
             //OnHealthChanged?.Invoke();
-            // if (HP.CurrentValue > HP.BaseValue)
-            //     HP.ResetValue();
+            // if (Health.CurrentValue > Health.BaseValue)
+            //     Health.ResetValue();
         }
 
         public void TakeDamage(float damage,bool isCrit)
@@ -241,10 +309,27 @@ namespace Tzipory.EntitySystem.Entitys
             if (IsDamageable)
             {
                 EffectSequenceHandler.PlaySequenceById(isCrit
-                    ? Constant.EffectSequenceIds.OnGetCritHit
-                    : Constant.EffectSequenceIds.OnGetHit);
+                    ? Constant.EffectSequenceIds.GET_CRIT_HIT
+                    : Constant.EffectSequenceIds.GET_HIT);
                 
-                HP.ReduceFromValue(damage);
+                IsDamageable = false; // Is this what turns on InvincibleTime?
+                if (isCrit)
+                {
+                    _critPopUpText_Config.damage = damage;
+                    _critPopUpText_Config.text = $"{damage}";
+                    _critPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
+                    _critPopUpText_Config.size += LevelVisualData_Monoton.Instance.Crit_FontSizeBonus; //this is pretty bad imo
+                    _popUpTexter.SpawnPopUp(_critPopUpText_Config);
+                }
+                else
+                {
+                    //_defaultPopUpText_Config.text = $"-{damage}";
+                    _defaultPopUpText_Config.damage = damage;
+                    _defaultPopUpText_Config.text = $"{damage}";
+                    _defaultPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
+                    _popUpTexter.SpawnPopUp(_defaultPopUpText_Config);
+                }
+                Health.ReduceFromValue(damage);
                 IsDamageable = false;
             }
         }
@@ -262,7 +347,7 @@ namespace Tzipory.EntitySystem.Entitys
                 }
             }
 
-            if (HP.CurrentValue < 0)
+            if (Health.CurrentValue < 0)
                 OnEntityDead();
         }
 
@@ -270,7 +355,7 @@ namespace Tzipory.EntitySystem.Entitys
 
         #region CombatComponent                                                                                                                                   
         
-        public void SetAttackTarget(IEntityTargetAbleComponent target) => Targeting.SetAttackTarget(target);
+        public void SetAttackTarget(IEntityTargetAbleComponent target) => TargetingHandler.SetAttackTarget(target);
 
         public Stat AttackDamage => StatusHandler.GetStatById((int)Constant.Stats.AttackDamage);
         public Stat CritDamage => StatusHandler.GetStatById((int)Constant.Stats.CritDamage);
@@ -286,7 +371,7 @@ namespace Tzipory.EntitySystem.Entitys
         #region MovementComponent
 
 
-        public Stat MoveSpeed => StatusHandler.GetStatById((int)Constant.Stats.MovementSpeed);
+        public Stat MovementSpeed => StatusHandler.GetStatById((int)Constant.Stats.MovementSpeed);
         
         //This is not really needed - we can remove the movement interface from baseunit I think... - it should have a BasicMovement, controlled by something else
         public void SetDestination(Vector3 destination, MoveType moveType) 
@@ -316,6 +401,7 @@ namespace Tzipory.EntitySystem.Entitys
         public SoundHandler SoundHandler => _soundHandler;
         public Transform ParticleEffectPosition => _particleEffectPosition;
         public Transform VisualQueueEffectPosition => _visualQueueEffectPosition;
+        public PopUpTexter PopUpTexter => _popUpTexter;
 
         private void AddStatusEffectVisual(BaseStatusEffect baseStatusEffect) =>
             EffectSequenceHandler.PlaySequenceByData(baseStatusEffect.EffectSequence);//temp

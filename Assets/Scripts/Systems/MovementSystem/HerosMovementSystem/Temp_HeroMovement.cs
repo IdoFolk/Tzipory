@@ -8,14 +8,14 @@ namespace MovementSystem.HerosMovementSystem
     {
 
         [SerializeField] private AgentAuthoring _agentAuthoring;
-        [SerializeField] private BasicMoveComponent _moveComponent;
+        [SerializeField] private TEMP_BasicMoveComponent _moveComponent;
         [SerializeField] Shamans.Shaman _shaman;
 
         public bool IsMoveing => _moveComponent.IsMoveing;
         
         private void Start()
         {
-            _moveComponent.Init(_shaman.MoveSpeed);
+            _moveComponent.Init(_shaman.MovementSpeed);
         }
         public void SetTarget(Vector3 pos)
         {
@@ -25,7 +25,7 @@ namespace MovementSystem.HerosMovementSystem
         public void SelectHero()
         {
             //TempHeroMovementManager.Instance.SelectTarget(this);
-            TempHeroMovementManager.Instance.SelectTarget(this,_shaman.SpriteRenderer.sprite, _shaman.AttackRange.CurrentValue*2f); //temp?
+            TempHeroMovementManager.Instance.SelectTarget(this,_shaman.SpriteRenderer.sprite, _shaman.AttackRange.CurrentValue); //temp?
 #if UNITY_EDITOR
             Debug.Log($"{gameObject.name} has Selected");
 #endif

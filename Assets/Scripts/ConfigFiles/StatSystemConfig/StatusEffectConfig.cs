@@ -10,15 +10,13 @@ namespace Tzipory.EntitySystem.StatusSystem
     [CreateAssetMenu(fileName = "NewStatusEffectConfig", menuName = "ScriptableObjects/EntitySystem/StatusSystem/New status effect config", order = 0)]
     public class StatusEffectConfig : ScriptableObject
     {
-        private bool _showDuration => _statusEffectType is StatusEffectType.OverTime or StatusEffectType.Interval;
-
         [Header("Status Effect Config")] 
         [SerializeField, Tooltip("")] private string _StatusEffectName;
         [SerializeField, Tooltip("")] private Constant.Stats _affectedStat;
         [SerializeField, Tooltip("")] private List<StatusEffectConfig> _statusEffectToInterrupt;
         [Header("Stat Modifiers")] 
         [SerializeField, Tooltip("")] private StatusEffectType _statusEffectType;
-        [SerializeField, Tooltip(""),ShowIf("_showDuration")] private float _duration;
+        [SerializeField, Tooltip(""),HideIf("_statusEffectType",StatusEffectType.Instant)] private float _duration;
         [SerializeField, Tooltip(""),ShowIf("_statusEffectType",StatusEffectType.Interval)] private float _interval;
         [SerializeField, Tooltip("")] private List<StatModifierConfig> _statModifier;
         [Header("Status effect visual")]
@@ -37,8 +35,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         public List<StatModifierConfig> StatModifier => _statModifier;
 
         public List<StatusEffectConfig> StatusEffectToInterrupt => _statusEffectToInterrupt;
-
-
+        
         public EffectSequenceConfig EffectSequence => _effectSequence;
     }
 }

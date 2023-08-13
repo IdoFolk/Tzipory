@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1471130245323627165}
-  - component: {fileID: 3224129321280798881}
   - component: {fileID: 8905150346630847035}
-  m_Layer: 0
+  - component: {fileID: 5638204648444181050}
+  - component: {fileID: 8683890394827938878}
+  m_Layer: 9
   m_Name: CircleObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,16 +26,32 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402944897756821938}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &3224129321280798881
-CircleCollider2D:
+--- !u!114 &8905150346630847035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402944897756821938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff
+--- !u!68 &5638204648444181050
+EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -66,9 +83,44 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!114 &8905150346630847035
+  m_EdgeRadius: 0
+  m_Points:
+  - {x: 1.5, y: 0}
+  - {x: 1.4672215, y: -0.2079117}
+  - {x: 1.3703182, y: -0.40673664}
+  - {x: 1.2135255, y: -0.58778524}
+  - {x: 1.0036958, y: -0.74314487}
+  - {x: 0.74999994, y: -0.86602545}
+  - {x: 0.46352547, y: -0.95105654}
+  - {x: 0.15679263, y: -0.9945219}
+  - {x: -0.15679276, y: -0.9945219}
+  - {x: -0.4635254, y: -0.95105654}
+  - {x: -0.7500001, y: -0.8660254}
+  - {x: -1.003696, y: -0.7431448}
+  - {x: -1.2135255, y: -0.5877852}
+  - {x: -1.3703182, y: -0.40673658}
+  - {x: -1.4672215, y: -0.20791161}
+  - {x: -1.5, y: 0.00000008742278}
+  - {x: -1.4672214, y: 0.20791179}
+  - {x: -1.3703182, y: 0.40673652}
+  - {x: -1.2135255, y: 0.5877851}
+  - {x: -1.003696, y: 0.74314475}
+  - {x: -0.7499999, y: 0.86602545}
+  - {x: -0.46352565, y: 0.9510565}
+  - {x: -0.1567925, y: 0.9945219}
+  - {x: 0.15679254, y: 0.9945219}
+  - {x: 0.46352568, y: 0.9510565}
+  - {x: 0.7499999, y: 0.86602545}
+  - {x: 1.0036961, y: 0.74314475}
+  - {x: 1.2135254, y: 0.5877853}
+  - {x: 1.3703183, y: 0.4067365}
+  - {x: 1.4672214, y: 0.20791176}
+  - {x: 1.5, y: -0.00000017484555}
+  m_AdjacentStartPoint: {x: 0, y: 0}
+  m_AdjacentEndPoint: {x: 0, y: 0}
+  m_UseAdjacentStartPoint: 0
+  m_UseAdjacentEndPoint: 0
+--- !u!114 &8683890394827938878
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,10 +129,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1402944897756821938}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9809bf1345abc5648af68b3a82653f08, type: 3}
+  m_Script: {fileID: 11500000, guid: 3585ffed29a69cd4a895fade144b6fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_OverrideArea: 1
-  m_Area: 1
-  m_IgnoreFromBuild: 0
-  m_AffectedAgents: ffffffff
+  radiusX: 1.5
+  radiusY: 1
+  smoothness: 30
+  rotation: 0

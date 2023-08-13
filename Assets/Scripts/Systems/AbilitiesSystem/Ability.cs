@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Helpers.Consts;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.EntitySystem.TargetingSystem;
+using Tzipory.SerializeData.AbilitySystemSerializeData;
 using UnityEngine;
 
 namespace Tzipory.AbilitiesSystem
@@ -27,6 +29,7 @@ namespace Tzipory.AbilitiesSystem
         private Stat Cooldown { get; }
         private Stat CastTime { get; }
         
+        [Obsolete("Use AbilitySerializeData")]
         public Ability(IEntityTargetAbleComponent caster,IEntityTargetingComponent entityTargetingComponent, AbilityConfig config)
         {
             _entityTargetingComponent = entityTargetingComponent;

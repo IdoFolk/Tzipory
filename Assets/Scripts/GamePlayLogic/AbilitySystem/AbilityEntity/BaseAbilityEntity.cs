@@ -6,7 +6,6 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
 {
     public abstract class BaseAbilityEntity : BaseGameEntity
     {
-        [SerializeField] protected Collider2D _collider2D;
         [SerializeField] protected Transform visualTransform;
         
         protected IAbilityExecutor _abilityExecutor;
@@ -14,7 +13,6 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
 
         protected void Init(IEntityTargetAbleComponent target, IAbilityExecutor abilityExecutor)
         {
-            _collider2D.isTrigger = true;
             _target = target;
             _abilityExecutor = abilityExecutor;
         }

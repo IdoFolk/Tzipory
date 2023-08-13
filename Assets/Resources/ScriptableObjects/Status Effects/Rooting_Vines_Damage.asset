@@ -37,3 +37,7 @@ MonoBehaviour:
       _startDelay: 0
       _effectActionStart: 0
       _effectActionConfig: {fileID: 11400000, guid: a623487578b155d448fa5c0657da923b, type: 2}
+    - _disableUndo: 0
+      _startDelay: 0
+      _effectActionStart: 0
+      _effectActionConfig: {fileID: 11400000, guid: bbc3634bffc015d4a941fd5bf2f22e3d, type: 2}

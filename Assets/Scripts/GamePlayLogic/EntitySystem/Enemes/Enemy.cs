@@ -1,12 +1,10 @@
 ﻿using System;
 using Helpers.Consts;
-using Sirenix.OdinInspector;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.Systems.PoolSystem;
-using Tzipory.Tools.Interface;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -26,7 +24,7 @@ namespace Enemes
         
         //TEMP!
         [SerializeField] private MovementOnPath _movementOnPath;
-        public BasicMoveComponent BasicMoveComponent;
+        public TEMP_BasicMoveComponent _tempBasicMoveComponent;
 
         float timer;
         
@@ -35,10 +33,10 @@ namespace Enemes
             base.Init(parameter);
             
             IsAttckingCore = false;
-            EntityTeamType = EntityTeamType.Enemy;
+            EntityType = EntityType.Enemy;
             timer = 0;
             _isAttacking  = false;
-            BasicMoveComponent.Init(MoveSpeed);//temp!
+            _tempBasicMoveComponent.Init(MovementSpeed);//temp!
             
             var enemyConfig = (EnemyConfig)parameter;
             
@@ -59,11 +57,11 @@ namespace Enemes
                 {
                     if (Random.Range(0, 100) < _aggroLevel)
                     {
-                        if (Targeting.HaveTarget)
+                        if (TargetingHandler.HaveTarget)
                         {
                             _isAttacking  = true;
 #if UNITY_EDITOR
-                            Debug.Log($"{gameObject.name} InstanceID: {EntityInstanceID} is attacking {Targeting.CurrentTarget.EntityTransform.name}");
+                            Debug.Log($"{gameObject.name} InstanceID: {EntityInstanceID} is attacking {TargetingHandler.CurrentTarget.EntityTransform.name}");
 #endif
                         }
                     }
@@ -71,11 +69,11 @@ namespace Enemes
 
                 if (_isAttacking)
                 {
-                    BasicMoveComponent.SetDestination(Targeting.CurrentTarget.EntityTransform.position, MoveType.Free);//temp!
+                    _tempBasicMoveComponent.SetDestination(TargetingHandler.CurrentTarget.EntityTransform.position, MoveType.Free);//temp!
 
                     if (Random.Range(0, 100) < _returnLevel +
                         Vector3.Distance(EntityTransform.position, _movementOnPath.CurrentPointOnPath) ||
-                        Targeting.CurrentTarget.IsEntityDead)
+                        TargetingHandler.CurrentTarget.IsEntityDead)
                     {
                         _isAttacking = false;
                         Debug.Log($"{gameObject.name} return to path");
@@ -89,13 +87,13 @@ namespace Enemes
             
             if (_isAttacking)
             {
-                if (!Targeting.HaveTarget)
+                if (!TargetingHandler.HaveTarget)
                 {
                     _isAttacking = false;
                     return;
                 }//plastr
 
-                if (Vector3.Distance(transform.position, Targeting.CurrentTarget.EntityTransform.position) < AttackRange.CurrentValue)
+                if (Vector3.Distance(transform.position, TargetingHandler.CurrentTarget.EntityTransform.position) < AttackRange.CurrentValue)
                     Attack();
             }
             
@@ -109,14 +107,14 @@ namespace Enemes
 
         public override void Attack()
         {
-            if (Targeting.CurrentTarget == null)
+            if (TargetingHandler.CurrentTarget == null)
                 return;
             
             if (timer >= StatusHandler.GetStatById((int)Constant.Stats.AttackRate).CurrentValue)
             {
                 timer = 0f;
-                Targeting.CurrentTarget.TakeDamage(StatusHandler.GetStatById((int)Constant.Stats.AttackDamage).CurrentValue, false);
-                Debug.Log($"{gameObject.name} attack {Targeting.CurrentTarget.EntityTransform.name}");
+                TargetingHandler.CurrentTarget.TakeDamage(StatusHandler.GetStatById((int)Constant.Stats.AttackDamage).CurrentValue, false);
+                Debug.Log($"{gameObject.name} attack {TargetingHandler.CurrentTarget.EntityTransform.name}");
             }
             else
             {

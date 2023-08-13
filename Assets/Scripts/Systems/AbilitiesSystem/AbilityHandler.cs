@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.SerializeData.AbilitySystemSerializeData;
 using UnityEngine;
 
 namespace Tzipory.AbilitiesSystem
@@ -13,6 +15,7 @@ namespace Tzipory.AbilitiesSystem
         
         public bool IsCasting => Abilities.Any(ability => ability.Value.IsCasting);
         
+        [Obsolete("Use AbilitySerializeData")]
         public AbilityHandler(IEntityTargetAbleComponent caster,IEntityTargetingComponent entityTargetingComponent,IEnumerable<AbilityConfig> abilitiesConfig)//temp
         {
             Abilities = new Dictionary<string, Ability>();
@@ -32,6 +35,8 @@ namespace Tzipory.AbilitiesSystem
 
         public void CastAbility(IEnumerable<IEntityTargetAbleComponent> availableTargets)
         {
+            if (Abilities.Count == 0)
+                return;
             Abilities.First().Value?.ExecuteAbility(availableTargets);
         }
 

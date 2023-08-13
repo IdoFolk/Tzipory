@@ -5,7 +5,8 @@ using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.Helpers;
 using Sirenix.OdinInspector;
-using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
+using Tzipory.SerializeData;
 using UnityEngine;
 
 namespace Shamans
@@ -13,23 +14,31 @@ namespace Shamans
     public class Shaman : BaseUnitEntity
     {
         [SerializeField, TabGroup("Proximity Indicator")] private ProximityIndicatorHandler _proximityHandler;
+        [SerializeField,TabGroup("Component")] private ClickHelper _clickHelper;
 
         [Space]
         [Header("Temps")]
         [SerializeField] private Temp_ShamanShotVisual _shotVisual;
-        [SerializeField] private ClickHelper _clickHelper;
         [SerializeField] private Temp_HeroMovement _tempHeroMovement;
+        
+        private ShamanSerializeData  _serializeData;
         
         private float _currentAttackRate;
 
-        public override void Init(BaseUnitEntityConfig parameter)
+        public override void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
-            base.Init(parameter);
-            EntityTeamType = EntityTeamType.Hero;
+            base.Init(parameter, visualConfig);
+            var shamanSerializeData = (ShamanSerializeData)parameter;
+            _serializeData = shamanSerializeData;
+            
+            _shotVisual.Init(this);
+            
+            EntityType = EntityType.Hero;
             _clickHelper.OnClick += _tempHeroMovement.SelectHero;
             
             _proximityHandler.Init(AttackRange.CurrentValue);//MAY need to move to OnEnable - especially if we use ObjectPooling instead of instantiate
         }
+
         private void OnDisable()
         {
             _proximityHandler.Disable();
@@ -37,13 +46,14 @@ namespace Shamans
 
         protected override void UpdateEntity()
         {
-            if (Targeting.CurrentTarget != null)//temp
+            if (TargetingHandler.CurrentTarget != null)//temp
                 Attack();
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
+            _serializeData?.UpdateData(this);//need to make endGame logic
             _clickHelper.OnClick -= _tempHeroMovement.SelectHero;
         }
 
@@ -55,7 +65,7 @@ namespace Shamans
                 return;
             }
             
-            AbilityHandler.CastAbility(Targeting.AvailableTargets);
+            AbilityHandler.CastAbility(TargetingHandler.AvailableTargets);
             
             bool canAttack = false;
 
@@ -78,12 +88,12 @@ namespace Shamans
             
             if (CritChance.CurrentValue > Random.Range(0, 100))
             {
-                EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.OnCritAttack);
-                _shotVisual.Shot(Targeting.CurrentTarget,CritDamage.CurrentValue,true);
+                EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
+                _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true);
                 return;
             }
-            EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.OnAttack);
-            _shotVisual.Shot(Targeting.CurrentTarget,AttackDamage.CurrentValue,false);
+            EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
+            _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue,false);
         }
 
         public override void OnEntityDead()

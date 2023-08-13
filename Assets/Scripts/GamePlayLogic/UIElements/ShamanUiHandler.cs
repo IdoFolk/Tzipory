@@ -17,25 +17,25 @@ namespace GameplayeLogic.UIElements
             _shaman = shaman;
             _splash.sprite = _shaman.SpriteRenderer.sprite;
             Show();
-            UpdateUIData(_shaman.HP.CurrentValue);
+            UpdateUIData(_shaman.Health.CurrentValue);
         }
 
         public override void Show()
         {
-            _shaman.HP.OnValueChanged += UpdateUIData;
+            _shaman.Health.OnValueChanged += UpdateUIData;
             base.Show();
         }
 
         public override void Hide()
         {
-            _shaman.HP.OnValueChanged -= UpdateUIData;
+            _shaman.Health.OnValueChanged -= UpdateUIData;
             base.Hide();
         }
 
         private void UpdateUIData(float cureentHP)
         {
-            _healthBar.value  = cureentHP / _shaman.HP.BaseValue;
-            _fill.color = Color.Lerp(Color.red,Color.green,_shaman.HP.CurrentValue/_shaman.HP.BaseValue);
+            _healthBar.value  = cureentHP / _shaman.Health.BaseValue;
+            _fill.color = Color.Lerp(Color.red,Color.green,_shaman.Health.CurrentValue/_shaman.Health.BaseValue);
         }
     }
 }

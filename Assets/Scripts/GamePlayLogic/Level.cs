@@ -35,10 +35,10 @@ namespace Tzipory.SerializeData.LevalSerializeData
         public IEnumerable<WaveSpawner> WaveSpawnersSerialize => _waveSpawnersSerialize;
         
         public int NumberOfWaveSpawners => _waveSpawners.Count;
-
+        
         private void Awake()
         {
-            FakeForward = _fakeForward;
+            FakeForward = _fakeForward.normalized;
             MapSize = new Vector2(_bgRenderer.sprite.texture.width, _bgRenderer.sprite.texture.height);
         }
 

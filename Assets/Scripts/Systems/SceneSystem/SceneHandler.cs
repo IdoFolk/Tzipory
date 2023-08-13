@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Tzipory.Systems.SceneSystem
 {
-    public class SceneHandler : MonoBehaviour
+    public class SceneHandler : MonoBehaviour , ISceneHandler
     {
         public static event Action<SceneType> OnSceneLoaded;
         
@@ -22,14 +22,21 @@ namespace Tzipory.Systems.SceneSystem
         
         public static Scene PresistanteScene { get; private set; }
         public static Scene CurrentScene { get; private set; }
+        
+        public static bool IsLoading { get; private set; }
 
         private void Start()
         {
             PresistanteScene = SceneManager.GetActiveScene();
+
+#if UNITY_EDITOR
+            _minLoadTime = 0;
+#endif
         }
 
         private IEnumerator LoadSceneAsync(SceneType sceneType)
         {
+            IsLoading = true;
             _loadTime = 0;
             
             int sceneIndex = sceneType switch
@@ -77,6 +84,8 @@ namespace Tzipory.Systems.SceneSystem
             SceneManager.SetActiveScene(CurrentScene);
             
             OnSceneLoaded?.Invoke(sceneType);
+
+            IsLoading = false;
             
             Debug.Log($"Loaded sceneType {CurrentScene.name}");
         }
@@ -105,6 +114,11 @@ namespace Tzipory.Systems.SceneSystem
             if (_loadingScreenHandler == null)
                 _loadingScreenHandler = GetComponent<LoadingScreenHandler>();
         }
+    }
+
+    public interface ISceneHandler
+    {
+        public void LoadScene(SceneType sceneType);
     }
 
     public enum SceneType

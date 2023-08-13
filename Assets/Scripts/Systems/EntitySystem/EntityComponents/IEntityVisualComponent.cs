@@ -11,5 +11,7 @@ namespace Tzipory.EntitySystem.EntityComponents
         public SoundHandler SoundHandler { get; }
         public Transform ParticleEffectPosition { get; }
         public Transform VisualQueueEffectPosition { get; }
+
+        public PopUpTexter PopUpTexter { get; }
     }
 }

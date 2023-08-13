@@ -1,73 +1,58 @@
-using Tzipory.AbilitiesSystem;
+using Systems.TargetingSystem;
+using Tools.Enums;
 using Tzipory.AbilitiesSystem.AbilityEntity;
 using Tzipory.AbilitiesSystem.AbilityExecuteTypes;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
-public class AoeAbilityEntity : BaseAbilityEntity, ITargetableReciever
+namespace GamePlayLogic.AbilitySystem.AbilityEntity
 {
-    private float _duration;
-    private AoeAbilityExecuter _aoeAbilityExecuter;
-
-    //OLD INIT
-
-    public void Init(IEntityTargetAbleComponent target, float radius, float duration,IAbilityExecutor abilityExecutor)
+    public class AoeAbilityEntity : BaseAbilityEntity, ITargetableReciever
     {
-        base.Init(target,abilityExecutor);
+        [SerializeField] private ColliderTargetingArea _colliderTargetingArea;
         
-        //_collider2D.radius = radius;
-        _collider2D.isTrigger = true;
-        _duration = duration;
-        //base.statusEffect = statusEffect;
-
-        visualTransform.localScale = new Vector3(radius * 2.5f, radius * 2.5f, 0); //why *2.5?
-        _collider2D.transform.localScale = new Vector3(radius * 2.5f, radius * 2.5f, 0); //why *2.5?
-
-        var colliders = Physics2D.OverlapCircleAll(transform.position, _collider2D.transform.localScale.x);
-
-
-        foreach (var collider in colliders)
+        private float _duration;
+        private AoeAbilityExecuter _aoeAbilityExecuter;
+    
+        public void Init(IEntityTargetAbleComponent target, float radius, float duration, AoeAbilityExecuter abilityExecutor)
         {
-            if (collider.isTrigger)
-                continue;
-            
-            if (collider.TryGetComponent(out IEntityTargetAbleComponent entityTargetAbleComponent))
-                Cast(entityTargetAbleComponent);
+            base.Init(target,abilityExecutor);
+            _aoeAbilityExecuter = abilityExecutor;
+            _duration = duration;
+            _colliderTargetingArea.Init(this);
+            visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
         }
-    }
-    //GOOD INIT!
-    public void InitSimple(IEntityTargetAbleComponent target, float radius, float duration, AoeAbilityExecuter abilityExecutor)
-    {
-        base.Init(target,abilityExecutor);
-        _aoeAbilityExecuter = abilityExecutor;
-        //_collider2D.radius = radius;
-        _collider2D.isTrigger = true;
-        _duration = duration;
-        //base.statusEffect = statusEffect;
 
-        visualTransform.localScale = new Vector3(radius , radius, 1); //why *2.5?
-        _collider2D.transform.localScale = new Vector3(radius , radius, 1); //why *2.5?
+        public void RecieveCollision(Collider2D other, IOStatType ioStatType)
+        {
+            
+        }
 
-    }
-
-    public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
-    {
-        _aoeAbilityExecuter.Execute(targetable);
-    }
-
-    public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
-    {
-        _aoeAbilityExecuter.ExecuteOnExit(targetable);
-    }
-
-    protected override void Update()
-    {
-        base.Update();
+        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
+        {
+            if (targetable == _aoeAbilityExecuter.Caster)
+                return;
         
-        _duration -= GAME_TIME.GameDeltaTime;//need to be a timer
+            _aoeAbilityExecuter.Execute(targetable);
+        }
+
+        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
+        {
+            if (targetable == _aoeAbilityExecuter.Caster)
+                return;
         
-        if(_duration <= 0)
-            Destroy(gameObject);//temp need to add pool
+            _aoeAbilityExecuter.ExecuteOnExit(targetable);
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+        
+            _duration -= GAME_TIME.GameDeltaTime;//need to be a timer
+        
+            if(_duration <= 0)
+                Destroy(gameObject);//TODO: add a pool to the ability entity system
+        }
     }
 }

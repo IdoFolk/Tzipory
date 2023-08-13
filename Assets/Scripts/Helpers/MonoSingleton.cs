@@ -17,5 +17,10 @@ namespace Tzipory.BaseScripts
                     Destroy(this);
             }
         }
+
+        protected virtual void OnDestroy()
+        {
+            _instance = null;
+        }
     }
 }

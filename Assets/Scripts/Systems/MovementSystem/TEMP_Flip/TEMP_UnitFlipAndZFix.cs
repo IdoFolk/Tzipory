@@ -39,7 +39,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     private void Start()
     {
         StartCoroutine(nameof(CheckForFlip));
-        _targeting = _baseUnitEntity.Targeting;
+        _targeting = _baseUnitEntity.TargetingHandler;
 
 
         //This should be applied differently between Shamans and Enemies.

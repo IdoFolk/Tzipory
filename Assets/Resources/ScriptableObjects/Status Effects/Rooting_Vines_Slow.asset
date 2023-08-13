@@ -28,4 +28,8 @@ MonoBehaviour:
     _endDelay: 0
     _isStackable: 0
     _isInterruptable: 0
-    _effectActionContainers: []
+    _effectActionContainers:
+    - _disableUndo: 0
+      _startDelay: 0
+      _effectActionStart: 0
+      _effectActionConfig: {fileID: 11400000, guid: 3d2958e3a431f0b478b0bcdcad49be44, type: 2}

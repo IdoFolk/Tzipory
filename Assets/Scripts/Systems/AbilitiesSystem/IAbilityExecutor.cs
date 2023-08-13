@@ -2,6 +2,7 @@
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.SerializeData.StatSystemSerilazeData;
 
 namespace Tzipory.AbilitiesSystem
 {

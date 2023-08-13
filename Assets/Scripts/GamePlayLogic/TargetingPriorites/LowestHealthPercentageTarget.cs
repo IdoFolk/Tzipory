@@ -20,10 +20,10 @@ namespace Tzipory.EntitySystem.TargetingSystem.TargetingPriorites
             foreach (var target in targets)
             {
                 //USE BASE VALUE HERE! NOT MAXVALUE! 
-                if (target.HP.CurrentValue/target.HP.BaseValue < currentLowestHP)
+                if (target.Health.CurrentValue/target.Health.BaseValue < currentLowestHP)
                 {
                     currentLowestTarget = target;
-                    currentLowestHP = target.HP.CurrentValue;
+                    currentLowestHP = target.Health.CurrentValue;
                 }
             }
 

@@ -1,4 +1,3 @@
-using Tzipory.SerializeData.LevalSerializeData;
 using UnityEngine;
 
 public class TEMP_SoloZFixer : MonoBehaviour
@@ -8,13 +7,10 @@ public class TEMP_SoloZFixer : MonoBehaviour
     /// Tick this V to keep this script in the sceneType. If this is false -> the script will destory itself after start
     /// </summary>
     [SerializeField] bool doGoOn;
-
-
+    
     Vector3 _cachedScaledMapSize;
     void Start()
     {
-
-
         _spriteRenderer.transform.localPosition = new Vector3(_spriteRenderer.transform.localPosition.x, _spriteRenderer.transform.localPosition.y, TEMP_UnitFlipAndZFix.GetZForLocalPosition(transform));
         
         if (!doGoOn)

@@ -92,7 +92,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
     }
 
     private void Update()
-    {
+    { 
         if (IsDone || _activeEnemyGroup == null || _activeEnemyGroup.Count == 0)
             return;
         
@@ -109,7 +109,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
         foreach (var enemyGroup in _activeEnemyGroup)
         {
             if (!enemyGroup.TryGetEnemy(out var entityConfig))
-                return;
+                continue;
             
             var enemy = PoolManager.EnemyPool.GetObject();
             

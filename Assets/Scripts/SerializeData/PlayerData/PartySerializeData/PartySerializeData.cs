@@ -41,6 +41,9 @@ namespace Tzipory.SerializeData
 
             _shamansPartyDataContainers = new List<ShamanDataContainer>();
             
+            //Temp need this for the temp map system
+            _shamansPartyDataContainers.AddRange(_shamanRosterDataContainers);
+            
             IsInitialization = true;
         }
         

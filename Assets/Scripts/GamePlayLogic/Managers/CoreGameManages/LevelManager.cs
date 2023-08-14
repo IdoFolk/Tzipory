@@ -10,7 +10,6 @@ using Tzipory.SerializeData;
 using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(-1)]
 public class LevelManager : MonoBehaviour

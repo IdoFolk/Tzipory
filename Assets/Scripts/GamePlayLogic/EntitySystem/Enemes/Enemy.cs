@@ -44,6 +44,8 @@ namespace Enemes
             _currentDecisionInterval = _decisionInterval;
             _aggroLevel = enemyConfig.AggroLevel;
             _returnLevel = enemyConfig.ReturnLevel;
+            
+            _movementOnPath.AdvanceOnPath();
         }
 
         protected override void UpdateEntity()

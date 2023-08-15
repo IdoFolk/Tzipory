@@ -56,5 +56,5 @@ MonoBehaviour:
   _targetingPriority: 2
   _enemyId: 0
   _decisionInterval: 5
-  _aggroLevel: 30
-  _returnLevel: 10
+  _aggroLevel: 7
+  _returnLevel: 5

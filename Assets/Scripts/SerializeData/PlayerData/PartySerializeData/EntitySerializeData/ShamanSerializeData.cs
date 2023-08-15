@@ -1,4 +1,6 @@
-﻿using Shamans;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Shamans;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles;
 using Tzipory.EntitySystem.EntityConfigSystem;
@@ -9,11 +11,14 @@ namespace Tzipory.SerializeData
     [System.Serializable]
     public class ShamanSerializeData : UnitEntitySerializeData , IUpdateData<Shaman>
     {
+        public IReadOnlyList<ShamanItemSerializeData> AttachedItemsSerializeData => attachedItemsSerializeData;
+        //changed to public for testing until i figure ouot that data requester
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanId;
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanLevel;
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanExp;
-        
-        //add Item serializeData
+
+        //
+        private List<ShamanItemSerializeData> attachedItemsSerializeData = new List<ShamanItemSerializeData>();
         //add consumables serializeData
         
         public int ShamanId => _shamanId;
@@ -26,7 +31,8 @@ namespace Tzipory.SerializeData
             var config = (ShamanConfig)parameter;
             
             _shamanId = config.ConfigObjectId;
-            
+            //Need to be in config?
+            attachedItemsSerializeData = new List<ShamanItemSerializeData>();
             //need to add more shaman config logic
         }
 
@@ -34,6 +40,35 @@ namespace Tzipory.SerializeData
         {
             base.UpdateData(data);
             //need to add dataUpdate for shaman
+        }
+
+
+        public void AttachItem(ShamanItemSerializeData itemToAttach)
+        {
+            if (attachedItemsSerializeData.Contains(itemToAttach))
+            {
+                Debug.LogError("Item already attached");
+                return;
+            }
+            for (int i = attachedItemsSerializeData.Count - 1; i >= 0; i--)
+            {
+                if (attachedItemsSerializeData[i].TargetSlot == itemToAttach.TargetSlot)
+                {
+                    RemoveItem(attachedItemsSerializeData[i]);
+                }
+            }
+            
+            attachedItemsSerializeData.Add(itemToAttach);
+        }
+
+        public void RemoveItem(ShamanItemSerializeData shamanItemSerializeData)
+        {
+            if (!attachedItemsSerializeData.Contains(shamanItemSerializeData))
+            {
+                Debug.LogError("Item does not exist for shaman! cannot remove it");
+                return;
+            }
+            attachedItemsSerializeData.Remove(shamanItemSerializeData);
         }
     }
 }

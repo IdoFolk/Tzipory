@@ -18,7 +18,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 
     public PathCreator PatrolPath => _patrolPath;
 
-    public EntityTeamType EntityTeamType => EntityTeamType.Hero;
+    public EntityType EntityType => EntityType.Hero;
 
     public Stat InvincibleTime => throw new System.NotImplementedException();
 

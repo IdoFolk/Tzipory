@@ -16,8 +16,8 @@ TagManager:
   - NavMesh
   - Entity
   - Projectile
-  - Shamans
-  - PS
+  - NavMesh
+  - 
   - Clickable
   - Shadow
   - 

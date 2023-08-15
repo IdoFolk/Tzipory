@@ -1,11 +1,15 @@
-﻿using Tzipory.BaseSystem.TimeSystem;
+﻿using Systems.TargetingSystem;
+using Tools.Enums;
+using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
 namespace Tzipory.AbilitiesSystem.AbilityEntity
 {
-    public class ProjectileAbilityEntity : BaseAbilityEntity
+    public class ProjectileAbilityEntity : BaseAbilityEntity , ITargetableReciever
     {
+        [SerializeField] private ColliderTargetingArea _colliderTargeting;
+        
         private float _penetrationNumber;
         private float _speed;
         private Vector3 _dir;
@@ -13,6 +17,7 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
         public void Init(IEntityTargetAbleComponent target,float speed, float penetrationNumber,IAbilityExecutor abilityExecutor) 
         {
             base.Init(target, abilityExecutor);
+            _colliderTargeting.Init(this);
             _speed = speed;
             _penetrationNumber = penetrationNumber;
             _dir = (target.EntityTransform.position - transform.position).normalized;
@@ -29,14 +34,22 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
                 Destroy(gameObject);
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        public void RecieveCollision(Collider2D other, IOStatType ioStatType)
         {
-            if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
             
-            if (targetAbleComponent.EntityInstanceID == _abilityExecutor.Caster.EntityInstanceID) return;
+        }
+
+        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
+        {
+            if (targetable.EntityInstanceID == _abilityExecutor.Caster.EntityInstanceID) return;
             
-            _abilityExecutor.Init(targetAbleComponent);
+            _abilityExecutor.Init(targetable);
             _penetrationNumber--;
+        }
+
+        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
+        {
+            
         }
     }
 }

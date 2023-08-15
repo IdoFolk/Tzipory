@@ -1,4 +1,5 @@
-﻿using Systems.SaveLoadSystem;
+﻿using System.Collections.Generic;
+using Systems.SaveLoadSystem;
 using Tzipory.ConfigFiles;
 using Tzipory.SerializeData;
 using UnityEngine;
@@ -28,7 +29,7 @@ namespace Systems.DataManagerSystem
         {
             var output = new T();
             
-            if (_saveAndLoadManager.GetSaveData())
+            if (_saveAndLoadManager.GetSaveData(out T data))
             {
                 //return save data
             }
@@ -43,7 +44,7 @@ namespace Systems.DataManagerSystem
         {
             var output = new T();
             
-            if (_saveAndLoadManager.GetSaveData())
+            if (_saveAndLoadManager.GetSaveData(out T data))
             {
                 //return save data
             }
@@ -52,6 +53,32 @@ namespace Systems.DataManagerSystem
             
             if (!output.IsInitialization)
                 output.Init(configFile);
+            
+            return output;
+        }
+
+        public IEnumerable<T> GetDatas<T>(IConfigFile configFile) where T : class, ISerializeData, new()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public IEnumerable<T> GetDatas<T>(int objectId) where T : class, ISerializeData, new()
+        {
+            var output = new List<T>();
+            
+            if (_saveAndLoadManager.GetSaveData(out IEnumerable<T> data))
+            {
+                output.AddRange(data);
+                //return save data
+            }
+
+            foreach (var serializeData in output)
+            {
+                var configFile = _configManager.GetConfig(serializeData.SerializeTypeId,objectId);
+            
+                if (!serializeData.IsInitialization)
+                    serializeData.Init(configFile);
+            }
             
             return output;
         }

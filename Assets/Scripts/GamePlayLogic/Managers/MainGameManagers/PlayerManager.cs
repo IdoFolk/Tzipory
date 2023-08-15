@@ -1,4 +1,4 @@
-﻿using GameplayeLogic.Managersp;
+﻿using GameplayeLogic.Managers;
 
 namespace GamePlayLogic.Managers
 {

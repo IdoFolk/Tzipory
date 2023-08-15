@@ -1,14 +1,17 @@
 ﻿using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.EntitySystem.TargetingSystem;
+using UnityEngine;
 
 namespace Tzipory.EntitySystem.EntityComponents
 {
     public interface IEntityTargetingComponent : IEntityComponent
     {
+        //TODO may need to add OnTargetSelected event
         public Stat TargetingRange { get; }
-        public EntityTeamType EntityTeamType { get; }//temp
+        public EntityType EntityType { get; }
+        public Vector2 ShotPosition { get;}
         public IPriorityTargeting DefaultPriorityTargeting { get; }
-        public TargetingHandler Targeting { get; set; }
+        public TargetingHandler TargetingHandler { get; }
         public float GetDistanceToTarget(IEntityTargetAbleComponent targetAbleComponent);
     }
 }

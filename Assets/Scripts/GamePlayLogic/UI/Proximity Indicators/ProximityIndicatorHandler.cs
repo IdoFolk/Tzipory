@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Helpers.Consts;
 using UnityEngine;
 
 [System.Serializable]
@@ -16,21 +15,15 @@ public class ProximityIndicatorHandler
 
     private bool _isToggleOn;
     private bool _isLock;
-
     
     public void Init(float range)
     {
         _range = range;
         _isLock = false;
         _isToggleOn = false;
-
         //TEMP AF!!!!
-
-        //float ratio = _scaler.localScale.x / _scaler.localScale.y;
-        //_scaler.localScale = new Vector3(_range * ratio, _range, 1);
-        _scaler.localScale = new Vector3(_range/2f , _range/2f, 1);
+        _scaler.localScale = new Vector3(_range , _range, 1);
         //TEMP AF!!!!
-
         _spriteRenderer.color = _proximityConfig.Color;
 
         foreach (var condition in _proximityConfig.IndicatorConditions)

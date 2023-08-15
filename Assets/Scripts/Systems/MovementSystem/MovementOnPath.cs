@@ -7,7 +7,7 @@ public class MovementOnPath : MonoBehaviour
 {
     #region TempRefs
     [SerializeField]
-    BasicMoveComponent basicMoveComponent; //will be set with init
+    TEMP_BasicMoveComponent _tempBasicMoveComponent; //will be set with init
 
     [SerializeField]
     private float privateRabbitIncrement; //will be set with config
@@ -55,7 +55,7 @@ public class MovementOnPath : MonoBehaviour
 
         _currentPointOnPath = pathCreator.path.GetPointAtDistance(privateRabbitProgress, EndOfPathInstruction.Stop);
 
-        basicMoveComponent.SetDestination(_currentPointOnPath, MoveType.Guided);
+        _tempBasicMoveComponent.SetDestination(_currentPointOnPath, MoveType.Guided);
 
         Vector3 closestPointOnPath = pathCreator.path.GetClosestPointOnPath(transform.position);
 
@@ -78,7 +78,7 @@ public class MovementOnPath : MonoBehaviour
         {
             privateRabbitProgress += finalLoopSpeed;
         }
-        basicMoveComponent.SetDestination(_currentPointOnPath, MoveType.Free);
+        _tempBasicMoveComponent.SetDestination(_currentPointOnPath, MoveType.Free);
 
         //TEMP!!!!!!
         Enemy enemy = GetComponent<Enemy>();

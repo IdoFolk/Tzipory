@@ -1,13 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using Systems.TargetingSystem;
+using Tools.Enums;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.TargetingSystem
 {
-    public class TargetingHandler : MonoBehaviour
+    public class TargetingHandler : MonoBehaviour , ITargetableReciever
     {
-        [SerializeField] private Collider2D _targetingCollider2D;
-        
+        [SerializeField,Required] private ColliderTargetingArea _targetingArea;
+
         private IEntityTargetingComponent _entityTargetingComponent;
         private List<IEntityTargetAbleComponent> _availableTargets;
         
@@ -15,7 +19,8 @@ namespace Tzipory.EntitySystem.TargetingSystem
         public IEntityTargetAbleComponent CurrentTarget { get; private set; }
         
         public List<IEntityTargetAbleComponent> AvailableTargets => _availableTargets;
-
+        
+        [Obsolete]
         public TargetingHandler(IEntityTargetingComponent targetingComponent)//may whnt to not be a monobehavior
         {
             _availableTargets = new List<IEntityTargetAbleComponent>();
@@ -27,16 +32,15 @@ namespace Tzipory.EntitySystem.TargetingSystem
             _availableTargets = new List<IEntityTargetAbleComponent>();
             _entityTargetingComponent = targetingComponent;
             
-            _targetingCollider2D.isTrigger  = true;
-            _targetingCollider2D.transform.localScale = new Vector3(_entityTargetingComponent.TargetingRange.CurrentValue* 1.455f, _entityTargetingComponent.TargetingRange.CurrentValue,1f);//temp need to be const
+            _targetingArea.Init(this);
+            
+            UpdateTargetingRange(_entityTargetingComponent.TargetingRange.CurrentValue);
             
             _entityTargetingComponent.TargetingRange.OnValueChanged += UpdateTargetingRange;
         }
 
-        private void UpdateTargetingRange(float value)
-        {
-            _targetingCollider2D.transform.localScale = new Vector3(value * 1.455f, value,1f);//temp
-        }
+        private void UpdateTargetingRange(float value)=>
+            transform.localScale = new Vector3(value, value,1f);
 
         public void SetAttackTarget(IEntityTargetAbleComponent target)
         {
@@ -61,34 +65,38 @@ namespace Tzipory.EntitySystem.TargetingSystem
             return true;
         }
 
-        private void AddTarget(IEntityTargetAbleComponent targetAbleComponent)
+        private void TryAddTarget(IEntityTargetAbleComponent targetAbleComponent)
         {
+            if (targetAbleComponent.EntityType == _entityTargetingComponent.EntityType)
+                return;
+            
             _availableTargets.Add(targetAbleComponent);
         }
 
         private void RemoveTarget(IEntityTargetAbleComponent targetAbleComponent)
         {
-            _availableTargets.Remove(targetAbleComponent);
-        }
-        
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            if (other.gameObject.TryGetComponent(out IEntityTargetAbleComponent targetAbleComponent) && targetAbleComponent.EntityTeamType != _entityTargetingComponent.EntityTeamType) //Removing friendly fire!
-                AddTarget(targetAbleComponent);
+            if (_availableTargets.Contains(targetAbleComponent))
+                _availableTargets.Remove(targetAbleComponent);
         }
 
-        private void OnTriggerExit2D(Collider2D other)
+
+        public void RecieveCollision(Collider2D other, IOStatType ioStatType)
         {
-            if (other.gameObject.TryGetComponent(out IEntityTargetAbleComponent targetAbleComponent))
-            {
-                RemoveTarget(targetAbleComponent);
-                
-                if (CurrentTarget == null)
-                    return;
-                
-                if (targetAbleComponent.EntityInstanceID == CurrentTarget.EntityInstanceID) //TBD targeting could be improved here
-                    GetPriorityTarget();
-            }
+            
+        }
+
+        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
+        {
+            TryAddTarget(targetable);
+        }
+
+        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
+        {
+            RemoveTarget(targetable);
+
+            if (CurrentTarget == null) return;
+            if (targetable.EntityInstanceID == CurrentTarget.EntityInstanceID)
+                GetPriorityTarget();
         }
     }
 }

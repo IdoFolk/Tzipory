@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3594279958353090911}
   - component: {fileID: 7952938519188446527}
   - component: {fileID: 2559643096176676582}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: BoxObstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

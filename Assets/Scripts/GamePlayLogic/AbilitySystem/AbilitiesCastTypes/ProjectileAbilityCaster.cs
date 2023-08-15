@@ -42,7 +42,7 @@ namespace Tzipory.AbilitiesSystem
         public void Cast(IEntityTargetAbleComponent target, IAbilityExecutor abilityExecutor)
         {
             OnCast?.Invoke();
-            var projectilePrefab = Object.Instantiate(_projectilePrefab,EntityCasterTargetingComponent.EntityTransform.position,Quaternion.identity);
+            var projectilePrefab = Object.Instantiate(_projectilePrefab,EntityCasterTargetingComponent.ShotPosition,Quaternion.identity);
             projectilePrefab.GetComponent<ProjectileAbilityEntity>().Init(target,ProjectileSpeed.CurrentValue,ProjectilePenetration.CurrentValue,abilityExecutor);
         }
     }

@@ -38,7 +38,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         
         private void Awake()
         {
-            FakeForward = _fakeForward;
+            FakeForward = _fakeForward.normalized;
             MapSize = new Vector2(_bgRenderer.sprite.texture.width, _bgRenderer.sprite.texture.height);
         }
 

@@ -13,65 +13,29 @@ MonoBehaviour:
   m_Name: Level Visual Data SO
   m_EditorClassIdentifier: 
   level_VisualData:
-    DamageRange: {x: 10, y: 60}
-    FontSizeRange: {x: 5, y: 14}
-    Crit_FontSizeBonus: 5
+    DamageRange: {x: 30, y: 100}
+    FontSizeRange: {x: 5, y: 8}
+    Crit_FontSizeBonus: 3
     PopUpText_MoveCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: -0.003447487
-        value: 0.49881887
-        inSlope: 0.80213535
-        outSlope: 0.80213535
+        time: 0.50179213
+        value: 0.0062499996
+        inSlope: 0
+        outSlope: 0
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.2855815
-      - serializedVersion: 3
-        time: 0.291999
-        value: 0.7473254
-        inSlope: -0.24280639
-        outSlope: -0.24280639
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.42289993
-        outWeight: 0.055161174
-      - serializedVersion: 3
-        time: 0.30728486
-        value: 0.00043867156
-        inSlope: -0.026832484
-        outSlope: -0.026832484
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.31202385
-      - serializedVersion: 3
-        time: 0.6183554
-        value: -0.0016057147
-        inSlope: 0.010135709
-        outSlope: 0.010135709
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.35527492
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.71012586
-        value: -0.21704741
-        inSlope: -2.6208694
-        outSlope: -2.6208694
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
+        outWeight: 0
       - serializedVersion: 3
         time: 1
-        value: -0.79129153
-        inSlope: -0.05093213
-        outSlope: -0.05093213
+        value: 1
+        inSlope: 2
+        outSlope: 2
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.7543595
+        inWeight: 0
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -80,26 +44,35 @@ MonoBehaviour:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 9.313226e-10
-        value: 0.7995283
-        inSlope: 0.80213535
-        outSlope: 0.80213535
+        time: -0.0000035667326
+        value: 1.0001639
+        inSlope: -0.014796994
+        outSlope: -0.014796994
         tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.2855815
+        outWeight: 0.053710863
       - serializedVersion: 3
-        time: 0.29265136
-        value: 0.99304813
-        inSlope: -2.180864
-        outSlope: -2.180864
+        time: 0.36345482
+        value: 0.7055962
+        inSlope: -0.0028848487
+        outSlope: -0.0028848487
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.2378295
-        outWeight: 0.055161174
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.9860724
-        value: 0.015052562
+        time: 0.5015201
+        value: 0.7047426
+        inSlope: 0.00033322186
+        outSlope: 0.00033322186
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.44339126
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.9879907
+        value: 0.6549022
         inSlope: -0.044562694
         outSlope: -0.044562694
         tangentMode: 0
@@ -122,8 +95,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0.2859588
       - serializedVersion: 3
-        time: 0.29265136
-        value: 1.0001241
+        time: 0.49518004
+        value: 1.0049038
         inSlope: -0.0062498306
         outSlope: -0.0062498306
         tangentMode: 0
@@ -133,11 +106,11 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 0.00000007636845
-        inSlope: -0.044562694
-        outSlope: -0.044562694
+        inSlope: -5.927255
+        outSlope: -5.927255
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.26303208
+        inWeight: 0.07768251
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2

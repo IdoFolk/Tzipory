@@ -10,7 +10,6 @@ using Tzipory.SerializeData;
 using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(-1)]
 public class LevelManager : MonoBehaviour
@@ -108,13 +107,8 @@ public class LevelManager : MonoBehaviour
         OnEndGame?.Invoke(isWon);
         IsGameRunning = false;
     }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
-
-    public void Reset()
+    
+    public void Continue()
     {
         GAME_TIME.SetTimeStep(1);
         GameManager.SceneHandler.LoadScene(SceneType.Map);

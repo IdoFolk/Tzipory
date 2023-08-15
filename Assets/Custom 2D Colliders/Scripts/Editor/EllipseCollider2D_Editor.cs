@@ -27,9 +27,8 @@ You can contact me by email at guyquad27@gmail.com or on Reddit at https://www.r
 
 using UnityEngine;
 using UnityEditor;
-using System.Collections;
 
-[CustomEditor (typeof(EllipseCollider2D))]
+[CustomEditor(typeof(EllipseCollider2D))]
 public class EllipseCollider_Editor : Editor {
 
     EllipseCollider2D ec;
@@ -45,7 +44,7 @@ public class EllipseCollider_Editor : Editor {
             ec.gameObject.AddComponent<EdgeCollider2D>();
             edgeCollider = ec.GetComponent<EdgeCollider2D>();
         }
-        edgeCollider.points = ec.getPoints(edgeCollider.offset);
+        edgeCollider.points = ec.GetPoints(edgeCollider.offset);
     }
 
     public override void OnInspectorGUI()
@@ -55,7 +54,7 @@ public class EllipseCollider_Editor : Editor {
 
         if (GUI.changed || !off.Equals(edgeCollider.offset))
         {
-            edgeCollider.points = ec.getPoints(edgeCollider.offset);
+            edgeCollider.points = ec.GetPoints(edgeCollider.offset);
         }
 
         off = edgeCollider.offset;

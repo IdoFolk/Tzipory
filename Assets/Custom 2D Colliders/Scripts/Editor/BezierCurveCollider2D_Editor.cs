@@ -65,7 +65,7 @@ public class BezierCurveCollider_Editor : Editor {
         EditorGUILayout.EndHorizontal();
 
 
-        if (GUILayout.Button("Reset"))
+        if (GUILayout.Button("Continue"))
         {
             bc.initialized = false;
             bc.Init();

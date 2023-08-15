@@ -27,6 +27,7 @@ namespace Tzipory.EntitySystem.Entitys
 #endif
         [SerializeField,TabGroup("Component")] private Transform _particleEffectPosition;
         [SerializeField,TabGroup("Component")] private SoundHandler _soundHandler;
+        [SerializeField,TabGroup("Component")] private TargetingHandler _targetingHandler;
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private SpriteRenderer _spriteRenderer;
         [SerializeField,TabGroup("Component")] private Transform _visualQueueEffectPosition;
@@ -48,7 +49,8 @@ namespace Tzipory.EntitySystem.Entitys
         #endregion
 
         #region Temps
-        [Header("TEMPS")]
+        [Header("TEMPS")] [SerializeField]
+        private Transform _shotPosition;
         [SerializeField] private bool _doShowHPBar;
         [SerializeField] private TEMP_UNIT_HPBarConnector _hpBarConnector;
         #endregion
@@ -94,7 +96,7 @@ namespace Tzipory.EntitySystem.Entitys
             DefaultPriorityTargeting =
                 Factory.TargetingPriorityFactory.GetTargetingPriority(this, (TargetingPriorityType)parameter.TargetingPriority);
             
-            Targeting.Init(this);
+            TargetingHandler.Init(this);
             
             StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
             StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
@@ -148,7 +150,7 @@ namespace Tzipory.EntitySystem.Entitys
             DefaultPriorityTargeting =
                 Factory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
             
-            Targeting.Init(this);
+            TargetingHandler.Init(this);
             
             StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
             StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
@@ -172,7 +174,6 @@ namespace Tzipory.EntitySystem.Entitys
         protected override void Awake()
         {
             base.Awake();
-            Targeting = GetComponentInChildren<TargetingHandler>();//temp
             
             _onDeath.ID = Constant.EffectSequenceIds.DEATH;
             _onAttack.ID = Constant.EffectSequenceIds.ATTACK;
@@ -212,8 +213,8 @@ namespace Tzipory.EntitySystem.Entitys
             HealthComponentUpdate();
             StatusHandler.UpdateStatusEffects();
 
-            if (Targeting.CurrentTarget == null || Targeting.CurrentTarget.IsEntityDead)
-                Targeting.GetPriorityTarget();
+            if (TargetingHandler.CurrentTarget == null || TargetingHandler.CurrentTarget.IsEntityDead)
+                TargetingHandler.GetPriorityTarget();
             
             EffectSequenceHandler.UpdateEffectHandler();
             
@@ -244,12 +245,12 @@ namespace Tzipory.EntitySystem.Entitys
         {
            // Gizmos.DrawWireSphere(transform.position,_config.AttackRange.BaseValue / 2);
 
-            if (Targeting != null)
+            if (TargetingHandler != null)
             {
-                if (Targeting.CurrentTarget == null) return;
+                if (TargetingHandler.CurrentTarget == null) return;
                 
                 Gizmos.color = Color.red;
-                Gizmos.DrawLine(transform.position,Targeting.CurrentTarget.EntityTransform.position);
+                Gizmos.DrawLine(transform.position,TargetingHandler.CurrentTarget.EntityTransform.position);
                 Gizmos.color = Color.white;
             }
         }
@@ -271,9 +272,10 @@ namespace Tzipory.EntitySystem.Entitys
 
         public Stat TargetingRange => StatusHandler.GetStatById((int)Constant.Stats.TargetingRange);
         public bool IsTargetAble { get; }
-        public EntityTeamType EntityTeamType { get; protected set; }
+        public EntityType EntityType { get; protected set; }
+        public Vector2 ShotPosition => _shotPosition.position;
         public IPriorityTargeting DefaultPriorityTargeting { get; private set; }
-        public TargetingHandler Targeting { get; set; }
+        public TargetingHandler TargetingHandler => _targetingHandler;
         
         public float GetDistanceToTarget(IEntityTargetAbleComponent targetAbleComponent)
             => Vector2.Distance(transform.position, targetAbleComponent.EntityTransform.position);
@@ -354,7 +356,7 @@ namespace Tzipory.EntitySystem.Entitys
 
         #region CombatComponent                                                                                                                                   
         
-        public void SetAttackTarget(IEntityTargetAbleComponent target) => Targeting.SetAttackTarget(target);
+        public void SetAttackTarget(IEntityTargetAbleComponent target) => TargetingHandler.SetAttackTarget(target);
 
         public Stat AttackDamage => StatusHandler.GetStatById((int)Constant.Stats.AttackDamage);
         public Stat CritDamage => StatusHandler.GetStatById((int)Constant.Stats.CritDamage);

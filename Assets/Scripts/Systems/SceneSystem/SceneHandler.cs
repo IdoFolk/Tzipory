@@ -22,6 +22,8 @@ namespace Tzipory.Systems.SceneSystem
         
         public static Scene PresistanteScene { get; private set; }
         public static Scene CurrentScene { get; private set; }
+        
+        public static bool IsLoading { get; private set; }
 
         private void Start()
         {
@@ -34,6 +36,7 @@ namespace Tzipory.Systems.SceneSystem
 
         private IEnumerator LoadSceneAsync(SceneType sceneType)
         {
+            IsLoading = true;
             _loadTime = 0;
             
             int sceneIndex = sceneType switch
@@ -81,6 +84,8 @@ namespace Tzipory.Systems.SceneSystem
             SceneManager.SetActiveScene(CurrentScene);
             
             OnSceneLoaded?.Invoke(sceneType);
+
+            IsLoading = false;
             
             Debug.Log($"Loaded sceneType {CurrentScene.name}");
         }

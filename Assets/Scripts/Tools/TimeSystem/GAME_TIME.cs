@@ -11,7 +11,7 @@ namespace Tzipory.BaseSystem.TimeSystem
         private static TimerHandler _timerHandler;
         private static float _startGameTime;
 
-        private float _tempTimeData = 1;
+        private static float _tempTimeData = 1;
         
         public static float TimePlayed => Time.realtimeSinceStartup - _startGameTime;
         public static float GetCurrentTimeRate => _timeRate;
@@ -51,13 +51,13 @@ namespace Tzipory.BaseSystem.TimeSystem
             SetTimeStep(_timeRate * 2);
         }
 
-        public void Play()
+        public static void Play()
         {
             SetTimeStep(_tempTimeData);
             _tempTimeData = 0;
         }
         
-        public void Pause()
+        public static void Pause()
         {
             if (_timeRate == 0) return;
             _tempTimeData = _timeRate;

@@ -30,6 +30,8 @@ namespace Tzipory.EntitySystem.Entitys
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private SpriteRenderer _spriteRenderer;
         [SerializeField,TabGroup("Component")] private Transform _visualQueueEffectPosition;
+        [SerializeField, TabGroup("Component")] private SpriteRenderer _seeThroughRenderer;
+
 
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onDeath;
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onAttack;
@@ -98,9 +100,9 @@ namespace Tzipory.EntitySystem.Entitys
             StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
             
             AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
-            
-            SpriteRenderer.sprite = visualConfig.Sprite;
-            
+
+            SetUnitSprite(visualConfig.Sprite);
+
             //init Hp_bar
             if (_doShowHPBar)//Temp!
                 Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
@@ -152,9 +154,8 @@ namespace Tzipory.EntitySystem.Entitys
             StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
             
             AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
-            
-            SpriteRenderer.sprite = parameter.UnitEntityVisualConfig.Sprite;
-            
+
+            SetUnitSprite(parameter.UnitEntityVisualConfig.Sprite);
             //init Hp_bar
             if (_doShowHPBar)//Temp!
                 Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
@@ -400,6 +401,19 @@ namespace Tzipory.EntitySystem.Entitys
         public Transform ParticleEffectPosition => _particleEffectPosition;
         public Transform VisualQueueEffectPosition => _visualQueueEffectPosition;
         public PopUpTexter PopUpTexter => _popUpTexter;
+
+        /// <summary>
+        /// Unifies the main sprite setting method.
+        /// Helps in setting additional sprites to that same sprtie.
+        /// Can also be turned into an event Action<Sprite> and any new sprite renderers (like the shadow) could sub to the SetMainSprtie<Sprite> Action
+        /// but I don't forsee any more renderers of this type - so I don't think it is needed at this time
+        /// </summary>
+        /// <param name="newSprite"></param>
+        public void SetUnitSprite(Sprite newSprite)
+        {
+            SpriteRenderer.sprite = newSprite;
+            _seeThroughRenderer.sprite = newSprite; 
+        }
 
         private void AddStatusEffectVisual(BaseStatusEffect baseStatusEffect) =>
             EffectSequenceHandler.PlaySequenceByData(baseStatusEffect.EffectSequence);//temp

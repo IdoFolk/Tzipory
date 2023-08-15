@@ -29,8 +29,10 @@ namespace Shamans
         {
             base.Init(parameter, visualConfig);
             var config = (ShamanSerializeData)parameter;
+
+
             //add shaman config
-            
+
             EntityTeamType = EntityTeamType.Hero;
             _clickHelper.OnClick += _tempHeroMovement.SelectHero;
             

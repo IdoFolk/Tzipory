@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1989063162462914551, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: m_Size.x
+      value: 1.4628571
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989063162462914551, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: m_Size.y
+      value: 1.4628571
+      objectReference: {fileID: 0}
+    - target: {fileID: 1989063162462914551, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b1a33335676bae348b7c9e4bc0a7554a, type: 3}
+    - target: {fileID: 1989063162462914551, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2062197455431657528, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0.7349999
@@ -176,10 +192,18 @@ PrefabInstance:
       propertyPath: m_Points.Array.data[30].y
       value: -0.34400022
       objectReference: {fileID: 0}
+    - target: {fileID: 4228493472124563496, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _spriteRenderer
+      value: 
+      objectReference: {fileID: 7181048955210609148}
     - target: {fileID: 4291540667549584041, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: m_Radius
       value: 0.56
       objectReference: {fileID: 0}
+    - target: {fileID: 5115747954987240790, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b1a33335676bae348b7c9e4bc0a7554a, type: 3}
     - target: {fileID: 5679466174791393494, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: m_ExcludeLayers.m_Bits
       value: 0
@@ -225,3 +249,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+--- !u!212 &7181048955210609148 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 1989063162462914551, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+  m_PrefabInstance: {fileID: 8661169279840712203}
+  m_PrefabAsset: {fileID: 0}

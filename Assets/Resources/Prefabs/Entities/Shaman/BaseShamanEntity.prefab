@@ -118,7 +118,7 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 364768839933734932}
     - targetCorrespondingSourceObject: {fileID: 4357314417853133059, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
-      insertIndex: -1
+      insertIndex: 3
       addedObject: {fileID: 5144156884191978286}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1420442367539004591, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
@@ -180,6 +180,11 @@ SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 2750211597899472799, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
   m_PrefabInstance: {fileID: 4080524451218561172}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &2854971960228503888 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2251248414798084548, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+  m_PrefabInstance: {fileID: 4080524451218561172}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3104813651261807675 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1420442367539004591, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
@@ -204,6 +209,7 @@ MonoBehaviour:
   _soundHandler: {fileID: 3215233828703679931}
   _spriteRenderer: {fileID: 2200670044425848587}
   _visualQueueEffectPosition: {fileID: 800062657850464996}
+  _seeThroughRenderer: {fileID: 2854971960228503888}
   _onDeath:
     _sequenceName: 
     _id: 0

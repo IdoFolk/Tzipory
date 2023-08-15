@@ -1,3 +1,4 @@
+using Tzipory.EntitySystem.Entitys;
 using Tzipory.SerializeData.LevalSerializeData;
 using UnityEngine;
 

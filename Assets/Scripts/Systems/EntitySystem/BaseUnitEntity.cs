@@ -402,6 +402,8 @@ namespace Tzipory.EntitySystem.Entitys
         public Transform VisualQueueEffectPosition => _visualQueueEffectPosition;
         public PopUpTexter PopUpTexter => _popUpTexter;
 
+        //The following bellow is awaiting approval
+
         /// <summary>
         /// Unifies the main sprite setting method.
         /// Helps in setting additional sprites to that same sprtie.
@@ -413,6 +415,15 @@ namespace Tzipory.EntitySystem.Entitys
         {
             SpriteRenderer.sprite = newSprite;
             _seeThroughRenderer.sprite = newSprite; 
+        }
+        /// <summary>
+        /// Flips all sprites that maybe
+        /// </summary>
+        /// <param name="newSprite"></param>
+        public void SetSpriteFlipX(bool doFlip)
+        {
+            SpriteRenderer.flipX = doFlip;
+            _seeThroughRenderer.flipX = doFlip; 
         }
 
         private void AddStatusEffectVisual(BaseStatusEffect baseStatusEffect) =>

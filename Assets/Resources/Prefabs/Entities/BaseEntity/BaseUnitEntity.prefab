@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.64
       objectReference: {fileID: 0}
+    - target: {fileID: 1606500935877454357, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6489605381146350932, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
       propertyPath: m_Name
       value: UnitEntityVisual
@@ -430,6 +434,10 @@ PrefabInstance:
     - target: {fileID: 2315287719569622348, guid: b800d6237f805ea4cbd214f73078b773, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2408346367098106717, guid: b800d6237f805ea4cbd214f73078b773, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

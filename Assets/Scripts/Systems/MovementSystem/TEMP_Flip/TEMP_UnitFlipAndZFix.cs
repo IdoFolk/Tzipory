@@ -11,7 +11,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     [SerializeField] private FlipPrefs _flipPrefs; //TEMP! SHOULD NOT BE SERIALIZED BUT SET VIA THE UNIT's SCRIPT!
     [SerializeField] private bool _doLookAtTemple; 
     
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    private SpriteRenderer _spriteRenderer => _baseUnitEntity.SpriteRenderer;
 
     //Should probably be the targetting module instead
     [SerializeField] private Transform _tgt;
@@ -20,7 +20,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     
 
     [SerializeField] BaseUnitEntity _baseUnitEntity;
-    TargetingHandler _targeting;
+    TargetingHandler _targeting => _baseUnitEntity.Targeting;
     //TEMP! Should USE Init(BaseUnitEntity) INSTEAD 
 
     static Vector3 cachedScaledMapSize => Level.MapSize * .01f; //fix take from consts
@@ -39,7 +39,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     private void Start()
     {
         StartCoroutine(nameof(CheckForFlip));
-        _targeting = _baseUnitEntity.Targeting;
+        //_targeting = _baseUnitEntity.Targeting;
 
 
         //This should be applied differently between Shamans and Enemies.
@@ -68,13 +68,16 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
             var deltaV = transform.position - lastPos;
             if (deltaV.sqrMagnitude >= _flipPrefs.DeadZone)
             {
-                _spriteRenderer.flipX = deltaV.x >= 0;
+                //_spriteRenderer.flipX = deltaV.x >= 0;
+                _baseUnitEntity.SetSpriteFlipX(deltaV.x >= 0);
+
             }
             else
             {
                 if(_tgt)
                 {
-                    _spriteRenderer.flipX = (_tgt.position - transform.position).x >0;
+                    //_spriteRenderer.flipX = (_tgt.position - transform.position).x >0;
+                    _baseUnitEntity.SetSpriteFlipX((_tgt.position - transform.position).x >0);
                 }
             }
         }

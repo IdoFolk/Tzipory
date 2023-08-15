@@ -6,12 +6,11 @@ using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.EntitySystem.TargetingSystem;
-using Tzipory.SerializeData.AbilitySystemSerializeData;
 using UnityEngine;
 
 namespace Tzipory.AbilitiesSystem
 {
-    public class Ability
+    public class Ability : IStatHolder
     {
         private readonly IEntityTargetingComponent _entityTargetingComponent;
         private readonly IAbilityCaster _abilityCaster;
@@ -26,21 +25,45 @@ namespace Tzipory.AbilitiesSystem
         public string AbilityName { get; }
         public int AbilityId { get; }
         public bool IsCasting { get; private set; }
-        private Stat Cooldown { get; }
-        private Stat CastTime { get; }
+        
+        public Dictionary<int, Stat> Stats { get; }
+
+        private Stat Cooldown
+        {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.AbilityCooldown, out var coolDown))
+                    return coolDown;
+                
+                throw new Exception($"Cooldown not found on ability {AbilityName} in entity {_entityTargetingComponent.GameEntity.name}");
+            }
+        }
+        private Stat CastTime 
+        {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.AbilityCastTime, out var castTime))
+                    return castTime;
+                
+                throw new Exception($"CastTime not found on ability {AbilityName} in entity {_entityTargetingComponent.GameEntity.name}");
+            }
+        }
         
         [Obsolete("Use AbilitySerializeData")]
         public Ability(IEntityTargetAbleComponent caster,IEntityTargetingComponent entityTargetingComponent, AbilityConfig config)
         {
             _entityTargetingComponent = entityTargetingComponent;
 
+            Stats = new Dictionary<int, Stat>();
+            
             AbilityName = config.AbilityName;
             AbilityId = config.AbilityId;
-
-            Cooldown = new Stat(Constant.Stats.AbilityCooldown.ToString(), config.Cooldown, int.MaxValue,
-                (int)Constant.Stats.AbilityCooldown);
-            CastTime = new Stat(Constant.Stats.AbilityCastTime.ToString(), config.CastTime, int.MaxValue,
-                (int)Constant.Stats.AbilityCastTime);
+            
+            Stats.Add((int)Constant.Stats.AbilityCooldown,new Stat(Constant.Stats.AbilityCooldown.ToString(), config.Cooldown, int.MaxValue,
+                (int)Constant.Stats.AbilityCooldown));
+            Stats.Add((int)Constant.Stats.AbilityCastTime,new Stat(Constant.Stats.AbilityCastTime.ToString(), config.CastTime, int.MaxValue,
+                (int)Constant.Stats.AbilityCastTime));
+            
 
             _abilityCaster = Factory.AbilityFactory.GetAbilityCaster(entityTargetingComponent,config);
             _abilityExecutor = Factory.AbilityFactory.GetAbilityExecutor(caster,config);
@@ -52,6 +75,19 @@ namespace Tzipory.AbilitiesSystem
                     config.TargetingPriorityType);
 
             _isReady = true;
+        }
+        
+        public IEnumerable<IStatHolder> GetNestedStatHolders()
+        {
+            List<IStatHolder> statHolders = new List<IStatHolder> { this };
+
+            if (_abilityCaster is IStatHolder abilityCaster)
+                statHolders.AddRange(abilityCaster.GetNestedStatHolders());
+            
+            if (_abilityExecutor is IStatHolder abilityExecutor)
+                statHolders.AddRange(abilityExecutor.GetNestedStatHolders());
+
+            return statHolders;
         }
 
         public void ExecuteAbility(IEnumerable<IEntityTargetAbleComponent> availableTarget)
@@ -103,6 +139,5 @@ namespace Tzipory.AbilitiesSystem
         {
             _abilityCaster.OnCast -= StartCooldown;
         }
-
     }
 }

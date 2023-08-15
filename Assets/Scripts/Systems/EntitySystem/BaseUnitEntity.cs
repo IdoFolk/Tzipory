@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Helpers.Consts;
 using SerializeData.VisualSystemSerializeData;
 using Sirenix.OdinInspector;
@@ -43,136 +44,146 @@ namespace Tzipory.EntitySystem.Entitys
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _defaultPopUpText_Config;
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _critPopUpText_Config;
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _healPopUpText_Config;
+        
+        private float  _currentInvincibleTime;
 
         #endregion
 
+        #region Proprty
+
+        public Dictionary<int, Stat> Stats { get; private set; }
+        
+        public StatusHandler StatusHandler { get; private set; }
+        
+        public AbilityHandler AbilityHandler { get; private set; }
+        
+        public EffectSequenceHandler EffectSequenceHandler { get; private set; }
+        public SpriteRenderer SpriteRenderer => _spriteRenderer;
+        public SoundHandler SoundHandler => _soundHandler;
+        public Transform ParticleEffectPosition => _particleEffectPosition;
+        public Transform VisualQueueEffectPosition => _visualQueueEffectPosition;
+        public PopUpTexter PopUpTexter => _popUpTexter;
+        
+        public bool IsDamageable { get; private set; }
+        public bool IsEntityDead => Health.CurrentValue <= 0;
+        
+        public Stat Health  
+        {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.Health, out var health))
+                    return health;
+                
+                throw new Exception($"{Constant.Stats.Health} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat InvincibleTime  {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.InvincibleTime, out var invincibleTime))
+                    return invincibleTime;
+                
+                throw new Exception($"{Constant.Stats.InvincibleTime} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat AttackDamage  {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.AttackDamage, out var attackDamage))
+                    return attackDamage;
+                
+                throw new Exception($"{Constant.Stats.AttackDamage} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat CritDamage  {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.CritDamage, out var critDamage))
+                    return critDamage;
+                
+                throw new Exception($"{Constant.Stats.CritDamage} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat CritChance {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.CritChance, out var critChance))
+                    return critChance;
+                
+                throw new Exception($"{Constant.Stats.CritChance} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat AttackRate {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.AttackRate, out var attackRate))
+                    return attackRate;
+                
+                throw new Exception($"{Constant.Stats.AttackRate} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat AttackRange  {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.AttackRange, out var attackRange))
+                    return attackRange;
+                
+                throw new Exception($"{Constant.Stats.AttackRange} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat MovementSpeed  {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.MovementSpeed, out var movementSpeed))
+                    return movementSpeed;
+                
+                throw new Exception($"{Constant.Stats.MovementSpeed} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat TargetingRange {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.TargetingRange, out var targetingRange))
+                    return targetingRange;
+                
+                throw new Exception($"{Constant.Stats.TargetingRange} not found in entity {GameEntity.name}");
+            }
+        }
+        
+        public bool IsTargetAble { get; }
+        
+        public EntityType EntityType { get; protected set; }
+        public Vector2 ShotPosition => _shotPosition.position;
+        public IPriorityTargeting DefaultPriorityTargeting { get; private set; }
+        public TargetingHandler TargetingHandler => _targetingHandler;
+        
+        public bool IsInitialization { get; private set; }
+        
+        #endregion
+
         #region Temps
+        
         [Header("TEMPS")] [SerializeField]
         private Transform _shotPosition;
         [SerializeField] private bool _doShowHPBar;
         [SerializeField] private TEMP_UNIT_HPBarConnector _hpBarConnector;
-        #endregion
-
-        //Temp?
-        #region Events
-        //public event Action OnHealthChanged;
-        #endregion
-
-        #region UnityCallBacks
         
-        public bool IsInitialization { get; private set; }
+        #endregion
         
-        public virtual void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
+        #region Init
+
+        private void BaseInit()
         {
-            gameObject.name =  $"{parameter.EntityName} InstanceID: {EntityInstanceID}";
+            StatusHandler = new StatusHandler(this);//may need to work in init!
+            var statHolders = GetNestedStatHolders();
 
-            List<Stat> stats = new List<Stat>
+            foreach (var statHolder in statHolders)
             {
-                new(parameter.Health),
-                new(parameter.InvincibleTime),
-                new(parameter.AttackDamage),
-                new(parameter.CritDamage),
-                new(parameter.CritChance),
-                new(parameter.AttackRate),
-                new(parameter.AttackRange),
-                new(parameter.TargetingRange),
-                new(parameter.MovementSpeed)
-            };
-
-            // if (parameter.Stats is { Count: > 0 })
-            // {
-            //     foreach (var stat in parameter.Stats)
-            //         stats.Add(stat);
-            // }
-            
+                StatusHandler.AddStatHolder(statHolder);
 #if UNITY_EDITOR
-            _stats = stats;
+                _stats.AddRange(statHolder.Stats.Values);
 #endif
-               
-            StatusHandler = new StatusHandler(stats,this);//may need to work in init!
-            
-            DefaultPriorityTargeting =
-                Factory.TargetingPriorityFactory.GetTargetingPriority(this, (TargetingPriorityType)parameter.TargetingPriority);
-            
-            TargetingHandler.Init(this);
-            
-            StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
-            StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
-            
-            AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
-            
-            SpriteRenderer.sprite = visualConfig.Sprite;
-            
-            //init Hp_bar
-            if (_doShowHPBar)//Temp!
-                Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
-
-            if (_doShowHPBar)
-                _hpBarConnector.Init(this);
-            else
-                _hpBarConnector.gameObject.SetActive(false);
-            
-            gameObject.SetActive(true);
-            IsInitialization = true;
-        }
-
-        public virtual void Init(BaseUnitEntityConfig parameter)//need to oder logic to many responsibility
-        {
-            gameObject.name =  $"{parameter.name} InstanceID: {EntityInstanceID}";
-
-            List<Stat> stats = new List<Stat>
-            {
-                new Stat(parameter.Health),
-                new Stat(parameter.InvincibleTime),
-                new Stat(parameter.AttackDamage),
-                new Stat(parameter.CritDamage),
-                new Stat(parameter.CritChance),
-                new Stat(parameter.AttackRate),
-                new Stat(parameter.AttackRange),
-                new Stat(parameter.TargetingRange),
-                new Stat(parameter.MovementSpeed)
-            };
-
-            if (parameter.Stats is { Count: > 0 })
-            {
-                foreach (var stat in parameter.Stats)
-                    stats.Add(stat);
             }
-            
-#if UNITY_EDITOR
-            _stats = stats;
-#endif
-               
-            StatusHandler = new StatusHandler(stats,this);//may need to work in init!
-            
-            DefaultPriorityTargeting =
-                Factory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
-            
-            TargetingHandler.Init(this);
-            
-            StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
-            StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
-            
-            AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
-            
-            SpriteRenderer.sprite = parameter.UnitEntityVisualConfig.Sprite;
-            
-            //init Hp_bar
-            if (_doShowHPBar)//Temp!
-                Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
-
-            if (_doShowHPBar)
-                _hpBarConnector.Init(this);
-            else
-                _hpBarConnector.gameObject.SetActive(false);
-            
-            gameObject.SetActive(true);
-            IsInitialization = true;
-        }
-
-        protected override void Awake()
-        {
-            base.Awake();
             
             _onDeath.ID = Constant.EffectSequenceIds.DEATH;
             _onAttack.ID = Constant.EffectSequenceIds.ATTACK;
@@ -199,9 +210,68 @@ namespace Tzipory.EntitySystem.Entitys
             };
 
             EffectSequenceHandler = new EffectSequenceHandler(this,effectSequence);
+            
+            StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
+            StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
+
+            TargetingHandler.Init(this);
+            
+            if (_doShowHPBar)//Temp!
+                Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
+
+            if (_doShowHPBar)
+                _hpBarConnector.Init(this);
+            else
+                _hpBarConnector.gameObject.SetActive(false);
+            
+            gameObject.SetActive(true);
+            
+            IsInitialization = true;
         }
+        
+        public virtual void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
+        {
+            gameObject.name =  $"{parameter.EntityName} InstanceID: {EntityInstanceID}";
+            
+            Stats = new Dictionary<int, Stat>();
 
+            foreach (var statConfig in parameter.StatSerializeDatas)
+                Stats.Add(statConfig.ID ,new Stat(statConfig));
+            
+            DefaultPriorityTargeting =
+                Factory.TargetingPriorityFactory.GetTargetingPriority(this, (TargetingPriorityType)parameter.TargetingPriority);
+            
+            AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
+            
+            SpriteRenderer.sprite = visualConfig.Sprite;
+            
+            BaseInit();
+        }
+        
+        [Obsolete("may need to use UnitEntitySerializeData only")]
+        public virtual void Init(BaseUnitEntityConfig parameter)//need to oder logic to many responsibility
+        {
+            gameObject.name =  $"{parameter.name} InstanceID: {EntityInstanceID}";
+            
+            Stats = new Dictionary<int, Stat>();
 
+            foreach (var statConfig in parameter.StatConfigs)
+                Stats.Add(statConfig.ID,new Stat(statConfig));
+            
+            DefaultPriorityTargeting =
+                Factory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
+            
+            AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
+            
+            SpriteRenderer.sprite = parameter.UnitEntityVisualConfig.Sprite;
+            
+            BaseInit();
+        }
+        
+        #endregion    
+        
+        #region UnityCallBacks
+        
         protected override void Update()
         {
             base.Update();
@@ -210,7 +280,7 @@ namespace Tzipory.EntitySystem.Entitys
                 return;
 
             HealthComponentUpdate();
-            StatusHandler.UpdateStatusEffects();
+            StatusHandler.UpdateStatHandler();
 
             if (TargetingHandler.CurrentTarget == null || TargetingHandler.CurrentTarget.IsEntityDead)
                 TargetingHandler.GetPriorityTarget();
@@ -225,25 +295,10 @@ namespace Tzipory.EntitySystem.Entitys
         private void OnValidate()
         {
             _soundHandler ??= GetComponentInChildren<SoundHandler>();
-
-            // if (_bodyCollider == null || _rangeCollider == null)
-            // {
-            //     var colliders = GetComponents<CircleCollider2D>();
-            //
-            //     foreach (var collider in colliders)
-            //     {
-            //         if (collider.isTrigger)
-            //             _rangeCollider = collider;
-            //         else
-            //             _bodyCollider = collider;
-            //     }
-            // }
         }
 
         private void OnDrawGizmosSelected()
         {
-           // Gizmos.DrawWireSphere(transform.position,_config.AttackRange.BaseValue / 2);
-
             if (TargetingHandler != null)
             {
                 if (TargetingHandler.CurrentTarget == null) return;
@@ -266,15 +321,22 @@ namespace Tzipory.EntitySystem.Entitys
         }
 
         #endregion
+        
+        #region StatComponent
 
+        public IEnumerable<IStatHolder> GetNestedStatHolders()
+        {
+            List<IStatHolder> statHolders = new List<IStatHolder>() {this };
+            
+            foreach (var abilitiesValue in AbilityHandler.Abilities.Values)
+                statHolders.AddRange(abilitiesValue.GetNestedStatHolders());
+
+            return statHolders;
+        }
+
+        #endregion      
+        
         #region TargetingComponent
-
-        public Stat TargetingRange => StatusHandler.GetStatById((int)Constant.Stats.TargetingRange);
-        public bool IsTargetAble { get; }
-        public EntityType EntityType { get; protected set; }
-        public Vector2 ShotPosition => _shotPosition.position;
-        public IPriorityTargeting DefaultPriorityTargeting { get; private set; }
-        public TargetingHandler TargetingHandler => _targetingHandler;
         
         public float GetDistanceToTarget(IEntityTargetAbleComponent targetAbleComponent)
             => Vector2.Distance(transform.position, targetAbleComponent.EntityTransform.position);
@@ -283,13 +345,6 @@ namespace Tzipory.EntitySystem.Entitys
 
         #region HealthComponent
         
-        private float  _currentInvincibleTime;
-
-        public Stat Health => StatusHandler.GetStatById((int)Constant.Stats.Health);
-        public Stat InvincibleTime => StatusHandler.GetStatById((int)Constant.Stats.InvincibleTime);
-        public bool IsDamageable { get; private set; }
-        public bool IsEntityDead => Health.CurrentValue <= 0;
-
         public void Heal(float amount)
         {
             _healPopUpText_Config.damage = amount;
@@ -297,11 +352,7 @@ namespace Tzipory.EntitySystem.Entitys
             _healPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(amount);
             
             _popUpTexter.SpawnPopUp(_healPopUpText_Config);
-            //_popUpTexter.SpawnPopUp($"+{amount}", _healPopUpText_Config);
             Health.AddToValue(amount);
-            //OnHealthChanged?.Invoke();
-            // if (Health.CurrentValue > Health.BaseValue)
-            //     Health.ResetValue();
         }
 
         public void TakeDamage(float damage,bool isCrit)
@@ -323,7 +374,6 @@ namespace Tzipory.EntitySystem.Entitys
                 }
                 else
                 {
-                    //_defaultPopUpText_Config.text = $"-{damage}";
                     _defaultPopUpText_Config.damage = damage;
                     _defaultPopUpText_Config.text = $"{damage}";
                     _defaultPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
@@ -357,52 +407,22 @@ namespace Tzipory.EntitySystem.Entitys
         
         public void SetAttackTarget(IEntityTargetAbleComponent target) => TargetingHandler.SetAttackTarget(target);
 
-        public Stat AttackDamage => StatusHandler.GetStatById((int)Constant.Stats.AttackDamage);
-        public Stat CritDamage => StatusHandler.GetStatById((int)Constant.Stats.CritDamage);
-        public Stat CritChance => StatusHandler.GetStatById((int)Constant.Stats.CritChance);
-        public Stat AttackRate => StatusHandler.GetStatById((int)Constant.Stats.AttackRate);
-        public Stat AttackRange => StatusHandler.GetStatById((int)Constant.Stats.AttackRange);
-
         public abstract void Attack();
         public abstract void OnEntityDead();
 
         #endregion
 
         #region MovementComponent
-
-
-        public Stat MovementSpeed => StatusHandler.GetStatById((int)Constant.Stats.MovementSpeed);
         
-        //This is not really needed - we can remove the movement interface from baseunit I think... - it should have a BasicMovement, controlled by something else
         public void SetDestination(Vector3 destination, MoveType moveType) 
         {
             throw new System.NotImplementedException();
         }
 
         #endregion
-
-        #region StstusEffcetComponent
-
-        //stuff
-        public StatusHandler StatusHandler { get; private set; }
-
-        #endregion
-
-        #region AbilityComponent
-        
-        public AbilityHandler AbilityHandler { get; private set; }
-
-        #endregion
         
         #region VisualComponent
         
-        public EffectSequenceHandler EffectSequenceHandler { get; private set; }
-        public SpriteRenderer SpriteRenderer => _spriteRenderer;
-        public SoundHandler SoundHandler => _soundHandler;
-        public Transform ParticleEffectPosition => _particleEffectPosition;
-        public Transform VisualQueueEffectPosition => _visualQueueEffectPosition;
-        public PopUpTexter PopUpTexter => _popUpTexter;
-
         private void AddStatusEffectVisual(BaseStatusEffect baseStatusEffect) =>
             EffectSequenceHandler.PlaySequenceByData(baseStatusEffect.EffectSequence);//temp
 

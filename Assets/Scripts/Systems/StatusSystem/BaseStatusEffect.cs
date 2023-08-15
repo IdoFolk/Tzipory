@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using SerializeData.VisualSystemSerializeData;
+using Tzipory.Tools.Interface;
 
 namespace Tzipory.EntitySystem.StatusSystem
 {
-    public abstract class BaseStatusEffect : IDisposable
+    public abstract class BaseStatusEffect : IDisposable ,IInitialization<StatusEffectConfig>
     {
         #region Events
 
@@ -16,32 +17,38 @@ namespace Tzipory.EntitySystem.StatusSystem
 
         #region Fields
 
-        protected readonly Stat StatToEffect;
+        protected Stat StatToEffect;
         
-        protected readonly List<StatModifier> modifiers;
+        protected List<StatModifier> modifiers;
 
         #endregion
 
         #region Property
 
-        public string StatusEffectName { get; }
+        public string StatusEffectName { get;private set; }
 
         public string AffectedStatName => StatToEffect.Name;
         public int AffectedStatId => StatToEffect.Id;
 
         public bool IsDone { get; private set; }
 
-        public EffectSequenceConfig EffectSequence { get; }
+        public EffectSequenceConfig EffectSequence { get;private set; }
 
-        public List<StatusEffectConfig> StatusEffectToInterrupt { get; }
+        public List<StatusEffectConfig> StatusEffectToInterrupt { get;private set; }
+        public bool IsInitialization { get; private set; }
 
         #endregion
-       
+
+        protected BaseStatusEffect()
+        {
+            
+        }
         
+        [Obsolete("Need to use init to use pool")]
         protected BaseStatusEffect(StatusEffectConfig statusEffectConfig,Stat statToEffectToEffect)
         {
             StatusEffectName = statusEffectConfig.StatusEffectName;
-            StatusEffectToInterrupt = statusEffectConfig.StatusEffectToInterrupt;
+            //StatusEffectToInterrupt = statusEffectConfig.StatusEffectToInterrupt;
             EffectSequence = statusEffectConfig.EffectSequence;
 
             StatToEffect = statToEffectToEffect;
@@ -52,6 +59,20 @@ namespace Tzipory.EntitySystem.StatusSystem
             {
                 modifiers.Add(new StatModifier(modifier.Modifier, modifier.StatusModifierType));
             } 
+        }
+        
+        public virtual void Init(StatusEffectConfig parameter)
+        {
+            StatusEffectName = parameter.StatusEffectName;
+            //StatusEffectToInterrupt = parameter.StatusEffectToInterrupt;
+            EffectSequence = parameter.EffectSequence;
+            
+            modifiers = new List<StatModifier>();
+
+            foreach (var modifier in parameter.StatModifier)
+                modifiers.Add(new StatModifier(modifier.Modifier, modifier.StatusModifierType));
+            
+            IsInitialization = true;
         }
 
         public virtual void StatusEffectStart()
@@ -65,7 +86,7 @@ namespace Tzipory.EntitySystem.StatusSystem
             OnStatusEffectInterrupt?.Invoke(AffectedStatId);
         }
 
-        protected virtual void StatusEffectFinish()
+        public virtual void StatusEffectFinish()
         {
             OnStatusEffectDone?.Invoke(AffectedStatId);
             IsDone = true;

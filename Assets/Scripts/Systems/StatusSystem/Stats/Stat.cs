@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using SerializeData.StatSerializeData;
 using Sirenix.OdinInspector;
 using Tzipory.SerializeData.StatSystemSerilazeData;
@@ -6,14 +7,19 @@ using UnityEngine;
 
 namespace Tzipory.EntitySystem.StatusSystem
 {
+#if true
     [Serializable]
+#endif
     public class Stat
     {
         public event Action<float> OnValueChanged;
         
         [SerializeField,ReadOnly] private string _name;
         [SerializeField,ReadOnly] private float _currentValue;
-
+        
+        private List<BaseStatusEffect> _activeStatusEffects = new();
+        
+        //to add a list of statModifires
         public string Name => _name;
         public float CurrentValue => _currentValue;
         public int Id { get; }
@@ -24,7 +30,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         public Stat(StatConfig statConfig)
         {
             _name = statConfig.Name;
-            Id = statConfig.Id;
+            Id = statConfig.ID;
             BaseValue = statConfig.BaseValue;
             _currentValue = BaseValue;
             MaxValue = StatLimiters.MaxStatValue;
@@ -45,8 +51,37 @@ namespace Tzipory.EntitySystem.StatusSystem
             _name = name;
             Id = id;  
             BaseValue = baseValue;
-            MaxValue = StatLimiters.MaxStatValue; //TBD is this still a thing?
+            MaxValue = StatLimiters.MaxStatValue;
             _currentValue = BaseValue;
+        }
+        
+        public void UpdateStatusEffects()
+        {
+            if (_activeStatusEffects.Count == 0)
+                return;
+
+            for (int i = 0; i < _activeStatusEffects.Count; i++)
+            {
+                if (_activeStatusEffects[i].IsDone)
+                {
+                    _activeStatusEffects[i].StatusEffectFinish();
+                    _activeStatusEffects.RemoveAt(i);
+                    continue;
+                }
+                
+                _activeStatusEffects[i].ProcessStatusEffect();
+            }
+        }
+        
+        public IDisposable AddStatusEffect(StatusEffectConfig statusEffectConfig)
+        {
+            var statusEffect = Factory.StatusEffectFactory.GetStatusEffect(statusEffectConfig,this);
+            
+            statusEffect.StatusEffectStart();
+            
+            _activeStatusEffects.Add(statusEffect);
+       
+            return statusEffect;
         }
 
         private void ChangeValue(float value)
@@ -61,7 +96,6 @@ namespace Tzipory.EntitySystem.StatusSystem
         public void MultiplyValue(float amount)=>
             ChangeValue(_currentValue * amount);
         
-        //public void DivideValue(float amount)=> //THIS IS WHY I DON'T LIKE THESE THINGS!
         public void DivideValue(float amount)=>
             ChangeValue(_currentValue / amount);
         

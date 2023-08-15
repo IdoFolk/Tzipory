@@ -20,7 +20,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     
 
     [SerializeField] BaseUnitEntity _baseUnitEntity;
-    TargetingHandler _targeting => _baseUnitEntity.Targeting;
+    TargetingHandler _targeting => _baseUnitEntity.TargetingHandler;
     //TEMP! Should USE Init(BaseUnitEntity) INSTEAD 
 
     static Vector3 cachedScaledMapSize => Level.MapSize * .01f; //fix take from consts

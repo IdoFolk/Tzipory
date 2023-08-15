@@ -113,7 +113,8 @@ PrefabInstance:
       objectReference: {fileID: 7221615852569552283}
     m_RemovedComponents:
     - {fileID: 8783141836976998822, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5772911156343462321, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4357314417853133059, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       insertIndex: -1
@@ -147,14 +148,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4159569051386712687}
   m_SourcePrefab: {fileID: 100100000, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
---- !u!4 &1668354888428069289 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7114176909680833873, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
-  m_PrefabInstance: {fileID: 8475086043216172280}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2932877760079779853 stripped
+--- !u!114 &433436307487325276 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6714340459238886645, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8331217152380807332, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
   m_PrefabInstance: {fileID: 8475086043216172280}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -227,7 +223,7 @@ MonoBehaviour:
   _stats: []
   _particleEffectPosition: {fileID: 6503520961240737061}
   _soundHandler: {fileID: 7035656871031306711}
-  _targetingHandler: {fileID: 2932877760079779853}
+  _targetingHandler: {fileID: 433436307487325276}
   _spriteRenderer: {fileID: 6032355350260239207}
   _visualQueueEffectPosition: {fileID: 5055015959598962312}
   _seeThroughRenderer: {fileID: 7684134214269545788}
@@ -330,7 +326,7 @@ MonoBehaviour:
     riseSpeed: 0.03
     timeToLive: 1
     damage: 0
-  _shotPosition: {fileID: 1668354888428069289}
+  _shotPosition: {fileID: 0}
   _doShowHPBar: 1
   _hpBarConnector: {fileID: 4613587498334124606}
   IsAttckingCore: 0
@@ -463,7 +459,6 @@ MonoBehaviour:
     DeadZone: 0.01
     TestFreq: 6
   _doLookAtTemple: 0
-  _spriteRenderer: {fileID: 6032355350260239207}
   _tgt: {fileID: 0}
   _zDistanceModifier: 0
   _baseUnitEntity: {fileID: 7854104335867524329}

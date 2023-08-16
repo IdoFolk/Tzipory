@@ -51,6 +51,18 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Shaman
       objectReference: {fileID: 0}
+    - target: {fileID: 2251248414798084548, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251248414798084548, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251248414798084548, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2750211597899472799, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_Size.x
       value: 1.3653333
@@ -70,6 +82,10 @@ PrefabInstance:
     - target: {fileID: 2750211597899472799, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2859632196482787772, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3727445444298982000, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -244,7 +260,7 @@ MonoBehaviour:
   _targetingHandler: {fileID: 5421914498109878320}
   _spriteRenderer: {fileID: 2200670044425848587}
   _visualQueueEffectPosition: {fileID: 800062657850464996}
-  _seeThroughRenderer: {fileID: 2854971960228503888}
+  _silhouetteRenderer: {fileID: 2854971960228503888}
   _onDeath:
     _sequenceName: 
     _id: 0

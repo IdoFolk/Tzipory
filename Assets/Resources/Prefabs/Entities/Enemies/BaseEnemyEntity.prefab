@@ -51,6 +51,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: EllipseTargetingShape
       objectReference: {fileID: 0}
+    - target: {fileID: 2251248414798084548, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251248414798084548, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2251248414798084548, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2501377926167560866, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_SortingOrder
       value: 2
@@ -226,7 +238,7 @@ MonoBehaviour:
   _targetingHandler: {fileID: 433436307487325276}
   _spriteRenderer: {fileID: 6032355350260239207}
   _visualQueueEffectPosition: {fileID: 5055015959598962312}
-  _seeThroughRenderer: {fileID: 7684134214269545788}
+  _silhouetteRenderer: {fileID: 7684134214269545788}
   _onDeath:
     _sequenceName: 
     _id: 0

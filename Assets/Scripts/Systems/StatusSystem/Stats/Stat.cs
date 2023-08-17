@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SerializeData.StatSerializeData;
 using Sirenix.OdinInspector;
+using Tools.Enums;
 using Tzipory.SerializeData.StatSystemSerilazeData;
 using UnityEngine;
 
@@ -12,14 +13,15 @@ namespace Tzipory.EntitySystem.StatusSystem
 #endif
     public class Stat
     {
+        [Obsolete("Get the data version")]
         public event Action<float> OnValueChanged;
+        public event Action<StatChangeData> OnValueChangedData;
         
         [SerializeField,ReadOnly] private string _name;
         [SerializeField,ReadOnly] private float _currentValue;
         
         private List<BaseStatusEffect> _activeStatusEffects = new();
         
-        //to add a list of statModifires
         public string Name => _name;
         public float CurrentValue => _currentValue;
         public int Id { get; }
@@ -64,12 +66,13 @@ namespace Tzipory.EntitySystem.StatusSystem
             {
                 if (_activeStatusEffects[i].IsDone)
                 {
-                    _activeStatusEffects[i].StatusEffectFinish();
+                    //Need to return to the pool
                     _activeStatusEffects.RemoveAt(i);
                     continue;
                 }
-                
-                _activeStatusEffects[i].ProcessStatusEffect();
+
+                if (_activeStatusEffects[i].ProcessStatusEffect(out StatChangeData statChangeData))
+                    OnValueChangedData?.Invoke(statChangeData);
             }
         }
         
@@ -77,13 +80,35 @@ namespace Tzipory.EntitySystem.StatusSystem
         {
             var statusEffect = Factory.StatusEffectFactory.GetStatusEffect(statusEffectConfig,this);
             
-            statusEffect.StatusEffectStart();
+           return AddStatusEffect(statusEffect);
+        }
+        
+        public IDisposable AddStatusEffect(BaseStatusEffect statusEffect)
+        {
+            var statChange = statusEffect.StatusEffectStart();
+            
+            //TODO add interrupt logic
+            OnValueChangedData?.Invoke(statChange);
             
             _activeStatusEffects.Add(statusEffect);
        
             return statusEffect;
         }
-
+        
+        public void ProcessStatModifier(params StatModifier[] statModifiers)
+        {
+            float changeDelta = 0;
+            
+            foreach (var statModifier in statModifiers)
+            {
+                statModifier.ProcessStatModifier(this);
+                changeDelta += statModifier.Value;
+            }
+            
+            StatChangeData changeData = new StatChangeData(string.Empty,changeDelta,CurrentValue,EffectType.Default);
+            OnValueChangedData?.Invoke(changeData);
+        }
+        
         private void ChangeValue(float value)
         {
             _currentValue = value;
@@ -107,5 +132,21 @@ namespace Tzipory.EntitySystem.StatusSystem
         
         public void ResetValue() =>
             ChangeValue(BaseValue);
+    }
+    
+    public readonly struct StatChangeData
+    {
+        public readonly string StatusEffectName;
+        public readonly float Delta;
+        public readonly float NewValue;
+        public readonly EffectType EffectType;
+        
+        public StatChangeData(string statusEffectName,float delta, float newValue, EffectType effectType)
+        {
+            StatusEffectName = statusEffectName;
+            Delta = delta;
+            NewValue = newValue;
+            EffectType = effectType;
+        }
     }
 }

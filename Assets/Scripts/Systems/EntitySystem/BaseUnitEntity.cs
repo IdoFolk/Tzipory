@@ -175,15 +175,11 @@ namespace Tzipory.EntitySystem.Entitys
         private void BaseInit()
         {
             StatusHandler = new StatusHandler(this);//may need to work in init!
-            var statHolders = GetNestedStatHolders();
 
-            foreach (var statHolder in statHolders)
-            {
-                StatusHandler.AddStatHolder(statHolder);
 #if UNITY_EDITOR
+            foreach (var statHolder in StatusHandler.StatHolders)
                 _stats.AddRange(statHolder.Stats.Values);
 #endif
-            }
             
             _onDeath.ID = Constant.EffectSequenceIds.DEATH;
             _onAttack.ID = Constant.EffectSequenceIds.ATTACK;
@@ -326,7 +322,7 @@ namespace Tzipory.EntitySystem.Entitys
 
         public IEnumerable<IStatHolder> GetNestedStatHolders()
         {
-            List<IStatHolder> statHolders = new List<IStatHolder>() {this };
+            List<IStatHolder> statHolders = new List<IStatHolder>() {this};
             
             foreach (var abilitiesValue in AbilityHandler.Abilities.Values)
                 statHolders.AddRange(abilitiesValue.GetNestedStatHolders());
@@ -379,7 +375,8 @@ namespace Tzipory.EntitySystem.Entitys
                     _defaultPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
                     _popUpTexter.SpawnPopUp(_defaultPopUpText_Config);
                 }
-                Health.ReduceFromValue(damage);
+                
+                Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce));
                 IsDamageable = false;
             }
         }

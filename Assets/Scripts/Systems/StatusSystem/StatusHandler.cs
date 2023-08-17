@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Helpers.Consts;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
@@ -12,8 +13,13 @@ namespace Tzipory.EntitySystem.StatusSystem
 
         private readonly IEntityStatusEffectComponent _entity;
 
-        private readonly List<IStatHolder> _statHolders;//need to make a big refactor! for this to work
-        
+        private readonly List<IStatHolder> _statHolders;
+
+#if UNITY_EDITOR
+        [Obsolete("Only in editor")]
+        public List<IStatHolder> StatHolders => _statHolders;
+#endif
+
         public StatusHandler(IEntityStatusEffectComponent entity)
         {
             _statHolders = new List<IStatHolder>();
@@ -28,7 +34,7 @@ namespace Tzipory.EntitySystem.StatusSystem
             _statHolders.Add(statHolder);
         }
 
-        public Stat GetStatById(int id)
+        public Stat GetStat(int id)
         {
             foreach (var statHolder in _statHolders)
             {
@@ -37,6 +43,18 @@ namespace Tzipory.EntitySystem.StatusSystem
             }
 
             Debug.LogError($"Stat ID: {id} not found in StatusHandler of entity {_entity.GameEntity.name}");
+            return  null;
+        }
+        
+        public Stat GetStat(Constant.Stats statToFind)
+        {
+            foreach (var statHolder in _statHolders)
+            {
+                if (statHolder.Stats.TryGetValue((int)statToFind, out Stat stat))
+                    return stat;
+            }
+
+            Debug.LogError($"Stat ID: {statToFind} not found in StatusHandler of entity {_entity.GameEntity.name}");
             return  null;
         }
 
@@ -51,13 +69,13 @@ namespace Tzipory.EntitySystem.StatusSystem
         
         public IDisposable AddStatusEffect(StatusEffectConfig statusEffectConfig)
         {
-            var statToEffect = GetStatById(statusEffectConfig.AffectedStatId);
+            var statToEffect = GetStat(statusEffectConfig.AffectedStatId);
             
             //   TODO need to Interrupt stats
             
             return statToEffect.AddStatusEffect(statusEffectConfig);
         }
-            
+
         //TODO need to fix the InterruptStatusEffects
         // private void InterruptStatusEffects(IEnumerable<StatusEffectConfig> effectConfigSos)
         // {

@@ -1,38 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using SerializeData.VisualSystemSerializeData;
+using Tools.Enums;
 using Tzipory.Tools.Interface;
 
 namespace Tzipory.EntitySystem.StatusSystem
 {
     public abstract class BaseStatusEffect : IDisposable ,IInitialization<StatusEffectConfig>
     {
-        #region Events
-
-        public event Action<int> OnStatusEffectStart;
-        public event Action<int> OnStatusEffectDone;
-        public event  Action<int> OnStatusEffectInterrupt;
-
-        #endregion
-
         #region Fields
 
-        protected Stat StatToEffect;
+        protected readonly Stat StatToEffect;
+
+        protected List<StatModifier> Modifiers;
         
-        protected List<StatModifier> modifiers;
+        protected string StatusEffectName;
 
         #endregion
 
         #region Property
 
-        public string StatusEffectName { get;private set; }
+        public EffectType EffectType { get; private set; }  
+        
+        public bool IsDone { get; protected set; }
 
-        public string AffectedStatName => StatToEffect.Name;
-        public int AffectedStatId => StatToEffect.Id;
-
-        public bool IsDone { get; private set; }
-
-        public EffectSequenceConfig EffectSequence { get;private set; }
+        public EffectSequenceConfig EffectSequence { get; private set; }
 
         public List<StatusEffectConfig> StatusEffectToInterrupt { get;private set; }
         public bool IsInitialization { get; private set; }
@@ -50,15 +42,16 @@ namespace Tzipory.EntitySystem.StatusSystem
             StatusEffectName = statusEffectConfig.StatusEffectName;
             //StatusEffectToInterrupt = statusEffectConfig.StatusEffectToInterrupt;
             EffectSequence = statusEffectConfig.EffectSequence;
-
+            EffectType = statusEffectConfig.EffectType;
+            
             StatToEffect = statToEffectToEffect;
 
-            modifiers = new List<StatModifier>();
+            Modifiers = new List<StatModifier>();
 
             foreach (var modifier in statusEffectConfig.StatModifier)
-            {
-                modifiers.Add(new StatModifier(modifier.Modifier, modifier.StatusModifierType));
-            } 
+                Modifiers.Add(new StatModifier(modifier.Modifier, modifier.StatusModifierType));
+            
+            IsDone = false;
         }
         
         public virtual void Init(StatusEffectConfig parameter)
@@ -67,36 +60,38 @@ namespace Tzipory.EntitySystem.StatusSystem
             //StatusEffectToInterrupt = parameter.StatusEffectToInterrupt;
             EffectSequence = parameter.EffectSequence;
             
-            modifiers = new List<StatModifier>();
+            Modifiers = new List<StatModifier>();
 
             foreach (var modifier in parameter.StatModifier)
-                modifiers.Add(new StatModifier(modifier.Modifier, modifier.StatusModifierType));
+                Modifiers.Add(new StatModifier(modifier.Modifier, modifier.StatusModifierType));
             
             IsInitialization = true;
+            
+            IsDone  = false;
         }
 
-        public virtual void StatusEffectStart()
+        public StatChangeData StatusEffectStart()
         {
-            OnStatusEffectStart?.Invoke(AffectedStatId);
-            IsDone  = false;
+            float changeDelta = 0;
+            
+            foreach (var statModifier in Modifiers)
+            {
+                statModifier.ProcessStatModifier(StatToEffect);
+                changeDelta += statModifier.Value;
+            }
+            
+            return new StatChangeData(StatusEffectName,changeDelta,StatToEffect.CurrentValue,EffectType);
         }
 
         public virtual void StatusEffectInterrupt()
         {
-            OnStatusEffectInterrupt?.Invoke(AffectedStatId);
         }
 
-        public virtual void StatusEffectFinish()
-        {
-            OnStatusEffectDone?.Invoke(AffectedStatId);
-            IsDone = true;
-        }
-
-        public abstract void ProcessStatusEffect();
+        public abstract bool ProcessStatusEffect(out StatChangeData statChangeData);
 
         public abstract void Dispose();
     }
-    
+
     public enum StatusEffectType
     {
         OverTime,

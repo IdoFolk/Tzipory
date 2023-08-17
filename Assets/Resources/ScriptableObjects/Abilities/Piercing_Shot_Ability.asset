@@ -24,17 +24,19 @@ MonoBehaviour:
   _chainDuration: 0
   _chainAmount: 0
   targetingPriorityType: 3
-  _cooldown: 6
+  _cooldown: 50
   _castTime: 1
   _statusEffectConfigs:
-  - _statusEffectName: 
+  - _statusEffectName: Piercing Shot
     _affectedStat: 0
-    _statusEffectType: 1
-    _duration: 0
-    _interval: 0
+    _effectType: 0
+    _statusEffectType: 0
+    _duration: 5
+    _interval: 1
+    _disableDuration: 0
     _statModifier:
-    - _statusModifierType: 1
-      _modifier: 50
+    - _statusModifierType: 2
+      _modifier: 10
     _effectSequence:
       _sequenceName: 
       _id: 0

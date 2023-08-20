@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EndScreenText
   m_EditorClassIdentifier: 
   _winText:
-  - You defeated the enemy bravely
-  - You were a badass, you won!
+  - The core is safe for now
+  - The gods are impressed
   _loseText:
   - You have been defeated and had to abandon the core

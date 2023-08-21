@@ -24,7 +24,34 @@ MonoBehaviour:
   _chainDuration: 0
   _chainAmount: 0
   targetingPriorityType: 3
-  _cooldown: 6
+  _cooldown: 50
   _castTime: 1
   _statusEffectConfigs:
-  - {fileID: 11400000, guid: 87ec423eece20b047a9c4442edf8c57b, type: 2}
+  - _statusEffectName: Piercing Shot
+    _affectedStat: 0
+    _effectType: 0
+    _statusEffectType: 0
+    _duration: 5
+    _interval: 1
+    _disableDuration: 0
+    _statModifier:
+    - _statusModifierType: 2
+      _modifier: 10
+    _effectSequence:
+      _sequenceName: 
+      _id: 0
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers:
+      - _disableUndo: 0
+        _startDelay: 0
+        _effectActionStart: 0
+        _effectActionConfig: {fileID: 11400000, guid: efd2a47c331e44c4d80a605273ecc06f, type: 2}
+      - _disableUndo: 0
+        _startDelay: 0
+        _effectActionStart: 0
+        _effectActionConfig: {fileID: 11400000, guid: a623487578b155d448fa5c0657da923b, type: 2}
+  _doExitEffects: 0
+  _statusEffectConfigsOnExit: []

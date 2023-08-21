@@ -1,4 +1,5 @@
-﻿using Systems.UISystem;
+﻿using System.Globalization;
+using Systems.UISystem;
 using TMPro;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace GameplayeLogic.UIElements
         
         protected void UpdateUiData(float currentCunt)
         {
-            _currentCount.text = currentCunt.ToString();
+            _currentCount.text = currentCunt.ToString(CultureInfo.CurrentCulture);
         }
         
         protected void UpdateUiData(int currentCunt)

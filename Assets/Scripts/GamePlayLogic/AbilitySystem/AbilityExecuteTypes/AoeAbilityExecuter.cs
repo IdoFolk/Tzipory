@@ -10,7 +10,7 @@ using Object = UnityEngine.Object;
 
 namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
 {
-    public class AoeAbilityExecuter :  IAbilityExecutor
+    public class AoeAbilityExecuter :  IAbilityExecutor , IStatHolder
     {
         private const string  AoePrefabPath = "Prefabs/Ability/AoeAbilityEntity";
         
@@ -63,5 +63,11 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
         }
 
 
+        public Dictionary<int, Stat> Stats { get; }
+        public IEnumerable<IStatHolder> GetNestedStatHolders()
+        {
+            IEnumerable<IStatHolder> statHolders = new List<IStatHolder>() { this };
+            return statHolders;
+        }
     }
 }

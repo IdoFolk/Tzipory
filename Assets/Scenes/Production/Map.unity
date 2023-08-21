@@ -1388,6 +1388,7 @@ MonoBehaviour:
   - {fileID: 501125501}
   - {fileID: 1612416426}
   - {fileID: 416246837}
+  _unlockAll: 1
 --- !u!1 &1310679754
 GameObject:
   m_ObjectHideFlags: 0
@@ -2611,6 +2612,10 @@ PrefabInstance:
       objectReference: {fileID: 1612416426}
     - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: _nextNodes.Array.data[1]
+      value: 
+      objectReference: {fileID: 416246837}
+    - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
+      propertyPath: _nextNodes.Array.data[2]
       value: 
       objectReference: {fileID: 416246837}
     - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}

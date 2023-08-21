@@ -420,8 +420,8 @@ namespace Tzipory.EntitySystem.Entitys
         
         #region VisualComponent
         
-        private void AddStatusEffectVisual(BaseStatusEffect baseStatusEffect) =>
-            EffectSequenceHandler.PlaySequenceByData(baseStatusEffect.EffectSequence);//temp
+        private void AddStatusEffectVisual(EffectSequenceConfig effectSequenceConfig) =>
+            EffectSequenceHandler.PlaySequenceByData(effectSequenceConfig);//temp
 
         #endregion
     }

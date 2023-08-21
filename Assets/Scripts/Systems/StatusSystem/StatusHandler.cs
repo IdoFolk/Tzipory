@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Helpers.Consts;
+using SerializeData.VisualSystemSerializeData;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace Tzipory.EntitySystem.StatusSystem
 {
     public class StatusHandler
     {
-        public event Action<BaseStatusEffect> OnStatusEffectAdded; 
+        public event Action<EffectSequenceConfig> OnStatusEffectAdded; 
         public event Action<int> OnStatusEffectInterrupt; 
 
         private readonly IEntityStatusEffectComponent _entity;
@@ -72,6 +73,8 @@ namespace Tzipory.EntitySystem.StatusSystem
             var statToEffect = GetStat(statusEffectConfig.AffectedStatId);
             
             //   TODO need to Interrupt stats
+            
+            OnStatusEffectAdded?.Invoke(statusEffectConfig.EffectSequence);
             
             return statToEffect.AddStatusEffect(statusEffectConfig);
         }

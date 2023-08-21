@@ -1388,7 +1388,7 @@ MonoBehaviour:
   - {fileID: 501125501}
   - {fileID: 1612416426}
   - {fileID: 416246837}
-  _unlockAll: 1
+  _unLockAll: 1
 --- !u!1 &1310679754
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,5 +5,7 @@ namespace Tzipory.EntitySystem.StatusSystem
     public interface IStatHolder
     {
         public Dictionary<int,Stat> Stats { get; }
+
+        public IEnumerable<IStatHolder> GetNestedStatHolders();
     }
 }

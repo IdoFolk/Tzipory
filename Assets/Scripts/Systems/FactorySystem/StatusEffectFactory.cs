@@ -16,6 +16,5 @@ namespace Tzipory.Factory
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
-
     }
 }

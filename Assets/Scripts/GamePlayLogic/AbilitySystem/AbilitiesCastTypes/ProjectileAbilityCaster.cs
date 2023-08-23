@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Helpers.Consts;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.AbilitiesSystem.AbilityEntity;
@@ -9,7 +10,7 @@ using Object = UnityEngine.Object;
 
 namespace Tzipory.AbilitiesSystem
 {
-    public class ProjectileAbilityCaster : IAbilityCaster
+    public class ProjectileAbilityCaster : IAbilityCaster , IStatHolder
     {
         private const string ProjectilePrefabPath = "Prefabs/Ability/ProjectileAbilityEntity";
 
@@ -17,22 +18,44 @@ namespace Tzipory.AbilitiesSystem
        //public AbilityCastType AbilityCastType { get; }
         
         public IEntityTargetingComponent EntityCasterTargetingComponent { get; }
+        
+        public Dictionary<int, Stat> Stats { get; }
 
-        private Stat ProjectileSpeed { get;}
-        private Stat ProjectilePenetration { get;}
+        private Stat ProjectileSpeed   
+        {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.ProjectileSpeed, out var projectileSpeed))
+                    return projectileSpeed;
+                
+                throw new Exception($"ProjectileSpeed not found in entity {EntityCasterTargetingComponent.GameEntity.name}");
+            }
+        }
+        
+        private Stat ProjectilePenetration 
+        {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.ProjectilePenetration, out var projectilePenetration))
+                    return projectilePenetration;
+                
+                throw new Exception($"CastTime not found in entity {EntityCasterTargetingComponent.GameEntity.name}");
+            }
+        }
 
         private readonly GameObject _projectilePrefab;
 
         public ProjectileAbilityCaster(IEntityTargetingComponent entityCasterTargetingComponent, AbilityConfig config)
         {
             EntityCasterTargetingComponent = entityCasterTargetingComponent;
-
-            ProjectileSpeed = new Stat("ProjectileSpeed", config.ProjectileSpeed, int.MaxValue,
-                (int)Constant.Stats.ProjectileSpeed);
             
-            ProjectilePenetration = new Stat("ProjectilePenetration", config.ProjectilePenetration, int.MaxValue,
-                (int)Constant.Stats.ProjectilePenetration);
-
+            Stats = new Dictionary<int, Stat>();
+            
+            Stats.Add((int)Constant.Stats.ProjectileSpeed,  new Stat("ProjectileSpeed", config.ProjectileSpeed, int.MaxValue,
+                (int)Constant.Stats.ProjectileSpeed));
+            Stats.Add((int)Constant.Stats.ProjectilePenetration, new Stat("ProjectilePenetration", config.ProjectilePenetration, int.MaxValue,
+                (int)Constant.Stats.ProjectilePenetration));
+            
             _projectilePrefab = Resources.Load<GameObject>(ProjectilePrefabPath);
 
             if (_projectilePrefab is null)
@@ -44,6 +67,12 @@ namespace Tzipory.AbilitiesSystem
             OnCast?.Invoke();
             var projectilePrefab = Object.Instantiate(_projectilePrefab,EntityCasterTargetingComponent.ShotPosition,Quaternion.identity);
             projectilePrefab.GetComponent<ProjectileAbilityEntity>().Init(target,ProjectileSpeed.CurrentValue,ProjectilePenetration.CurrentValue,abilityExecutor);
+        }
+
+        public IEnumerable<IStatHolder> GetNestedStatHolders()
+        {
+            IEnumerable<IStatHolder> statHolders = new List<IStatHolder>() { this };
+            return statHolders;
         }
     }
 }

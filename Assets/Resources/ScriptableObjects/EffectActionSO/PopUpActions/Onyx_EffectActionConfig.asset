@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Onyx_EffectActionConfig
   m_EditorClassIdentifier: 
   PopUpText_Config:
-    text: Crit Damage +25%
+    text: Crit Damage +100%
     color: {r: 0, g: 0, b: 0, a: 0}
     size: 8
     riseSpeed: 0.01

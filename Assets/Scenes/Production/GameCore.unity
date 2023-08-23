@@ -983,6 +983,10 @@ PrefabInstance:
       propertyPath: m_UseWorldSpace
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3551072497226089900, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5057946402660152332, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
       propertyPath: m_Name
       value: TempMovementHelper

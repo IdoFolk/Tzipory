@@ -84,9 +84,17 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2859632196482787772, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: m_Name
+      value: 'Unit_Silhouette '
+      objectReference: {fileID: 0}
+    - target: {fileID: 2859632196482787772, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3428881108892275808, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: _silhouetteSpriteRenderer
+      value: 
+      objectReference: {fileID: 2200670044425848587}
     - target: {fileID: 3727445444298982000, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_LocalPosition.y
       value: 1

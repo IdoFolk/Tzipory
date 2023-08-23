@@ -54,32 +54,32 @@ namespace Tzipory.EntitySystem.Entitys
         [SerializeField] private bool _doShowHPBar;
         [SerializeField] private TEMP_UNIT_HPBarConnector _hpBarConnector;
 
-        //The current front-most (highest z value) obstacle
-        float CurrentTopObstacleZ()
-        {
-            float toReturn = float.PositiveInfinity;
-            if (_obstaclesZs == null || _obstaclesZs.Count == 0)
-                return toReturn;
+        ////The current front-most (highest z value) obstacle
+        //float CurrentTopObstacleZ()
+        //{
+        //    float toReturn = float.PositiveInfinity;
+        //    if (_obstaclesZs == null || _obstaclesZs.Count == 0)
+        //        return toReturn;
 
-            foreach (var item in _obstaclesZs)
-            {
-                if(item < toReturn)
-                    toReturn = item;
-            }
-            return toReturn;
-        }
-        List<float> _obstaclesZs = new List<float>();
+        //    foreach (var item in _obstaclesZs)
+        //    {
+        //        if(item < toReturn)
+        //            toReturn = item;
+        //    }
+        //    return toReturn;
+        //}
+        //List<float> _obstaclesZs = new List<float>();
 
-        public void AddObstacleZ(float z)
-        {
-            _obstaclesZs.Add(z);
-            SilhouetteSpriteRenderer.material.SetFloat("_ObstacleZ", CurrentTopObstacleZ());
-        }
-        public void RemoveObstacleZ(float z)
-        {
-            _obstaclesZs.Remove(z);
-            SilhouetteSpriteRenderer.material.SetFloat("_ObstacleZ", CurrentTopObstacleZ());
-        }
+        //public void AddObstacleZ(float z)
+        //{
+        //    _obstaclesZs.Add(z);
+        //    SilhouetteSpriteRenderer.material.SetFloat("_ObstacleZ", CurrentTopObstacleZ());
+        //}
+        //public void RemoveObstacleZ(float z)
+        //{
+        //    _obstaclesZs.Remove(z);
+        //    SilhouetteSpriteRenderer.material.SetFloat("_ObstacleZ", CurrentTopObstacleZ());
+        //}
 
         #endregion
 
@@ -427,11 +427,17 @@ namespace Tzipory.EntitySystem.Entitys
         
         public EffectSequenceHandler EffectSequenceHandler { get; private set; }
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
-        public SpriteRenderer SilhouetteSpriteRenderer => _silhouetteRenderer;
+        //public SpriteRenderer SilhouetteSpriteRenderer => _silhouetteRenderer;
         public SoundHandler SoundHandler => _soundHandler;
         public Transform ParticleEffectPosition => _particleEffectPosition;
         public Transform VisualQueueEffectPosition => _visualQueueEffectPosition;
         public PopUpTexter PopUpTexter => _popUpTexter;
+
+        /// <summary>
+        /// This Action is called whenever the Unit's sprite is set and it sends the new sprite
+        /// As of now, only the Silhouetter subs to this, but it can be useful for other things as well
+        /// </summary>
+        public event System.Action<Sprite> OnSetSprite;
 
         //The following bellow is awaiting approval
 
@@ -445,7 +451,7 @@ namespace Tzipory.EntitySystem.Entitys
         public void SetUnitSprite(Sprite newSprite)
         {
             SpriteRenderer.sprite = newSprite;
-            _silhouetteRenderer.sprite = newSprite; 
+            OnSetSprite?.Invoke(newSprite);
         }
         /// <summary>
         /// Flips all sprites that maybe

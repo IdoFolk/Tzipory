@@ -25,7 +25,7 @@ MonoBehaviour:
   _chainAmount: 0
   targetingPriorityType: 4
   _cooldown: 8
-  _castTime: 2
+  _castTime: 1
   _statusEffectConfigs:
   - _statusEffectName: 
     _affectedStat: 0
@@ -49,7 +49,7 @@ MonoBehaviour:
     _affectedStat: 5
     _effectType: 0
     _statusEffectType: 0
-    _duration: 1
+    _duration: 5
     _interval: 0
     _disableDuration: 0
     _statModifier:

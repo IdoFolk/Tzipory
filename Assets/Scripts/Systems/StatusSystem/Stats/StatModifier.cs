@@ -56,7 +56,7 @@ namespace Tzipory.EntitySystem.StatusSystem
                     stat.SetValue(Value);
                     break;
                 case StatusModifierType.Set:
-                    Debug.LogError("Can not undo Set modification");
+                    stat.ResetSetValue();
                     break;
                 case StatusModifierType.Reduce:
                     stat.AddToValue(Value);

@@ -21,6 +21,8 @@ namespace Tzipory.EntitySystem.StatusSystem
         [SerializeField,ReadOnly] private float _currentValue;
         
         private List<BaseStatusEffect> _activeStatusEffects = new();
+
+        private float _previousSetValue;
         
         public string Name => _name;
         public float CurrentValue => _currentValue;
@@ -115,8 +117,14 @@ namespace Tzipory.EntitySystem.StatusSystem
             OnValueChanged?.Invoke(_currentValue);
         }
 
-        public void SetValue(float amount) =>
+        public void SetValue(float amount)
+        {
+            _previousSetValue = _currentValue;
             ChangeValue(amount);
+        }
+        
+        public void ResetSetValue() =>
+            ChangeValue(_previousSetValue);
 
         public void MultiplyValue(float amount)=>
             ChangeValue(_currentValue * amount);

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.SerializeData.AbilitySystemSerializeData;
 using UnityEngine;
 
 namespace Tzipory.AbilitiesSystem
@@ -11,7 +10,7 @@ namespace Tzipory.AbilitiesSystem
     public class AbilityHandler
     {
         private IEntityTargetAbleComponent Caster { get; }
-        private Dictionary<string, Ability> Abilities { get; }
+        public Dictionary<string, Ability> Abilities { get; }
         
         public bool IsCasting => Abilities.Any(ability => ability.Value.IsCasting);
         

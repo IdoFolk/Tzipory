@@ -1,19 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using SerializeData.StatSerializeData;
 using Sirenix.OdinInspector;
+using Tools.Enums;
 using Tzipory.SerializeData.StatSystemSerilazeData;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.StatusSystem
 {
+#if true
     [Serializable]
+#endif
     public class Stat
     {
+        [Obsolete("Get the data version")]
         public event Action<float> OnValueChanged;
+        public event Action<StatChangeData> OnValueChangedData;
         
         [SerializeField,ReadOnly] private string _name;
         [SerializeField,ReadOnly] private float _currentValue;
-
+        
+        private List<BaseStatusEffect> _activeStatusEffects = new();
+        
         public string Name => _name;
         public float CurrentValue => _currentValue;
         public int Id { get; }
@@ -24,7 +32,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         public Stat(StatConfig statConfig)
         {
             _name = statConfig.Name;
-            Id = statConfig.Id;
+            Id = statConfig.ID;
             BaseValue = statConfig.BaseValue;
             _currentValue = BaseValue;
             MaxValue = StatLimiters.MaxStatValue;
@@ -45,10 +53,62 @@ namespace Tzipory.EntitySystem.StatusSystem
             _name = name;
             Id = id;  
             BaseValue = baseValue;
-            MaxValue = StatLimiters.MaxStatValue; //TBD is this still a thing?
+            MaxValue = StatLimiters.MaxStatValue;
             _currentValue = BaseValue;
         }
+        
+        public void UpdateStatusEffects()
+        {
+            if (_activeStatusEffects.Count == 0)
+                return;
 
+            for (int i = 0; i < _activeStatusEffects.Count; i++)
+            {
+                if (_activeStatusEffects[i].IsDone)
+                {
+                    //Need to return to the pool
+                    _activeStatusEffects.RemoveAt(i);
+                    continue;
+                }
+
+                if (_activeStatusEffects[i].ProcessStatusEffect(out StatChangeData statChangeData))
+                    OnValueChangedData?.Invoke(statChangeData);
+            }
+        }
+        
+        public IDisposable AddStatusEffect(StatusEffectConfig statusEffectConfig)
+        {
+            var statusEffect = Factory.StatusEffectFactory.GetStatusEffect(statusEffectConfig,this);
+            
+           return AddStatusEffect(statusEffect);
+        }
+        
+        public IDisposable AddStatusEffect(BaseStatusEffect statusEffect)
+        {
+            var statChange = statusEffect.StatusEffectStart();
+            
+            //TODO add interrupt logic
+            OnValueChangedData?.Invoke(statChange);
+            
+            _activeStatusEffects.Add(statusEffect);
+       
+            return statusEffect;
+        }
+        
+        public void ProcessStatModifier(params StatModifier[] statModifiers)
+        {
+            float changeDelta = 0;
+            
+            foreach (var statModifier in statModifiers)
+            {
+                statModifier.ProcessStatModifier(this);
+                changeDelta += statModifier.Value;
+            }
+            
+            StatChangeData changeData = new StatChangeData(string.Empty,changeDelta,CurrentValue,EffectType.Default);
+            OnValueChangedData?.Invoke(changeData);
+        }
+        
         private void ChangeValue(float value)
         {
             _currentValue = value;
@@ -61,7 +121,6 @@ namespace Tzipory.EntitySystem.StatusSystem
         public void MultiplyValue(float amount)=>
             ChangeValue(_currentValue * amount);
         
-        //public void DivideValue(float amount)=> //THIS IS WHY I DON'T LIKE THESE THINGS!
         public void DivideValue(float amount)=>
             ChangeValue(_currentValue / amount);
         
@@ -73,5 +132,21 @@ namespace Tzipory.EntitySystem.StatusSystem
         
         public void ResetValue() =>
             ChangeValue(BaseValue);
+    }
+    
+    public readonly struct StatChangeData
+    {
+        public readonly string StatusEffectName;
+        public readonly float Delta;
+        public readonly float NewValue;
+        public readonly EffectType EffectType;
+        
+        public StatChangeData(string statusEffectName,float delta, float newValue, EffectType effectType)
+        {
+            StatusEffectName = statusEffectName;
+            Delta = delta;
+            NewValue = newValue;
+            EffectType = effectType;
+        }
     }
 }

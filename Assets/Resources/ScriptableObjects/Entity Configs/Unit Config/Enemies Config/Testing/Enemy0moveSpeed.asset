@@ -10,33 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42ee311548384ecc85e91ba2b85a84ea, type: 3}
-  m_Name: Madu_Enemy
+  m_Name: Enemy0moveSpeed
   m_EditorClassIdentifier: 
   _statConfigs:
   - _stats: 0
-    _baseValue: 50
+    _baseValue: 5000
   - _stats: 8
     _baseValue: 0
   - _stats: 1
-    _baseValue: 2
+    _baseValue: 0
   - _stats: 2
-    _baseValue: 2
+    _baseValue: 0
   - _stats: 4
-    _baseValue: 7
+    _baseValue: 0
   - _stats: 3
-    _baseValue: 7
+    _baseValue: 0
   - _stats: 6
-    _baseValue: 5
+    _baseValue: 0
   - _stats: 7
-    _baseValue: 5
+    _baseValue: 0
   - _stats: 5
-    _baseValue: 5
+    _baseValue: 0
   _abilityConfigs: []
   _unitEntityVisualConfig:
     _sprite: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
     _icon: {fileID: 0}
-  _targetingPriority: 2
+  _targetingPriority: 0
   _enemyId: 0
-  _decisionInterval: 5
-  _aggroLevel: 5
-  _returnLevel: 5
+  _decisionInterval: 0
+  _aggroLevel: 0
+  _returnLevel: 0

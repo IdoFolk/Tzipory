@@ -73,6 +73,8 @@ namespace Helpers.Consts
             ChainRadius,
             ChainDuration,
             ChainAmount,
+            Armor,
+            Regeneration
         }
     }
 

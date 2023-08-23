@@ -84,34 +84,6 @@ PrefabInstance:
       propertyPath: _myEffect
       value: 
       objectReference: {fileID: 11400000, guid: 0339e834abce62c4c9f54be4eb4e2141, type: 2}
-    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
-      propertyPath: _myEffect._affectedStat
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
-      propertyPath: _myEffect._statusEffectType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
-      propertyPath: _myEffect._statModifier.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
-      propertyPath: _myEffect._statModifier.Array.data[0]._modifier
-      value: 1.35
-      objectReference: {fileID: 0}
-    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
-      propertyPath: _myEffect._statModifier.Array.data[0]._statusModifierType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
-      propertyPath: _myEffect._effectSequence._effectActionContainers.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
-      propertyPath: _myEffect._effectSequence._effectActionContainers.Array.data[0]._effectActionConfig
-      value: 
-      objectReference: {fileID: 11400000, guid: e363f672b6f7e5242ba5f1e4451094ef, type: 2}
     - target: {fileID: 8275930077482909604, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: m_Name
       value: Carnelian_PS

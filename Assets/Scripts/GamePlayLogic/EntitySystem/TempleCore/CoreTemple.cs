@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using PathCreation;
 using UnityEngine;
 using Tzipory.EntitySystem;
@@ -35,14 +34,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
     //SUPER TEMP! this needs to move to the Blackboard if we're really doing it
     public static Transform CoreTrans;
 
-    
-    public Dictionary<int, Stat> Stats { get; }
-    
-    public IEnumerable<IStatHolder> GetNestedStatHolders()
-    {
-        throw new System.NotImplementedException();
-    }
-    
+
     protected override void Awake()
     {
         CoreTrans = transform;

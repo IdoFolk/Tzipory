@@ -25,7 +25,7 @@ namespace Tzipory.SerializeData.StatSystemSerilazeData
         public StatSerializeData(StatConfig statConfig)
         {
              _name  = statConfig.Name;
-             _id = statConfig.ID;
+             _id = statConfig.Id;
              _baseValue = statConfig.BaseValue;
         }
 

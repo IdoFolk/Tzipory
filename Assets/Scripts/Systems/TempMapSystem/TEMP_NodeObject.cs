@@ -17,8 +17,6 @@ public class TEMP_NodeObject : MonoBehaviour
     public bool IsUnlock { get; private set; }
     public bool IsCompleted { get; private set; }
 
-    public int Id => _levelConfig.LevelId;
-
     private void Awake()
     {
         _clickHelper.OnClick += OnNodeClick;

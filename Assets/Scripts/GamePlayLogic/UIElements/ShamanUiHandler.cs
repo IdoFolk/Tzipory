@@ -1,6 +1,5 @@
 ﻿using Shamans;
 using Systems.UISystem;
-using Tzipory.EntitySystem.StatusSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,19 +22,14 @@ namespace GameplayeLogic.UIElements
 
         public override void Show()
         {
-            _shaman.Health.OnValueChangedData += OnHealthChange;
+            _shaman.Health.OnValueChanged += UpdateUIData;
             base.Show();
         }
 
         public override void Hide()
         {
-            _shaman.Health.OnValueChangedData -= OnHealthChange;
+            _shaman.Health.OnValueChanged -= UpdateUIData;
             base.Hide();
-        }
-
-        private void OnHealthChange(StatChangeData statChangeData)
-        {
-            UpdateUIData(statChangeData.NewValue);
         }
 
         private void UpdateUIData(float cureentHP)

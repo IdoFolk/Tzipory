@@ -112,10 +112,10 @@ namespace Enemes
             if (TargetingHandler.CurrentTarget == null)
                 return;
             
-            if (timer >= StatusHandler.GetStat(Constant.Stats.AttackRate).CurrentValue)
+            if (timer >= StatusHandler.GetStatById((int)Constant.Stats.AttackRate).CurrentValue)
             {
                 timer = 0f;
-                TargetingHandler.CurrentTarget.TakeDamage(StatusHandler.GetStat(Constant.Stats.AttackDamage).CurrentValue, false);
+                TargetingHandler.CurrentTarget.TakeDamage(StatusHandler.GetStatById((int)Constant.Stats.AttackDamage).CurrentValue, false);
                 Debug.Log($"{gameObject.name} attack {TargetingHandler.CurrentTarget.EntityTransform.name}");
             }
             else

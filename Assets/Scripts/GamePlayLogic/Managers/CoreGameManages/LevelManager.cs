@@ -58,11 +58,11 @@ public class LevelManager : MonoBehaviour
         EnemyManager = new EnemyManager(_enemiesParent);
         WaveManager  = new WaveManager(_levelConfig);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
-        PartyManager.SpawnShaman();
     }
 
     private void Start()
     {
+        PartyManager.SpawnShaman();
         WaveManager.StartLevel();
         UIManager.Initialize();
         GAME_TIME.SetTimeStep(1);

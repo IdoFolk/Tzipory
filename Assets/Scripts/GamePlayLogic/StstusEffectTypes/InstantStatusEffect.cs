@@ -8,18 +8,18 @@ namespace Tzipory.EntitySystem.StatusSystem
         public InstantStatusEffect(StatusEffectConfig statusEffectConfig,Stat statToEffectToEffect) : base(statusEffectConfig,statToEffectToEffect)
         {
         }
-        
 
-        public override bool ProcessStatusEffect(out StatChangeData statChangeData)
+        public override void ProcessStatusEffect()
         {
-            IsDone  = true;
-            statChangeData = default;
-            return false;
+            foreach (var statModifier in modifiers)
+                statModifier.ProcessStatModifier(StatToEffect);
+            Debug.Log("ProcessStatusEffect");
+            StatusEffectFinish();
         }
 
         public override void Dispose()
         {
-            foreach (var statModifier in Modifiers)
+            foreach (var statModifier in modifiers)
                 statModifier.Undo(StatToEffect);
         }
     }

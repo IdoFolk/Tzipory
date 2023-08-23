@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using static PlayButtonEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine.TestTools;
 
 [InitializeOnLoad]
 public class PlayButtonEditor : EditorWindow
@@ -30,13 +31,14 @@ public class PlayButtonEditor : EditorWindow
             }
             else
             {
+	            EditorSceneManager.SaveOpenScenes();
 	         	EditorSceneManager.OpenScene(AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets(PERSISTENT_SCENE_NAME, new[] { PRODUCTION_PATH })[0]));
 				EditorApplication.EnterPlaymode();
             }
 		}
 	}
 
-		public static class ToolbarCallback
+	public static class ToolbarCallback
 		{
 			static Type m_toolbarType = typeof(Editor).Assembly.GetType("UnityEditor.Toolbar");
 			static Type m_guiViewType = typeof(Editor).Assembly.GetType("UnityEditor.GUIView");

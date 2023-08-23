@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c89cefaeaab2c545b80079ff596cc7c, type: 3}
-  m_Name: Torquize_EffectActionConfig
+  m_Name: Turquoise_EffectActionConfig
   m_EditorClassIdentifier: 
   PopUpText_Config:
     text: Crit Chance +25%

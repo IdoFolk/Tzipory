@@ -15,10 +15,30 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
         private const string  AoePrefabPath = "Prefabs/Ability/AoeAbilityEntity";
         
         private GameObject _aoePrefab;
-        
-        public Stat Radius { get; private set; }
-        public Stat Duration { get; private set; }
-        
+
+
+        private Stat Radius
+        {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.AoeRadius, out var aoeRadius))
+                    return aoeRadius;
+
+                throw new Exception($"aoeRadius not found in entity {Caster.GameEntity.name}");
+            }
+        }
+
+        private Stat Duration
+        {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.AoeDuration, out var aoeDuration))
+                    return aoeDuration;
+
+                throw new Exception($"aoeDuration not found in entity {Caster.GameEntity.name}");
+            }
+        }
+
         private List<BaseStatusEffect> _statusEffects;
         public AbilityExecuteType AbilityExecuteType => AbilityExecuteType.AOE;
         public IEntityTargetAbleComponent Caster { get; }
@@ -30,6 +50,8 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
         [Obsolete("Use AbilitySerializeData")]
         public AoeAbilityExecuter(IEntityTargetAbleComponent caster,AbilityConfig abilityConfig)
         {
+            Stats = new Dictionary<int, Stat>();
+
             Caster = caster;
             OnEnterStatusEffects = new List<StatusEffectConfig>();
             OnExitStatusEffects = new List<StatusEffectConfig>();
@@ -37,9 +59,8 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
             OnEnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
             if(abilityConfig.DoExitEffects)
                 OnExitStatusEffects.AddRange(abilityConfig.OnExitStatusEffectConfigs);
-
-            Radius = new Stat("AoeRadius", abilityConfig.AoeRadius, int.MaxValue, (int)Constant.Stats.AoeRadius);
-            Duration = new Stat("AoeDuration", abilityConfig.AoeDuration, int.MaxValue, (int)Constant.Stats.AoeDuration);
+            Stats.Add((int)Constant.Stats.AoeRadius,new Stat("AoeRadius", abilityConfig.AoeRadius, int.MaxValue, (int)Constant.Stats.AoeRadius));
+            Stats.Add((int)Constant.Stats.AoeDuration, new Stat("AoeDuration", abilityConfig.AoeDuration, int.MaxValue, (int)Constant.Stats.AoeDuration));
 
             _aoePrefab = Resources.Load<GameObject>(AoePrefabPath);
         }

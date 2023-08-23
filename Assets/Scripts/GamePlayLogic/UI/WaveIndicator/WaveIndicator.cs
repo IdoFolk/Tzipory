@@ -20,9 +20,14 @@ namespace GamePlayLogic.UI.WaveIndicator
         
         public void Init(WaveSpawner waveSpawner,ITimer timer)
         {
-            _rectTransform.SetScreenPointRelativeToWordPoint(waveSpawner.transform.position);
-            _timerFill.fillAmount = 0;
+            var transformPosition = waveSpawner.transform.position;
             
+            _rectTransform.SetScreenPointRelativeToWordPoint(transformPosition);
+            _timerFill.fillAmount = 0;
+
+            Vector3 dir = transformPosition - transform.position;
+            
+            _rotateIndicator.rotation = Quaternion.Euler(dir);
             gameObject.SetActive(true);
             
             IsInitialization  = true;

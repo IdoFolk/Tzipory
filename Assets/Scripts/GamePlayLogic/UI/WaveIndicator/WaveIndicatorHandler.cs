@@ -3,6 +3,7 @@ using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.Tools.Interface;
 using Tzipory.WaveSystem;
+using UnityEngine;
 
 namespace GamePlayLogic.UI.WaveIndicator
 {
@@ -12,12 +13,16 @@ namespace GamePlayLogic.UI.WaveIndicator
         
         public bool IsInitialization { get; private set; }
 
-        public WaveIndicatorHandler(int numberOfWaveSpawners)
+        public WaveIndicatorHandler(Transform parent,int numberOfWaveSpawners)
         {
             _waveIndicators = new List<WaveIndicator>();
 
             for (int i = 0; i < numberOfWaveSpawners; i++)
-                _waveIndicators.Add(PoolManager.IndicatorPool.GetObject());
+            {
+                var waveIndicator = PoolManager.IndicatorPool.GetObject();
+                waveIndicator.transform.SetParent(parent);
+                _waveIndicators.Add(waveIndicator);
+            }
         }
         
         public void Init(Wave wave, ITimer timer)

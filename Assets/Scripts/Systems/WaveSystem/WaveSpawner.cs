@@ -17,7 +17,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
 
     private List<IProgress> _completedEnemyGroups;
 
-    private EnemyGroupConfig[] _enemyGroupsConfig;
+    private List<EnemyGroupConfig> _enemyGroupsConfig;
 
     private int _currentEnemyGroupIndex;
     
@@ -59,7 +59,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
             if (_completedEnemyGroups == null)
                 return false;
             
-            if (_completedEnemyGroups.Count != _enemyGroupsConfig.Length) 
+            if (_completedEnemyGroups.Count != _enemyGroupsConfig.Count) 
                 return false;
             
             foreach (var completedEnemyGroup in _completedEnemyGroups)
@@ -72,11 +72,12 @@ public class WaveSpawner : MonoBehaviour , IProgress
         }
     }
 
-    public bool IsActiveThisWave => _enemyGroupsConfig.Length != 0;
+    public bool IsActiveThisWave => _enemyGroupsConfig.Count != 0;
 
     private void Awake()
     {
         Level.AddWaveSpawner(this);
+        _enemyGroupsConfig = new List<EnemyGroupConfig>();
     }
 
     public void Init(WaveSpawnerConfig waveSpawnerConfig)
@@ -133,8 +134,8 @@ public class WaveSpawner : MonoBehaviour , IProgress
 
     private bool TryGetNextEnemyGroup()
     {
-        if (_enemyGroupsConfig.Length == 0) return false;
-        if (_currentEnemyGroupIndex >= _enemyGroupsConfig.Length)
+        if (_enemyGroupsConfig.Count == 0) return false;
+        if (_currentEnemyGroupIndex >= _enemyGroupsConfig.Count)
         {
             Debug.LogWarning($"No more enemy group for {gameObject.name}");
             IsSpawning = false;
@@ -144,7 +145,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
         _activeEnemyGroup.Add(new EnemyGroup(_enemyGroupsConfig[_currentEnemyGroupIndex]));
         _currentEnemyGroupIndex++;
 
-        if (_currentEnemyGroupIndex == _enemyGroupsConfig.Length)
+        if (_currentEnemyGroupIndex == _enemyGroupsConfig.Count)
             return false;
 
         if (_enemyGroupsConfig[_currentEnemyGroupIndex].StartType == ActionStartType.WithPrevious)

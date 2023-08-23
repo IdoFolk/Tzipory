@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GamePlayLogic.Managers;
 using GamePlayLogic.UI.WaveIndicator;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.SerializeData.LevalSerializeData;
@@ -42,11 +43,11 @@ namespace Tzipory.Leval
 
         #endregion
         
-        public WaveManager(LevelConfig levelConfig)
+        public WaveManager(LevelConfig levelConfig,Transform waveIndicatorParent)
         {
             _levelConfig = levelConfig;
             _waves = new List<Wave>();
-            _waveIndicatorHandler = new WaveIndicatorHandler(_levelConfig.Level.WaveSpawners.Count());//need to check the count fun
+            _waveIndicatorHandler = new WaveIndicatorHandler(waveIndicatorParent,_levelConfig.Level.WaveSpawners.Count());//need to check the count fun
             _currentWaveIndex = 0;
             _levelStartDelay = _levelConfig.LevelStartDelay;
             _delayBetweenWaves = _levelConfig.DelayBetweenWaves;

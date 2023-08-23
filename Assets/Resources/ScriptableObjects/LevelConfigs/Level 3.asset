@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fefaa5ef5471cc4ebfa0a75d56ffeb7, type: 3}
-  m_Name: Level 2
+  m_Name: Level 3
   m_EditorClassIdentifier: 
-  _levelId: 0
-  _level: {fileID: 1758735506430089248, guid: 3cd48872507905648a65e6803d716626, type: 3}
+  _levelId: 3
+  _level: {fileID: 1758735506430089248, guid: 72d1d9a2cbc42dd47b0dd0c95bb7e5ec, type: 3}
   _levelStartDelay: 0
   _delayBetweenWaves: 30
   _waves:
@@ -22,93 +22,93 @@ MonoBehaviour:
     - _id: 0
       _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
-      _enemyGroups: []
-    - _id: 1
-      _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-      _delayBetweenEnemyGroup: 0
       _enemyGroups:
       - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
         _groupStartDelay: 0
-        _totalSpawnAmount: 10
-        _spawnAmountPreInterval: 2
-        _spawnInterval: 4
+        _totalSpawnAmount: 30
+        _spawnAmountPreInterval: 3
+        _spawnInterval: 5
         _startType: 0
         _startTime: 0
+    - _id: 1
+      _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups: []
     - _id: 2
       _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
-      _enemyGroups: []
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
+        _groupStartDelay: 15
+        _totalSpawnAmount: 20
+        _spawnAmountPreInterval: 1
+        _spawnInterval: 3
+        _startType: 0
+        _startTime: 0
   - _name: Wave 2
     _waveSpawnerSerializeDatas:
     - _id: 0
       _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
-      _delayBetweenEnemyGroup: 0
-      _enemyGroups: []
-    - _id: 1
-      _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
       _enemyGroups:
       - _enemyConfig: {fileID: 11400000, guid: e81e5d6c33b1ca845a4caf36f8b3a399, type: 2}
         _groupStartDelay: 0
         _totalSpawnAmount: 1
         _spawnAmountPreInterval: 1
-        _spawnInterval: 10
+        _spawnInterval: 1
         _startType: 0
-        _startTime: 50
-      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
-        _groupStartDelay: 0
-        _totalSpawnAmount: 5
-        _spawnAmountPreInterval: 1
-        _spawnInterval: 3
-        _startType: 0
-        _startTime: 50
+        _startTime: 105
+    - _id: 1
+      _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups: []
     - _id: 2
       _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
-      _enemyGroups: []
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: e81e5d6c33b1ca845a4caf36f8b3a399, type: 2}
+        _groupStartDelay: 0
+        _totalSpawnAmount: 1
+        _spawnAmountPreInterval: 1
+        _spawnInterval: 1
+        _startType: 0
+        _startTime: 105
   - _name: Wave 3
     _waveSpawnerSerializeDatas:
     - _id: 0
       _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
-      _enemyGroups: []
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
+        _groupStartDelay: 0
+        _totalSpawnAmount: 10
+        _spawnAmountPreInterval: 2
+        _spawnInterval: 2
+        _startType: 0
+        _startTime: 136
     - _id: 1
       _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
       _enemyGroups:
       - _enemyConfig: {fileID: 11400000, guid: e81e5d6c33b1ca845a4caf36f8b3a399, type: 2}
         _groupStartDelay: 0
-        _totalSpawnAmount: 3
+        _totalSpawnAmount: 2
         _spawnAmountPreInterval: 1
         _spawnInterval: 20
         _startType: 0
-        _startTime: 95
+        _startTime: 136
     - _id: 2
       _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
-      _delayBetweenEnemyGroup: 0
-      _enemyGroups: []
-  - _name: Wave 4
-    _waveSpawnerSerializeDatas:
-    - _id: 0
-      _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
-      _delayBetweenEnemyGroup: 0
-      _enemyGroups: []
-    - _id: 1
-      _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
       _enemyGroups:
       - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
         _groupStartDelay: 0
-        _totalSpawnAmount: 16
-        _spawnAmountPreInterval: 4
-        _spawnInterval: 3
+        _totalSpawnAmount: 10
+        _spawnAmountPreInterval: 2
+        _spawnInterval: 2
         _startType: 0
-        _startTime: 185
-    - _id: 2
-      _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
-      _delayBetweenEnemyGroup: 0
-      _enemyGroups: []
-  - _name: Wave 5
+        _startTime: 136
+  - _name: Wave 4
     _waveSpawnerSerializeDatas:
     - _id: 0
       _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
@@ -117,10 +117,45 @@ MonoBehaviour:
       - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
         _groupStartDelay: 0
         _totalSpawnAmount: 15
-        _spawnAmountPreInterval: 3
-        _spawnInterval: 5
+        _spawnAmountPreInterval: 2
+        _spawnInterval: 2
         _startType: 0
-        _startTime: 227
+        _startTime: 206
+    - _id: 1
+      _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
+        _groupStartDelay: 0
+        _totalSpawnAmount: 15
+        _spawnAmountPreInterval: 2
+        _spawnInterval: 2
+        _startType: 0
+        _startTime: 206
+    - _id: 2
+      _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
+        _groupStartDelay: 0
+        _totalSpawnAmount: 15
+        _spawnAmountPreInterval: 2
+        _spawnInterval: 2
+        _startType: 0
+        _startTime: 206
+  - _name: Wave 5
+    _waveSpawnerSerializeDatas:
+    - _id: 0
+      _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: e81e5d6c33b1ca845a4caf36f8b3a399, type: 2}
+        _groupStartDelay: 0
+        _totalSpawnAmount: 3
+        _spawnAmountPreInterval: 1
+        _spawnInterval: 10
+        _startType: 0
+        _startTime: 250
     - _id: 1
       _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -128,11 +163,18 @@ MonoBehaviour:
       - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
         _groupStartDelay: 0
         _totalSpawnAmount: 10
-        _spawnAmountPreInterval: 5
-        _spawnInterval: 10
+        _spawnAmountPreInterval: 2
+        _spawnInterval: 2
         _startType: 0
-        _startTime: 227
+        _startTime: 250
     - _id: 2
       _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
-      _enemyGroups: []
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
+        _groupStartDelay: 0
+        _totalSpawnAmount: 30
+        _spawnAmountPreInterval: 1
+        _spawnInterval: 1
+        _startType: 0
+        _startTime: 250

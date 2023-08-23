@@ -245,6 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a5aea4f0c7a2f4fbd13d3d9c1978f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 6384550637329320876}
   _rotateIndicator: {fileID: 9140210028701899648}
   _timerFill: {fileID: 4766003855562498267}
 --- !u!1 &6931346090941193925
@@ -466,7 +467,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.939
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0

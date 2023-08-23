@@ -22,7 +22,7 @@ namespace Tzipory.GamePlayLogic.ObjectPools
         {
            VisualSystemPool  = new VisualSystemPool();
             EnemyPool = new ObjectPool<Enemy>(new EnemyFactory(),50);
-            IndicatorPool  = new ObjectPool<WaveIndicator>(new WaveIndicatorFactory(),5);
+            IndicatorPool  = new ObjectPool<WaveIndicator>(new WaveIndicatorFactory());
         }
     }
 

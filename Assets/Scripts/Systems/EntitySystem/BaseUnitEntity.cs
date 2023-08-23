@@ -257,7 +257,7 @@ namespace Tzipory.EntitySystem.Entitys
             DefaultPriorityTargeting =
                 Factory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
             
-            AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
+            AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);//making new every time we init new enemy(memory waste) 
             
             SpriteRenderer.sprite = parameter.UnitEntityVisualConfig.Sprite;
             

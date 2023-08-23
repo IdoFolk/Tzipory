@@ -8,7 +8,6 @@ namespace Tzipory.BaseSystem.TimeSystem
         public static event Action OnTimeRateChange;
         
         private static float _timeRate = 1f;
-        private static TimerHandler _timerHandler;
         private static float _startGameTime;
 
         private static float _tempTimeData = 1;
@@ -16,17 +15,17 @@ namespace Tzipory.BaseSystem.TimeSystem
         public static float TimePlayed => Time.realtimeSinceStartup - _startGameTime;
         public static float GetCurrentTimeRate => _timeRate;
         public static float GameDeltaTime => Time.deltaTime * _timeRate;
-        public static TimerHandler TimerHandler => _timerHandler;
-        
-        private void Start()
+        public static TimerHandler TimerHandler { get; private set; }
+
+        private void Awake()
         {
-            _timerHandler = new TimerHandler();
+            TimerHandler = new TimerHandler();
             _startGameTime = Time.realtimeSinceStartup;
         }
 
         private void Update()
         {
-            _timerHandler.TickAllTimers();
+            TimerHandler.TickAllTimers();
         }
         
         public static void SetTimeStep(float time)

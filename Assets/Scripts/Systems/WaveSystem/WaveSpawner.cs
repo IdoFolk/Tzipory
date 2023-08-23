@@ -67,9 +67,12 @@ public class WaveSpawner : MonoBehaviour , IProgress
                 if (!completedEnemyGroup.IsDone)
                     return false;
             }
+            
             return true;
         }
     }
+
+    public bool IsActiveThisWave => _enemyGroupsConfig.Length != 0;
 
     private void Awake()
     {
@@ -86,13 +89,16 @@ public class WaveSpawner : MonoBehaviour , IProgress
         
         foreach (var enemyGroupSerializeData in _enemyGroupsConfig)
             TotalNumberOfEnemiesPreWave += enemyGroupSerializeData.TotalSpawnAmount;
-
-        if (!TryGetNextEnemyGroup())
-            Debug.LogWarning("Not enemy group for the spawner");
     }
 
+    public void StartSpawning() =>
+        IsSpawning = true;
+
     private void Update()
-    { 
+    {
+        if (!IsSpawning)
+            return;
+        
         if (IsDone || _activeEnemyGroup == null || _activeEnemyGroup.Count == 0)
             return;
         
@@ -100,9 +106,13 @@ public class WaveSpawner : MonoBehaviour , IProgress
         {
             _completedEnemyGroups.AddRange(_activeEnemyGroup);
             _activeEnemyGroup.Clear();
-            
+
             if (!TryGetNextEnemyGroup())
+            {
+                IsSpawning = false;
                 return;
+            }
+            
             Debug.Log($"#<color=2eff00>WaveManager:</color> start enemyGroup-{_currentEnemyGroupIndex + 1}");
         }
 
@@ -124,8 +134,13 @@ public class WaveSpawner : MonoBehaviour , IProgress
     private bool TryGetNextEnemyGroup()
     {
         if (_enemyGroupsConfig.Length == 0) return false;
-        if (_currentEnemyGroupIndex >= _enemyGroupsConfig.Length) return false;
-            
+        if (_currentEnemyGroupIndex >= _enemyGroupsConfig.Length)
+        {
+            Debug.LogWarning($"No more enemy group for {gameObject.name}");
+            IsSpawning = false;
+            return false;
+        }
+        
         _activeEnemyGroup.Add(new EnemyGroup(_enemyGroupsConfig[_currentEnemyGroupIndex]));
         _currentEnemyGroupIndex++;
 

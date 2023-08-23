@@ -10,7 +10,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
     {
         [Title("$_name",bold:true,titleAlignment:TitleAlignments.Centered)] 
         [SerializeField,ReadOnly,PropertyOrder(-2)] private string _name;
-        [SerializeField,ListDrawerSettings(HideAddButton = true,HideRemoveButton = true),PropertyOrder(1)] private List<WaveSpawnerConfig> _waveSpawnerSerializeDatas;
+        [SerializeField,ListDrawerSettings(HideAddButton = true,HideRemoveButton = true),PropertyOrder(1)] private List<WaveSpawnerConfig> _waveSpawnerConfig;
 
         [ShowInInspector, ReadOnly,PropertyOrder(-1)]
         public float TotalWaveTime
@@ -19,7 +19,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
             {
                 float totalWaveTime = 0;
 
-                foreach (var spawnerSerializeData in _waveSpawnerSerializeDatas)
+                foreach (var spawnerSerializeData in _waveSpawnerConfig)
                 {
                     if (spawnerSerializeData == null)
                         continue;
@@ -34,16 +34,16 @@ namespace Tzipory.SerializeData.LevalSerializeData
         }
         
         private LevelConfig  _levelConfig;
-        public List<WaveSpawnerConfig> WaveSpawnerSerializeDatas => _waveSpawnerSerializeDatas;
+        public List<WaveSpawnerConfig> WaveSpawnerConfig => _waveSpawnerConfig;
 
         public WaveConfig(IEnumerable<WaveSpawner> waveSpawners,LevelConfig levelConfig)
         {
             _levelConfig = levelConfig;
-            _waveSpawnerSerializeDatas = new List<WaveSpawnerConfig>();
+            _waveSpawnerConfig = new List<WaveSpawnerConfig>();
 
             foreach (var waveSpawner in waveSpawners)
             {
-                _waveSpawnerSerializeDatas.Add(new WaveSpawnerConfig(waveSpawner));
+                _waveSpawnerConfig.Add(new WaveSpawnerConfig(waveSpawner));
             }
         }
 
@@ -56,7 +56,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
 
         public void OnValidate(float startTime)
         {
-            foreach (var spawnerSerializeData in _waveSpawnerSerializeDatas)
+            foreach (var spawnerSerializeData in _waveSpawnerConfig)
             {
                 spawnerSerializeData.OnValidate(startTime);  
             }

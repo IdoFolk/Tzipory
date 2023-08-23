@@ -6,21 +6,22 @@ using UnityEngine;
 //Not sure if temp -> more like "experimental"?
 public class Obstacle_ZSetter : MonoBehaviour
 {
-    BaseUnitEntity _unit;
+    Silhouetter _silhouetter;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_unit = collision.gameObject.GetComponent<BaseUnitEntity>())
+        //if (_unit = collision.gameObject.GetComponent<BaseUnitEntity>())
+        if (_silhouetter = collision.gameObject.GetComponent<Silhouetter>())
         {
-            _unit.AddObstacleZ(transform.position.z);
+            _silhouetter.AddObstacleZ(transform.position.z);
         }
         
     } 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (_unit = collision.gameObject.GetComponent<BaseUnitEntity>())
+        if (_silhouetter = collision.gameObject.GetComponent<Silhouetter>())
         {
-            _unit.RemoveObstacleZ(transform.position.z);
+            _silhouetter.RemoveObstacleZ(transform.position.z);
         }
         
     }

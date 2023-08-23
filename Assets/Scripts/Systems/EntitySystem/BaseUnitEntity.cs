@@ -31,7 +31,6 @@ namespace Tzipory.EntitySystem.Entitys
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private SpriteRenderer _spriteRenderer;
         [SerializeField,TabGroup("Component")] private Transform _visualQueueEffectPosition;
-        [SerializeField, TabGroup("Component")] private SpriteRenderer _silhouetteRenderer;
 
 
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onDeath;
@@ -53,33 +52,6 @@ namespace Tzipory.EntitySystem.Entitys
         private Transform _shotPosition;
         [SerializeField] private bool _doShowHPBar;
         [SerializeField] private TEMP_UNIT_HPBarConnector _hpBarConnector;
-
-        ////The current front-most (highest z value) obstacle
-        //float CurrentTopObstacleZ()
-        //{
-        //    float toReturn = float.PositiveInfinity;
-        //    if (_obstaclesZs == null || _obstaclesZs.Count == 0)
-        //        return toReturn;
-
-        //    foreach (var item in _obstaclesZs)
-        //    {
-        //        if(item < toReturn)
-        //            toReturn = item;
-        //    }
-        //    return toReturn;
-        //}
-        //List<float> _obstaclesZs = new List<float>();
-
-        //public void AddObstacleZ(float z)
-        //{
-        //    _obstaclesZs.Add(z);
-        //    SilhouetteSpriteRenderer.material.SetFloat("_ObstacleZ", CurrentTopObstacleZ());
-        //}
-        //public void RemoveObstacleZ(float z)
-        //{
-        //    _obstaclesZs.Remove(z);
-        //    SilhouetteSpriteRenderer.material.SetFloat("_ObstacleZ", CurrentTopObstacleZ());
-        //}
 
         #endregion
 
@@ -438,6 +410,12 @@ namespace Tzipory.EntitySystem.Entitys
         /// As of now, only the Silhouetter subs to this, but it can be useful for other things as well
         /// </summary>
         public event System.Action<Sprite> OnSetSprite;
+        /// <summary>
+        /// This Action is called when the sprite flips direction.
+        /// Used to flip the Silhouette sprite along with the actual sprite
+        /// Not as useful as the OnSetSprite -> but it can have more uses...
+        /// </summary>
+        public event System.Action<bool> OnSpriteFlipX;
 
         //The following bellow is awaiting approval
 
@@ -460,7 +438,7 @@ namespace Tzipory.EntitySystem.Entitys
         public void SetSpriteFlipX(bool doFlip)
         {
             SpriteRenderer.flipX = doFlip;
-            _silhouetteRenderer.flipX = doFlip; 
+            OnSpriteFlipX?.Invoke(doFlip);
         }
 
         private void AddStatusEffectVisual(BaseStatusEffect baseStatusEffect) =>

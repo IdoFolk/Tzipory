@@ -127,6 +127,7 @@ PrefabInstance:
     - {fileID: 8783141836976998822, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5772911156343462321, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+    - {fileID: 2859632196482787772, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4357314417853133059, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       insertIndex: -1
@@ -238,7 +239,7 @@ MonoBehaviour:
   _targetingHandler: {fileID: 433436307487325276}
   _spriteRenderer: {fileID: 6032355350260239207}
   _visualQueueEffectPosition: {fileID: 5055015959598962312}
-  _silhouetteRenderer: {fileID: 7684134214269545788}
+  _silhouetteRenderer: {fileID: 0}
   _onDeath:
     _sequenceName: 
     _id: 0
@@ -474,8 +475,3 @@ MonoBehaviour:
   _tgt: {fileID: 0}
   _zDistanceModifier: 0
   _baseUnitEntity: {fileID: 7854104335867524329}
---- !u!212 &7684134214269545788 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 2251248414798084548, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
-  m_PrefabInstance: {fileID: 8475086043216172280}
-  m_PrefabAsset: {fileID: 0}

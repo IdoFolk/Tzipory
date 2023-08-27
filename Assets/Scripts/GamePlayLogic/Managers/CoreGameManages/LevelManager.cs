@@ -10,6 +10,7 @@ using Tzipory.SerializeData;
 using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [DefaultExecutionOrder(-1)]
 public class LevelManager : MonoBehaviour
@@ -27,6 +28,9 @@ public class LevelManager : MonoBehaviour
     public bool IsGameRunning { get; private set; }
     
     [SerializeField,TabGroup("Party manager")] private ShamanConfig[] _shamanConfigs;
+
+    [SerializeField, TabGroup("Level manager"),Tooltip("Make the level that you can lose or win the game")]
+    private bool _cantLose;
     [SerializeField, TabGroup("Level manager")]
     private Transform _levelParent;
     [SerializeField, TabGroup("Level manager")]
@@ -78,6 +82,9 @@ public class LevelManager : MonoBehaviour
         
         WaveManager.UpdateLevel();
 
+        if (_cantLose)
+            return;
+
         if (CoreTemplete.IsEntityDead)
             EndGame(false);
 
@@ -113,7 +120,11 @@ public class LevelManager : MonoBehaviour
     public void Continue()
     {
         GAME_TIME.SetTimeStep(1);
-        GameManager.SceneHandler.LoadScene(SceneType.Map);
+
+        if (GameManager.SceneHandler != null)//for testing so you can rest the level if you start from the coreGame scene
+            GameManager.SceneHandler.LoadScene(SceneType.Map);
+        else
+            SceneManager.LoadScene(3);//reset the CoreGame scene so you can play again
     }
 
 #if UNITY_EDITOR

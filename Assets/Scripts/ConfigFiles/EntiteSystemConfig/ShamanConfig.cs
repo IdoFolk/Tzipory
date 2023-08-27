@@ -1,4 +1,5 @@
 ﻿using Helpers.Consts;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.EntityConfigSystem
@@ -8,6 +9,10 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
     {
         [SerializeField] private int _shamanId;
         
+        [SerializeField,TabGroup("AI")] private float _decisionInterval;//temp
+
+        public float DecisionInterval => _decisionInterval;
+
         public override int ConfigObjectId => _shamanId;
         public override int ConfigTypeId => Constant.DataId.SHAMAN_DATA_ID;
     }

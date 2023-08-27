@@ -16,6 +16,8 @@ namespace Tzipory.SerializeData
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanId;
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanLevel;
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanExp;
+        
+        [SerializeField] private float _decisionInterval;//temp
 
         //
         private List<ShamanItemSerializeData> attachedItemsSerializeData = new List<ShamanItemSerializeData>();
@@ -24,12 +26,14 @@ namespace Tzipory.SerializeData
         public int ShamanId => _shamanId;
         public int ShamanLevel => _shamanLevel;
         public int ShamanExp => _shamanExp;
+        public float DecisionInterval => _decisionInterval;
         
         public override void Init(IConfigFile parameter)
         {
             base.Init(parameter);
             var config = (ShamanConfig)parameter;
-            
+
+            _decisionInterval = config.DecisionInterval;
             _shamanId = config.ConfigObjectId;
             //Need to be in config?
             attachedItemsSerializeData = new List<ShamanItemSerializeData>();

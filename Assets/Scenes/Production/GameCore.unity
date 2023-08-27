@@ -835,6 +835,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1774659271}
     m_Modifications:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _cantLose
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelConfig
       value: 
       objectReference: {fileID: 11400000, guid: a7c6cbea3d43f1245ae64b78cf00e486, type: 2}
@@ -856,7 +860,7 @@ PrefabInstance:
       objectReference: {fileID: 1930332588}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.data[0]
@@ -865,7 +869,7 @@ PrefabInstance:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
+      objectReference: {fileID: 11400000, guid: 1860914778f26304ebb1455b9221a5ef, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.data[2]
       value: 

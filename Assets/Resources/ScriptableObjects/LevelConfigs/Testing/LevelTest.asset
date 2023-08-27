@@ -25,8 +25,8 @@ MonoBehaviour:
       _enemyGroups:
       - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
         _groupStartDelay: 0
-        _totalSpawnAmount: 10
-        _spawnAmountPreInterval: 1
+        _totalSpawnAmount: 25
+        _spawnAmountPreInterval: 3
         _spawnInterval: 5
         _startType: 0
         _startTime: 10
@@ -57,7 +57,7 @@ MonoBehaviour:
         _spawnAmountPreInterval: 1
         _spawnInterval: 1
         _startType: 0
-        _startTime: 80
+        _startTime: 70
     - _id: 1
       _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -68,7 +68,7 @@ MonoBehaviour:
         _spawnAmountPreInterval: 1
         _spawnInterval: 1
         _startType: 0
-        _startTime: 80
+        _startTime: 70
     - _id: 2
       _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -79,4 +79,4 @@ MonoBehaviour:
         _spawnAmountPreInterval: 1
         _spawnInterval: 1
         _startType: 0
-        _startTime: 80
+        _startTime: 70

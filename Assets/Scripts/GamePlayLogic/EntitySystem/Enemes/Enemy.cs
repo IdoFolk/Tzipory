@@ -116,7 +116,6 @@ namespace Enemes
             {
                 timer = 0f;
                 TargetingHandler.CurrentTarget.TakeDamage(StatusHandler.GetStat(Constant.Stats.AttackDamage).CurrentValue, false);
-                Debug.Log($"{gameObject.name} attack {TargetingHandler.CurrentTarget.EntityTransform.name}");
             }
             else
             {

@@ -56,12 +56,9 @@ public class TEMP_PowerStructure : BaseGameEntity , ITargetableReciever
     {
         if (targetable is not Shaman shaman) return;
         
-        Debug.Log($"ENTER {shaman.name}");
-
         if (_activeStatusEffectOnShaman.ContainsKey(shaman.EntityInstanceID))//temp!!!
             return;
 
-        Debug.Log($"{shaman.name} entered the area of influence of {name}");
         IDisposable disposable = shaman.StatusHandler.AddStatusEffect(_myEffect);
         _activeStatusEffectOnShaman.Add(shaman.
             EntityInstanceID, disposable);
@@ -71,8 +68,6 @@ public class TEMP_PowerStructure : BaseGameEntity , ITargetableReciever
     {
         if (targetable is not Shaman shaman) return;
         
-        Debug.Log($"EXIT {shaman.name}");
-            
         if (_activeStatusEffectOnShaman.TryGetValue(shaman.EntityInstanceID,out IDisposable disposable))
         {
             disposable.Dispose();

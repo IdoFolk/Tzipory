@@ -93,6 +93,8 @@ public class WaveSpawner : MonoBehaviour , IProgress
         
         foreach (var enemyGroupSerializeData in _enemyGroupsConfig)
             TotalNumberOfEnemiesPreWave += enemyGroupSerializeData.TotalSpawnAmount;
+
+        IsSpawning = false;
     }
 
     public void StartSpawning() =>

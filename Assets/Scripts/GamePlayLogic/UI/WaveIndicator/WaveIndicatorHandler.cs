@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.Tools.Interface;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace GamePlayLogic.UI.WaveIndicator
 {
-    public class WaveIndicatorHandler : IInitialization<Wave,ITimer>
+    public class WaveIndicatorHandler : IInitialization<Wave,ITimer> , IDisposable
     {
         private readonly List<WaveIndicator> _waveIndicators;
         
@@ -42,6 +43,15 @@ namespace GamePlayLogic.UI.WaveIndicator
             }
             
             IsInitialization = true;
+        }
+
+
+        public void Dispose()
+        {
+            foreach (var waveIndicator in _waveIndicators)
+                waveIndicator.Dispose();
+
+            IsInitialization = false;
         }
     }
 }

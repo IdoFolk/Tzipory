@@ -21,6 +21,10 @@ namespace Tzipory.Leval
         
         private float _levelStartDelay;
         private float _delayBetweenWaves;
+
+#if UNITY_EDITOR
+        private bool _isReportEndLevel;
+#endif
         
         private int _currentWaveIndex;
 
@@ -35,7 +39,7 @@ namespace Tzipory.Leval
         
         public  bool IsLastWave => _currentWaveIndex == _waves.Count - 1;
 
-        public bool AllWaveAreDone => _waves.All(wave => wave.IsDone) && _currentWaveIndex  == _waves.Count - 1;
+        public bool AllWaveAreDone => _waves.All(wave => wave.IsComplete) && _currentWaveIndex  == _waves.Count - 1;
         
         private Wave CurrentWave => _waves[_currentWaveIndex];
 
@@ -57,6 +61,8 @@ namespace Tzipory.Leval
         {
             foreach (var waveSerialize in _levelConfig.Waves)
                 _waves.Add(new Wave(_levelConfig.Level.WaveSpawners,waveSerialize));
+
+            _isReportEndLevel = false;
             
             _startLevelTimer = GAME_TIME.TimerHandler.StartNewTimer(_levelStartDelay);
             CurrentWave.Init();
@@ -67,36 +73,47 @@ namespace Tzipory.Leval
         {
             if (!_startLevelTimer.IsDone)
                 return;
+            
+            if (_delayBetweenWavesTimer is { IsDone: false })
+                return;
 
-            if (!CurrentWave.IsStarted)
+            if (!CurrentWave.IsActive && !CurrentWave.IsComplete)
             {
 #if UNITY_EDITOR
                 Debug.Log($"<color=#2eff00>WaveManager:</color> start wave-{_currentWaveIndex + 1}");
 #endif
                 CurrentWave.StartWave();
+                _waveIndicatorHandler.Dispose();
                 OnNewWaveStarted?.Invoke(_currentWaveIndex + 1);
             }
 
-            if (!CurrentWave.IsDone) return;
-            
-            CurrentWave.EndWave();
-            NextWave.Init();
+            if (!CurrentWave.IsAllWaveSpawnersDone) return;
 
-            _delayBetweenWavesTimer ??= GAME_TIME.TimerHandler.StartNewTimer(_delayBetweenWaves);
+            if (CurrentWave.IsActive && !CurrentWave.IsComplete)
+            {
+                CurrentWave.EndWave();
+                Debug.Log($"<color=#2eff00>WaveManager:</color> ended wave-{_currentWaveIndex + 1}");
+            }
             
-            _waveIndicatorHandler.Init(NextWave,_delayBetweenWavesTimer);
-            
-            if (!_delayBetweenWavesTimer.IsDone)
-                return;
-
-            _delayBetweenWavesTimer = null;
-            _delayBetweenWaves = _levelConfig.DelayBetweenWaves;
-#if UNITY_EDITOR
-            Debug.Log($"<color=#2eff00>WaveManager:</color> ended wave-{_currentWaveIndex + 1}");
-#endif
-
             if (_currentWaveIndex + 1 < _waves.Count)
                 _currentWaveIndex++;
+            else
+            {
+#if UNITY_EDITOR
+                if (!_isReportEndLevel)
+                {
+                    _isReportEndLevel = true;
+                    Debug.Log($"<color=#2eff00>WaveManager:</color> <color=#f20505>Level Ended</color>");
+                }
+#endif
+                return; // End level
+            }
+            
+            CurrentWave.Init();
+            
+            _delayBetweenWavesTimer ??= GAME_TIME.TimerHandler.StartNewTimer(_delayBetweenWaves);
+            
+            _waveIndicatorHandler.Init(CurrentWave,_delayBetweenWavesTimer);
         }
 
         public void Dispose()

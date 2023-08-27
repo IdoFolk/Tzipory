@@ -12,10 +12,11 @@ namespace Tzipory.WaveSystem
 
         private readonly WaveConfig _data;
 
-        public bool IsStarted { get; private set; }
+        public bool IsActive { get; private set; }
         
+        public bool IsComplete  { get; private set; }
         public float CompletionPercentage => throw new NotImplementedException();
-        public bool IsDone => _waveSpawners.All(waveSpawner => waveSpawner.IsDone) && IsStarted;
+        public bool IsAllWaveSpawnersDone => _waveSpawners.All(waveSpawner => waveSpawner.IsDone);
 
         public int NumberOfEnemiesInWave
         {
@@ -50,6 +51,7 @@ namespace Tzipory.WaveSystem
                 }
             }
 
+            IsComplete = false;
             IsInitialization = true;
         }
 
@@ -61,11 +63,13 @@ namespace Tzipory.WaveSystem
             foreach (var waveSpawner in _waveSpawners)
                 waveSpawner.StartSpawning();
 
-            IsStarted = true;
+            IsActive = true;
         }
         
         public void EndWave()
         {
+            IsComplete = true;
+            IsActive = false;
         }
     }
 }

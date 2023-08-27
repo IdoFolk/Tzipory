@@ -27,10 +27,12 @@ public class LevelManager : MonoBehaviour
     public bool IsGameRunning { get; private set; }
     
     [SerializeField,TabGroup("Party manager")] private ShamanConfig[] _shamanConfigs;
-    [SerializeField, TabGroup("LevelToOpen manager")]
+    [SerializeField, TabGroup("Level manager")]
     private Transform _levelParent;
+    [SerializeField, TabGroup("Level manager")]
+    private Transform _waveIndicatorParent;
     [Header("Testing")]
-    [SerializeField, TabGroup("LevelToOpen manager")]
+    [SerializeField, TabGroup("Level manager")]
     private LevelConfig _levelConfig;
     [SerializeField, TabGroup("Spawn parents")]
     private Transform _shamanParent;
@@ -56,7 +58,7 @@ public class LevelManager : MonoBehaviour
 
         Instantiate(_levelConfig.Level, _levelParent);
         EnemyManager = new EnemyManager(_enemiesParent);
-        WaveManager  = new WaveManager(_levelConfig);//temp!
+        WaveManager  = new WaveManager(_levelConfig,_waveIndicatorParent);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
         PartyManager.SpawnShaman();
     }

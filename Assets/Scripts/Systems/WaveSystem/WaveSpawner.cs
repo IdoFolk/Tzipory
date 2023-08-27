@@ -12,12 +12,13 @@ public class WaveSpawner : MonoBehaviour , IProgress
 {
     [SerializeField, HideInInspector] private Color _color;
     [SerializeField,HideInInspector] private int _id;
+    [SerializeField] private Transform _waveIndicatorPosition;
     [SerializeField] private Transform[] _spawnPositions;
     [SerializeField] private PathCreator myPathCreator;
 
     private List<IProgress> _completedEnemyGroups;
 
-    private EnemyGroupConfig[] _enemyGroupsConfig;
+    private List<EnemyGroupConfig> _enemyGroupsConfig;
 
     private int _currentEnemyGroupIndex;
     
@@ -35,11 +36,13 @@ public class WaveSpawner : MonoBehaviour , IProgress
 
     public int TotalNumberOfEnemiesPreWave { get; private set; }
 
+    public Transform WaveIndicatorPosition => _waveIndicatorPosition;
+
     private bool IsDoneActiveEnemyGroup
     {
         get
         {
-            if (_activeEnemyGroup == null || _activeEnemyGroup.Count == 0)
+            if (_activeEnemyGroup == null)
                 return false;
 
             foreach (var enemyGroup in _activeEnemyGroup)
@@ -59,7 +62,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
             if (_completedEnemyGroups == null)
                 return false;
             
-            if (_completedEnemyGroups.Count != _enemyGroupsConfig.Length) 
+            if (_completedEnemyGroups.Count != _enemyGroupsConfig.Count) 
                 return false;
             
             foreach (var completedEnemyGroup in _completedEnemyGroups)
@@ -67,13 +70,17 @@ public class WaveSpawner : MonoBehaviour , IProgress
                 if (!completedEnemyGroup.IsDone)
                     return false;
             }
+            
             return true;
         }
     }
 
+    public bool IsActiveThisWave => _enemyGroupsConfig.Count != 0;
+
     private void Awake()
     {
         Level.AddWaveSpawner(this);
+        _enemyGroupsConfig = new List<EnemyGroupConfig>();
     }
 
     public void Init(WaveSpawnerConfig waveSpawnerConfig)
@@ -86,24 +93,31 @@ public class WaveSpawner : MonoBehaviour , IProgress
         
         foreach (var enemyGroupSerializeData in _enemyGroupsConfig)
             TotalNumberOfEnemiesPreWave += enemyGroupSerializeData.TotalSpawnAmount;
-
-        if (!TryGetNextEnemyGroup())
-            Debug.LogWarning("Not enemy group for the spawner");
     }
 
+    public void StartSpawning() =>
+        IsSpawning = true;
+
     private void Update()
-    { 
-        if (IsDone || _activeEnemyGroup == null || _activeEnemyGroup.Count == 0)
+    {
+        if (!IsSpawning)
+            return;
+        
+        if (IsDone || _activeEnemyGroup == null)
             return;
         
         if (IsDoneActiveEnemyGroup)
         {
             _completedEnemyGroups.AddRange(_activeEnemyGroup);
             _activeEnemyGroup.Clear();
-            
+
             if (!TryGetNextEnemyGroup())
+            {
+                IsSpawning = false;
                 return;
-            Debug.Log($"#<color=2eff00>WaveManager:</color> start enemyGroup-{_currentEnemyGroupIndex + 1}");
+            }
+            
+            Debug.Log($"<color=#2eff00>WaveManager:</color> start enemyGroup-{_currentEnemyGroupIndex + 1} at {gameObject.name}");
         }
 
         foreach (var enemyGroup in _activeEnemyGroup)
@@ -123,17 +137,27 @@ public class WaveSpawner : MonoBehaviour , IProgress
 
     private bool TryGetNextEnemyGroup()
     {
-        if (_enemyGroupsConfig.Length == 0) return false;
-        if (_currentEnemyGroupIndex >= _enemyGroupsConfig.Length) return false;
-            
-        _activeEnemyGroup.Add(new EnemyGroup(_enemyGroupsConfig[_currentEnemyGroupIndex]));
+        if (_enemyGroupsConfig.Count == 0) return false;
+        
+        if (_currentEnemyGroupIndex >= _enemyGroupsConfig.Count)
+        {
+            Debug.Log($"<color=#2eff00>WaveManager:</color> No more enemy group for {gameObject.name}");
+            IsSpawning = false;
+            return false;
+        }
+        
+        _activeEnemyGroup.Add(new EnemyGroup(_enemyGroupsConfig[_currentEnemyGroupIndex]));//add to pool
+
         _currentEnemyGroupIndex++;
 
-        if (_currentEnemyGroupIndex == _enemyGroupsConfig.Length)
-            return false;
-
-        if (_enemyGroupsConfig[_currentEnemyGroupIndex].StartType == ActionStartType.WithPrevious)
-            TryGetNextEnemyGroup();
+        if (_currentEnemyGroupIndex == _enemyGroupsConfig.Count) return true;
+        
+        while (_currentEnemyGroupIndex >= _enemyGroupsConfig.Count && _enemyGroupsConfig[_currentEnemyGroupIndex].StartType == ActionStartType.WithPrevious)
+        {
+            _activeEnemyGroup.Add(new EnemyGroup(_enemyGroupsConfig[_currentEnemyGroupIndex]));//add to pool
+            
+            _currentEnemyGroupIndex++;
+        }
 
         return true;
     }
@@ -147,5 +171,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
     {
         Gizmos.color = WaveSpawnerColor;
         Gizmos.DrawSphere(transform.position, 0.5f);
+        Gizmos.color = Color.gray;                 
+        Gizmos.DrawSphere(_waveIndicatorPosition.position, 0.5f);     
     }
 }

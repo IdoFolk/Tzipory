@@ -56,27 +56,44 @@ namespace Tzipory.EntitySystem.TargetingSystem
                 return false;
 
             if (priorityTargeting == null)
-            {
                 CurrentTarget = _entityTargetingComponent.DefaultPriorityTargeting.GetPriorityTarget(_availableTargets);
-                return true;
+            else
+                CurrentTarget = priorityTargeting.GetPriorityTarget(_availableTargets);
+
+            if (!CurrentTarget.GameEntity.gameObject.activeInHierarchy)
+            {
+                RemoveTarget(CurrentTarget);
+                return GetPriorityTarget();
             }
             
-            CurrentTarget = priorityTargeting.GetPriorityTarget(_availableTargets);
             return true;
         }
 
         private void TryAddTarget(IEntityTargetAbleComponent targetAbleComponent)
         {
+// #if UNITY_EDITOR
+//             Debug.Log($"<color=#f2db05>Targeting Handler:</color> Entity: <color=#de05f2>{_entityTargetingComponent.GameEntity.name}</color>: Got a OnTriggerEnterEvent on entity : {targetAbleComponent.GameEntity.name}");
+// #endif
             if (targetAbleComponent.EntityType == _entityTargetingComponent.EntityType)
                 return;
-            
+#if UNITY_EDITOR
+            Debug.Log($"<color=#f2db05>Targeting Handler:</color> Entity: <color=#de05f2>{_entityTargetingComponent.GameEntity.name}</color>: added {targetAbleComponent.GameEntity.name} to targets list");
+#endif
             _availableTargets.Add(targetAbleComponent);
         }
 
         private void RemoveTarget(IEntityTargetAbleComponent targetAbleComponent)
         {
+// #if UNITY_EDITOR
+//             Debug.Log($"<color=#f2db05>Targeting Handler:</color> Entity: <color=#de05f2>{_entityTargetingComponent.GameEntity.name}</color>: Got a OnTriggerExitEvent on entity : {targetAbleComponent.GameEntity.name}");
+// #endif
             if (_availableTargets.Contains(targetAbleComponent))
+            {
+#if UNITY_EDITOR
+                Debug.Log($"<color=#f2db05>Targeting Handler:</color> Entity: <color=#de05f2>{_entityTargetingComponent.GameEntity.name}</color>: Remove {targetAbleComponent.GameEntity.name} from targets list entity");
+#endif
                 _availableTargets.Remove(targetAbleComponent);
+            }
         }
 
 

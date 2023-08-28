@@ -1,4 +1,5 @@
 ﻿using Tzipory.BaseSystem.TimeSystem;
+using UnityEngine;
 
 namespace Tzipory.EntitySystem.StatusSystem
 {
@@ -14,46 +15,46 @@ namespace Tzipory.EntitySystem.StatusSystem
         {
             _interval = new Stat("Interval", statusEffectConfig.Interval, int.MaxValue, 999);
             _duration = new Stat("Duration", statusEffectConfig.Duration, int.MaxValue, 999);
-        }
-
-        public override void StatusEffectStart()
-        {
+                
             _currentInterval = _interval.CurrentValue;
             _currentDuration = _duration.CurrentValue;
-            
-            foreach (var statModifier in modifiers)
-                statModifier.ProcessStatModifier(StatToEffect);
-            
-            base.StatusEffectStart();
         }
 
-        public override void ProcessStatusEffect()
+        public override bool ProcessStatusEffect(out StatChangeData statChangeData)
         {
-            _currentDuration -= GAME_TIME.GameDeltaTime;
-
             if (_currentDuration < 0)
             {
-                StatusEffectFinish();
-                return;
+                IsDone  = true;
+                //may need to return
             }
 
-            _currentInterval -= GAME_TIME.GameDeltaTime;
             if (_currentInterval <= 0)
             {
+                float changeDelta = 0;
+                
                 _currentInterval = _interval.CurrentValue;
-                foreach (var statModifier in modifiers)
+                
+                foreach (var statModifier in Modifiers)
                 {
-#if UNITY_EDITOR
-                   // Debug.Log($"Cast effect {StatToEffect.Name} by {statModifier.Modifier.CurrentValue}");    
-#endif
+                    Debug.Log("Process");
                     statModifier.ProcessStatModifier(StatToEffect);
+                    changeDelta += statModifier.Value;
                 }
+                
+                statChangeData = new StatChangeData(StatusEffectName,changeDelta,StatToEffect.CurrentValue,EffectType);
+                return true;
             }
+            
+            _currentDuration -= GAME_TIME.GameDeltaTime;
+            _currentInterval -= GAME_TIME.GameDeltaTime;
+            
+            statChangeData = default;
+            return false;
         }
 
         public override void Dispose()
         {
-            StatusEffectFinish();
+            IsDone = true;
         }
     }
 }

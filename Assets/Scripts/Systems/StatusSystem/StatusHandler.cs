@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Helpers.Consts;
+using SerializeData.VisualSystemSerializeData;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
@@ -8,101 +9,88 @@ namespace Tzipory.EntitySystem.StatusSystem
 {
     public class StatusHandler
     {
-        public event Action<BaseStatusEffect> OnStatusEffectAdded; 
-        public event Action<int> OnStatusEffectRemoved; 
+        public event Action<EffectSequenceConfig> OnStatusEffectAdded; 
         public event Action<int> OnStatusEffectInterrupt; 
 
         private readonly IEntityStatusEffectComponent _entity;
-        
-        private  readonly Dictionary<int, IStatHolder> _stats;//need to make a big refactor! for this to work
-        
-        private readonly Dictionary<int, Stat> _statsById;
 
-        private readonly Dictionary<int, BaseStatusEffect> _activeStatusEffects;
+        private readonly List<IStatHolder> _statHolders;
 
-        public StatusHandler(IEnumerable<Stat> stats,IEntityStatusEffectComponent entity)
+#if UNITY_EDITOR
+        [Obsolete("Only in editor")]
+        public List<IStatHolder> StatHolders => _statHolders;
+#endif
+
+        public StatusHandler(IEntityStatusEffectComponent entity)
         {
+            _statHolders = new List<IStatHolder>();
+            
             _entity = entity;
             
-            _statsById = new Dictionary<int, Stat>();
-
-            foreach (var stat in stats)
-                _statsById.Add(stat.Id, stat);
-
-            _activeStatusEffects = new Dictionary<int, BaseStatusEffect>();
+            _statHolders.AddRange(_entity.GetNestedStatHolders());
         }
 
-        public Stat GetStatById(int id)
+        public void AddStatHolder(IStatHolder statHolder)
         {
-            if (_statsById.TryGetValue(id, out Stat stat))
+            _statHolders.Add(statHolder);
+        }
+
+        public Stat GetStat(int id)
+        {
+            foreach (var statHolder in _statHolders)
             {
-                return stat;
+                if (statHolder.Stats.TryGetValue(id, out Stat stat))
+                    return stat;
             }
 
-            Debug.LogError($"Stat ID: {id} not found in StatusHandler");
+            Debug.LogError($"Stat ID: {id} not found in StatusHandler of entity {_entity.GameEntity.name}");
+            return  null;
+        }
+        
+        public Stat GetStat(Constant.Stats statToFind)
+        {
+            foreach (var statHolder in _statHolders)
+            {
+                if (statHolder.Stats.TryGetValue((int)statToFind, out Stat stat))
+                    return stat;
+            }
+
+            Debug.LogError($"Stat ID: {statToFind} not found in StatusHandler of entity {_entity.GameEntity.name}");
             return  null;
         }
 
-        public void UpdateStatusEffects()
+        public void UpdateStatHandler()
         {
-            for (int index = 0; index < _activeStatusEffects.Count; index++)
+            foreach (var statHolder in _statHolders)
             {
-                var statusEffect = _activeStatusEffects.ElementAt(index).Value;
-
-                if (statusEffect.IsDone)
-                {
-                    RemoveStatusEffect(statusEffect.AffectedStatId);
-                    continue;
-                }
-                
-                statusEffect.ProcessStatusEffect();
+                foreach (var stat in statHolder.Stats.Values)
+                    stat.UpdateStatusEffects();
             }
         }
         
         public IDisposable AddStatusEffect(StatusEffectConfig statusEffectConfig)
         {
-            if (_activeStatusEffects.ContainsKey(statusEffectConfig.AffectedStatId))
-                return null;
-
-            var statToEffect = GetStatById(statusEffectConfig.AffectedStatId);
+            var statToEffect = GetStat(statusEffectConfig.AffectedStatId);
             
-            var statusEffect = Factory.StatusEffectFactory.GetStatusEffect(statusEffectConfig,statToEffect);
+            //   TODO need to Interrupt stats
             
-            statusEffect.StatusEffectStart();
+            OnStatusEffectAdded?.Invoke(statusEffectConfig.EffectSequence);
             
-            InterruptStatusEffects(statusEffectConfig.StatusEffectToInterrupt);
-            
-            _activeStatusEffects.Add(statusEffectConfig.AffectedStatId, statusEffect);
-            OnStatusEffectAdded?.Invoke(statusEffect);
-            
-            //statusEffect.OnStatusEffectDone += RemoveStatusEffect;
-#if UNITY_EDITOR
-          //  Debug.Log($"Add Statues Effect {statusEffectConfig.StatusEffectName} on {_entity.EntityTransform.name}, Affected stat is {statusEffectConfig.AffectedStatName}");
-#endif
-            return statusEffect;
+            return statToEffect.AddStatusEffect(statusEffectConfig);
         }
 
-        private void InterruptStatusEffects(IEnumerable<StatusEffectConfig> effectConfigSos)
-        {
-            foreach (var effectConfigSo in effectConfigSos)
-            {
-                if (_activeStatusEffects.TryGetValue(effectConfigSo.AffectedStatId,out var statusEffect))
-                {
-                    statusEffect.StatusEffectInterrupt();
-                    _activeStatusEffects.Remove(effectConfigSo.AffectedStatId);
-                    OnStatusEffectInterrupt?.Invoke(statusEffect.AffectedStatId);
-                }
-            }
-        }
-
-        private void RemoveStatusEffect(int id)
-        {
-            if(_activeStatusEffects.TryGetValue(id, out BaseStatusEffect baseStatusEffect))
-            {
-                //statusEffectConfig.OnStatusEffectDone -= RemoveStatusEffect;
-                OnStatusEffectRemoved?.Invoke(baseStatusEffect.AffectedStatId);
-                _activeStatusEffects.Remove(id);
-            }
-        }
+        //TODO need to fix the InterruptStatusEffects
+        // private void InterruptStatusEffects(IEnumerable<StatusEffectConfig> effectConfigSos)
+        // {
+        //     foreach (var effectConfigSo in effectConfigSos)
+        //     {
+        //         if (_activeStatusEffects.TryGetValue(effectConfigSo.AffectedStatId,out var statusEffect))
+        //         {
+        //             statusEffect.StatusEffectInterrupt();
+        //             _activeStatusEffects.Remove(effectConfigSo.AffectedStatId);
+        //             OnStatusEffectInterrupt?.Invoke(statusEffect.AffectedStatId);
+        //         }
+        //     }
+        // }
     }
 }

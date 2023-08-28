@@ -1,60 +1,41 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Tzipory.EntitySystem.StatusSystem
 {
-    public class StatModifier
+    public readonly struct StatModifier
     {
-        public StatusModifierType ModifierType { get; }
-
-        private Stat Modifier { get; }
-
-        private float _value;
-
-        private float _previousValue;
-
+        public readonly StatusModifierType ModifierType;
+        
+        public readonly float Value;
+        
         public StatModifier(float modifier,StatusModifierType statusModifierType)
         {
-            Modifier = new Stat("Modifier",modifier,int.MaxValue,999);//temp
+            Value = modifier;
             ModifierType = statusModifierType;
         }
 
         public void ProcessStatModifier(Stat stat)
         {
-            _previousValue = stat.CurrentValue;
-            _value = Modifier.CurrentValue;
-
             switch (ModifierType)
             {
                 case StatusModifierType.Addition:
-                    stat.AddToValue(_value);
+                    stat.AddToValue(Value);
                     break;
-                    //These were missing from the swtich and threw some exceptions that could have cost some time
                     case StatusModifierType.Reduce:
-                    stat.ReduceFromValue(_value);
+                    stat.ReduceFromValue(Value);
                     break;
-
                 case StatusModifierType.Multiplication:
-                    stat.MultiplyValue(_value);
+                    stat.MultiplyValue(Value);
                     break;
-                    //These were missing from the swtich and threw some exceptions that could have cost some time
                 case StatusModifierType.Divide:
-                    stat.DivideValue(_value);
+                    stat.DivideValue(Value);
                     break;
-
                 case StatusModifierType.Percentage:
-                    //stat.MultiplyValue(_value);//may meed to by change
-
-                    //Alon - temp usage for this: it "Adds" that percentage of itself. It accepts both positive and negative values.
-                    //Stat of 10, and a modifier _value of 24 -> will add 24% of the stats currentValue to itself (10 + 24% of 10 -> add [10 * 24/100])
-                    //Stat of 10, and a modifier _value of -50 -> will REMOVE 50% of the stats currentValue to itself (10 - 50% of 10 -> subtract [10 * 50/100])
-                    //also save previous value so we can UnDo it
-                    Modifier.SetValue(stat.CurrentValue);
-                    stat.AddToValue(stat.CurrentValue * _value/100f);
-
-                    
+                    stat.AddToValue(stat.CurrentValue * Value / 100f);
                     break;
                 case StatusModifierType.Set:
-                    stat.SetValue(_value);
+                    stat.SetValue(Value);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(ModifierType), ModifierType, null);
@@ -66,27 +47,22 @@ namespace Tzipory.EntitySystem.StatusSystem
             switch (ModifierType)
             {
                 case StatusModifierType.Addition:
-                    stat.ReduceFromValue(_value);
+                    stat.ReduceFromValue(Value);
                     break;
                 case StatusModifierType.Multiplication:
-                    stat.DivideValue(_value);
+                    stat.DivideValue(Value);
                     break;
                 case StatusModifierType.Percentage:
-                    //stat.DivideValue(_value);//may meed to by change
-                    stat.SetValue(Modifier.BaseValue); //returns to original value without any dirty math -> same could be done with StatusModifierType.Set?
+                    stat.SetValue(Value);
                     break;
                 case StatusModifierType.Set:
-                    //set dos not have a undo
-                    stat.SetValue(_previousValue); //returns to previous value
-
+                    stat.ResetSetValue();
                     break;
                 case StatusModifierType.Reduce:
-                    //stat.ReduceFromValue(_value); //I flipped those so they would do the opposite operation (not the same)
-                    stat.AddToValue(_value);
+                    stat.AddToValue(Value);
                     break;
                 case StatusModifierType.Divide:
-                    //stat.DivideValue(_value);   //I flipped those so they would do the opposite operation (not the same)
-                    stat.MultiplyValue(_value);
+                    stat.MultiplyValue(Value);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(ModifierType), ModifierType, null);

@@ -33,6 +33,9 @@ namespace Tzipory.Systems.PoolSystem
         
         public ObjectPool(IFactory<T> factory)
         {
+            IsDynamic = true;
+            MaxPoolSize = int.MaxValue;
+            MinPoolSize = 0;
             OnGet = null;
             OnReturn = null;
             _aliveObjects  = new List<T>();

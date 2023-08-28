@@ -12,43 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b8a7127d1bb4364999262a821bd1168, type: 3}
   m_Name: Javan_Shaman
   m_EditorClassIdentifier: 
-  _health:
-    _name: Health
-    _id: 0
+  _statConfigs:
+  - _stats: 0
     _baseValue: 500
-  _invincibleTime:
-    _name: InvincibleTime
-    _id: 8
+  - _stats: 8
     _baseValue: 0
-  _attackDamage:
-    _name: AttackDamage
-    _id: 1
+  - _stats: 1
     _baseValue: 55
-  _attackRate:
-    _name: AttackRate
-    _id: 2
+  - _stats: 2
     _baseValue: 1.1
-  _attackRange:
-    _name: AttackRange
-    _id: 3
+  - _stats: 4
     _baseValue: 9
-  _targetingRange:
-    _name: TargetingRange
-    _id: 4
+  - _stats: 3
     _baseValue: 9
-  _CritDamage:
-    _name: CritDamage
-    _id: 6
-    _baseValue: 135
-  _CritChance:
-    _name: CritChance
-    _id: 7
+  - _stats: 6
+    _baseValue: 150
+  - _stats: 7
     _baseValue: 10
-  _movementSpeed:
-    _name: MovementSpeed
-    _id: 5
+  - _stats: 5
     _baseValue: 1.7
-  _stats: []
   _abilityConfigs: []
   _unitEntityVisualConfig:
     _sprite: {fileID: 21300000, guid: 70df0507c1d381b40871f3841c246c27, type: 3}

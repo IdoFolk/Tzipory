@@ -1,4 +1,5 @@
-﻿using Sirenix.OdinInspector;
+﻿using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using Tzipory.Tools.Enums;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         
         [SerializeField,ReadOnly,PropertyOrder(-3)] private Color _waveSpawnerColor;
         [SerializeField,PropertyOrder(-2)] private float _delayBetweenEnemyGroup;
-        [SerializeField,PropertyOrder(1)] private EnemyGroupConfig[] _enemyGroups;
+        [SerializeField,PropertyOrder(1)] private List<EnemyGroupConfig> _enemyGroups;
 
         private float _startTime;
         
@@ -34,7 +35,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
                         totalTime = groupSerializeData.EndTime - _startTime;
                 }
 
-                totalTime += _delayBetweenEnemyGroup * (_enemyGroups.Length - 1);
+                totalTime += _delayBetweenEnemyGroup * (_enemyGroups.Count - 1);
                 
                 return  totalTime;
             }
@@ -42,7 +43,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
 
         public int ID => _id;
 
-        public EnemyGroupConfig[] EnemyGroups => _enemyGroups;
+        public List<EnemyGroupConfig> EnemyGroups => _enemyGroups;
 
         public float DelayBetweenEnemyGroup => _delayBetweenEnemyGroup;
 
@@ -58,7 +59,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
             
             float lastStartTime = _startTime;
             
-            for (int i = 0; i < _enemyGroups.Length; i++)
+            for (int i = 0; i < _enemyGroups.Count; i++)
             {
                 if (i == 0)
                 {

@@ -28,10 +28,15 @@ public class LevelManager : MonoBehaviour
     public bool IsGameRunning { get; private set; }
     
     [SerializeField,TabGroup("Party manager")] private ShamanConfig[] _shamanConfigs;
-    [SerializeField, TabGroup("LevelToOpen manager")]
+
+    [SerializeField, TabGroup("Level manager"),Tooltip("Make the level that you can lose or win the game")]
+    private bool _cantLose;
+    [SerializeField, TabGroup("Level manager")]
     private Transform _levelParent;
+    [SerializeField, TabGroup("Level manager")]
+    private Transform _waveIndicatorParent;
     [Header("Testing")]
-    [SerializeField, TabGroup("LevelToOpen manager")]
+    [SerializeField, TabGroup("Level manager")]
     private LevelConfig _levelConfig;
     [SerializeField, TabGroup("Spawn parents")]
     private Transform _shamanParent;
@@ -57,13 +62,13 @@ public class LevelManager : MonoBehaviour
 
         Instantiate(_levelConfig.Level, _levelParent);
         EnemyManager = new EnemyManager(_enemiesParent);
-        WaveManager  = new WaveManager(_levelConfig);//temp!
+        WaveManager  = new WaveManager(_levelConfig,_waveIndicatorParent);//temp!
         CoreTemplete = FindObjectOfType<CoreTemple>();//temp!!!
+        PartyManager.SpawnShaman();
     }
 
     private void Start()
     {
-        PartyManager.SpawnShaman();
         WaveManager.StartLevel();
         UIManager.Initialize();
         GAME_TIME.SetTimeStep(1);
@@ -76,6 +81,9 @@ public class LevelManager : MonoBehaviour
             return;
         
         WaveManager.UpdateLevel();
+
+        if (_cantLose)
+            return;
 
         if (CoreTemplete.IsEntityDead)
             EndGame(false);
@@ -112,7 +120,11 @@ public class LevelManager : MonoBehaviour
     public void Continue()
     {
         GAME_TIME.SetTimeStep(1);
-        GameManager.SceneHandler.LoadScene(SceneType.Map);
+
+        if (GameManager.SceneHandler != null)//for testing so you can rest the level if you start from the coreGame scene
+            GameManager.SceneHandler.LoadScene(SceneType.Map);
+        else
+            SceneManager.LoadScene(3);//reset the CoreGame scene so you can play again
     }
 
 #if UNITY_EDITOR

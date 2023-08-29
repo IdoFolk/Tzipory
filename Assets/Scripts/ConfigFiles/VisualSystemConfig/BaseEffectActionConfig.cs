@@ -15,5 +15,6 @@ namespace Tzipory.VisualSystem.EffectSequence
         PopUp,
         ParticleEffects,
         Sound,
+        Sprite,
     }
 }

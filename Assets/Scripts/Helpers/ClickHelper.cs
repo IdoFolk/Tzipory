@@ -23,7 +23,6 @@ namespace Tzipory.Helpers
         {
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                Debug.Log("Click");
                 OnClick?.Invoke();
             }
         }

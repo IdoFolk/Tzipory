@@ -1,5 +1,6 @@
 ﻿using System;
 using Enemes;
+using GamePlayLogic.UI.WaveIndicator;
 using SerializeData.VisualSystemSerializeData;
 using Systems.FactorySystem;
 using Tzipory.Factory;
@@ -13,11 +14,15 @@ namespace Tzipory.GamePlayLogic.ObjectPools
     {
         public static VisualSystemPool  VisualSystemPool { get; private set; }
         public static ObjectPool<Enemy> EnemyPool { get; private set; }
+        public static ObjectPool<WaveIndicator> IndicatorPool { get; private set; }
+        
+        //statusEffect pool
 
         public PoolManager()
         {
-           VisualSystemPool  = new VisualSystemPool();
+            VisualSystemPool  = new VisualSystemPool();
             EnemyPool = new ObjectPool<Enemy>(new EnemyFactory(),50);
+            IndicatorPool  = new ObjectPool<WaveIndicator>(new WaveIndicatorFactory());
         }
     }
 

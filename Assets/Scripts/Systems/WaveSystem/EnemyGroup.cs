@@ -1,29 +1,31 @@
 using System;
-using Enemes;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.Tools.Interface;
 
 namespace Tzipory.WaveSystem
 {
-    public class EnemyGroup : WaveComponent<EnemyGroupConfig>
+    public class EnemyGroup : IProgress
     {
-        private EnemyConfig _enemyConfig;
+        private readonly EnemyConfig _enemyConfig;
+        private readonly EnemyGroupConfig _data;
         
         private int _spawnAmountPreInterval;
 
         private float _startDelay;
 
         private float _spawnInterval;
+        
+        
         public int TotalSpawnAmount { get; private set; }
 
-        public override EnemyGroupConfig Data { get; }
-        public override float CompletionPercentage => throw new NotImplementedException();
-        public override bool IsDone => TotalSpawnAmount <= 0;
+        public float CompletionPercentage => throw new NotImplementedException();
+        public bool IsDone => TotalSpawnAmount <= 0;
         
         public EnemyGroup(EnemyGroupConfig enemyGroupConfig)
         {
-            Data = enemyGroupConfig;
+            _data = enemyGroupConfig;
             _startDelay = enemyGroupConfig.GroupStartDelay;
             _enemyConfig = enemyGroupConfig.EnemyConfig;
             TotalSpawnAmount = enemyGroupConfig.TotalSpawnAmount;
@@ -56,8 +58,8 @@ namespace Tzipory.WaveSystem
                     return true;
                 }
 
-                _spawnAmountPreInterval = Data.SpawnAmountPreInterval;
-                _spawnInterval = Data.SpawnInterval;
+                _spawnAmountPreInterval = _data.SpawnAmountPreInterval;
+                _spawnInterval = _data.SpawnInterval;
             }
             else
                 _spawnInterval -= GAME_TIME.GameDeltaTime;

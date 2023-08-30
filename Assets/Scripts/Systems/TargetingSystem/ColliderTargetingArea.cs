@@ -1,3 +1,4 @@
+using System;
 using Tools.Enums;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace Systems.TargetingSystem
         
         private ITargetableReciever _reciever;
         
+        [Obsolete]
         public void Init()
         {
             _reciever = GetComponentInParent(typeof(ITargetableReciever)) as ITargetableReciever;
@@ -28,7 +30,7 @@ namespace Systems.TargetingSystem
             if (_testing)
                 Debug.Log($"On target enter {other.name} from {gameObject.name}");
             
-            _reciever.RecieveCollision(other, IOStatType.In);
+            _reciever.RecieveCollision(other, IOType.In);
             
             if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
                 _reciever.RecieveTargetableEntry(targetAbleComponent);
@@ -39,7 +41,7 @@ namespace Systems.TargetingSystem
             if (_testing)
                 Debug.Log($"On target exit {other.name} from {gameObject.name}");
             
-            _reciever.RecieveCollision(other, IOStatType.Out);
+            _reciever.RecieveCollision(other, IOType.Out);
             
             if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
                 _reciever.RecieveTargetableExit(targetAbleComponent);
@@ -49,7 +51,7 @@ namespace Systems.TargetingSystem
 
     public interface ITargetableReciever
     {
-        void RecieveCollision(Collider2D other, IOStatType ioStatType);
+        void RecieveCollision(Collider2D other, IOType ioType);
         void RecieveTargetableEntry(IEntityTargetAbleComponent targetable);
         void RecieveTargetableExit(IEntityTargetAbleComponent targetable);
     }

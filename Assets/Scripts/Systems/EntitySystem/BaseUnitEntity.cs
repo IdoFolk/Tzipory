@@ -67,7 +67,10 @@ namespace Tzipory.EntitySystem.Entitys
         public bool IsDamageable { get; private set; }
         public bool IsEntityDead => Health.CurrentValue <= 0;
         
-        public Stat Health  
+        //need to remove this and only use the Dictionary!!!
+        #region Stats
+
+         public Stat Health  
         {
             get
             {
@@ -149,8 +152,12 @@ namespace Tzipory.EntitySystem.Entitys
                 throw new Exception($"{Constant.Stats.TargetingRange} not found in entity {GameEntity.name}");
             }
         }
-        
-        public bool IsTargetAble { get; }
+
+        #endregion
+
+
+        public event Action<IEntityTargetAbleComponent> OnTargetDisable;
+        public bool IsTargetAble { get; }//not in use!
         
         public EntityType EntityType { get; protected set; }
         public Vector2 ShotPosition => _shotPosition.position;
@@ -395,7 +402,7 @@ namespace Tzipory.EntitySystem.Entitys
             }
 
             if (Health.CurrentValue < 0)
-                OnEntityDead();
+                EntityDead();
         }
 
         #endregion
@@ -405,7 +412,11 @@ namespace Tzipory.EntitySystem.Entitys
         public void SetAttackTarget(IEntityTargetAbleComponent target) => TargetingHandler.SetAttackTarget(target);
 
         public abstract void Attack();
-        public abstract void OnEntityDead();
+
+        public virtual void EntityDead()
+        {
+            OnTargetDisable?.Invoke(this);
+        }
 
         #endregion
 

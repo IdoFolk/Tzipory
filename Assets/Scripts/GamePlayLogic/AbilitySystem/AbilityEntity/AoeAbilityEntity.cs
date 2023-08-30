@@ -24,7 +24,7 @@ namespace GamePlayLogic.AbilitySystem.AbilityEntity
             visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
         }
 
-        public void RecieveCollision(Collider2D other, IOStatType ioStatType)
+        public void RecieveCollision(Collider2D other, IOType ioType)
         {
             
         }

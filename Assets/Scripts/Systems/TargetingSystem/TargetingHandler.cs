@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using Systems.TargetingSystem;
 using Tools.Enums;
@@ -114,6 +115,11 @@ namespace Tzipory.EntitySystem.TargetingSystem
             if (CurrentTarget == null) return;
             if (targetable.EntityInstanceID == CurrentTarget.EntityInstanceID)
                 GetPriorityTarget();
+        }
+
+        public void Reset()
+        {
+            _availableTargets.Clear();
         }
     }
 }

@@ -67,7 +67,10 @@ namespace Tzipory.EntitySystem.Entitys
         public bool IsDamageable { get; private set; }
         public bool IsEntityDead => Health.CurrentValue <= 0;
         
-        public Stat Health  
+        //need to remove this and only use the Dictionary!!!
+        #region Stats
+
+         public Stat Health  
         {
             get
             {
@@ -149,8 +152,10 @@ namespace Tzipory.EntitySystem.Entitys
                 throw new Exception($"{Constant.Stats.TargetingRange} not found in entity {GameEntity.name}");
             }
         }
+
+        #endregion
         
-        public bool IsTargetAble { get; }
+        public bool IsTargetAble { get; }//not in use!
         
         public EntityType EntityType { get; protected set; }
         public Vector2 ShotPosition => _shotPosition.position;

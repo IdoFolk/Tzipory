@@ -2,6 +2,7 @@
 using SerializeData.VisualSystemSerializeData;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.GamePlayLogic.ObjectPools;
+using Unity.Entities;
 using UnityEngine;
 
 namespace Tzipory.VisualSystem.EffectSequence
@@ -123,6 +124,13 @@ namespace Tzipory.VisualSystem.EffectSequence
             {
                 _activeSequences[i].UpdateEffectSequence();
             }
+        }
+
+        public void Reset()
+        {
+            foreach (var activeSequence in _activeSequences)
+                activeSequence.ResetSequence();
+            _activeSequences.Clear();
         }
     }
 }

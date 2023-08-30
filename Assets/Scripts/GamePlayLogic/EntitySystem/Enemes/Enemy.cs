@@ -136,6 +136,8 @@ namespace Enemes
         public void Dispose()
         {
             OnDispose?.Invoke(this);
+            EffectSequenceHandler.Reset();
+            TargetingHandler.Reset();
             gameObject.SetActive(false);
         }
 

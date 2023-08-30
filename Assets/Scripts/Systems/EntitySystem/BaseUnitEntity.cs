@@ -154,7 +154,9 @@ namespace Tzipory.EntitySystem.Entitys
         }
 
         #endregion
-        
+
+
+        public event Action<IEntityTargetAbleComponent> OnTargetDisable;
         public bool IsTargetAble { get; }//not in use!
         
         public EntityType EntityType { get; protected set; }
@@ -400,7 +402,7 @@ namespace Tzipory.EntitySystem.Entitys
             }
 
             if (Health.CurrentValue < 0)
-                OnEntityDead();
+                EntityDead();
         }
 
         #endregion
@@ -410,7 +412,11 @@ namespace Tzipory.EntitySystem.Entitys
         public void SetAttackTarget(IEntityTargetAbleComponent target) => TargetingHandler.SetAttackTarget(target);
 
         public abstract void Attack();
-        public abstract void OnEntityDead();
+
+        public virtual void EntityDead()
+        {
+            OnTargetDisable?.Invoke(this);
+        }
 
         #endregion
 

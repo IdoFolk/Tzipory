@@ -124,8 +124,9 @@ namespace Enemes
             }
         }
 
-        public override void OnEntityDead()
+        public override void EntityDead()
         {
+            base.EntityDead();
             Dispose();
         }
 

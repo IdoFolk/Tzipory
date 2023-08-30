@@ -10,7 +10,7 @@ namespace Tzipory.EntitySystem.EntityComponents
         public bool IsEntityDead { get; }
         
         public void Heal(float amount);
-        
         public void TakeDamage(float damage,bool isCrit);
+        public void EntityDead();
     }
 }

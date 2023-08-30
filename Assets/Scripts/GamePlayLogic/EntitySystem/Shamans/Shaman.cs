@@ -109,8 +109,9 @@ namespace Shamans
             _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue,false);
         }
 
-        public override void OnEntityDead()
+        public override void EntityDead()
         {
+            base.EntityDead();
             Debug.Log($"{gameObject.name} as Died!");
             gameObject.SetActive(false);
         }

@@ -111,7 +111,7 @@ namespace Tzipory.Leval
             
             CurrentWave.Init();
             
-            _delayBetweenWavesTimer ??= GAME_TIME.TimerHandler.StartNewTimer(_delayBetweenWaves);
+            _delayBetweenWavesTimer = GAME_TIME.TimerHandler.StartNewTimer(_delayBetweenWaves);
             
             _waveIndicatorHandler.Init(CurrentWave,_delayBetweenWavesTimer);
         }

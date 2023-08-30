@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelId: 3
   _level: {fileID: 1758735506430089248, guid: 72d1d9a2cbc42dd47b0dd0c95bb7e5ec, type: 3}
-  _levelStartDelay: 0
+  _levelStartDelay: 10
   _delayBetweenWaves: 30
   _waves:
   - _name: Wave 1
-    _waveSpawnerSerializeDatas:
+    _waveSpawnerConfig:
     - _id: 0
       _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -26,10 +26,10 @@ MonoBehaviour:
       - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
         _groupStartDelay: 0
         _totalSpawnAmount: 30
-        _spawnAmountPreInterval: 3
+        _spawnAmountPreInterval: 5
         _spawnInterval: 5
         _startType: 0
-        _startTime: 0
+        _startTime: 10
     - _id: 1
       _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -37,16 +37,9 @@ MonoBehaviour:
     - _id: 2
       _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
-      _enemyGroups:
-      - _enemyConfig: {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
-        _groupStartDelay: 15
-        _totalSpawnAmount: 20
-        _spawnAmountPreInterval: 1
-        _spawnInterval: 3
-        _startType: 0
-        _startTime: 0
+      _enemyGroups: []
   - _name: Wave 2
-    _waveSpawnerSerializeDatas:
+    _waveSpawnerConfig:
     - _id: 0
       _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -55,9 +48,9 @@ MonoBehaviour:
         _groupStartDelay: 0
         _totalSpawnAmount: 1
         _spawnAmountPreInterval: 1
-        _spawnInterval: 1
+        _spawnInterval: 10
         _startType: 0
-        _startTime: 105
+        _startTime: 70
     - _id: 1
       _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -72,9 +65,9 @@ MonoBehaviour:
         _spawnAmountPreInterval: 1
         _spawnInterval: 1
         _startType: 0
-        _startTime: 105
+        _startTime: 70
   - _name: Wave 3
-    _waveSpawnerSerializeDatas:
+    _waveSpawnerConfig:
     - _id: 0
       _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -85,7 +78,7 @@ MonoBehaviour:
         _spawnAmountPreInterval: 2
         _spawnInterval: 2
         _startType: 0
-        _startTime: 136
+        _startTime: 110
     - _id: 1
       _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -96,7 +89,7 @@ MonoBehaviour:
         _spawnAmountPreInterval: 1
         _spawnInterval: 20
         _startType: 0
-        _startTime: 136
+        _startTime: 110
     - _id: 2
       _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -107,9 +100,9 @@ MonoBehaviour:
         _spawnAmountPreInterval: 2
         _spawnInterval: 2
         _startType: 0
-        _startTime: 136
+        _startTime: 110
   - _name: Wave 4
-    _waveSpawnerSerializeDatas:
+    _waveSpawnerConfig:
     - _id: 0
       _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -120,7 +113,7 @@ MonoBehaviour:
         _spawnAmountPreInterval: 2
         _spawnInterval: 2
         _startType: 0
-        _startTime: 206
+        _startTime: 180
     - _id: 1
       _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -131,7 +124,7 @@ MonoBehaviour:
         _spawnAmountPreInterval: 2
         _spawnInterval: 2
         _startType: 0
-        _startTime: 206
+        _startTime: 180
     - _id: 2
       _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -142,9 +135,9 @@ MonoBehaviour:
         _spawnAmountPreInterval: 2
         _spawnInterval: 2
         _startType: 0
-        _startTime: 206
+        _startTime: 180
   - _name: Wave 5
-    _waveSpawnerSerializeDatas:
+    _waveSpawnerConfig:
     - _id: 0
       _waveSpawnerColor: {r: 1, g: 0, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -155,7 +148,7 @@ MonoBehaviour:
         _spawnAmountPreInterval: 1
         _spawnInterval: 10
         _startType: 0
-        _startTime: 250
+        _startTime: 224
     - _id: 1
       _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -166,7 +159,7 @@ MonoBehaviour:
         _spawnAmountPreInterval: 2
         _spawnInterval: 2
         _startType: 0
-        _startTime: 250
+        _startTime: 224
     - _id: 2
       _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
       _delayBetweenEnemyGroup: 0
@@ -177,4 +170,4 @@ MonoBehaviour:
         _spawnAmountPreInterval: 1
         _spawnInterval: 1
         _startType: 0
-        _startTime: 250
+        _startTime: 224

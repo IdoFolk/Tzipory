@@ -94,7 +94,7 @@ namespace Tzipory.EntitySystem.TargetingSystem
         }
 
 
-        public void RecieveCollision(Collider2D other, IOStatType ioStatType)
+        public void RecieveCollision(Collider2D other, IOType ioType)
         {
             
         }

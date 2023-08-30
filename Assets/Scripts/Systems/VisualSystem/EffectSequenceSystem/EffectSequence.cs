@@ -53,7 +53,6 @@ namespace Tzipory.VisualSystem.EffectSequence
             IsInitialization  = false;
         }
 
-
         public void Init(IEntityVisualComponent parameter1, EffectSequenceConfig parameter2)
         {
             SequenceName = parameter2.SequenceName;

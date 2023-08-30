@@ -34,7 +34,7 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
                 Destroy(gameObject);
         }
 
-        public void RecieveCollision(Collider2D other, IOStatType ioStatType)
+        public void RecieveCollision(Collider2D other, IOType ioType)
         {
             
         }

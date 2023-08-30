@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SerializeData.VisualSystemSerializeData;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.GamePlayLogic.ObjectPools;
-using Unity.Entities;
 using UnityEngine;
 
 namespace Tzipory.VisualSystem.EffectSequence
@@ -26,7 +26,7 @@ namespace Tzipory.VisualSystem.EffectSequence
                 _sequencesDictionary.Add(sequenceData.ID, sequenceData);
         }
 
-        private void PlaySequence(EffectSequenceConfig effectSequenceConfig)
+        private void PlaySequence(EffectSequenceConfig effectSequenceConfig,Action onComplete = null)
         {
             if (effectSequenceConfig.IsInterruptable)
                 RemoveEffectSequence(effectSequenceConfig.ID);
@@ -60,7 +60,7 @@ namespace Tzipory.VisualSystem.EffectSequence
             effectSequence.OnEffectSequenceComplete -= RemoveEffectSequence;
             _activeSequences.Remove(effectSequence);
         }
-
+        //not in use
         private bool CanPlaySequence(EffectSequenceConfig sequenceConfig,out int interrupterSequenceIndex)
         {
             for (var i = 0; i < _activeSequences.Count; i++)
@@ -82,7 +82,7 @@ namespace Tzipory.VisualSystem.EffectSequence
             return true;
         }
         
-        public void PlaySequenceById(int id)
+        public void PlaySequenceById(int id,Action onComplete = null)
         {
             if (!_sequencesDictionary.TryGetValue(id, out var effectSequenceData))
             {

@@ -48,7 +48,7 @@ namespace Systems.UISystem
             if (_clickNum == 0)
                 return;
 
-            _doubleClickTimer ??= GAME_TIME.TimerHandler.StartNewTimer(_doubleClickSpeed);
+            _doubleClickTimer ??= GAME_TIME.TimerHandler.StartNewTimer(_doubleClickSpeed,"Double Click UI Timer");
             
             if (_doubleClickTimer.IsDone)
             {

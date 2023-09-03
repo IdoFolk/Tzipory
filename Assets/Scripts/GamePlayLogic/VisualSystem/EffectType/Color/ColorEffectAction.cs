@@ -14,7 +14,7 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
         private float _alpha;
         private float _duration;
 
-        protected override float Duration => _duration;
+        public override float Duration => _duration;
 
         public override void Init(EffectActionContainerConfig actionContainerConfig, IEntityVisualComponent visualComponent)
         {
@@ -27,7 +27,7 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
             _duration = config.Duration;
         }
 
-        protected override void OnStartEffectAction()
+        public override void StartEffectAction()
         {
             var newColor = new Color(_color.r, _color.g, _color.b, _alpha);
             _originalColor = VisualComponent.SpriteRenderer.color;
@@ -35,22 +35,22 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
             VisualComponent.SpriteRenderer.color = newColor;
         }
 
-        protected override void OnProcessEffectAction()
+        public override void ProcessEffectAction()
         {
         }
 
-        protected override void OnCompleteEffectAction()
+        public override void CompleteEffectAction()
         {
         }
 
-        protected override void OnUndoEffectAction()
+        public override void UndoEffectAction()
         {
             VisualComponent.SpriteRenderer.color = Color.white;
         }
 
-        protected override void OnInterruptEffectAction()
+        public override void InterruptEffectAction()
         {
-            OnUndoEffectAction();
+            UndoEffectAction();
         }
 
         #region PoolObject

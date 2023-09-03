@@ -64,7 +64,7 @@ namespace Tzipory.Leval
 
             _isReportEndLevel = false;
             
-            _startLevelTimer = GAME_TIME.TimerHandler.StartNewTimer(_levelStartDelay);
+            _startLevelTimer = GAME_TIME.TimerHandler.StartNewTimer(_levelStartDelay,"Start Level Timer");
             CurrentWave.Init();
             _waveIndicatorHandler.Init(CurrentWave,_startLevelTimer);
         }
@@ -111,7 +111,7 @@ namespace Tzipory.Leval
             
             CurrentWave.Init();
             
-            _delayBetweenWavesTimer ??= GAME_TIME.TimerHandler.StartNewTimer(_delayBetweenWaves);
+            _delayBetweenWavesTimer = GAME_TIME.TimerHandler.StartNewTimer(_delayBetweenWaves,"Delay Between Waves Timer");
             
             _waveIndicatorHandler.Init(CurrentWave,_delayBetweenWavesTimer);
         }

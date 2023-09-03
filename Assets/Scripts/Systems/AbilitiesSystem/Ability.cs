@@ -101,7 +101,7 @@ namespace Tzipory.AbilitiesSystem
             Debug.Log($"<color=#0008ff>AbilityHandler:</color> {_entityTargetingComponent.GameEntity.name} start casting ability {AbilityName} castTime: {CastTime.CurrentValue}");
             
 #endif
-            _castTimer = _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(CastTime.CurrentValue, Cast,ref availableTarget);
+            _castTimer = _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(CastTime.CurrentValue,"Ability cast time", Cast,ref availableTarget);
         }
 
         private void Cast(IEnumerable<IEntityTargetAbleComponent> availableTarget)
@@ -129,7 +129,7 @@ namespace Tzipory.AbilitiesSystem
         private void StartCooldown()
         {
             IsCasting  = false;
-            _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(Cooldown.CurrentValue,ResetAbility);
+            _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(Cooldown.CurrentValue,"Ability cooldown",ResetAbility);
         }
 
         private void ResetAbility() =>

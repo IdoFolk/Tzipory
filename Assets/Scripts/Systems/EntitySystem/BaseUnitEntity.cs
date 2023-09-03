@@ -47,6 +47,8 @@ namespace Tzipory.EntitySystem.Entitys
         
         private float  _currentInvincibleTime;
 
+        private bool _startedDeathSequence;
+
         #endregion
 
         #region Proprty
@@ -154,10 +156,9 @@ namespace Tzipory.EntitySystem.Entitys
         }
 
         #endregion
-
-
+        
         public event Action<IEntityTargetAbleComponent> OnTargetDisable;
-        public bool IsTargetAble { get; }//not in use!
+        public bool IsTargetAble { get; private set; }//not in use!
         
         public EntityType EntityType { get; protected set; }
         public Vector2 ShotPosition => _shotPosition.position;
@@ -202,7 +203,7 @@ namespace Tzipory.EntitySystem.Entitys
             _onGetHit.SequenceName = "OnGetHit";
             _onGetCritHit.SequenceName = "OnGetCritHit";
             
-            var effectSequence = new EffectSequenceConfig[]
+            var effectSequence = new[]
             {
                 _onDeath,
                 _onAttack,
@@ -228,6 +229,10 @@ namespace Tzipory.EntitySystem.Entitys
                 _hpBarConnector.gameObject.SetActive(false);
             
             gameObject.SetActive(true);
+
+            _startedDeathSequence = false;
+
+            IsTargetAble = true;
             
             IsInitialization = true;
         }
@@ -281,6 +286,17 @@ namespace Tzipory.EntitySystem.Entitys
 
             if (!IsInitialization)
                 return;
+            
+            EffectSequenceHandler.UpdateEffectHandler();
+            
+            if (IsEntityDead)
+            {
+                if (_startedDeathSequence)
+                    return;
+                
+                StartDeathSequence();
+                return;
+            }
 
             HealthComponentUpdate();
             StatusHandler.UpdateStatHandler();
@@ -288,7 +304,6 @@ namespace Tzipory.EntitySystem.Entitys
             if (TargetingHandler.CurrentTarget == null || TargetingHandler.CurrentTarget.IsEntityDead)
                 TargetingHandler.GetPriorityTarget();
             
-            EffectSequenceHandler.UpdateEffectHandler();
             
             UpdateEntity();
         }
@@ -400,9 +415,6 @@ namespace Tzipory.EntitySystem.Entitys
                     _currentInvincibleTime = InvincibleTime.CurrentValue;
                 }
             }
-
-            if (Health.CurrentValue < 0)
-                EntityDead();
         }
 
         #endregion
@@ -413,9 +425,23 @@ namespace Tzipory.EntitySystem.Entitys
 
         public abstract void Attack();
 
-        public virtual void EntityDead()
+        public virtual void StartDeathSequence()
         {
+            _startedDeathSequence = true;
+#if UNITY_EDITOR
+            Debug.Log($"{name} as started death sequence");
+#endif
+            
+            IsTargetAble = false;
+            IsDamageable = false;
+                
             OnTargetDisable?.Invoke(this);
+            EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.DEATH,EntityDied);
+        }
+
+        protected virtual void EntityDied()
+        {
+            IsInitialization = false;
         }
 
         #endregion

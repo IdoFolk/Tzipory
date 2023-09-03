@@ -11,7 +11,6 @@ namespace Tzipory.BaseSystem.TimeSystem
         private static float _startGameTime;
 
         private static float _tempTimeData = 1;
-        
         public static float TimePlayed => Time.realtimeSinceStartup - _startGameTime;
         public static float GetCurrentTimeRate => _timeRate;
         public static float GameDeltaTime => Time.deltaTime * _timeRate;

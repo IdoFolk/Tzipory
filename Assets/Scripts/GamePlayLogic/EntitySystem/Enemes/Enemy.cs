@@ -52,7 +52,7 @@ namespace Enemes
         {
             if (IsAttckingCore)
                 Attack();
-            
+
             if (_currentDecisionInterval < 0)
             {
                 if (!_isAttacking)
@@ -124,9 +124,16 @@ namespace Enemes
             }
         }
 
-        public override void EntityDead()
+        public override void StartDeathSequence()
         {
-            base.EntityDead();
+            base.StartDeathSequence();
+            _tempBasicMoveComponent.Stop();
+        }
+
+        protected override void EntityDied()
+        {
+            base.EntityDied();
+            Debug.Log($"Enemy {name} as died");
             Dispose();
         }
 

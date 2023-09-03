@@ -72,10 +72,10 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
         OnHealthChanged?.Invoke();
 
         if (IsEntityDead)
-            EntityDead();
+            StartDeathSequence();
     }
 
-    public void EntityDead()
+    public void StartDeathSequence()
     {
         print("GAME OVER!");
     }

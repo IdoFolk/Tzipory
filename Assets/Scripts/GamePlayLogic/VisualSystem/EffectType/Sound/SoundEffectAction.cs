@@ -20,7 +20,7 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
 
         private AudioClip _selectedAudioClip;
 
-        protected override float Duration => _selectedAudioClip.length;
+        public override float Duration => _selectedAudioClip.length;
 
         public override void Init(EffectActionContainerConfig actionContainerConfig, IEntityVisualComponent visualComponent)
         {
@@ -35,7 +35,7 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
             _randomVolume = config.RandomVolume;
         }
 
-        protected override void OnStartEffectAction()
+        public override void StartEffectAction()
         {
             float pitch = 1;
             float volume = 1;
@@ -50,19 +50,19 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
             VisualComponent.SoundHandler.PlayAudioClip(_selectedAudioClip,pitch ,volume);
         }
 
-        protected override void OnProcessEffectAction()
+        public override void ProcessEffectAction()
         {
         }
 
-        protected override void OnCompleteEffectAction()
+        public override void CompleteEffectAction()
         {
         }
 
-        protected override void OnUndoEffectAction()
+        public override void UndoEffectAction()
         {
         }
 
-        protected override void OnInterruptEffectAction()
+        public override void InterruptEffectAction()
         {
         }
 

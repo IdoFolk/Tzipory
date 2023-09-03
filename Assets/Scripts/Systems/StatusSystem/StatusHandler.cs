@@ -73,7 +73,7 @@ namespace Tzipory.EntitySystem.StatusSystem
             var statToEffect = GetStat(statusEffectConfig.AffectedStatId);
             
             //   TODO need to Interrupt stats
-            
+
             OnStatusEffectAdded?.Invoke(statusEffectConfig.EffectSequence);
             
             return statToEffect.AddStatusEffect(statusEffectConfig);

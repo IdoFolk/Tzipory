@@ -1263,6 +1263,12 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.38
       objectReference: {fileID: 0}
+    - target: {fileID: 8568239965125765166, guid: 1801a3d5d1a357747b3683fb4c2abb0c, type: 3}
+      propertyPath: m_text
+      value: '0
+
+'
+      objectReference: {fileID: 0}
     - target: {fileID: 8619261269038550020, guid: 1801a3d5d1a357747b3683fb4c2abb0c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1774,10 +1780,6 @@ PrefabInstance:
     - target: {fileID: 4495618467026156135, guid: 9c3032910c8036644bde17d12bf15cbe, type: 3}
       propertyPath: m_Name
       value: End Level Screen UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495618467026156135, guid: 9c3032910c8036644bde17d12bf15cbe, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4755847922635961243, guid: 9c3032910c8036644bde17d12bf15cbe, type: 3}
       propertyPath: m_AnchorMax.y

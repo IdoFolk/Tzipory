@@ -1,24 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using SerializeData.VisualSystemSerializeData;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.Systems.PoolSystem;
 using Tzipory.Tools.Interface;
+using UnityEngine;
 
 namespace Tzipory.VisualSystem.EffectSequence
 {
-    public class EffectSequence : IInitialization<IEntityVisualComponent,EffectSequenceConfig> , IPoolable<EffectSequence>
+    public class EffectSequence : IInitialization<IEntityVisualComponent,EffectSequenceConfig,Action> , IPoolable<EffectSequence>
     {
-        public event Action<EffectSequence> OnEffectSequenceComplete;
-
         #region Fields
 
+        private Action _onComplete;
+        
         private float _startDelay;
         
-        private List<BaseEffectAction> _effectActions;
+        //private List<BaseEffectAction> _activeEffectActions;
+
+        private Dictionary<ITimer, BaseEffectAction> _startEffectActions;
+        private Dictionary<ITimer, BaseEffectAction> _activeEffectActions;
+
+        private EffectActionContainerConfig[] _effectActionConfigs;
 
         private IEntityVisualComponent _entityVisualComponent;
         
@@ -32,7 +37,6 @@ namespace Tzipory.VisualSystem.EffectSequence
 
         #region Properties
 
-        public bool IsActive { get; private set; }
 
 
         public bool IsInterruptable { get; private set; }
@@ -42,7 +46,7 @@ namespace Tzipory.VisualSystem.EffectSequence
         public int ID { get; private set; }
 
         public bool IsInitialization { get; private  set; }
-        public bool AllEffectActionDone => _effectActions.All(effectAction => !effectAction.IsActive);
+        public bool AllEffectActionDone => _activeEffectActions.Count == 0 && _startEffectActions.Count == 0 && _isStarted; 
         
         #endregion
 
@@ -51,142 +55,161 @@ namespace Tzipory.VisualSystem.EffectSequence
         public EffectSequence()
         {
             IsInitialization  = false;
+            //_activeEffectActions = new List<BaseEffectAction>();
+            _startEffectActions = new Dictionary<ITimer, BaseEffectAction>();
+            _activeEffectActions = new Dictionary<ITimer, BaseEffectAction>();
         }
 
-        public void Init(IEntityVisualComponent parameter1, EffectSequenceConfig parameter2)
+        public void Init(IEntityVisualComponent parameter1, EffectSequenceConfig parameter2,Action onComplete = null)
         {
             SequenceName = parameter2.SequenceName;
             ID = parameter2.ID;
-            _startDelay = parameter2.StartDelay;
             IsInterruptable = parameter2.IsInterruptable;
 
-            IsActive = false;
-            _isStarted = false;
+            _onComplete = onComplete;
             
-            _entityVisualComponent  = parameter1;
-            _effectActions = new List<BaseEffectAction>();
+            _isStarted = false;
+            _entityVisualComponent = parameter1;
 
-            foreach (var effectActionContainer in parameter2.EffectActionContainers)
-            {
-                BaseEffectAction effectAction = PoolManager.VisualSystemPool.GetEffectAction(effectActionContainer);
-                effectAction.Init(effectActionContainer,_entityVisualComponent);
-                effectAction.OnEffectActionComplete += OnActionComplete;
-                _effectActions.Add(effectAction);
-            }
+            _effectActionConfigs = parameter2.EffectActionContainers;
             
             _currentEffectActionIndex = 0;
             
             IsInitialization = true;
+            
+            _startDelayTimer = _entityVisualComponent.GameEntity.EntityTimer.StartNewTimer(parameter2.StartDelay,$"EffectSequence: {SequenceName} start Delay Timer");
         }
         
-
         #endregion
 
         #region PrivateMethod
         
         private void OnCompleteEffectSequence()
         {
-            IsActive = false;
-            
-            OnEffectSequenceComplete?.Invoke(this);
-            
-            ResetSequence();
+            _onComplete?.Invoke();
+#if UNITY_EDITOR
+            Debug.Log($"<color=#fc6b03>Effect Handler:</color> sequence {SequenceName} as completed on entity <color=#a903fc>{_entityVisualComponent.GameEntity.name}</color>");
+#endif
+            Dispose();
         }
         
         private void PlayActions()
         {
-            if (_effectActions.Count == 0)
+            if (_effectActionConfigs.Length == 0)
                 return;
             
-            var effectAction = _effectActions[_currentEffectActionIndex];
+            var effectActionConfig = _effectActionConfigs[_currentEffectActionIndex];
             
-            if (!effectAction.IsActive)
-                effectAction.ActivateActionEffect();
+            BaseEffectAction effectAction = PoolManager.VisualSystemPool.GetEffectAction(effectActionConfig);
+            effectAction.Init(effectActionConfig,_entityVisualComponent);
+
+            ITimer effectActionStartDelayTimer =
+                _entityVisualComponent.GameEntity.EntityTimer.StartNewTimer(effectActionConfig.StartDelay,
+                    "Effect action start delay timer");
+            
+            _startEffectActions.Add(effectActionStartDelayTimer,effectAction);
+            
+            effectActionStartDelayTimer.OnTimerComplete += OnActionTimerComplete;
+            
+            if (_currentEffectActionIndex == _effectActionConfigs.Length - 1)
+                return;
             
             _currentEffectActionIndex++;
-
-            if (_currentEffectActionIndex == _effectActions.Count)
-                return;
-
-            if (_effectActions[_currentEffectActionIndex].ActionStartType == EffectActionStartType.WithPrevious)
+            
+            if (_effectActionConfigs[_currentEffectActionIndex].EffectActionStart == EffectActionStartType.WithPrevious)
                 PlayActions();
         }
         
-        private void OnActionComplete(BaseEffectAction effectAction)
+        private void OnActionTimerComplete(ITimer effectActionTime,bool isTimerStopped)
         {
-            if (_currentEffectActionIndex == _effectActions.Count && !_effectActions[_currentEffectActionIndex - 1].IsActive)
+            if (_startEffectActions.TryGetValue(effectActionTime,out var startEffectAction))
             {
-                ResetSequence();
+                startEffectAction.StartEffectAction();
+                    
+                effectActionTime.OnTimerComplete -= OnActionTimerComplete;
+                _startEffectActions.Remove(effectActionTime);
+
+                ITimer durationTimer =
+                    _entityVisualComponent.GameEntity.EntityTimer.StartNewTimer(startEffectAction.Duration,"Effect action duration");
+
+                durationTimer.OnTimerComplete += OnActionTimerComplete;
+                
+                _activeEffectActions.Add(durationTimer,startEffectAction);
+                
                 return;
             }
+            
+            if (_activeEffectActions.TryGetValue(effectActionTime,out var activeEffectAction))
+            {
+                if (activeEffectAction.DisableUndo)
+                {
+                    activeEffectAction.CompleteEffectAction();
+                }
+                else
+                {
+                    activeEffectAction.UndoEffectAction();
+                    activeEffectAction.CompleteEffectAction();
+                }
 
-            if (!_effectActions[_currentEffectActionIndex - 1].IsActive)
-                PlayActions();
+                effectActionTime.OnTimerComplete -= OnActionTimerComplete;
+                _activeEffectActions.Remove(effectActionTime);
+            }
+
+            if (AllEffectActionDone)
+                OnCompleteEffectSequence();
         }
 
         #endregion
 
         #region PublicMethod
         
-        public void ResetSequence()
+        public void ResetSequence()//not in use
         {
-            foreach (var baseEffectAction in _effectActions)
-            {
-                if (baseEffectAction.IsActive)
-                    baseEffectAction.InterruptEffectAction();
-            }
+            foreach (var baseEffectAction in _startEffectActions)
+                baseEffectAction.Value.InterruptEffectAction();
             
+            foreach (var baseEffectAction in _activeEffectActions)
+                baseEffectAction.Value.InterruptEffectAction();
+
             _currentEffectActionIndex = 0;
-            IsActive = false;
-        }
-
-        public void StartEffectSequence()
-        {
-            if (!IsInitialization)
-                throw  new Exception("EffectSequence is not initialized");
-
-            _startDelayTimer = _entityVisualComponent.GameEntity.EntityTimer.StartNewTimer(_startDelay);
-            
-            IsActive = true;
         }
 
         public void UpdateEffectSequence()
         {
-            if (!IsActive)
+            if (!IsInitialization || _isStarted)
                 return;
 
-            if (_startDelayTimer.IsDone && !_isStarted)
+            if (_startDelayTimer.IsDone)
             {
-                _isStarted  = true;
                 PlayActions();
+                _isStarted  = true;
             }
-
-            for (int i = 0; i < _effectActions.Count; i++)
-                _effectActions[i].UpdateEffectAction();
-            
-            if (_currentEffectActionIndex == _effectActions.Count && AllEffectActionDone)
-                OnCompleteEffectSequence();
         }
 
         #endregion
 
-        // ~EffectSequence()
-        // {
-        //     foreach (var effectAction in _effectActions)
-        //     {
-        //         effectAction.OnEffectActionComplete -= OnActionComplete;
-        //     }
-        // }
-
         #region PoolObject
 
         public event Action<EffectSequence> OnDispose;
-        public void Dispose()=>
+
+        public void Dispose()
+        {
+            // foreach (var baseEffectAction in _activeEffectActions)
+            // {
+            //     if (baseEffectAction.IsActive && !baseEffectAction.DisableUndo)
+            //         baseEffectAction.InterruptEffectAction();
+            // }
+            _onComplete = null;
+            _activeEffectActions.Clear();
+            _startDelayTimer = null;
+            IsInitialization = false;
             OnDispose?.Invoke(this);
+        }
 
         public void Free()
         {
-            _effectActions = null;
+            _onComplete = null;
+            _activeEffectActions = null;
             _startDelayTimer = null;
             _entityVisualComponent = null;
         }

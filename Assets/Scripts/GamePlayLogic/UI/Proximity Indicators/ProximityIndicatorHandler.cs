@@ -11,12 +11,12 @@ public class ProximityIndicatorHandler
     [SerializeField] private ProximityConfig _proximityConfig;
     [SerializeField] Tzipory.Helpers.ClickHelper clickHelper;
     
-    private float _range;
+    protected float _range;
 
-    private bool _isToggleOn;
-    private bool _isLock;
+    protected bool _isToggleOn;
+    protected bool _isLock;
     
-    public void Init(float range)
+    public virtual void Init(float range)
     {
         _range = range;
         _isLock = false;
@@ -94,14 +94,14 @@ public class ProximityIndicatorHandler
 
 
 
-    void WeakSetToActive(bool doActive)
+    protected virtual void WeakSetToActive(bool doActive)
     {
         //Some logic and stuff
         if (_isLock)
             return;
         _spriteRenderer.enabled = doActive;
     }
-    void ToggleActive() //also weak
+    protected virtual void ToggleActive() //also weak
     {
         //Some logic and stuff
         if (_isLock)
@@ -111,7 +111,7 @@ public class ProximityIndicatorHandler
         _spriteRenderer.enabled = _isToggleOn;
     }
 
-    void SetToActiveAndLock(bool doActive, bool doLock) //strong!
+    protected virtual void SetToActiveAndLock(bool doActive, bool doLock) //strong!
     {
         //Some logic and stuff
         _isLock = doLock;

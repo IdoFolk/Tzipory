@@ -92,6 +92,12 @@ namespace Tzipory.EntitySystem.StatusSystem
                     throw new ArgumentOutOfRangeException(nameof(ModifierType), ModifierType, null);
             }
         }
+
+        public void SetValue(float newValue)
+        {
+            //_previousValue = _value; //?
+            _value = newValue;
+        }
     }
         
     public enum StatusModifierType

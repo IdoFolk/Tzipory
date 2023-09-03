@@ -74,6 +74,12 @@ namespace Tzipory.EntitySystem.StatusSystem
         public abstract void ProcessStatusEffect();
 
         public abstract void Dispose();
+
+        //Temp?
+        public virtual void SetMyFirstModifier(float newValue)
+        {
+            modifiers[0].SetValue(newValue);
+        }
     }
     
     public enum StatusEffectType

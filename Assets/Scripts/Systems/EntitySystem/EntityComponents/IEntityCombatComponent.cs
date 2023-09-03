@@ -11,6 +11,5 @@ namespace Tzipory.EntitySystem.EntityComponents
         public Stat AttackRange { get; }
 
         public void Attack();//may need to target parameter
-        public void OnEntityDead();
     }
 }

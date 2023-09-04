@@ -1,4 +1,5 @@
 using System;
+using Helpers;
 using UnityEngine;
 
 namespace Tzipory.BaseSystem.TimeSystem
@@ -34,7 +35,9 @@ namespace Tzipory.BaseSystem.TimeSystem
                 Debug.LogError("Can not set timeStep to less or equal to 0");
                 return;
             }
-            
+#if UNITY_EDITOR
+            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Time Handler:</color> set time to {time}");
+#endif
             _timeRate = time;
             OnTimeRateChange?.Invoke();
         }
@@ -50,8 +53,11 @@ namespace Tzipory.BaseSystem.TimeSystem
         }
 
         public static void Play()
-        {
+        { 
             SetTimeStep(_tempTimeData);
+#if UNITY_EDITOR
+            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Time Handler:</color> <color={ColorLogHelper.GREEN}>PLAY</color>");
+#endif
             _tempTimeData = 0;
         }
         
@@ -59,6 +65,9 @@ namespace Tzipory.BaseSystem.TimeSystem
         {
             if (_timeRate == 0) return;
             _tempTimeData = _timeRate;
+#if UNITY_EDITOR
+            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Time Handler:</color> <color={ColorLogHelper.RED}>PLAY</color>");
+#endif
             SetTimeStep(0);
         }
     }

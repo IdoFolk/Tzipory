@@ -32,7 +32,7 @@ namespace Tzipory.AbilitiesSystem
         {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.AbilityCooldown, out var coolDown))
+                if (Stats.TryGetValue((int)Constant.StatsId.AbilityCooldown, out var coolDown))
                     return coolDown;
                 
                 throw new Exception($"Cooldown not found on ability {AbilityName} in entity {_entityTargetingComponent.GameEntity.name}");
@@ -42,7 +42,7 @@ namespace Tzipory.AbilitiesSystem
         {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.AbilityCastTime, out var castTime))
+                if (Stats.TryGetValue((int)Constant.StatsId.AbilityCastTime, out var castTime))
                     return castTime;
                 
                 throw new Exception($"CastTime not found on ability {AbilityName} in entity {_entityTargetingComponent.GameEntity.name}");
@@ -59,10 +59,10 @@ namespace Tzipory.AbilitiesSystem
             AbilityName = config.AbilityName;
             AbilityId = config.AbilityId;
             
-            Stats.Add((int)Constant.Stats.AbilityCooldown,new Stat(Constant.Stats.AbilityCooldown.ToString(), config.Cooldown, int.MaxValue,
-                (int)Constant.Stats.AbilityCooldown));
-            Stats.Add((int)Constant.Stats.AbilityCastTime,new Stat(Constant.Stats.AbilityCastTime.ToString(), config.CastTime, int.MaxValue,
-                (int)Constant.Stats.AbilityCastTime));
+            Stats.Add((int)Constant.StatsId.AbilityCooldown,new Stat(Constant.StatsId.AbilityCooldown.ToString(), config.Cooldown, int.MaxValue,
+                (int)Constant.StatsId.AbilityCooldown));
+            Stats.Add((int)Constant.StatsId.AbilityCastTime,new Stat(Constant.StatsId.AbilityCastTime.ToString(), config.CastTime, int.MaxValue,
+                (int)Constant.StatsId.AbilityCastTime));
             
 
             _abilityCaster = Factory.AbilityFactory.GetAbilityCaster(entityTargetingComponent,config);

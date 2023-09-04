@@ -1,4 +1,5 @@
 ﻿using Helpers.Consts;
+using SerializeData.StatSerializeData;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -20,5 +21,12 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
 
         public override int ConfigObjectId => _enemyId;
         public override int ConfigTypeId => Constant.DataId.ENEMY_DATA_ID;
+
+        protected override void OnValidate()
+        {
+            base.OnValidate();
+            if (_statConfigs.Count == 0)
+                _statConfigs.Add(new StatConfig() { _statsId = Constant.StatsId.CoreAttackDamage });
+        }
     }
 }

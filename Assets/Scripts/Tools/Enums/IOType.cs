@@ -1,6 +1,6 @@
 ﻿namespace Tools.Enums
 {
-    public enum IOStatType
+    public enum IOType
     {
         In,
         Out

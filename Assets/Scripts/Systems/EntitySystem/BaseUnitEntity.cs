@@ -47,6 +47,125 @@ namespace Tzipory.EntitySystem.Entitys
 
         #endregion
 
+        #region Proprty
+
+        public Dictionary<int, Stat> Stats { get; private set; }
+        
+        public StatusHandler StatusHandler { get; private set; }
+        
+        public AbilityHandler AbilityHandler { get; private set; }
+        
+        public EffectSequenceHandler EffectSequenceHandler { get; private set; }
+        public SpriteRenderer SpriteRenderer => _spriteRenderer;
+        public SoundHandler SoundHandler => _soundHandler;
+        public Transform ParticleEffectPosition => _particleEffectPosition;
+        public Transform VisualQueueEffectPosition => _visualQueueEffectPosition;
+        public PopUpTexter PopUpTexter => _popUpTexter;
+        
+        public bool IsDamageable { get; private set; }
+        public bool IsEntityDead => Health.CurrentValue <= 0;
+        
+        //need to remove this and only use the Dictionary!!!
+        #region Stats
+
+         public Stat Health  
+        {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.Health, out var health))
+                    return health;
+                
+                throw new Exception($"{Constant.Stats.Health} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat InvincibleTime  {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.InvincibleTime, out var invincibleTime))
+                    return invincibleTime;
+                
+                throw new Exception($"{Constant.Stats.InvincibleTime} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat AttackDamage  {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.AttackDamage, out var attackDamage))
+                    return attackDamage;
+                
+                throw new Exception($"{Constant.Stats.AttackDamage} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat CritDamage  {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.CritDamage, out var critDamage))
+                    return critDamage;
+                
+                throw new Exception($"{Constant.Stats.CritDamage} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat CritChance {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.CritChance, out var critChance))
+                    return critChance;
+                
+                throw new Exception($"{Constant.Stats.CritChance} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat AttackRate {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.AttackRate, out var attackRate))
+                    return attackRate;
+                
+                throw new Exception($"{Constant.Stats.AttackRate} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat AttackRange  {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.AttackRange, out var attackRange))
+                    return attackRange;
+                
+                throw new Exception($"{Constant.Stats.AttackRange} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat MovementSpeed  {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.MovementSpeed, out var movementSpeed))
+                    return movementSpeed;
+                
+                throw new Exception($"{Constant.Stats.MovementSpeed} not found in entity {GameEntity.name}");
+            }
+        }
+        public Stat TargetingRange {
+            get
+            {
+                if (Stats.TryGetValue((int)Constant.Stats.TargetingRange, out var targetingRange))
+                    return targetingRange;
+                
+                throw new Exception($"{Constant.Stats.TargetingRange} not found in entity {GameEntity.name}");
+            }
+        }
+
+        #endregion
+
+
+        public event Action<IEntityTargetAbleComponent> OnTargetDisable;
+        public bool IsTargetAble { get; }//not in use!
+        
+        public EntityType EntityType { get; protected set; }
+        public Vector2 ShotPosition => _shotPosition.position;
+        public IPriorityTargeting DefaultPriorityTargeting { get; private set; }
+        public TargetingHandler TargetingHandler => _targetingHandler;
+        
+        public bool IsInitialization { get; private set; }
+        
+        #endregion
+
         #region Temps
         [Header("TEMPS")] [SerializeField]
         private Transform _shotPosition;
@@ -201,8 +320,24 @@ namespace Tzipory.EntitySystem.Entitys
 
             EffectSequenceHandler = new EffectSequenceHandler(this,effectSequence);
         }
-
-
+        
+            foreach (var statConfig in parameter.StatConfigs)
+                Stats.Add(statConfig.ID,new Stat(statConfig));
+            
+            DefaultPriorityTargeting =
+                Factory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
+            
+            AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);//making new every time we init new enemy(memory waste) 
+            
+            SpriteRenderer.sprite = parameter.UnitEntityVisualConfig.Sprite;
+            
+            BaseInit();
+        }
+        
+        #endregion    
+        
+        #region UnityCallBacks
+        
         protected override void Update()
         {
             base.Update();
@@ -349,7 +484,7 @@ namespace Tzipory.EntitySystem.Entitys
             }
 
             if (Health.CurrentValue < 0)
-                OnEntityDead();
+                EntityDead();
         }
 
         #endregion
@@ -365,7 +500,11 @@ namespace Tzipory.EntitySystem.Entitys
         public Stat AttackRange => StatusHandler.GetStatById((int)Constant.Stats.AttackRange);
 
         public abstract void Attack();
-        public abstract void OnEntityDead();
+
+        public virtual void EntityDead()
+        {
+            OnTargetDisable?.Invoke(this);
+        }
 
         #endregion
 

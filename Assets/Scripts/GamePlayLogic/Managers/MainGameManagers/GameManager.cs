@@ -1,7 +1,6 @@
 using GameplayeLogic.Managers;
 using GamePlayLogic.Managers;
 using Systems.DataManagerSystem;
-using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.ConfigFiles;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;
@@ -13,14 +12,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerConfig _playerConfig;
     [SerializeField] private SceneHandler _sceneHandler;
 
+    private static Camera _camera;
+    
     public static GameData GameData { get; private set; }
     public static PlayerManager PlayerManager { get; private set; }
+    
+    public static Camera Camera => _camera == null ? Camera.main : _camera;
 
     private void Awake()
     { 
         if (SceneHandler == null)
             SceneHandler = _sceneHandler;
 
+        _camera = Camera.main;
         GameData = new GameData();
     }
 

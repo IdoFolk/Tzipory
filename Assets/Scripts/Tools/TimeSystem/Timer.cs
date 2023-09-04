@@ -8,7 +8,7 @@ namespace Tzipory.BaseSystem.TimeSystem
         
         public string TimerName { get; }
 
-        public string OnCompleteMethodName { get; }
+        public string CompleteMethodName { get; }
         
         public bool IsDone { get; }
 
@@ -26,7 +26,7 @@ namespace Tzipory.BaseSystem.TimeSystem
         
         public string TimerName { get; }
         
-        public string OnCompleteMethodName { get; }
+        public string CompleteMethodName { get; }
 
         public float TimeRemaining { get; private set; }
 
@@ -37,9 +37,10 @@ namespace Tzipory.BaseSystem.TimeSystem
             TimerName = timerName;
             TimeRemaining = time;
             _onComplete = onComplete;
-            
+#if UNITY_EDITOR
             if (onComplete != null)
-                OnCompleteMethodName = onComplete.Method.Name;
+                CompleteMethodName = onComplete.Method.Name;
+#endif
         }
 
         public void TickTimer()
@@ -54,7 +55,8 @@ namespace Tzipory.BaseSystem.TimeSystem
         }
 
         public void StopTimer(bool executeOnComplete = false)
-        {
+        {   
+            TimeRemaining = 0;
             OnTimerComplete?.Invoke(this);
             
             if (executeOnComplete)
@@ -72,7 +74,7 @@ namespace Tzipory.BaseSystem.TimeSystem
         
         public string TimerName { get; }
         
-        public string OnCompleteMethodName { get; }
+        public string CompleteMethodName { get; }
 
         public float TimeRemaining { get; private set; }
         
@@ -84,7 +86,7 @@ namespace Tzipory.BaseSystem.TimeSystem
             TimeRemaining = time;
             _onComplete = onComplete;
             
-            OnCompleteMethodName  = onComplete.Method.Name;
+            CompleteMethodName  = onComplete.Method.Name;
 
             _parameter = parameter;
         }
@@ -120,7 +122,7 @@ namespace Tzipory.BaseSystem.TimeSystem
         
         public string TimerName { get; }
         
-        public string OnCompleteMethodName { get; }
+        public string CompleteMethodName { get; }
 
         public float TimeRemaining { get; private set; }
         
@@ -132,7 +134,7 @@ namespace Tzipory.BaseSystem.TimeSystem
             TimeRemaining = time;
             _onComplete = onComplete;
             
-            OnCompleteMethodName  = onComplete.Method.Name;
+            CompleteMethodName  = onComplete.Method.Name;
 
             _parameter1 = parameter1;
             _parameter2 = parameter2;
@@ -170,7 +172,7 @@ namespace Tzipory.BaseSystem.TimeSystem
         
         public string TimerName { get; }
         
-        public string OnCompleteMethodName { get; }
+        public string CompleteMethodName { get; }
 
         public float TimeRemaining { get; private set; }
         
@@ -182,7 +184,7 @@ namespace Tzipory.BaseSystem.TimeSystem
             TimeRemaining = time;
             _onComplete = onComplete;
             
-            OnCompleteMethodName  = onComplete.Method.Name;
+            CompleteMethodName  = onComplete.Method.Name;
 
             _parameter1 = parameter1;
             _parameter2 = parameter2;
@@ -222,7 +224,7 @@ namespace Tzipory.BaseSystem.TimeSystem
         
         public string TimerName { get; }
         
-        public string OnCompleteMethodName { get; }
+        public string CompleteMethodName { get; }
 
         public float TimeRemaining { get; private set; }
         
@@ -234,7 +236,7 @@ namespace Tzipory.BaseSystem.TimeSystem
             TimeRemaining = time;
             _onComplete = onComplete;
             
-            OnCompleteMethodName  = onComplete.Method.Name;
+            CompleteMethodName  = onComplete.Method.Name;
 
             _parameter1 = parameter1;
             _parameter2 = parameter2;
@@ -276,7 +278,7 @@ namespace Tzipory.BaseSystem.TimeSystem
         
         public string TimerName { get; }
         
-        public string OnCompleteMethodName { get; }
+        public string CompleteMethodName { get; }
 
         public float TimeRemaining { get; private set; }
         
@@ -288,7 +290,7 @@ namespace Tzipory.BaseSystem.TimeSystem
             TimeRemaining = time;
             _onComplete = onComplete;
             
-            OnCompleteMethodName  = onComplete.Method.Name;
+            CompleteMethodName  = onComplete.Method.Name;
 
             _parameter1 = parameter1;
             _parameter2 = parameter2;

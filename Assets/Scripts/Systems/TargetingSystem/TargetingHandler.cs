@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using Systems.TargetingSystem;
 using Tools.Enums;
@@ -56,12 +57,16 @@ namespace Tzipory.EntitySystem.TargetingSystem
                 return false;
 
             if (priorityTargeting == null)
-            {
                 CurrentTarget = _entityTargetingComponent.DefaultPriorityTargeting.GetPriorityTarget(_availableTargets);
-                return true;
+            else
+                CurrentTarget = priorityTargeting.GetPriorityTarget(_availableTargets);
+
+            if (!CurrentTarget.GameEntity.gameObject.activeInHierarchy)
+            {
+                RemoveTarget(CurrentTarget);
+                return GetPriorityTarget();
             }
             
-            CurrentTarget = priorityTargeting.GetPriorityTarget(_availableTargets);
             return true;
         }
 
@@ -69,18 +74,27 @@ namespace Tzipory.EntitySystem.TargetingSystem
         {
             if (targetAbleComponent.EntityType == _entityTargetingComponent.EntityType)
                 return;
-            
+#if UNITY_EDITOR
+            Debug.Log($"<color=#f2db05>Targeting Handler:</color> Entity: <color=#de05f2>{_entityTargetingComponent.GameEntity.name}</color>: added {targetAbleComponent.GameEntity.name} to targets list");
+#endif
+            targetAbleComponent.OnTargetDisable += RemoveTarget;
             _availableTargets.Add(targetAbleComponent);
         }
 
         private void RemoveTarget(IEntityTargetAbleComponent targetAbleComponent)
         {
             if (_availableTargets.Contains(targetAbleComponent))
+            {
+#if UNITY_EDITOR
+                Debug.Log($"<color=#f2db05>Targeting Handler:</color> Entity: <color=#de05f2>{_entityTargetingComponent.GameEntity.name}</color>: Remove {targetAbleComponent.GameEntity.name} from targets list entity");
+#endif
+                targetAbleComponent.OnTargetDisable -= RemoveTarget;
                 _availableTargets.Remove(targetAbleComponent);
+            }
         }
 
 
-        public void RecieveCollision(Collider2D other, IOStatType ioStatType)
+        public void RecieveCollision(Collider2D other, IOType ioType)
         {
             
         }
@@ -97,6 +111,11 @@ namespace Tzipory.EntitySystem.TargetingSystem
             if (CurrentTarget == null) return;
             if (targetable.EntityInstanceID == CurrentTarget.EntityInstanceID)
                 GetPriorityTarget();
+        }
+
+        public void Reset()
+        {
+            _availableTargets.Clear();
         }
     }
 }

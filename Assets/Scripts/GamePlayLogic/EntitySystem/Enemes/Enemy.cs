@@ -115,8 +115,7 @@ namespace Enemes
             if (timer >= StatusHandler.GetStatById((int)Constant.Stats.AttackRate).CurrentValue)
             {
                 timer = 0f;
-                TargetingHandler.CurrentTarget.TakeDamage(StatusHandler.GetStatById((int)Constant.Stats.AttackDamage).CurrentValue, false);
-                Debug.Log($"{gameObject.name} attack {TargetingHandler.CurrentTarget.EntityTransform.name}");
+                TargetingHandler.CurrentTarget.TakeDamage(StatusHandler.GetStat(Constant.Stats.AttackDamage).CurrentValue, false);
             }
             else
             {
@@ -125,8 +124,9 @@ namespace Enemes
             }
         }
 
-        public override void OnEntityDead()
+        public override void EntityDead()
         {
+            base.EntityDead();
             Dispose();
         }
 
@@ -137,6 +137,8 @@ namespace Enemes
         public void Dispose()
         {
             OnDispose?.Invoke(this);
+            EffectSequenceHandler.Reset();
+            TargetingHandler.Reset();
             gameObject.SetActive(false);
         }
 

@@ -1,3 +1,4 @@
+using System;
 using PathCreation;
 using UnityEngine;
 using Tzipory.EntitySystem;
@@ -14,6 +15,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 
     [SerializeField,ReadOnly] private Stat _hpStat;
 
+    public event Action<IEntityTargetAbleComponent> OnTargetDisable;
     public bool IsTargetAble => true;
 
     public PathCreator PatrolPath => _patrolPath;
@@ -62,8 +64,11 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
         OnHealthChanged?.Invoke();
 
         if (IsEntityDead)
-        {
-            print("GAME OVER!");
-        }
+            EntityDead();
+    }
+
+    public void EntityDead()
+    {
+        print("GAME OVER!");
     }
 }

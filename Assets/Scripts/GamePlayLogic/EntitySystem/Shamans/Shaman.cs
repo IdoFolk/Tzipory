@@ -22,6 +22,9 @@ namespace Shamans
         [SerializeField] private Temp_HeroMovement _tempHeroMovement;
         
         private ShamanSerializeData  _serializeData;
+
+        private float _currentDecisionInterval = 0;//temp
+        private float _baseDecisionInterval;//temp
         
         private float _currentAttackRate;
 
@@ -32,7 +35,9 @@ namespace Shamans
             _serializeData = shamanSerializeData;
             
             _shotVisual.Init(this);
-            
+
+            _baseDecisionInterval = shamanSerializeData.DecisionInterval;
+
             EntityType = EntityType.Hero;
             _clickHelper.OnClick += _tempHeroMovement.SelectHero;
             
@@ -46,6 +51,14 @@ namespace Shamans
 
         protected override void UpdateEntity()
         {
+            _currentDecisionInterval -= GAME_TIME.GameDeltaTime;
+            
+            if (_currentDecisionInterval < 0)
+            {
+                TargetingHandler.GetPriorityTarget();
+                _currentDecisionInterval = _baseDecisionInterval;
+            }
+            
             if (TargetingHandler.CurrentTarget != null)//temp
                 Attack();
         }
@@ -96,8 +109,9 @@ namespace Shamans
             _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue,false);
         }
 
-        public override void OnEntityDead()
+        public override void EntityDead()
         {
+            base.EntityDead();
             Debug.Log($"{gameObject.name} as Died!");
             gameObject.SetActive(false);
         }

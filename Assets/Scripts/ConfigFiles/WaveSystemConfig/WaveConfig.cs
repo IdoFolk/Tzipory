@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Tzipory.SerializeData.LevalSerializeData
 {
@@ -10,8 +10,11 @@ namespace Tzipory.SerializeData.LevalSerializeData
     {
         [Title("$_name",bold:true,titleAlignment:TitleAlignments.Centered)] 
         [SerializeField,ReadOnly,PropertyOrder(-2)] private string _name;
-        [SerializeField,ListDrawerSettings(HideAddButton = true,HideRemoveButton = true),PropertyOrder(1)] private List<WaveSpawnerConfig> _waveSpawnerConfig;
+        [SerializeField,ListDrawerSettings(HideAddButton = true,HideRemoveButton = true),PropertyOrder(1)] 
+        [FormerlySerializedAs("_waveSpawnerSerializeDatas")] private List<WaveSpawnerConfig> _waveSpawnerConfig;
 
+        [SerializeField,HideInInspector] private LevelConfig  _levelConfig;
+        
         [ShowInInspector, ReadOnly,PropertyOrder(-1)]
         public float TotalWaveTime
         {
@@ -33,7 +36,6 @@ namespace Tzipory.SerializeData.LevalSerializeData
             }
         }
         
-        private LevelConfig  _levelConfig;
         public List<WaveSpawnerConfig> WaveSpawnerConfig => _waveSpawnerConfig;
 
         public WaveConfig(IEnumerable<WaveSpawner> waveSpawners,LevelConfig levelConfig)

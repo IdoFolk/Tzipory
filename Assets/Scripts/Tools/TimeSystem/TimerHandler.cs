@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Helpers;
 using Sirenix.OdinInspector;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -106,6 +107,7 @@ namespace Tzipory.BaseSystem.TimeSystem
         {
             _timersList.Add(timer);
 #if UNITY_EDITOR
+            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Timer Handler:</color><color={ColorLogHelper.GREEN}> Start</color> timer {timer.TimerName} at time {timer.TimeRemaining}");
             _timerSerializeDatas.Add(new TimerSerializeData(timer));
 #endif
             timer.OnTimerComplete += TimeComplete;
@@ -125,9 +127,10 @@ namespace Tzipory.BaseSystem.TimeSystem
         {
 
 #if UNITY_EDITOR
-            Debug.Log(isStopped
-                ? $"<color=#f602fa>Timer Handler:</color> Stop timer {timer.TimerName} at time reminding: {timer.TimeRemaining}"
-                : $"<color=#f602fa>Timer Handler:</color> Complete timer {timer.TimerName} at time reminding: {timer.TimeRemaining}");
+            if (isStopped)
+                Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Timer Handler:</color><color={ColorLogHelper.RED}>Stop</color> timer {timer.TimerName} at time reminding: {timer.TimeRemaining}");
+            else
+                Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Timer Handler:</color><color={ColorLogHelper.RED}>Complete</color> timer {timer.TimerName} at time reminding: {timer.TimeRemaining}");
 #endif
             
 #if UNITY_EDITOR

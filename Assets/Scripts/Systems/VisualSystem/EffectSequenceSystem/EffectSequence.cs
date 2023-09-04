@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Helpers;
 using SerializeData.VisualSystemSerializeData;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
@@ -55,7 +56,6 @@ namespace Tzipory.VisualSystem.EffectSequence
         public EffectSequence()
         {
             IsInitialization  = false;
-            //_activeEffectActions = new List<BaseEffectAction>();
             _startEffectActions = new Dictionary<ITimer, BaseEffectAction>();
             _activeEffectActions = new Dictionary<ITimer, BaseEffectAction>();
         }
@@ -77,6 +77,9 @@ namespace Tzipory.VisualSystem.EffectSequence
             
             IsInitialization = true;
             
+#if UNITY_EDITOR
+            Debug.Log($"<color={ColorLogHelper.EFFECT_HANDLER_COLOR}>Effect Handler:</color> sequence {SequenceName} as started on entity <color={ColorLogHelper.ENTITY_COLOR}>{_entityVisualComponent.GameEntity.name}</color>");
+#endif
             _startDelayTimer = _entityVisualComponent.GameEntity.EntityTimer.StartNewTimer(parameter2.StartDelay,$"EffectSequence: {SequenceName} start Delay Timer");
         }
         
@@ -88,7 +91,7 @@ namespace Tzipory.VisualSystem.EffectSequence
         {
             _onComplete?.Invoke();
 #if UNITY_EDITOR
-            Debug.Log($"<color=#fc6b03>Effect Handler:</color> sequence {SequenceName} as completed on entity <color=#a903fc>{_entityVisualComponent.GameEntity.name}</color>");
+            Debug.Log($"<color={ColorLogHelper.EFFECT_HANDLER_COLOR}>Effect Handler:</color> sequence {SequenceName} as completed on entity <color={ColorLogHelper.ENTITY_COLOR}>{_entityVisualComponent.GameEntity.name}</color>");
 #endif
             Dispose();
         }
@@ -194,15 +197,13 @@ namespace Tzipory.VisualSystem.EffectSequence
 
         public void Dispose()
         {
-            // foreach (var baseEffectAction in _activeEffectActions)
-            // {
-            //     if (baseEffectAction.IsActive && !baseEffectAction.DisableUndo)
-            //         baseEffectAction.InterruptEffectAction();
-            // }
             _onComplete = null;
             _activeEffectActions.Clear();
             _startDelayTimer = null;
             IsInitialization = false;
+#if UNITY_EDITOR
+            Debug.Log($"<color={ColorLogHelper.EFFECT_HANDLER_COLOR}>Effect Handler:</color> sequence {SequenceName} as <color={ColorLogHelper.RED}>Dispose</color> on entity <color={ColorLogHelper.ENTITY_COLOR}>{_entityVisualComponent.GameEntity.name}</color>");
+#endif
             OnDispose?.Invoke(this);
         }
 

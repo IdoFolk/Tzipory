@@ -104,7 +104,6 @@ namespace Tzipory.VisualSystem.EffectSequence
 
             _activeSequences.Remove(effectSequence);
             effectSequence.OnDispose -= RemoveEffectSequence;
-            effectSequence.Dispose();
         }
         
         //not in use

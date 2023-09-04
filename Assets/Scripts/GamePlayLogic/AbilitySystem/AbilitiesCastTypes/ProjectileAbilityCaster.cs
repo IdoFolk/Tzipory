@@ -25,7 +25,7 @@ namespace Tzipory.AbilitiesSystem
         {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.ProjectileSpeed, out var projectileSpeed))
+                if (Stats.TryGetValue((int)Constant.StatsId.ProjectileSpeed, out var projectileSpeed))
                     return projectileSpeed;
                 
                 throw new Exception($"ProjectileSpeed not found in entity {EntityCasterTargetingComponent.GameEntity.name}");
@@ -36,7 +36,7 @@ namespace Tzipory.AbilitiesSystem
         {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.ProjectilePenetration, out var projectilePenetration))
+                if (Stats.TryGetValue((int)Constant.StatsId.ProjectilePenetration, out var projectilePenetration))
                     return projectilePenetration;
                 
                 throw new Exception($"CastTime not found in entity {EntityCasterTargetingComponent.GameEntity.name}");
@@ -51,10 +51,10 @@ namespace Tzipory.AbilitiesSystem
             
             Stats = new Dictionary<int, Stat>();
             
-            Stats.Add((int)Constant.Stats.ProjectileSpeed,  new Stat("ProjectileSpeed", config.ProjectileSpeed, int.MaxValue,
-                (int)Constant.Stats.ProjectileSpeed));
-            Stats.Add((int)Constant.Stats.ProjectilePenetration, new Stat("ProjectilePenetration", config.ProjectilePenetration, int.MaxValue,
-                (int)Constant.Stats.ProjectilePenetration));
+            Stats.Add((int)Constant.StatsId.ProjectileSpeed,  new Stat("ProjectileSpeed", config.ProjectileSpeed, int.MaxValue,
+                (int)Constant.StatsId.ProjectileSpeed));
+            Stats.Add((int)Constant.StatsId.ProjectilePenetration, new Stat("ProjectilePenetration", config.ProjectilePenetration, int.MaxValue,
+                (int)Constant.StatsId.ProjectilePenetration));
             
             _projectilePrefab = Resources.Load<GameObject>(ProjectilePrefabPath);
 

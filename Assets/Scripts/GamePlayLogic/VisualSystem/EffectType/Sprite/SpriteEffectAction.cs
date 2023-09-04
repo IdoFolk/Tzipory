@@ -4,30 +4,29 @@ namespace Tzipory.SerializeData.LevalSerializeData.VisualSystem.EffectType.Sprit
 {
     public class SpriteEffectAction : BaseEffectAction
     {
-        
-        
-        protected override float Duration { get; }
-        protected override void OnStartEffectAction()
+        public override float Duration { get; }
+
+        public override void StartEffectAction()
         {
             throw new System.NotImplementedException();
         }
 
-        protected override void OnProcessEffectAction()
+        public override void ProcessEffectAction()
         {
             throw new System.NotImplementedException();
         }
 
-        protected override void OnCompleteEffectAction()
+        public override void CompleteEffectAction()
         {
             throw new System.NotImplementedException();
         }
 
-        protected override void OnUndoEffectAction()
+        public override void UndoEffectAction()
         {
             throw new System.NotImplementedException();
         }
 
-        protected override void OnInterruptEffectAction()
+        public override void InterruptEffectAction()
         {
             throw new System.NotImplementedException();
         }

@@ -7,12 +7,12 @@ namespace SerializeData.StatSerializeData
     [System.Serializable]
     public class StatConfig : IConfigFile
     {
-        public Constant.Stats _stats;
+        public Constant.StatsId _statsId;
         [SerializeField] private float _baseValue;
         
-        public string Name => _stats.ToString();
+        public string Name => _statsId.ToString();
         
-        public int ID => (int)_stats;
+        public int ID => (int)_statsId;
         public float BaseValue => _baseValue;
 
         public int ConfigObjectId { get; }

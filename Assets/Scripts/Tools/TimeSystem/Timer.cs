@@ -4,7 +4,7 @@ namespace Tzipory.BaseSystem.TimeSystem
 {
     public interface ITimer
     {
-        public event Action<ITimer>  OnTimerComplete;
+        public event Action<ITimer,bool>  OnTimerComplete;
         
         public string TimerName { get; }
 
@@ -20,7 +20,7 @@ namespace Tzipory.BaseSystem.TimeSystem
 
     public class Timer : ITimer
     {
-        public event Action<ITimer> OnTimerComplete;
+        public event Action<ITimer,bool> OnTimerComplete;
 
         private readonly Action _onComplete;
         
@@ -50,14 +50,14 @@ namespace Tzipory.BaseSystem.TimeSystem
             if (TimeRemaining <= 0)
             {
                 _onComplete?.Invoke();
-                OnTimerComplete?.Invoke(this);
+                OnTimerComplete?.Invoke(this,false);
             }
         }
 
         public void StopTimer(bool executeOnComplete = false)
         {   
             TimeRemaining = 0;
-            OnTimerComplete?.Invoke(this);
+            OnTimerComplete?.Invoke(this,true);
             
             if (executeOnComplete)
                 _onComplete?.Invoke();
@@ -66,7 +66,7 @@ namespace Tzipory.BaseSystem.TimeSystem
     
     public class Timer<T> : ITimer
     {
-        public event Action<ITimer> OnTimerComplete;
+        public event Action<ITimer,bool> OnTimerComplete;
         
         private readonly Action<T> _onComplete;
 
@@ -98,13 +98,14 @@ namespace Tzipory.BaseSystem.TimeSystem
             if (TimeRemaining <= 0)
             {
                 _onComplete?.Invoke(_parameter);
-                OnTimerComplete?.Invoke(this);
+                OnTimerComplete?.Invoke(this,false);
             }
         }
 
         public void StopTimer(bool executeOnComplete = false)
         {
-            OnTimerComplete?.Invoke(this);
+            TimeRemaining = 0;
+            OnTimerComplete?.Invoke(this,true);
             
             if (executeOnComplete)
                 _onComplete?.Invoke(_parameter);
@@ -113,7 +114,7 @@ namespace Tzipory.BaseSystem.TimeSystem
     
     public class Timer<T1,T2> : ITimer
     {
-        public event Action<ITimer>  OnTimerComplete;
+        public event Action<ITimer,bool>  OnTimerComplete;
         
         private readonly Action<T1,T2> _onComplete;
 
@@ -147,13 +148,14 @@ namespace Tzipory.BaseSystem.TimeSystem
             if (TimeRemaining <= 0)
             {
                 _onComplete?.Invoke(_parameter1,_parameter2);
-                OnTimerComplete?.Invoke(this);
+                OnTimerComplete?.Invoke(this,false);
             }
         }
 
         public void StopTimer(bool executeOnComplete = false)
         {
-            OnTimerComplete?.Invoke(this);
+            TimeRemaining = 0;
+            OnTimerComplete?.Invoke(this,true);
             
             if (executeOnComplete)
                 _onComplete?.Invoke(_parameter1,_parameter2);
@@ -162,7 +164,7 @@ namespace Tzipory.BaseSystem.TimeSystem
     
     public class Timer<T1,T2,T3> : ITimer
     {
-        public event Action<ITimer> OnTimerComplete;
+        public event Action<ITimer,bool> OnTimerComplete;
         
         private readonly Action<T1,T2,T3> _onComplete;
 
@@ -198,13 +200,14 @@ namespace Tzipory.BaseSystem.TimeSystem
             if (TimeRemaining <= 0)
             {
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3);
-                OnTimerComplete?.Invoke(this);
+                OnTimerComplete?.Invoke(this,false);
             }
         }
 
         public void StopTimer(bool executeOnComplete = false)
         {
-            OnTimerComplete?.Invoke(this);
+            TimeRemaining = 0;
+            OnTimerComplete?.Invoke(this,true);
             
             if (executeOnComplete)
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3);
@@ -213,7 +216,7 @@ namespace Tzipory.BaseSystem.TimeSystem
     
     public class Timer<T1,T2,T3,T4> : ITimer
     {
-        public event Action<ITimer> OnTimerComplete;
+        public event Action<ITimer,bool> OnTimerComplete;
         
         private readonly Action<T1,T2,T3,T4> _onComplete;
 
@@ -251,13 +254,14 @@ namespace Tzipory.BaseSystem.TimeSystem
             if (TimeRemaining <= 0)
             {
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3,_parameter4);
-                OnTimerComplete?.Invoke(this);
+                OnTimerComplete?.Invoke(this,false);
             }
         }
 
         public void StopTimer(bool executeOnComplete = false)
         {
-            OnTimerComplete?.Invoke(this);
+            TimeRemaining = 0;
+            OnTimerComplete?.Invoke(this,true);
             
             if (executeOnComplete)
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3,_parameter4);
@@ -266,7 +270,7 @@ namespace Tzipory.BaseSystem.TimeSystem
     
     public class Timer<T1,T2,T3,T4,T5> : ITimer
     {
-        public event Action<ITimer> OnTimerComplete;
+        public event Action<ITimer,bool> OnTimerComplete;
         
         private readonly Action<T1,T2,T3,T4,T5> _onComplete;
 
@@ -306,13 +310,14 @@ namespace Tzipory.BaseSystem.TimeSystem
             if (TimeRemaining <= 0)
             {
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3,_parameter4,_parameter5);
-                OnTimerComplete?.Invoke(this);
+                OnTimerComplete?.Invoke(this,false);
             }
         }
 
         public void StopTimer(bool executeOnComplete = false)
         {
-            OnTimerComplete?.Invoke(this);
+            TimeRemaining = 0;
+            OnTimerComplete?.Invoke(this,true);
             
             if (executeOnComplete)
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3,_parameter4,_parameter5);

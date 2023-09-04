@@ -12,7 +12,7 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
         PopUpEffectActionConfig _config;
         private float _duration;
 
-        protected override float Duration => _duration;
+        public override float Duration => _duration;
 
         public override void Init(EffectActionContainerConfig actionContainerConfig, IEntityVisualComponent visualComponent)
         {
@@ -24,28 +24,28 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
             //_duration = config.PopUpText_Config.TTL; //Not sure this is needed
         }
 
-        protected override void OnStartEffectAction()
+        public override void StartEffectAction()
         {
             VisualComponent.PopUpTexter.SpawnPopUp(_config.PopUpText_Config);
         }
 
-        protected override void OnProcessEffectAction()
+        public override void ProcessEffectAction()
         {
             //here we can process things that are intervals and not just one shots
         }
 
-        protected override void OnCompleteEffectAction()
+        public override void CompleteEffectAction()
         {
         }
 
-        protected override void OnUndoEffectAction()
+        public override void UndoEffectAction()
         {
             VisualComponent.SpriteRenderer.color = Color.white;
         }
 
-        protected override void OnInterruptEffectAction()
+        public override void InterruptEffectAction()
         {
-            OnUndoEffectAction();
+            UndoEffectAction();
         }
 
         #region PoolObject

@@ -53,7 +53,7 @@ namespace Helpers.Consts
             public const int WORKSHOP_ITEMS_FACILITY = 0;
         }
 
-        public enum Stats
+        public enum StatsId
         {
             Health,
             AttackDamage,
@@ -74,7 +74,9 @@ namespace Helpers.Consts
             ChainDuration,
             ChainAmount,
             Armor,
-            Regeneration
+            Regeneration,
+            CoreAttackDamage,
+            Modifier
         }
     }
 

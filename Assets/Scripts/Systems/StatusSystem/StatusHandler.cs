@@ -47,15 +47,15 @@ namespace Tzipory.EntitySystem.StatusSystem
             return  null;
         }
         
-        public Stat GetStat(Constant.Stats statToFind)
+        public Stat GetStat(Constant.StatsId statIdToFind)
         {
             foreach (var statHolder in _statHolders)
             {
-                if (statHolder.Stats.TryGetValue((int)statToFind, out Stat stat))
+                if (statHolder.Stats.TryGetValue((int)statIdToFind, out Stat stat))
                     return stat;
             }
 
-            Debug.LogError($"Stat ID: {statToFind} not found in StatusHandler of entity {_entity.GameEntity.name}");
+            Debug.LogError($"Stat ID: {statIdToFind} not found in StatusHandler of entity {_entity.GameEntity.name}");
             return  null;
         }
 
@@ -73,7 +73,7 @@ namespace Tzipory.EntitySystem.StatusSystem
             var statToEffect = GetStat(statusEffectConfig.AffectedStatId);
             
             //   TODO need to Interrupt stats
-            
+
             OnStatusEffectAdded?.Invoke(statusEffectConfig.EffectSequence);
             
             return statToEffect.AddStatusEffect(statusEffectConfig);

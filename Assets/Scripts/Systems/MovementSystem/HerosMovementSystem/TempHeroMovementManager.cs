@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Tzipory.BaseScripts;
+using Tzipory.BaseSystem.TimeSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +21,8 @@ namespace MovementSystem.HerosMovementSystem
 
         private bool _isValidClick;
 
+        private float _previousTimeRate;
+        
         [SerializeField] private Shadow _shadow;
 
         
@@ -47,7 +50,8 @@ namespace MovementSystem.HerosMovementSystem
             _shadow.SetShadow(target.transform, shadowSprite, range);
 
             Cursor.visible = false;
-
+            _previousTimeRate = GAME_TIME.GetCurrentTimeRate;
+            GAME_TIME.SetTimeStep(0.5f);
             OnAnyShamanSelected?.Invoke();
         }
 
@@ -59,7 +63,7 @@ namespace MovementSystem.HerosMovementSystem
             isCooldown = true;
             StartCoroutine(SetIsCooldownWaitOneFrame(false));
             //Invoke(nameof(SetIsCooldown),)
-
+            GAME_TIME.SetTimeStep(_previousTimeRate);
             OnAnyShamanDeselected?.Invoke();
         }
         private IEnumerator SetIsCooldownWaitOneFrame(bool isIt)

@@ -49,9 +49,13 @@ namespace Tzipory.EntitySystem.EntityComponents
             IsMoveing  = true;
         }
 
+        public void Stop()
+        {
+            agent.Stop();
+        }
+
         private void Update()
         {
-           
             if (_destination == Vector2.zero) return;
             
             if (Vector2.Distance(_destination, transform.position) > 0.2f) return;

@@ -13,8 +13,8 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
 {
     public abstract class BaseUnitEntityConfig : ScriptableObject, IConfigFile
     {
-        [SerializeField, Tooltip(""), TabGroup("Stats")]
-        private List<StatConfig> _statConfigs;
+        [SerializeField, Tooltip(""), TabGroup("StatsId")]
+        protected List<StatConfig> _statConfigs;
 
         [SerializeField, TabGroup("Abilities")]
         private AbilityConfig[] _abilityConfigs;
@@ -33,21 +33,21 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
         public abstract int ConfigObjectId { get; }
         public abstract int ConfigTypeId { get; }
 
-        private void OnValidate()
+        protected virtual void OnValidate()
         {
 #if UNITY_EDITOR
-            if (_statConfigs.Count != 0)
-                return;
-
-            _statConfigs.Add(new StatConfig() { _stats = Constant.Stats.Health });
-            _statConfigs.Add(new StatConfig() { _stats = Constant.Stats.InvincibleTime });
-            _statConfigs.Add(new StatConfig() { _stats = Constant.Stats.AttackDamage });
-            _statConfigs.Add(new StatConfig() { _stats = Constant.Stats.AttackRate });
-            _statConfigs.Add(new StatConfig() { _stats = Constant.Stats.TargetingRange });
-            _statConfigs.Add(new StatConfig() { _stats = Constant.Stats.AttackRange });
-            _statConfigs.Add(new StatConfig() { _stats = Constant.Stats.CritDamage });
-            _statConfigs.Add(new StatConfig() { _stats = Constant.Stats.CritChance });
-            _statConfigs.Add(new StatConfig() { _stats = Constant.Stats.MovementSpeed });
+            if (_statConfigs.Count == 0)
+            {
+                _statConfigs.Add(new StatConfig() { _statsId = Constant.StatsId.Health });
+                _statConfigs.Add(new StatConfig() { _statsId = Constant.StatsId.InvincibleTime });
+                _statConfigs.Add(new StatConfig() { _statsId = Constant.StatsId.AttackDamage });
+                _statConfigs.Add(new StatConfig() { _statsId = Constant.StatsId.AttackRate });
+                _statConfigs.Add(new StatConfig() { _statsId = Constant.StatsId.TargetingRange });
+                _statConfigs.Add(new StatConfig() { _statsId = Constant.StatsId.AttackRange });
+                _statConfigs.Add(new StatConfig() { _statsId = Constant.StatsId.CritDamage });
+                _statConfigs.Add(new StatConfig() { _statsId = Constant.StatsId.CritChance });
+                _statConfigs.Add(new StatConfig() { _statsId = Constant.StatsId.MovementSpeed });
+            }
 #endif
         }
     }

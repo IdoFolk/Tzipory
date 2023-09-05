@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Helpers;
 using UnityEngine;
 using PathCreation;
 using Tzipory.GamePlayLogic.ObjectPools;
@@ -119,7 +120,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
                 return;
             }
             
-            Debug.Log($"<color=#2eff00>WaveManager:</color> start enemyGroup-{_currentEnemyGroupIndex + 1} at {gameObject.name}");
+            Debug.Log($"<color={ColorLogHelper.WAVE_MANAGER_COLOR}>WaveManager:</color> start enemyGroup-{_currentEnemyGroupIndex} at {gameObject.name}");
         }
 
         foreach (var enemyGroup in _activeEnemyGroup)
@@ -143,7 +144,7 @@ public class WaveSpawner : MonoBehaviour , IProgress
         
         if (_currentEnemyGroupIndex >= _enemyGroupsConfig.Count)
         {
-            Debug.Log($"<color=#2eff00>WaveManager:</color> No more enemy group for {gameObject.name}");
+            Debug.Log($"<color={ColorLogHelper.WAVE_MANAGER_COLOR}>WaveManager:</color> No more enemy group for {gameObject.name}");
             IsSpawning = false;
             return false;
         }

@@ -21,7 +21,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 
     public PathCreator PatrolPath => _patrolPath;
 
-    public EntityType EntityType => EntityType.Hero;
+    public EntityType EntityType => EntityType.Core;
 
     public Stat InvincibleTime => throw new System.NotImplementedException();
 
@@ -72,10 +72,10 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
         OnHealthChanged?.Invoke();
 
         if (IsEntityDead)
-            EntityDead();
+            StartDeathSequence();
     }
 
-    public void EntityDead()
+    public void StartDeathSequence()
     {
         print("GAME OVER!");
     }

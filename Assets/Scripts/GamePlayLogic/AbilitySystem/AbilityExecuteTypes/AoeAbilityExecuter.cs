@@ -21,7 +21,7 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
         {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.AoeRadius, out var aoeRadius))
+                if (Stats.TryGetValue((int)Constant.StatsId.AoeRadius, out var aoeRadius))
                     return aoeRadius;
 
                 throw new Exception($"aoeRadius not found in entity {Caster.GameEntity.name}");
@@ -32,7 +32,7 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
         {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.AoeDuration, out var aoeDuration))
+                if (Stats.TryGetValue((int)Constant.StatsId.AoeDuration, out var aoeDuration))
                     return aoeDuration;
 
                 throw new Exception($"aoeDuration not found in entity {Caster.GameEntity.name}");
@@ -59,8 +59,9 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
             OnEnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
             if(abilityConfig.DoExitEffects)
                 OnExitStatusEffects.AddRange(abilityConfig.OnExitStatusEffectConfigs);
-            Stats.Add((int)Constant.Stats.AoeRadius,new Stat("AoeRadius", abilityConfig.AoeRadius, int.MaxValue, (int)Constant.Stats.AoeRadius));
-            Stats.Add((int)Constant.Stats.AoeDuration, new Stat("AoeDuration", abilityConfig.AoeDuration, int.MaxValue, (int)Constant.Stats.AoeDuration));
+            
+            Stats.Add((int)Constant.StatsId.AoeRadius,new Stat("AoeRadius", abilityConfig.AoeRadius, int.MaxValue, (int)Constant.StatsId.AoeRadius));
+            Stats.Add((int)Constant.StatsId.AoeDuration, new Stat("AoeDuration", abilityConfig.AoeDuration, int.MaxValue, (int)Constant.StatsId.AoeDuration));
 
             _aoePrefab = Resources.Load<GameObject>(AoePrefabPath);
         }
@@ -74,11 +75,17 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
 
         public void Execute(IEntityTargetAbleComponent target)
         {
+            if (target.EntityType == Caster.EntityType)
+                return;
+
             foreach (var statusEffect in OnEnterStatusEffects)
                 target.StatusHandler.AddStatusEffect(statusEffect);
         }
         public void ExecuteOnExit(IEntityTargetAbleComponent target)
         {
+            if (target.EntityType == Caster.EntityType)
+                return;
+
             foreach (var statusEffect in OnExitStatusEffects)
                 target.StatusHandler.AddStatusEffect(statusEffect);
         }

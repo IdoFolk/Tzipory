@@ -1,6 +1,5 @@
 ﻿using System;
 using SerializeData.VisualSystemSerializeData;
-using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Tools.Interface;
 
@@ -10,99 +9,35 @@ namespace Tzipory.VisualSystem.EffectSequence
     {
         public event Action<BaseEffectAction> OnEffectActionComplete;
         
-        private float _startDelay;
-        
-        private ITimer _startDelayTimer;
-        private ITimer _endDelayTimer;
-        private ITimer _completeTimer;
-        
-        public EffectActionStartType ActionStartType { get; private set; }
-        public bool IsActive { get; private set; }
-        
-        protected abstract float Duration { get; }
-        protected IEntityVisualComponent VisualComponent { get; private set; }
+        #region Proprty
 
-        private bool _disableUndo;
-        private bool IsStarted { get; set; }
-        
+        public EffectActionStartType ActionStartType { get; private set; }
+        protected IEntityVisualComponent VisualComponent { get; private set; }
+        public abstract float Duration { get; }
+        public bool DisableUndo { get; private set; }
         public bool IsInitialization { get; private set; }
         
+        #endregion
+
         protected BaseEffectAction()
         {
-            IsActive = false;
-            IsStarted = false;
             IsInitialization = false;
         }
-        
+
+        #region PublicMethod
+
         public virtual void Init(EffectActionContainerConfig actionContainerConfig, IEntityVisualComponent visualComponent)
         {
             VisualComponent = visualComponent;
-            _startDelay = actionContainerConfig.StartDelay;
             ActionStartType = actionContainerConfig.EffectActionStart;
-            _disableUndo = actionContainerConfig.DisableUndo;
+            DisableUndo = actionContainerConfig.DisableUndo;
             IsInitialization = true;
         }
-        
-        public void ActivateActionEffect()                                                           
-        {
-            if (!IsInitialization)
-                throw  new Exception("EffectAction not initialized!");
-            
-            IsActive = true;                                                                         
-            _startDelayTimer = VisualComponent.GameEntity.EntityTimer.StartNewTimer(_startDelay);    
-        }                                                                                            
 
-        private void StartEffectAction()
-        {
-            IsStarted = true;
-            OnStartEffectAction();
-            _completeTimer = VisualComponent.GameEntity.EntityTimer.StartNewTimer(Duration);
-        }
-        
-        private void CompleteEffectAction()
-        {
-            if (!_disableUndo)
-                OnUndoEffectAction();
-            
-            OnCompleteEffectAction();
-            
-            IsActive = false;
-            IsStarted = false;
-            
-            OnEffectActionComplete?.Invoke(this);
-        }
+        #endregion
 
-        public void InterruptEffectAction()
-        {
-            IsStarted = false;
-            IsActive = false;
-            
-            VisualComponent.GameEntity.EntityTimer.StopTimer(_completeTimer);
-            //need to add more logic!
+        #region PrivateMethod
 
-            if (!_disableUndo)
-                OnUndoEffectAction();
-
-            OnInterruptEffectAction();
-        }
-        
-        public void UpdateEffectAction()
-        {
-            if (!IsActive)
-                return;
-
-            if (!_startDelayTimer.IsDone)
-                return;
-
-            if (!IsStarted)
-                StartEffectAction();
-
-            OnProcessEffectAction();
-
-            if (_completeTimer.IsDone)
-                CompleteEffectAction();
-        }
-        
         protected T GetConfig<T>(BaseEffectActionConfig effectActionConfig) where T : BaseEffectActionConfig
         {
             if (effectActionConfig is T effectActionSo)
@@ -111,11 +46,17 @@ namespace Tzipory.VisualSystem.EffectSequence
             throw new Exception($"Can't cast {effectActionConfig.GetType()} to {typeof(T)}");
         }
         
-        protected abstract void OnStartEffectAction();
-        protected abstract void OnProcessEffectAction();
-        protected abstract void OnCompleteEffectAction();
-        protected abstract void OnUndoEffectAction();
-        protected abstract void OnInterruptEffectAction();
+        #endregion
+
+        #region abstractMethod
+
+        public abstract void UndoEffectAction();
+        public abstract void StartEffectAction();
+        public abstract void ProcessEffectAction();
+        public abstract void CompleteEffectAction();
+        public abstract void InterruptEffectAction();
+
+        #endregion
     }
 
     public enum EffectActionStartType

@@ -17,7 +17,7 @@ namespace Tzipory.SerializeData
     {
         [SerializeField,TabGroup("General"),ReadOnly] private string _entityName;
         [SerializeField,TabGroup("General"),ReadOnly] private int _targetingPriority;
-        [SerializeField,TabGroup("Stats"),ReadOnly] private List<StatSerializeData> _statSerializeDatas;
+        [SerializeField,TabGroup("StatsId"),ReadOnly] private List<StatSerializeData> _statSerializeDatas;
 
         [SerializeField, TabGroup("Ability"), ReadOnly] private AbilitySerializeData[] _ability;
         [SerializeField, TabGroup("Ability"), ReadOnly] private AbilityConfig[] _abilityConfigs;//temp

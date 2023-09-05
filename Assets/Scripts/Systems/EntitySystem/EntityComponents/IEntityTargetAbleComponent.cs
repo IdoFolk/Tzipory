@@ -13,6 +13,7 @@ namespace Tzipory.EntitySystem.EntityComponents
     {
         Hero,
         Enemy,
-        Structure
+        Structure,
+        Core
     }
 }

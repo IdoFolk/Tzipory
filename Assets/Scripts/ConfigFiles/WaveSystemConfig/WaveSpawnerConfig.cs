@@ -12,7 +12,7 @@ namespace Tzipory.SerializeData.LevalSerializeData
         
         [SerializeField,ReadOnly,PropertyOrder(-3)] private Color _waveSpawnerColor;
         [SerializeField,PropertyOrder(-2)] private float _delayBetweenEnemyGroup;
-        [SerializeField,PropertyOrder(1)] private List<EnemyGroupConfig> _enemyGroups;
+        [SerializeField, PropertyOrder(1)] private List<EnemyGroupConfig> _enemyGroups = new List<EnemyGroupConfig>();
 
         private float _startTime;
         

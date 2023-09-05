@@ -841,7 +841,7 @@ PrefabInstance:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelConfig
       value: 
-      objectReference: {fileID: 11400000, guid: a7c6cbea3d43f1245ae64b78cf00e486, type: 2}
+      objectReference: {fileID: 11400000, guid: 06b8e78b430d1a247b55094e69f053e1, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelParent
       value: 
@@ -1262,6 +1262,12 @@ PrefabInstance:
     - target: {fileID: 7441120970068104235, guid: 1801a3d5d1a357747b3683fb4c2abb0c, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568239965125765166, guid: 1801a3d5d1a357747b3683fb4c2abb0c, type: 3}
+      propertyPath: m_text
+      value: '0
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 8619261269038550020, guid: 1801a3d5d1a357747b3683fb4c2abb0c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1774,10 +1780,6 @@ PrefabInstance:
     - target: {fileID: 4495618467026156135, guid: 9c3032910c8036644bde17d12bf15cbe, type: 3}
       propertyPath: m_Name
       value: End Level Screen UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495618467026156135, guid: 9c3032910c8036644bde17d12bf15cbe, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4755847922635961243, guid: 9c3032910c8036644bde17d12bf15cbe, type: 3}
       propertyPath: m_AnchorMax.y

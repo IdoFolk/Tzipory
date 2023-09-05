@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Tzipory.SerializeData.LevalSerializeData
 {
-    [CreateAssetMenu(fileName = "NewLevelConfig", menuName = "ScriptableObjects/New _levelToOpen config", order = 0)]
+    [CreateAssetMenu(fileName = "NewLevelConfig", menuName = "ScriptableObjects/New level config", order = 0)]
     public class LevelConfig : ScriptableObject
     {
         [SerializeField,PropertyOrder(-2)] private int _levelId;

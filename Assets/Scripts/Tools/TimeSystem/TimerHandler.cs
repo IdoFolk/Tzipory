@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Helpers;
 using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Tzipory.BaseSystem.TimeSystem
@@ -8,7 +11,6 @@ namespace Tzipory.BaseSystem.TimeSystem
     [Serializable]
     public class TimerHandler
     {
-        private Dictionary<string, ITimer> _timersDictionary;
         private List<ITimer> _timersList;
 
 #if UNITY_EDITOR
@@ -17,14 +19,13 @@ namespace Tzipory.BaseSystem.TimeSystem
 
         public TimerHandler()
         {
-            _timersDictionary = new Dictionary<string, ITimer>();
             _timersList = new List<ITimer>();
 #if UNITY_EDITOR
             _timerSerializeDatas = new List<TimerSerializeData>();
 #endif
         }
 
-        public ITimer StartNewTimer(float time,Action onComplete,string timerName = null)
+        public ITimer StartNewTimer(float time,string timerName,Action onComplete = null)
         {
             if (!ValidateTime(timerName))
                 return null;
@@ -36,7 +37,7 @@ namespace Tzipory.BaseSystem.TimeSystem
             return  timer;
         }
         
-        public ITimer StartNewTimer<T1>(float time,Action<T1> onComplete,ref T1 parameter ,string timerName = null)
+        public ITimer StartNewTimer<T1>(float time,string timerName,Action<T1> onComplete,ref T1 parameter)
         {
             if (!ValidateTime(timerName))
                 return null;
@@ -48,7 +49,7 @@ namespace Tzipory.BaseSystem.TimeSystem
             return timer;
         }
         
-        public ITimer StartNewTimer<T1,T2>(float time,Action<T1,T2> onComplete,ref T1 parameter1,ref T2 parameter2,string timerName = null)
+        public ITimer StartNewTimer<T1,T2>(float time,string timerName,Action<T1,T2> onComplete,ref T1 parameter1,ref T2 parameter2)
         {
             if (!ValidateTime(timerName))
                 return null;
@@ -60,7 +61,7 @@ namespace Tzipory.BaseSystem.TimeSystem
             return timer;
         }
         
-        public ITimer StartNewTimer<T1,T2,T3>(float time,Action<T1,T2,T3> onComplete,ref T1 parameter1,ref T2 parameter2, ref T3 parameter3,string timerName = null)
+        public ITimer StartNewTimer<T1,T2,T3>(float time,string timerName,Action<T1,T2,T3> onComplete,ref T1 parameter1,ref T2 parameter2, ref T3 parameter3)
         {
             if (!ValidateTime(timerName))
                 return null;
@@ -72,7 +73,7 @@ namespace Tzipory.BaseSystem.TimeSystem
             return timer;
         }
         
-        public ITimer StartNewTimer<T1,T2,T3,T4>(float time,Action<T1,T2,T3,T4> onComplete,ref T1 parameter1,ref T2 parameter2, ref T3 parameter3, ref T4 parameter4,string timerName = null)
+        public ITimer StartNewTimer<T1,T2,T3,T4>(float time,string timerName,Action<T1,T2,T3,T4> onComplete,ref T1 parameter1,ref T2 parameter2, ref T3 parameter3, ref T4 parameter4)
         {
             if (!ValidateTime(timerName))
                 return null;
@@ -84,7 +85,7 @@ namespace Tzipory.BaseSystem.TimeSystem
             return timer;
         }
         
-        public ITimer StartNewTimer<T1,T2,T3,T4,T5>(float time,Action<T1,T2,T3,T4,T5> onComplete,ref T1 parameter1,ref T2 parameter2, ref T3 parameter3, ref T4 parameter4, ref T5 parameter5,string timerName = null)
+        public ITimer StartNewTimer<T1,T2,T3,T4,T5>(float time,string timerName, System.Action<T1,T2,T3,T4,T5> onComplete,ref T1 parameter1,ref T2 parameter2, ref T3 parameter3, ref T4 parameter4, ref T5 parameter5)
         {
             if (!ValidateTime(timerName))
                 return null;
@@ -95,59 +96,18 @@ namespace Tzipory.BaseSystem.TimeSystem
             
             return timer;
         }
-        
-        public ITimer StartNewTimer(float time,string timerName = null)
-        {
-            if (!ValidateTime(timerName))
-                return null;
-            
-            var timer = new Timer(timerName,time);
-            
-            AddTimer(timer);
-            
-            return timer;
-        }
-
-        public void StopTimer(ITimer timer)
-        {
-            if (!string.IsNullOrEmpty(timer.TimerName))
-            {
-                if (_timersDictionary.TryGetValue(timer.TimerName, out var value))
-                {
-                    _timersDictionary.Remove(timer.TimerName);
-                    return;
-                }
-            }
-
-            if (_timersList.Contains(timer))
-            {
-                _timersList.Remove(timer);
-                return;
-            }
-
-            Debug.LogWarning("can not find a timer");
-        }
 
         private bool ValidateTime(string timerName = null)
         {
-            if (!string.IsNullOrEmpty(timerName))
-            {
-                if (_timersDictionary.ContainsKey(timerName))
-                {
-                    Debug.LogError("Timer with name " + timerName + " already exists");
-                    return false;
-                }
-            }
-            return  true;
+            //not in use for now
+            return true;
         }
 
         private void AddTimer(ITimer timer)
         {
-            if (!string.IsNullOrEmpty(timer.TimerName))
-                _timersDictionary.Add(timer.TimerName, timer);
-            else
-                _timersList.Add(timer);
+            _timersList.Add(timer);
 #if UNITY_EDITOR
+            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Timer Handler:</color><color={ColorLogHelper.GREEN}> Start</color> timer {timer.TimerName} at time {timer.TimeRemaining}");
             _timerSerializeDatas.Add(new TimerSerializeData(timer));
 #endif
             timer.OnTimerComplete += TimeComplete;
@@ -155,9 +115,6 @@ namespace Tzipory.BaseSystem.TimeSystem
         
         public void TickAllTimers()
         {
-            foreach (var keyValuePair in _timersDictionary)
-                keyValuePair.Value.TickTimer();
-
             for (int i = 0; i < _timersList.Count; i++)
                 _timersList[i].TickTimer();
 #if UNITY_EDITOR
@@ -166,8 +123,15 @@ namespace Tzipory.BaseSystem.TimeSystem
 #endif
         }
         
-        private void TimeComplete(ITimer timer)
+        private void TimeComplete(ITimer timer,bool isStopped)
         {
+
+#if UNITY_EDITOR
+            if (isStopped)
+                Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Timer Handler:</color><color={ColorLogHelper.RED}>Stop</color> timer {timer.TimerName} at time reminding: {timer.TimeRemaining}");
+            else
+                Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Timer Handler:</color><color={ColorLogHelper.RED}>Complete</color> timer {timer.TimerName} at time reminding: {timer.TimeRemaining}");
+#endif
             
 #if UNITY_EDITOR
             for (int i = 0; i < _timerSerializeDatas.Count; i++)
@@ -177,18 +141,6 @@ namespace Tzipory.BaseSystem.TimeSystem
                 break;
             }
 #endif
-            
-            if (!string.IsNullOrEmpty(timer.TimerName))
-            {
-                if (_timersDictionary.TryGetValue(timer.TimerName, out var value))
-                {
-                    _timersDictionary.Remove(timer.TimerName);
-                    return;
-                }
-
-                Debug.LogError($"can not find time by name : {timer.TimerName}");
-            }
-            
             if (_timersList.Contains(timer))
             {
                 _timersList.Remove(timer);

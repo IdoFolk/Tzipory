@@ -14,7 +14,7 @@ namespace Tzipory.EntitySystem.StatusSystem
     {
         [Header("Status Effect Config")] 
         [SerializeField, Tooltip("")] private string _statusEffectName;
-        [SerializeField, Tooltip("")] private Constant.Stats _affectedStat;
+        [SerializeField, Tooltip("")] private Constant.StatsId _affectedStatId;
         [SerializeField, Tooltip("")] private EffectType _effectType;
         //[SerializeField, Tooltip("")] private List<StatusEffectConfig> _statusEffectToInterrupt;
         [Header("Stat Modifiers")] 
@@ -34,7 +34,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         
         public EffectType EffectType => _effectType;
 
-        public int AffectedStatId => (int)_affectedStat;
+        public int AffectedStatId => (int)_affectedStatId;
         public StatusEffectType StatusEffectType => _statusEffectType;
 
         public bool DisableDuration => _disableDuration;

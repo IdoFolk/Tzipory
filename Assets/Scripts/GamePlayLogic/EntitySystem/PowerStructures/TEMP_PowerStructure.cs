@@ -35,20 +35,20 @@ public class TEMP_PowerStructure : BaseGameEntity , ITargetableReciever
         _proximityIndicatorHandler.Disable();
     }
     
-    public void RecieveCollision(Collider2D other, IOStatType ioStatType)
+    public void RecieveCollision(Collider2D other, IOType ioType)
     {
-        switch (ioStatType)
+        switch (ioType)
         {
-            case IOStatType.In:
+            case IOType.In:
                 if(other.gameObject.CompareTag("ShadowShaman")) 
                     _proximityIndicatorHandler.ChangeColor(_activeColor);
                 break;
-            case IOStatType.Out:
+            case IOType.Out:
                 if (other.gameObject.CompareTag("ShadowShaman"))
                     _proximityIndicatorHandler.ResetColor();
                 break;
             default:
-                throw new ArgumentOutOfRangeException(nameof(ioStatType), ioStatType, null);
+                throw new ArgumentOutOfRangeException(nameof(ioType), ioType, null);
         }
     }
 

@@ -13,23 +13,23 @@ MonoBehaviour:
   m_Name: Nadia_Shaman
   m_EditorClassIdentifier: 
   _statConfigs:
-  - _stats: 0
+  - _statsId: 0
     _baseValue: 400
-  - _stats: 8
+  - _statsId: 8
     _baseValue: 0
-  - _stats: 1
+  - _statsId: 1
     _baseValue: 40
-  - _stats: 2
+  - _statsId: 2
     _baseValue: 0.9
-  - _stats: 4
+  - _statsId: 4
     _baseValue: 10
-  - _stats: 3
+  - _statsId: 3
     _baseValue: 10
-  - _stats: 6
+  - _statsId: 6
     _baseValue: 130
-  - _stats: 7
+  - _statsId: 7
     _baseValue: 15
-  - _stats: 5
+  - _statsId: 5
     _baseValue: 3.5
   _abilityConfigs:
   - {fileID: 11400000, guid: 75928f8badccef2498c77125ef0f7375, type: 2}
@@ -38,3 +38,4 @@ MonoBehaviour:
     _icon: {fileID: 21300000, guid: fc2805c32b6ccbe429d23e618777dbee, type: 3}
   _targetingPriority: 6
   _shamanId: 1
+  _decisionInterval: 0

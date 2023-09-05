@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PathCreation;
 using UnityEngine;
@@ -15,11 +16,12 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 
     [SerializeField,ReadOnly] private Stat _hpStat;
 
+    public event Action<IEntityTargetAbleComponent> OnTargetDisable;
     public bool IsTargetAble => true;
 
     public PathCreator PatrolPath => _patrolPath;
 
-    public EntityType EntityType => EntityType.Hero;
+    public EntityType EntityType => EntityType.Core;
 
     public Stat InvincibleTime => throw new System.NotImplementedException();
 
@@ -70,8 +72,11 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
         OnHealthChanged?.Invoke();
 
         if (IsEntityDead)
-        {
-            print("GAME OVER!");
-        }
+            StartDeathSequence();
+    }
+
+    public void StartDeathSequence()
+    {
+        print("GAME OVER!");
     }
 }

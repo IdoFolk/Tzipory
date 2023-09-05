@@ -16,7 +16,7 @@ namespace Tzipory.SerializeData.StatSystemSerilazeData
         
         [Header("Status Effect Config")] 
         [SerializeField, Tooltip("")] private string _StatusEffectName;
-        [SerializeField, Tooltip("")] private Constant.Stats _affectedStat;
+        [SerializeField, Tooltip("")] private Constant.StatsId _affectedStatId;
         [SerializeField, Tooltip("")] private List<StatusEffectConfig> _statusEffectToInterrupt;
         [Header("Stat Modifiers")] 
         [SerializeField, Tooltip("")] private StatusEffectType _statusEffectType;

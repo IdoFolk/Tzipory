@@ -1,11 +1,10 @@
-﻿
-
-using System;
+﻿using System;
 
 namespace Tzipory.EntitySystem.EntityComponents
 {
     public interface IEntityTargetAbleComponent : IEntityHealthComponent , IEntityStatusEffectComponent
     {
+        public event Action<IEntityTargetAbleComponent> OnTargetDisable;
         public bool IsTargetAble { get; }
         public EntityType EntityType { get; }
     }
@@ -14,6 +13,7 @@ namespace Tzipory.EntitySystem.EntityComponents
     {
         Hero,
         Enemy,
-        Structure
+        Structure,
+        Core
     }
 }

@@ -52,7 +52,7 @@ namespace Enemes
         {
             if (IsAttckingCore)
                 Attack();
-            
+
             if (_currentDecisionInterval < 0)
             {
                 if (!_isAttacking)
@@ -112,20 +112,32 @@ namespace Enemes
             if (TargetingHandler.CurrentTarget == null)
                 return;
             
-            if (timer >= StatusHandler.GetStat(Constant.Stats.AttackRate).CurrentValue)
+            if (timer >= StatusHandler.GetStat(Constant.StatsId.AttackRate).CurrentValue)
             {
                 timer = 0f;
-                TargetingHandler.CurrentTarget.TakeDamage(StatusHandler.GetStat(Constant.Stats.AttackDamage).CurrentValue, false);
+                float attackDamage = 0;
+
+                attackDamage = TargetingHandler.CurrentTarget.EntityType == EntityType.Core 
+                    ? StatusHandler.GetStat(Constant.StatsId.CoreAttackDamage).CurrentValue 
+                    : StatusHandler.GetStat(Constant.StatsId.AttackDamage).CurrentValue;
+                
+                TargetingHandler.CurrentTarget.TakeDamage(attackDamage, false);
             }
             else
             {
                 timer += GAME_TIME.GameDeltaTime;
-                
             }
         }
 
-        public override void OnEntityDead()
+        public override void StartDeathSequence()
         {
+            base.StartDeathSequence();
+            _tempBasicMoveComponent.Stop();
+        }
+
+        protected override void EntityDied()
+        {
+            base.EntityDied();
             Dispose();
         }
 
@@ -136,6 +148,8 @@ namespace Enemes
         public void Dispose()
         {
             OnDispose?.Invoke(this);
+            EffectSequenceHandler.Reset();
+            TargetingHandler.Reset();
             gameObject.SetActive(false);
         }
 

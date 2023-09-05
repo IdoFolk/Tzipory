@@ -136,7 +136,7 @@ MonoBehaviour:
   _clickHelper: {fileID: 6061506417753830879}
   _spriteRenderer: {fileID: 8720115925193685355}
   _winNodeColor: {r: 0.7057289, g: 0.9622642, b: 0.5582948, a: 0.5019608}
-  _avilableNodeColor: {r: 0.9647059, g: 0.7752974, b: 0.5686275, a: 0.5019608}
+  _avilableNodeColor: {r: 0.9647059, g: 0.7752974, b: 0.5686275, a: 0.6862745}
 --- !u!1001 &329112140069368356
 PrefabInstance:
   m_ObjectHideFlags: 0

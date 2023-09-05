@@ -15,7 +15,7 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
         private Vector3 _originalScale;
         private Vector3 _originalRotation;
 
-        protected override float Duration
+        public override float Duration
         {
             get
             {
@@ -44,7 +44,7 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
             _transformEffectActionConfig  = config;
         }
 
-        protected override void OnStartEffectAction()
+        public override void StartEffectAction()
         {
             _originalPosition = VisualComponent.EntityTransform.position;
             _originalScale = VisualComponent.EntityTransform.localScale;
@@ -53,25 +53,25 @@ namespace Tzipory.VisualSystem.EffectSequence.EffectType
             VisualComponent.EntityTransform.Transition(_transformEffectActionConfig);
         }
 
-        protected override void OnProcessEffectAction()
+        public override void ProcessEffectAction()
         {
         }
 
-        protected override void OnCompleteEffectAction()
+        public override void CompleteEffectAction()
         {
             VisualComponent.EntityTransform.Move(_originalPosition,_transformEffectActionConfig);
             VisualComponent.EntityTransform.Scale(_originalScale,_transformEffectActionConfig);
             VisualComponent.EntityTransform.Rotate(_originalRotation,_transformEffectActionConfig);
         }
 
-        protected override void OnUndoEffectAction()
+        public override void UndoEffectAction()
         {
-            OnCompleteEffectAction();
+            CompleteEffectAction();
         }
 
-        protected override void OnInterruptEffectAction()
+        public override void InterruptEffectAction()
         {
-            OnCompleteEffectAction();
+            CompleteEffectAction();
         }
 
         #region PoolObject

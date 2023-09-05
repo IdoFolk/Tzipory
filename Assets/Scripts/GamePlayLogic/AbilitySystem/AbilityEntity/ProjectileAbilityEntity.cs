@@ -34,7 +34,7 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
                 Destroy(gameObject);
         }
 
-        public void RecieveCollision(Collider2D other, IOStatType ioStatType)
+        public void RecieveCollision(Collider2D other, IOType ioType)
         {
             
         }
@@ -43,6 +43,9 @@ namespace Tzipory.AbilitiesSystem.AbilityEntity
         {
             if (targetable.EntityInstanceID == _abilityExecutor.Caster.EntityInstanceID) return;
             
+            // if (targetable.EntityType == Caster.EntityType)
+            //     return;
+
             _abilityExecutor.Init(targetable);
             _penetrationNumber--;
         }

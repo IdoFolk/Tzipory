@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Helpers;
 using Helpers.Consts;
 using SerializeData.VisualSystemSerializeData;
 using Sirenix.OdinInspector;
@@ -24,7 +25,7 @@ namespace Tzipory.EntitySystem.Entitys
         #region Fields
 
 #if UNITY_EDITOR
-        [SerializeField, ReadOnly,TabGroup("Stats")] private List<Stat> _stats;
+        [SerializeField, ReadOnly,TabGroup("StatsId")] private List<Stat> _stats;
 #endif
         [SerializeField,TabGroup("Component")] private Transform _particleEffectPosition;
         [SerializeField,TabGroup("Component")] private SoundHandler _soundHandler;
@@ -47,6 +48,8 @@ namespace Tzipory.EntitySystem.Entitys
         
         private float  _currentInvincibleTime;
 
+        private bool _startedDeathSequence;
+
         #endregion
 
         #region Proprty
@@ -67,90 +70,96 @@ namespace Tzipory.EntitySystem.Entitys
         public bool IsDamageable { get; private set; }
         public bool IsEntityDead => Health.CurrentValue <= 0;
         
-        public Stat Health  
+        //need to remove this and only use the Dictionary!!!
+        #region StatsId
+
+         public Stat Health  
         {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.Health, out var health))
+                if (Stats.TryGetValue((int)Constant.StatsId.Health, out var health))
                     return health;
                 
-                throw new Exception($"{Constant.Stats.Health} not found in entity {GameEntity.name}");
+                throw new Exception($"{Constant.StatsId.Health} not found in entity {GameEntity.name}");
             }
         }
         public Stat InvincibleTime  {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.InvincibleTime, out var invincibleTime))
+                if (Stats.TryGetValue((int)Constant.StatsId.InvincibleTime, out var invincibleTime))
                     return invincibleTime;
                 
-                throw new Exception($"{Constant.Stats.InvincibleTime} not found in entity {GameEntity.name}");
+                throw new Exception($"{Constant.StatsId.InvincibleTime} not found in entity {GameEntity.name}");
             }
         }
         public Stat AttackDamage  {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.AttackDamage, out var attackDamage))
+                if (Stats.TryGetValue((int)Constant.StatsId.AttackDamage, out var attackDamage))
                     return attackDamage;
                 
-                throw new Exception($"{Constant.Stats.AttackDamage} not found in entity {GameEntity.name}");
+                throw new Exception($"{Constant.StatsId.AttackDamage} not found in entity {GameEntity.name}");
             }
         }
         public Stat CritDamage  {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.CritDamage, out var critDamage))
+                if (Stats.TryGetValue((int)Constant.StatsId.CritDamage, out var critDamage))
                     return critDamage;
                 
-                throw new Exception($"{Constant.Stats.CritDamage} not found in entity {GameEntity.name}");
+                throw new Exception($"{Constant.StatsId.CritDamage} not found in entity {GameEntity.name}");
             }
         }
         public Stat CritChance {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.CritChance, out var critChance))
+                if (Stats.TryGetValue((int)Constant.StatsId.CritChance, out var critChance))
                     return critChance;
                 
-                throw new Exception($"{Constant.Stats.CritChance} not found in entity {GameEntity.name}");
+                throw new Exception($"{Constant.StatsId.CritChance} not found in entity {GameEntity.name}");
             }
         }
         public Stat AttackRate {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.AttackRate, out var attackRate))
+                if (Stats.TryGetValue((int)Constant.StatsId.AttackRate, out var attackRate))
                     return attackRate;
                 
-                throw new Exception($"{Constant.Stats.AttackRate} not found in entity {GameEntity.name}");
+                throw new Exception($"{Constant.StatsId.AttackRate} not found in entity {GameEntity.name}");
             }
         }
         public Stat AttackRange  {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.AttackRange, out var attackRange))
+                if (Stats.TryGetValue((int)Constant.StatsId.AttackRange, out var attackRange))
                     return attackRange;
                 
-                throw new Exception($"{Constant.Stats.AttackRange} not found in entity {GameEntity.name}");
+                throw new Exception($"{Constant.StatsId.AttackRange} not found in entity {GameEntity.name}");
             }
         }
         public Stat MovementSpeed  {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.MovementSpeed, out var movementSpeed))
+                if (Stats.TryGetValue((int)Constant.StatsId.MovementSpeed, out var movementSpeed))
                     return movementSpeed;
                 
-                throw new Exception($"{Constant.Stats.MovementSpeed} not found in entity {GameEntity.name}");
+                throw new Exception($"{Constant.StatsId.MovementSpeed} not found in entity {GameEntity.name}");
             }
         }
         public Stat TargetingRange {
             get
             {
-                if (Stats.TryGetValue((int)Constant.Stats.TargetingRange, out var targetingRange))
+                if (Stats.TryGetValue((int)Constant.StatsId.TargetingRange, out var targetingRange))
                     return targetingRange;
                 
-                throw new Exception($"{Constant.Stats.TargetingRange} not found in entity {GameEntity.name}");
+                throw new Exception($"{Constant.StatsId.TargetingRange} not found in entity {GameEntity.name}");
             }
         }
+
+        #endregion
         
-        public bool IsTargetAble { get; }
+        public event Action<IEntityTargetAbleComponent> OnTargetDisable;
+        public bool IsTargetAble { get; private set; }//not in use!
         
         public EntityType EntityType { get; protected set; }
         public Vector2 ShotPosition => _shotPosition.position;
@@ -195,7 +204,7 @@ namespace Tzipory.EntitySystem.Entitys
             _onGetHit.SequenceName = "OnGetHit";
             _onGetCritHit.SequenceName = "OnGetCritHit";
             
-            var effectSequence = new EffectSequenceConfig[]
+            var effectSequence = new[]
             {
                 _onDeath,
                 _onAttack,
@@ -221,6 +230,10 @@ namespace Tzipory.EntitySystem.Entitys
                 _hpBarConnector.gameObject.SetActive(false);
             
             gameObject.SetActive(true);
+
+            _startedDeathSequence = false;
+
+            IsTargetAble = true;
             
             IsInitialization = true;
         }
@@ -274,6 +287,17 @@ namespace Tzipory.EntitySystem.Entitys
 
             if (!IsInitialization)
                 return;
+            
+            EffectSequenceHandler.UpdateEffectHandler();
+            
+            if (IsEntityDead)
+            {
+                if (_startedDeathSequence)
+                    return;
+                
+                StartDeathSequence();
+                return;
+            }
 
             HealthComponentUpdate();
             StatusHandler.UpdateStatHandler();
@@ -281,7 +305,6 @@ namespace Tzipory.EntitySystem.Entitys
             if (TargetingHandler.CurrentTarget == null || TargetingHandler.CurrentTarget.IsEntityDead)
                 TargetingHandler.GetPriorityTarget();
             
-            EffectSequenceHandler.UpdateEffectHandler();
             
             UpdateEntity();
         }
@@ -393,9 +416,6 @@ namespace Tzipory.EntitySystem.Entitys
                     _currentInvincibleTime = InvincibleTime.CurrentValue;
                 }
             }
-
-            if (Health.CurrentValue < 0)
-                OnEntityDead();
         }
 
         #endregion
@@ -405,7 +425,28 @@ namespace Tzipory.EntitySystem.Entitys
         public void SetAttackTarget(IEntityTargetAbleComponent target) => TargetingHandler.SetAttackTarget(target);
 
         public abstract void Attack();
-        public abstract void OnEntityDead();
+
+        public virtual void StartDeathSequence()
+        {
+            _startedDeathSequence = true;
+#if UNITY_EDITOR
+            Debug.Log($"{name} as started death sequence");
+#endif
+            
+            IsTargetAble = false;
+            IsDamageable = false;
+                
+            OnTargetDisable?.Invoke(this);
+            EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.DEATH,EntityDied);
+        }
+
+        protected virtual void EntityDied()
+        {
+            IsInitialization = false;
+#if UNITY_EDITOR
+            Debug.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as died!");
+#endif
+        }
 
         #endregion
 

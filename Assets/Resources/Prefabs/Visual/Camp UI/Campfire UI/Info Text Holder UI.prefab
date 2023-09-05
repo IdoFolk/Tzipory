@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 18
-  m_fontSizeBase: 18
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 4665571937921569395}
   - component: {fileID: 9130653254689415435}
   m_Layer: 0
-  m_Name: Info Text Holder
+  m_Name: Info Text Holder UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -34849,10 +34849,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rooting Vines Entry Timeline Var_02
       objectReference: {fileID: 0}
-    - target: {fileID: 7157788274958173542, guid: 454090e1f91243f4198cce31441648a2, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7938629577173727441, guid: 454090e1f91243f4198cce31441648a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -35072,26 +35068,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6940140376013406635, guid: f0ff819da10b26c4ab1de72393498aa0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.459
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940140376013406635, guid: f0ff819da10b26c4ab1de72393498aa0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.201
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940140376013406635, guid: f0ff819da10b26c4ab1de72393498aa0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940140376013406635, guid: f0ff819da10b26c4ab1de72393498aa0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6940140376013406635, guid: f0ff819da10b26c4ab1de72393498aa0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -35148,10 +35124,6 @@ PrefabInstance:
     - target: {fileID: 6789028272386428940, guid: 1e34c4dd3f2d2a54189857dcadee2c28, type: 3}
       propertyPath: m_Name
       value: 'Rooting Vines Exit Timeline Var_02 '
-      objectReference: {fileID: 0}
-    - target: {fileID: 6789028272386428940, guid: 1e34c4dd3f2d2a54189857dcadee2c28, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

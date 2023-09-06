@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Helpers;
 using Sirenix.OdinInspector;
-using Unity.VisualScripting;
+using Tzipory.EntitySystem;
 using UnityEngine;
 
 namespace Tzipory.BaseSystem.TimeSystem
@@ -15,13 +14,15 @@ namespace Tzipory.BaseSystem.TimeSystem
 
 #if UNITY_EDITOR
         [SerializeField, ReadOnly] private List<TimerSerializeData> _timerSerializeDatas;
+        private static BaseGameEntity _gameEntity;
 #endif
 
-        public TimerHandler()
+        public TimerHandler(BaseGameEntity gameEntity = null)
         {
             _timersList = new List<ITimer>();
 #if UNITY_EDITOR
             _timerSerializeDatas = new List<TimerSerializeData>();
+            _gameEntity = gameEntity;
 #endif
         }
 
@@ -107,7 +108,7 @@ namespace Tzipory.BaseSystem.TimeSystem
         {
             _timersList.Add(timer);
 #if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Timer Handler:</color><color={ColorLogHelper.GREEN}> Start</color> timer {timer.TimerName} at time {timer.TimeRemaining}");
+            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Timer Handler:</color>{ColorLogHelper.SetColorToString("Start",Color.cyan)} timer {timer.TimerName} at time {timer.TimeRemaining}");
             _timerSerializeDatas.Add(new TimerSerializeData(timer));
 #endif
             timer.OnTimerComplete += TimeComplete;

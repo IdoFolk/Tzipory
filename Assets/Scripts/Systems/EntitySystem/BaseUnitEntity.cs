@@ -430,14 +430,15 @@ namespace Tzipory.EntitySystem.Entitys
         {
             _startedDeathSequence = true;
 #if UNITY_EDITOR
-            Debug.Log($"{name} as started death sequence");
+            Debug.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as started death sequence");
 #endif
             
             IsTargetAble = false;
             IsDamageable = false;
                 
             OnTargetDisable?.Invoke(this);
-            EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.DEATH,EntityDied);
+            //EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.DEATH,EntityDied);
+            EntityDied();
         }
 
         protected virtual void EntityDied()

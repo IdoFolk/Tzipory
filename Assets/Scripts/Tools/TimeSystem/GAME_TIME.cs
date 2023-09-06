@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using Helpers;
 using UnityEngine;
 
@@ -10,6 +11,8 @@ namespace Tzipory.BaseSystem.TimeSystem
         
         private static float _timeRate = 1f;
         private static float _startGameTime;
+        
+        private static AnimationCurve _defaultCurve = AnimationCurve.Linear(0,0,1,1);
 
         private static float _tempTimeData = 1;
         public static float TimePlayed => Time.realtimeSinceStartup - _startGameTime;
@@ -17,8 +20,13 @@ namespace Tzipory.BaseSystem.TimeSystem
         public static float GameDeltaTime => Time.deltaTime * _timeRate;
         public static TimerHandler TimerHandler { get; private set; }
 
+        private static MonoBehaviour _monoBehaviour;
+
+        private static Coroutine _fadeCoroutine;
+
         private void Awake()
         {
+            _monoBehaviour = this;
             TimerHandler = new TimerHandler();
             _startGameTime = Time.realtimeSinceStartup;
         }
@@ -28,28 +36,50 @@ namespace Tzipory.BaseSystem.TimeSystem
             TimerHandler.TickAllTimers();
         }
         
-        public static void SetTimeStep(float time)
+        public static void SetTimeStep(float time,float transitionTime = 1 ,AnimationCurve curve = null)
         {
             if (time < 0)
             {
                 Debug.LogError("Can not set timeStep to less or equal to 0");
                 return;
             }
+
+            if (_fadeCoroutine != null)
+                _monoBehaviour.StopCoroutine(_fadeCoroutine);
+
+            if (curve == null)
+                SetTime(time);
+            else
+                _fadeCoroutine = _monoBehaviour.StartCoroutine(FadeTime(time, transitionTime, curve));
+        }
+        
+        private static IEnumerator FadeTime(float time,float transitionTime = 1 ,AnimationCurve curve = null)
+        {
+            float currentTimeRate = GetCurrentTimeRate;
+            float transitionTimeCount = 0;
+            var animationCurve = curve ?? _defaultCurve;
+
+            while (transitionTimeCount < transitionTime)
+            {
+                transitionTimeCount += Time.deltaTime;
+
+                float evaluateValue = animationCurve.Evaluate(transitionTimeCount / transitionTime);
+
+                _timeRate = Mathf.Lerp(currentTimeRate, time, evaluateValue);
+                
+                yield return null;
+            }
+            
+            SetTime(time);
+        }
+
+        private static void SetTime(float timeRate)
+        {
+            _timeRate = timeRate;
 #if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Time Handler:</color> set time to {time}");
+            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Time Handler:</color> set time to {timeRate}");
 #endif
-            _timeRate = time;
             OnTimeRateChange?.Invoke();
-        }
-
-        public void ReduseTime()
-        {
-            SetTimeStep(_timeRate / 2);
-        }
-
-        public void AddTime()
-        {
-            SetTimeStep(_timeRate * 2);
         }
 
         public static void Play()

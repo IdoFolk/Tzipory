@@ -1,4 +1,6 @@
-﻿namespace Helpers
+﻿using UnityEngine;
+
+namespace Helpers
 {
     /// <summary>
     /// A class that have reference to colors that represents a system or object log message color
@@ -14,5 +16,20 @@
         public const string TIMER_HANDLER_COLOR = "#00ff00";
         public const string EFFECT_HANDLER_COLOR = "#5b0f00";
         public const string GAME_MANAGER_COLOR = "#ff0000";
+
+        public static string SetColorToString(string message, Color color)
+            => $"<color={ToRGBHex(color)}>{message}</color>";
+        
+        public static string SetColorToString(string message, string hexCode)
+            => $"<color={hexCode}>{message}</color>";
+        
+        private static string ToRGBHex(Color c)
+            => $"#{ToByte(c.r):X2}{ToByte(c.g):X2}{ToByte(c.b):X2}";
+        
+        private static byte ToByte(float f)
+        {
+            f = Mathf.Clamp01(f);
+            return (byte)(f * 255);
+        }
     }
 }

@@ -62,8 +62,10 @@ namespace Tzipory.Leval
         {
             foreach (var waveSerialize in _levelConfig.Waves)
                 _waves.Add(new Wave(_levelConfig.Level.WaveSpawners,waveSerialize));
-
+            
+#if UNITY_EDITOR
             _isReportEndLevel = false;
+#endif
             
             _startLevelTimer = GAME_TIME.TimerHandler.StartNewTimer(_levelStartDelay,"Start Level Timer");
             CurrentWave.Init();

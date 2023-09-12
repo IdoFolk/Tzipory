@@ -45,7 +45,10 @@ namespace Tzipory.BaseSystem.TimeSystem
             }
 
             if (_fadeCoroutine != null)
+            {
                 _monoBehaviour.StopCoroutine(_fadeCoroutine);
+                _fadeCoroutine = null;
+            }
 
             if (curve == null)
                 SetTime(time);

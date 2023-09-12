@@ -32,7 +32,7 @@ MonoBehaviour:
   - _statsId: 5
     _baseValue: 0.7
   - _statsId: 20
-    _baseValue: 0
+    _baseValue: 20
   _abilityConfigs: []
   _unitEntityVisualConfig:
     _sprite: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}

@@ -28,7 +28,7 @@ MonoBehaviour:
   _castTime: 1
   _statusEffectConfigs:
   - _statusEffectName: 
-    _affectedStat: 0
+    _affectedStatId: 0
     _effectType: 0
     _statusEffectType: 1
     _duration: 0
@@ -46,7 +46,7 @@ MonoBehaviour:
       _isInterruptable: 0
       _effectActionContainers: []
   - _statusEffectName: 
-    _affectedStat: 5
+    _affectedStatId: 5
     _effectType: 0
     _statusEffectType: 0
     _duration: 5

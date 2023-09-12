@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd74998339d35e428a6d165d6ac9901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defualtSO: {fileID: 11400000, guid: 1c477da2ae86013479986cb933c972e0, type: 2}
+  defualtSO: {fileID: 11400000, guid: 60b2ee99298fa1b498ae8552db195e92, type: 2}
 --- !u!1001 &498852640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -836,7 +836,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _cantLose
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelConfig
@@ -1046,11 +1046,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6205046880782950764, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
       propertyPath: _slowTime
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6205046880782950764, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
       propertyPath: _slowTimeTransitionTime
-      value: 2
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6205046880782950764, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
       propertyPath: _slowTimeCurve.m_Curve.Array.size

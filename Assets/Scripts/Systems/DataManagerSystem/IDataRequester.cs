@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Tzipory.ConfigFiles;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 
 namespace Systems.DataManagerSystem
 {

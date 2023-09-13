@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 
 namespace Systems.SaveLoadSystem
 {

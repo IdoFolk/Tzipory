@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 using Tzipory.Tools.Interface;
 
 namespace Tzipory.WaveSystem

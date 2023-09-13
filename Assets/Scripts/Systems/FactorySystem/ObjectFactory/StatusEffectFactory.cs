@@ -1,6 +1,6 @@
 ﻿using System;
-using Tzipory.EntitySystem.StatusSystem;
-using Tzipory.SerializeData.StatSystemSerilazeData;
+using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.ConfigFiles.WaveSystemConfig.StatSystemSerilazeData;
 
 namespace Tzipory.Factory
 {

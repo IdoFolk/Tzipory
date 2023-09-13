@@ -3,7 +3,7 @@ using Systems.UISystem;
 using Tzipory.Tools.BaseObserver;
 using Unity.VisualScripting;
 
-namespace GamePlayLogic.Managers
+namespace Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.Managers
 {
     public class UIManager : BaseObserver<IUIElement> , IInitializable , IDisposable
     {

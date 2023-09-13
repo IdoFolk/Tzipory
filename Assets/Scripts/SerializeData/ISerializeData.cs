@@ -1,9 +1,9 @@
 ﻿
 
-using Tzipory.ConfigFiles;
+using Tzipory.ConfigFiles.PartyConfig;
 using Tzipory.Tools.Interface;
 
-namespace Tzipory.SerializeData
+namespace Tzipory.ConfigFiles.WaveSystemConfig
 {
     public interface ISerializeData : IInitialization<IConfigFile>
     {

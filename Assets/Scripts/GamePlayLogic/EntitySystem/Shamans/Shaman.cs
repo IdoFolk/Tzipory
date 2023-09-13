@@ -5,8 +5,8 @@ using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.Helpers;
 using Sirenix.OdinInspector;
-using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig.EntityVisualConfig;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 using UnityEngine;
 
 namespace Shamans

@@ -2,13 +2,13 @@
 using Helpers.Consts;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.Systems.PoolSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Enemes
+namespace Tzipory.GameplayLogic.EntitySystem.Enemies
 {
     public class Enemy : BaseUnitEntity , IPoolable<Enemy>
     {

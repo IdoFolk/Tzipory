@@ -4,7 +4,7 @@ using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
-namespace Tzipory.AbilitiesSystem.AbilityEntity
+namespace Tzipory.GameplayLogic.AbilitySystem.AbilityEntity
 {
     public class ProjectileAbilityEntity : BaseAbilityEntity , ITargetableReciever
     {

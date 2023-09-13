@@ -8,7 +8,7 @@ using Tzipory.Tools.Interface;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GamePlayLogic.UI.WaveIndicator
+namespace Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.UI.WaveIndicator
 {
     public class WaveIndicator : BaseUIElement , IInitialization<WaveSpawner,ITimer> , IPoolable<WaveIndicator>
     {

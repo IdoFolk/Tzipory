@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tzipory.VisualSystem.EffectSequence
+namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
     public abstract class BaseEffectActionConfig : ScriptableObject
     {

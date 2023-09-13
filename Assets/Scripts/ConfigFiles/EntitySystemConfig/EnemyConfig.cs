@@ -1,9 +1,10 @@
-﻿using Helpers.Consts;
-using SerializeData.StatSerializeData;
+﻿using Tzipory.ConfigFiles.VisualSystemConfig;
+using Helpers.Consts;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 
-namespace Tzipory.EntitySystem.EntityConfigSystem
+namespace Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig
 {
     [CreateAssetMenu(fileName = "New enemy config", menuName = "ScriptableObjects/Entity/New enemy config", order = 0)]
     public class EnemyConfig : BaseUnitEntityConfig

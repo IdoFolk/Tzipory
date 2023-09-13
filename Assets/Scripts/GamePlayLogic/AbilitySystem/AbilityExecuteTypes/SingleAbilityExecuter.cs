@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
+using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 
-namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
+namespace Tzipory.GameplayLogic.AbilitySystem.AbilityExecuteTypes
 {
     public class SingleAbilityExecuter : IAbilityExecutor
     {

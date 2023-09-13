@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using Helpers.Consts;
-using SerializeData.StatSerializeData;
 using Sirenix.OdinInspector;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.ConfigFiles;
-using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
+using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig.EntityVisualConfig;
 using Tzipory.EntitySystem.TargetingSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.EntityConfigSystem
+namespace Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig
 {
     public abstract class BaseUnitEntityConfig : ScriptableObject, IConfigFile
     {

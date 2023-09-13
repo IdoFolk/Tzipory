@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Helpers.Consts;
-using SerializeData.Nodes;
 using Systems.NodeSystem;
-using Tzipory.ConfigFiles;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.VisualSystemConfig.Nodes;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 
-namespace SerializeData.Progression
+namespace Tzipory.ConfigFiles.VisualSystemConfig.Progression
 {
     [Serializable]
     public class WorldMapProgressionSerializeData : ISerializeData

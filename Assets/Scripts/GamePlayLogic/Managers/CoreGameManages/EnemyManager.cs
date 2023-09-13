@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Enemes;
+using Tzipory.GameplayLogic.EntitySystem.Enemies;
 using Tzipory.GamePlayLogic.ObjectPools;
 using UnityEngine;
 

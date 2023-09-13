@@ -1,6 +1,6 @@
 ﻿using Shamans;
 using Systems.UISystem;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using UnityEngine;
 using UnityEngine.UI;
 

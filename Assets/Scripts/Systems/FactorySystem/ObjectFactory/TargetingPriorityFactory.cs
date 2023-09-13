@@ -1,5 +1,5 @@
 ﻿using System;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
+using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.TargetingSystem;
 using Tzipory.EntitySystem.TargetingSystem.TargetingPriorites;

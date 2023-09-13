@@ -27,7 +27,6 @@ You can contact me by email at guyquad27@gmail.com or on Reddit at https://www.r
 
 using UnityEngine;
 using UnityEditor;
-using System.Collections;
 
 [CustomEditor (typeof(ArcCollider2D))]
 public class ArcCollider_Editor : Editor {

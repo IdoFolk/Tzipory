@@ -1,12 +1,11 @@
 ﻿using System;
-using Enemes;
-using GamePlayLogic.UI.WaveIndicator;
-using SerializeData.VisualSystemSerializeData;
+using Tzipory.GameplayLogic.EntitySystem.Enemies;
+using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.UI.WaveIndicator;
 using Systems.FactorySystem;
 using Tzipory.Factory;
 using Tzipory.Systems.PoolSystem;
-using Tzipory.VisualSystem.EffectSequence;
-using Tzipory.VisualSystem.EffectSequence.EffectType;
+using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.ConfigFiles.VisualSystemConfig.EffectType;
 
 namespace Tzipory.GamePlayLogic.ObjectPools
 {

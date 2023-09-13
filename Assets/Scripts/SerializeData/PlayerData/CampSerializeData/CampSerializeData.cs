@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameplayeLogic.Managers;
-using Tzipory.ConfigFiles;
+using Tzipory.ConfigFiles.PartyConfig;
 using UnityEngine;
 
-namespace Tzipory.SerializeData
+namespace Tzipory.ConfigFiles.WaveSystemConfig
 {
     [Serializable]
     public class CampSerializeData : ISerializeData, IUpdateData<CampManager>

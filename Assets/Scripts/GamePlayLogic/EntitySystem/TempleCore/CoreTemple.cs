@@ -4,7 +4,7 @@ using PathCreation;
 using UnityEngine;
 using Tzipory.EntitySystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using Sirenix.OdinInspector;
 
 public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent

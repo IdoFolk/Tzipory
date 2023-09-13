@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.EntitySystem.TargetingSystem;
 using Tzipory.Leval;
-using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 using UnityEngine;
 
 public class TEMP_UnitFlipAndZFix : MonoBehaviour

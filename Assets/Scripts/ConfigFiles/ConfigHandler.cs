@@ -1,7 +1,7 @@
 ﻿using Helpers.Consts;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles
+namespace Tzipory.ConfigFiles.PartyConfig
 {
     [System.Serializable]
     public class ConfigHandler<T>  where T : IConfigFile

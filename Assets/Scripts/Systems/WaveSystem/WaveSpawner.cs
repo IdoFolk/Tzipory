@@ -3,11 +3,12 @@ using Helpers;
 using UnityEngine;
 using PathCreation;
 using Tzipory.GamePlayLogic.ObjectPools;
-using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 using Tzipory.Tools.Enums;
 using Tzipory.Tools.Interface;
 using Tzipory.WaveSystem;
 using Random = UnityEngine.Random;
+
 
 public class WaveSpawner : MonoBehaviour , IProgress
 {

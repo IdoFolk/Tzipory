@@ -1,7 +1,7 @@
 ﻿using Tzipory.BaseSystem.TimeSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
     internal sealed class IntervalStatusEffect : BaseStatusEffect
     {

@@ -1,4 +1,4 @@
-﻿namespace Tzipory.EntitySystem.StatusSystem
+﻿namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
     public static class StatLimiters
     {

@@ -1,4 +1,4 @@
-﻿namespace Tzipory.ConfigFiles
+﻿namespace Tzipory.ConfigFiles.PartyConfig
 {
     public interface IConfigFile
     {

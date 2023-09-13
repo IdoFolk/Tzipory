@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using Helpers;
 using Helpers.Consts;
-using SerializeData.VisualSystemSerializeData;
 using Sirenix.OdinInspector;
-using Tzipory.AbilitiesSystem;
+using Tzipory.GameplayLogic.AbilitySystem;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.EntityConfigSystem;
-using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig.EntityVisualConfig;
 using Tzipory.EntitySystem.TargetingSystem;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.Sound;
-using Tzipory.VisualSystem.EffectSequence;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using UnityEngine;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 
 namespace Tzipory.EntitySystem.Entitys
 {

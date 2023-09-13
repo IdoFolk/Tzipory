@@ -2,11 +2,11 @@
 using System.Linq;
 using Shamans;
 using Sirenix.OdinInspector;
-using Tzipory.ConfigFiles;
-using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using UnityEngine;
 
-namespace Tzipory.SerializeData
+namespace Tzipory.ConfigFiles.WaveSystemConfig
 {
     [System.Serializable]
     public class ShamanSerializeData : UnitEntitySerializeData , IUpdateData<Shaman>

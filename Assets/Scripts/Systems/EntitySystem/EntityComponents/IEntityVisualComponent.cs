@@ -1,5 +1,5 @@
 ﻿using Tzipory.Tools.Sound;
-using Tzipory.VisualSystem.EffectSequence;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.EntityComponents

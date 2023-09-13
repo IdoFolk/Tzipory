@@ -1,4 +1,4 @@
-﻿using ConfigFiles;
+﻿using Tzipory.ConfigFiles.ToolTipConfig;
 using Systems.UISystem;
 using TMPro;
 using UnityEngine;

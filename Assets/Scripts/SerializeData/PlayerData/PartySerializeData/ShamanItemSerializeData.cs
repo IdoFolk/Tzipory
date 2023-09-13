@@ -1,7 +1,7 @@
 ﻿using Helpers.Consts;
-using Tzipory.ConfigFiles;
+using Tzipory.ConfigFiles.PartyConfig;
 
-namespace Tzipory.SerializeData
+namespace Tzipory.ConfigFiles.WaveSystemConfig
 {
     public enum ItemSlot
     {

@@ -1,4 +1,4 @@
-﻿using GamePlayLogic.UI.WaveIndicator;
+﻿using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.UI.WaveIndicator;
 
 namespace Systems.FactorySystem
 {

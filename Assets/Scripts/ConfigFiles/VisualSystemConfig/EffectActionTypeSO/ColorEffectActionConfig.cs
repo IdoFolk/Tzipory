@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Tzipory.ConfigFiles.VisualSystemConfig;
+using UnityEngine;
 
-namespace Tzipory.VisualSystem.EffectSequence.EffectActionTypeSO
+namespace Tzipory.ConfigFiles.VisualSystemConfig.EffectActionTypeSO
 {
     [CreateAssetMenu(fileName = "NewColorEffectAction", menuName = "ScriptableObjects/VisualSystem/EffectAction/New color effect action", order = 0)]
     public class ColorEffectActionConfig : BaseEffectActionConfig

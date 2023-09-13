@@ -2,12 +2,12 @@
 using Helpers.Consts;
 using Systems.DataManagerSystem;
 using Tools.Enums;
-using Tzipory.ConfigFiles;
-using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-namespace Tzipory.SerializeData
+namespace Tzipory.ConfigFiles.WaveSystemConfig
 {
     [System.Serializable]
     public class PartySerializeData : ISerializeData , IInitialization<ShamanConfig[]>
@@ -49,7 +49,7 @@ namespace Tzipory.SerializeData
         
         public void Init(IConfigFile parameter)
         {
-            var config = (PartyConfig)parameter;
+            var config = (PartyConfig.PartyConfig)parameter;
             
             _shamanRosterDataContainers = new List<ShamanDataContainer>();
 

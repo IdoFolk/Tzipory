@@ -1,4 +1,4 @@
-using Tzipory.Nodes.Config;
+using Tzipory.ConfigFiles.PartyConfig.NodesConfig;
 using UnityEngine;
 
 public abstract class BaseNodeManager : MonoBehaviour

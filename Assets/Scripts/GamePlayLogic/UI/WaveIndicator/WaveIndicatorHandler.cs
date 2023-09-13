@@ -6,7 +6,7 @@ using Tzipory.Tools.Interface;
 using Tzipory.WaveSystem;
 using UnityEngine;
 
-namespace GamePlayLogic.UI.WaveIndicator
+namespace Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.UI.WaveIndicator
 {
     public class WaveIndicatorHandler : IInitialization<Wave,ITimer> , IDisposable
     {

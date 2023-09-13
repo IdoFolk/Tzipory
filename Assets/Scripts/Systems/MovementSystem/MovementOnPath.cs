@@ -1,7 +1,7 @@
 using UnityEngine;
 using Tzipory.EntitySystem.EntityComponents;
 using PathCreation;
-using Enemes;
+using Tzipory.GameplayLogic.EntitySystem.Enemies;
 
 public class MovementOnPath : MonoBehaviour
 {

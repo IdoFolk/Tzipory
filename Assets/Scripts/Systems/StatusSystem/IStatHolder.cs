@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
     public interface IStatHolder
     {

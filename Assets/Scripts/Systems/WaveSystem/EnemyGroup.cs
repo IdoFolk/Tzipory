@@ -1,7 +1,7 @@
 using System;
 using Tzipory.BaseSystem.TimeSystem;
-using Tzipory.EntitySystem.EntityConfigSystem;
-using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 using Tzipory.Tools.Interface;
 
 namespace Tzipory.WaveSystem

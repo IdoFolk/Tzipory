@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
+using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
-using Tzipory.SerializeData.StatSystemSerilazeData;
+using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.ConfigFiles.WaveSystemConfig.StatSystemSerilazeData;
 
-namespace Tzipory.AbilitiesSystem
+namespace Tzipory.GameplayLogic.AbilitySystem
 {
     public interface IAbilityExecutor
     {

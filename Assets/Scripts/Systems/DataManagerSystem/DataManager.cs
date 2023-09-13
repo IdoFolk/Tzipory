@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Systems.SaveLoadSystem;
-using Tzipory.ConfigFiles;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 using UnityEngine;
 
 namespace Systems.DataManagerSystem

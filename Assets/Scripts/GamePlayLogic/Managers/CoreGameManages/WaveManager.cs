@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GamePlayLogic.Managers;
-using GamePlayLogic.UI.WaveIndicator;
+using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.Managers;
+using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.UI.WaveIndicator;
 using Helpers;
 using Tzipory.BaseSystem.TimeSystem;
-using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 using Tzipory.WaveSystem;
 using UnityEngine;
 

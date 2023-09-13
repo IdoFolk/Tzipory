@@ -1,7 +1,7 @@
 using GameplayeLogic.Managers;
-using GamePlayLogic.Managers;
+using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.Managers;
 using Systems.DataManagerSystem;
-using Tzipory.ConfigFiles;
+using Tzipory.ConfigFiles.PartyConfig;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
     public readonly struct StatModifier
     {

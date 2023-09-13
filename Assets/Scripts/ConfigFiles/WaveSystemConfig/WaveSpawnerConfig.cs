@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using Tzipory.Tools.Enums;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.LevalSerializeData
+namespace Tzipory.ConfigFiles.WaveSystemConfig
 {
     [System.Serializable]
     public class WaveSpawnerConfig

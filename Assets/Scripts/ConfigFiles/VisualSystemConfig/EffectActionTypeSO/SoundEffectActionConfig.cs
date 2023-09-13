@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using Sirenix.OdinInspector;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using UnityEngine.Serialization;
 
-namespace Tzipory.VisualSystem.EffectSequence.EffectActionTypeSO
+namespace Tzipory.ConfigFiles.VisualSystemConfig.EffectActionTypeSO
 {
     [CreateAssetMenu(fileName = "NewSoundEffectAction", menuName = "ScriptableObjects/VisualSystem/EffectAction/New sound effect action")]
     public class SoundEffectActionConfig : BaseEffectActionConfig

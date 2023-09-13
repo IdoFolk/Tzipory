@@ -1,6 +1,6 @@
-﻿using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
+﻿using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig.EntityVisualConfig;
 
-namespace Tzipory.SerializeData
+namespace Tzipory.ConfigFiles.WaveSystemConfig
 {
     public class ShamanDataContainer
     {

@@ -1,7 +1,7 @@
 using System;
 using ProjectDawn.Navigation;
 using ProjectDawn.Navigation.Hybrid;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using Tzipory.BaseSystem.TimeSystem;
 using UnityEngine;
 

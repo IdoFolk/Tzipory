@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Helpers.Consts;
 using Sirenix.OdinInspector;
-using Tzipory.ConfigFiles;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using Tzipory.EntitySystem.TargetingSystem;
 using UnityEngine;
 
-namespace Tzipory.AbilitiesSystem.AbilityConfigSystem
+namespace Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig
 {
     [CreateAssetMenu(fileName = "NewAbilityConfig", menuName = "ScriptableObjects/EntitySystem/AbilitySystem/New ability config", order = 0)]
     public class AbilityConfig : ScriptableObject , IConfigFile

@@ -4,7 +4,7 @@ using Shamans;
 using Sirenix.OdinInspector;
 using Systems.TargetingSystem;
 using Tools.Enums;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using Tzipory.EntitySystem;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;

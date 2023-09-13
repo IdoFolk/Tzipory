@@ -1,9 +1,9 @@
 ﻿using System;
-using SerializeData.VisualSystemSerializeData;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Tools.Interface;
 
-namespace Tzipory.VisualSystem.EffectSequence
+namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
     public abstract class BaseEffectAction : IInitialization<EffectActionContainerConfig,IEntityVisualComponent>
     {

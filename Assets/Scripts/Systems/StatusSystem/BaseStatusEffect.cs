@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using SerializeData.VisualSystemSerializeData;
 using Tools.Enums;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using Tzipory.Tools.Interface;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
     public abstract class BaseStatusEffect : IDisposable ,IInitialization<StatusEffectConfig>
     {
@@ -20,7 +20,7 @@ namespace Tzipory.EntitySystem.StatusSystem
 
         #region Property
 
-        public EffectType EffectType { get; private set; }  
+        public global::Tools.Enums.EffectType EffectType { get; private set; }  
         
         public bool IsDone { get; protected set; }
 

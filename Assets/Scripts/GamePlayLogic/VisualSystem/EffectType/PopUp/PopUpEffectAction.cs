@@ -1,11 +1,11 @@
 using System;
-using SerializeData.VisualSystemSerializeData;
+using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.ConfigFiles.VisualSystemConfig.EffectActionTypeSO;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Systems.PoolSystem;
-using Tzipory.VisualSystem.EffectSequence.EffectActionTypeSO;
 using UnityEngine;
 
-namespace Tzipory.VisualSystem.EffectSequence.EffectType
+namespace Tzipory.ConfigFiles.VisualSystemConfig.EffectType
 {
     public class PopUpEffectAction : BaseEffectAction, IPoolable<PopUpEffectAction>
     {

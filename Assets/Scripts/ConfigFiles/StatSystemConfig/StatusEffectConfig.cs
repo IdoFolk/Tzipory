@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using Helpers.Consts;
-using SerializeData.StatSerializeData;
-using SerializeData.VisualSystemSerializeData;
 using Sirenix.OdinInspector;
 using Tools.Enums;
-using Tzipory.ConfigFiles;
+using Tzipory.ConfigFiles.PartyConfig;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
     [System.Serializable]
     public class StatusEffectConfig : IConfigFile
@@ -15,7 +14,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         [Header("Status Effect Config")] 
         [SerializeField, Tooltip("")] private string _statusEffectName;
         [SerializeField, Tooltip("")] private Constant.StatsId _affectedStatId;
-        [SerializeField, Tooltip("")] private EffectType _effectType;
+        [SerializeField, Tooltip("")] private global::Tools.Enums.EffectType _effectType;
         //[SerializeField, Tooltip("")] private List<StatusEffectConfig> _statusEffectToInterrupt;
         [Header("Stat Modifiers")] 
         [SerializeField, Tooltip("")] private StatusEffectType _statusEffectType;
@@ -32,7 +31,7 @@ namespace Tzipory.EntitySystem.StatusSystem
 
         public float Interval => _interval;
         
-        public EffectType EffectType => _effectType;
+        public global::Tools.Enums.EffectType EffectType => _effectType;
 
         public int AffectedStatId => (int)_affectedStatId;
         public StatusEffectType StatusEffectType => _statusEffectType;

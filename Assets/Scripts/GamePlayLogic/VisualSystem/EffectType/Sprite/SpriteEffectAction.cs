@@ -1,6 +1,6 @@
-﻿using Tzipory.VisualSystem.EffectSequence;
+﻿using Tzipory.ConfigFiles.VisualSystemConfig;
 
-namespace Tzipory.SerializeData.LevalSerializeData.VisualSystem.EffectType.Sprite
+namespace Tzipory.ConfigFiles.WaveSystemConfig.VisualSystem.EffectType.Sprite
 {
     public class SpriteEffectAction : BaseEffectAction
     {

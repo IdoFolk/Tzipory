@@ -1,4 +1,4 @@
-﻿using Tzipory.EntitySystem.StatusSystem;
+﻿using Tzipory.ConfigFiles.VisualSystemConfig;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.EntityComponents

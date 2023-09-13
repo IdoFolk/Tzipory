@@ -1,8 +1,8 @@
 ﻿using System;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using UnityEngine;
 
-namespace SerializeData.StatSerializeData
+namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
     [Serializable]
     public class StatModifierConfig

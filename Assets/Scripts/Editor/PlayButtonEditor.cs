@@ -4,62 +4,65 @@ using UnityEngine.UIElements;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using static PlayButtonEditor;
 using UnityEditor.SceneManagement;
-using UnityEngine.TestTools;
 
-[InitializeOnLoad]
-public class PlayButtonEditor : EditorWindow
-{
-	private const string PRODUCTION_PATH = "Assets/Scenes/Production";
-	private const string PERSISTENT_SCENE_NAME = "PersistentScene";
-	
-	static PlayButtonEditor()
+	[InitializeOnLoad]
+	public class PlayButtonEditor : EditorWindow
 	{
-		ToolbarExtender.LeftToolbarGUI.Add(OnToolbarGUI);
-	}
+		private const string PRODUCTION_PATH = "Assets/Scenes/Production";
+		private const string PERSISTENT_SCENE_NAME = "PersistentScene";
 
-	static void OnToolbarGUI()
-	{
-		GUILayout.FlexibleSpace();
-
-		if (GUILayout.Button(new GUIContent("Play From Start")))
+		static PlayButtonEditor()
 		{
-            if (EditorApplication.isPlaying)
-			{
-				EditorApplication.ExitPlaymode();
-            }
-            else
-            {
-	            EditorSceneManager.SaveOpenScenes();
-	         	EditorSceneManager.OpenScene(AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets(PERSISTENT_SCENE_NAME, new[] { PRODUCTION_PATH })[0]));
-				EditorApplication.EnterPlaymode();
-            }
+			ToolbarExtender.LeftToolbarGUI.Add(OnToolbarGUI);
 		}
-	}
 
-	public static class ToolbarCallback
+		static void OnToolbarGUI()
+		{
+			GUILayout.FlexibleSpace();
+
+			if (GUILayout.Button(new GUIContent("Play From Start")))
+			{
+				if (EditorApplication.isPlaying)
+				{
+					EditorApplication.ExitPlaymode();
+				}
+				else
+				{
+					EditorSceneManager.SaveOpenScenes();
+					EditorSceneManager.OpenScene(AssetDatabase.GUIDToAssetPath(
+						AssetDatabase.FindAssets(PERSISTENT_SCENE_NAME, new[] { PRODUCTION_PATH })[0]));
+					EditorApplication.EnterPlaymode();
+				}
+			}
+		}
+
+		public static class ToolbarCallback
 		{
 			static Type m_toolbarType = typeof(Editor).Assembly.GetType("UnityEditor.Toolbar");
 			static Type m_guiViewType = typeof(Editor).Assembly.GetType("UnityEditor.GUIView");
 #if UNITY_2020_1_OR_NEWER
-		static Type m_iWindowBackendType = typeof(Editor).Assembly.GetType("UnityEditor.IWindowBackend");
-		static PropertyInfo m_windowBackend = m_guiViewType.GetProperty("windowBackend",
-			BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-		static PropertyInfo m_viewVisualTree = m_iWindowBackendType.GetProperty("visualTree",
-			BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+			static Type m_iWindowBackendType = typeof(Editor).Assembly.GetType("UnityEditor.IWindowBackend");
+
+			static PropertyInfo m_windowBackend = m_guiViewType.GetProperty("windowBackend",
+				BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+			static PropertyInfo m_viewVisualTree = m_iWindowBackendType.GetProperty("visualTree",
+				BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 #else
 			static PropertyInfo m_viewVisualTree = m_guiViewType.GetProperty("visualTree",
 				BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 #endif
 			static FieldInfo m_imguiContainerOnGui = typeof(IMGUIContainer).GetField("m_OnGUIHandler",
 				BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
 			static ScriptableObject m_currentToolbar;
 
 			/// <summary>
 			/// Callback for toolbar OnGUI method.
 			/// </summary>
 			public static Action OnToolbarGUI;
+
 			public static Action OnToolbarGUILeft;
 			public static Action OnToolbarGUIRight;
 
@@ -80,29 +83,30 @@ public class PlayButtonEditor : EditorWindow
 					if (m_currentToolbar != null)
 					{
 #if UNITY_2021_1_OR_NEWER
-					var root = m_currentToolbar.GetType().GetField("m_Root", BindingFlags.NonPublic | BindingFlags.Instance);
-					var rawRoot = root.GetValue(m_currentToolbar);
-					var mRoot = rawRoot as VisualElement;
-					RegisterCallback("ToolbarZoneLeftAlign", OnToolbarGUILeft);
-					RegisterCallback("ToolbarZoneRightAlign", OnToolbarGUIRight);
+						var root = m_currentToolbar.GetType()
+							.GetField("m_Root", BindingFlags.NonPublic | BindingFlags.Instance);
+						var rawRoot = root.GetValue(m_currentToolbar);
+						var mRoot = rawRoot as VisualElement;
+						RegisterCallback("ToolbarZoneLeftAlign", OnToolbarGUILeft);
+						RegisterCallback("ToolbarZoneRightAlign", OnToolbarGUIRight);
 
-					void RegisterCallback(string root, Action cb) {
-						var toolbarZone = mRoot.Q(root);
-
-						var parent = new VisualElement()
+						void RegisterCallback(string root, Action cb)
 						{
-							style = {
-								flexGrow = 1,
-								flexDirection = FlexDirection.Row,
-							}
-						};
-						var container = new IMGUIContainer();
-						container.onGUIHandler += () => { 
-							cb?.Invoke();
-						}; 
-						parent.Add(container);
-						toolbarZone.Add(parent);
-					}
+							var toolbarZone = mRoot.Q(root);
+
+							var parent = new VisualElement()
+							{
+								style =
+								{
+									flexGrow = 1,
+									flexDirection = FlexDirection.Row,
+								}
+							};
+							var container = new IMGUIContainer();
+							container.onGUIHandler += () => { cb?.Invoke(); };
+							parent.Add(container);
+							toolbarZone.Add(parent);
+						}
 #else
 #if UNITY_2020_1_OR_NEWER
 					var windowBackend = m_windowBackend.GetValue(m_currentToolbar);
@@ -135,6 +139,7 @@ public class PlayButtonEditor : EditorWindow
 			}
 		}
 	}
+
 	[InitializeOnLoad]
 	public static class ToolbarExtender
 	{
@@ -167,9 +172,9 @@ public class PlayButtonEditor : EditorWindow
 			m_toolCount = toolIcons != null ? ((Array) toolIcons.GetValue(null)).Length : 5;
 #endif
 
-			ToolbarCallback.OnToolbarGUI = OnGUI;
-			ToolbarCallback.OnToolbarGUILeft = GUILeft;
-			ToolbarCallback.OnToolbarGUIRight = GUIRight;
+			PlayButtonEditor.ToolbarCallback.OnToolbarGUI = OnGUI;
+			PlayButtonEditor.ToolbarCallback.OnToolbarGUILeft = GUILeft;
+			PlayButtonEditor.ToolbarCallback.OnToolbarGUIRight = GUIRight;
 		}
 
 #if UNITY_2019_3_OR_NEWER
@@ -284,6 +289,7 @@ public class PlayButtonEditor : EditorWindow
 			{
 				handler();
 			}
+
 			GUILayout.EndHorizontal();
 		}
 
@@ -294,6 +300,7 @@ public class PlayButtonEditor : EditorWindow
 			{
 				handler();
 			}
+
 			GUILayout.EndHorizontal();
 		}
 	}

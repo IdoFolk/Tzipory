@@ -1,9 +1,9 @@
 using Helpers.Consts;
-using Tzipory.ConfigFiles;
-using Tzipory.Nodes.Config;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.PartyConfig.NodesConfig;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 
-namespace SerializeData.Nodes
+namespace Tzipory.ConfigFiles.VisualSystemConfig.Nodes
 {
     [System.Serializable]
     public abstract class BaseNodeSerializeData : ISerializeData

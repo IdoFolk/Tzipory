@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Helpers;
-using SerializeData.VisualSystemSerializeData;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.GamePlayLogic.ObjectPools;
@@ -9,7 +9,7 @@ using Tzipory.Systems.PoolSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-namespace Tzipory.VisualSystem.EffectSequence
+namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
     public class EffectSequence : IInitialization<IEntityVisualComponent,EffectSequenceConfig,Action> , IPoolable<EffectSequence>
     {

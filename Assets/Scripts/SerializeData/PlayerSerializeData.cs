@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Helpers.Consts;
-using SerializeData.Progression;
+using Tzipory.ConfigFiles.VisualSystemConfig.Progression;
 using Systems.DataManagerSystem;
 using Tools.Enums;
-using Tzipory.ConfigFiles;
-using Tzipory.EntitySystem.EntityConfigSystem;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 using UnityEngine;
 
 namespace GameplayeLogic.Managers

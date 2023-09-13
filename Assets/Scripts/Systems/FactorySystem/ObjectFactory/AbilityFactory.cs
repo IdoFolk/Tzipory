@@ -1,9 +1,9 @@
 ﻿using System;
-using Tzipory.AbilitiesSystem;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.AbilitiesSystem.AbilityExecuteTypes;
+using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
+using Tzipory.GameplayLogic.AbilitySystem;
+using Tzipory.GameplayLogic.AbilitySystem.AbilityExecuteTypes;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.SerializeData.AbilitySystemSerializeData;
+using Tzipory.ConfigFiles.WaveSystemConfig.AbilitySystemSerializeData;
 
 namespace Tzipory.Factory
 {

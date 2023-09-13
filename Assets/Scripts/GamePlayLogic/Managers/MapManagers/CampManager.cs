@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Helpers.Consts;
 using Systems.CampSystem;
 using Tools.Enums;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.WaveSystemConfig;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 

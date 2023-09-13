@@ -1,6 +1,6 @@
 using System;
 using Tzipory.Helpers;
-using Tzipory.Nodes.Config;
+using Tzipory.ConfigFiles.PartyConfig.NodesConfig;
 using Tzipory.Tools.Enums;
 using Tzipory.Tools.Interface;
 using UnityEngine;

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using SerializeData.StatSerializeData;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using Sirenix.OdinInspector;
 using Tools.Enums;
-using Tzipory.SerializeData.StatSystemSerilazeData;
+using Tzipory.ConfigFiles.WaveSystemConfig.StatSystemSerilazeData;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
 #if true
     [Serializable]
@@ -107,7 +107,7 @@ namespace Tzipory.EntitySystem.StatusSystem
                 changeDelta += statModifier.Value;
             }
             
-            StatChangeData changeData = new StatChangeData(string.Empty,changeDelta,CurrentValue,EffectType.Default);
+            StatChangeData changeData = new StatChangeData(string.Empty,changeDelta,CurrentValue,global::Tools.Enums.EffectType.Default);
             OnValueChangedData?.Invoke(changeData);
         }
         
@@ -147,9 +147,9 @@ namespace Tzipory.EntitySystem.StatusSystem
         public readonly string StatusEffectName;
         public readonly float Delta;
         public readonly float NewValue;
-        public readonly EffectType EffectType;
+        public readonly global::Tools.Enums.EffectType EffectType;
         
-        public StatChangeData(string statusEffectName,float delta, float newValue, EffectType effectType)
+        public StatChangeData(string statusEffectName,float delta, float newValue, global::Tools.Enums.EffectType effectType)
         {
             StatusEffectName = statusEffectName;
             Delta = delta;

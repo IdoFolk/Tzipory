@@ -1,6 +1,6 @@
 ﻿using Tzipory.Systems.FactorySystem;
-using Tzipory.VisualSystem.EffectSequence;
-using Tzipory.VisualSystem.EffectSequence.EffectType;
+using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.ConfigFiles.VisualSystemConfig.EffectType;
 
 namespace Tzipory.Factory
 {

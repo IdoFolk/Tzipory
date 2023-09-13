@@ -1,4 +1,4 @@
-﻿using Tzipory.EntitySystem.StatusSystem;
+﻿using Tzipory.ConfigFiles.VisualSystemConfig;
 using Tzipory.EntitySystem.TargetingSystem;
 using UnityEngine;
 

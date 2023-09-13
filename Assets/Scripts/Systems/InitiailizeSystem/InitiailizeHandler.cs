@@ -1,4 +1,4 @@
-﻿using Tzipory.SerializeData;
+﻿using Tzipory.ConfigFiles.WaveSystemConfig;
 
 namespace Tzipory.Systems.InitiailizeSystem
 {

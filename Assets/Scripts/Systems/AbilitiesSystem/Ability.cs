@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Helpers.Consts;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.VisualSystemConfig;
 using Tzipory.EntitySystem.TargetingSystem;
 using UnityEngine;
 
-namespace Tzipory.AbilitiesSystem
+namespace Tzipory.GameplayLogic.AbilitySystem
 {
     public class Ability : IStatHolder
     {

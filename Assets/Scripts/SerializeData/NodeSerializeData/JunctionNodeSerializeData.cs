@@ -1,7 +1,7 @@
 
-using Tzipory.ConfigFiles;
+using Tzipory.ConfigFiles.PartyConfig;
 
-namespace SerializeData.Nodes
+namespace Tzipory.ConfigFiles.VisualSystemConfig.Nodes
 {
     public class JunctionNodeSerializeData : WorldMapNodeSerializeData
     {

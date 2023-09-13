@@ -1,8 +1,7 @@
 ﻿using System;
-using Tzipory.VisualSystem.EffectSequence;
 using UnityEngine;
 
-namespace SerializeData.VisualSystemSerializeData
+namespace Tzipory.ConfigFiles.VisualSystemConfig
 {
     [Serializable]
     public class EffectActionContainerConfig

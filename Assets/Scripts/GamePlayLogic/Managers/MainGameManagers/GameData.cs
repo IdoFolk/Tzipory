@@ -1,6 +1,6 @@
-﻿using Tzipory.SerializeData.LevalSerializeData;
+﻿using Tzipory.ConfigFiles.WaveSystemConfig;
 
-namespace GamePlayLogic.Managers
+namespace Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.Managers
 {
     public class GameData
     {

@@ -2,7 +2,7 @@
 using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.TargetingSystem;
-using Tzipory.EntitySystem.TargetingSystem.TargetingPriorites;
+using Tzipory.GameplayLogic.TargetingPriorities;
 
 namespace Tzipory.Factory
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.Managers;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.BaseSystem.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;

@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Helpers.Consts;
 using Sirenix.OdinInspector;
 using Tools.Enums;
 using Tzipory.ConfigFiles.PartyConfig;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig
+namespace Tzipory.GameplayLogic.StatusEffectTypes
 {
     [System.Serializable]
     public class StatusEffectConfig : IConfigFile

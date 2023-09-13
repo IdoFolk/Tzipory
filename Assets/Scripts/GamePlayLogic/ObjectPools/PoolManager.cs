@@ -4,8 +4,8 @@ using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.UI.WaveIndicator;
 using Systems.FactorySystem;
 using Tzipory.Factory;
 using Tzipory.Systems.PoolSystem;
-using Tzipory.ConfigFiles.VisualSystemConfig;
-using Tzipory.ConfigFiles.VisualSystemConfig.EffectType;
+using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.GameplayLogic.StatusEffectTypes.EffectType;
 
 namespace Tzipory.GamePlayLogic.ObjectPools
 {

@@ -1,9 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using Tzipory.EntitySystem.Entitys;
 using Tzipory.EntitySystem.TargetingSystem;
-using Tzipory.Leval;
 using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.GameplayLogic.EntitySystem.TempleCore;
 using UnityEngine;
 
 public class TEMP_UnitFlipAndZFix : MonoBehaviour

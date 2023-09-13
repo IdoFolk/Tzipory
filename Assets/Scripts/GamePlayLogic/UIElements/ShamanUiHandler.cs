@@ -1,6 +1,6 @@
-﻿using Shamans;
+﻿using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Systems.UISystem;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using UnityEngine;
 using UnityEngine.UI;
 

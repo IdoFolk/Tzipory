@@ -1,6 +1,6 @@
 ﻿using Tzipory.Systems.FactorySystem;
-using Tzipory.ConfigFiles.VisualSystemConfig;
-using Tzipory.ConfigFiles.VisualSystemConfig.EffectType;
+using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.GameplayLogic.StatusEffectTypes.EffectType;
 
 namespace Tzipory.Factory
 {

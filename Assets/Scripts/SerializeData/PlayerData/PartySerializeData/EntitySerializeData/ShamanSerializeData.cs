@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Shamans;
+using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.PartyConfig;
 using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;

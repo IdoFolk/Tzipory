@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Helpers.Consts;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity;
 using UnityEngine;

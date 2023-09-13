@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.GamePlayLogic.ObjectPools;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig
+namespace Tzipory.GameplayLogic.StatusEffectTypes
 {
     public class EffectSequenceHandler
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Helpers;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.GamePlayLogic.ObjectPools;
@@ -9,7 +9,7 @@ using Tzipory.Systems.PoolSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig
+namespace Tzipory.GameplayLogic.StatusEffectTypes
 {
     public class EffectSequence : IInitialization<IEntityVisualComponent,EffectSequenceConfig,Action> , IPoolable<EffectSequence>
     {

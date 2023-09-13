@@ -3,7 +3,7 @@ using Tzipory.ConfigFiles.PartyConfig;
 using Tzipory.ConfigFiles.PartyConfig.NodesConfig;
 using Tzipory.ConfigFiles.WaveSystemConfig;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig.Nodes
+namespace Tzipory.GameplayLogic.StatusEffectTypes.Nodes
 {
     [System.Serializable]
     public abstract class BaseNodeSerializeData : ISerializeData

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig
+namespace Tzipory.GameplayLogic.StatusEffectTypes
 {
     public abstract class BaseEffectActionConfig : ScriptableObject
     {

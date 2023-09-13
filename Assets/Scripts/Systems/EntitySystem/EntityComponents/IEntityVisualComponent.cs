@@ -1,5 +1,5 @@
 ﻿using Tzipory.Tools.Sound;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.EntityComponents

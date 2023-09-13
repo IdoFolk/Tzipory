@@ -1,8 +1,10 @@
 using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.EntitySystem.TargetingSystem;
+using Tzipory.GameplayLogic.EntitySystem.TempleCore;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.TargetingSystem.TargetingPriorites
+namespace Tzipory.GameplayLogic.TargetingPriorities
 {
 
     public class ClosestToCoreTarget : BaseTargetingPriority

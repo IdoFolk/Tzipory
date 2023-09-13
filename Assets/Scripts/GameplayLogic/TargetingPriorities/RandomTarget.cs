@@ -2,9 +2,10 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.EntitySystem.TargetingSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.TargetingSystem.TargetingPriorites
+namespace Tzipory.GameplayLogic.TargetingPriorities
 {
     public class RandomTarget : BaseTargetingPriority
     {

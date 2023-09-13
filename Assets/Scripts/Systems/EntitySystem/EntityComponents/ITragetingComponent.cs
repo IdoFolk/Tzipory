@@ -1,4 +1,4 @@
-﻿using Tzipory.ConfigFiles.VisualSystemConfig;
+﻿using Tzipory.GameplayLogic.StatusEffectTypes;
 using Tzipory.EntitySystem.TargetingSystem;
 using UnityEngine;
 

@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.EntitySystem.TargetingSystem;
 
-namespace Tzipory.EntitySystem.TargetingSystem.TargetingPriorites
+namespace Tzipory.GameplayLogic.TargetingPriorities
 {
     public class ClosestToEntityTarget : BaseTargetingPriority
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using DG.Tweening;
-using Tzipory.ConfigFiles.VisualSystemConfig.EffectActionTypeSO;
-using Tzipory.ConfigFiles.VisualSystemConfig.EffectType;
+using Tzipory.GameplayLogic.StatusEffectTypes.EffectActionTypeSO;
+using Tzipory.GameplayLogic.StatusEffectTypes.EffectType;
 using UnityEngine;
 
 public static class TransitionManager

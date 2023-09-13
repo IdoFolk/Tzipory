@@ -2,6 +2,7 @@ using UnityEngine;
 using Tzipory.EntitySystem.EntityComponents;
 using PathCreation;
 using Tzipory.GameplayLogic.EntitySystem.Enemies;
+using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 
 public class MovementOnPath : MonoBehaviour
 {

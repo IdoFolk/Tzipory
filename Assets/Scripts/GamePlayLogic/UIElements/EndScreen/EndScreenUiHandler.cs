@@ -1,6 +1,7 @@
 ﻿using Tzipory.ConfigFiles.ToolTipConfig;
 using Systems.UISystem;
 using TMPro;
+using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using UnityEngine;
 
 namespace GameplayeLogic.UIElements

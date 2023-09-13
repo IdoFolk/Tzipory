@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Tools.Enums;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Tzipory.Tools.Interface;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig
+namespace Tzipory.GameplayLogic.StatusEffectTypes
 {
     public abstract class BaseStatusEffect : IDisposable ,IInitialization<StatusEffectConfig>
     {

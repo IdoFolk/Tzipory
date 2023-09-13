@@ -1,7 +1,8 @@
-﻿using Tzipory.Systems.SceneSystem;
+﻿using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.Systems.SceneSystem;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.WaveSystemConfig.Managers.MainMenuMangers
+namespace Tzipory.GameplayLogic.Managers.MainMenuMangers
 {
     public class MainMenuManager : MonoBehaviour
     {

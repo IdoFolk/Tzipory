@@ -1,7 +1,7 @@
 ﻿using Helpers.Consts;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.PartyConfig;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using UnityEngine;
 
 namespace Tzipory.ConfigFiles.WaveSystemConfig.StatSystemSerilazeData

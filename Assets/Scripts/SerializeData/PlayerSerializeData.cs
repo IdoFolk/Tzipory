@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Helpers.Consts;
-using Tzipory.ConfigFiles.VisualSystemConfig.Progression;
+using Tzipory.GameplayLogic.StatusEffectTypes.Progression;
 using Systems.DataManagerSystem;
 using Tools.Enums;
 using Tzipory.ConfigFiles.PartyConfig;
@@ -9,7 +9,7 @@ using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using Tzipory.ConfigFiles.WaveSystemConfig;
 using UnityEngine;
 
-namespace GameplayeLogic.Managers
+namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 {
     [Serializable]
     public class PlayerSerializeData : ISerializeData, IDisposable

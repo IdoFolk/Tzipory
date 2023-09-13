@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.EntitySystem.TargetingSystem;
+using Tzipory.GameplayLogic.EntitySystem.TempleCore;
 using UnityEngine;
-namespace Tzipory.EntitySystem.TargetingSystem.TargetingPriorites
+namespace Tzipory.GameplayLogic.TargetingPriorities
 {
 
-    public class FarthestFromEntityTarget : BaseTargetingPriority
+    public class FarthestFromCoreTarget : BaseTargetingPriority
     {
-        public FarthestFromEntityTarget(IEntityTargetingComponent targetingComponent) : base(targetingComponent)
+        public FarthestFromCoreTarget(IEntityTargetingComponent targetingComponent) : base(targetingComponent)
         {
         }
 
@@ -19,7 +21,7 @@ namespace Tzipory.EntitySystem.TargetingSystem.TargetingPriorites
 
             foreach (var target in targets)
             {
-                var distance = TargetingComponent.GetDistanceToTarget(target);
+                var distance = Vector3.Distance(CoreTemple.CoreTrans.position, target.EntityTransform.position);
 
                 if (distance > currentLongestDistance)
                 {

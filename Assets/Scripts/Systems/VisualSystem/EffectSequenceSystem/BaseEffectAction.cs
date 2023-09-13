@@ -1,9 +1,9 @@
 ﻿using System;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Tools.Interface;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig
+namespace Tzipory.GameplayLogic.StatusEffectTypes
 {
     public abstract class BaseEffectAction : IInitialization<EffectActionContainerConfig,IEntityVisualComponent>
     {

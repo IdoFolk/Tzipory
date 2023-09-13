@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.GameplayLogic.EntitySystem.TempleCore;
 using UnityEngine;
 
 public class TEMP_Temple_HPBarConnector : MonoBehaviour

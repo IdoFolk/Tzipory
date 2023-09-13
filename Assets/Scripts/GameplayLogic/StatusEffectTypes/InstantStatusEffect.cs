@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig
+namespace Tzipory.GameplayLogic.StatusEffectTypes
 {
     internal sealed class InstantStatusEffect : BaseStatusEffect
     {

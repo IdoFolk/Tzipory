@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Sirenix.OdinInspector;
 using Tools.Enums;
 using Tzipory.ConfigFiles.WaveSystemConfig.StatSystemSerilazeData;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig
+namespace Tzipory.GameplayLogic.StatusEffectTypes
 {
 #if true
     [Serializable]

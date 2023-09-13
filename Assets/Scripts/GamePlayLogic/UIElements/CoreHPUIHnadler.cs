@@ -1,4 +1,5 @@
-﻿using Tzipory.ConfigFiles.VisualSystemConfig;
+﻿using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 
 namespace GameplayeLogic.UIElements
 {

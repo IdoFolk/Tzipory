@@ -1,4 +1,4 @@
-﻿using Tzipory.ConfigFiles.VisualSystemConfig;
+﻿using Tzipory.GameplayLogic.StatusEffectTypes;
 
 namespace Tzipory.ConfigFiles.WaveSystemConfig.VisualSystem.EffectType.Sprite
 {

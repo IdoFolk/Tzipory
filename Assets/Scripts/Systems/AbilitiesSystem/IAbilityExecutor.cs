@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Tzipory.ConfigFiles.WaveSystemConfig.StatSystemSerilazeData;
 
 namespace Tzipory.GameplayLogic.AbilitySystem

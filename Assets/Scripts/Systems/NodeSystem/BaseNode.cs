@@ -1,5 +1,5 @@
 ﻿using System;
-using Tzipory.ConfigFiles.VisualSystemConfig.Nodes;
+using Tzipory.GameplayLogic.StatusEffectTypes.Nodes;
 
 namespace Systems.NodeSystem
 {

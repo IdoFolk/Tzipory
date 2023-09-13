@@ -1,7 +1,7 @@
 
 using Tzipory.ConfigFiles.PartyConfig;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig.Nodes
+namespace Tzipory.GameplayLogic.StatusEffectTypes.Nodes
 {
     public class JunctionNodeSerializeData : WorldMapNodeSerializeData
     {

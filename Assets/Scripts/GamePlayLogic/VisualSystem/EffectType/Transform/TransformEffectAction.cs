@@ -1,11 +1,11 @@
 ﻿using System;
-using Tzipory.ConfigFiles.VisualSystemConfig;
-using Tzipory.ConfigFiles.VisualSystemConfig.EffectActionTypeSO;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.GameplayLogic.StatusEffectTypes.EffectActionTypeSO;
 using Tzipory.Systems.PoolSystem;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig.EffectType
+namespace Tzipory.GameplayLogic.StatusEffectTypes.EffectType
 {
     public class TransformEffectAction : BaseEffectAction , IPoolable<TransformEffectAction>
     {

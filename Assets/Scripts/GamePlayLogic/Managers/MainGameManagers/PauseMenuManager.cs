@@ -3,7 +3,7 @@ using Tzipory.Systems.SceneSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.Managers.MainGameManagers
+namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
     public class PauseMenuManager : MonoBehaviour
     {

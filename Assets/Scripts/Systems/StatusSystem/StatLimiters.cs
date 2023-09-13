@@ -1,4 +1,4 @@
-﻿namespace Tzipory.ConfigFiles.VisualSystemConfig
+﻿namespace Tzipory.GameplayLogic.StatusEffectTypes
 {
     public static class StatLimiters
     {

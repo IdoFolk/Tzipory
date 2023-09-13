@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Helpers.Consts;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;

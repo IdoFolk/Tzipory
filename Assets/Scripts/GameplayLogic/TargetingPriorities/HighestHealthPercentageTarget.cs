@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.EntitySystem.TargetingSystem;
 using UnityEngine;
-namespace Tzipory.EntitySystem.TargetingSystem.TargetingPriorites
+namespace Tzipory.GameplayLogic.TargetingPriorities
 {
 
-    public class LowestHealthTarget : BaseTargetingPriority
+    public class HighestHealthPercentageTarget : BaseTargetingPriority
     {
-        public LowestHealthTarget(IEntityTargetingComponent targetingComponent) : base(targetingComponent)
+        public HighestHealthPercentageTarget(IEntityTargetingComponent targetingComponent) : base(targetingComponent)
         {
         }
 
@@ -15,14 +16,15 @@ namespace Tzipory.EntitySystem.TargetingSystem.TargetingPriorites
         {
             IEntityTargetAbleComponent currentLowestTarget = null;
 
-            float currentLowestHP = float.MaxValue;
+            float currentHighestHP = float.MinValue;
 
             foreach (var target in targets)
             {
-                if (target.Health.CurrentValue < currentLowestHP)
+                //USE BASE VALUE HERE! NOT MAXVALUE! 
+                if (target.Health.CurrentValue / target.Health.BaseValue > currentHighestHP)
                 {
                     currentLowestTarget = target;
-                    currentLowestHP = target.Health.CurrentValue;
+                    currentHighestHP = target.Health.CurrentValue;
                 }
             }
 

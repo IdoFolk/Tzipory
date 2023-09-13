@@ -1,5 +1,5 @@
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig.Nodes
+namespace Tzipory.GameplayLogic.StatusEffectTypes.Nodes
 {
     [System.Serializable]
     public abstract class WorldMapNodeSerializeData : BaseNodeSerializeData

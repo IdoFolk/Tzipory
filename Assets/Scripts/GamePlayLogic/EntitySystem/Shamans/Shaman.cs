@@ -9,7 +9,7 @@ using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig.EntityVisualConfig;
 using Tzipory.ConfigFiles.WaveSystemConfig;
 using UnityEngine;
 
-namespace Shamans
+namespace Tzipory.GameplayLogic.EntitySystem.Shamans
 {
     public class Shaman : BaseUnitEntity
     {

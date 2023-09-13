@@ -1,5 +1,5 @@
 ﻿using System;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Tzipory.ConfigFiles.WaveSystemConfig.StatSystemSerilazeData;
 
 namespace Tzipory.Factory

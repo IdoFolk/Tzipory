@@ -4,7 +4,7 @@ using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Helpers.Consts;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using Tzipory.EntitySystem.TargetingSystem;
 using UnityEngine;
 

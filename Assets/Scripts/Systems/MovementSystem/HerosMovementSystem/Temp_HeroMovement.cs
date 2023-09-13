@@ -9,7 +9,7 @@ namespace MovementSystem.HerosMovementSystem
 
         [SerializeField] private AgentAuthoring _agentAuthoring;
         [SerializeField] private TEMP_BasicMoveComponent _moveComponent;
-        [SerializeField] Shamans.Shaman _shaman;
+        [SerializeField] Tzipory.GameplayLogic.EntitySystem.Shamans.Shaman _shaman;
 
         public bool IsMoveing => _moveComponent.IsMoveing;
         

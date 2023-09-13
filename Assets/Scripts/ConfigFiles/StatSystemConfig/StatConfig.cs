@@ -2,7 +2,7 @@
 using Tzipory.ConfigFiles.PartyConfig;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.VisualSystemConfig
+namespace Tzipory.GameplayLogic.StatusEffectTypes
 {
     [System.Serializable]
     public class StatConfig : IConfigFile

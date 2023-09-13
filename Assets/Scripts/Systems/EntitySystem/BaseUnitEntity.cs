@@ -11,7 +11,7 @@ using Tzipory.EntitySystem.TargetingSystem;
 using Tzipory.ConfigFiles.WaveSystemConfig;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.Sound;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using UnityEngine;
 using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 

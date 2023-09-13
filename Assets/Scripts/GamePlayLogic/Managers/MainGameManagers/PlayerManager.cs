@@ -1,6 +1,6 @@
-﻿using GameplayeLogic.Managers;
+﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 
-namespace Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.Managers
+namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
     public class PlayerManager
     {

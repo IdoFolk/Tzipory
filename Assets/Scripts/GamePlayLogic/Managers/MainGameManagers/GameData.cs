@@ -1,6 +1,6 @@
 ﻿using Tzipory.ConfigFiles.WaveSystemConfig;
 
-namespace Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.Managers
+namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
     public class GameData
     {

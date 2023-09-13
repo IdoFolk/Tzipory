@@ -1,13 +1,14 @@
 using System.Collections.Generic;
-using Tzipory.ConfigFiles.VisualSystemConfig.Nodes;
-using Tzipory.ConfigFiles.VisualSystemConfig.Progression;
+using Tzipory.GameplayLogic.StatusEffectTypes.Nodes;
+using Tzipory.GameplayLogic.StatusEffectTypes.Progression;
 using Sirenix.OdinInspector;
 using Systems.NodeSystem;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.SceneSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.Managers
+namespace Tzipory.GameplayLogic.Managers.MapManagers
 {
     public class WorldMapNodesManager : BaseNodeManager , IInitialization<WorldMapProgressionSerializeData>
     {

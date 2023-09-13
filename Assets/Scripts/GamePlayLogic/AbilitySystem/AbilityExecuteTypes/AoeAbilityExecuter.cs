@@ -4,7 +4,7 @@ using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity;
 using Helpers.Consts;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.ConfigFiles.VisualSystemConfig;
+using Tzipory.GameplayLogic.StatusEffectTypes;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

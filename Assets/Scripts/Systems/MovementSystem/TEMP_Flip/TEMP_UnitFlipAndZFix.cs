@@ -68,13 +68,15 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
             var deltaV = transform.position - lastPos;
             if (deltaV.sqrMagnitude >= _flipPrefs.DeadZone)
             {
-                _spriteRenderer.flipX = deltaV.x >= 0;
+                //_spriteRenderer.flipX = deltaV.x >= 0;
+                _baseUnitEntity.SetSpriteFlipX( deltaV.x >= 0);
             }
             else
             {
-                if(_tgt)
+                if (_tgt)
                 {
-                    _spriteRenderer.flipX = (_tgt.position - transform.position).x >0;
+                    //_spriteRenderer.flipX = (_tgt.position - transform.position).x > 0;
+                    _baseUnitEntity.SetSpriteFlipX((_tgt.position - transform.position).x > 0);
                 }
             }
         }

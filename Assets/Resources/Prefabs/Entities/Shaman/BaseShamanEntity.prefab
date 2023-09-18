@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3967852597732260807}
   - component: {fileID: 4384665016017732509}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Silhouette
   m_TagString: Untagged
   m_Icon: {fileID: 0}

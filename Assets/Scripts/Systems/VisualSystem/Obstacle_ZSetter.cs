@@ -8,12 +8,14 @@ public class Obstacle_ZSetter : MonoBehaviour
 {
     Silhouetter _silhouetter;
 
+    [SerializeField] Transform gfxTrans;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //if (_unit = collision.gameObject.GetComponent<BaseUnitEntity>())
         if (_silhouetter = collision.gameObject.GetComponent<Silhouetter>())
         {
-            _silhouetter.AddObstacleZ(transform.position.z);
+            _silhouetter.AddObstacleZ(gfxTrans.position.z);
         }
         
     } 
@@ -21,7 +23,7 @@ public class Obstacle_ZSetter : MonoBehaviour
     {
         if (_silhouetter = collision.gameObject.GetComponent<Silhouetter>())
         {
-            _silhouetter.RemoveObstacleZ(transform.position.z);
+            _silhouetter.RemoveObstacleZ(gfxTrans.position.z);
         }
         
     }

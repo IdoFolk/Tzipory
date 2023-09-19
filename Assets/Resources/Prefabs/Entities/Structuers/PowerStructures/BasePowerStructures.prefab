@@ -133,7 +133,23 @@ MonoBehaviour:
   _timerHandler:
     _timerSerializeDatas: []
   _range: 0
-  _myEffect: {fileID: 0}
+  _myEffect:
+    _statusEffectName: 
+    _affectedStatId: 0
+    _effectType: 0
+    _statusEffectType: 0
+    _duration: 0
+    _interval: 0
+    _disableDuration: 0
+    _statModifier: []
+    _effectSequence:
+      _sequenceName: 
+      _id: 0
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []
   _colliderTargetingArea: {fileID: 3010881160199426927}
   _proximityIndicatorHandler:
     _scaler: {fileID: 2062197455431657528}
@@ -371,11 +387,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1471130245323627165, guid: 211f2104271d9ec4e8629989f9371d26, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1471130245323627165, guid: 211f2104271d9ec4e8629989f9371d26, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.5
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1471130245323627165, guid: 211f2104271d9ec4e8629989f9371d26, type: 3}
       propertyPath: m_LocalPosition.x

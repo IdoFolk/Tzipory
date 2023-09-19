@@ -26,7 +26,7 @@ namespace MovementSystem.HerosMovementSystem
         public void SelectHero()
         {
             //TempHeroMovementManager.Instance.SelectTarget(this);
-            TempHeroMovementManager.Instance.SelectTarget(this,_shaman.SpriteRenderer.sprite, _shaman.AttackRange.CurrentValue); //temp?
+            TempHeroMovementManager.Instance.SelectTarget(this,_shaman.SpriteRenderer.sprite, _shaman.TargetingRange.CurrentValue); //temp?
         }
     }
 }

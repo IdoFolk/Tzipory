@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Shamans;
-using Sirenix.OdinInspector;
 using Systems.TargetingSystem;
 using Tools.Enums;
 using Tzipory.EntitySystem.StatusSystem;
@@ -15,7 +14,7 @@ public class TEMP_PowerStructure : BaseGameEntity , ITargetableReciever
     //temp config stuff
     [SerializeField] private float _range;
     
-    [SerializeField,AssetsOnly,Required] private StatusEffectConfig _myEffect;
+    [SerializeField] private StatEffectConfig _statEffectConfig;
     [SerializeField] private ColliderTargetingArea _colliderTargetingArea;
     [SerializeField] private ProximityIndicatorHandler _proximityIndicatorHandler;
     [SerializeField] private Color _activeColor;
@@ -59,7 +58,7 @@ public class TEMP_PowerStructure : BaseGameEntity , ITargetableReciever
         if (_activeStatusEffectOnShaman.ContainsKey(shaman.EntityInstanceID))//temp!!!
             return;
 
-        IDisposable disposable = shaman.StatusHandler.AddStatusEffect(_myEffect);
+        IDisposable disposable = shaman.StatusHandler.AddStatusEffect(_statEffectConfig);
         _activeStatusEffectOnShaman.Add(shaman.
             EntityInstanceID, disposable);
     }

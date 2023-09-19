@@ -865,11 +865,11 @@ PrefabInstance:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
+      objectReference: {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 1860914778f26304ebb1455b9221a5ef, type: 2}
+      objectReference: {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.data[2]
       value: 

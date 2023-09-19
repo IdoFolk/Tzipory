@@ -28,15 +28,13 @@ MonoBehaviour:
   _castTime: 1
   _statusEffectConfigs:
   - _statusEffectName: Piercing Shot
-    _affectedStat: 0
-    _effectType: 0
-    _statusEffectType: 1
+    _affectedStatId: 0
+    _statEffectType: 1
     _duration: 5
     _interval: 1
-    _disableDuration: 0
     _statModifier:
-    - _statusModifierType: 2
-      _modifier: 100
+      _statusModifierType: 2
+      _modifier: 25
     _effectSequence:
       _sequenceName: 
       _id: 0

@@ -16,7 +16,7 @@ namespace Tzipory.GamePlayLogic.ObjectPools
         public static ObjectPool<Enemy> EnemyPool { get; private set; }
         public static ObjectPool<WaveIndicator> IndicatorPool { get; private set; }
         
-        //statusEffect pool
+        //modifyStatEffect pool
 
         public PoolManager()
         {

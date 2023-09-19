@@ -1,4 +1,5 @@
-﻿using ProjectDawn.Navigation.Hybrid;
+﻿using Helpers.Consts;
+using ProjectDawn.Navigation.Hybrid;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace MovementSystem.HerosMovementSystem
         
         private void Start()
         {
-            _moveComponent.Init(_shaman.MovementSpeed);
+            _moveComponent.Init(_shaman.StatusHandler.GetStat(Constant.StatsId.MovementSpeed));
         }
         public void SetTarget(Vector3 pos)
         {

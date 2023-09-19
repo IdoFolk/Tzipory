@@ -30,9 +30,9 @@ namespace Tzipory.AbilitiesSystem.AbilityConfigSystem
         [Header("Ability parameters")]
         [SerializeField,Tooltip("")] private float _cooldown;
         [SerializeField,Tooltip("")] private float _castTime;
-        [SerializeField,Tooltip("")] private List<StatusEffectConfig> _statusEffectConfigs;
+        [SerializeField,Tooltip("")] private List<StatEffectConfig> _statusEffectConfigs;
         [SerializeField,Tooltip(""), ShowIf("abilityExecuteType", AbilityExecuteType.AOE)] private bool _doExitEffects;
-        [SerializeField,Tooltip(""), ShowIf("_doExitEffects")] private List<StatusEffectConfig> _statusEffectConfigsOnExit;
+        [SerializeField,Tooltip(""), ShowIf("_doExitEffects")] private List<StatEffectConfig> _statusEffectConfigsOnExit;
         
         public string AbilityName => _abilityName;
         public int AbilityId => _abilityId;
@@ -59,12 +59,12 @@ namespace Tzipory.AbilitiesSystem.AbilityConfigSystem
 
         public float Cooldown => _cooldown;
         public float CastTime => _castTime;
-        public List<StatusEffectConfig> StatusEffectConfigs => _statusEffectConfigs;
+        public List<StatEffectConfig> StatusEffectConfigs => _statusEffectConfigs;
 
         public int ConfigObjectId => _abilityId;
         public int ConfigTypeId => Constant.DataId.ABILITY_DATA_ID;
         public bool DoExitEffects => _doExitEffects;
-        public List<StatusEffectConfig> OnExitStatusEffectConfigs => _doExitEffects? _statusEffectConfigsOnExit : null;
+        public List<StatEffectConfig> OnExitStatusEffectConfigs => _doExitEffects? _statusEffectConfigsOnExit : null;
     }
 
     public enum AbilityExecuteType

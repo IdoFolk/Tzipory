@@ -36,7 +36,7 @@ namespace Enemes
             EntityType = EntityType.Enemy;
             timer = 0;
             _isAttacking  = false;
-            _tempBasicMoveComponent.Init(MovementSpeed);//temp!
+            _tempBasicMoveComponent.Init(StatusHandler.GetStat(Constant.StatsId.MovementSpeed));//temp!
             
             var enemyConfig = (EnemyConfig)parameter;
             
@@ -148,8 +148,6 @@ namespace Enemes
         public void Dispose()
         {
             OnDispose?.Invoke(this);
-            EffectSequenceHandler.Reset();
-            TargetingHandler.Reset();
             gameObject.SetActive(false);
         }
 

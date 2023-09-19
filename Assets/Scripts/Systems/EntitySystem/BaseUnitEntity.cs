@@ -45,7 +45,13 @@ namespace Tzipory.EntitySystem.Entitys
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _defaultPopUpText_Config;
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _critPopUpText_Config;
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _healPopUpText_Config;
-        
+
+        #region Visual Events
+        public Action<bool> OnSpriteFlipX;
+        public Action<Sprite> OnSetSprite;
+
+        #endregion
+
         private float  _currentInvincibleTime;
 
         private bool _startedDeathSequence;
@@ -250,9 +256,11 @@ namespace Tzipory.EntitySystem.Entitys
                 Factory.TargetingPriorityFactory.GetTargetingPriority(this, (TargetingPriorityType)parameter.TargetingPriority);
             
             AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
-            
-            SpriteRenderer.sprite = visualConfig.Sprite;
-            
+
+            //SpriteRenderer.sprite = visualConfig.Sprite;
+            SetSprite(visualConfig.Sprite);
+
+
             BaseInit();
         }
         
@@ -463,6 +471,18 @@ namespace Tzipory.EntitySystem.Entitys
         
         private void AddStatusEffectVisual(EffectSequenceConfig effectSequenceConfig) =>
             EffectSequenceHandler.PlaySequenceByData(effectSequenceConfig);//temp
+
+        private void SetSprite(Sprite newSprite)
+        {
+            _spriteRenderer.sprite = newSprite;
+            OnSetSprite?.Invoke(newSprite);
+        }
+        public void SetSpriteFlipX(bool doFlip)
+        {
+            _spriteRenderer.flipX = doFlip;
+            OnSpriteFlipX?.Invoke(doFlip);
+        }
+
 
         #endregion
     }

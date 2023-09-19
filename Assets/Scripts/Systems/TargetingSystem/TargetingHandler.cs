@@ -5,6 +5,7 @@ using Sirenix.OdinInspector;
 using Systems.TargetingSystem;
 using Tools.Enums;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.EntitySystem.StatusSystem;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.TargetingSystem
@@ -35,13 +36,13 @@ namespace Tzipory.EntitySystem.TargetingSystem
             
             _targetingArea.Init(this);
             
-            UpdateTargetingRange(_entityTargetingComponent.TargetingRange.CurrentValue);
+            transform.localScale = new Vector3(_entityTargetingComponent.TargetingRange.CurrentValue, _entityTargetingComponent.TargetingRange.CurrentValue,1f);
             
-            _entityTargetingComponent.TargetingRange.OnValueChanged += UpdateTargetingRange;
+            _entityTargetingComponent.TargetingRange.OnValueChangedData += UpdateTargetingRange;
         }
 
-        private void UpdateTargetingRange(float value)=>
-            transform.localScale = new Vector3(value, value,1f);
+        private void UpdateTargetingRange(StatChangeData statChangeData)=>
+            transform.localScale = new Vector3(statChangeData.NewValue, statChangeData.NewValue,1f);
 
         public void SetAttackTarget(IEntityTargetAbleComponent target)
         {
@@ -123,6 +124,7 @@ namespace Tzipory.EntitySystem.TargetingSystem
         public void Reset()
         {
             _availableTargets.Clear();
+            _entityTargetingComponent.TargetingRange.OnValueChangedData -= UpdateTargetingRange;
         }
     }
 }

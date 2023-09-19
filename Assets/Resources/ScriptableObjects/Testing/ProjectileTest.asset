@@ -14,25 +14,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityId: 0
   _abilityName: ProjectileTest
-  _abilityType: 2
-  _abilityActionType: 1
-  _targetingPriority: 0
-  _targetType: 1
-  _effectType: 1
-  _cooldown:
-    _name: 
-    _id: 0
-    _baseValue: 5
-    _currentValue: 0
-  _castTime:
-    _name: 
-    _id: 0
-    _baseValue: 1
-    _currentValue: 0
-  abilityParameter:
-  - _name: ProjectileSpeed
-    _id: 0
-    _baseValue: 5
-    _currentValue: 0
+  abilityCastType: 0
+  _projectileSpeed: 5
+  _projectilePenetration: 5
+  abilityExecuteType: 1
+  _aoeRadius: 0
+  _aoeDuration: 0
+  _chainRadius: 0
+  _chainDuration: 0
+  _chainAmount: 0
+  targetingPriorityType: 5
+  _cooldown: 5
+  _castTime: 1
   _statusEffectConfigs:
-  - {fileID: 11400000, guid: b88d00e68281c724c889c9df070b136a, type: 2}
+  - _statusEffectName: 
+    _statProcessPriority: 999
+    _affectedStatId: 0
+    _statEffectType: 3
+    _duration: 0
+    _interval: 0
+    _statModifier:
+      _statusModifierType: 3
+      _modifier: 0
+    _effectSequence:
+      _sequenceName: 
+      _id: 0
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []
+  _doExitEffects: 0
+  _statusEffectConfigsOnExit: []

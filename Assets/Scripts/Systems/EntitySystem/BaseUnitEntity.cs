@@ -222,13 +222,12 @@ namespace Tzipory.EntitySystem.Entitys
 
             EffectSequenceHandler = new EffectSequenceHandler(this,effectSequence);
             
-            StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
             StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
 
             TargetingHandler.Init(this);
             
             if (_doShowHPBar)//Temp!
-                Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
+                Health.OnValueChangedData += _hpBarConnector.SetBarToHealth;
 
             if (_doShowHPBar)
                 _hpBarConnector.Init(this);
@@ -250,8 +249,8 @@ namespace Tzipory.EntitySystem.Entitys
             
             Stats = new Dictionary<int, Stat>();
 
-            foreach (var statConfig in parameter.StatSerializeDatas)
-                Stats.Add(statConfig.ID ,new Stat(statConfig));
+            foreach (var statSerializeData in parameter.StatSerializeDatas)
+                Stats.Add(statSerializeData.ID ,new Stat(statSerializeData));
             
             DefaultPriorityTargeting =
                 Factory.TargetingPriorityFactory.GetTargetingPriority(this, (TargetingPriorityType)parameter.TargetingPriority);
@@ -298,6 +297,9 @@ namespace Tzipory.EntitySystem.Entitys
             
             EffectSequenceHandler.UpdateEffectHandler();
             
+            StatusHandler.UpdateStatHandler();
+            HealthComponentUpdate();
+            
             if (IsEntityDead)
             {
                 if (_startedDeathSequence)
@@ -306,13 +308,9 @@ namespace Tzipory.EntitySystem.Entitys
                 StartDeathSequence();
                 return;
             }
-
-            HealthComponentUpdate();
-            StatusHandler.UpdateStatHandler();
-
+            
             if (TargetingHandler.CurrentTarget == null || TargetingHandler.CurrentTarget.IsEntityDead)
                 TargetingHandler.GetPriorityTarget();
-            
             
             UpdateEntity();
         }
@@ -341,10 +339,9 @@ namespace Tzipory.EntitySystem.Entitys
             if (!IsInitialization)
                 return;
 
-            StatusHandler.OnStatusEffectInterrupt -= EffectSequenceHandler.RemoveEffectSequence;
             StatusHandler.OnStatusEffectAdded -= AddStatusEffectVisual;
 
-            Health.OnValueChanged  -= _hpBarConnector.SetBarToHealth;
+            Health.OnValueChangedData  -= _hpBarConnector.SetBarToHealth;
         }
 
         #endregion
@@ -379,7 +376,7 @@ namespace Tzipory.EntitySystem.Entitys
             _healPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(amount);
             
             _popUpTexter.SpawnPopUp(_healPopUpText_Config);
-            Health.AddToValue(amount);
+            Health.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition));
         }
 
         public void TakeDamage(float damage,bool isCrit)
@@ -452,6 +449,8 @@ namespace Tzipory.EntitySystem.Entitys
         protected virtual void EntityDied()
         {
             IsInitialization = false;
+            TargetingHandler.Reset();
+            EffectSequenceHandler.Reset();
 #if UNITY_EDITOR
             Debug.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as died!");
 #endif

@@ -39,13 +39,13 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
             }
         }
 
-        private List<BaseStatusEffect> _statusEffects;
+        private List<BaseModifyStatEffect> _statusEffects;
         public AbilityExecuteType AbilityExecuteType => AbilityExecuteType.AOE;
         public IEntityTargetAbleComponent Caster { get; }
 
         //Changes:
-        public List<StatusEffectConfig> OnEnterStatusEffects { get; }
-        public List<StatusEffectConfig> OnExitStatusEffects { get; }
+        public List<StatEffectConfig> OnEnterStatusEffects { get; }
+        public List<StatEffectConfig> OnExitStatusEffects { get; }
 
         [Obsolete("Use AbilitySerializeData")]
         public AoeAbilityExecuter(IEntityTargetAbleComponent caster,AbilityConfig abilityConfig)
@@ -53,8 +53,8 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
             Stats = new Dictionary<int, Stat>();
 
             Caster = caster;
-            OnEnterStatusEffects = new List<StatusEffectConfig>();
-            OnExitStatusEffects = new List<StatusEffectConfig>();
+            OnEnterStatusEffects = new List<StatEffectConfig>();
+            OnExitStatusEffects = new List<StatEffectConfig>();
             
             OnEnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
             if(abilityConfig.DoExitEffects)

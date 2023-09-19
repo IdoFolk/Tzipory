@@ -27,8 +27,12 @@ namespace Tzipory.EntitySystem.EntityComponents
         public void Init(Stat newSpeed)
         {
             _speedStat = newSpeed;
-            _speedStat.OnValueChanged += AdjustAgentSpeed;
-            AdjustAgentSpeed(_speedStat.CurrentValue);
+            _speedStat.OnValueChangedData += AdjustAgentSpeed;
+            
+            AgentSteering aS = agent.DefaultSteering;
+            aS.Speed = _speedStat.CurrentValue * GAME_TIME.GetCurrentTimeRate;
+            agent.EntitySteering = aS;
+            
             _lastPosition = transform.position;
         }
 
@@ -74,30 +78,32 @@ namespace Tzipory.EntitySystem.EntityComponents
             _lastPosition = transform.position;
         }
 
-        void AdjustAgentSpeed(float currentSpeed) //subs to OnTimeRateChange
+        void AdjustAgentSpeed(StatChangeData statChangeData) //subs to OnTimeRateChange
         {
             //AgentSteering aS = agent.EntitySteering;
             AgentSteering aS = agent.DefaultSteering;
-            aS.Speed = currentSpeed * GAME_TIME.GetCurrentTimeRate;
+            aS.Speed = statChangeData.NewValue * GAME_TIME.GetCurrentTimeRate;
             agent.EntitySteering = aS;
         }
-
-        private void AdjustAgentSpeedTime()
+        
+        void AdjustAgentTime() //subs to OnTimeRateChange
         {
             if (_speedStat == null)
                 return;
-            AdjustAgentSpeed(_speedStat.CurrentValue);
+            AgentSteering aS = agent.DefaultSteering;
+            aS.Speed *= GAME_TIME.GetCurrentTimeRate;
+            agent.EntitySteering = aS;
         }
 
         private void OnEnable()
         {
-            GAME_TIME.OnTimeRateChange += AdjustAgentSpeedTime; //?
+            GAME_TIME.OnTimeRateChange += AdjustAgentTime; //?
         }
         private void OnDisable()
         {
-            GAME_TIME.OnTimeRateChange -= AdjustAgentSpeedTime;
+            GAME_TIME.OnTimeRateChange -= AdjustAgentTime;
             if(_speedStat != null)
-                _speedStat.OnValueChanged -= AdjustAgentSpeed;
+                _speedStat.OnValueChangedData -= AdjustAgentSpeed;
         }
 
     }

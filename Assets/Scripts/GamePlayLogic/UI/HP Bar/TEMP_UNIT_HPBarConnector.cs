@@ -1,4 +1,5 @@
 using Tzipory.EntitySystem.Entitys;
+using Tzipory.EntitySystem.StatusSystem;
 using UnityEngine;
 
 public class TEMP_UNIT_HPBarConnector : MonoBehaviour
@@ -17,8 +18,8 @@ public class TEMP_UNIT_HPBarConnector : MonoBehaviour
     }
 
    
-    public void SetBarToHealth(float _health)
+    public void SetBarToHealth(StatChangeData statChangeData)
     {
-        hP_Bar.SetBarValue(_health);
+        hP_Bar.SetBarValue(statChangeData.NewValue);
     }
 }

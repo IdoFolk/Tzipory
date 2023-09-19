@@ -91,7 +91,7 @@ namespace Tzipory.EntitySystem.EntityComponents
             if (_speedStat == null)
                 return;
             AgentSteering aS = agent.DefaultSteering;
-            aS.Speed *= GAME_TIME.GetCurrentTimeRate;
+            aS.Speed = _speedStat.CurrentValue * GAME_TIME.GetCurrentTimeRate;
             agent.EntitySteering = aS;
         }
 

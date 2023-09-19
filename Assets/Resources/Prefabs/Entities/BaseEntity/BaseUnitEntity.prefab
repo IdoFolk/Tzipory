@@ -100,7 +100,8 @@ PrefabInstance:
       value: UnitEntityVisual
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2001920143108846328, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 871882582661858441, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
       insertIndex: -1

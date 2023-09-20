@@ -1,5 +1,5 @@
-using Tzipory.EntitySystem;
-using UnityEngine;
+using Tzipory.EntitySystem.Entitys;
+using Tzipory.EntitySystem.StatusSystem;
 
 namespace GameplayLogic.UI.HPBar
 {
@@ -18,9 +18,8 @@ namespace GameplayLogic.UI.HPBar
         }
 
 
-        public void SetBarToHealth(float _health)
+        public void SetBarToHealth(StatChangeData statChangeData)
         {
-            hP_Bar.SetBarValue(_health);
+            hP_Bar.SetBarValue(statChangeData.NewValue);
         }
     }
-}

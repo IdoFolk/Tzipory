@@ -37,7 +37,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Enemies
             EntityType = EntityType.Enemy;
             timer = 0;
             _isAttacking  = false;
-            _tempBasicMoveComponent.Init(MovementSpeed);//temp!
+            _tempBasicMoveComponent.Init(StatusHandler.GetStat(Constant.StatsId.MovementSpeed));//temp!
             
             var enemyConfig = (EnemyConfig)parameter;
             
@@ -149,8 +149,6 @@ namespace Tzipory.GameplayLogic.EntitySystem.Enemies
         public void Dispose()
         {
             OnDispose?.Invoke(this);
-            EffectSequenceHandler.Reset();
-            TargetingHandler.Reset();
             gameObject.SetActive(false);
         }
 

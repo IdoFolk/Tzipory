@@ -1,4 +1,5 @@
-﻿using ProjectDawn.Navigation.Hybrid;
+﻿using Helpers.Consts;
+using ProjectDawn.Navigation.Hybrid;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         
         private void Start()
         {
-            _moveComponent.Init(_shaman.MovementSpeed);
+            _moveComponent.Init(_shaman.StatusHandler.GetStat(Constant.StatsId.MovementSpeed));
         }
         public void SetTarget(Vector3 pos)
         {
@@ -25,7 +26,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         public void SelectHero()
         {
             //TempHeroMovementManager.Instance.SelectTarget(this);
-            TempHeroMovementManager.Instance.SelectTarget(this,_shaman.SpriteRenderer.sprite, _shaman.AttackRange.CurrentValue); //temp?
+            TempHeroMovementManager.Instance.SelectTarget(this,_shaman.SpriteRenderer.sprite, _shaman.TargetingRange.CurrentValue); //temp?
         }
     }
 }

@@ -47,7 +47,13 @@ namespace Tzipory.EntitySystem
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _defaultPopUpText_Config;
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _critPopUpText_Config;
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _healPopUpText_Config;
-        
+
+        #region Visual Events
+        public Action<bool> OnSpriteFlipX;
+        public Action<Sprite> OnSetSprite;
+
+        #endregion
+
         private float  _currentInvincibleTime;
 
         private bool _startedDeathSequence;
@@ -218,13 +224,12 @@ namespace Tzipory.EntitySystem
 
             EffectSequenceHandler = new EffectSequenceHandler(this,effectSequence);
             
-            StatusHandler.OnStatusEffectInterrupt += EffectSequenceHandler.RemoveEffectSequence;
             StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
 
             TargetingHandler.Init(this);
             
             if (_doShowHPBar)//Temp!
-                Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
+                Health.OnValueChangedData += _hpBarConnector.SetBarToHealth;
 
             if (_doShowHPBar)
                 _hpBarConnector.Init(this);
@@ -246,16 +251,18 @@ namespace Tzipory.EntitySystem
             
             Stats = new Dictionary<int, Stat>();
 
-            foreach (var statConfig in parameter.StatSerializeDatas)
-                Stats.Add(statConfig.ID ,new Stat(statConfig));
+            foreach (var statSerializeData in parameter.StatSerializeDatas)
+                Stats.Add(statSerializeData.ID ,new Stat(statSerializeData));
             
             DefaultPriorityTargeting =
                 Systems.FactorySystem.ObjectFactory.TargetingPriorityFactory.GetTargetingPriority(this, (TargetingPriorityType)parameter.TargetingPriority);
             
             AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
-            
-            SpriteRenderer.sprite = visualConfig.Sprite;
-            
+
+            //SpriteRenderer.sprite = visualConfig.Sprite;
+            SetSprite(visualConfig.Sprite);
+
+
             BaseInit();
         }
         
@@ -292,6 +299,9 @@ namespace Tzipory.EntitySystem
             
             EffectSequenceHandler.UpdateEffectHandler();
             
+            StatusHandler.UpdateStatHandler();
+            HealthComponentUpdate();
+            
             if (IsEntityDead)
             {
                 if (_startedDeathSequence)
@@ -300,13 +310,9 @@ namespace Tzipory.EntitySystem
                 StartDeathSequence();
                 return;
             }
-
-            HealthComponentUpdate();
-            StatusHandler.UpdateStatHandler();
-
+            
             if (TargetingHandler.CurrentTarget == null || TargetingHandler.CurrentTarget.IsEntityDead)
                 TargetingHandler.GetPriorityTarget();
-            
             
             UpdateEntity();
         }
@@ -335,10 +341,9 @@ namespace Tzipory.EntitySystem
             if (!IsInitialization)
                 return;
 
-            StatusHandler.OnStatusEffectInterrupt -= EffectSequenceHandler.RemoveEffectSequence;
             StatusHandler.OnStatusEffectAdded -= AddStatusEffectVisual;
 
-            Health.OnValueChanged  -= _hpBarConnector.SetBarToHealth;
+            Health.OnValueChangedData  -= _hpBarConnector.SetBarToHealth;
         }
 
         #endregion
@@ -373,7 +378,7 @@ namespace Tzipory.EntitySystem
             _healPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(amount);
             
             _popUpTexter.SpawnPopUp(_healPopUpText_Config);
-            Health.AddToValue(amount);
+            Health.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition));
         }
 
         public void TakeDamage(float damage,bool isCrit)
@@ -446,6 +451,8 @@ namespace Tzipory.EntitySystem
         protected virtual void EntityDied()
         {
             IsInitialization = false;
+            TargetingHandler.Reset();
+            EffectSequenceHandler.Reset();
 #if UNITY_EDITOR
             Debug.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as died!");
 #endif
@@ -466,6 +473,18 @@ namespace Tzipory.EntitySystem
         
         private void AddStatusEffectVisual(EffectSequenceConfig effectSequenceConfig) =>
             EffectSequenceHandler.PlaySequenceByData(effectSequenceConfig);//temp
+
+        private void SetSprite(Sprite newSprite)
+        {
+            _spriteRenderer.sprite = newSprite;
+            OnSetSprite?.Invoke(newSprite);
+        }
+        public void SetSpriteFlipX(bool doFlip)
+        {
+            _spriteRenderer.flipX = doFlip;
+            OnSpriteFlipX?.Invoke(doFlip);
+        }
+
 
         #endregion
     }

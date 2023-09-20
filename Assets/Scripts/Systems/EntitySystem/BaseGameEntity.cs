@@ -22,7 +22,7 @@ namespace Tzipory.EntitySystem
         {
             EntityTimer = new TimerHandler();
             EntityTransform = transform;
-            EntityInstanceID = EntityIDGenerator.GetInstanceID();
+            EntityInstanceID = InstanceIDGenerator.GetInstanceID();
 #if UNITY_EDITOR
             _timerHandler = EntityTimer;
 #endif

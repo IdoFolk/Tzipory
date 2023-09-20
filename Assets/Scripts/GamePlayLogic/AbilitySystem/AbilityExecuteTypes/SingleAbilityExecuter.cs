@@ -9,12 +9,12 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
     {
         public AbilityExecuteType AbilityExecuteType { get; }
         public IEntityTargetAbleComponent Caster { get; }
-        public List<StatusEffectConfig> OnEnterStatusEffects { get; }
+        public List<StatEffectConfig> OnEnterStatusEffects { get; }
 
         public SingleAbilityExecuter(IEntityTargetAbleComponent caster,AbilityConfig abilityConfig)
         {
             Caster = caster;
-            OnEnterStatusEffects = new List<StatusEffectConfig>();
+            OnEnterStatusEffects = new List<StatEffectConfig>();
 
            OnEnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
         }

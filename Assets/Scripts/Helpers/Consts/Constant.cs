@@ -76,7 +76,22 @@ namespace Tzipory.Helpers.Consts
             Armor,
             Regeneration,
             CoreAttackDamage,
-            Modifier
+            Modifier,
+            Duration,
+            Interval
+        }
+        
+        public enum StatHolderType
+        {
+            Entity,
+            Ability,
+        }
+        
+        public enum AbilityType
+        {
+            AoeAbility,
+            ProjectileAbility,
+            ChainAbility,
         }
     }
 

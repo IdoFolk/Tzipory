@@ -1,6 +1,6 @@
 ﻿namespace Tzipory.EntitySystem
 {
-    public static class EntityIDGenerator
+    public static class InstanceIDGenerator
     {
         private static int _count = 0;
 

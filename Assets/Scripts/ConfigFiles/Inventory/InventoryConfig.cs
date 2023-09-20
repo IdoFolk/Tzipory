@@ -7,12 +7,15 @@ namespace Tzipory.ConfigFiles.Inventory
     public class InventoryConfig : IConfigFile
     {
         [SerializeField] private ItemContainerConfig[] _items;
+        //TODO: add potions
+        public ItemContainerConfig[] Items => _items;
+
         public int ObjectId { get; }
         public int ConfigTypeId { get; }
     }
 
     [System.Serializable]
-    public class ItemContainerConfig
+    public class ItemContainerConfig : IConfigFile
     {
         [SerializeField] private ItemConfig _itemConfig;
         [SerializeField] private int _amount;
@@ -20,5 +23,7 @@ namespace Tzipory.ConfigFiles.Inventory
         public ItemConfig ItemConfig => _itemConfig;
 
         public int Amount => _amount;
+        public int ObjectId { get; }
+        public int ConfigTypeId { get; }
     }
 }

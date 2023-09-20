@@ -1,5 +1,6 @@
 using GameplayeLogic.Managers;
 using GamePlayLogic.Managers;
+using Sirenix.OdinInspector;
 using Systems.DataManagerSystem;
 using Tzipory.ConfigFiles;
 using Tzipory.Systems.SceneSystem;
@@ -13,6 +14,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private SceneHandler _sceneHandler;
 
     private static Camera _camera;
+
+#if UNITY_EDITOR
+    [SerializeField,ReadOnly,TabGroup("Player data")] private PlayerSerializeData _playerSerializeData;
+#endif
     
     public static GameData GameData { get; private set; }
     public static PlayerManager PlayerManager { get; private set; }
@@ -34,6 +39,10 @@ public class GameManager : MonoBehaviour
         
         var playerSerializeData = DataManager.DataRequester.GetData<PlayerSerializeData>(_playerConfig); 
         PlayerManager = new PlayerManager(playerSerializeData);
+        
+#if UNITY_EDITOR
+        _playerSerializeData = PlayerManager.PlayerSerializeData;
+#endif
     }
 
     #region Test

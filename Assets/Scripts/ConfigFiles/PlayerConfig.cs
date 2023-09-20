@@ -20,5 +20,7 @@ namespace Tzipory.ConfigFiles
 
         public InventoryConfig InventoryConfig => _inventoryConfig;
         public PartyConfig PartyConfig => _partyConfig;
+
+        public PlayerCurrencyConfig CurrencyConfig => _currencyConfig;
     }
 }

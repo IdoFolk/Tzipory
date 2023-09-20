@@ -11,6 +11,7 @@ namespace Tzipory.ConfigFiles.Item
     {
         [SerializeField,TabGroup("Item data")] private string _itemName = "New item";
         [SerializeField,TextArea(4,4),TabGroup("Item data")] private string _itemDescription;
+        [SerializeField,TabGroup("Item data")] private ItemSlot _itemSlot;
         [SerializeField,TabGroup("Item data")] private bool _isStackable = true;
         [Space]
         [SerializeField,TabGroup("Item data")] private StatEffectConfig _statEffectConfig;
@@ -31,5 +32,14 @@ namespace Tzipory.ConfigFiles.Item
         public Sprite ItemIcon => _itemIcon;
         public int ObjectId => _objectId;
         public int ConfigTypeId => Constant.DataId.ITEM_DATA_ID;
+    }
+    
+    public enum ItemSlot
+    {
+        Head,
+        Neck,
+        Chest,
+        Legs,
+        Hands
     }
 }

@@ -1,6 +1,6 @@
 ﻿using Helpers.Consts;
 using Tzipory.ConfigFiles;
-using Tzipory.ConfigFiles.Item;
+using Tzipory.ConfigFiles.Inventory;
 using Tzipory.SerializeData;
 
 namespace SerializeData.ItemSerializeData
@@ -15,9 +15,10 @@ namespace SerializeData.ItemSerializeData
         
         public void Init(IConfigFile parameter)
         {
-            var config = (ItemConfig)parameter;
+            var config = (ItemContainerConfig)parameter;
 
-            ItemId = config.ObjectId;
+            ItemId = config.ItemConfig.ObjectId;
+            ItemStack = config.Amount;
             
             IsInitialization = true;
         }

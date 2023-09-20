@@ -2,6 +2,7 @@
 using Helpers.Consts;
 using SerializeData.ItemSerializeData;
 using Tzipory.ConfigFiles;
+using Tzipory.ConfigFiles.Inventory;
 using Tzipory.SerializeData;
 using UnityEngine;
 
@@ -16,7 +17,16 @@ namespace SerializeData.InventorySerializeData
         
         public void Init(IConfigFile parameter)
         {
-            throw new System.NotImplementedException();
+            var config = (InventoryConfig)parameter;
+
+            _itemData = new List<ItemContainerSerializeData>();
+            
+            foreach (var itemContainerConfig in config.Items)
+            {
+                ItemContainerSerializeData serializeData = new ItemContainerSerializeData();
+                serializeData.Init(itemContainerConfig);
+                _itemData.Add(serializeData);
+            }
         }
 
         public int SerializeTypeId => Constant.DataId.INVENTORY_DATA_ID;

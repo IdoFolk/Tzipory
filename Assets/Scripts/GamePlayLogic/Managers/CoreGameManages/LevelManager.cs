@@ -2,6 +2,7 @@ using System;
 using GameplayeLogic.Managers;
 using GamePlayLogic.Managers;
 using Sirenix.OdinInspector;
+using Tools.GameSettings;
 using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.EntitySystem.EntityConfigSystem;
 using Tzipory.GamePlayLogic.ObjectPools;
@@ -82,7 +83,7 @@ public class LevelManager : MonoBehaviour
         
         WaveManager.UpdateLevel();
 
-        if (_cantLose)
+        if (GameSetting.CantLose)
             return;
 
         if (CoreTemplete.IsEntityDead)

@@ -21,7 +21,7 @@ namespace Tzipory.SerializeData
             IsInitialization = true;
         }
 
-        public int SerializeTypeId => Constant.DataId.SHAMAN_ITEM_DATA_ID;
+        public int SerializeTypeId => Constant.DataId.ITEM_DATA_ID;
         
         public int ItemId => _itemId;
 

@@ -19,7 +19,7 @@ namespace Tzipory.Nodes.Config
         [SerializeField] protected bool _leadAndUnlockNodesSame = true;
         public string NodeName => _nodeName;
         public bool IsUnlock => _isUnlock;
-        public int ConfigObjectId => name.GetHashCode();
+        public int ObjectId => name.GetHashCode();
         public int ConfigTypeId => Constant.DataId.NODE_DATA_ID;
     }
 }

@@ -29,9 +29,10 @@ namespace Systems.DataManagerSystem
         {
             var output = new T();
             
-            if (_saveAndLoadManager.GetSaveData(out T data))
+            if (_saveAndLoadManager.GetSaveData(out T serializeData))
             {
                 //return save data
+                return serializeData;
             }
 
             if (!output.IsInitialization)
@@ -44,9 +45,10 @@ namespace Systems.DataManagerSystem
         {
             var output = new T();
             
-            if (_saveAndLoadManager.GetSaveData(out T data))
+            if (_saveAndLoadManager.GetSaveData(out T serializeData))
             {
                 //return save data
+                return serializeData;
             }
             
             var configFile = _configManager.GetConfig(output.SerializeTypeId,objectId);

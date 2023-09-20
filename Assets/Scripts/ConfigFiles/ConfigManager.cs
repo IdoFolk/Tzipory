@@ -11,7 +11,6 @@ namespace Tzipory.ConfigFiles
         [SerializeField] private ConfigHandler<ShamanConfig> _shamanConfig;
         [SerializeField] private ConfigHandler<EnemyConfig> _enemyConfig;
         [SerializeField] private ConfigHandler<AbilityConfig> _abilityConfig;
-        [SerializeField] private ConfigHandler<PartyConfig> _partyConfig;
         //add item config handler
         
         
@@ -25,9 +24,6 @@ namespace Tzipory.ConfigFiles
                     return _enemyConfig.GetConfigFile(objectId);
                 case Constant.DataId.ABILITY_DATA_ID:
                     return _abilityConfig.GetConfigFile(objectId);
-                case Constant.DataId.PARTY_DATA_ID:
-                    return _partyConfig.GetConfigFile(objectId);
-                
                 default:
                     return null;
             }

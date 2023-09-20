@@ -1,4 +1,7 @@
-﻿using Helpers.Consts;
+﻿using DefaultNamespace;
+using Helpers.Consts;
+using Sirenix.OdinInspector;
+using Tzipory.ConfigFiles.Inventory;
 using UnityEngine;
 
 namespace Tzipory.ConfigFiles
@@ -6,12 +9,16 @@ namespace Tzipory.ConfigFiles
     [CreateAssetMenu(fileName = "NewPlayerConfig", menuName = "ScriptableObjects/Config/Player config", order = 0)]
     public class PlayerConfig : ScriptableObject , IConfigFile
     {
-        public int ConfigObjectId { get; }
+        public int ObjectId { get; }
         
         public int ConfigTypeId => Constant.DataId.PLAYER_DATA_ID;
 
-        [SerializeField] private PartyConfig _partyConfig;
-        
+        [SerializeField,TabGroup("Party Config")] private PartyConfig _partyConfig;
+        [SerializeField,TabGroup("Inventory Config")] private InventoryConfig _inventoryConfig;
+        [SerializeField,TabGroup("Currency Config")] private PlayerCurrencyConfig _currencyConfig;
+
+
+        public InventoryConfig InventoryConfig => _inventoryConfig;
         public PartyConfig PartyConfig => _partyConfig;
     }
 }

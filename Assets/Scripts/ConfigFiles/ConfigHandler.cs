@@ -14,7 +14,7 @@ namespace Tzipory.ConfigFiles
         {
             foreach (var configFile in _config) 
             {
-                if (configFile.ConfigObjectId == id)
+                if (configFile.ObjectId == id)
                     return configFile;
             }
             

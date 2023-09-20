@@ -35,7 +35,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         public StatModifierConfig StatModifier => _statModifier;
         public EffectSequenceConfig EffectSequence => _effectSequence;
         
-        public int ConfigObjectId { get; }
+        public int ObjectId { get; }
         
         public int ConfigTypeId { get; }
     }

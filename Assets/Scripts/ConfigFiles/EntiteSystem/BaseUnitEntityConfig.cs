@@ -30,7 +30,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
 
         public BaseUnitEntityVisualConfig UnitEntityVisualConfig => _unitEntityVisualConfig;
 
-        public abstract int ConfigObjectId { get; }
+        public abstract int ObjectId { get; }
         public abstract int ConfigTypeId { get; }
 
         protected virtual void OnValidate()

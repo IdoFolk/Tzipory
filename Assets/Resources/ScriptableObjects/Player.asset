@@ -12,4 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2983dabbf3743ba8591523d52d6f93d, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  _partyConfig: {fileID: 11400000, guid: 136f5470f5664cc468e70db35de89b12, type: 2}
+  _partyConfig:
+    _partyMembers:
+    - {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
+  _inventoryConfig:
+    _items:
+    - _itemConfig: {fileID: 0}
+      _amount: 0
+    - _itemConfig: {fileID: 0}
+      _amount: 0
+    - _itemConfig: {fileID: 0}
+      _amount: 0
+    - _itemConfig: {fileID: 0}
+      _amount: 0

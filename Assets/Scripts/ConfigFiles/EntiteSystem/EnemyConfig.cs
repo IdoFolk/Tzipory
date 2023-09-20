@@ -19,7 +19,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
 
         public float ReturnLevel => _returnLevel;
 
-        public override int ConfigObjectId => _enemyId;
+        public override int ObjectId => _enemyId;
         public override int ConfigTypeId => Constant.DataId.ENEMY_DATA_ID;
 
         protected override void OnValidate()

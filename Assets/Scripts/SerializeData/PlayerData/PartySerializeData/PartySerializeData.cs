@@ -57,7 +57,7 @@ namespace Tzipory.SerializeData
             {
                 var shamanSerializeData = DataManager.DataRequester.GetData<ShamanSerializeData>(shamanConfig);
                 var shamanVisual =(ShamanConfig)DataManager.DataRequester.ConfigManager.GetConfig(shamanConfig.ConfigTypeId,
-                    shamanConfig.ConfigObjectId);//temp!!!
+                    shamanConfig.ObjectId);//temp!!!
                 _shamanRosterDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanVisual.UnitEntityVisualConfig));
             }
             

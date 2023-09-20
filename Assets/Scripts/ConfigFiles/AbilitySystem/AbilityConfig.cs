@@ -61,7 +61,7 @@ namespace Tzipory.AbilitiesSystem.AbilityConfigSystem
         public float CastTime => _castTime;
         public List<StatEffectConfig> StatusEffectConfigs => _statusEffectConfigs;
 
-        public int ConfigObjectId => _abilityId;
+        public int ObjectId => _abilityId;
         public int ConfigTypeId => Constant.DataId.ABILITY_DATA_ID;
         public bool DoExitEffects => _doExitEffects;
         public List<StatEffectConfig> OnExitStatusEffectConfigs => _doExitEffects? _statusEffectConfigsOnExit : null;

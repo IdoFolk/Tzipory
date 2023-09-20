@@ -34,7 +34,7 @@ namespace Tzipory.SerializeData
             var config = (ShamanConfig)parameter;
 
             _decisionInterval = config.DecisionInterval;
-            _shamanId = config.ConfigObjectId;
+            _shamanId = config.ObjectId;
             //Need to be in config?
             attachedItemsSerializeData = new List<ShamanItemSerializeData>();
             //need to add more shaman config logic

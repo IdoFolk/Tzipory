@@ -24,6 +24,8 @@ namespace GameplayeLogic.Managers
 
         public CampSerializeData CampSerializeData { get; private set; }
         
+        //TODO: Add inventory serializeData
+        
         private List<ShamanItemSerializeData> _itemsSerializeData = new List<ShamanItemSerializeData>();
         //camp serializeData 
 

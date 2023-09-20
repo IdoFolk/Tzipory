@@ -17,7 +17,7 @@ namespace SerializeData.Nodes
         {
             var config = (BaseNodeConfig)parameter;
             
-            NodeId = config.ConfigObjectId;
+            NodeId = config.ObjectId;
         }
     }
 }

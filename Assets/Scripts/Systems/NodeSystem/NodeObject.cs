@@ -15,7 +15,7 @@ public class NodeObject : MonoBehaviour , IInitialization<BattleMapNodeState> , 
     [SerializeField] private ClickHelper _clickHelper;
 
     private BattleMapNodeStateConfig _stateConfig;
-    public int NodeId => _baseNodeConfig.ConfigObjectId;
+    public int NodeId => _baseNodeConfig.ObjectId;
 
     public BaseNodeConfig BaseNodeConfig => _baseNodeConfig;
 

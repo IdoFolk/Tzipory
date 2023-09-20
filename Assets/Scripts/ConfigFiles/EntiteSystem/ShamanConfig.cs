@@ -13,7 +13,7 @@ namespace Tzipory.EntitySystem.EntityConfigSystem
 
         public float DecisionInterval => _decisionInterval;
 
-        public override int ConfigObjectId => _shamanId;
+        public override int ObjectId => _shamanId;
         public override int ConfigTypeId => Constant.DataId.SHAMAN_DATA_ID;
     }
 }

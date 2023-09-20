@@ -16,7 +16,7 @@ using Tzipory.Tools.Sound;
 using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
-using Tzipory.Systems.StatusSystem.Stats;
+using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 
 namespace Tzipory.EntitySystem

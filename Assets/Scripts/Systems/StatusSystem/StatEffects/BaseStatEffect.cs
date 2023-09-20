@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers.Consts;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
 
 namespace Tzipory.EntitySystem.StatusSystem

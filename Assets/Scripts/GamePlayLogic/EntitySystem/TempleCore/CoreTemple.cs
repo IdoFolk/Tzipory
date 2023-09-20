@@ -6,6 +6,7 @@ using Tzipory.EntitySystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.EntitySystem.StatusSystem;
 using Sirenix.OdinInspector;
+using Tzipory.Systems.StatusSystem;
 
 public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 {

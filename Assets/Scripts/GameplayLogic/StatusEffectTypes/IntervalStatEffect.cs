@@ -1,6 +1,7 @@
-﻿using Helpers.Consts;
-using Tzipory.BaseSystem.TimeSystem;
-using Tzipory.EntitySystem.StatusSystem;
+﻿using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Tools.TimeSystem;
 
 namespace Tzipory.SerializeData.LevalSerializeData.StstusEffectTypes
 {

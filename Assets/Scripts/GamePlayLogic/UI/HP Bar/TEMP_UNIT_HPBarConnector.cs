@@ -1,5 +1,6 @@
-using Tzipory.EntitySystem.Entitys;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.EntitySystem;
+using Tzipory.Systems.StatusSystem;
+using UnityEngine;
 
 namespace GameplayLogic.UI.HPBar
 {
@@ -23,3 +24,4 @@ namespace GameplayLogic.UI.HPBar
             hP_Bar.SetBarValue(statChangeData.NewValue);
         }
     }
+}

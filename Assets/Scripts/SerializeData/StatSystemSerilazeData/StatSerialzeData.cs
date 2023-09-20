@@ -1,9 +1,8 @@
 ﻿using Tzipory.Helpers.Consts;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.Systems.StatusSystem;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
-using Tzipory.Systems.StatusSystem.Stats;
 using UnityEngine;
 
 namespace Tzipory.SerializeData.StatSystemSerializeData

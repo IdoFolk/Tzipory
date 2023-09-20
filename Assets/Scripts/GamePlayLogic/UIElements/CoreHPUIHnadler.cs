@@ -1,5 +1,5 @@
 ﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
-using Tzipory.Systems.StatusSystem.Stats;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.UISystem;
 
 namespace Tzipory.GameplayLogic.UIElements

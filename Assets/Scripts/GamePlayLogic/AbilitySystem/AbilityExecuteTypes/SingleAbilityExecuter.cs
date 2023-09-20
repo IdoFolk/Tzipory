@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.Systems.StatusSystem;
+using Tzipory.EntitySystem.StatusSystem;
 
 namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 {

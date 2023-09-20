@@ -1,12 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
-using Sirenix.OdinInspector;
 using Tzipory.Tools.Enums;
-using Tzipory.Systems.StatusSystem;
-using Shamans;
-using Systems.TargetingSystem;
-using Tools.Enums;
 using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.EntitySystem;
 using Tzipory.EntitySystem.EntityComponents;

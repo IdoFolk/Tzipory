@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tzipory.Tools.Enums;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
 namespace Tzipory.Systems.TargetingSystem

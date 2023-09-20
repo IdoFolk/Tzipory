@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Systems.TargetingSystem;
-using Tzipory.GameplayLogic.EntitySystem.TempleCore;
 using UnityEngine;
 namespace Tzipory.GameplayLogic.TargetingPriorities
 {

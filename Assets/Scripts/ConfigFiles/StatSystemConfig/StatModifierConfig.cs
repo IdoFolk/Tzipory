@@ -1,6 +1,5 @@
 ﻿using System;
-using Tzipory.Systems.StatusSystem;
-using Tzipory.Systems.StatusSystem.Stats;
+using Tzipory.EntitySystem.StatusSystem;
 using UnityEngine;
 
 namespace Tzipory.Systems.StatusSystem

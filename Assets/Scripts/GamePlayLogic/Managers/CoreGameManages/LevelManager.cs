@@ -5,7 +5,6 @@ using Tzipory.Tools.TimeSystem;
 using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
-using Tzipory.GameplayLogic.EntitySystem.TempleCore;
 using Tzipory.SerializeData.PlayerData.PartySerializeData;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;

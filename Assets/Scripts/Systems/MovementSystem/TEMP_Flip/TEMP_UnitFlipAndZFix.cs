@@ -2,7 +2,6 @@ using System.Collections;
 using Tzipory.EntitySystem;
 using Tzipory.Systems.TargetingSystem;
 using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
-using Tzipory.GameplayLogic.EntitySystem.TempleCore;
 using UnityEngine;
 
 public class TEMP_UnitFlipAndZFix : MonoBehaviour

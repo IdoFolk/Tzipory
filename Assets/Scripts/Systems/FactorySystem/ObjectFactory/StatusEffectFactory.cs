@@ -1,10 +1,7 @@
 ﻿using System;
-using Tzipory.Systems.StatusSystem;
-using Tzipory.SerializeData.StatSystemSerializeData;
-using Tzipory.Systems.StatusSystem.Stats;
 using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.SerializeData.LevalSerializeData.StstusEffectTypes;
-using Tzipory.SerializeData.StatSystemSerilazeData;
+using Tzipory.Systems.StatusSystem;
 
 namespace Tzipory.Systems.FactorySystem.ObjectFactory
 {

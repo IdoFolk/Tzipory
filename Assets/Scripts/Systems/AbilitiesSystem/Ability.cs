@@ -4,9 +4,9 @@ using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.Helpers.Consts;
 using Tzipory.Tools.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.TargetingSystem;
-using Tzipory.Systems.StatusSystem.Stats;
 using UnityEngine;
 
 namespace Tzipory.Systems.AbilitySystem

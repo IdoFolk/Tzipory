@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Tzipory.Helpers.Consts;
-using Tzipory.Systems.StatusSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.Systems.StatusSystem.Stats;
+using Tzipory.EntitySystem.StatusSystem;
 using UnityEngine;
 
 namespace Tzipory.Systems.StatusSystem

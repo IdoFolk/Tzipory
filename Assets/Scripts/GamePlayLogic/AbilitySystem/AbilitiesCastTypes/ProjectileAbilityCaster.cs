@@ -4,8 +4,8 @@ using Tzipory.Helpers.Consts;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
+using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.Systems.AbilitySystem.AbilityEntity;
-using Tzipory.Systems.StatusSystem.Stats;
 using UnityEngine;
 using Object = UnityEngine.Object;
 

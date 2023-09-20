@@ -1,6 +1,6 @@
 ﻿using Tzipory.GameplayLogic.EntitySystem.Shamans;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.UISystem;
-using Tzipory.Systems.StatusSystem.Stats;
 using UnityEngine;
 using UnityEngine.UI;
 

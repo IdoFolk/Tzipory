@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Tzipory.Systems.StatusSystem.Stats;
+using Tzipory.EntitySystem.StatusSystem;
 
 namespace Tzipory.Systems.StatusSystem
 {

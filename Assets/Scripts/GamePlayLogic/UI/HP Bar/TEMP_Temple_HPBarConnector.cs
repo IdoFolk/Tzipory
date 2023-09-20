@@ -1,4 +1,3 @@
-using Tzipory.GameplayLogic.EntitySystem.TempleCore;
 using UnityEngine;
 
 namespace GameplayLogic.UI.HPBar

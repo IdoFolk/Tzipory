@@ -1,6 +1,6 @@
 ﻿using System;
-using Systems.UISystem;
-using Tzipory.Tools.BaseObserver;
+using Tzipory.Systems.UISystem;
+using Tzipory.Tools.BaseClass;
 using Unity.VisualScripting;
 
 namespace Tzipory.GameplayLogic.Managers.MainGameManagers

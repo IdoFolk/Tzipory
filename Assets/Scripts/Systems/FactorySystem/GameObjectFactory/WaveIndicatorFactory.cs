@@ -1,6 +1,6 @@
-﻿using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.UI.WaveIndicator;
+﻿using Tzipory.GameplayLogic.UI.WaveIndicator;
 
-namespace Systems.FactorySystem
+namespace Tzipory.Systems.FactorySystem.GameObjectFactory
 {
     public class WaveIndicatorFactory : BaseGameObjectFactory<WaveIndicator>
     {

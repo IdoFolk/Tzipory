@@ -1,5 +1,5 @@
 ﻿using System;
-using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using UnityEngine;
 using UnityEngine.UI;
 

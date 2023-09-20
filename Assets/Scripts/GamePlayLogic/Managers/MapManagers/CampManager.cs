@@ -1,8 +1,8 @@
 ﻿using System;
-using Helpers.Consts;
+using Tzipory.Helpers.Consts;
 using Systems.CampSystem;
-using Tools.Enums;
-using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.Tools.Enums;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Tools.Interface;
 using UnityEngine;

@@ -1,7 +1,7 @@
 ﻿using Tzipory.ConfigFiles.PartyConfig;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.WaveSystemConfig
+namespace Tzipory.SerializeData
 {
     [System.Serializable]
     public abstract class BaseDataInitializeHandler<T1,T2> where T1 : ISerializeData where T2 : IConfigFile

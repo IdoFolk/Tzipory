@@ -1,12 +1,13 @@
 ﻿using System;
-using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.GameplayLogic.StatusEffectTypes.EffectActionTypeSO;
+using Tzipory.Systems.StatusSystem.EffectActionTypeSO;
 using Tzipory.Systems.PoolSystem;
+using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes.EffectType
+namespace Tzipory.GameplayLogic.VisualSystem.EffectType.SoundEffect
 {
     public class SoundEffectAction : BaseEffectAction , IPoolable<SoundEffectAction>
     {

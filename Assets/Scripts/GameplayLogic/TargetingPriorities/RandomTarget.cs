@@ -2,7 +2,7 @@ using System.Collections;
 using System.Linq;
 using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.TargetingSystem;
+using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.TargetingPriorities

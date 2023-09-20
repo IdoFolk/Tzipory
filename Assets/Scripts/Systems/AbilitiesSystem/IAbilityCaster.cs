@@ -1,7 +1,7 @@
 ﻿using System;
 using Tzipory.EntitySystem.EntityComponents;
 
-namespace Tzipory.GameplayLogic.AbilitySystem
+namespace Tzipory.Systems.AbilitySystem
 {
     public interface IAbilityCaster
     {

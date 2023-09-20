@@ -2,7 +2,7 @@ using Tzipory.ConfigFiles.PartyConfig;
 using Tzipory.ConfigFiles.PartyConfig.NodesConfig;
 using Tzipory.Tools.Enums;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes.Nodes
+namespace Tzipory.SerializeData.NodeSerializeData
 {
     [System.Serializable]
     public class BattleMapNodeSerializeData : WorldMapNodeSerializeData

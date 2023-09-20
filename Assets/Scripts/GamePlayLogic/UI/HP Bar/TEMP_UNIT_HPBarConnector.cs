@@ -1,24 +1,26 @@
-using Tzipory.EntitySystem.Entitys;
+using Tzipory.EntitySystem;
 using UnityEngine;
 
-public class TEMP_UNIT_HPBarConnector : MonoBehaviour
+namespace GameplayLogic.UI.HPBar
 {
-    [SerializeField]
-    TEMP_HP_Bar hP_Bar;
-
-    [SerializeField] private GameObject _objWithUnit; //TEMP!
-    BaseUnitEntity _unit;
-
-    public void Init(BaseUnitEntity unit)
+    public class TEMP_UNIT_HPBarConnector : MonoBehaviour
     {
-        _unit = unit;
-        hP_Bar.Init(_unit.Health.BaseValue);
-        
-    }
+        [SerializeField] TEMP_HP_Bar hP_Bar;
 
-   
-    public void SetBarToHealth(float _health)
-    {
-        hP_Bar.SetBarValue(_health);
+        [SerializeField] private GameObject _objWithUnit; //TEMP!
+        BaseUnitEntity _unit;
+
+        public void Init(BaseUnitEntity unit)
+        {
+            _unit = unit;
+            hP_Bar.Init(_unit.Health.BaseValue);
+
+        }
+
+
+        public void SetBarToHealth(float _health)
+        {
+            hP_Bar.SetBarValue(_health);
+        }
     }
 }

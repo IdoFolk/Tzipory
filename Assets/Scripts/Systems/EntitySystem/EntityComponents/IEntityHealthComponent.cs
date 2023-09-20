@@ -1,4 +1,5 @@
-﻿using Tzipory.GameplayLogic.StatusEffectTypes;
+﻿using Tzipory.Systems.StatusSystem;
+using Tzipory.Systems.StatusSystem.Stats;
 
 namespace Tzipory.EntitySystem.EntityComponents
 {

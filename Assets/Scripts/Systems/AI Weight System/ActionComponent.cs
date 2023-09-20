@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Tzipory.AI.WeightSystem
+namespace Tzipory.Systems.AIWeightSystem
 {
     public class ActionComponent : MonoBehaviour
     {

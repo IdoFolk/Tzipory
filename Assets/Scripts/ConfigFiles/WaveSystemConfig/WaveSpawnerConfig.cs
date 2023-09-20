@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Tzipory.Systems.WaveSystem;
 using Tzipory.Tools.Enums;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.WaveSystemConfig
+namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
 {
     [System.Serializable]
     public class WaveSpawnerConfig

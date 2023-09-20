@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class CameraHelper : MonoBehaviour
+namespace Tzipory.Helpers
 {
-    private void Awake()
+    public class CameraHelper : MonoBehaviour
     {
-        if (Camera.allCameras.Length > 1)
-            Destroy(gameObject);
+        private void Awake()
+        {
+            if (Camera.allCameras.Length > 1)
+                Destroy(gameObject);
+        }
     }
 }

@@ -1,8 +1,12 @@
 ﻿using Tzipory.Systems.FactorySystem;
-using Tzipory.GameplayLogic.StatusEffectTypes;
-using Tzipory.GameplayLogic.StatusEffectTypes.EffectType;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.GameplayLogic.VisualSystem.EffectType.ColorEffect;
+using Tzipory.GameplayLogic.VisualSystem.EffectType.PopUpEffect;
+using Tzipory.GameplayLogic.VisualSystem.EffectType.SoundEffect;
+using Tzipory.GameplayLogic.VisualSystem.EffectType.TransformEffect;
+using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 
-namespace Tzipory.Factory
+namespace Tzipory.Systems.FactorySystem.ObjectFactory
 {
     public class EffectSequenceFactory :  IFactory<EffectSequence>
     {

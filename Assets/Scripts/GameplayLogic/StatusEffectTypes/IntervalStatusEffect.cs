@@ -1,7 +1,8 @@
-﻿using Tzipory.BaseSystem.TimeSystem;
+﻿using Tzipory.Tools.TimeSystem;
+using Tzipory.Systems.StatusSystem.Stats;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes
+namespace Tzipory.Systems.StatusSystem
 {
     internal sealed class IntervalStatusEffect : BaseStatusEffect
     {

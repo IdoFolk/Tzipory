@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers.Consts;
-using Systems.NodeSystem;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.NodeSystem;
 using Tzipory.ConfigFiles.PartyConfig;
-using Tzipory.ConfigFiles.WaveSystemConfig;
-using Tzipory.GameplayLogic.StatusEffectTypes.Nodes;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+using Tzipory.SerializeData.NodeSerializeData;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes.Progression
+namespace Tzipory.SerializeData.ProgressionSerializeData
 {
     [Serializable]
     public class WorldMapProgressionSerializeData : ISerializeData

@@ -1,8 +1,9 @@
 ﻿using System;
-using Tzipory.GameplayLogic.StatusEffectTypes;
-using Tzipory.ConfigFiles.WaveSystemConfig.StatSystemSerilazeData;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.SerializeData.StatSystemSerializeData;
+using Tzipory.Systems.StatusSystem.Stats;
 
-namespace Tzipory.Factory
+namespace Tzipory.Systems.FactorySystem.ObjectFactory
 {
     public class StatusEffectFactory
     {

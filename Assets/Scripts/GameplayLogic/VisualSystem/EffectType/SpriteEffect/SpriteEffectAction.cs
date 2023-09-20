@@ -1,6 +1,7 @@
-﻿using Tzipory.GameplayLogic.StatusEffectTypes;
+﻿using Tzipory.Systems.StatusSystem;
+using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 
-namespace Tzipory.ConfigFiles.WaveSystemConfig.VisualSystem.EffectType.Sprite
+namespace Tzipory.GameplayLogic.VisualSystem.EffectType.SpriteEffect
 {
     public class SpriteEffectAction : BaseEffectAction
     {

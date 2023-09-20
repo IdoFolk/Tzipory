@@ -1,7 +1,7 @@
 using System.Collections;
-using Tzipory.EntitySystem.Entitys;
-using Tzipory.EntitySystem.TargetingSystem;
-using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.EntitySystem;
+using Tzipory.Systems.TargetingSystem;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using Tzipory.GameplayLogic.EntitySystem.TempleCore;
 using UnityEngine;
 

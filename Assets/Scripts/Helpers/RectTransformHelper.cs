@@ -2,7 +2,7 @@
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using UnityEngine;
 
-namespace Helpers
+namespace Tzipory.Helpers
 {
     public static class RectTransformHelper
     {

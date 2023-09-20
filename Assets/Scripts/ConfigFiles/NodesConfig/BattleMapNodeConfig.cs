@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using Tzipory.Tools.Enums;
 using UnityEngine;
 

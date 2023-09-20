@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.SerializeData;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 
-namespace Systems.SaveLoadSystem
+namespace Tzipory.Systems.SaveLoadSystem
 {
     public class SaveAndLoadManager
     {

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Helpers.Consts;
+using Tzipory.Helpers.Consts;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.PartyConfig;
-using Tzipory.GameplayLogic.StatusEffectTypes;
-using Tzipory.EntitySystem.TargetingSystem;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 
 namespace Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig

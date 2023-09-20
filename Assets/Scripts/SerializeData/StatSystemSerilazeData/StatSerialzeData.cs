@@ -1,10 +1,12 @@
-﻿using Helpers.Consts;
+﻿using Tzipory.Helpers.Consts;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.PartyConfig;
-using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+using Tzipory.Systems.StatusSystem.Stats;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.WaveSystemConfig.StatSystemSerilazeData
+namespace Tzipory.SerializeData.StatSystemSerializeData
 {
     [System.Serializable]
     public class StatSerializeData : ISerializeData , IUpdateData<Stat>

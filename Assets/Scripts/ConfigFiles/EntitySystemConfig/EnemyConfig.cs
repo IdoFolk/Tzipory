@@ -1,5 +1,5 @@
-﻿using Tzipory.GameplayLogic.StatusEffectTypes;
-using Helpers.Consts;
+﻿using Tzipory.Systems.StatusSystem;
+using Tzipory.Helpers.Consts;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;

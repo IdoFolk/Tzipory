@@ -3,7 +3,7 @@
 using Tzipory.ConfigFiles.PartyConfig;
 using Tzipory.Tools.Interface;
 
-namespace Tzipory.ConfigFiles.WaveSystemConfig
+namespace Tzipory.SerializeData
 {
     public interface ISerializeData : IInitialization<IConfigFile>
     {

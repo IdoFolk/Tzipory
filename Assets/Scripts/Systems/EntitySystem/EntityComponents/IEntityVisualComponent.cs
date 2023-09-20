@@ -1,5 +1,7 @@
-﻿using Tzipory.Tools.Sound;
-using Tzipory.GameplayLogic.StatusEffectTypes;
+﻿using MyNamespaceTzipory.Systems.VisualSystem;
+using Tzipory.Tools.Sound;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.EntityComponents

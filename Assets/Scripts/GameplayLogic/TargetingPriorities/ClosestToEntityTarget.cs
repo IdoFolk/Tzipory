@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.TargetingSystem;
+using Tzipory.Systems.TargetingSystem;
 
 namespace Tzipory.GameplayLogic.TargetingPriorities
 {

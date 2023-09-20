@@ -1,4 +1,4 @@
-﻿using Helpers.Consts;
+﻿using Tzipory.Helpers.Consts;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;

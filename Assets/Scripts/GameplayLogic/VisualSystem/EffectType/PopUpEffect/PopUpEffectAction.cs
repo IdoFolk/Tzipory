@@ -1,11 +1,12 @@
 using System;
-using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.GameplayLogic.StatusEffectTypes.EffectActionTypeSO;
+using Tzipory.Systems.StatusSystem.EffectActionTypeSO;
 using Tzipory.Systems.PoolSystem;
+using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes.EffectType
+namespace Tzipory.GameplayLogic.VisualSystem.EffectType.PopUpEffect
 {
     public class PopUpEffectAction : BaseEffectAction, IPoolable<PopUpEffectAction>
     {
@@ -40,7 +41,7 @@ namespace Tzipory.GameplayLogic.StatusEffectTypes.EffectType
 
         public override void UndoEffectAction()
         {
-            VisualComponent.SpriteRenderer.color = Color.white;
+            VisualComponent.SpriteRenderer.color = UnityEngine.Color.white;
         }
 
         public override void InterruptEffectAction()

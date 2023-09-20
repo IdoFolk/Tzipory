@@ -1,4 +1,4 @@
-﻿using Helpers.Consts;
+﻿using Tzipory.Helpers.Consts;
 using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using UnityEngine;

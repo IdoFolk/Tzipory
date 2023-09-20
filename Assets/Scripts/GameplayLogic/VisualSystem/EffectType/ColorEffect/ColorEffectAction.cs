@@ -1,16 +1,17 @@
 ﻿using System;
-using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.GameplayLogic.StatusEffectTypes.EffectActionTypeSO;
+using Tzipory.Systems.StatusSystem.EffectActionTypeSO;
 using Tzipory.Systems.PoolSystem;
+using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes.EffectType
+namespace Tzipory.GameplayLogic.VisualSystem.EffectType.ColorEffect
 {
     public class ColorEffectAction : BaseEffectAction , IPoolable<ColorEffectAction>
     {
-        private Color _color;
-        private Color _originalColor;
+        private UnityEngine.Color _color;
+        private UnityEngine.Color _originalColor;
         private float _alpha;
         private float _duration;
 
@@ -29,7 +30,7 @@ namespace Tzipory.GameplayLogic.StatusEffectTypes.EffectType
 
         public override void StartEffectAction()
         {
-            var newColor = new Color(_color.r, _color.g, _color.b, _alpha);
+            var newColor = new UnityEngine.Color(_color.r, _color.g, _color.b, _alpha);
             _originalColor = VisualComponent.SpriteRenderer.color;
             
             VisualComponent.SpriteRenderer.color = newColor;
@@ -45,7 +46,7 @@ namespace Tzipory.GameplayLogic.StatusEffectTypes.EffectType
 
         public override void UndoEffectAction()
         {
-            VisualComponent.SpriteRenderer.color = Color.white;
+            VisualComponent.SpriteRenderer.color = UnityEngine.Color.white;
         }
 
         public override void InterruptEffectAction()

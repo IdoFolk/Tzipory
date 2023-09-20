@@ -1,9 +1,10 @@
 ﻿using Sirenix.OdinInspector;
-using Tzipory.GameplayLogic.StatusEffectTypes;
-using Tzipory.GameplayLogic.StatusEffectTypes.EffectType;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.GameplayLogic.VisualSystem.EffectType.ColorEffect;
+using Tzipory.GameplayLogic.VisualSystem.EffectType.TransformEffect;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes.EffectActionTypeSO
+namespace Tzipory.Systems.StatusSystem.EffectActionTypeSO
 {
     [CreateAssetMenu(fileName = "NewTransformEffectAction", menuName = "ScriptableObjects/VisualSystem/EffectAction/New transform effect action")]
     public class TransformEffectActionConfig : BaseEffectActionConfig

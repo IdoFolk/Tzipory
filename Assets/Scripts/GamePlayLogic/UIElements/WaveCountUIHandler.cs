@@ -1,6 +1,7 @@
 ﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+using Tzipory.Systems.UISystem;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.GameplayLogic.UIElements
 {
     public class WaveCountUIHandler : BaseCounterUIHandler
     {

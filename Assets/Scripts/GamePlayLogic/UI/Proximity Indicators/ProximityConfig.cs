@@ -4,9 +4,13 @@ using UnityEngine;
 //temp enum
 public enum IndicatorCondition {AnyShamanSelected, HoverSelf, AllCall}
 
-[System.Serializable]
-public struct ProximityConfig 
+namespace Tzipory.GameplayLogic.UI.ProximityIndicators
 {
-    public List<IndicatorCondition> IndicatorConditions;
-    public Color Color;
+
+    [System.Serializable]
+    public struct ProximityConfig
+    {
+        public List<IndicatorCondition> IndicatorConditions;
+        public Color Color;
+    }
 }

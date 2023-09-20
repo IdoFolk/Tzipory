@@ -1,7 +1,8 @@
-﻿using Tzipory.GameplayLogic.StatusEffectTypes;
-using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+using Tzipory.Systems.StatusSystem.Stats;
+using Tzipory.Systems.UISystem;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.GameplayLogic.UIElements
 {
     public class CoreHPUIHnadler : BaseCounterUIHandler
     {

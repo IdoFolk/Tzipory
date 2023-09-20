@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.Systems.StatusSystem;
 using Sirenix.OdinInspector;
-using Tools.Enums;
-using Tzipory.ConfigFiles.WaveSystemConfig.StatSystemSerilazeData;
+using Tzipory.SerializeData.StatSystemSerializeData;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes
+namespace Tzipory.Systems.StatusSystem.Stats
 {
 #if true
     [Serializable]
@@ -80,7 +79,7 @@ namespace Tzipory.GameplayLogic.StatusEffectTypes
         
         public IDisposable AddStatusEffect(StatusEffectConfig statusEffectConfig)
         {
-            var statusEffect = Factory.StatusEffectFactory.GetStatusEffect(statusEffectConfig,this);
+            var statusEffect = Systems.FactorySystem.ObjectFactory.StatusEffectFactory.GetStatusEffect(statusEffectConfig,this);
             
            return AddStatusEffect(statusEffect);
         }
@@ -107,7 +106,7 @@ namespace Tzipory.GameplayLogic.StatusEffectTypes
                 changeDelta += statModifier.Value;
             }
             
-            StatChangeData changeData = new StatChangeData(string.Empty,changeDelta,CurrentValue,global::Tools.Enums.EffectType.Default);
+            StatChangeData changeData = new StatChangeData(string.Empty,changeDelta,CurrentValue,global::Tzipory.Tools.Enums.EffectType.Default);
             OnValueChangedData?.Invoke(changeData);
         }
         
@@ -147,9 +146,9 @@ namespace Tzipory.GameplayLogic.StatusEffectTypes
         public readonly string StatusEffectName;
         public readonly float Delta;
         public readonly float NewValue;
-        public readonly global::Tools.Enums.EffectType EffectType;
+        public readonly global::Tzipory.Tools.Enums.EffectType EffectType;
         
-        public StatChangeData(string statusEffectName,float delta, float newValue, global::Tools.Enums.EffectType effectType)
+        public StatChangeData(string statusEffectName,float delta, float newValue, global::Tzipory.Tools.Enums.EffectType effectType)
         {
             StatusEffectName = statusEffectName;
             Delta = delta;

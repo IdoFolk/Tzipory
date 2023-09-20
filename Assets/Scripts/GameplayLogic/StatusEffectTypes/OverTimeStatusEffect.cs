@@ -1,6 +1,7 @@
-﻿using Tzipory.BaseSystem.TimeSystem;
+﻿using Tzipory.Tools.TimeSystem;
+using Tzipory.Systems.StatusSystem.Stats;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes
+namespace Tzipory.Systems.StatusSystem
 {
     internal sealed class OverTimeStatusEffect : BaseStatusEffect
     {

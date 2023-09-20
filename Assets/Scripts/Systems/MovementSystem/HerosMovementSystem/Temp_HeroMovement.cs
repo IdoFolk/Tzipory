@@ -2,7 +2,7 @@
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
-namespace MovementSystem.HerosMovementSystem
+namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
 {
     public class Temp_HeroMovement : MonoBehaviour
     {

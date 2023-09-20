@@ -5,7 +5,7 @@ using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.AbilitySystem
+namespace Tzipory.Systems.AbilitySystem
 {
     public class AbilityHandler
     {

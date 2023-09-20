@@ -1,8 +1,8 @@
-﻿using Helpers.Consts;
+﻿using Tzipory.Helpers.Consts;
 using Tzipory.ConfigFiles.PartyConfig;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes
+namespace Tzipory.Systems.StatusSystem
 {
     [System.Serializable]
     public class StatConfig : IConfigFile

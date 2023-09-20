@@ -1,6 +1,6 @@
 ﻿using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using UnityEngine;
-using Constant = Helpers.Consts.Constant;
+using Constant = Tzipory.Helpers.Consts.Constant;
 
 namespace Tzipory.ConfigFiles.PartyConfig
 {

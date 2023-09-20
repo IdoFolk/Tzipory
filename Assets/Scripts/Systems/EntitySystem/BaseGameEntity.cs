@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.Tools;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem

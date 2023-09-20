@@ -1,9 +1,10 @@
 ﻿using System;
-using Helpers.Consts;
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.Helpers.Consts;
+using Tzipory.Tools.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
-using Tzipory.EntitySystem.Entitys;
+using Tzipory.EntitySystem;
+using Tzipory.Systems.MovementSystem;
 using Tzipory.Systems.PoolSystem;
 using UnityEngine;
 using Random = UnityEngine.Random;

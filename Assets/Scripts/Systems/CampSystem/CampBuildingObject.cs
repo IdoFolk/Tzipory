@@ -1,5 +1,5 @@
 ﻿using TMPro;
-using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using UnityEngine;
 
 namespace Systems.CampSystem

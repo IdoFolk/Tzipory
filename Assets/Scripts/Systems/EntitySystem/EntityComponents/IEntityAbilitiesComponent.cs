@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Tzipory.GameplayLogic.AbilitySystem;
+using Tzipory.Systems.AbilitySystem;
 
 namespace Tzipory.EntitySystem.EntityComponents
 {

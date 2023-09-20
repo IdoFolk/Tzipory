@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Helpers
+namespace Tzipory.Helpers
 {
     public class EventSystemHelper : MonoBehaviour
     {

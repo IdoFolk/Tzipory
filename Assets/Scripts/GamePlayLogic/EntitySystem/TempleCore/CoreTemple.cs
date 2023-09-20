@@ -4,8 +4,9 @@ using PathCreation;
 using UnityEngine;
 using Tzipory.EntitySystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.Systems.StatusSystem;
 using Sirenix.OdinInspector;
+using Tzipory.Systems.StatusSystem.Stats;
 
 namespace Tzipory.GameplayLogic.EntitySystem.TempleCore
 {

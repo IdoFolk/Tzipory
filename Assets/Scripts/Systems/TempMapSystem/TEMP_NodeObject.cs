@@ -1,6 +1,6 @@
 using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using Tzipory.Helpers;
-using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;

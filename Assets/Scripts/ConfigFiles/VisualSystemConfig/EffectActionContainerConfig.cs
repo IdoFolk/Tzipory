@@ -1,7 +1,8 @@
 ﻿using System;
+using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes
+namespace Tzipory.Systems.StatusSystem
 {
     [Serializable]
     public class EffectActionContainerConfig

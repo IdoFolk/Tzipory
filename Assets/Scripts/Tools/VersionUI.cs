@@ -1,13 +1,16 @@
 using TMPro;
 using UnityEngine;
 
-public class VersionUI : MonoBehaviour
+namespace Tzipory.Tools
 {
-    [SerializeField] private TMP_Text _text;
-
-    private void Awake()
+    public class VersionUI : MonoBehaviour
     {
-        _text.text = $"{Application.productName} V_{Application.version}";
-        Destroy(this);
+        [SerializeField] private TMP_Text _text;
+
+        private void Awake()
+        {
+            _text.text = $"{Application.productName} V_{Application.version}";
+            Destroy(this);
+        }
     }
 }

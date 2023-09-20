@@ -1,10 +1,10 @@
 using System;
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.Tools.TimeSystem;
 using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
-using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using Tzipory.Tools.Interface;
 
-namespace Tzipory.WaveSystem
+namespace Tzipory.Systems.WaveSystem
 {
     public class EnemyGroup : IProgress
     {

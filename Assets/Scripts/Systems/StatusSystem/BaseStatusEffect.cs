@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tools.Enums;
-using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.Systems.StatusSystem.Stats;
 using Tzipory.Tools.Interface;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes
+namespace Tzipory.Systems.StatusSystem
 {
     public abstract class BaseStatusEffect : IDisposable ,IInitialization<StatusEffectConfig>
     {
@@ -20,7 +19,7 @@ namespace Tzipory.GameplayLogic.StatusEffectTypes
 
         #region Property
 
-        public global::Tools.Enums.EffectType EffectType { get; private set; }  
+        public global::Tzipory.Tools.Enums.EffectType EffectType { get; private set; }  
         
         public bool IsDone { get; protected set; }
 

@@ -1,9 +1,9 @@
-using Helpers.Consts;
+using Tzipory.Helpers.Consts;
 using Tzipory.ConfigFiles.PartyConfig;
 using Tzipory.ConfigFiles.PartyConfig.NodesConfig;
-using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes.Nodes
+namespace Tzipory.SerializeData.NodeSerializeData
 {
     [System.Serializable]
     public abstract class BaseNodeSerializeData : ISerializeData

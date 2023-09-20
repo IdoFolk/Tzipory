@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.TargetingSystem;
+using Tzipory.Systems.TargetingSystem;
 using Tzipory.GameplayLogic.EntitySystem.TempleCore;
 using UnityEngine;
 

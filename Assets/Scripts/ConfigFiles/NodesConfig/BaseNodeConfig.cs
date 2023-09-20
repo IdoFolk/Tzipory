@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Helpers.Consts;
+using Tzipory.Helpers.Consts;
 using Tzipory.ConfigFiles.PartyConfig;
 using UnityEngine;
 

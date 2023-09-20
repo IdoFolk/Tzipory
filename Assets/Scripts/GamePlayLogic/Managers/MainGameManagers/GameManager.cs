@@ -1,6 +1,7 @@
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Systems.DataManagerSystem;
 using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.SerializeData;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;
 

@@ -1,7 +1,6 @@
 ﻿using System;
-using UnityEngine;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes
+namespace Tzipory.Systems.StatusSystem.Stats
 {
     public readonly struct StatModifier
     {

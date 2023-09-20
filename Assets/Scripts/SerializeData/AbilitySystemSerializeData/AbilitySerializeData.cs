@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using Helpers.Consts;
-using Tzipory.GameplayLogic.AbilitySystem;
+using Tzipory.Helpers.Consts;
 using Tzipory.ConfigFiles.PartyConfig;
-using Tzipory.ConfigFiles.WaveSystemConfig.StatSystemSerilazeData;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+using Tzipory.SerializeData.StatSystemSerializeData;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.WaveSystemConfig.AbilitySystemSerializeData
+namespace Tzipory.SerializeData.AbilitySystemSerializeData
 {
     [System.Serializable]
     public class AbilitySerializeData : ISerializeData

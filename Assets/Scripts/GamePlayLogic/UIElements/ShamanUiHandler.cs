@@ -1,10 +1,10 @@
 ﻿using Tzipory.GameplayLogic.EntitySystem.Shamans;
-using Systems.UISystem;
-using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.Systems.UISystem;
+using Tzipory.Systems.StatusSystem.Stats;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.GameplayLogic.UIElements
 {
     public class ShamanUiHandler : BaseUIElement
     {

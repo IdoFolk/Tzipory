@@ -1,7 +1,7 @@
 ﻿using System;
-using Tzipory.GameplayLogic.StatusEffectTypes.Nodes;
+using Tzipory.SerializeData.NodeSerializeData;
 
-namespace Systems.NodeSystem
+namespace Tzipory.Systems.NodeSystem
 {
     public abstract class BaseNode
     {

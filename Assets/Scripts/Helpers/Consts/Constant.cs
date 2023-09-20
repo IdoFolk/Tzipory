@@ -1,5 +1,5 @@
 ﻿
-namespace Helpers.Consts
+namespace Tzipory.Helpers.Consts
 {
     public static class Constant
     {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Tzipory.ConfigFiles.PartyConfig;
-using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.SerializeData;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 
 namespace Systems.DataManagerSystem
 {

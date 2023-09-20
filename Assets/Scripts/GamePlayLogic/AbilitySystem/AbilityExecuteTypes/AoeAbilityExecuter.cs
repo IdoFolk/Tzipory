@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
-using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity;
-using Helpers.Consts;
+using Tzipory.Helpers.Consts;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Systems.AbilitySystem.AbilityEntity;
+using Tzipory.Systems.StatusSystem.Stats;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Tzipory.GameplayLogic.AbilitySystem.AbilityExecuteTypes
+namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 {
     public class AoeAbilityExecuter :  IAbilityExecutor , IStatHolder
     {

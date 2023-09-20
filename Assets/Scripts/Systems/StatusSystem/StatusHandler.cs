@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers.Consts;
-using Tzipory.GameplayLogic.StatusEffectTypes;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.StatusSystem.Stats;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes
+namespace Tzipory.Systems.StatusSystem
 {
     public class StatusHandler
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tzipory.ConfigFiles.WaveSystemConfig;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using Tzipory.Tools.Interface;
 
-namespace Tzipory.WaveSystem
+namespace Tzipory.Systems.WaveSystem
 {
     public class Wave : IInitialization
     {

@@ -4,7 +4,7 @@ using Tzipory.ConfigFiles.PartyConfig;
 using Tzipory.GameplayLogic.Managers.MapManagers;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.WaveSystemConfig
+namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
 {
     [Serializable]
     public class CampSerializeData : ISerializeData, IUpdateData<CampManager>

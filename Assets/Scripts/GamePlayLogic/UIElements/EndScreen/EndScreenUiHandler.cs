@@ -1,10 +1,10 @@
 ﻿using Tzipory.ConfigFiles.ToolTipConfig;
-using Systems.UISystem;
+using Tzipory.Systems.UISystem;
 using TMPro;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using UnityEngine;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.GameplayLogic.UIElements.EndScreen
 {
     public class EndScreenUiHandler : BaseUIElement
     {

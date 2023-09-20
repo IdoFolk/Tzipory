@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Tzipory.GameplayLogic.StatusEffectTypes.Nodes;
-using Tzipory.GameplayLogic.StatusEffectTypes.Progression;
+using Tzipory.SerializeData.NodeSerializeData;
+using Tzipory.SerializeData.ProgressionSerializeData;
 using Sirenix.OdinInspector;
-using Systems.NodeSystem;
+using Tzipory.Systems.NodeSystem;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.SceneSystem;
 using Tzipory.Tools.Interface;

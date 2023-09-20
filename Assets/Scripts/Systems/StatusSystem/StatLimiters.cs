@@ -1,4 +1,4 @@
-﻿namespace Tzipory.GameplayLogic.StatusEffectTypes
+﻿namespace Tzipory.Systems.StatusSystem
 {
     public static class StatLimiters
     {

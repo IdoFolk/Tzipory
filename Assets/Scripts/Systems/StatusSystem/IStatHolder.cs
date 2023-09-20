@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Tzipory.Systems.StatusSystem.Stats;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes
+namespace Tzipory.Systems.StatusSystem
 {
     public interface IStatHolder
     {

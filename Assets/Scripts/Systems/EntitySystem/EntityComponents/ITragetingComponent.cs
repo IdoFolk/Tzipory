@@ -1,5 +1,6 @@
-﻿using Tzipory.GameplayLogic.StatusEffectTypes;
-using Tzipory.EntitySystem.TargetingSystem;
+﻿using Tzipory.Systems.StatusSystem;
+using Tzipory.Systems.TargetingSystem;
+using Tzipory.Systems.StatusSystem.Stats;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.EntityComponents

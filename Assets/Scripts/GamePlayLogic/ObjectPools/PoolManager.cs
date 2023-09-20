@@ -1,11 +1,16 @@
 ﻿using System;
 using Tzipory.GameplayLogic.EntitySystem.Enemies;
-using Tzipory.GameplayLogic.AbilitySystem.AbilityEntity.UI.WaveIndicator;
-using Systems.FactorySystem;
-using Tzipory.Factory;
+using Tzipory.GameplayLogic.UI.WaveIndicator;
+using Tzipory.Systems.FactorySystem;
+using Tzipory.Systems.FactorySystem.ObjectFactory;
 using Tzipory.Systems.PoolSystem;
-using Tzipory.GameplayLogic.StatusEffectTypes;
-using Tzipory.GameplayLogic.StatusEffectTypes.EffectType;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.GameplayLogic.VisualSystem.EffectType.ColorEffect;
+using Tzipory.GameplayLogic.VisualSystem.EffectType.PopUpEffect;
+using Tzipory.GameplayLogic.VisualSystem.EffectType.SoundEffect;
+using Tzipory.GameplayLogic.VisualSystem.EffectType.TransformEffect;
+using Tzipory.Systems.FactorySystem.GameObjectFactory;
+using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 
 namespace Tzipory.GamePlayLogic.ObjectPools
 {

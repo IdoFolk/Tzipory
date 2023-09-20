@@ -1,11 +1,10 @@
 ﻿using System;
 using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
-using Tzipory.GameplayLogic.AbilitySystem;
-using Tzipory.GameplayLogic.AbilitySystem.AbilityExecuteTypes;
+using Tzipory.Systems.AbilitySystem;
+using Tzipory.Systems.AbilitySystem.AbilityExecuteTypes;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.ConfigFiles.WaveSystemConfig.AbilitySystemSerializeData;
 
-namespace Tzipory.Factory
+namespace Tzipory.Systems.FactorySystem.ObjectFactory
 {
     public class AbilityFactory
     {

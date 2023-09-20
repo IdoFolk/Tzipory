@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using Tzipory.GameplayLogic.StatusEffectTypes;
-using Helpers.Consts;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Helpers.Consts;
 using Sirenix.OdinInspector;
-using Tools.Enums;
+using Tzipory.Tools.Enums;
 using Tzipory.ConfigFiles.PartyConfig;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.StatusEffectTypes
+namespace Tzipory.Systems.StatusSystem
 {
     [System.Serializable]
     public class StatusEffectConfig : IConfigFile
@@ -14,7 +14,7 @@ namespace Tzipory.GameplayLogic.StatusEffectTypes
         [Header("Status Effect Config")] 
         [SerializeField, Tooltip("")] private string _statusEffectName;
         [SerializeField, Tooltip("")] private Constant.StatsId _affectedStatId;
-        [SerializeField, Tooltip("")] private global::Tools.Enums.EffectType _effectType;
+        [SerializeField, Tooltip("")] private global::Tzipory.Tools.Enums.EffectType _effectType;
         //[SerializeField, Tooltip("")] private List<StatusEffectConfig> _statusEffectToInterrupt;
         [Header("Stat Modifiers")] 
         [SerializeField, Tooltip("")] private StatusEffectType _statusEffectType;
@@ -31,7 +31,7 @@ namespace Tzipory.GameplayLogic.StatusEffectTypes
 
         public float Interval => _interval;
         
-        public global::Tools.Enums.EffectType EffectType => _effectType;
+        public global::Tzipory.Tools.Enums.EffectType EffectType => _effectType;
 
         public int AffectedStatId => (int)_affectedStatId;
         public StatusEffectType StatusEffectType => _statusEffectType;

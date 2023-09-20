@@ -1,10 +1,10 @@
-﻿using Systems.TargetingSystem;
-using Tools.Enums;
-using Tzipory.BaseSystem.TimeSystem;
+﻿using Tzipory.Tools.Enums;
+using Tzipory.Tools.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.AbilitySystem.AbilityEntity
+namespace Tzipory.Systems.AbilitySystem.AbilityEntity
 {
     public class ProjectileAbilityEntity : BaseAbilityEntity , ITargetableReciever
     {

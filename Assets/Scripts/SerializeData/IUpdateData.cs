@@ -1,4 +1,4 @@
-﻿namespace Tzipory.ConfigFiles.WaveSystemConfig
+﻿namespace Tzipory.SerializeData
 {
     public interface IUpdateData<in T>
     {

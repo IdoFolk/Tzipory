@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Helpers.Consts;
 using SerializeData.InventorySerializeData;
 using SerializeData.Progression;

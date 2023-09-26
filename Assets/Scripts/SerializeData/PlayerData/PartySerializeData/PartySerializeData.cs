@@ -12,9 +12,13 @@ namespace Tzipory.SerializeData
     [System.Serializable]
     public class PartySerializeData : ISerializeData , IInitialization<ShamanConfig[]>
     {
+#if UNITY_EDITOR
+        [SerializeField] private List<ShamanSerializeData> _shamanSerializeDatas;
+#endif
+        
         //all shamans
         private List<ShamanDataContainer> _shamanRosterDataContainers;
-
+        
         private List<ShamanDataContainer> _shamansPartyDataContainers;
         
         public List<ShamanDataContainer> ShamansPartyDataContainers => _shamansPartyDataContainers;
@@ -27,6 +31,9 @@ namespace Tzipory.SerializeData
         
         public void Init(ShamanConfig[] parameter)//for testing
         {
+#if UNITY_EDITOR
+            _shamanSerializeDatas = new List<ShamanSerializeData>();
+#endif
             _shamanRosterDataContainers = new List<ShamanDataContainer>();
             _shamansPartyDataContainers = new List<ShamanDataContainer>();
             
@@ -49,11 +56,18 @@ namespace Tzipory.SerializeData
         {
             var config = (PartyConfig)parameter;
             
+#if UNITY_EDITOR
+            _shamanSerializeDatas = new List<ShamanSerializeData>();
+#endif
+            
             _shamanRosterDataContainers = new List<ShamanDataContainer>();
 
             foreach (var shamanConfig in config.PartyMembers)
             {
                 var shamanSerializeData = DataManager.DataRequester.GetSerializeData<ShamanSerializeData>(shamanConfig);
+#if UNITY_EDITOR
+                _shamanSerializeDatas.Add(shamanSerializeData);
+#endif
                 var shamanVisual =(ShamanConfig)DataManager.DataRequester.ConfigManager.GetConfig(shamanConfig.ConfigTypeId,
                     shamanConfig.ObjectId);//temp!!!
                 _shamanRosterDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanVisual.UnitEntityVisualConfig));

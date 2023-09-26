@@ -14,8 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemName: TestItem1
   _objectId: -1
-  _itemDescription: Test Test Test(Add 25 HP)
+  _itemDescription: Add 25 Hp
   _itemIcon: {fileID: 0}
-  _itemSlot: 0
+  _itemSlot: 1
   _isStackable: 1
-  _statEffectConfigs: []
+  _statEffectConfigs:
+  - _statusEffectName: 
+    _statProcessPriority: 0
+    _affectedStatId: 0
+    _statEffectType: 3
+    _duration: 0
+    _interval: 0
+    _statModifier:
+      _statusModifierType: 1
+      _modifier: 25
+    _effectSequence:
+      _sequenceName: 
+      _id: 0
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []

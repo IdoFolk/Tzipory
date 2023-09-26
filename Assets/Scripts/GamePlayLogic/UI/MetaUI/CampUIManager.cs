@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Tzipory.SerializeData;
 using UnityEngine;
 
 namespace Tzipory.GamePlayLogic.UI.MetaUI
@@ -6,10 +6,14 @@ namespace Tzipory.GamePlayLogic.UI.MetaUI
     public class CampUIManager : MonoBehaviour
     {
         [SerializeField] private CampFireUIHandler _campFireUIHandler;
-        [SerializeField] private CharacterRosterUI _characterRosterUI;
 
         private void Awake()
         {
+        }
+
+        public void NewMainShamanSelected(ShamanDataContainer shamanDataContainer)
+        {
+            _campFireUIHandler.SetNewShamanData(shamanDataContainer);
         }
     }
 }

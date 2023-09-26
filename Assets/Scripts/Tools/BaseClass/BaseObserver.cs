@@ -12,5 +12,12 @@ namespace Tzipory.Tools.BaseObserver
                 return;
             ObserverObjects.Add(obj);
         }
+        
+        public static void RemoveObserverObject(T obj)
+        {
+            if (!ObserverObjects.Contains(obj))
+                return;
+            ObserverObjects.Remove(obj);
+        }
     }
 }

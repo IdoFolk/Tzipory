@@ -1,7 +1,6 @@
 ﻿using System;
 using GamePlayLogic.Managers;
 using Tzipory.BaseSystem.TimeSystem;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -53,6 +52,7 @@ namespace  Systems.UISystem
         private void Awake()
         {
             UIManager.AddObserverObject(this);
+            gameObject.SetActive(false);
         }
 
         public virtual void Show()

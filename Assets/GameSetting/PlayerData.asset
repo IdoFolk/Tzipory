@@ -10,21 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2983dabbf3743ba8591523d52d6f93d, type: 3}
-  m_Name: Player
+  m_Name: PlayerData
   m_EditorClassIdentifier: 
   _partyConfig:
     _partyMembers:
     - {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
+    - {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
   _inventoryConfig:
     _items:
-    - _itemConfig: {fileID: 11400000, guid: 071923c544ec20448985aea767d6b331, type: 2}
+    - _itemConfig: {fileID: 11400000, guid: dc19cf7108597484d976cafa2d038402, type: 2}
       _amount: 4
-    - _itemConfig: {fileID: 11400000, guid: 071923c544ec20448985aea767d6b331, type: 2}
+    - _itemConfig: {fileID: 11400000, guid: f973f7301ff92c84699bf12843c42e4e, type: 2}
       _amount: 5
-    - _itemConfig: {fileID: 11400000, guid: 071923c544ec20448985aea767d6b331, type: 2}
-      _amount: 5
-    - _itemConfig: {fileID: 11400000, guid: 071923c544ec20448985aea767d6b331, type: 2}
-      _amount: 6
   _currencyConfig:
     _currency:
     - _material: 3

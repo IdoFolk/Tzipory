@@ -21,7 +21,7 @@ namespace Tzipory.GamePlayLogic.UI
             for (int i = 0; i < shamanDataContainers.Length; i++)
             {
                 _rosterSlotUis[i].Init(shamanDataContainers[i]);
-                _rosterSlotUis[i].OnCharacterRosterSlotClicked += OnCharacterRosterSlotClicked;
+                _rosterSlotUis[i].OnCharacterRosterSlotClicked += ShamanSelected;
             }
 
             IsInitialization = true;
@@ -30,9 +30,17 @@ namespace Tzipory.GamePlayLogic.UI
         public override void Show()
         {
             base.Show();
-        
-            foreach (var rosterSlotUI in _rosterSlotUis)    
-                rosterSlotUI.Show();
+
+            foreach (var rosterSlotUI in _rosterSlotUis)
+            {
+                if (rosterSlotUI.IsInitialization)
+                     rosterSlotUI.Show();
+            } 
+        }
+
+        private void ShamanSelected(ShamanDataContainer shamanDataContainer)
+        {
+            OnCharacterRosterSlotClicked?.Invoke(shamanDataContainer);
         }
 
         private void OnDestroy()
@@ -41,7 +49,7 @@ namespace Tzipory.GamePlayLogic.UI
             {
                 if (_rosterSlotUis[i].IsInitialization)
                 {
-                    _rosterSlotUis[i].OnCharacterRosterSlotClicked -= OnCharacterRosterSlotClicked;
+                    _rosterSlotUis[i].OnCharacterRosterSlotClicked -= ShamanSelected;
                 }
             }
         }

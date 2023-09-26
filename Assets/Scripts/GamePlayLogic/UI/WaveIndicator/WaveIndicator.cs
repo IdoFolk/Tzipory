@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 namespace GamePlayLogic.UI.WaveIndicator
 {
-    public class WaveIndicator : BaseUIElement , IInitialization<WaveSpawner,ITimer> , IPoolable<WaveIndicator>
+    public class WaveIndicator : BaseInteractiveUIElement , IInitialization<WaveSpawner,ITimer> , IPoolable<WaveIndicator>
     {
         public event Action<WaveIndicator> OnDispose;
         

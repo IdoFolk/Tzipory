@@ -1,0 +1,39 @@
+using System;
+using Systems.UISystem;
+using Tzipory.SerializeData;
+using Tzipory.Tools.Interface;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
+
+namespace Tzipory.GamePlayLogic.UI
+{
+    public class CharacterRosterSlotUI : BaseInteractiveUIElement , IInitialization<ShamanDataContainer>
+    {
+        public event Action<ShamanDataContainer> OnCharacterRosterSlotClicked;
+
+        [SerializeField] private Image _image;
+    
+        private ShamanDataContainer _shamanDataContainer;
+        public bool IsInitialization { get; private set; }
+
+        public override void Show()
+        {
+            base.Show();
+            _image.sprite = _shamanDataContainer.UnitEntityVisualConfig.Sprite;
+        }
+
+        public void Init(ShamanDataContainer parameter)
+        {
+            _shamanDataContainer = parameter;
+            IsInitialization = true;
+        }
+
+        protected override void Click(PointerEventData eventData)
+        {
+            base.Click(eventData);
+            OnCharacterRosterSlotClicked?.Invoke(_shamanDataContainer);
+        }
+    }
+}
+

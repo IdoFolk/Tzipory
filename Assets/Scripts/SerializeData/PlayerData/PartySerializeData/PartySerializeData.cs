@@ -20,9 +20,7 @@ namespace Tzipory.SerializeData
         public List<ShamanDataContainer> ShamansPartyDataContainers => _shamansPartyDataContainers;
 
         public List<ShamanDataContainer> ShamanRosterDataContainers => _shamanRosterDataContainers;
-
-
-
+        
         public bool IsInitialization { get; private set; }
         
         public int SerializeTypeId => Constant.DataId.PARTY_DATA_ID;
@@ -55,7 +53,7 @@ namespace Tzipory.SerializeData
 
             foreach (var shamanConfig in config.PartyMembers)
             {
-                var shamanSerializeData = DataManager.DataRequester.GetData<ShamanSerializeData>(shamanConfig);
+                var shamanSerializeData = DataManager.DataRequester.GetSerializeData<ShamanSerializeData>(shamanConfig);
                 var shamanVisual =(ShamanConfig)DataManager.DataRequester.ConfigManager.GetConfig(shamanConfig.ConfigTypeId,
                     shamanConfig.ObjectId);//temp!!!
                 _shamanRosterDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanVisual.UnitEntityVisualConfig));
@@ -101,27 +99,6 @@ namespace Tzipory.SerializeData
             }
 
             _shamansPartyDataContainers.Remove(shamanContainerDataFromRoster);
-        }
-
-        public void ToggleItemOnShaman(int targetShamanID, ShamanItemSerializeData targetItemSerializeData,
-            CollectionActionType actionType)
-        {
-            ShamanDataContainer shamanContainerDataFromRoster = _shamanRosterDataContainers.Find(shamanDataContainer =>
-                shamanDataContainer.ShamanSerializeData.ShamanId == targetShamanID);
-            if (shamanContainerDataFromRoster == null)
-            {
-                Debug.LogError("Trying to toggle item on shaman who does not exist?");
-                return;
-            }
-            
-            if (actionType == CollectionActionType.Add)
-            {
-                shamanContainerDataFromRoster.ShamanSerializeData.AttachItem(targetItemSerializeData);
-            }
-            else
-            {
-                shamanContainerDataFromRoster.ShamanSerializeData.RemoveItem(targetItemSerializeData);
-            }
         }
     }
 }

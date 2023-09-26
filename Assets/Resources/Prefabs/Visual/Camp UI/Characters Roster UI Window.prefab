@@ -847,6 +847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4814215093001745429}
+  - component: {fileID: 1070927188587348368}
   m_Layer: 0
   m_Name: Characters Roster UI Window
   m_TagString: Untagged
@@ -874,6 +875,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1050, y: 125}
   m_Pivot: {x: 0.5, y: 0}
+--- !u!114 &1070927188587348368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8464853519814588653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8148a29f02aaa8249a73de28b50ad870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rosterSlotUis: []
 --- !u!1 &8515410162247369032
 GameObject:
   m_ObjectHideFlags: 0

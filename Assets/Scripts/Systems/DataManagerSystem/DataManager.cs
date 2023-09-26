@@ -25,7 +25,7 @@ namespace Systems.DataManagerSystem
         }
 
 
-        public T GetData<T>(IConfigFile configFile) where T : class, ISerializeData , new()
+        public T GetSerializeData<T>(IConfigFile configFile) where T : class, ISerializeData , new()
         {
             var output = new T();
             
@@ -41,7 +41,7 @@ namespace Systems.DataManagerSystem
             return output;
         }
 
-        public T GetData<T>(int objectId) where T : class, ISerializeData, new()
+        public T GetSerializeData<T>(int objectId) where T : class, ISerializeData, new()
         {
             var output = new T();
             
@@ -59,12 +59,21 @@ namespace Systems.DataManagerSystem
             return output;
         }
 
-        public IEnumerable<T> GetDatas<T>(IConfigFile configFile) where T : class, ISerializeData, new()
+        public T GetConfigData<T>(int objectId) where T : class, IConfigFile, new()
+        {
+            var output = new T();
+            
+            var configFile = _configManager.GetConfig(output.ConfigTypeId,objectId);
+            
+            return configFile as T;
+        }
+
+        public IEnumerable<T> GetSerializeDatas<T>(IConfigFile configFile) where T : class, ISerializeData, new()
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<T> GetDatas<T>(int objectId) where T : class, ISerializeData, new()
+        public IEnumerable<T> GetSerializeDatas<T>(int objectId) where T : class, ISerializeData, new()
         {
             var output = new List<T>();
             

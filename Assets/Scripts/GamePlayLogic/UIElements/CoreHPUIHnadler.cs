@@ -2,7 +2,7 @@
 
 namespace GameplayeLogic.UIElements
 {
-    public class CoreHPUIHnadler : BaseCounterUIHandler
+    public class CoreHPUIHnadler : BaseInteractiveCounterUIHandler
     {
         public override void Show()
         {

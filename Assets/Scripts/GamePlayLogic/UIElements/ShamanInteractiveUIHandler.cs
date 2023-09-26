@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace GameplayeLogic.UIElements
 {
-    public class ShamanUiHandler : BaseUIElement
+    public class ShamanInteractiveUIHandler : BaseInteractiveUIElement
     {
         [SerializeField] private Image _fill;
         [SerializeField] private Slider _healthBar;

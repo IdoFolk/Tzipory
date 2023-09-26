@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace GameplayeLogic.UIElements
 {
-    public class PartyUIManager : BaseUIElement
+    public class PartyInteractiveUIManager : BaseInteractiveUIElement
     {
         [SerializeField] private RectTransform _heroContainer;
-        [SerializeField] private ShamanUiHandler _shamanUiHanlder;
+        [SerializeField] private ShamanInteractiveUIHandler _shamanInteractiveUIHanlder;
         
         public override void Show()
         {
@@ -14,7 +14,7 @@ namespace GameplayeLogic.UIElements
 
             foreach (var shaman in shamans)
             {
-                var shamanUI = Instantiate(_shamanUiHanlder, _heroContainer);
+                var shamanUI = Instantiate(_shamanInteractiveUIHanlder, _heroContainer);
                 shamanUI.Init(shaman);
             }
             

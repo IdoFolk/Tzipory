@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameplayeLogic.UIElements
 {
-    public class EndScreenTimeUIHandler : BaseUIElement
+    public class EndScreenTimeInteractiveUIHandler : BaseInteractiveUIElement
     {
         [SerializeField] private  TMPro.TextMeshProUGUI _text;
 

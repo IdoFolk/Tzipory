@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameplayeLogic.UIElements
 {
-    public class EndScreenEnemiesKilledUIHandler : BaseUIElement
+    public class EndScreenEnemiesKilledInteractiveUIHandler : BaseInteractiveUIElement
     {
         [SerializeField] private TMP_Text _countText;
 

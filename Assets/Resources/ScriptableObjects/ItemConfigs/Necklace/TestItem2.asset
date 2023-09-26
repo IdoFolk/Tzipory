@@ -10,21 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0320f9fd04147198bc55703d0ea4d69, type: 3}
-  m_Name: TestItem
+  m_Name: TestItem2
   m_EditorClassIdentifier: 
-  _itemName: 
-  _itemDescription: 
+  _itemName: TestItem2
+  _objectId: -1
+  _itemDescription: add 25% to attack Range
   _itemIcon: {fileID: 0}
-  _statEffectConfig:
-    _statusEffectName: 
+  _itemSlot: 0
+  _isStackable: 1
+  _statEffectConfigs:
+  - _statusEffectName: 
     _statProcessPriority: 0
-    _affectedStatId: 0
+    _affectedStatId: 4
     _statEffectType: 3
     _duration: 0
     _interval: 0
     _statModifier:
-      _statusModifierType: 0
-      _modifier: 0
+      _statusModifierType: 3
+      _modifier: 1.25
+    _effectSequence:
+      _sequenceName: 
+      _id: 0
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []
+  - _statusEffectName: 
+    _statProcessPriority: 0
+    _affectedStatId: 3
+    _statEffectType: 3
+    _duration: 0
+    _interval: 0
+    _statModifier:
+      _statusModifierType: 3
+      _modifier: 1.25
     _effectSequence:
       _sequenceName: 
       _id: 0

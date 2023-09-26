@@ -37,10 +37,10 @@ namespace GameplayeLogic.Managers
         {
             var config = (PlayerConfig)parameter;
             
-            _partySerializeData = DataManager.DataRequester.GetData<PartySerializeData>(config.PartyConfig);
-            _worldMapProgression = DataManager.DataRequester.GetData<WorldMapProgressionSerializeData>(_currentWord);
-            _campSerializeData = DataManager.DataRequester.GetData<CampSerializeData>(Constant.DataId.CAMP_DATA_ID);
-            _inventorySerializeData = DataManager.DataRequester.GetData<InventorySerializeData>(config.InventoryConfig);
+            _partySerializeData = DataManager.DataRequester.GetSerializeData<PartySerializeData>(config.PartyConfig);
+            _worldMapProgression = DataManager.DataRequester.GetSerializeData<WorldMapProgressionSerializeData>(_currentWord);
+            _campSerializeData = DataManager.DataRequester.GetSerializeData<CampSerializeData>(Constant.DataId.CAMP_DATA_ID);
+            _inventorySerializeData = DataManager.DataRequester.GetSerializeData<InventorySerializeData>(config.InventoryConfig);
             
             IsInitialization = true;
         }
@@ -70,26 +70,5 @@ namespace GameplayeLogic.Managers
                 PartySerializeData.RemovePartyMember(targetShamanID);
             }
         }
-        
-        public void ToggleItemOnShaman(int targetShamanID, int targetItemInstanceID,
-            CollectionActionType actionType)
-        {
-            // ShamanItemSerializeData shamanItemData = _itemsSerializeData.Find(itemData =>
-            //     itemData.ItemInstanceId == targetItemInstanceID);
-            //
-            // if (shamanItemData == null)
-            // {
-            //     Debug.LogError("No item data found!");
-            //     return;
-            // }
-            //
-            // PartySerializeData.ToggleItemOnShaman(targetShamanID, shamanItemData, actionType);
-        }
-        
-        // [Obsolete("Old method for setting party members")]
-        // public void SetPartyMembers(List<ShamanSerializeData> shamanSerializeDatas)
-        // {
-        //     PartySerializeData.SetPartyMembers(shamanSerializeDatas);
-        // }
     }
 }

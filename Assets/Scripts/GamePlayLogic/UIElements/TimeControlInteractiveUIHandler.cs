@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameplayeLogic.UIElements
 {
-    public class TimeControlUiHandler : BaseUIElement
+    public class TimeControlInteractiveUIHandler : BaseInteractiveUIElement
     {
         [SerializeField] private List<TimeButtonsUI> _timeButtons;
         

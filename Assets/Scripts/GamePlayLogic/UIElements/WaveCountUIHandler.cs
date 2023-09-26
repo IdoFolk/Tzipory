@@ -2,7 +2,7 @@
 
 namespace GameplayeLogic.UIElements
 {
-    public class WaveCountUIHandler : BaseCounterUIHandler
+    public class WaveCountUIHandler : BaseInteractiveCounterUIHandler
     {
         public override void Show()
         {

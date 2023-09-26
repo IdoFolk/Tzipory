@@ -1,12 +1,37 @@
 ﻿using System;
 using GamePlayLogic.Managers;
 using Tzipory.BaseSystem.TimeSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Systems.UISystem
+namespace  Systems.UISystem
 {
-    public abstract class BaseUIElement : MonoBehaviour , IUIElement , IPointerEnterHandler,IPointerExitHandler , IPointerClickHandler
+    public abstract class BaseUIElement : MonoBehaviour, IUIElement
+    {
+        public string ElementName { get; }
+        public Action OnShow { get; }
+        public Action OnHide { get; }
+        
+        private void Awake()
+        {
+            UIManager.AddObserverObject(this);
+        }
+        
+        public virtual void Show()
+        {
+            gameObject.SetActive(true);
+            OnShow?.Invoke();
+        }
+
+        public virtual void Hide()
+        {
+            gameObject.SetActive(false);
+            OnHide?.Invoke();
+        }
+    }
+    
+    public abstract class BaseInteractiveUIElement : MonoBehaviour , IUIElement , IPointerEnterHandler,IPointerExitHandler , IPointerClickHandler
     {
         public event Action OnClick;
         public event Action OnDoubleClick;
@@ -57,34 +82,47 @@ namespace Systems.UISystem
             }
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            _isOn = true;
-            OnEnter?.Invoke();
-        }
+        public void OnPointerEnter(PointerEventData eventData)=>
+            PointerEnter(eventData);
 
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            _isOn = false;
-            OnExit?.Invoke();
-        }
-
+        public void OnPointerExit(PointerEventData eventData) => 
+            PointerExit(eventData);
         public void OnPointerClick(PointerEventData eventData)
         {
             switch (_clickNum)
             {
                 case 0:
-                    OnClick?.Invoke();
-                    _clickNum++;
-                    //Debug.Log("Onclick");
+                    Click(eventData);
                     return;
                 case 1:
-                    OnDoubleClick?.Invoke();
-                    //Debug.Log("OnDoubleClick");
-                    _doubleClickTimer = null;
-                    _clickNum = 0;
+                   DoubleClick(eventData);
                     return;
             }
+        }
+
+        protected virtual void Click(PointerEventData eventData)
+        {
+            OnClick?.Invoke();
+            _clickNum++;
+        }
+        
+        protected virtual void DoubleClick(PointerEventData eventData)
+        {
+            OnDoubleClick?.Invoke();
+            _doubleClickTimer = null;
+            _clickNum = 0;
+        }
+
+        protected virtual void PointerEnter(PointerEventData eventData)
+        {
+            _isOn = true;
+            OnEnter?.Invoke();
+        }
+        
+        protected virtual void PointerExit(PointerEventData eventData)
+        {
+            _isOn = false;
+            OnExit?.Invoke();
         }
     }
 

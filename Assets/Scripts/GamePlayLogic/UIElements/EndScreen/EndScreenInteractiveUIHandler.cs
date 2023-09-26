@@ -5,14 +5,14 @@ using UnityEngine;
 
 namespace GameplayeLogic.UIElements
 {
-    public class EndScreenUiHandler : BaseUIElement
+    public class EndScreenInteractiveUIHandler : BaseInteractiveUIElement
     {
         [SerializeField] private TMP_Text _title;
         [SerializeField] private TMP_Text _tips;
         [SerializeField] private EndScreenTextsConfig _config;
-        [SerializeField] private EndScreenEnemiesKilledUIHandler  _enemiesKilledHandler;
-        [SerializeField] private EndScreenTimeUIHandler _timeHandler;
-        [SerializeField] private EndScreenWaveUIHandler _waveUIHandler;
+        [SerializeField] private EndScreenEnemiesKilledInteractiveUIHandler  _enemiesKilledInteractiveHandler;
+        [SerializeField] private EndScreenTimeInteractiveUIHandler _timeInteractiveHandler;
+        [SerializeField] private EndScreenWaveInteractiveUIHandler _waveInteractiveUIHandler;
 
         private void Awake()
         {
@@ -34,9 +34,9 @@ namespace GameplayeLogic.UIElements
 
         private void OnEnable()
         {
-            _enemiesKilledHandler.Show();
-            _timeHandler.Show();
-            _waveUIHandler.Show();
+            _enemiesKilledInteractiveHandler.Show();
+            _timeInteractiveHandler.Show();
+            _waveInteractiveUIHandler.Show();
         }
     }
 }

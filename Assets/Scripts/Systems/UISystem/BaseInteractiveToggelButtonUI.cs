@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Systems.UISystem
 {
-    public abstract class BaseToggelButtonUI : BaseUIElement
+    public abstract class BaseInteractiveToggelButtonUI : BaseInteractiveUIElement
     {
         public event Action<ButtonState> OnChangeState;
         [SerializeField] private bool _disableOffToggel;

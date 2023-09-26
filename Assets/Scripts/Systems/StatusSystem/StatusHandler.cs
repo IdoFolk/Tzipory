@@ -92,7 +92,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         }
 
         //TODO need to fix the InterruptStatusEffects
-        // private void InterruptStatusEffects(IEnumerable<StatEffectConfig> effectConfigSos)
+        // private void InterruptStatusEffects(IEnumerable<StatEffectConfigs> effectConfigSos)
         // {
         //     foreach (var effectConfigSo in effectConfigSos)
         //     {

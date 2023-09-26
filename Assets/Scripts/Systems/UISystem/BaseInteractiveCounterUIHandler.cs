@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace GameplayeLogic.UIElements
 {
-    public abstract class BaseCounterUIHandler : BaseUIElement
+    public abstract class BaseInteractiveCounterUIHandler : BaseInteractiveUIElement
     {
         [SerializeField] protected TMP_Text _currentCount;
         [SerializeField] protected TMP_Text _maxCount;

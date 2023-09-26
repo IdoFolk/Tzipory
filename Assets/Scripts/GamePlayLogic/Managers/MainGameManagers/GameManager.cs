@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     {
         SceneHandler.LoadScene(SceneType.MainMenu);
         
-        var playerSerializeData = DataManager.DataRequester.GetData<PlayerSerializeData>(_playerConfig); 
+        var playerSerializeData = DataManager.DataRequester.GetSerializeData<PlayerSerializeData>(_playerConfig); 
         PlayerManager = new PlayerManager(playerSerializeData);
         
 #if UNITY_EDITOR

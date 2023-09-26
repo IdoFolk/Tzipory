@@ -128,14 +128,6 @@ namespace GameplayeLogic.Managers
         #endregion
 
         #region ShamanManagment
-
-        public void ToggleItemOnShaman(int targetShamanID, int targetItemInstanceID,
-            CollectionActionType actionType)
-        {
-            GameManager.PlayerManager.PlayerSerializeData
-                .ToggleItemOnShaman(targetShamanID, targetItemInstanceID, actionType);
-
-        }
         
         public void AttachItemToShamanTest()
         {

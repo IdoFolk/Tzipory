@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameplayeLogic.UIElements
 {
-    public class EndScreenWaveUIHandler : BaseUIElement
+    public class EndScreenWaveInteractiveUIHandler : BaseInteractiveUIElement
     {
         [SerializeField] private TMP_Text _text;
 

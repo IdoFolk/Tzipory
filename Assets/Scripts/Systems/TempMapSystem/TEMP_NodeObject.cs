@@ -29,9 +29,11 @@ public class TEMP_NodeObject : MonoBehaviour
     {
         IsUnlock = isUnLock;
         IsCompleted = isCompleted;
-
-        gameObject.SetActive(IsUnlock);
-        _spriteRenderer.color = IsCompleted ? _winNodeColor : _avilableNodeColor;
+        
+        if (IsUnlock)
+            Unlock();
+        if (isCompleted)
+            Completed();
     }
 
     public void Lock()
@@ -49,11 +51,11 @@ public class TEMP_NodeObject : MonoBehaviour
     {
         _spriteRenderer.color = _avilableNodeColor;
         gameObject.SetActive(true);
-        GameManager.GameData.SetLockNodeStat(_levelConfig.LevelId,true);
+       GameManager.GameData.SetLockNodeStat(_levelConfig.LevelId,true);
         IsUnlock = true;
     }
 
-    public void Completed()
+    private void Completed()
     {
         _spriteRenderer.color = _winNodeColor;
         

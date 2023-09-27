@@ -71,10 +71,10 @@ namespace Tzipory.Systems.StatusSystem
             Name = statConfig.Name;
             Id = statConfig.ID;
             BaseValue = statConfig.BaseValue;
-            _currentValue = BaseValue;
             MaxValue = StatLimiters.MaxStatValue;
             _zeroSetModifier = 1;
 #if UNITY_EDITOR
+            _currentValue = BaseValue;
             _name = Name;
 #endif
         }
@@ -84,10 +84,10 @@ namespace Tzipory.Systems.StatusSystem
             Name = statSerializeData.Name;
             Id = statSerializeData.ID;
             BaseValue = statSerializeData.BaseValue;
-            _currentValue = BaseValue;
             MaxValue = StatLimiters.MaxStatValue;
             _zeroSetModifier = 1;
 #if UNITY_EDITOR
+            _currentValue = BaseValue;
             _name = Name;
 #endif
         }
@@ -99,9 +99,9 @@ namespace Tzipory.Systems.StatusSystem
             Id = id;  
             BaseValue = baseValue;
             MaxValue = StatLimiters.MaxStatValue;
-            _currentValue = BaseValue;
             _zeroSetModifier = 1;
 #if UNITY_EDITOR
+            _currentValue = BaseValue;
             _name = Name;
 #endif
         }

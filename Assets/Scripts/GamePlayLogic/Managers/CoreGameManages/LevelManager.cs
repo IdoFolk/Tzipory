@@ -146,7 +146,6 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         {
             EndGame(false);
         }
-
 #endif
     }
 }

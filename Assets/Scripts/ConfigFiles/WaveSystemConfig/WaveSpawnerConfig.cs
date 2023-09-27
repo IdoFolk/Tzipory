@@ -4,7 +4,7 @@ using Tzipory.Systems.WaveSystem;
 using Tzipory.Tools.Enums;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
+namespace Tzipory.ConfigFiles.Level
 {
     [System.Serializable]
     public class WaveSpawnerConfig

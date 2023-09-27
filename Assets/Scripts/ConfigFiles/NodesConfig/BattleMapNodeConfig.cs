@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+using Tzipory.ConfigFiles.Level;
 using Tzipory.Tools.Enums;
 using UnityEngine;
 

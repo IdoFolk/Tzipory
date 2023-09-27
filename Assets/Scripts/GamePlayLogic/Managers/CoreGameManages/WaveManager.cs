@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.ConfigFiles.Level;
 using Tzipory.GameplayLogic.UI.WaveIndicator;
 using Tzipory.Helpers;
 using Tzipory.Tools.TimeSystem;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using Tzipory.Systems.WaveSystem;
 using UnityEngine;
 

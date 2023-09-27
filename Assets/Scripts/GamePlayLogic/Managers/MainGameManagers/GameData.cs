@@ -1,4 +1,4 @@
-﻿using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+﻿using Tzipory.ConfigFiles.Level;
 
 namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {

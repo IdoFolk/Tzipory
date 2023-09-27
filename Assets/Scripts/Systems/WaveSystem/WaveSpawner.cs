@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Tzipory.Helpers;
 using UnityEngine;
 using PathCreation;
+using Tzipory.ConfigFiles.Level;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using Tzipory.Systems.MovementSystem;
@@ -82,7 +83,7 @@ namespace Tzipory.Systems.WaveSystem
 
         private void Awake()
         {
-            Level.AddWaveSpawner(this);
+            LevelHandler.AddWaveSpawner(this);
             _enemyGroupsConfig = new List<EnemyGroupConfig>();
         }
 

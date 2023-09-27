@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+using Tzipory.ConfigFiles.Level;
 using Tzipory.Tools.Interface;
 
 namespace Tzipory.Systems.WaveSystem

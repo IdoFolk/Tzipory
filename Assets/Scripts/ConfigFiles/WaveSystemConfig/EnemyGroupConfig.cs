@@ -3,7 +3,7 @@ using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using Tzipory.Tools.Enums;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
+namespace Tzipory.ConfigFiles.Level
 {
     [System.Serializable]
     public class EnemyGroupConfig

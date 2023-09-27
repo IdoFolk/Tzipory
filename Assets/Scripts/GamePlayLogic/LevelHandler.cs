@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
 {
-    public class Level : MonoBehaviour
+    public class LevelHandler : MonoBehaviour
     {
         public static Vector3 FakeForward { get; private set;}
         /// <summary>

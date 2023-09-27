@@ -1,10 +1,10 @@
 using System;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Sirenix.OdinInspector;
+using Tzipory.ConfigFiles.Level;
 using Tzipory.Tools.TimeSystem;
 using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using Tzipory.GamePlayLogic.ObjectPools;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using Tzipory.SerializeData.PlayerData.PartySerializeData;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;

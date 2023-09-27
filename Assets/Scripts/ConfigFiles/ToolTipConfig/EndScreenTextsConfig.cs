@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ConfigFiles
+namespace Tzipory.ConfigFiles.ToolTipConfig
 {
     [CreateAssetMenu(fileName = "NewEndScreenTexts", menuName = "ScriptableObjects/new end screen text", order = 0)]
     public class EndScreenTextsConfig : ScriptableObject

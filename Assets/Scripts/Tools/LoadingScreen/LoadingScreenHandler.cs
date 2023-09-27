@@ -1,6 +1,5 @@
-using System;
 using System.Collections;
-using ConfigFiles.ToolTipConfig;
+using Tzipory.ConfigFiles.ToolTipConfig;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;

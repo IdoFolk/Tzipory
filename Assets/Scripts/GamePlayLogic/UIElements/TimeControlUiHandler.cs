@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Systems.UISystem;
+using Tzipory.Systems.UISystem;
 using UnityEngine;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.GameplayLogic.UIElements
 {
     public class TimeControlUiHandler : BaseUIElement
     {

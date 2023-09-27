@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.Tools.TimeSystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.Tools.Interface;
-using Tzipory.WaveSystem;
+using Tzipory.Systems.WaveSystem;
 using UnityEngine;
 
-namespace GamePlayLogic.UI.WaveIndicator
+namespace Tzipory.GameplayLogic.UI.WaveIndicator
 {
     public class WaveIndicatorHandler : IInitialization<Wave,ITimer> , IDisposable
     {

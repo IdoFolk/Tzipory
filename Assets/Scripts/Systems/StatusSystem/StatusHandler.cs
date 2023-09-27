@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers.Consts;
-using SerializeData.VisualSystemSerializeData;
+using Tzipory.Helpers.Consts;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.EntitySystem.StatusSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.Systems.StatusSystem
 {
     public class StatusHandler
     {

@@ -1,4 +1,4 @@
-﻿namespace Tools.Enums
+﻿namespace Tzipory.Tools.Enums
 {
     public enum CollectionActionType
     {

@@ -1,14 +1,15 @@
 using System;
-using Helpers;
-using Systems.UISystem;
-using Tzipory.BaseSystem.TimeSystem;
 using Tzipory.Helpers;
+using Tzipory.Systems.UISystem;
+using Tzipory.Tools.TimeSystem;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.PoolSystem;
+using Tzipory.Systems.WaveSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GamePlayLogic.UI.WaveIndicator
+namespace Tzipory.GameplayLogic.UI.WaveIndicator
 {
     public class WaveIndicator : BaseUIElement , IInitialization<WaveSpawner,ITimer> , IPoolable<WaveIndicator>
     {

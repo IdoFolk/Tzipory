@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Shamans;
+using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Sirenix.OdinInspector;
-using Tzipory.ConfigFiles;
-using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using UnityEngine;
 
-namespace Tzipory.SerializeData
+namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
 {
     [System.Serializable]
     public class ShamanSerializeData : UnitEntitySerializeData , IUpdateData<Shaman>

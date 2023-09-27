@@ -1,7 +1,8 @@
-﻿using Systems.UISystem;
+﻿using Tzipory.Systems.UISystem;
+using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using UnityEngine;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.GameplayLogic.UIElements
 {
     public class PartyUIManager : BaseUIElement
     {

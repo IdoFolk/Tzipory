@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-namespace Systems.UISystem
+namespace Tzipory.Systems.UISystem
 {
     public abstract class BaseToggelButtonUI : BaseUIElement
     {

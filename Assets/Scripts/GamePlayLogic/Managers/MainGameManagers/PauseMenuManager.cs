@@ -1,9 +1,9 @@
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.Tools.TimeSystem;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace GamePlayLogic.Managers.MainGameManagers
+namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
     public class PauseMenuManager : MonoBehaviour
     {

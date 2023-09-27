@@ -1,4 +1,4 @@
-﻿namespace Tzipory.EntitySystem.TargetingSystem
+﻿namespace Tzipory.Systems.TargetingSystem
 {
     public enum TargetingPriorityType
     {

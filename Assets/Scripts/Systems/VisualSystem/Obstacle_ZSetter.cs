@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Tzipory.EntitySystem.Entitys;
 using UnityEngine;
 
 //Not sure if temp -> more like "experimental"?

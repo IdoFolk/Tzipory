@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Tzipory.Systems.WaveSystem;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.LevalSerializeData
+namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
 {
     public class Level : MonoBehaviour
     {

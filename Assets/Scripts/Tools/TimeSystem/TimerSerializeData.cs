@@ -2,7 +2,7 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Tzipory.BaseSystem.TimeSystem
+namespace Tzipory.Tools.TimeSystem
 {
 #if true
     [Serializable]

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tzipory.Tools.BaseObserver
+namespace Tzipory.Tools.BaseClass
 {
     public class BaseObserver<T>
     {

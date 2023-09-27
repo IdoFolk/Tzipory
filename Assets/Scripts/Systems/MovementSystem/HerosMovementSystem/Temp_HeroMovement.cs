@@ -1,16 +1,16 @@
-﻿using Helpers.Consts;
-using ProjectDawn.Navigation.Hybrid;
+﻿using ProjectDawn.Navigation.Hybrid;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Helpers.Consts;
 using UnityEngine;
 
-namespace MovementSystem.HerosMovementSystem
+namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
 {
     public class Temp_HeroMovement : MonoBehaviour
     {
 
         [SerializeField] private AgentAuthoring _agentAuthoring;
         [SerializeField] private TEMP_BasicMoveComponent _moveComponent;
-        [SerializeField] Shamans.Shaman _shaman;
+        [SerializeField] Tzipory.GameplayLogic.EntitySystem.Shamans.Shaman _shaman;
 
         public bool IsMoveing => _moveComponent.IsMoveing;
         

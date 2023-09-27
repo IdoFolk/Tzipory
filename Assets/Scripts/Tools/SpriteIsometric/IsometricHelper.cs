@@ -1,14 +1,17 @@
 using UnityEngine;
 
-public class IsometricHelper : MonoBehaviour
+namespace Tzipory.Tools.SpriteIsometric
 {
-#if UNITY_EDITOR
-    [SerializeField] private float _scale = 1;
-    [SerializeField,Range(0,1)] private float _isoOffSet = 1;
-    
-    private void OnValidate()
+    public class IsometricHelper : MonoBehaviour
     {
-        transform.localScale  = new Vector3(_scale, _scale * _isoOffSet, 0);
-    }
+#if UNITY_EDITOR
+        [SerializeField] private float _scale = 1;
+        [SerializeField, Range(0, 1)] private float _isoOffSet = 1;
+
+        private void OnValidate()
+        {
+            transform.localScale = new Vector3(_scale, _scale * _isoOffSet, 0);
+        }
 #endif
+    }
 }

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers.Consts;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.AbilitiesSystem.AbilityEntity;
+using Tzipory.Helpers.Consts;
 using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
 using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.Systems.AbilitySystem.AbilityEntity;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Tzipory.AbilitiesSystem
+namespace Tzipory.Systems.AbilitySystem
 {
     public class ProjectileAbilityCaster : IAbilityCaster , IStatHolder
     {

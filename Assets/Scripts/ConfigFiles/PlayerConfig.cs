@@ -1,7 +1,7 @@
-﻿using Helpers.Consts;
+﻿using Tzipory.Helpers.Consts;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles
+namespace Tzipory.ConfigFiles.PartyConfig
 {
     [CreateAssetMenu(fileName = "NewPlayerConfig", menuName = "ScriptableObjects/Config/Player config", order = 0)]
     public class PlayerConfig : ScriptableObject , IConfigFile

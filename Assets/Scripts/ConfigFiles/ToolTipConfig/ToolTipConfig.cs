@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ConfigFiles.ToolTipConfig
+namespace Tzipory.ConfigFiles.ToolTipConfig
 {
     [CreateAssetMenu(fileName = "NewToolTipConfig", menuName = "ScriptableObjects/NewToolTipConfig", order = 0)]
     public class ToolTipConfig : ScriptableObject

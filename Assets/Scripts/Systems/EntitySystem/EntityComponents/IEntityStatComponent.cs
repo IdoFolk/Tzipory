@@ -1,5 +1,5 @@
 ﻿
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.Systems.StatusSystem;
 
 namespace Tzipory.EntitySystem.EntityComponents
 {

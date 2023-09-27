@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Helpers.Consts;
-using Tzipory.ConfigFiles;
+using Tzipory.Helpers.Consts;
+using Tzipory.ConfigFiles.PartyConfig;
 using UnityEngine;
 
-namespace Tzipory.SerializeData
+namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
 {
     public enum CampBuildingType
     {

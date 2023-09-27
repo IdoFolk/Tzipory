@@ -1,8 +1,8 @@
-﻿using Tzipory.EntitySystem.EntityConfigSystem;
+﻿using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using UnityEngine;
-using Constant = Helpers.Consts.Constant;
+using Constant = Tzipory.Helpers.Consts.Constant;
 
-namespace Tzipory.ConfigFiles
+namespace Tzipory.ConfigFiles.PartyConfig
 {
     [CreateAssetMenu(fileName = "NewPartyConfig", menuName = "ScriptableObjects/Config/New party config", order = 0)]
     public class PartyConfig : ScriptableObject , IConfigFile

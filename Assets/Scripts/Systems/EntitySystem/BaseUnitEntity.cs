@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers;
-using Helpers.Consts;
-using SerializeData.VisualSystemSerializeData;
+using GameplayLogic.UI.HPBar;
+using MyNamespaceTzipory.Systems.VisualSystem;
+using Tzipory.Helpers;
+using Tzipory.Helpers.Consts;
 using Sirenix.OdinInspector;
-using Tzipory.AbilitiesSystem;
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.Systems.AbilitySystem;
+using Tzipory.Tools.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.EntityConfigSystem;
-using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
-using Tzipory.EntitySystem.StatusSystem;
-using Tzipory.EntitySystem.TargetingSystem;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig.EntityVisualConfig;
+using Tzipory.Systems.TargetingSystem;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.Sound;
-using Tzipory.VisualSystem.EffectSequence;
+using Tzipory.Systems.StatusSystem;
 using UnityEngine;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
+using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 
-namespace Tzipory.EntitySystem.Entitys
+namespace Tzipory.EntitySystem
 {
     public abstract class BaseUnitEntity : BaseGameEntity, IEntityTargetAbleComponent, IEntityCombatComponent, IEntityMovementComponent, 
         IEntityTargetingComponent, IEntityAbilitiesComponent, IEntityVisualComponent, IInitialization<BaseUnitEntityConfig> , IInitialization<UnitEntitySerializeData,BaseUnitEntityVisualConfig>
@@ -253,7 +255,7 @@ namespace Tzipory.EntitySystem.Entitys
                 Stats.Add(statSerializeData.ID ,new Stat(statSerializeData));
             
             DefaultPriorityTargeting =
-                Factory.TargetingPriorityFactory.GetTargetingPriority(this, (TargetingPriorityType)parameter.TargetingPriority);
+                Systems.FactorySystem.ObjectFactory.TargetingPriorityFactory.GetTargetingPriority(this, (TargetingPriorityType)parameter.TargetingPriority);
             
             AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
 
@@ -275,7 +277,7 @@ namespace Tzipory.EntitySystem.Entitys
                 Stats.Add(statConfig.ID,new Stat(statConfig));
             
             DefaultPriorityTargeting =
-                Factory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
+                Systems.FactorySystem.ObjectFactory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
             
             AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);//making new every time we init new enemy(memory waste) 
             

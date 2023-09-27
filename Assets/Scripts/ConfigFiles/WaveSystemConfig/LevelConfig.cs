@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.LevalSerializeData
+namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
 {
     [CreateAssetMenu(fileName = "NewLevelConfig", menuName = "ScriptableObjects/New level config", order = 0)]
     public class LevelConfig : ScriptableObject

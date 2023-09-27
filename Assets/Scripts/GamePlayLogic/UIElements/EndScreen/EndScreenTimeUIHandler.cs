@@ -1,8 +1,8 @@
-﻿using Systems.UISystem;
-using Tzipory.BaseSystem.TimeSystem;
+﻿using Tzipory.Systems.UISystem;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.GameplayLogic.UIElements.EndScreen
 {
     public class EndScreenTimeUIHandler : BaseUIElement
     {

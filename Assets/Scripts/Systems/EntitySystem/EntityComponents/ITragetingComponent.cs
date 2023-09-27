@@ -1,5 +1,5 @@
-﻿using Tzipory.EntitySystem.StatusSystem;
-using Tzipory.EntitySystem.TargetingSystem;
+﻿using Tzipory.Systems.StatusSystem;
+using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 
 namespace Tzipory.EntitySystem.EntityComponents

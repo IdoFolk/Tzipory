@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using Tzipory.EntitySystem.Entitys;
-using Tzipory.EntitySystem.TargetingSystem;
-using Tzipory.Leval;
-using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.EntitySystem;
+using Tzipory.Systems.TargetingSystem;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using UnityEngine;
 
 public class TEMP_UnitFlipAndZFix : MonoBehaviour

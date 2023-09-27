@@ -1,13 +1,14 @@
 using System.Collections.Generic;
-using SerializeData.Nodes;
-using SerializeData.Progression;
+using Tzipory.SerializeData.NodeSerializeData;
+using Tzipory.SerializeData.ProgressionSerializeData;
 using Sirenix.OdinInspector;
-using Systems.NodeSystem;
+using Tzipory.Systems.NodeSystem;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.SceneSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-namespace GamePlayLogic.Managers
+namespace Tzipory.GameplayLogic.Managers.MapManagers
 {
     public class WorldMapNodesManager : BaseNodeManager , IInitialization<WorldMapProgressionSerializeData>
     {

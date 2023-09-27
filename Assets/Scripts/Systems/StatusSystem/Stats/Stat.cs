@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SerializeData.StatSerializeData;
 using Sirenix.OdinInspector;
-using Tzipory.SerializeData.StatSystemSerilazeData;
+using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.SerializeData.StatSystemSerializeData;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.Systems.StatusSystem
 {
 #if UNITY_EDITOR
     [Serializable]
@@ -123,7 +123,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         
         public IDisposable AddStatusEffect(StatEffectConfig statEffectConfig)
         {
-            var statusEffect = Factory.StatusEffectFactory.GetStatusEffect(statEffectConfig,this);
+            var statusEffect =  FactorySystem.ObjectFactory.StatusEffectFactory.GetStatusEffect(statEffectConfig,this);
             
             return AddStatusEffect(statusEffect);
         }

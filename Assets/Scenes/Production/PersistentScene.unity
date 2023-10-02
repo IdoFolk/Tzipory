@@ -2203,6 +2203,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2794710943949227540, guid: a21658bf9c933454991365eeebc7d402, type: 3}
+      propertyPath: _cameraMoveToPosSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389486412246985101, guid: a21658bf9c933454991365eeebc7d402, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -80
+      objectReference: {fileID: 0}
     - target: {fileID: 3493536373832206464, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2242,6 +2250,10 @@ PrefabInstance:
     - target: {fileID: 3493536373832206464, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7822808706967263669, guid: a21658bf9c933454991365eeebc7d402, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -80
       objectReference: {fileID: 0}
     - target: {fileID: 7871334403514214793, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_Name

@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_FollowOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -93,7 +93,7 @@ Transform:
   m_GameObject: {fileID: 3563899037446751318}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: -90}
+  m_LocalPosition: {x: 0, y: 0, z: -80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -169,7 +169,7 @@ Transform:
   m_GameObject: {fileID: 5402110623228111812}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: -90}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -353,7 +353,7 @@ Transform:
   m_GameObject: {fileID: 6896305718013502515}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: -80}
+  m_LocalPosition: {x: 0, y: 0, z: -80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -406,20 +406,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ecc09f2fe28c040a147c1476e05e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSettings: {fileID: 11400000, guid: 2fcc4c10b2fed7f408f9dce37e653946, type: 2}
   _enableCameraMovement: 1
+  _enableEdgeScroll: 1
   _mainCamera: {fileID: 1133403119959084057}
   _cinemachineVirtualCamera: {fileID: 8209895816503717536}
   _cameraFollowObject: {fileID: 4805690003894856463}
-  _moveSpeed: 10
-  _zoomSpeed: 10
-  _zoomAmount: 1
-  _zoomMin: 2
-  _zoomMax: 9
-  _targetFieldOfView: 2
-  _edgeScrollDetectSize: 20
-  _enableEdgeScroll: 0
-  _xDamping: 0.2
-  _yDamping: 0.2
-  _edgeDampingX: 1.9
-  _edgeDampingY: 1.2
-  _edgeScrollBorder: {x: 20, y: 20}

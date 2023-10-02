@@ -60,7 +60,7 @@ namespace Tzipory.GameplayLogic.UI.WaveIndicator
 
             _timerFill.fillAmount = _timer.TimeRemaining / _delay;
 
-            var waveSpawnerScreenPoint = GameManager.Camera.WorldToScreenPoint(_waveSpawner.transform.position);
+            var waveSpawnerScreenPoint = GameManager.CameraHandler.MainCamera.WorldToScreenPoint(_waveSpawner.transform.position);
             
             Vector3 dir = (waveSpawnerScreenPoint - transform.position).normalized;
             float angle = Vector3.Angle(Vector3.up, dir);

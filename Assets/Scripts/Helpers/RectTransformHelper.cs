@@ -18,7 +18,7 @@ namespace Tzipory.Helpers
 
             Vector2 screenPos;
             
-            if (GameManager.Camera == null)
+            if (GameManager.CameraHandler == null)
             {
                 if (Camera.main != null) 
                     screenPos = Camera.main.WorldToScreenPoint(wordPos);
@@ -26,7 +26,7 @@ namespace Tzipory.Helpers
                     throw new Exception("No camera was found");
             }
             else
-                screenPos = GameManager.Camera.WorldToScreenPoint(wordPos);
+                screenPos = GameManager.CameraHandler.MainCamera.WorldToScreenPoint(wordPos);
 
             screenPos += offSet;
                 

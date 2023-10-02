@@ -1394,6 +1394,10 @@ MonoBehaviour:
   - {fileID: 1612416426}
   - {fileID: 416246837}
   _unLockAll: 0
+  _cameraBorders: {x: 20, y: 20}
+  _overwriteCameraStartPosition: 0
+  _cameraStartPosition: {x: 0, y: 0}
+  _enableGizmos: 1
 --- !u!1 &1310679754
 GameObject:
   m_ObjectHideFlags: 0

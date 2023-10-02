@@ -2,7 +2,7 @@
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
-namespace Tzipory.AbilitiesSystem.AbilityEntity
+namespace Tzipory.Systems.AbilitySystem.AbilityEntity
 {
     public abstract class BaseAbilityEntity : BaseGameEntity
     {

@@ -1,10 +1,10 @@
 ﻿using System;
-using GamePlayLogic.Managers;
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Systems.UISystem
+namespace Tzipory.Systems.UISystem
 {
     public abstract class BaseUIElement : MonoBehaviour , IUIElement , IPointerEnterHandler,IPointerExitHandler , IPointerClickHandler
     {

@@ -1,9 +1,10 @@
-﻿using Helpers.Consts;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.EntitySystem.EntityConfigSystem;
+﻿using Tzipory.Helpers.Consts;
+using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles
+
+namespace Tzipory.ConfigFiles.PartyConfig
 {
     [System.Serializable]
     public class ConfigManager

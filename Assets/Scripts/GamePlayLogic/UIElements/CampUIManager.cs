@@ -1,7 +1,7 @@
 using Systems.CampSystem;
 using UnityEngine;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.GameplayLogic.UIElements
 {
     public class CampUIManager : MonoBehaviour
     {

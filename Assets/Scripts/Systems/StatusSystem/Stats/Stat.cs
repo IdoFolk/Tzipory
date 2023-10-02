@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using SerializeData.StatSerializeData;
 using Sirenix.OdinInspector;
-using Tzipory.SerializeData.StatSystemSerilazeData;
+using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.SerializeData.StatSystemSerializeData;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.Systems.StatusSystem
 {
 #if UNITY_EDITOR
     [Serializable]
@@ -71,10 +71,10 @@ namespace Tzipory.EntitySystem.StatusSystem
             Name = statConfig.Name;
             Id = statConfig.ID;
             BaseValue = statConfig.BaseValue;
-            _currentValue = BaseValue;
             MaxValue = StatLimiters.MaxStatValue;
             _zeroSetModifier = 1;
 #if UNITY_EDITOR
+            _currentValue = BaseValue;
             _name = Name;
 #endif
         }
@@ -84,10 +84,10 @@ namespace Tzipory.EntitySystem.StatusSystem
             Name = statSerializeData.Name;
             Id = statSerializeData.ID;
             BaseValue = statSerializeData.BaseValue;
-            _currentValue = BaseValue;
             MaxValue = StatLimiters.MaxStatValue;
             _zeroSetModifier = 1;
 #if UNITY_EDITOR
+            _currentValue = BaseValue;
             _name = Name;
 #endif
         }
@@ -99,9 +99,9 @@ namespace Tzipory.EntitySystem.StatusSystem
             Id = id;  
             BaseValue = baseValue;
             MaxValue = StatLimiters.MaxStatValue;
-            _currentValue = BaseValue;
             _zeroSetModifier = 1;
 #if UNITY_EDITOR
+            _currentValue = BaseValue;
             _name = Name;
 #endif
         }
@@ -123,7 +123,7 @@ namespace Tzipory.EntitySystem.StatusSystem
         
         public IDisposable AddStatusEffect(StatEffectConfig statEffectConfig)
         {
-            var statusEffect = Factory.StatusEffectFactory.GetStatusEffect(statEffectConfig,this);
+            var statusEffect =  FactorySystem.ObjectFactory.StatusEffectFactory.GetStatusEffect(statEffectConfig,this);
             
             return AddStatusEffect(statusEffect);
         }

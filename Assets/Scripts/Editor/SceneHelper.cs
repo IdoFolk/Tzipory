@@ -7,7 +7,6 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public enum SceneType
 {
     Production,
@@ -17,23 +16,27 @@ public enum SceneType
 public class SceneEditor : OdinMenuEditorWindow
 {
     private const string PRODUCTION_PATH = "Assets/Scenes/Production";
-    private const string TEST_PATH = "Assets/Scenes/Testing"; 
-    [MenuItem("Tools/Scenes")] 
+    private const string TEST_PATH = "Assets/Scenes/Testing";
+
+    [MenuItem("Tools/Scenes")]
     private static void OpenWindow()
     {
         SceneEditor window = GetWindow<SceneEditor>();
         window.Show();
     }
+
     protected override void OnEnable()
     {
         base.OnEnable();
         SceneEditorCache.OnSceneDeleted += ForceMenuTreeRebuild;
     }
+
     protected override void OnDestroy()
     {
         SceneEditorCache.OnSceneDeleted -= ForceMenuTreeRebuild;
         base.OnDestroy();
     }
+
     protected override OdinMenuTree BuildMenuTree()
     {
         var tree = new OdinMenuTree();
@@ -75,47 +78,47 @@ public class SceneEditor : OdinMenuEditorWindow
             case SceneType.Test:
                 return TEST_PATH;
         }
+
         throw new Exception();
     }
 
 
     public class NewSceneClass
     {
-        [SerializeField]
-        private string _name;
-        [SerializeField]
-        private SceneType _path = SceneType.Test;
+        [SerializeField] private string _name;
+        [SerializeField] private SceneType _path = SceneType.Test;
+
         [Sirenix.OdinInspector.Button]
         private void CreateNewScene()
         {
             if (_name.Length == 0)
                 return;
-            var scene =  EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
-            EditorSceneManager.SaveScene(scene, Path(_path)+$"\\{_name}.unity");
-
+            var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
+            EditorSceneManager.SaveScene(scene, Path(_path) + $"\\{_name}.unity");
         }
-
-
     }
+
     public class SceneEditorCache
     {
         public static event Action OnSceneDeleted;
         private bool _canBeDeleted;
         private SceneAsset _current;
         private List<Scene> _scenes = new List<Scene>();
+
         public SceneEditorCache(bool canBeDeleted, SceneAsset scene)
         {
             _current = scene;
             _canBeDeleted = canBeDeleted;
         }
+
         [Sirenix.OdinInspector.Button]
         public void LoadSingle()
         {
-
             Debug.Log($"Loading {_current.name} Scene");
             Reset();
             EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(_current), OpenSceneMode.Single);
         }
+
         [Sirenix.OdinInspector.Button]
         public void LoadAdditive()
         {
@@ -153,6 +156,5 @@ public class SceneEditor : OdinMenuEditorWindow
         }
 
         private void Reset() => _scenes.Clear();
-
     }
 }

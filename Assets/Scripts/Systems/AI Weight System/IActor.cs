@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Tzipory.AI.WeightSystem
+namespace Tzipory.Systems.AIWeightSystem
 {
     public interface IActor 
     {

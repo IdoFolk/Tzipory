@@ -1,6 +1,6 @@
-﻿using Tzipory.SerializeData.LevalSerializeData;
+﻿using Tzipory.ConfigFiles.Level;
 
-namespace GamePlayLogic.Managers
+namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
     public class GameData
     {

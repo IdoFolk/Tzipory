@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Tzipory.EntitySystem.StatusSystem;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.Systems.StatusSystem
 {
     public interface IStatHolder
     {

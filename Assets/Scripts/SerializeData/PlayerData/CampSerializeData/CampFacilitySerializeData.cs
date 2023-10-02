@@ -1,7 +1,7 @@
-﻿using Helpers.Consts;
-using Tzipory.ConfigFiles;
+﻿using Tzipory.Helpers.Consts;
+using Tzipory.ConfigFiles.PartyConfig;
 
-namespace Tzipory.SerializeData 
+namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData 
 {
     [System.Serializable]
     public class CampFacilitySerializeData : ISerializeData

@@ -2,7 +2,7 @@
 using Tzipory.EntitySystem.StatusSystem;
 using UnityEngine;
 
-namespace SerializeData.StatSerializeData
+namespace Tzipory.Systems.StatusSystem
 {
     [Serializable]
     public class StatModifierConfig

@@ -1,10 +1,9 @@
 ﻿using System;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.TargetingSystem;
-using Tzipory.EntitySystem.TargetingSystem.TargetingPriorites;
+using Tzipory.Systems.TargetingSystem;
+using Tzipory.GameplayLogic.TargetingPriorities;
 
-namespace Tzipory.Factory
+namespace Tzipory.Systems.FactorySystem.ObjectFactory
 {
     public class TargetingPriorityFactory
     {

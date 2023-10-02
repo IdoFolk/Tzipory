@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Shamans;
-using Tzipory.SerializeData;
+using Tzipory.GameplayLogic.EntitySystem.Shamans;
+using Tzipory.SerializeData.PlayerData.PartySerializeData;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-namespace GameplayeLogic.Managers
+namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 {
     public class PartyManager : IDisposable
     {

@@ -1,9 +1,9 @@
-using Helpers.Consts;
-using Tzipory.ConfigFiles;
-using Tzipory.Nodes.Config;
-using Tzipory.SerializeData;
+using Tzipory.Helpers.Consts;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.PartyConfig.NodesConfig;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 
-namespace SerializeData.Nodes
+namespace Tzipory.SerializeData.NodeSerializeData
 {
     [System.Serializable]
     public abstract class BaseNodeSerializeData : ISerializeData

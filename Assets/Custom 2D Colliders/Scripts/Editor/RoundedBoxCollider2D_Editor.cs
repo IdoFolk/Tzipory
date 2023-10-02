@@ -30,7 +30,7 @@ using UnityEditor;
 using System.Collections;
 
 [CustomEditor (typeof(RoundedBoxCollider2D))]
-public class RoundedBoxCollider_Editor : Editor {
+public class RoundedBoxCollider_Editor : UnityEditor.Editor {
 
     RoundedBoxCollider2D rb;
     EdgeCollider2D edgeCollider;

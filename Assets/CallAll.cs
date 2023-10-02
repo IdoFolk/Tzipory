@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Tzipory.GameplayLogic.UI.ProximityIndicators;
 using UnityEngine;
 
 public class CallAll : MonoBehaviour

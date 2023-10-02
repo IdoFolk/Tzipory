@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tzipory.BaseSystem.TimeSystem
+namespace Tzipory.Tools.TimeSystem
 {
     public interface ITimer
     {

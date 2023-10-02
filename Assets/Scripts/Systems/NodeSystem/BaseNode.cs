@@ -1,7 +1,7 @@
 ﻿using System;
-using SerializeData.Nodes;
+using Tzipory.SerializeData.NodeSerializeData;
 
-namespace Systems.NodeSystem
+namespace Tzipory.Systems.NodeSystem
 {
     public abstract class BaseNode
     {

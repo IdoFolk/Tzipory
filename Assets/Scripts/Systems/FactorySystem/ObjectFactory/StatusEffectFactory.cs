@@ -1,9 +1,9 @@
 ﻿using System;
 using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.SerializeData.LevalSerializeData.StstusEffectTypes;
-using Tzipory.SerializeData.StatSystemSerilazeData;
+using Tzipory.Systems.StatusSystem;
 
-namespace Tzipory.Factory
+namespace Tzipory.Systems.FactorySystem.ObjectFactory
 {
     public class StatusEffectFactory
     {

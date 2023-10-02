@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GamePlayLogic.Managers;
-using GamePlayLogic.UI.WaveIndicator;
-using Helpers;
-using Tzipory.BaseSystem.TimeSystem;
-using Tzipory.SerializeData.LevalSerializeData;
-using Tzipory.WaveSystem;
+using Tzipory.ConfigFiles.Level;
+using Tzipory.GameplayLogic.UI.WaveIndicator;
+using Tzipory.Helpers;
+using Tzipory.Tools.TimeSystem;
+using Tzipory.Systems.WaveSystem;
 using UnityEngine;
 
-namespace Tzipory.Leval
+namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 {
     public class WaveManager : IDisposable
     {

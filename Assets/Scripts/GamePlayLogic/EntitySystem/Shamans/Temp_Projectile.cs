@@ -1,4 +1,4 @@
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.Tools.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 

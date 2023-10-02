@@ -1,6 +1,7 @@
-﻿using GameplayeLogic.Managers;
+﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+using Tzipory.SerializeData;
 
-namespace GamePlayLogic.Managers
+namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
     public class PlayerManager
     {

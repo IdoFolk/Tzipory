@@ -1,6 +1,6 @@
-﻿using Enemes;
+﻿using Tzipory.GameplayLogic.EntitySystem.Enemies;
 
-namespace Systems.FactorySystem
+namespace Tzipory.Systems.FactorySystem.GameObjectFactory
 {
     public class EnemyFactory : BaseGameObjectFactory<Enemy>
     {

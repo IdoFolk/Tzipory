@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers.Consts;
-using SerializeData.StatSerializeData;
+using Tzipory.Systems.StatusSystem;
 
 namespace Tzipory.EntitySystem.StatusSystem
 {

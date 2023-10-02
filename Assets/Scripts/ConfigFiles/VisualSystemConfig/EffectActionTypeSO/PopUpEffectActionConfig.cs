@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using MyNamespaceTzipory.Systems.VisualSystem;
 using Sirenix.OdinInspector;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Testing;
 using UnityEngine;
 
 
-namespace Tzipory.VisualSystem.EffectSequence.EffectActionTypeSO
+namespace Tzipory.Systems.StatusSystem.EffectActionTypeSO
 {
     [CreateAssetMenu(fileName = "NewPopUpEffectAction", menuName = "ScriptableObjects/VisualSystem/EffectAction/New PopUp effect action")]
     public class PopUpEffectActionConfig : BaseEffectActionConfig

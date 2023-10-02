@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.ConfigFiles.Level;
 using Tzipory.Tools.Enums;
 using UnityEngine;
 
-namespace Tzipory.Nodes.Config
+namespace Tzipory.ConfigFiles.PartyConfig.NodesConfig
 {
     [CreateAssetMenu(fileName = "BattleMapNode", menuName = "ScriptableObjects/Nodes/BattleMapNode", order = 2)]
     public class BattleMapNodeConfig : BaseNodeConfig

@@ -1,15 +1,16 @@
-﻿using Helpers.Consts;
-using MovementSystem.HerosMovementSystem;
-using Tzipory.BaseSystem.TimeSystem;
+﻿using Tzipory.GameplayLogic.UI.ProximityIndicators;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.MovementSystem.HerosMovementSystem;
+using Tzipory.Tools.TimeSystem;
 using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.Entitys;
 using Tzipory.Helpers;
 using Sirenix.OdinInspector;
-using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig.EntityVisualConfig;
+using Tzipory.EntitySystem;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using UnityEngine;
 
-namespace Shamans
+namespace Tzipory.GameplayLogic.EntitySystem.Shamans
 {
     public class Shaman : BaseUnitEntity
     {
@@ -27,6 +28,7 @@ namespace Shamans
         private float _baseDecisionInterval;//temp
         
         private float _currentAttackRate;
+        public int EntityInstanceID { get; set; }
 
         public override void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {

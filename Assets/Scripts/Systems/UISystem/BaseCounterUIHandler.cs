@@ -1,9 +1,8 @@
 ﻿using System.Globalization;
-using Systems.UISystem;
 using TMPro;
 using UnityEngine;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.Systems.UISystem
 {
     public abstract class BaseCounterUIHandler : BaseUIElement
     {

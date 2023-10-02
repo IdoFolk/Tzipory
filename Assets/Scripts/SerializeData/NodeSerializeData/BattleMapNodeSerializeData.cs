@@ -1,8 +1,8 @@
-using Tzipory.ConfigFiles;
-using Tzipory.Nodes.Config;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.PartyConfig.NodesConfig;
 using Tzipory.Tools.Enums;
 
-namespace SerializeData.Nodes
+namespace Tzipory.SerializeData.NodeSerializeData
 {
     [System.Serializable]
     public class BattleMapNodeSerializeData : WorldMapNodeSerializeData

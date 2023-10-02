@@ -1,5 +1,5 @@
 
-namespace SerializeData.Nodes
+namespace Tzipory.SerializeData.NodeSerializeData
 {
     [System.Serializable]
     public abstract class WorldMapNodeSerializeData : BaseNodeSerializeData

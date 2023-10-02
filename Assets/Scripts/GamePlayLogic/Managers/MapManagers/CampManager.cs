@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using Helpers.Consts;
+using Tzipory.Helpers.Consts;
 using Systems.CampSystem;
-using Tools.Enums;
-using Tzipory.SerializeData;
+using Tzipory.Tools.Enums;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-namespace GameplayeLogic.Managers
+namespace Tzipory.GameplayLogic.Managers.MapManagers
 {
     public class CampManager : MonoBehaviour, IInitialization<CampSerializeData>
     {

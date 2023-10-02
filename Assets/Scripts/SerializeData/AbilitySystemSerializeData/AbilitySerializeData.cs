@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using Helpers.Consts;
-using Tzipory.AbilitiesSystem;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.ConfigFiles;
-using Tzipory.SerializeData.StatSystemSerilazeData;
+using Tzipory.Helpers.Consts;
+using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+using Tzipory.SerializeData.StatSystemSerializeData;
 using UnityEngine;
 
 namespace Tzipory.SerializeData.AbilitySystemSerializeData

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Tzipory.EntitySystem.EntityComponents;
 
-namespace Tzipory.EntitySystem.TargetingSystem
+namespace Tzipory.Systems.TargetingSystem
 {
     public abstract class BaseTargetingPriority : IPriorityTargeting
     {

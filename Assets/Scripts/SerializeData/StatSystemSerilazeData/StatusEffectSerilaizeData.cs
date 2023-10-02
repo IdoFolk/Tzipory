@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
-using Helpers.Consts;
-using SerializeData.StatSerializeData;
-using SerializeData.VisualSystemSerializeData;
+using Tzipory.Helpers.Consts;
 using Sirenix.OdinInspector;
-using Tzipory.ConfigFiles;
+using Tzipory.ConfigFiles.PartyConfig;
 using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.StatSystemSerilazeData
+namespace Tzipory.SerializeData.StatSystemSerializeData
 {
     [System.Serializable]
     public class StatusEffectSerializeData : ISerializeData //need to save ability statEffect(may not be needed)

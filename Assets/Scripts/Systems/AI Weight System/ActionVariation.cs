@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tzipory.AI.WeightSystem
+namespace Tzipory.Systems.AIWeightSystem
 {
     [System.Serializable]
     public class ActionVariation

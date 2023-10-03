@@ -169,7 +169,7 @@ Transform:
   m_GameObject: {fileID: 5402110623228111812}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -80}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -406,9 +406,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71ecc09f2fe28c040a147c1476e05e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSettings: {fileID: 11400000, guid: 2fcc4c10b2fed7f408f9dce37e653946, type: 2}
+  _cameraSettings: {fileID: 11400000, guid: 2fcc4c10b2fed7f408f9dce37e653946, type: 2}
   _enableCameraMovement: 1
-  _enableEdgeScroll: 1
+  _enableEdgeScroll: 0
   _mainCamera: {fileID: 1133403119959084057}
   _cinemachineVirtualCamera: {fileID: 8209895816503717536}
   _cameraFollowObject: {fileID: 4805690003894856463}

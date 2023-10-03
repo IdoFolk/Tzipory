@@ -12,18 +12,23 @@ namespace Tzipory.Systems.CameraSystem
         
         [Header("Camera Movement")]
         public float MoveSpeed = 10f;
-        public int EdgeScrollDetectSize = 20;
+        [Range(0,0.1f)]public float EdgeScrollDetectSizeX = 0.025f;
+        [Range(0,0.1f)]public float EdgeScrollDetectSizeY = 0.025f;
         [Range(0,1)]public float XDamping = 0.2f;
         [Range(0,1)]public float YDamping = 0.2f;
         [Header("Camera Zoom")]
-        public float ZoomSpeed = 8f;
+        public float ZoomSpeed = 6.5f;
         public float ZoomAmount = 1f;
         public float ZoomMin = 2f;
-        public float ZoomMax = 8f;
-        public float ZoomStartValue;
+        public float ZoomMax = 11f;
+        public float ZoomStartValue = 7f;
+        [Header("Camera Transition to Event")]
+        [Range(0,1)]public float EventTransitionDampingX = 0.4f;
+        [Range(0,1)]public float EventTransitionDampingY = 0.4f;
         [Header("Border Control")]
-        public float EdgeDampingX = 2f;
-        public float EdgeDampingY = 1.3f;
+        public float DefaultEdgePaddingX = 2f;
+        public float DefaultEdgePaddingY = 1.3f;
+        
         
         [Button("Set as camera setting")] //WIP (not working)
         public void SetAsCameraSetting()

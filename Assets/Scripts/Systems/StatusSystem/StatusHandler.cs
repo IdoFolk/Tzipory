@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tzipory.ConfigFiles.StatusSystem;
 using Tzipory.Helpers.Consts;
-using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
 
 namespace Tzipory.Systems.StatusSystem
@@ -92,7 +92,7 @@ namespace Tzipory.Systems.StatusSystem
         }
 
         //TODO need to fix the InterruptStatusEffects
-        // private void InterruptStatusEffects(IEnumerable<StatEffectConfig> effectConfigSos)
+        // private void InterruptStatusEffects(IEnumerable<StatEffectConfigs> effectConfigSos)
         // {
         //     foreach (var effectConfigSo in effectConfigSos)
         //     {

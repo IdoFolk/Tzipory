@@ -1,5 +1,5 @@
 ﻿using System;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.StatusSystem;
 using Tzipory.SerializeData.LevalSerializeData.StstusEffectTypes;
 using Tzipory.Systems.StatusSystem;
 

@@ -1,6 +1,4 @@
-﻿
-
-using Tzipory.ConfigFiles.PartyConfig;
+﻿using Tzipory.ConfigFiles;
 using Tzipory.Tools.Interface;
 
 namespace Tzipory.SerializeData

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 

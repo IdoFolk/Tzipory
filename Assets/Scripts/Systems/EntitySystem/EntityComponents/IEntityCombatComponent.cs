@@ -1,6 +1,6 @@
 ﻿using Tzipory.Systems.StatusSystem;
 
-namespace Tzipory.EntitySystem.EntityComponents
+namespace Tzipory.Systems.Entity.EntityComponents
 {
     public interface IEntityCombatComponent : IEntityComponent
     {

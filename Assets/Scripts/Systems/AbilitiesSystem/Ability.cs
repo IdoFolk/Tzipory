@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
+using Tzipory.ConfigFiles.AbilitySystem;
 using Tzipory.Helpers.Consts;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Tools.TimeSystem;
-using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.TargetingSystem;
 using UnityEngine;

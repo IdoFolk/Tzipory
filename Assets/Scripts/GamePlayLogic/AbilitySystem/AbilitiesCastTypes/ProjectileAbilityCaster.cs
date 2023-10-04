@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tzipory.ConfigFiles.AbilitySystem;
 using Tzipory.Helpers.Consts;
-using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Systems.StatusSystem;
-using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
-using Tzipory.EntitySystem.StatusSystem;
 using Tzipory.Systems.AbilitySystem.AbilityEntity;
+using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -60,7 +59,7 @@ namespace Tzipory.Systems.AbilitySystem
             _projectilePrefab = Resources.Load<GameObject>(ProjectilePrefabPath);
 
             if (_projectilePrefab is null)
-                throw  new System.Exception($"{nameof(ProjectileAbilityCaster)} ProjectilePrefab not found");
+                throw  new Exception($"{nameof(ProjectileAbilityCaster)} ProjectilePrefab not found");
         }
 
         public void Cast(IEntityTargetAbleComponent target, IAbilityExecutor abilityExecutor)

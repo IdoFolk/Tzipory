@@ -1,10 +1,13 @@
+using System;
 using ProjectDawn.Navigation;
 using ProjectDawn.Navigation.Hybrid;
+using Tzipory.Systems.Entity;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.EntityComponents
+namespace Tzipory.Systems.EntityComponents
 {
     public class TEMP_BasicMoveComponent : MonoBehaviour, IEntityMovementComponent
     {
@@ -37,11 +40,11 @@ namespace Tzipory.EntitySystem.EntityComponents
 
         public Stat MovementSpeed => _speedStat;
 
-        public int EntityInstanceID => throw new System.NotImplementedException();
+        public int EntityInstanceID => throw new NotImplementedException();
 
         public Transform EntityTransform => agent.transform;
 
-        public BaseGameEntity GameEntity => throw new System.NotImplementedException();
+        public BaseGameEntity GameEntity => throw new NotImplementedException();
 
         public bool IsMoveing { get; private set; }    
 

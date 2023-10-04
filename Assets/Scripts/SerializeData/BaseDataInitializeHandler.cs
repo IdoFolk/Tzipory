@@ -1,4 +1,4 @@
-﻿using Tzipory.ConfigFiles.PartyConfig;
+﻿using Tzipory.ConfigFiles;
 using UnityEngine;
 
 namespace Tzipory.SerializeData

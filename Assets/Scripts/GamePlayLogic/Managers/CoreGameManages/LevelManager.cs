@@ -1,12 +1,13 @@
 using System;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Sirenix.OdinInspector;
+using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.ConfigFiles.Level;
 using Tzipory.Tools.TimeSystem;
-using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using Tzipory.GamePlayLogic.ObjectPools;
-using Tzipory.SerializeData.PlayerData.PartySerializeData;
+using Tzipory.SerializeData.PlayerData.Party;
 using Tzipory.Systems.SceneSystem;
+using Tzipory.Tools.GameSettings;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -88,8 +89,8 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
             WaveManager.UpdateLevel();
 
-            if (_cantLose)
-                return;
+        if (GameSetting.CantLose)
+            return;
 
             if (CoreTemplete.IsEntityDead)
                 EndGame(false);

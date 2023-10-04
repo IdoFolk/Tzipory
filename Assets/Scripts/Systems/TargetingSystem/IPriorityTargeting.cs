@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.Entity.EntityComponents;
 
 namespace Tzipory.Systems.TargetingSystem
 {

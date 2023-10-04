@@ -1,8 +1,8 @@
-﻿namespace Tzipory.ConfigFiles.PartyConfig
+﻿namespace Tzipory.ConfigFiles
 {
     public interface IConfigFile
     {
-        public int ConfigObjectId { get; }
+        public int ObjectId { get; }
         public int ConfigTypeId { get; }
     }
 }

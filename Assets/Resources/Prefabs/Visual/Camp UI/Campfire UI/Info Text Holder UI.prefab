@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 90, y: 16}
+  m_SizeDelta: {x: 120, y: 16}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &6436090166416213932
 CanvasRenderer:
@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 12
+  m_fontSizeBase: 12
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -282,7 +282,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 90, y: 16}
+  m_SizeDelta: {x: 60, y: 16}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &3376796371626228153
 CanvasRenderer:
@@ -391,6 +391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4665571937921569395}
   - component: {fileID: 9130653254689415435}
+  - component: {fileID: 5701033561467111399}
   m_Layer: 0
   m_Name: Info Text Holder UI
   m_TagString: Untagged
@@ -426,3 +427,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8364827644866650319}
   m_CullTransparentMesh: 1
+--- !u!114 &5701033561467111399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8364827644866650319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ca66c06a187f6f43a365e634f44d725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dataName: {fileID: 568343288227285931}
+  _dataValue: {fileID: 30270580054068757}

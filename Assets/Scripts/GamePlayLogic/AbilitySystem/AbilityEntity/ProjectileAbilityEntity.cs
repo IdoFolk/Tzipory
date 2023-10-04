@@ -1,6 +1,6 @@
-﻿using Tzipory.Tools.Enums;
+﻿using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Tools.Enums;
 using Tzipory.Tools.TimeSystem;
-using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 

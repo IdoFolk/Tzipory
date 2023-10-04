@@ -1,7 +1,4 @@
-﻿using Tzipory.GameplayLogic.VisualSystem.EffectType.ColorEffect;
-using Tzipory.GameplayLogic.VisualSystem.EffectType.PopUpEffect;
-using Tzipory.GameplayLogic.VisualSystem.EffectType.SoundEffect;
-using Tzipory.GameplayLogic.VisualSystem.EffectType.TransformEffect;
+﻿using Tzipory.GameplayLogic.VisualSystem.EffectType;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 
 namespace Tzipory.Systems.FactorySystem.ObjectFactory

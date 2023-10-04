@@ -1,6 +1,6 @@
 using System;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Tools.Enums;
-using Tzipory.EntitySystem.EntityComponents;
 using UnityEngine;
 
 namespace Tzipory.Systems.TargetingSystem

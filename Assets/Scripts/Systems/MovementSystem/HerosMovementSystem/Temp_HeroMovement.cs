@@ -1,6 +1,7 @@
 ﻿using ProjectDawn.Navigation.Hybrid;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.EntityComponents;
 using Tzipory.Helpers.Consts;
+using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
 
 namespace Tzipory.Systems.MovementSystem.HerosMovementSystem

@@ -1,5 +1,4 @@
-﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
-using Tzipory.SerializeData;
+﻿using Tzipory.SerializeData;
 
 namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {

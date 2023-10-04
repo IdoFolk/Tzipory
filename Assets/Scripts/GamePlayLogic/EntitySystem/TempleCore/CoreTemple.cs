@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using PathCreation;
-using UnityEngine;
 using Sirenix.OdinInspector;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
+using UnityEngine;
 
 public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 {

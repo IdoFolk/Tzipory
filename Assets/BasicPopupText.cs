@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using MyNamespaceTzipory.Systems.VisualSystem;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class BasicPopupText : MonoBehaviour
 {

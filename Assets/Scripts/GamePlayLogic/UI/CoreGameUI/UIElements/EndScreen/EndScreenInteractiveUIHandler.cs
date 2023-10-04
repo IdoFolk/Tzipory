@@ -1,5 +1,5 @@
-﻿using Tzipory.ConfigFiles.ToolTipConfig;
-using TMPro;
+﻿using TMPro;
+using Tzipory.ConfigFiles.ToolTipConfig;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.Systems.UISystem;
 using UnityEngine;

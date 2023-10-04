@@ -1,5 +1,4 @@
-﻿using Tzipory.ConfigFiles.Item;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Tzipory.Systems.InventorySystem
 {

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Tzipory.Helpers;
 using Tzipory.Testing;
+using UnityEngine;
 
 public class LevelVisualData_Monoton : MonoSingleton<LevelVisualData_Monoton> //TODO: This will probably be integrated into LevelData TBF 
 {

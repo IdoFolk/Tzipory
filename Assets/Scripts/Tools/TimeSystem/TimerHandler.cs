@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tzipory.Helpers;
 using Sirenix.OdinInspector;
+using Tzipory.Helpers;
 using Tzipory.Systems.Entity;
 using UnityEngine;
 

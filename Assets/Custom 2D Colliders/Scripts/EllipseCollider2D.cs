@@ -26,8 +26,9 @@ You can contact me by email at guyquad27@gmail.com or on Reddit at https://www.r
 
 
 //#if UNITY_EDITOR
-using UnityEngine;
+
 using System.Collections.Generic;
+using UnityEngine;
 
 [AddComponentMenu("Physics 2D/Ellipse Collider 2D")]
 

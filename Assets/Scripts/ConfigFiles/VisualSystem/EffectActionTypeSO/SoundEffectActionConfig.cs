@@ -1,6 +1,5 @@
-﻿using UnityEngine;
-using Sirenix.OdinInspector;
-using Tzipory.Systems.StatusSystem;
+﻿using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Tzipory.Systems.StatusSystem.EffectActionTypeSO

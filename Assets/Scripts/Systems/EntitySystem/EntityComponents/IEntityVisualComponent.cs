@@ -1,7 +1,6 @@
 ﻿using MyNamespaceTzipory.Systems.VisualSystem;
-using Tzipory.Tools.Sound;
-using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
+using Tzipory.Tools.Sound;
 using UnityEngine;
 
 namespace Tzipory.Systems.Entity.EntityComponents

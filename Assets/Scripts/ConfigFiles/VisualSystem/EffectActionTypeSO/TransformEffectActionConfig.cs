@@ -1,5 +1,4 @@
 ﻿using Sirenix.OdinInspector;
-using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.VisualSystem.TransitionSystem;
 using UnityEngine;
 

@@ -8,7 +8,7 @@ namespace Tzipory.ConfigFiles.Item
     public class ItemConfig : ScriptableObject , IConfigFile
     {
         [SerializeField] public string _itemName = "New item";
-        [SerializeField,ReadOnly] public int _objectId = -1;
+        [ReadOnly] public int _objectId;
         [SerializeField,TextArea(4,4),TabGroup("Item data")] private string _itemDescription;
         [SerializeField,PreviewField] private Sprite _itemIcon;
         [SerializeField] private ItemSlot _itemSlot;

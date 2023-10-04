@@ -29,9 +29,9 @@ namespace Tzipory.GamePlayLogic.UI
             IsInitialization = true;
         }
 
-        protected override void Click(PointerEventData eventData)
+        protected override void OnClick(PointerEventData eventData)
         {
-            base.Click(eventData);
+            base.OnClick(eventData);
             OnCharacterRosterSlotClicked?.Invoke(_shamanDataContainer);
         }
     }

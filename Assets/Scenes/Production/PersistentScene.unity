@@ -450,7 +450,9 @@ MonoBehaviour:
       - {fileID: 11400000, guid: 1ae853bb9bae2264d947b505396fb4e8, type: 2}
       - {fileID: 11400000, guid: 75928f8badccef2498c77125ef0f7375, type: 2}
     _itemConfig:
-      _config: []
+      _config:
+      - {fileID: 11400000, guid: 987b231e3dbb0af45a58d4cb8a221806, type: 2}
+      - {fileID: 11400000, guid: dc2af1d1427c5db4586b124166e28aaa, type: 2}
 --- !u!1 &192807189
 GameObject:
   m_ObjectHideFlags: 0

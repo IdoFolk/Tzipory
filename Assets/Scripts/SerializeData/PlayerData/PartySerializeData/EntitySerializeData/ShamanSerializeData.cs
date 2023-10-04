@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SerializeData.ItemSerializeData;
 using Shamans;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles;
@@ -25,7 +26,9 @@ namespace Tzipory.SerializeData
         public int ShamanLevel => _shamanLevel;
         public int ShamanExp => _shamanExp;
         public float DecisionInterval => _decisionInterval;
-        
+
+        public List<int> ItemIDList => _itemIDList;
+
         public override void Init(IConfigFile parameter)
         {
             base.Init(parameter);
@@ -43,6 +46,11 @@ namespace Tzipory.SerializeData
         {
             base.UpdateData(data);
             //need to add dataUpdate for shaman
+        }
+
+        public void AddItemData(ItemContainerSerializeData itemData)
+        {
+            _itemIDList.Add(itemData.ItemId);
         }
     }
 }

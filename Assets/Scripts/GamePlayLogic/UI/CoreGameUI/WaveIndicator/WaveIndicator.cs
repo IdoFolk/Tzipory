@@ -31,7 +31,7 @@ namespace GamePlayLogic.UI.WaveIndicator
 
         private void Awake()
         {
-            OnClick += Click;
+            OnClickEvent += ClickEvent;
         }
 
         public void Init(WaveSpawner waveSpawner,ITimer timer)
@@ -67,7 +67,7 @@ namespace GamePlayLogic.UI.WaveIndicator
             _rotateIndicator.localEulerAngles = newDir;
         }
 
-        private void Click()
+        private void ClickEvent()
         {
             _timer.StopTimer();
             Debug.Log("Click");
@@ -87,7 +87,7 @@ namespace GamePlayLogic.UI.WaveIndicator
 
         private void OnDestroy()
         {
-            OnClick += Click;
+            OnClickEvent += ClickEvent;
         }
 
         private void OnDrawGizmosSelected()

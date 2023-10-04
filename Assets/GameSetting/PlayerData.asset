@@ -18,9 +18,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
   _inventoryConfig:
     _items:
-    - _itemConfig: {fileID: 11400000, guid: dc19cf7108597484d976cafa2d038402, type: 2}
+    - _itemConfig: {fileID: 11400000, guid: 987b231e3dbb0af45a58d4cb8a221806, type: 2}
       _amount: 4
-    - _itemConfig: {fileID: 11400000, guid: f973f7301ff92c84699bf12843c42e4e, type: 2}
+    - _itemConfig: {fileID: 11400000, guid: dc2af1d1427c5db4586b124166e28aaa, type: 2}
       _amount: 5
   _currencyConfig:
     _currency:

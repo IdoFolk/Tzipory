@@ -18,12 +18,12 @@ namespace Systems.UISystem
         {
             _state = _startStat;
             ChangeState(_state);
-            OnClick += ToggleStat;
+            OnClickEvent += ToggleStat;
         }
 
         private void OnDisable()
         {
-            OnClick -= ToggleStat;
+            OnClickEvent -= ToggleStat;
         }
 
         public void ChangeState(ButtonState state)

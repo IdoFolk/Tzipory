@@ -85,6 +85,8 @@ public class ItemDataEditor : OdinMenuEditorWindow
         [Button("Save new item")]
         private void CreateNewAsset()
         {
+            ItemConfig._objectId = ItemConfig.ItemName.GetHashCode();
+            
             switch (ItemConfig.ItemSlot)
             {
                 case ItemSlot.Necklace:
@@ -106,7 +108,6 @@ public class ItemDataEditor : OdinMenuEditorWindow
                     throw new ArgumentOutOfRangeException();
             }
 
-            ItemConfig._objectId = ItemConfig.ItemName.GetHashCode();
             AssetDatabase.SaveAssets();
         }
     }

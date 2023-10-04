@@ -1,5 +1,6 @@
 ﻿using System;
 using GamePlayLogic.Managers;
+using Sirenix.OdinInspector;
 using Tzipory.BaseSystem.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,7 +17,12 @@ namespace  Systems.UISystem
         {
             UIManager.AddObserverObject(this);
         }
-        
+
+        private void OnDestroy()
+        {
+            UIManager.RemoveObserverObject(this);
+        }
+
         public virtual void Show()
         {
             gameObject.SetActive(true);
@@ -30,16 +36,23 @@ namespace  Systems.UISystem
         }
     }
     
-    public abstract class BaseInteractiveUIElement : MonoBehaviour , IUIElement , IPointerEnterHandler,IPointerExitHandler , IPointerClickHandler
+    public abstract class BaseInteractiveUIElement : MonoBehaviour , IUIElement , IPointerEnterHandler,IPointerExitHandler , IPointerClickHandler ,IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
-        public event Action OnClick;
-        public event Action OnDoubleClick;
+        public event Action OnClickEvent;
+        public event Action OnDragEvent;
+        public event Action OnBeginDragEvent;
+        public event Action OnEndDragEvent;
+        public event Action OnDoubleClickEvent;
         public event Action OnEnter;
         public event Action OnExit;
         public Action OnShow { get; }
 
         public Action OnHide { get; }
         public string ElementName => gameObject.name;
+
+        [SerializeField] private bool _enableDrag;
+        
+        [SerializeField,ShowIf("_enableDrag")] private CanvasGroup _canvasGroup;
         
         [SerializeField] private float _doubleClickSpeed = 0.5f;
         
@@ -52,7 +65,12 @@ namespace  Systems.UISystem
         private void Awake()
         {
             UIManager.AddObserverObject(this);
-            gameObject.SetActive(false);
+            //gameObject.SetActive(false);
+        }
+        
+        private void OnDestroy()
+        {
+            UIManager.RemoveObserverObject(this);
         }
 
         public virtual void Show()
@@ -82,47 +100,81 @@ namespace  Systems.UISystem
             }
         }
 
-        public void OnPointerEnter(PointerEventData eventData)=>
-            PointerEnter(eventData);
+        public virtual void OnPointerEnter(PointerEventData eventData)
+        {
+            _isOn = true;
+            OnEnter?.Invoke();
+        }
 
-        public void OnPointerExit(PointerEventData eventData) => 
-            PointerExit(eventData);
+        public virtual void OnPointerExit(PointerEventData eventData)
+        {
+            _isOn = false;
+            OnExit?.Invoke();
+        }
+
+        #region DragLogic
+
+        public virtual void OnBeginDrag(PointerEventData eventData)
+        {
+            if (!_enableDrag)
+                return;
+            
+            _clickNum = 0;
+            _doubleClickTimer = null;
+            
+            _canvasGroup.alpha = 0.6f;
+            _canvasGroup.blocksRaycasts = false;
+            OnBeginDragEvent?.Invoke();
+        }
+
+        public virtual void OnDrag(PointerEventData eventData)
+        {
+            if(!_enableDrag)
+                return;
+            OnDragEvent?.Invoke();
+        }
+
+        public virtual void OnEndDrag(PointerEventData eventData)
+        {
+            if (!_enableDrag)
+                return;
+            
+            _canvasGroup.alpha = 1f;
+            _canvasGroup.blocksRaycasts = true;
+            
+            OnEndDragEvent?.Invoke();
+        }
+
+        #endregion
+        
         public void OnPointerClick(PointerEventData eventData)
         {
             switch (_clickNum)
             {
                 case 0:
-                    Click(eventData);
+                    OnClick(eventData);
                     return;
                 case 1:
-                   DoubleClick(eventData);
+                    OnDoubleClick(eventData);
                     return;
             }
         }
 
-        protected virtual void Click(PointerEventData eventData)
+        protected virtual void OnClick(PointerEventData eventData)
         {
-            OnClick?.Invoke();
+            OnClickEvent?.Invoke();
             _clickNum++;
         }
         
-        protected virtual void DoubleClick(PointerEventData eventData)
+        protected virtual void OnDoubleClick(PointerEventData eventData)
         {
-            OnDoubleClick?.Invoke();
+            OnDoubleClickEvent?.Invoke();
             _doubleClickTimer = null;
             _clickNum = 0;
         }
 
-        protected virtual void PointerEnter(PointerEventData eventData)
+        public virtual void OnDrop(PointerEventData eventData)
         {
-            _isOn = true;
-            OnEnter?.Invoke();
-        }
-        
-        protected virtual void PointerExit(PointerEventData eventData)
-        {
-            _isOn = false;
-            OnExit?.Invoke();
         }
     }
 

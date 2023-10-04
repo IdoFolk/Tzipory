@@ -1,4 +1,5 @@
-﻿using Tzipory.ConfigFiles.Item;
+﻿using Helpers.Consts;
+using Tzipory.ConfigFiles.Item;
 using UnityEngine;
 
 namespace Tzipory.ConfigFiles.Inventory
@@ -23,7 +24,7 @@ namespace Tzipory.ConfigFiles.Inventory
         public ItemConfig ItemConfig => _itemConfig;
 
         public int Amount => _amount;
-        public int ObjectId { get; }
-        public int ConfigTypeId { get; }
+        public int ObjectId => _itemConfig.ObjectId;
+        public int ConfigTypeId => Constant.DataId.ITEM_DATA_ID;
     }
 }

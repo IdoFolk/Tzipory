@@ -4,7 +4,6 @@ using Tzipory.ConfigFiles.Item;
 using Tzipory.Helpers.Consts;
 using UnityEngine;
 
-
 namespace Tzipory.ConfigFiles
 {
     [System.Serializable]
@@ -14,8 +13,6 @@ namespace Tzipory.ConfigFiles
         [SerializeField] private ConfigHandler<EnemyConfig> _enemyConfig;
         [SerializeField] private ConfigHandler<AbilityConfig> _abilityConfig;
         [SerializeField] private ConfigHandler<ItemConfig> _itemConfig;
-        //add item config handler
-        
         
         public IConfigFile GetConfig(int dataId,int objectId)
         {

@@ -16,7 +16,7 @@ namespace Tzipory.Helpers
         public const string TIMER_HANDLER_COLOR = "#00ff00";
         public const string EFFECT_HANDLER_COLOR = "#5b0f00";
         public const string GAME_MANAGER_COLOR = "#ff0000";
-        public const string CAMERA_HANDLER = "##00ffff";
+        public const string CAMERA_HANDLER = "#00ffff";
 
         public static string SetColorToString(string message, Color color)
             => $"<color={ToRGBHex(color)}>{message}</color>";

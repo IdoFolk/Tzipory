@@ -54,7 +54,7 @@ namespace Tzipory.Systems.CameraSystem
             //check if a camera settings config file is attached
             if (_cameraSettings is null)
             {
-                string cameraSettingNullLog = ColorLogHelper.SetColorToString("Camera Settings", Color.cyan);
+                string cameraSettingNullLog = ColorLogHelper.SetColorToString("Camera Settings",ColorLogHelper.CAMERA_HANDLER);
                 throw new Exception($"{cameraSettingNullLog} is null"); //stop program?
             }
             //caching CinemachineTransposer
@@ -70,7 +70,7 @@ namespace Tzipory.Systems.CameraSystem
         {
             //TESTING
             if (Input.GetKeyDown(KeyCode.L)) _enableEdgeScroll = !_enableEdgeScroll;
-            if (Input.GetKeyDown(KeyCode.U)) ResetCamera();
+            if (Input.GetKeyDown(KeyCode.K)) ResetCamera();
             //
             
             //here we control the camera movement and zoom

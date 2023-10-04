@@ -18,10 +18,11 @@ namespace Tzipory.Systems.CameraSystem
         [Range(0,1)]public float YDamping = 0.2f;
         [Header("Camera Zoom")]
         public float ZoomSpeed = 6.5f;
-        public float ZoomAmount = 1f;
-        public float ZoomMin = 2f;
-        public float ZoomMax = 11f;
+        public float ZoomChangeAmount = 1f;
+        public float ZoomMinClamp = 2f;
+        public float ZoomMaxClamp = 11f;
         public float ZoomStartValue = 7f;
+        [Range(0,6)]public float ZoomSpeedChangeValue = 4f;
         [Header("Camera Transition to Event")]
         [Range(0,1)]public float EventTransitionDampingX = 0.4f;
         [Range(0,1)]public float EventTransitionDampingY = 0.4f;

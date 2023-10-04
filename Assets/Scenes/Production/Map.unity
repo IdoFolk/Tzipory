@@ -5394,6 +5394,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1133403119959084057, guid: a21658bf9c933454991365eeebc7d402, type: 3}
+      propertyPath: orthographic size
+      value: 11.27
+      objectReference: {fileID: 0}
     - target: {fileID: 3493536373832206464, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5437,6 +5441,10 @@ PrefabInstance:
     - target: {fileID: 7871334403514214793, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_Name
       value: 'Main Camera '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8209895816503717536, guid: a21658bf9c933454991365eeebc7d402, type: 3}
+      propertyPath: m_Lens.OrthographicSize
+      value: 11.27
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5871,6 +5879,9 @@ MonoBehaviour:
   - {fileID: 1612416426}
   - {fileID: 416246837}
   _unLockAll: 1
+  _enableGizmos: 0
+  _cameraLockedPos: {x: 0, y: -3}
+  _cameraLockedZoom: 11
 --- !u!1 &1132819489
 GameObject:
   m_ObjectHideFlags: 0

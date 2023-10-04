@@ -7,7 +7,7 @@ namespace Tzipory.ConfigFiles.Level
 {
     [CreateAssetMenu(fileName = "NewLevelConfig", menuName = "ScriptableObjects/New level config", order = 0)]
     public class LevelConfig : ScriptableObject
-    {
+    { 
         [SerializeField,PropertyOrder(-2)] private int _levelId;
         [SerializeField,PropertyOrder(-1)] private LevelHandler _level;
         [SerializeField,PropertyOrder(-1)] private float _levelStartDelay = 0.2f;

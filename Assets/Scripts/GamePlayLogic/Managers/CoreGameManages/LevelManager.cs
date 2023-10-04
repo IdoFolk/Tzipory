@@ -6,6 +6,7 @@ using Tzipory.ConfigFiles.Level;
 using Tzipory.Tools.TimeSystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.PlayerData.Party;
+using Tzipory.Systems.CameraSystem;
 using Tzipory.Systems.SceneSystem;
 using Tzipory.Tools.GameSettings;
 using UnityEngine;
@@ -68,7 +69,16 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             }
 
             Instantiate(_levelConfig.Level, _levelParent);
-            GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverWriteCameraStartPosition,_levelConfig.Level.CameraStartPosition);
+            if (GameManager.CameraHandler is null)
+            {
+               var camera = FindObjectOfType<CameraHandler>();//only for testing
+               camera.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverWriteCameraStartPosition,_levelConfig.Level.CameraStartPosition);
+            }
+            else
+            {
+                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverWriteCameraStartPosition,_levelConfig.Level.CameraStartPosition);
+            }
+
             EnemyManager = new EnemyManager(_enemiesParent);
             WaveManager = new WaveManager(_levelConfig, _waveIndicatorParent); //temp!
             CoreTemplete = FindObjectOfType<CoreTemple>(); //temp!!!

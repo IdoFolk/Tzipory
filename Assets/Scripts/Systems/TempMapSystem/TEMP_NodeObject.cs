@@ -50,8 +50,8 @@ public class TEMP_NodeObject : MonoBehaviour
     public void Unlock()
     {
         _spriteRenderer.color = _avilableNodeColor;
-        gameObject.SetActive(true);
-       GameManager.GameData.SetLockNodeStat(_levelConfig.LevelId,true);
+        gameObject.SetActive(true); 
+        GameManager.GameData.SetLockNodeStat(_levelConfig.LevelId,true);
         IsUnlock = true;
     }
 

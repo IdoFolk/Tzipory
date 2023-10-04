@@ -1,11 +1,6 @@
-using System;
-using Tzipory.GameplayLogic.Managers.CoreGameManagers;
-using Systems.DataManagerSystem;
-using Tzipory.ConfigFiles.PartyConfig;
 using Tzipory.SerializeData;
 using Tzipory.Systems.CameraSystem;
 using Tzipory.ConfigFiles.Party;
-using Tzipory.SerializeData;
 using Tzipory.Systems.DataManager;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;

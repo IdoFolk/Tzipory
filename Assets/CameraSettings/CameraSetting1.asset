@@ -18,10 +18,11 @@ MonoBehaviour:
   XDamping: 0.2
   YDamping: 0.2
   ZoomSpeed: 6.5
-  ZoomAmount: 1
-  ZoomMin: 2
-  ZoomMax: 11
+  ZoomChangeAmount: 1
+  ZoomMinClamp: 2
+  ZoomMaxClamp: 11
   ZoomStartValue: 7
+  ZoomSpeedChangeValue: 1.99
   EventTransitionDampingX: 0.8
   EventTransitionDampingY: 0.8
   DefaultEdgePaddingX: 2

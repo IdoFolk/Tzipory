@@ -28,11 +28,12 @@ namespace Tzipory.Systems.CameraSystem
         
         public static CameraSettings CameraSettings { get; set; }
         public Camera MainCamera => _mainCamera; 
+        public readonly Vector3 LockedCameraPosition = new Vector3(0,-3,-80);
+        public readonly int LockedCameraZoom = 9;
         
         private Vector2 _edgeScrollBorder;
         private Vector2 _cameraStartPosition;
         private float _targetOrthographicSize;
-        private readonly Vector3 _lockedCameraPosition = new Vector3(0,-3,-80);
         private CinemachineTransposer _cinemachineTransposer;
         
         private float _currentAspectRatioX;
@@ -46,7 +47,6 @@ namespace Tzipory.Systems.CameraSystem
             //only 1 camera in the scene
             if (Camera.allCameras.Length > 1)
                 Destroy(gameObject);
-            
         }
 
         private void Start()
@@ -63,7 +63,7 @@ namespace Tzipory.Systems.CameraSystem
             _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
             _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
             _edgePaddingY = _cameraSettings.DefaultEdgePaddingY;
-            LockCamera(true);
+            LockCamera(true,LockedCameraPosition,LockedCameraZoom);
         }
 
         private void Update()
@@ -97,12 +97,12 @@ namespace Tzipory.Systems.CameraSystem
                 //Mouse Scroll Zoom 
                 if (Input.mouseScrollDelta.y > 0)
                 {
-                    _targetOrthographicSize -= _cameraSettings.ZoomAmount;
+                    _targetOrthographicSize -= _cameraSettings.ZoomChangeAmount;
                     StartCoroutine(ChangeDampingForZoom(0,0));
                 }
                 if (Input.mouseScrollDelta.y < 0)
                 {
-                    _targetOrthographicSize += _cameraSettings.ZoomAmount;
+                    _targetOrthographicSize += _cameraSettings.ZoomChangeAmount;
                     StartCoroutine(ChangeDampingForZoom(0,0));
                 }
 
@@ -114,11 +114,21 @@ namespace Tzipory.Systems.CameraSystem
                 
                 //setting the input direction to correspond with camera direction
                 var moveDir = cameraTransform.up * inputDir.y + cameraTransform.right * inputDir.x;
-
+                
+                //determine the camera speed according to zoom
+                float fixedCameraSpeed = 1f;
+                float currentZoomPercent = _cinemachineVirtualCamera.m_Lens.OrthographicSize / _zoomPadding; //WIP
+                float zoomSpeedChangeValue = currentZoomPercent * _cameraSettings.ZoomSpeedChangeValue; //WIP
+                if (currentZoomPercent > 0.5) fixedCameraSpeed = _cameraSettings.MoveSpeed + zoomSpeedChangeValue; //WIP
+                else fixedCameraSpeed = _cameraSettings.MoveSpeed - zoomSpeedChangeValue; //WIP
+                
+                
+                
                 //moving the camera
-                cameraPosition += moveDir * (_cameraSettings.MoveSpeed * Time.deltaTime);
+                cameraPosition += moveDir * ( fixedCameraSpeed * Time.deltaTime);
                 var orthographicSizeX = orthographicSize * (_edgePaddingX);
                 var orthographicSizeY = orthographicSize * (_edgePaddingY);
+                Debug.Log($"current camera speed: {fixedCameraSpeed}"); //temp
                 
                 //clamping the camera to the borders of the map
                 cameraPosition.x = Mathf.Clamp(cameraPosition.x, -(_edgeScrollBorder.x - orthographicSizeX),
@@ -130,7 +140,7 @@ namespace Tzipory.Systems.CameraSystem
                 
                 //moving + clamping the camera zoom
                 _targetOrthographicSize =
-                    Mathf.Clamp(_targetOrthographicSize, _cameraSettings.ZoomMin, _zoomPadding);
+                    Mathf.Clamp(_targetOrthographicSize, _cameraSettings.ZoomMinClamp, _zoomPadding);
                 _cinemachineVirtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(
                     _cinemachineVirtualCamera.m_Lens.OrthographicSize, _targetOrthographicSize,
                     Time.deltaTime * _cameraSettings.ZoomSpeed);
@@ -156,21 +166,33 @@ namespace Tzipory.Systems.CameraSystem
             _edgePaddingX = _cameraSettings.DefaultEdgePaddingX / _currentAspectRatioX;
             _edgePaddingY = _cameraSettings.DefaultEdgePaddingY / _currentAspectRatioY;
             _zoomPadding = MAX_ZOOM_DEFINED_BY_BORDERS * _currentAspectRatioX;
-            if (_zoomPadding > _cameraSettings.ZoomMax) _zoomPadding = _cameraSettings.ZoomMax;
+            if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
             
             //resetting the camera position
             _cameraFollowObject.position = new Vector3(_cameraStartPosition.x,_cameraStartPosition.y,-80);
             _cinemachineVirtualCamera.m_Lens.OrthographicSize = _cameraSettings.ZoomStartValue;
             _targetOrthographicSize = _cameraSettings.ZoomStartValue;
         }
-
         public void LockCamera(bool state)
         {
             if (state)
             {
+                _cameraFollowObject.position = new Vector3(LockedCameraPosition.x,LockedCameraPosition.y,-80);
+                _cinemachineVirtualCamera.m_Lens.OrthographicSize = LockedCameraZoom;
                 _enableCameraMovement = false;
-                _cameraFollowObject.position = _lockedCameraPosition;
-                _cinemachineVirtualCamera.m_Lens.OrthographicSize = _cameraSettings.ZoomStartValue;
+            }
+            else
+            {
+                _enableCameraMovement = true;
+            }
+        }
+        public void LockCamera(bool state, Vector2 lockedCameraPos,int lockedCameraZoom)
+        {
+            if (state)
+            {
+                transform.position = new Vector3(lockedCameraPos.x,lockedCameraPos.y,-80);
+                _cinemachineVirtualCamera.m_Lens.OrthographicSize = lockedCameraZoom;
+                _enableCameraMovement = false;
             }
             else
             {

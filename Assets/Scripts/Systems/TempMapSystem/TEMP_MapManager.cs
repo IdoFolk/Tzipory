@@ -1,17 +1,14 @@
-using System;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using UnityEngine;
-using Sirenix.OdinInspector;
 
 public class TEMP_MapManager : MonoBehaviour
 {
     [SerializeField] private TEMP_NodeObject[] _nodeObjects;
     [SerializeField] private bool _unLockAll;
     [Header("Camera Control")]
-    [SerializeField] private Vector2 _cameraBorders;
-    [SerializeField] private bool _overwriteCameraStartPosition;
-    [SerializeField,ShowIf("_overwriteCameraStartPosition")] private Vector2 _cameraStartPosition;
     [SerializeField] private bool _enableGizmos;
+    [SerializeField] private Vector2 _cameraLockedPos;
+    [SerializeField] private int _cameraLockedZoom;
     
     private bool[] _nodeLockState;
     private bool[] _nodeCompletedState;
@@ -50,15 +47,8 @@ public class TEMP_MapManager : MonoBehaviour
 
     private void Start()
     {
-        GameManager.CameraHandler.LockCamera(true);
+       // GameManager.CameraHandler.SetCameraLockedPosition(_cameraLockedPos,_cameraLockedZoom);
+        GameManager.CameraHandler.LockCamera(true,_cameraLockedPos,_cameraLockedZoom);
     }
-
-    private void OnDrawGizmos()
-    {
-        if (_enableGizmos)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(Vector3.zero, _cameraBorders * 2);
-        }
-    }
+    
 }

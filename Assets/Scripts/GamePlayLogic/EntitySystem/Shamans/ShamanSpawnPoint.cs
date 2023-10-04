@@ -1,14 +1,18 @@
+using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using UnityEngine;
 
-public class ShamanSpawnPoint : MonoBehaviour
+namespace Tzipory.GameplayLogic.EntitySystem.Shamans
 {
-    void Awake()
-    { 
-        LevelManager.PartyManager.AddSpawnPoint(transform.position);   
-    }
-
-    private void OnDrawGizmosSelected()
+    public class ShamanSpawnPoint : MonoBehaviour
     {
-        Gizmos.DrawSphere(transform.position, 1);
+        void Awake()
+        {
+            LevelManager.PartyManager.AddSpawnPoint(transform.position);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.DrawSphere(transform.position, 1);
+        }
     }
 }

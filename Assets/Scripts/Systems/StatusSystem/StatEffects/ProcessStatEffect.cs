@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
+using Tzipory.Systems.StatusSystem;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.Systems.StatusSystem
 {
     public class ProcessStatEffect : BaseStatEffect
     {

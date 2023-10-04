@@ -1,10 +1,9 @@
-﻿using Enemes;
-using Sirenix.OdinInspector;
-using Tzipory.EntitySystem.EntityConfigSystem;
+﻿using Sirenix.OdinInspector;
+using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.Tools.Enums;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.LevalSerializeData
+namespace Tzipory.ConfigFiles.Level
 {
     [System.Serializable]
     public class EnemyGroupConfig

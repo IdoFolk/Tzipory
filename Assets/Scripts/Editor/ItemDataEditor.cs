@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using Tzipory.ConfigFiles.Item;
-using Tzipory.EntitySystem;
+using Tzipory.Systems;
 using UnityEditor;
 using UnityEngine;
 

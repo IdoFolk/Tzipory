@@ -1,8 +1,9 @@
 ﻿using Sirenix.OdinInspector;
-using Tzipory.VisualSystem.EffectSequence.EffectType;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Systems.VisualSystem.TransitionSystem;
 using UnityEngine;
 
-namespace Tzipory.VisualSystem.EffectSequence.EffectActionTypeSO
+namespace Tzipory.Systems.StatusSystem.EffectActionTypeSO
 {
     [CreateAssetMenu(fileName = "NewTransformEffectAction", menuName = "ScriptableObjects/VisualSystem/EffectAction/New transform effect action")]
     public class TransformEffectActionConfig : BaseEffectActionConfig

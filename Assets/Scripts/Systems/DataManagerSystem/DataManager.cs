@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
-using Systems.SaveLoadSystem;
 using Tzipory.ConfigFiles;
+using Tzipory.Systems.SaveLoadSystem;
+using Tzipory.ConfigFiles.Party;
 using Tzipory.SerializeData;
 using UnityEngine;
 
-namespace Systems.DataManagerSystem
+namespace Tzipory.Systems.DataManager
 {
     public class DataManager : MonoBehaviour , IDataRequester
     {

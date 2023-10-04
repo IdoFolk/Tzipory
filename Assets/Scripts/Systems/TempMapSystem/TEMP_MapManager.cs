@@ -1,3 +1,4 @@
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using UnityEngine;
 
 public class TEMP_MapManager : MonoBehaviour
@@ -25,9 +26,10 @@ public class TEMP_MapManager : MonoBehaviour
         {
             if (_nodeLockState[i])
             {
-                _nodeObjects[i].Unlock();
-                if (_nodeCompletedState[i])
-                    _nodeObjects[i].Completed();
+                _nodeObjects[i].Init(_nodeCompletedState[i],_nodeLockState[i]);
+                // _nodeObjects[i].Unlock();
+                // if (_nodeCompletedState[i])
+                //     _nodeObjects[i].Completed();
             }
             else
             {

@@ -1,9 +1,9 @@
-﻿using Helpers.Consts;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.Item;
+using Tzipory.Helpers.Consts;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.EntityConfigSystem
+namespace Tzipory.ConfigFiles.EntitySystem
 {
     [CreateAssetMenu(fileName = "New shaman config", menuName = "ScriptableObjects/Entity/New shaman config", order = 0)]
     public class ShamanConfig : BaseUnitEntityConfig

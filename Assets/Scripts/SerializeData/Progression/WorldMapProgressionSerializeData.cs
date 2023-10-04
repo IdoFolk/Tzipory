@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers.Consts;
-using SerializeData.Nodes;
-using Systems.NodeSystem;
 using Tzipory.ConfigFiles;
-using Tzipory.SerializeData;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.NodeSystem;
+using Tzipory.SerializeData.NodeSerializeData;
 
-namespace SerializeData.Progression
+namespace Tzipory.SerializeData.ProgressionSerializeData
 {
     [Serializable]
     public class WorldMapProgressionSerializeData : ISerializeData

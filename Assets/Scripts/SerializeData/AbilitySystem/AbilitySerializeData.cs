@@ -1,12 +1,10 @@
 ﻿using System.Collections.Generic;
-using Helpers.Consts;
-using Tzipory.AbilitiesSystem;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
 using Tzipory.ConfigFiles;
-using Tzipory.SerializeData.StatSystemSerilazeData;
+using Tzipory.Helpers.Consts;
+using Tzipory.SerializeData.StatSystemSerializeData;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.AbilitySystemSerializeData
+namespace Tzipory.SerializeData.AbilitySystem
 {
     [System.Serializable]
     public class AbilitySerializeData : ISerializeData
@@ -63,6 +61,7 @@ namespace Tzipory.SerializeData.AbilitySystemSerializeData
         
 
         public bool IsInitialization { get; }
+
         public void Init(IConfigFile parameter)
         {
             throw new System.NotImplementedException();

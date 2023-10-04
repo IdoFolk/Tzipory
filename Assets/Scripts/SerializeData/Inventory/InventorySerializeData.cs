@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
-using Helpers.Consts;
-using SerializeData.ItemSerializeData;
-using Systems.DataManagerSystem;
 using Tzipory.ConfigFiles;
 using Tzipory.ConfigFiles.Inventory;
-using Tzipory.SerializeData;
+using Tzipory.Helpers.Consts;
+using Tzipory.SerializeData.ItemSerializeData;
 using UnityEngine;
 
-namespace SerializeData.InventorySerializeData
+namespace Tzipory.SerializeData.Inventory
 {
     [System.Serializable]
     public class InventorySerializeData : ISerializeData

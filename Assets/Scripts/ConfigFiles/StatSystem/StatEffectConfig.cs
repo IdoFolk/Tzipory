@@ -1,11 +1,9 @@
-﻿using Helpers.Consts;
-using SerializeData.StatSerializeData;
-using SerializeData.VisualSystemSerializeData;
-using Sirenix.OdinInspector;
-using Tzipory.ConfigFiles;
+﻿using Sirenix.OdinInspector;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.ConfigFiles.StatusSystem
 {
     [System.Serializable]
     public class StatEffectConfig : IConfigFile

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tzipory.EntitySystem
+namespace Tzipory.Systems.Entity
 {
     public interface IEntityComponent
     {

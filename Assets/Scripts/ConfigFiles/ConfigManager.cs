@@ -1,8 +1,9 @@
-﻿using Helpers.Consts;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
+﻿using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.ConfigFiles.Item;
-using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.Helpers.Consts;
 using UnityEngine;
+
 
 namespace Tzipory.ConfigFiles
 {

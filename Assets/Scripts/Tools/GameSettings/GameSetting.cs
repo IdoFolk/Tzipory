@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tools.GameSettings
+namespace Tzipory.Tools.GameSettings
 {
     public class GameSetting : ScriptableObject , ISerializationCallbackReceiver 
     {

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using Tzipory.Systems.StatusSystem;
+using UnityEngine;
 
-namespace Tzipory.VisualSystem.EffectSequence.EffectActionTypeSO
+namespace Tzipory.Systems.StatusSystem.EffectActionTypeSO
 {
     public class SpriteEffectActionConfig : BaseEffectActionConfig
     {

@@ -1,6 +1,8 @@
-﻿using Tzipory.EntitySystem.StatusSystem;
+﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Systems.UISystem;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.GameplayLogic.UIElements
 {
     public class CoreHPUIHnadler : BaseInteractiveCounterUIHandler
     {

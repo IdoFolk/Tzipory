@@ -1,7 +1,7 @@
 ﻿
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.Systems.StatusSystem;
 
-namespace Tzipory.EntitySystem.EntityComponents
+namespace Tzipory.Systems.Entity.EntityComponents
 {
     public interface IEntityStatComponent : IEntityComponent , IStatHolder
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig
+namespace Tzipory.ConfigFiles.EntitySystem.EntityVisual
 {
     [System.Serializable]
     public class BaseUnitEntityVisualConfig

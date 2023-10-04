@@ -1,7 +1,6 @@
-﻿using Tzipory.Systems.FactorySystem;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Systems.FactorySystem
+namespace Tzipory.Systems.FactorySystem
 {
     public abstract class BaseGameObjectFactory<T> : IFactory<T> where T : MonoBehaviour 
     {

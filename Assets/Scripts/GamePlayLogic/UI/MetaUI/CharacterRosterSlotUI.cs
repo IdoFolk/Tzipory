@@ -1,6 +1,6 @@
 using System;
-using Systems.UISystem;
-using Tzipory.SerializeData;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 using UnityEngine.EventSystems;

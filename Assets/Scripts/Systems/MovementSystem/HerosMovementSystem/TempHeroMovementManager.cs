@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections;
-using Tzipory.BaseScripts;
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.Helpers;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace MovementSystem.HerosMovementSystem
+namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
 {
     public class TempHeroMovementManager : MonoSingleton<TempHeroMovementManager>
     {

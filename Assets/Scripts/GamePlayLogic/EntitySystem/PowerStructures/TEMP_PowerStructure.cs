@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
-using Shamans;
-using Systems.TargetingSystem;
-using Tools.Enums;
-using Tzipory.EntitySystem.StatusSystem;
-using Tzipory.EntitySystem;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.GameplayLogic.EntitySystem.Shamans;
+using Tzipory.Tools.Enums;
 using UnityEngine;
+using Tzipory.GameplayLogic.UI.ProximityIndicators;
+using Tzipory.Systems.Entity;
+using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.TargetingSystem;
 
 //TEMP NAME! BAD NAME!
 public class TEMP_PowerStructure : BaseGameEntity , ITargetableReciever 

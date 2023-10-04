@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using Tzipory.ConfigFiles;
+using Tzipory.ConfigFiles.Party;
 using Tzipory.SerializeData;
 
-namespace Systems.DataManagerSystem
+namespace Tzipory.Systems.DataManager
 {
     public interface IDataRequester
     {

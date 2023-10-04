@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
-using Helpers.Consts;
-using Systems.DataManagerSystem;
-using Tools.Enums;
+using Tzipory.Helpers.Consts;
 using Tzipory.ConfigFiles;
-using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.ConfigFiles.EntitySystem;
+using Tzipory.ConfigFiles.Party;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.DataManager;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-namespace Tzipory.SerializeData
+namespace Tzipory.SerializeData.PlayerData.Party
 {
     [System.Serializable]
     public class PartySerializeData : ISerializeData , IInitialization<ShamanConfig[]>

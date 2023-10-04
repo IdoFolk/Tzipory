@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Helpers
+namespace Tzipory.Helpers
 {
     /// <summary>
     /// A class that have reference to colors that represents a system or object log message color

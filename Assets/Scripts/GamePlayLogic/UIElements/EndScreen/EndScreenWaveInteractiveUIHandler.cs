@@ -1,10 +1,11 @@
-﻿using Systems.UISystem;
-using TMPro;
+﻿using TMPro;
+using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+using Tzipory.Systems.UISystem;
 using UnityEngine;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.GameplayLogic.UIElements.EndScreen
 {
-    public class EndScreenWaveInteractiveUIHandler : BaseInteractiveUIElement
+    public class EndScreenWaveInteractiveUIHandler : BaseUIElement
     {
         [SerializeField] private TMP_Text _text;
 

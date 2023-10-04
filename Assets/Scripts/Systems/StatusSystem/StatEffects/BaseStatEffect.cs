@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers.Consts;
+using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.Systems.StatusSystem
 {
     public abstract class BaseStatEffect : IStatEffectProcess ,IInitialization<StatEffectConfig,Stat> , IStatHolder
     {

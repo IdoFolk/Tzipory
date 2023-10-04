@@ -1,5 +1,5 @@
-using Systems.UISystem;
 using TMPro;
+using Tzipory.Systems.UISystem;
 using UnityEngine;
 
 public class InfoText : BaseUIElement

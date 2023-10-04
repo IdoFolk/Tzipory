@@ -1,21 +1,22 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.LevalSerializeData
+namespace Tzipory.ConfigFiles.Level
 {
     [CreateAssetMenu(fileName = "NewLevelConfig", menuName = "ScriptableObjects/New level config", order = 0)]
     public class LevelConfig : ScriptableObject
     {
         [SerializeField,PropertyOrder(-2)] private int _levelId;
-        [SerializeField,PropertyOrder(-1)] private Level _level;
+        [SerializeField,PropertyOrder(-1)] private LevelHandler _level;
         [SerializeField,PropertyOrder(-1)] private float _levelStartDelay = 0.2f;
         [SerializeField,PropertyOrder(-1)] private float _delayBetweenWaves;
         [SerializeField,PropertyOrder(1),ListDrawerSettings(HideAddButton = true,HideRemoveButton = true)] private List<WaveConfig> _waves;
 
         public int LevelId => _levelId;
 
-        public Level Level => _level;
+        public LevelHandler Level => _level;
         
         public List<WaveConfig> Waves => _waves;
 

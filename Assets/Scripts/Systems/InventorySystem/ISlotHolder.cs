@@ -1,6 +1,5 @@
-﻿using Tzipory.Systems.InventorySystem;
-
-namespace Systems.InventorySystem
+﻿
+namespace Tzipory.Systems.InventorySystem
 {
     public interface ISlotHolder
     {

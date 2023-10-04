@@ -1,6 +1,6 @@
-using System;
-using Systems.UISystem;
-using Tzipory.SerializeData;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.UISystem;
 using UnityEngine;
 
 public class CampFireUIHandler : BaseUIElement

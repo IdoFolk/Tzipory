@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using Systems.DataManagerSystem;
-using Systems.UISystem;
 using Tzipory.ConfigFiles.Item;
-using Tzipory.SerializeData;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.DataManager;
+using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 

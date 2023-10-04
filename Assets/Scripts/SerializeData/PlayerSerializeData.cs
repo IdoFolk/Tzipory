@@ -1,15 +1,17 @@
 ﻿using System;
-using Helpers.Consts;
-using SerializeData.InventorySerializeData;
-using SerializeData.Progression;
-using Systems.DataManagerSystem;
-using Tools.Enums;
+using Tzipory.Helpers.Consts;
+using Tzipory.SerializeData.ProgressionSerializeData;
 using Tzipory.ConfigFiles;
-using Tzipory.EntitySystem.EntityConfigSystem;
-using Tzipory.SerializeData;
+using Tzipory.ConfigFiles.EntitySystem;
+using Tzipory.Tools.Enums;
+using Tzipory.ConfigFiles.Party;
+using Tzipory.SerializeData.Inventory;
+using Tzipory.SerializeData.PlayerData.Camp;
+using Tzipory.SerializeData.PlayerData.Party;
+using Tzipory.Systems.DataManager;
 using UnityEngine;
 
-namespace GameplayeLogic.Managers
+namespace Tzipory.SerializeData
 {
     [Serializable]
     public class PlayerSerializeData : ISerializeData, IDisposable

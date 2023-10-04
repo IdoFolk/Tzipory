@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using Helpers.Consts;
-using Tzipory.ConfigFiles;
+using Tzipory.Helpers.Consts;
 using UnityEngine;
 
-namespace Tzipory.Nodes.Config
+namespace Tzipory.ConfigFiles.NodesConfig
 {
     [CreateAssetMenu(fileName = "BaseNode", menuName = "ScriptableObjects/Nodes/BaseNode", order = 1)]
     public abstract class BaseNodeConfig : ScriptableObject , IConfigFile

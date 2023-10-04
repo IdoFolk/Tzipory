@@ -1,5 +1,5 @@
-﻿using Helpers.Consts;
-using Tzipory.ConfigFiles;
+﻿using Tzipory.ConfigFiles;
+using Tzipory.Helpers.Consts;
 using UnityEngine;
 
 namespace DefaultNamespace

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using Systems.UISystem;
-using Tzipory.SerializeData;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 

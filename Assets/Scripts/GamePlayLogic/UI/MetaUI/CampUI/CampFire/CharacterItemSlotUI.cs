@@ -1,7 +1,7 @@
 using System;
-using SerializeData.ItemSerializeData;
-using Systems.UISystem;
 using Tzipory.ConfigFiles.Item;
+using Tzipory.SerializeData.ItemSerializeData;
+using Tzipory.Systems.UISystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;

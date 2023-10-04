@@ -1,10 +1,11 @@
-﻿using Systems.UISystem;
-using TMPro;
+﻿using TMPro;
+using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+using Tzipory.Systems.UISystem;
 using UnityEngine;
 
-namespace GameplayeLogic.UIElements
+namespace Tzipory.GameplayLogic.UIElements.EndScreen
 {
-    public class EndScreenEnemiesKilledInteractiveUIHandler : BaseInteractiveUIElement
+    public class EndScreenEnemiesKilledInteractiveUIHandler : BaseUIElement
     {
         [SerializeField] private TMP_Text _countText;
 

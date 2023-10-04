@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Systems.UISystem
+namespace Tzipory.Systems.UISystem
 {
     public abstract class ChangeColorToggleButton : BaseInteractiveToggelButtonUI
     {

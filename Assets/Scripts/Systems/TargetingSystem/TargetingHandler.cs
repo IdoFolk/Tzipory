@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Sirenix.OdinInspector;
-using Systems.TargetingSystem;
-using Tools.Enums;
-using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Tools.Enums;
+using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.TargetingSystem
+namespace Tzipory.Systems.TargetingSystem
 {
     public class TargetingHandler : MonoBehaviour , ITargetableReciever
     {

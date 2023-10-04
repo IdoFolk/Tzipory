@@ -1,9 +1,9 @@
 ﻿using System;
-using Tzipory.SerializeData;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Systems.CampSystem
+namespace Tzipory.Systems.CampSystem
 {
     public class ShamanPartyMemberSelectUI : MonoBehaviour
     {

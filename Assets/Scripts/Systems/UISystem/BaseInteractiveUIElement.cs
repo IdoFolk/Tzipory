@@ -1,41 +1,12 @@
 ﻿using System;
-using GamePlayLogic.Managers;
 using Sirenix.OdinInspector;
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace  Systems.UISystem
+namespace Tzipory.Systems.UISystem
 {
-    public abstract class BaseUIElement : MonoBehaviour, IUIElement
-    {
-        public string ElementName { get; }
-        public Action OnShow { get; }
-        public Action OnHide { get; }
-        
-        private void Awake()
-        {
-            UIManager.AddObserverObject(this);
-        }
-
-        private void OnDestroy()
-        {
-            UIManager.RemoveObserverObject(this);
-        }
-
-        public virtual void Show()
-        {
-            gameObject.SetActive(true);
-            OnShow?.Invoke();
-        }
-
-        public virtual void Hide()
-        {
-            gameObject.SetActive(false);
-            OnHide?.Invoke();
-        }
-    }
-    
     public abstract class BaseInteractiveUIElement : MonoBehaviour , IUIElement , IPointerEnterHandler,IPointerExitHandler , IPointerClickHandler ,IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
         public event Action OnClickEvent;

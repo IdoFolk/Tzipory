@@ -1,10 +1,10 @@
 ﻿using DefaultNamespace;
-using Helpers.Consts;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.Inventory;
+using Tzipory.Helpers.Consts;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles
+namespace Tzipory.ConfigFiles.Party
 {
     [CreateAssetMenu(fileName = "NewPlayerConfig", menuName = "ScriptableObjects/Config/Player config", order = 0)]
     public class PlayerConfig : ScriptableObject , IConfigFile

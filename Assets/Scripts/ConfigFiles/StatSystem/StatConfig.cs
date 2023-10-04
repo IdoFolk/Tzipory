@@ -1,8 +1,7 @@
-﻿using Helpers.Consts;
-using Tzipory.ConfigFiles;
+﻿using Tzipory.Helpers.Consts;
 using UnityEngine;
 
-namespace SerializeData.StatSerializeData
+namespace Tzipory.ConfigFiles.StatusSystem
 {
     [System.Serializable]
     public class StatConfig : IConfigFile

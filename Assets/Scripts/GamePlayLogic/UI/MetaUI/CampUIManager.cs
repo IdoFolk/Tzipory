@@ -1,4 +1,4 @@
-﻿using Tzipory.SerializeData;
+﻿using Tzipory.SerializeData.PlayerData.Party.Entity;
 using UnityEngine;
 
 namespace Tzipory.GamePlayLogic.UI.MetaUI

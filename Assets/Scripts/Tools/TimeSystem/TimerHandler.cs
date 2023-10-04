@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers;
+using Tzipory.Helpers;
 using Sirenix.OdinInspector;
-using Tzipory.EntitySystem;
+using Tzipory.Systems.Entity;
 using UnityEngine;
 
-namespace Tzipory.BaseSystem.TimeSystem
+namespace Tzipory.Tools.TimeSystem
 {
     [Serializable]
     public class TimerHandler

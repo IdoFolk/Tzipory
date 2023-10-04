@@ -1,9 +1,9 @@
 using System;
-using Tools.Enums;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Tools.Enums;
 using UnityEngine;
 
-namespace Systems.TargetingSystem
+namespace Tzipory.Systems.TargetingSystem
 {
     public class ColliderTargetingArea : MonoBehaviour
     {

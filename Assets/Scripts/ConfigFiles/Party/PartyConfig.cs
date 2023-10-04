@@ -1,8 +1,8 @@
-﻿using Tzipory.EntitySystem.EntityConfigSystem;
+﻿using Tzipory.ConfigFiles.EntitySystem;
+using Tzipory.Helpers.Consts;
 using UnityEngine;
-using Constant = Helpers.Consts.Constant;
 
-namespace Tzipory.ConfigFiles
+namespace Tzipory.ConfigFiles.Party
 {
     [System.Serializable]
     public class PartyConfig : IConfigFile

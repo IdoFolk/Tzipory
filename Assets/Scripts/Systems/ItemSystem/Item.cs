@@ -1,4 +1,4 @@
-﻿namespace Systems.ItemSystem
+﻿namespace Tzipory.Systems.ItemSystem
 {
     public class Item
     {

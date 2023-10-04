@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers.Consts;
-using SerializeData.StatSerializeData;
+using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.Systems.StatusSystem;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.Systems.StatusSystem
 {
     public readonly struct StatModifier
     {

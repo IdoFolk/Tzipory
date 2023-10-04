@@ -1,18 +1,21 @@
 using NavMeshPlus.Components;
 using UnityEngine;
 
-public class NavMeshHelper : MonoBehaviour
+namespace Tzipory.Helpers
 {
-    [SerializeField] private NavMeshSurface _navMeshSurface;
-    
-    void Start()
+    public class NavMeshHelper : MonoBehaviour
     {
-        _navMeshSurface.BuildNavMesh();    
-    }
+        [SerializeField] private NavMeshSurface _navMeshSurface;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        void Start()
+        {
+            _navMeshSurface.BuildNavMesh();
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }

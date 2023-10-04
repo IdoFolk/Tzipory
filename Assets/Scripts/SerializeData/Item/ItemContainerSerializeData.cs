@@ -1,12 +1,11 @@
-﻿using Helpers.Consts;
-using Tzipory.ConfigFiles;
+﻿using Tzipory.ConfigFiles;
 using Tzipory.ConfigFiles.Inventory;
 using Tzipory.ConfigFiles.Item;
-using Tzipory.SerializeData;
+using Tzipory.Helpers.Consts;
 using Tzipory.Systems.InventorySystem;
 using UnityEngine;
 
-namespace SerializeData.ItemSerializeData
+namespace Tzipory.SerializeData.ItemSerializeData
 {
     [System.Serializable]
     public class ItemContainerSerializeData : ISerializeData , ISlotItem

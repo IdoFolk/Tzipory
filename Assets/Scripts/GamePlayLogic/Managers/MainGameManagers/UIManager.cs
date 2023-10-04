@@ -1,9 +1,9 @@
 ﻿using System;
-using Systems.UISystem;
-using Tzipory.Tools.BaseObserver;
+using Tzipory.Systems.UISystem;
+using Tzipory.Tools.BaseClass;
 using Unity.VisualScripting;
 
-namespace GamePlayLogic.Managers
+namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
     public class UIManager : BaseObserver<IUIElement> , IInitializable , IDisposable
     {

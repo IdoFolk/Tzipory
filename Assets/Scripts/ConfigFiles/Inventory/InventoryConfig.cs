@@ -1,5 +1,5 @@
-﻿using Helpers.Consts;
-using Tzipory.ConfigFiles.Item;
+﻿using Tzipory.ConfigFiles.Item;
+using Tzipory.Helpers.Consts;
 using UnityEngine;
 
 namespace Tzipory.ConfigFiles.Inventory

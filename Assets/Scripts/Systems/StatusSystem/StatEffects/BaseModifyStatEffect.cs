@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
-using Helpers.Consts;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.StatusSystem;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.Systems.StatusSystem
 {
     public abstract class BaseModifyStatEffect : BaseStatEffect
     {

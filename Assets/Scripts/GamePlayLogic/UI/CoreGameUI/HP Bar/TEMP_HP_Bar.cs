@@ -1,54 +1,58 @@
 using System.Collections;
 using UnityEngine;
 
-public class TEMP_HP_Bar : MonoBehaviour
+namespace GameplayLogic.UI.HPBar
 {
-    [SerializeField]
-    Transform fillSprite;
-    [SerializeField]
-    float drainDuration;
-
-    float _maxValue;
-    Vector3 _originalScale;
-    //float targetValue;
-    Coroutine _runningSmoothBar;
-  
-    public void Init(float max)
+    public class TEMP_HP_Bar : MonoBehaviour
     {
-        //fillImage.fillAmount = 1f; //just to make sure. later on this will be removed and it will just read the value
-        _originalScale = fillSprite.localScale;
-        fillSprite.localScale = new Vector3(1f, _originalScale.y, _originalScale.z);
+        [SerializeField] Transform fillSprite;
+        [SerializeField] float drainDuration;
 
-        _maxValue = max;
-    }
+        float _maxValue;
 
-    public void SetBarValue(float value)
-    {
-        //fillImage.fillAmount = value/ _maxValue;
-        fillSprite.localScale = new Vector3(value/ _maxValue, _originalScale.y, _originalScale.z);
-    }
+        Vector3 _originalScale;
 
-    public void SetBarValueSmoothly(float value)
-    {
-        //targetValue = value;
-        if(_runningSmoothBar != null)
+        //float targetValue;
+        Coroutine _runningSmoothBar;
+
+        public void Init(float max)
         {
-            StopCoroutine(_runningSmoothBar);
+            //fillImage.fillAmount = 1f; //just to make sure. later on this will be removed and it will just read the value
+            _originalScale = fillSprite.localScale;
+            fillSprite.localScale = new Vector3(1f, _originalScale.y, _originalScale.z);
+
+            _maxValue = max;
         }
-        _runningSmoothBar = StartCoroutine(SmoothBar(drainDuration, value / _maxValue));
-    }
 
-    IEnumerator SmoothBar(float duration, float targetValue)
-    {
-        float t = 0f;
-        float startValue = fillSprite.localScale.x;
-        float currentValue = fillSprite.localScale.x;
-        while(t<=duration)
+        public void SetBarValue(float value)
         {
-            currentValue = Mathf.Lerp(startValue, targetValue, t);
-            t += Time.deltaTime / duration;
-            SetBarValue(currentValue);
-            yield return null;
+            //fillImage.fillAmount = value/ _maxValue;
+            fillSprite.localScale = new Vector3(value / _maxValue, _originalScale.y, _originalScale.z);
+        }
+
+        public void SetBarValueSmoothly(float value)
+        {
+            //targetValue = value;
+            if (_runningSmoothBar != null)
+            {
+                StopCoroutine(_runningSmoothBar);
+            }
+
+            _runningSmoothBar = StartCoroutine(SmoothBar(drainDuration, value / _maxValue));
+        }
+
+        IEnumerator SmoothBar(float duration, float targetValue)
+        {
+            float t = 0f;
+            float startValue = fillSprite.localScale.x;
+            float currentValue = fillSprite.localScale.x;
+            while (t <= duration)
+            {
+                currentValue = Mathf.Lerp(startValue, targetValue, t);
+                t += Time.deltaTime / duration;
+                SetBarValue(currentValue);
+                yield return null;
+            }
         }
     }
 }

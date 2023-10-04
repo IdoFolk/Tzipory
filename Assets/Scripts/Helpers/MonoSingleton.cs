@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tzipory.BaseScripts
+namespace Tzipory.Helpers
 {
     public abstract class MonoSingleton<T> : MonoBehaviour where T : Component
     {

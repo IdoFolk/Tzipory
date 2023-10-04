@@ -28,7 +28,6 @@ You can contact me by email at guyquad27@gmail.com or on Reddit at https://www.r
 #if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
-using System.Collections;
 
 [CustomEditor (typeof(StarCollider2D))]
 public class StarCollider_Editor : Editor {

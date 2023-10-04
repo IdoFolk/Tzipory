@@ -1,4 +1,4 @@
-﻿using Helpers.Consts;
+﻿using Tzipory.Helpers.Consts;
 using UnityEngine;
 
 namespace Tzipory.ConfigFiles

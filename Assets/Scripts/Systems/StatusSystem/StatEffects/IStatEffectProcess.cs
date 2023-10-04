@@ -1,6 +1,7 @@
 ﻿using System;
+using Tzipory.Systems.StatusSystem;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.Systems.StatusSystem
 {
     public interface IStatEffectProcess : IDisposable
     {

@@ -1,8 +1,8 @@
-﻿using Tzipory.EntitySystem;
-using Tzipory.EntitySystem.EntityComponents;
+﻿using Tzipory.Systems.Entity;
+using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
 
-namespace Tzipory.AbilitiesSystem.AbilityEntity
+namespace Tzipory.Systems.AbilitySystem.AbilityEntity
 {
     public abstract class BaseAbilityEntity : BaseGameEntity
     {

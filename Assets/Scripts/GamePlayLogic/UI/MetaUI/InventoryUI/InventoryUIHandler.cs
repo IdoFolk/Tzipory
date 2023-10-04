@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using SerializeData.InventorySerializeData;
-using Systems.UISystem;
+using Tzipory.SerializeData.Inventory;
+using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 

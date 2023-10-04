@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Tzipory.Systems.WaveSystem;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Tzipory.SerializeData.LevalSerializeData
+namespace Tzipory.ConfigFiles.Level
 {
     [System.Serializable]
     public class WaveConfig

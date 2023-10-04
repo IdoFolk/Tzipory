@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using Tzipory.SerializeData;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
 
-namespace Systems.SaveLoadSystem
+namespace Tzipory.Systems.SaveLoadSystem
 {
     public class SaveAndLoadManager
     {

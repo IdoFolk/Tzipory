@@ -1,4 +1,4 @@
-﻿using Tzipory.SerializeData;
+﻿using Tzipory.SerializeData.PlayerData.Party.Entity;
 
 namespace Tzipory.Systems.InitiailizeSystem
 {

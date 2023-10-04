@@ -1,3 +1,4 @@
+using System;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Systems.DataManagerSystem;
 using Tzipory.ConfigFiles.PartyConfig;
@@ -59,6 +60,12 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
         {
             if (_sceneHandler == null)
                 _sceneHandler = FindObjectOfType<SceneHandler>();
+        }
+
+        private void OnMouseDown()
+        {
+            //lock the cursor inside the screen
+            Screen.lockCursor = true;
         }
 
         public void Quit()

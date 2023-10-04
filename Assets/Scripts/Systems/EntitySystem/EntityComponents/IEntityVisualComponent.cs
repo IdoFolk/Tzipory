@@ -4,7 +4,7 @@ using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.EntityComponents
+namespace Tzipory.Systems.Entity.EntityComponents
 {
     public interface IEntityVisualComponent : IEntityComponent
     {

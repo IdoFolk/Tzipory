@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Tools.Enums;
-using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 

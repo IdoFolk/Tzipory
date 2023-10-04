@@ -3,7 +3,7 @@ using Tzipory.Tools;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem
+namespace Tzipory.Systems.Entity
 {
     public abstract class BaseGameEntity : MonoBehaviour , IEntityComponent
     {

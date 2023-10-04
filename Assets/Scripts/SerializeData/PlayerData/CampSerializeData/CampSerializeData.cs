@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles;
 using Tzipory.GameplayLogic.Managers.MapManagers;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
+namespace Tzipory.SerializeData.PlayerData.Camp
 {
     [Serializable]
     public class CampSerializeData : ISerializeData, IUpdateData<CampManager>

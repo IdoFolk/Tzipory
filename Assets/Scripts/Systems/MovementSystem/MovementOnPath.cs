@@ -1,8 +1,9 @@
 using UnityEngine;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.EntityComponents;
 using PathCreation;
 using Tzipory.GameplayLogic.EntitySystem.Enemies;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+using Tzipory.Systems.Entity.EntityComponents;
 
 namespace Tzipory.Systems.MovementSystem
 {

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Tzipory.EntitySystem;
+using Tzipory.Systems.Entity;
 using UnityEngine;
 
 public class Silhouetter : MonoBehaviour

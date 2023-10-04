@@ -1,8 +1,8 @@
 ﻿using TMPro;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+using Tzipory.SerializeData.PlayerData.Camp;
 using UnityEngine;
 
-namespace Systems.CampSystem
+namespace Tzipory.Systems.CampSystem
 {
     public class CampBuildingObject : MonoBehaviour
     {

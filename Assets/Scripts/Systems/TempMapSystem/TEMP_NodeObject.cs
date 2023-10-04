@@ -1,5 +1,5 @@
+using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.ConfigFiles.Level;
-using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
 using Tzipory.Helpers;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.SceneSystem;

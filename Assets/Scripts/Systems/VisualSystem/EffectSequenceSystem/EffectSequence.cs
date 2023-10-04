@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Tzipory.Helpers;
 using Tzipory.Tools.TimeSystem;
-using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.GamePlayLogic.ObjectPools;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.PoolSystem;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;

@@ -4,7 +4,7 @@ using UnityEngine;
 using PathCreation;
 using Tzipory.ConfigFiles.Level;
 using Tzipory.GamePlayLogic.ObjectPools;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.MovementSystem;
 using Tzipory.Tools.Enums;
 using Tzipory.Tools.Interface;

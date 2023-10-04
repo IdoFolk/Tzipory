@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using Tzipory.Helpers.Consts;
 using Sirenix.OdinInspector;
-using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
-using Tzipory.ConfigFiles.PartyConfig;
-using Tzipory.EntitySystem;
+using Tzipory.ConfigFiles;
+using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.ConfigFiles.EntitySystem;
 using UnityEngine;
-using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
-using Tzipory.SerializeData.AbilitySystemSerializeData;
+using Tzipory.SerializeData.AbilitySystem;
 using Tzipory.SerializeData.StatSystemSerializeData;
+using Tzipory.Systems.Entity;
 
-namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
+namespace Tzipory.SerializeData.PlayerData.Party.Entity
 {
     [Serializable]
     public class UnitEntitySerializeData : ISerializeData , IUpdateData<BaseUnitEntity>

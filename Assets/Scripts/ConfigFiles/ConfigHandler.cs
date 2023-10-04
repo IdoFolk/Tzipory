@@ -1,7 +1,7 @@
 ﻿using Tzipory.Helpers.Consts;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.PartyConfig
+namespace Tzipory.ConfigFiles
 {
     [System.Serializable]
     public class ConfigHandler<T>  where T : IConfigFile
@@ -14,7 +14,7 @@ namespace Tzipory.ConfigFiles.PartyConfig
         {
             foreach (var configFile in _config) 
             {
-                if (configFile.ConfigObjectId == id)
+                if (configFile.ObjectId == id)
                     return configFile;
             }
             

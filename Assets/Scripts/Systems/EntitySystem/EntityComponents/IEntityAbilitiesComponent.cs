@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Tzipory.Systems.AbilitySystem;
 
-namespace Tzipory.EntitySystem.EntityComponents
+namespace Tzipory.Systems.Entity.EntityComponents
 {
     public interface IEntityAbilitiesComponent
     {

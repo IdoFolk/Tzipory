@@ -1,4 +1,4 @@
-﻿namespace Tzipory.EntitySystem
+﻿namespace Tzipory.Systems
 {
     public static class InstanceIDGenerator
     {

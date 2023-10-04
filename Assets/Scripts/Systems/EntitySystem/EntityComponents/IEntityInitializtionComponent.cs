@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Tzipory.EntitySystem.EntityComponents
+namespace Tzipory.Systems.Entity.EntityComponents
 {
     public interface IEntityInitializationComponent<in T> where T : ScriptableObject
     {

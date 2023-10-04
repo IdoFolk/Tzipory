@@ -1,4 +1,4 @@
-using Tzipory.ConfigFiles.PartyConfig.NodesConfig;
+using Tzipory.ConfigFiles.NodesConfig;
 using UnityEngine;
 
 namespace Tzipory.Systems.NodeSystem

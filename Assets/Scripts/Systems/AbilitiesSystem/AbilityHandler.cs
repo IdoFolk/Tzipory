@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
 
 namespace Tzipory.Systems.AbilitySystem

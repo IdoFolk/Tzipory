@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
+using Tzipory.ConfigFiles;
 using Tzipory.Systems.SaveLoadSystem;
-using Tzipory.ConfigFiles.PartyConfig;
+using Tzipory.ConfigFiles.Party;
 using Tzipory.SerializeData;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using UnityEngine;
 
-namespace Systems.DataManagerSystem
+namespace Tzipory.Systems.DataManager
 {
     public class DataManager : MonoBehaviour , IDataRequester
     {
@@ -26,13 +26,14 @@ namespace Systems.DataManagerSystem
         }
 
 
-        public T GetData<T>(IConfigFile configFile) where T : class, ISerializeData , new()
+        public T GetSerializeData<T>(IConfigFile configFile) where T : class, ISerializeData , new()
         {
             var output = new T();
             
-            if (_saveAndLoadManager.GetSaveData(out T data))
+            if (_saveAndLoadManager.GetSaveData(out T serializeData))
             {
                 //return save data
+                return serializeData;
             }
 
             if (!output.IsInitialization)
@@ -41,13 +42,14 @@ namespace Systems.DataManagerSystem
             return output;
         }
 
-        public T GetData<T>(int objectId) where T : class, ISerializeData, new()
+        public T GetSerializeData<T>(int objectId) where T : class, ISerializeData, new()
         {
             var output = new T();
             
-            if (_saveAndLoadManager.GetSaveData(out T data))
+            if (_saveAndLoadManager.GetSaveData(out T serializeData))
             {
                 //return save data
+                return serializeData;
             }
             
             var configFile = _configManager.GetConfig(output.SerializeTypeId,objectId);
@@ -58,12 +60,21 @@ namespace Systems.DataManagerSystem
             return output;
         }
 
-        public IEnumerable<T> GetDatas<T>(IConfigFile configFile) where T : class, ISerializeData, new()
+        public T GetConfigData<T>(int objectId) where T : class, IConfigFile, new()
+        {
+            var output = new T();
+            
+            var configFile = _configManager.GetConfig(output.ConfigTypeId,objectId);
+            
+            return configFile as T;
+        }
+
+        public IEnumerable<T> GetSerializeDatas<T>(IConfigFile configFile) where T : class, ISerializeData, new()
         {
             throw new System.NotImplementedException();
         }
 
-        public IEnumerable<T> GetDatas<T>(int objectId) where T : class, ISerializeData, new()
+        public IEnumerable<T> GetSerializeDatas<T>(int objectId) where T : class, ISerializeData, new()
         {
             var output = new List<T>();
             

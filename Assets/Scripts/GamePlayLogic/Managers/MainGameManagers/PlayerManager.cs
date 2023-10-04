@@ -8,6 +8,8 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
         private PlayerSerializeData  _playerSerializeData;
 
         public PlayerSerializeData PlayerSerializeData => _playerSerializeData;
+        
+        //TODO : add Inventory manager 
 
         public PlayerManager(PlayerSerializeData playerSerializeData)
         {

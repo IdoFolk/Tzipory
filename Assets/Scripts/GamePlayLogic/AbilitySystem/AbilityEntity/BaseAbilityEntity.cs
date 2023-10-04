@@ -1,5 +1,5 @@
-﻿using Tzipory.EntitySystem;
-using Tzipory.EntitySystem.EntityComponents;
+﻿using Tzipory.Systems.Entity;
+using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
 
 namespace Tzipory.Systems.AbilitySystem.AbilityEntity

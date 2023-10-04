@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using Tzipory.Systems.WaveSystem;
 using UnityEngine;
 
-namespace Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData
+namespace Tzipory.SerializeData.PlayerData.Party.Entity
 {
     public class LevelHandler : MonoBehaviour
     {

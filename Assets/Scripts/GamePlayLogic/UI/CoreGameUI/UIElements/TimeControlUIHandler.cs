@@ -1,14 +1,20 @@
 ﻿using System.Collections.Generic;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.UIElements
 {
-    public class TimeControlInteractiveUIHandler : BaseInteractiveUIElement
+    public class TimeControlUIHandler : BaseUIElement
     {
         [SerializeField] private List<TimeButtonsUI> _timeButtons;
         
         private TimeButtonsUI  _currentButton;
+        
+        protected override void Awake()
+        {
+            UIManager.AddObserverObject(this);
+        }
 
         public override void Show()
         {

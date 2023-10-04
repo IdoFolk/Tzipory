@@ -9,15 +9,10 @@ namespace Tzipory.Systems.UISystem
         public string ElementName { get; }
         public Action OnShow { get; }
         public Action OnHide { get; }
-        
-        private void Awake()
-        {
-            UIManager.AddObserverObject(this);
-        }
 
-        private void OnDestroy()
+        protected virtual void Awake()
         {
-            UIManager.RemoveObserverObject(this);
+            Show();
         }
 
         public virtual void Show()

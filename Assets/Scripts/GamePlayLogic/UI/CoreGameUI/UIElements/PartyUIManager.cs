@@ -1,13 +1,19 @@
 ﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.UIElements
 {
-    public class PartyInteractiveUIManager : BaseInteractiveUIElement
+    public class PartyUIManager : BaseInteractiveUIElement
     {
         [SerializeField] private RectTransform _heroContainer;
         [SerializeField] private ShamanInteractiveUIHandler _shamanInteractiveUIHanlder;
+        
+        protected override void Awake()
+        {
+            UIManager.AddObserverObject(this);
+        }
         
         public override void Show()
         {

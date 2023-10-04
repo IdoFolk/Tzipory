@@ -1,6 +1,5 @@
 ﻿using System;
 using Sirenix.OdinInspector;
-using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -33,15 +32,8 @@ namespace Tzipory.Systems.UISystem
 
         private ITimer _doubleClickTimer;
 
-        private void Awake()
+        protected virtual void Awake()
         {
-            UIManager.AddObserverObject(this);
-            //gameObject.SetActive(false);
-        }
-        
-        private void OnDestroy()
-        {
-            UIManager.RemoveObserverObject(this);
         }
 
         public virtual void Show()

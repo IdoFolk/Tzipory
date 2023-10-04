@@ -26,3 +26,7 @@ MonoBehaviour:
     _currency:
     - _material: 3
       _amount: 54
+    - _material: 108
+      _amount: 0
+    - _material: 0
+      _amount: 0

@@ -1,11 +1,17 @@
 ﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.UISystem;
 
 namespace Tzipory.GameplayLogic.UIElements
 {
-    public class CoreHPUIHnadler : BaseInteractiveCounterUIHandler
+    public class CoreHPUIHnadler : BaseCounterUIHandler
     {
+        protected override void Awake()
+        {
+            UIManager.AddObserverObject(this);
+        }
+
         public override void Show()
         {
             LevelManager.CoreTemplete.Health.OnValueChangedData += UpdateCoreUI;

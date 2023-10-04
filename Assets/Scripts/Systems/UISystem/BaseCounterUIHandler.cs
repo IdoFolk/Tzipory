@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Tzipory.Systems.UISystem
 {
-    public abstract class BaseInteractiveCounterUIHandler : BaseInteractiveUIElement
+    public abstract class BaseCounterUIHandler : BaseUIElement
     {
         [SerializeField] protected TMP_Text _currentCount;
         [SerializeField] protected TMP_Text _maxCount;

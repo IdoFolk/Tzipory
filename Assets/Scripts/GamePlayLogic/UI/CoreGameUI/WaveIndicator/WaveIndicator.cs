@@ -30,8 +30,9 @@ namespace Tzipory.GameplayLogic.UI.WaveIndicator
         
         public bool IsInitialization { get; private set; }
 
-        private void Awake()
+        protected override void Awake()
         {
+            UIManager.AddObserverObject(this);
             OnClickEvent += ClickEvent;
         }
 

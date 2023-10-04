@@ -1,4 +1,5 @@
 ﻿using Tzipory.GameplayLogic.EntitySystem.Shamans;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
@@ -12,6 +13,11 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private Slider _healthBar;
         [SerializeField] private Image _splash;
         private Shaman _shaman;
+        
+        protected override void Awake()
+        {
+            UIManager.AddObserverObject(this);
+        }
         
         public void Init(Shaman shaman)
         {

@@ -68,11 +68,6 @@ namespace Tzipory.Systems.CameraSystem
 
         private void Update()
         {
-            //TESTING
-            if (Input.GetKeyDown(KeyCode.L)) _enableEdgeScroll = !_enableEdgeScroll;
-            if (Input.GetKeyDown(KeyCode.K)) ResetCamera();
-            //
-            
             //here we control the camera movement and zoom
 
             if (_enableCameraMovement) //option to disable camera movement and zoom
@@ -97,12 +92,12 @@ namespace Tzipory.Systems.CameraSystem
                 //Mouse Scroll Zoom 
                 if (Input.mouseScrollDelta.y > 0)
                 {
-                    _targetOrthographicSize -= _cameraSettings.ZoomChangeAmount;
+                    _targetOrthographicSize -= _cameraSettings.ZoomChangeValue;
                     StartCoroutine(ChangeDampingForZoom(0,0));
                 }
                 if (Input.mouseScrollDelta.y < 0)
                 {
-                    _targetOrthographicSize += _cameraSettings.ZoomChangeAmount;
+                    _targetOrthographicSize += _cameraSettings.ZoomChangeValue;
                     StartCoroutine(ChangeDampingForZoom(0,0));
                 }
 
@@ -115,20 +110,17 @@ namespace Tzipory.Systems.CameraSystem
                 //setting the input direction to correspond with camera direction
                 var moveDir = cameraTransform.up * inputDir.y + cameraTransform.right * inputDir.x;
                 
-                //determine the camera speed according to zoom
-                float fixedCameraSpeed = 1f;
-                float currentZoomPercent = _cinemachineVirtualCamera.m_Lens.OrthographicSize / _zoomPadding; //WIP
-                float zoomSpeedChangeValue = currentZoomPercent * _cameraSettings.ZoomSpeedChangeValue; //WIP
-                if (currentZoomPercent > 0.5) fixedCameraSpeed = _cameraSettings.MoveSpeed + zoomSpeedChangeValue; //WIP
-                else fixedCameraSpeed = _cameraSettings.MoveSpeed - zoomSpeedChangeValue; //WIP
-                
-                
+                //determine the camera speed according to the camera zoom
+                float currentZoomNormalizedValue =
+                    (_cinemachineVirtualCamera.m_Lens.OrthographicSize - _cameraSettings.ZoomMinClamp) /
+                    (_zoomPadding - _cameraSettings.ZoomMinClamp); 
+                float zoomSpeedChangeValue = currentZoomNormalizedValue * _cameraSettings.CameraSpeedZoomChangeValue; 
+                float fixedCameraSpeed = _cameraSettings.MoveSpeedMinimum + zoomSpeedChangeValue; 
                 
                 //moving the camera
                 cameraPosition += moveDir * ( fixedCameraSpeed * Time.deltaTime);
                 var orthographicSizeX = orthographicSize * (_edgePaddingX);
                 var orthographicSizeY = orthographicSize * (_edgePaddingY);
-                Debug.Log($"current camera speed: {fixedCameraSpeed}"); //temp
                 
                 //clamping the camera to the borders of the map
                 cameraPosition.x = Mathf.Clamp(cameraPosition.x, -(_edgeScrollBorder.x - orthographicSizeX),

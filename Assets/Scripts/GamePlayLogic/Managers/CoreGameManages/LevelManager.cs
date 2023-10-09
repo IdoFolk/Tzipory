@@ -72,13 +72,12 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             if (GameManager.CameraHandler is null)
             {
                var camera = FindObjectOfType<CameraHandler>();//only for testing
-               camera.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverWriteCameraStartPosition,_levelConfig.Level.CameraStartPosition);
+               camera.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
             }
             else
             {
-                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverWriteCameraStartPosition,_levelConfig.Level.CameraStartPosition);
+                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
             }
-
             EnemyManager = new EnemyManager(_enemiesParent);
             WaveManager = new WaveManager(_levelConfig, _waveIndicatorParent); //temp!
             CoreTemplete = FindObjectOfType<CoreTemple>(); //temp!!!
@@ -87,8 +86,8 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         private void Start()
         {
+            GameManager.CameraHandler.UnlockCamera();
             GameManager.CameraHandler.ResetCamera();
-            GameManager.CameraHandler.LockCamera(false);
             WaveManager.StartLevel();
             UIManager.Initialize();
             GAME_TIME.SetTimeStep(1);

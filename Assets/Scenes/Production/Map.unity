@@ -5880,7 +5880,7 @@ MonoBehaviour:
   - {fileID: 416246837}
   _unLockAll: 1
   _enableGizmos: 0
-  _cameraLockedPos: {x: 0, y: -3}
+  _cameraLockedPos: {x: 0, y: -5}
   _cameraLockedZoom: 11
 --- !u!1 &1132819489
 GameObject:

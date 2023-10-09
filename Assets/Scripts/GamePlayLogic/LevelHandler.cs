@@ -16,8 +16,9 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         public Vector2 CameraBorder => _cameraBorders;
 
         public Vector2 CameraStartPosition => _cameraStartPosition;
+        public float CameraStartZoom => _cameraStartZoom;
 
-        public bool OverWriteCameraStartPosition => _overWriteCameraStartPosition;
+        public bool OverrideCameraStartPositionAndZoom => _overrideCameraStartPositionAndZoom;
 
         /// <summary>
         /// The renderer for the map/floor
@@ -26,8 +27,9 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         [SerializeField] private Vector3 _fakeForward;
         [Header("Camera setting")]
         [SerializeField] private Vector2 _cameraBorders;
-        [SerializeField] private bool _overWriteCameraStartPosition;
-        [SerializeField,ShowIf("_overWriteCameraStartPosition")] private Vector2 _cameraStartPosition;
+        [SerializeField] private bool _overrideCameraStartPositionAndZoom;
+        [SerializeField,ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private Vector2 _cameraStartPosition;
+        [SerializeField,ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private float _cameraStartZoom;
         [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         [SerializeField] private bool _enableGizmos = true;
         private static List<WaveSpawner> _waveSpawners;

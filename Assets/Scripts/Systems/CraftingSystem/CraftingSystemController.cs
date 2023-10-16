@@ -6,30 +6,16 @@ using UnityEngine;
 public class CraftingSystemController : MonoBehaviour
 {
     [SerializeField] CraftingSystemConfig config;
+
     /// <summary>
-    /// use this method to get the recipe of an item and display the currencies needed
-    /// </summary>
-    /// <param name="item"></param>
-    /// <returns></returns>
-    public RecipeConfig GetRecipeBasedOnItem(ItemConfig item)//Get recipe based on an item
-    {
-        foreach (var recipe in config.Recipes)
-        {
-            if (recipe.ResultingItem == item)
-                return recipe;
-        }
-        Debug.Log("No Recipe Results in this Item");
-        return null;
-    }
-    /// <summary>
-    /// use these to check if you can craft an item
+    /// use these methods to check if you can craft an item
     /// </summary>
     /// <param name="_userCurrencies"></param>
     /// <param name="item"></param>
     /// <returns></returns>
     public bool CanPlayerCraftItem(CurrencyContainer[] _userCurrencies, ItemConfig item)
     {
-        var recipe = GetRecipeBasedOnItem(item);
+        var recipe = item.Recipe;
         bool isRecipeViable = true;
 
         for (int i = 0; i < recipe.Currencies.Length; i++)
@@ -53,7 +39,7 @@ public class CraftingSystemController : MonoBehaviour
 
         }
         return isRecipeViable;
-       
+
     }
     public bool CanPlayerCraftItem(CurrencyContainer[] _userCurrencies, RecipeConfig _recipe)//overload
     {
@@ -86,14 +72,15 @@ public class CraftingSystemController : MonoBehaviour
 
 
     /// <summary>
-    /// you can safely ignore this method unless you want to send currencies and check with all recipes which recipe it correlates and get its item 
+    /// you can safely INGORE this method unless you want to send currencies and check with all recipes which recipe it correlates and get its item 
     /// </summary>
     /// <param name="_userCurrencies"></param>
     /// <returns></returns>
-    public ItemConfig CompareMaterialsAndGetItem(CurrencyContainer[] _userCurrencies)//compare currencies to all recipes // deprecated
+    public ItemConfig CompareMaterialsAndGetItem(CurrencyContainer[] _userCurrencies)//compare currencies to all items recipes // deprecated
     {
-        foreach (var recipe in config.Recipes)
+        foreach (var item in config.Items)
         {
+            var recipe = item.Recipe;
             bool isRecipeViable = true;
 
             for (int i = 0; i < recipe.Currencies.Length; i++)
@@ -107,28 +94,81 @@ public class CraftingSystemController : MonoBehaviour
                         break;//break foreach
                         //same currency found with sufficient amount
                     }
-                   
+
                 }
-                if(!currencyFound)
+                if (!currencyFound)
                 {
                     isRecipeViable = false;
                     break;//break for
                 }
-               
+
             }
             if (isRecipeViable)
             {
-                return recipe.ResultingItem;
+                return item;
             }
 
         }
         return null;
     }
 
-  
+
     /// <summary>
     /// Debugging from here can be deleted later
+    /// context menu is used by right clicking the script name on the gameobject (component name) can be used outside play mode
     /// </summary>
+    /// 
+
+
+
+    [ContextMenu("CheckIfCanCraftItemOneForDebuggingShouldResultFalse")]
+
+    public void CheckIfCanCraftItemOneForDebuggingShouldResultFalse()
+    {
+
+
+        CurrencyContainer[] UserTestInventory = new CurrencyContainer[2]//wrong amount
+       {
+            new CurrencyContainer(Constant.Materials.Bones,2),
+            new CurrencyContainer(Constant.Materials.Honey,3)
+       };// user inventory
+
+
+        bool canCraft = CanPlayerCraftItem(UserTestInventory, config.Items[0]);
+        if (canCraft)
+        {
+            Debug.Log(" True : Can Craft");
+        }
+        else
+        {
+            Debug.Log(" False : Canoot Craft");
+
+        }
+    }
+    [ContextMenu("CheckIfCanCraftItemOneForDebuggingShouldResultTrue")]
+
+    public void CheckIfCanCraftItemOneForDebuggingShouldResultTrue()
+    {
+
+
+        CurrencyContainer[] UserTestInventory = new CurrencyContainer[2]//correct amount
+       {
+            new CurrencyContainer(Constant.Materials.Honey,4),
+            new CurrencyContainer(Constant.Materials.Bones,2)
+       };// user inventory
+
+
+        bool canCraft = CanPlayerCraftItem(UserTestInventory, config.Items[0]);
+        if (canCraft)
+        {
+            Debug.Log(" True : Can Craft");
+        }
+        else
+        {
+            Debug.Log(" False : Canoot Craft");
+
+        }
+    }
     [ContextMenu("TestGettingitemConfigResultNull")]
     public void TestGettingitemConfigResultNull()
     {

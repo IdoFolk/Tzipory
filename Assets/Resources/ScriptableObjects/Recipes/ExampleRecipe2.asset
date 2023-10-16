@@ -17,4 +17,3 @@ MonoBehaviour:
     _amount: 3
   - _material: 103
     _amount: 3
-  _resultingItem: {fileID: 11400000, guid: dc2af1d1427c5db4586b124166e28aaa, type: 2}

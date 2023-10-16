@@ -8,8 +8,6 @@ using UnityEngine;
 public class RecipeConfig : ScriptableObject
 {
     [SerializeField] CurrencyContainer[] _currencies;
-    [SerializeField] ItemConfig _resultingItem;
 
     public CurrencyContainer[] Currencies { get => _currencies; }
-    public ItemConfig ResultingItem { get => _resultingItem;}
 }

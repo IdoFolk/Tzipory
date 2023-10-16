@@ -15,7 +15,6 @@ namespace Tzipory.ConfigFiles.Item
         [SerializeField] private bool _isStackable = true;
         [Space]
         [SerializeField] private StatEffectConfig[] _statEffectConfigs;
-        
         public string ItemDescription => _itemDescription;
         public StatEffectConfig[] StatEffectConfigs => _statEffectConfigs;
         public bool IsStackable => _isStackable;

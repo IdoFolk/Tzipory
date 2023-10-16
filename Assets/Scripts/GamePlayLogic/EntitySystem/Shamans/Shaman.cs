@@ -6,6 +6,7 @@ using Tzipory.Helpers;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem.EntityVisual;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.AnimationSystem;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
@@ -81,6 +82,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             
             AbilityHandler.CastAbility(TargetingHandler.AvailableTargets);
             
+            
             bool canAttack = false;
 
             if (AbilityHandler.IsCasting)//temp!!!
@@ -103,10 +105,13 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             if (CritChance.CurrentValue > Random.Range(0, 100))
             {
                 EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
+                AnimationHandler.TEMP_SetAnimation(AnimationStates.CritAttack);
                 _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true);
+                
                 return;
             }
             EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
+            AnimationHandler.TEMP_SetAnimation(AnimationStates.BasicAttack);
             _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue,false);
         }
 

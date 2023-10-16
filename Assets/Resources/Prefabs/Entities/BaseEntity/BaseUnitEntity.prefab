@@ -95,6 +95,14 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 0.64
       objectReference: {fileID: 0}
+    - target: {fileID: 6006242283429286486, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
+      propertyPath: m_Name
+      value: SpineSkeleton
+      objectReference: {fileID: 0}
+    - target: {fileID: 6006242283429286486, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6489605381146350932, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
       propertyPath: m_Name
       value: UnitEntityVisual
@@ -109,13 +117,45 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 871882582661858441, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7114176909680833873}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6006242283429286486, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2103927609928585505}
   m_SourcePrefab: {fileID: 100100000, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
 --- !u!4 &4357314417853133059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 871882582661858441, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
   m_PrefabInstance: {fileID: 3486286348233209226}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &7150506189829187548 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6006242283429286486, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
+  m_PrefabInstance: {fileID: 3486286348233209226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2103927609928585505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7150506189829187548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ba0e9fbd730cc4c81f1774466f4cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skeletonAnimation: {fileID: 7616715543531226624}
+--- !u!114 &7616715543531226624 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6473296200502866826, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
+  m_PrefabInstance: {fileID: 3486286348233209226}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7150506189829187548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3967216879482840011
 PrefabInstance:
   m_ObjectHideFlags: 0

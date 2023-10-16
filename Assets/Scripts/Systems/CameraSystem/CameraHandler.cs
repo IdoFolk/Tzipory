@@ -31,7 +31,7 @@ namespace Tzipory.Systems.CameraSystem
         [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
         [SerializeField] private Transform _cameraFollowObject;
 
-        public static CameraSettings CameraSettings { get; set; }
+        public static CameraSettings CameraSettings { get;}
         public Camera MainCamera => _mainCamera;
         public readonly Vector3 LockedCameraPosition = new Vector3(0, -3, -80);
         public readonly int LockedCameraZoom = 9;

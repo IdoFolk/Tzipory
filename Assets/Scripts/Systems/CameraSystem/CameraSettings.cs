@@ -37,7 +37,7 @@ namespace Tzipory.Systems.CameraSystem
         [Button("Set as camera setting")] //WIP (not working)
         public void SetAsCameraSetting()
         {
-            CameraHandler.CameraSettings = this;
+            //CameraHandler.CameraSettings = this;
             Debug.Log($"Set {name} as the active camera setting");
         }
         

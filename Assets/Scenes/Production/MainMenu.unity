@@ -292,7 +292,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 8191
+    m_Bits: 6655
 --- !u!114 &306443521
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,4 +1,4 @@
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
 
 public class Temp_ShamanShotVisual : MonoBehaviour

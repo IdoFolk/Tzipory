@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Tzipory.Helpers;
 using Sirenix.OdinInspector;
-using Tzipory.EntitySystem;
+using Tzipory.Systems.Entity;
 using UnityEngine;
 
 namespace Tzipory.Tools.TimeSystem

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.StatusSystem;
 using Tzipory.SerializeData.StatSystemSerializeData;
 using UnityEngine;
 

@@ -3,7 +3,7 @@ using Tzipory.Tools;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem
+namespace Tzipory.Systems.Entity
 {
     public abstract class BaseGameEntity : MonoBehaviour , IEntityComponent
     {
@@ -14,8 +14,6 @@ namespace Tzipory.EntitySystem
         public int EntityInstanceID { get; private set; }
         public Transform EntityTransform { get; private set; }
         public TimerHandler EntityTimer { get; private set; }
-
-        public Ticker Ticker { get; } //need to implement
         public BaseGameEntity GameEntity => this;
 
         protected virtual void Awake()

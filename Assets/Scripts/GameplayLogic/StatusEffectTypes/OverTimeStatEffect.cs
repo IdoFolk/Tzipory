@@ -1,4 +1,4 @@
-﻿using Tzipory.EntitySystem.StatusSystem;
+﻿using Tzipory.ConfigFiles.StatusSystem;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.TimeSystem;

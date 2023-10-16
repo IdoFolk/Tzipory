@@ -1,7 +1,7 @@
 ﻿using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.EntityComponents
+namespace Tzipory.Systems.Entity.EntityComponents
 {
     public interface IEntityMovementComponent : IEntityComponent
     {

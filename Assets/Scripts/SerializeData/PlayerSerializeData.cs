@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using Tzipory.Helpers.Consts;
 using Tzipory.SerializeData.ProgressionSerializeData;
-using Systems.DataManagerSystem;
+using Tzipory.ConfigFiles;
+using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.Tools.Enums;
-using Tzipory.ConfigFiles.PartyConfig;
-using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
-using Tzipory.SerializeData.PlayerData.PartySerializeData;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+using Tzipory.ConfigFiles.Party;
+using Tzipory.SerializeData.Inventory;
+using Tzipory.SerializeData.PlayerData.Camp;
+using Tzipory.SerializeData.PlayerData.Party;
+using Tzipory.Systems.DataManager;
 using UnityEngine;
 
 namespace Tzipory.SerializeData
@@ -20,23 +21,27 @@ namespace Tzipory.SerializeData
         //eficId
 
         [SerializeField] private int _currentWord;
-        public WorldMapProgressionSerializeData WorldMapProgression { get; private set; }
-        public PartySerializeData PartySerializeData { get; private set; }
-
-        public CampSerializeData CampSerializeData { get; private set; }
+        [SerializeField] private InventorySerializeData _inventorySerializeData;
+        [SerializeField] private WorldMapProgressionSerializeData _worldMapProgression;
+        [SerializeField] private PartySerializeData _partySerializeData;
+        [SerializeField] private CampSerializeData _campSerializeData;
         
-        private List<ShamanItemSerializeData> _itemsSerializeData = new List<ShamanItemSerializeData>();
-        //camp serializeData 
-
+        public WorldMapProgressionSerializeData WorldMapProgression => _worldMapProgression;
+        public PartySerializeData PartySerializeData => _partySerializeData;
+        public CampSerializeData CampSerializeData => _campSerializeData;
+        public InventorySerializeData InventorySerializeData => _inventorySerializeData;
+        
         public bool IsInitialization { get; private set; }
         public int SerializeTypeId => Constant.DataId.PLAYER_DATA_ID;
         
         public void Init(IConfigFile parameter)
         {
             var config = (PlayerConfig)parameter;
-            PartySerializeData = DataManager.DataRequester.GetData<PartySerializeData>(config.PartyConfig);
-            WorldMapProgression = DataManager.DataRequester.GetData<WorldMapProgressionSerializeData>(_currentWord);
-            CampSerializeData = DataManager.DataRequester.GetData<CampSerializeData>(Constant.DataId.CAMP_DATA_ID);
+            
+            _partySerializeData = DataManager.DataRequester.GetSerializeData<PartySerializeData>(config.PartyConfig);
+            _worldMapProgression = DataManager.DataRequester.GetSerializeData<WorldMapProgressionSerializeData>(_currentWord);
+            _campSerializeData = DataManager.DataRequester.GetSerializeData<CampSerializeData>(Constant.DataId.CAMP_DATA_ID);
+            _inventorySerializeData = DataManager.DataRequester.GetSerializeData<InventorySerializeData>(config.InventoryConfig);
             
             IsInitialization = true;
         }
@@ -44,8 +49,8 @@ namespace Tzipory.SerializeData
 //#if UNITY_EDITOR
         public void SetPartyData(ShamanConfig[] shamanConfigs)
         {
-            PartySerializeData = new PartySerializeData();
-            PartySerializeData.Init(shamanConfigs);
+            _partySerializeData = new PartySerializeData();
+            _partySerializeData.Init(shamanConfigs);
         }
 //#endif
         
@@ -66,28 +71,5 @@ namespace Tzipory.SerializeData
                 PartySerializeData.RemovePartyMember(targetShamanID);
             }
         }
-        
-        public void ToggleItemOnShaman(int targetShamanID, int targetItemInstanceID,
-            CollectionActionType actionType)
-        {
-            ShamanItemSerializeData shamanItemData = _itemsSerializeData.Find(itemData =>
-                itemData.ItemInstanceId == targetItemInstanceID);
-
-            if (shamanItemData == null)
-            {
-                Debug.LogError("No item data found!");
-                return;
-            }
-            
-            PartySerializeData.ToggleItemOnShaman(targetShamanID, shamanItemData, actionType);
-        }
-        
-        // [Obsolete("Old method for setting party members")]
-        // public void SetPartyMembers(List<ShamanSerializeData> shamanSerializeDatas)
-        // {
-        //     PartySerializeData.SetPartyMembers(shamanSerializeDatas);
-        // }
-
-      
     }
 }

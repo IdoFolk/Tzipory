@@ -4,7 +4,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
     public class GameData
     {
-        public LevelConfig LevelConfig;
+        public LevelConfig CurrentLevelConfig;
         
         //Temp
         public bool[] NodeLockStatState { get; }

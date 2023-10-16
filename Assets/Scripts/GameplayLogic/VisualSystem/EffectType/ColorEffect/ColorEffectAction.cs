@@ -1,12 +1,11 @@
 ﻿using System;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
-using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Systems.StatusSystem.EffectActionTypeSO;
 using Tzipory.Systems.PoolSystem;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
-using UnityEngine;
 
-namespace Tzipory.GameplayLogic.VisualSystem.EffectType.ColorEffect
+namespace Tzipory.GameplayLogic.VisualSystem.EffectType
 {
     public class ColorEffectAction : BaseEffectAction , IPoolable<ColorEffectAction>
     {

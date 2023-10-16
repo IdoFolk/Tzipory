@@ -1,4 +1,4 @@
-﻿using Tzipory.EntitySystem.StatusSystem;
+﻿using Tzipory.Systems.StatusSystem;
 
 namespace Tzipory.SerializeData.LevalSerializeData.StstusEffectTypes
 {

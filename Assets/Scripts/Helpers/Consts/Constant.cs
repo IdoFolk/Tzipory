@@ -26,10 +26,41 @@ namespace Tzipory.Helpers.Consts
             public const int PLAYER_DATA_ID = 6;
             public const int MAP_DATA_ID = 7;
             public const int NODE_DATA_ID = 8;
-            public const int SHAMAN_ITEM_DATA_ID = 9;
+            public const int ITEM_DATA_ID = 9;
             public const int CAMP_DATA_ID = 10;
             public const int CAMP_BUILDING_DATA_ID = 11;
             public const int CAMP_FACILITY_DATA_ID = 12;
+            public const int INVENTORY_DATA_ID = 13;
+        }
+
+        public enum Materials
+        {
+            BronzeIngot = 1,
+            Bones = 2,
+            Honey = 3,
+            Beewax = 4,
+            Fur = 5,
+            Linen = 6,
+            Amber = 100,
+            Amethyst = 101,
+            Copper = 102,
+            Emerald = 103,
+            Garnet = 104,
+            Gold = 105,
+            LapisLazuli = 107,
+            Obsidian = 108,
+            Tin = 109,
+            LeatherScraps = 201,
+            Hide = 202,
+            CedarWood = 300,
+            Clay = 400,
+            Limestone=401,
+            Myrrh = 501,
+            Frankincense = 502,
+            Garlic = 503,
+            Jute = 504,
+            Flax = 505,
+            OliveOil = 600
         }
 
 

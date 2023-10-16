@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
-using Tzipory.SerializeData.PlayerData.PartySerializeData;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+using Tzipory.SerializeData.PlayerData.Party;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;

@@ -1,10 +1,11 @@
-﻿using Tzipory.Helpers.Consts;
-using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
-using Tzipory.ConfigFiles.PartyConfig.EntitySystemConfig;
+﻿using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.ConfigFiles.EntitySystem;
+using Tzipory.ConfigFiles.Item;
+using Tzipory.Helpers.Consts;
 using UnityEngine;
 
 
-namespace Tzipory.ConfigFiles.PartyConfig
+namespace Tzipory.ConfigFiles
 {
     [System.Serializable]
     public class ConfigManager
@@ -12,26 +13,20 @@ namespace Tzipory.ConfigFiles.PartyConfig
         [SerializeField] private ConfigHandler<ShamanConfig> _shamanConfig;
         [SerializeField] private ConfigHandler<EnemyConfig> _enemyConfig;
         [SerializeField] private ConfigHandler<AbilityConfig> _abilityConfig;
-        [SerializeField] private ConfigHandler<PartyConfig> _partyConfig;
+        [SerializeField] private ConfigHandler<ItemConfig> _itemConfig;
         //add item config handler
         
         
         public IConfigFile GetConfig(int dataId,int objectId)
         {
-            switch (dataId)
+            return dataId switch
             {
-                case Constant.DataId.SHAMAN_DATA_ID:
-                    return _shamanConfig.GetConfigFile(objectId);
-                case Constant.DataId.ENEMY_DATA_ID:
-                    return _enemyConfig.GetConfigFile(objectId);
-                case Constant.DataId.ABILITY_DATA_ID:
-                    return _abilityConfig.GetConfigFile(objectId);
-                case Constant.DataId.PARTY_DATA_ID:
-                    return _partyConfig.GetConfigFile(objectId);
-                
-                default:
-                    return null;
-            }
+                Constant.DataId.SHAMAN_DATA_ID => _shamanConfig.GetConfigFile(objectId),
+                Constant.DataId.ENEMY_DATA_ID => _enemyConfig.GetConfigFile(objectId),
+                Constant.DataId.ABILITY_DATA_ID => _abilityConfig.GetConfigFile(objectId),
+                Constant.DataId.ITEM_DATA_ID => _itemConfig.GetConfigFile(objectId),
+                _ => null
+            };
         }
     }
 }

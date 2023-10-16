@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tzipory.ConfigFiles.StatusSystem;
 using Tzipory.Systems.StatusSystem;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.Systems.StatusSystem
 {
     public readonly struct StatModifier
     {

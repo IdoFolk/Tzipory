@@ -1,7 +1,7 @@
 ﻿using System;
-using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Systems.TargetingSystem;
 using Tzipory.GameplayLogic.TargetingPriorities;
+using Tzipory.Systems.Entity.EntityComponents;
 
 namespace Tzipory.Systems.FactorySystem.ObjectFactory
 {

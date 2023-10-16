@@ -1,8 +1,8 @@
 ﻿using System;
-using Tzipory.ConfigFiles.PartyConfig.AbilitySystemConfig;
+using Tzipory.ConfigFiles.AbilitySystem;
 using Tzipory.Systems.AbilitySystem;
 using Tzipory.Systems.AbilitySystem.AbilityExecuteTypes;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.Entity.EntityComponents;
 
 namespace Tzipory.Systems.FactorySystem.ObjectFactory
 {

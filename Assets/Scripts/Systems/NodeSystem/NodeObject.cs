@@ -1,14 +1,13 @@
 using System;
+using Tzipory.ConfigFiles.NodesConfig;
 using Tzipory.Helpers;
-using Tzipory.ConfigFiles.PartyConfig.NodesConfig;
 using Tzipory.Tools.Enums;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
 namespace Tzipory.Systems.NodeSystem
 {
-    public class
-        NodeObject : MonoBehaviour, IInitialization<BattleMapNodeState>,
+   public class NodeObject : MonoBehaviour, IInitialization<BattleMapNodeState>,
             IInitialization //need to make Generic and inheritance
     {
         public event Action<BattleMapNodeStateConfig> OnNodeClick;
@@ -19,7 +18,7 @@ namespace Tzipory.Systems.NodeSystem
         [SerializeField] private ClickHelper _clickHelper;
 
         private BattleMapNodeStateConfig _stateConfig;
-        public int NodeId => _baseNodeConfig.ConfigObjectId;
+        public int NodeId => _baseNodeConfig.ObjectId;
 
         public BaseNodeConfig BaseNodeConfig => _baseNodeConfig;
 

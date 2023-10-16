@@ -1,12 +1,13 @@
 ﻿using System;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
-using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.Systems.StatusSystem.EffectActionTypeSO;
 using Tzipory.Systems.PoolSystem;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
+using Tzipory.Systems.VisualSystem.TransitionSystem;
 using UnityEngine;
 
-namespace Tzipory.GameplayLogic.VisualSystem.EffectType.TransformEffect
+namespace Tzipory.GameplayLogic.VisualSystem.EffectType
 {
     public class TransformEffectAction : BaseEffectAction , IPoolable<TransformEffectAction>
     {
@@ -87,50 +88,4 @@ namespace Tzipory.GameplayLogic.VisualSystem.EffectType.TransformEffect
 
         #endregion
     }
-    
-    [Serializable]
-    public class Transition3D 
-    {
-        [SerializeField] private float _timeToTransition = 1.0f;
-
-        [SerializeField] private AnimationCurve _animationCurveX;
-            
-        [SerializeField] private AnimationCurve _animationCurveY;
-            
-        [SerializeField] private AnimationCurve _animationCurveZ;
-        
-        public float TimeToTransition
-        {
-            get { return _timeToTransition;}
-#if UNITY_EDITOR
-            set { _timeToTransition = value; }
-        
-#endif
-        }
-        public AnimationCurve AnimationCurveX
-        {
-            get { return _animationCurveX;}
-#if UNITY_EDITOR
-            set { _animationCurveX = value; }
-
-#endif
-        }
-        public AnimationCurve AnimationCurveY
-        {
-            get { return _animationCurveY;}
-#if UNITY_EDITOR
-            set { _animationCurveY = value; }
-
-#endif
-        }
-        public AnimationCurve AnimationCurveZ
-        {
-            get { return _animationCurveZ;}
-#if UNITY_EDITOR
-            set { _animationCurveZ = value; }
-
-#endif
-        }
-    } 
-
 }

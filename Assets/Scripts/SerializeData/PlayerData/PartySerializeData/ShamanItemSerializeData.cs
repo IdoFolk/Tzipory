@@ -1,8 +1,7 @@
-﻿using Tzipory.Helpers.Consts;
-using Tzipory.ConfigFiles.PartyConfig;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
+﻿using Tzipory.ConfigFiles;
+using Tzipory.Helpers.Consts;
 
-namespace Tzipory.SerializeData.PlayerData.PartySerializeData
+namespace Tzipory.SerializeData.PlayerData.Party
 {
     public enum ItemSlot
     {
@@ -22,7 +21,7 @@ namespace Tzipory.SerializeData.PlayerData.PartySerializeData
             IsInitialization = true;
         }
 
-        public int SerializeTypeId => Constant.DataId.SHAMAN_ITEM_DATA_ID;
+        public int SerializeTypeId => Constant.DataId.ITEM_DATA_ID;
         
         public int ItemId => _itemId;
 

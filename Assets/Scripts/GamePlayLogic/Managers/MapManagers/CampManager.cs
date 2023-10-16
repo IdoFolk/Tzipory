@@ -1,9 +1,9 @@
 ﻿using System;
 using Tzipory.Helpers.Consts;
-using Systems.CampSystem;
 using Tzipory.Tools.Enums;
-using Tzipory.SerializeData.PlayerData.PartySerializeData.EntitySerializeData;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.SerializeData.PlayerData.Camp;
+using Tzipory.Systems.CampSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
@@ -128,14 +128,6 @@ namespace Tzipory.GameplayLogic.Managers.MapManagers
         #endregion
 
         #region ShamanManagment
-
-        public void ToggleItemOnShaman(int targetShamanID, int targetItemInstanceID,
-            CollectionActionType actionType)
-        {
-            GameManager.PlayerManager.PlayerSerializeData
-                .ToggleItemOnShaman(targetShamanID, targetItemInstanceID, actionType);
-
-        }
         
         public void AttachItemToShamanTest()
         {

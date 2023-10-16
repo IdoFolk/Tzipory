@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Systems.CampSystem
+namespace Tzipory.Systems.CampSystem
 {
     public class CampBuildingFacilityObject
     {

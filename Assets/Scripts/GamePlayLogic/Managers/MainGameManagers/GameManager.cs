@@ -1,12 +1,13 @@
-using Tzipory.GameplayLogic.Managers.CoreGameManagers;
-using Systems.DataManagerSystem;
-using Tzipory.ConfigFiles.PartyConfig;
 using Tzipory.SerializeData;
+using Tzipory.Systems.CameraSystem;
+using Tzipory.ConfigFiles.Party;
+using Tzipory.Systems.DataManager;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
+
     public class GameManager : MonoBehaviour
     {
         public static ISceneHandler SceneHandler { get; private set; }
@@ -14,19 +15,19 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private SceneHandler _sceneHandler;
 
-        private static Camera _camera;
+        private static CameraHandler _cameraHandler;
 
         public static GameData GameData { get; private set; }
         public static PlayerManager PlayerManager { get; private set; }
 
-        public static Camera Camera => _camera == null ? Camera.main : _camera;
+        public static CameraHandler CameraHandler => _cameraHandler;
 
         private void Awake()
         {
             if (SceneHandler == null)
                 SceneHandler = _sceneHandler;
 
-            _camera = Camera.main;
+            _cameraHandler = FindObjectOfType<CameraHandler>();//May need to change 
             GameData = new GameData();
         }
 
@@ -34,7 +35,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
         {
             SceneHandler.LoadScene(SceneType.MainMenu);
 
-            var playerSerializeData = DataManager.DataRequester.GetData<PlayerSerializeData>(_playerConfig);
+            var playerSerializeData = DataManager.DataRequester.GetSerializeData<PlayerSerializeData>(_playerConfig);
             PlayerManager = new PlayerManager(playerSerializeData);
         }
 
@@ -58,6 +59,12 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
         {
             if (_sceneHandler == null)
                 _sceneHandler = FindObjectOfType<SceneHandler>();
+        }
+
+        private void OnMouseDown()
+        {
+            //lock the cursor inside the screen
+            Screen.lockCursor = true;
         }
 
         public void Quit()

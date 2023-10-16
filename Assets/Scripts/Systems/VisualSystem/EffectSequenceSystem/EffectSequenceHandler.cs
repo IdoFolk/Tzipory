@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tzipory.EntitySystem.EntityComponents;
 using Tzipory.GamePlayLogic.ObjectPools;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 

@@ -1516,6 +1516,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 79346961843164260}
     m_Modifications:
+    - target: {fileID: 1746570520847645743, guid: 9e457d9276a4d9445b5b72c9fcb2e2ab, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 10.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746570520847645743, guid: 9e457d9276a4d9445b5b72c9fcb2e2ab, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 10.24
+      objectReference: {fileID: 0}
     - target: {fileID: 2097647181182622524, guid: 9e457d9276a4d9445b5b72c9fcb2e2ab, type: 3}
       propertyPath: m_Name
       value: Onyx_PS
@@ -2929,8 +2937,32 @@ PrefabInstance:
       value: -35
       objectReference: {fileID: 0}
     - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: _cameraBorders.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: _cameraBorders.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: _cameraStartZoom
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: _cameraStartPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: _cameraStartPosition.y
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
       propertyPath: _waveSpawnersSerialize.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: _overrideCameraStartPositionAndZoom
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
       propertyPath: _waveSpawnersSerialize.Array.data[0]

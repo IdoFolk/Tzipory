@@ -18,6 +18,12 @@ namespace DefaultNamespace
     [System.Serializable]
     public class CurrencyContainer
     {
+        public CurrencyContainer(Constant.Materials material, int amount)
+        {
+            _material = material;
+            _amount = amount;
+        }
+
         [SerializeField] private Constant.Materials _material;
         [SerializeField] private int _amount;
 

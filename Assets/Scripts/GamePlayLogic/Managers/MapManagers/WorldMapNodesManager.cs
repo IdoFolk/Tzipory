@@ -73,7 +73,7 @@ namespace Tzipory.GameplayLogic.Managers.MapManagers
 
         private void NodeClicked(BattleMapNodeStateConfig battleMapNodeStateConfig)//need to pass node data and not battleMapNodeStateConfig
         {
-            GameManager.GameData.LevelConfig  = battleMapNodeStateConfig.LevelToOpen;
+            GameManager.GameData.CurrentLevelConfig  = battleMapNodeStateConfig.LevelToOpen;
             GameManager.SceneHandler.LoadScene(SceneType.Game);//temp!
         }
 

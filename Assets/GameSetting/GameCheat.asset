@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66710edef610480a81e6c60d4224d433, type: 3}
   m_Name: GameCheat
   m_EditorClassIdentifier: 
+  _noWinOrLose: 0

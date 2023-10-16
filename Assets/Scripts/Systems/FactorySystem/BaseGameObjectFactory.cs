@@ -13,7 +13,7 @@ namespace Tzipory.Systems.FactorySystem
             _monoBehaviour = Resources.Load<T>(GameObjectPath);
 
             if (_monoBehaviour == null)
-                throw new System.Exception($"Monobehavir not found in path {GameObjectPath}");
+                throw new System.Exception($"MonoBehaviour not found in path {GameObjectPath}");
         }
         
         public T Create()

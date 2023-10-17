@@ -31,7 +31,6 @@ RectTransform:
   - {fileID: 4432040618579484796}
   - {fileID: 2817122895327603443}
   m_Father: {fileID: 2103247489213823565}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -69,7 +68,6 @@ RectTransform:
   m_Children:
   - {fileID: 8601049646546838833}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -88,8 +86,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9289c300bcec4b1bb841f87c96ff0571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableDrag: 0
+  _canvasGroup: {fileID: 0}
+  _popupWindowHandler: {fileID: 0}
+  _doubleClickSpeed: 0.5
   _heroContainer: {fileID: 2817122895327603443}
-  _shamanUiHanlder: {fileID: 6141385975892492192, guid: f03e743a3c27da14e913f8460b3150e6, type: 3}
+  _shamanInteractiveUIHanlder: {fileID: 0}
 --- !u!1 &3846718230969615506
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +122,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8601049646546838833}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -184,7 +185,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8601049646546838833}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

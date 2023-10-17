@@ -1,5 +1,6 @@
 ﻿using System;
 using Sirenix.OdinInspector;
+using Tzipory.Scripts.Systems.PopupSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -21,7 +22,7 @@ namespace Tzipory.Systems.UISystem
         public string ElementName => gameObject.name;
 
         [SerializeField] private bool _enableDrag;
-        
+
         [SerializeField,ShowIf("_enableDrag")] private CanvasGroup _canvasGroup;
         
         [SerializeField] private float _doubleClickSpeed = 0.5f;

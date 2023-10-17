@@ -46,18 +46,19 @@ namespace Tzipory.Systems.EntityComponents
 
         public BaseGameEntity GameEntity => throw new NotImplementedException();
 
-        public bool IsMoveing { get; private set; }    
+        public bool IsMoving { get; private set; }    
 
         public void SetDestination(Vector3 destination, MoveType moveType)
         {
             agent.SetDestination(destination);
             _destination  = destination;
-            IsMoveing  = true;
+            IsMoving  = true;
         }
 
         public void Stop()
         {
             agent.Stop();
+            IsMoving = false;
         }
 
         private void Update()
@@ -67,7 +68,7 @@ namespace Tzipory.Systems.EntityComponents
             if (Vector2.Distance(_destination, transform.position) > 0.2f) return;
             
             _destination = Vector2.zero;
-            IsMoveing = false;
+            IsMoving = false;
         }
 
         private void FixedUpdate()

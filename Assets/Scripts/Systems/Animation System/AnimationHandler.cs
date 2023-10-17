@@ -1,12 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Spine;
 using Spine.Unity;
-using Tzipory.Systems.Entity;
 using Tzipory.Tools.Interface;
-using Unity.VisualScripting;
 using UnityEngine;
+using AnimationState = Spine.AnimationState;
+using Event = Spine.Event;
 
 namespace Tzipory.Systems.AnimationSystem
 {
@@ -16,9 +13,12 @@ namespace Tzipory.Systems.AnimationSystem
         private const string IDLE = "Idle";
         private const string RUNNING = "Running";
         private const string BASIC_ATTACK = "Basic Attack2";
+        private const string CRIT_ATTACK = "Basic Attack";
         private const string ABILITY_ATTACK = "AOE Attack2";
         [SerializeField] private SkeletonAnimation _skeletonAnimation;
-        
+        public AnimationState AnimationState => _skeletonAnimation.AnimationState;
+        public AnimationStates CurrentAnimationStateType { get; private set; } 
+
 
         private void OnValidate()
         {
@@ -38,13 +38,15 @@ namespace Tzipory.Systems.AnimationSystem
             switch (animationStates)
             {
                 case AnimationStates.Idle:
+                    CurrentAnimationStateType = AnimationStates.Idle;
                     return _skeletonAnimation.AnimationState.SetAnimation(0, IDLE,true);
                 case AnimationStates.Running:
+                    CurrentAnimationStateType = AnimationStates.Running;
                     return _skeletonAnimation.AnimationState.SetAnimation(0, RUNNING,true);
                 case AnimationStates.BasicAttack:
                     return _skeletonAnimation.AnimationState.SetAnimation(1, BASIC_ATTACK,false);
                 case AnimationStates.CritAttack:
-                    return _skeletonAnimation.AnimationState.SetAnimation(1, BASIC_ATTACK,false);
+                    return _skeletonAnimation.AnimationState.SetAnimation(1, CRIT_ATTACK,false);
                 case AnimationStates.AbilityAttack:
                     return _skeletonAnimation.AnimationState.SetAnimation(1, ABILITY_ATTACK,false);
                 case AnimationStates.Hit:
@@ -55,9 +57,9 @@ namespace Tzipory.Systems.AnimationSystem
             return null;
         }
 
-        private void OnBasicAttackAnimationStart()
+        public void FlipSkeletonAnimation(bool flip)
         {
-            
+            _skeletonAnimation.skeleton.FlipX = flip;
         }
     }
 

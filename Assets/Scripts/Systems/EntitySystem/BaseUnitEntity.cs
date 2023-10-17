@@ -510,6 +510,12 @@ namespace Tzipory.Systems.Entity
         }
         public void SetSpriteFlipX(bool doFlip)
         {
+            if (_animationHandler.gameObject.activeSelf)
+            {
+                _animationHandler.FlipSkeletonAnimation(doFlip);
+                return;
+            }
+            
             _spriteRenderer.flipX = doFlip;
             OnSpriteFlipX?.Invoke(doFlip);
         }

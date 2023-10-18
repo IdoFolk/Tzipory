@@ -20,7 +20,7 @@ namespace Tzipory.GamePlayLogic.UI
         public override void Show()
         {
             base.Show();
-            _image.sprite = _shamanDataContainer.UnitEntityVisualConfig.Sprite;
+            _image.sprite = _shamanDataContainer.UnitEntityVisualConfig.Icon;
         }
 
         public void Init(ShamanDataContainer parameter)

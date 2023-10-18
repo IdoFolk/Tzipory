@@ -5,12 +5,14 @@ using MyNamespaceTzipory.Systems.VisualSystem;
 using Tzipory.Helpers;
 using Tzipory.Helpers.Consts;
 using Sirenix.OdinInspector;
+using Spine.Unity;
 using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.ConfigFiles.EntitySystem.EntityVisual;
 using Tzipory.Systems.AbilitySystem;
 using Tzipory.Tools.TimeSystem;
 using Tzipory.Systems.TargetingSystem;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.AnimationSystem;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.Sound;
@@ -33,6 +35,7 @@ namespace Tzipory.Systems.Entity
         [SerializeField,TabGroup("Component")] private TargetingHandler _targetingHandler;
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private SpriteRenderer _spriteRenderer;
+        [SerializeField,TabGroup("Component")] private AnimationHandler _animationHandler;
         [SerializeField,TabGroup("Component")] private Transform _visualQueueEffectPosition;
 
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onDeath;
@@ -68,6 +71,7 @@ namespace Tzipory.Systems.Entity
         public AbilityHandler AbilityHandler { get; private set; }
         
         public EffectSequenceHandler EffectSequenceHandler { get; private set; }
+        public AnimationHandler AnimationHandler => _animationHandler;
         public SpriteRenderer SpriteRenderer => _spriteRenderer;
         public SoundHandler SoundHandler => _soundHandler;
         public Transform ParticleEffectPosition => _particleEffectPosition;
@@ -258,10 +262,20 @@ namespace Tzipory.Systems.Entity
             
             AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);
 
-            //SpriteRenderer.sprite = visualConfig.Sprite;
-            SetSprite(visualConfig.Sprite);
-
-
+            //temp, spine currently in implementation
+            if (visualConfig.SkeletonDataAsset is null)
+            {
+                _spriteRenderer.enabled = true;
+                _animationHandler.gameObject.SetActive(false);
+                SetSprite(visualConfig.Sprite);
+            }
+            else
+            {
+                _spriteRenderer.enabled = false;
+                _animationHandler.gameObject.SetActive(true);
+                _animationHandler.Init(visualConfig.SkeletonDataAsset);
+            }
+            //
             BaseInit();
         }
         
@@ -280,7 +294,20 @@ namespace Tzipory.Systems.Entity
             
             AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);//making new every time we init new enemy(memory waste) 
             
-            SpriteRenderer.sprite = parameter.UnitEntityVisualConfig.Sprite;
+            //temp, spine currently in implementation
+            if (parameter.UnitEntityVisualConfig.SkeletonDataAsset is null)
+            {
+                _spriteRenderer.enabled = true;
+                _animationHandler.gameObject.SetActive(false);
+                SetSprite(parameter.UnitEntityVisualConfig.Sprite);
+            }
+            else
+            {
+                _spriteRenderer.enabled = false;
+                _animationHandler.gameObject.SetActive(true);
+                _animationHandler.Init(parameter.UnitEntityVisualConfig.SkeletonDataAsset);
+            }
+            //
             
             BaseInit();
         }
@@ -321,6 +348,7 @@ namespace Tzipory.Systems.Entity
         private void OnValidate()
         {
             _soundHandler ??= GetComponentInChildren<SoundHandler>();
+            _animationHandler ??= GetComponentInChildren<AnimationHandler>();
         }
 
         private void OnDrawGizmosSelected()
@@ -475,15 +503,24 @@ namespace Tzipory.Systems.Entity
 
         private void SetSprite(Sprite newSprite)
         {
+            _animationHandler.gameObject.SetActive(false);
+            _spriteRenderer.enabled = true;
             _spriteRenderer.sprite = newSprite;
             OnSetSprite?.Invoke(newSprite);
         }
         public void SetSpriteFlipX(bool doFlip)
         {
+            if (_animationHandler.gameObject.activeSelf)
+            {
+                _animationHandler.FlipSkeletonAnimation(doFlip);
+                return;
+            }
+            
             _spriteRenderer.flipX = doFlip;
             OnSpriteFlipX?.Invoke(doFlip);
         }
 
+        
 
         #endregion
     }

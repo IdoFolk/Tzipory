@@ -1,6 +1,5 @@
 ﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
-using Tzipory.Scripts.Systems.PopupSystem;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
 
@@ -10,8 +9,6 @@ namespace Tzipory.GameplayLogic.UIElements
     {
         [SerializeField] private RectTransform _heroContainer;
         [SerializeField] private ShamanInteractiveUIHandler _shamanInteractiveUIHanlder;
-        [SerializeField] private PopupWindowHandler _popupWindowHandler;
-        public PopupWindowHandler PopupWindowHandler => _popupWindowHandler;
 
         protected override void Awake()
         {

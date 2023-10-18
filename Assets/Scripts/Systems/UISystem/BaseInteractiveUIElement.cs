@@ -1,6 +1,5 @@
 ﻿using System;
 using Sirenix.OdinInspector;
-using Tzipory.Scripts.Systems.PopupSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -26,7 +25,7 @@ namespace Tzipory.Systems.UISystem
         [SerializeField,ShowIf("_enableDrag")] private CanvasGroup _canvasGroup;
         
         [SerializeField] private float _doubleClickSpeed = 0.5f;
-        
+        [SerializeField] protected RectTransform _rectTransform;
         private bool _isOn;
         
         private int _clickNum;
@@ -35,6 +34,12 @@ namespace Tzipory.Systems.UISystem
 
         protected virtual void Awake()
         {
+            
+        }
+
+        private void OnEnable()
+        {
+            _rectTransform = GetComponent<RectTransform>();
         }
 
         public virtual void Show()

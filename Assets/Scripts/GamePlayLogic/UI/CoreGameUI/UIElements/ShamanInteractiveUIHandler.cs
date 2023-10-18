@@ -1,9 +1,11 @@
 ﻿using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
-using Tzipory.Scripts.Systems.PopupSystem;
+using Tzipory.Systems.PopupSystem;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.UISystem;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Tzipory.GameplayLogic.UIElements
@@ -14,7 +16,6 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private Slider _healthBar;
         [SerializeField] private Image _splash;
         private Shaman _shaman;
-        private PopupWindowHandler _popupWindowHandler;
         
         protected override void Awake()
         {
@@ -23,7 +24,6 @@ namespace Tzipory.GameplayLogic.UIElements
         
         public void Init(Shaman shaman)
         {
-            _popupWindowHandler = GetComponentInParent<PartyUIManager>().PopupWindowHandler;
             _shaman = shaman;
             _splash.sprite = _shaman.SpriteRenderer.sprite;
             Show();
@@ -35,21 +35,10 @@ namespace Tzipory.GameplayLogic.UIElements
             GameManager.CameraHandler.SetCameraPosition(_shaman.transform.position);
         }
 
-        private void OpenPopupWindow()
-        {
-            _popupWindowHandler.OpenWindow(_shaman.name,"very strong yes yes");
-        }
-        private void ClosePopupWindow()
-        {
-            _popupWindowHandler.CloseWindow();
-        }
-
         public override void Show()
         {
             _shaman.Health.OnValueChangedData += OnHealthChange;
             OnClickEvent += GoToShaman;
-            OnEnter += OpenPopupWindow;
-            OnExit += ClosePopupWindow;
             base.Show();
         }
 
@@ -65,10 +54,25 @@ namespace Tzipory.GameplayLogic.UIElements
             UpdateUIData(statChangeData.NewValue);
         }
 
-        private void UpdateUIData(float cureentHP)
+        private void UpdateUIData(float currentHP)
         {
-            _healthBar.value  = cureentHP / _shaman.Health.BaseValue;
+            _healthBar.value  = currentHP / _shaman.Health.BaseValue;
             _fill.color = Color.Lerp(Color.red,Color.green,_shaman.Health.CurrentValue/_shaman.Health.BaseValue);
+        }
+
+        public override void OnPointerEnter(PointerEventData eventData)
+        {
+            base.OnPointerEnter(eventData);
+            var shamanName = _shaman.name;
+            int index = shamanName.IndexOf('_');
+            shamanName = shamanName.Substring(0, index);
+            PopupWindowManager.OpenNewWindow(_rectTransform,shamanName,"Stats");
+        }
+
+        public override void OnPointerExit(PointerEventData eventData)
+        {
+            base.OnPointerExit(eventData);
+            PopupWindowManager.CloseNewWindow();
         }
     }
 }

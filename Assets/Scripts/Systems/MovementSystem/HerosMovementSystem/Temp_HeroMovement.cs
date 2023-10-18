@@ -13,7 +13,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         [SerializeField] private TEMP_BasicMoveComponent _moveComponent;
         [SerializeField] Tzipory.GameplayLogic.EntitySystem.Shamans.Shaman _shaman;
 
-        public bool IsMoveing => _moveComponent.IsMoving;
+        public bool IsMoveing => _moveComponent.IsMoveing;
         
         private void Start()
         {

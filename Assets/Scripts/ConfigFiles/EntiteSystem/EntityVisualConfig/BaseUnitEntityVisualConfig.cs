@@ -1,5 +1,4 @@
-﻿using Spine.Unity;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Tzipory.ConfigFiles.EntitySystem.EntityVisual
 {
@@ -8,11 +7,9 @@ namespace Tzipory.ConfigFiles.EntitySystem.EntityVisual
     {
         [SerializeField] private Sprite _sprite;
         [SerializeField] private Sprite _icon;
-        [SerializeField] private SkeletonDataAsset _skeletonDataAsset;
 
         public Sprite Sprite => _sprite;
 
         public Sprite Icon => _icon;
-        public SkeletonDataAsset SkeletonDataAsset => _skeletonDataAsset;
     }
 }

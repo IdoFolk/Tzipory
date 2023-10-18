@@ -23,7 +23,9 @@ namespace Tzipory.Systems.CameraSystem
 
         [SerializeField, Tooltip("toggle mouse edge scroll camera movement")]
         private bool _enableEdgeScroll = true;
-
+        
+        [SerializeField, Tooltip("toggle whether the camera moves to the mouse position when zooming")]
+        private bool _enableZoomMovesCamera = true;
 
         [Header("Gameobjects")] [SerializeField]
         private Camera _mainCamera;
@@ -102,16 +104,35 @@ namespace Tzipory.Systems.CameraSystem
                 }
 
                 //Mouse Scroll Zoom 
+                var zoomChangeValue = _cameraSettings.ZoomMoveCameraValue;
+                var mouseWorldPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
+                var zoomcameraPos = _cameraFollowObject.position;
                 if (Input.mouseScrollDelta.y > 0)
                 {
                     _targetOrthographicSize -= _cameraSettings.ZoomChangeValue;
-                    StartCoroutine(ChangeDampingForZoom(0, 0));
+                    if (_enableZoomMovesCamera && _targetOrthographicSize > _cameraSettings.ZoomMinClamp)
+                    {
+                        zoomcameraPos.x = Mathf.Lerp(_cameraFollowObject.position.x, mouseWorldPos.x,
+                            zoomChangeValue);
+                        zoomcameraPos.y = Mathf.Lerp(_cameraFollowObject.position.y, mouseWorldPos.y,
+                            zoomChangeValue);
+                        _cameraFollowObject.position = zoomcameraPos;
+                    }
+                    else StartCoroutine(ChangeDampingForZoom(0, 0));
                 }
 
                 if (Input.mouseScrollDelta.y < 0)
                 {
                     _targetOrthographicSize += _cameraSettings.ZoomChangeValue;
-                    StartCoroutine(ChangeDampingForZoom(0, 0));
+                    if (_enableZoomMovesCamera && _targetOrthographicSize < _zoomPadding)
+                    {
+                        zoomcameraPos.x = Mathf.Lerp(_cameraFollowObject.position.x, mouseWorldPos.x,
+                            zoomChangeValue);
+                        zoomcameraPos.y = Mathf.Lerp(_cameraFollowObject.position.y, mouseWorldPos.y,
+                            zoomChangeValue);
+                        _cameraFollowObject.position = zoomcameraPos;
+                    }
+                    else StartCoroutine(ChangeDampingForZoom(0, 0));
                 }
 
 
@@ -143,7 +164,7 @@ namespace Tzipory.Systems.CameraSystem
                 _cameraFollowObject.position = cameraPosition;
 
 
-                //moving + clamping the camera zoom
+                //zooming + clamping the camera zoom
                 _targetOrthographicSize =
                     Mathf.Clamp(_targetOrthographicSize, _cameraSettings.ZoomMinClamp, _zoomPadding);
                 _cinemachineVirtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(

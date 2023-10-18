@@ -24,6 +24,7 @@ MonoBehaviour:
   DefaultEdgePaddingY: 1.3
   ZoomSpeed: 6.5
   ZoomChangeValue: 1
-  ZoomStartValue: 7
+  ZoomDefaultStartValue: 7
+  ZoomMoveCameraValue: 0.2
   ZoomMinClamp: 2
   ZoomMaxClamp: 11

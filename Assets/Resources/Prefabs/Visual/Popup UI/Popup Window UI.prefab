@@ -546,6 +546,7 @@ MonoBehaviour:
   _uiHolder: {fileID: 5614603384721662045}
   _textHeader: {fileID: 7448455994202742060}
   _textbody: {fileID: 254107499126383498}
+  _defaultPadding: {x: 5, y: 5}
 --- !u!225 &4446352150662966776
 CanvasGroup:
   m_ObjectHideFlags: 0

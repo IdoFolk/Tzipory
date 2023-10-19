@@ -10,6 +10,8 @@ namespace Tzipory.Systems.PopupSystem
     {
         [SerializeField] private PopupWindowHandler _popupWindowAsset;
         [SerializeField] private Transform _canvasParent;
+        [SerializeField] private PopupWindowSettings _popupWindowSettings;
+        
         private static PopupWindowHandler _popupWindow;
 
         private void Awake()
@@ -20,11 +22,12 @@ namespace Tzipory.Systems.PopupSystem
         public static void OpenNewWindow(RectTransform rectTransform,string header,string body)
         {
             _popupWindow.OpenWindow(rectTransform,header,body);
-        }
-        public static void OpenNewWindow(Transform transform,string header,string body) //may need to request sprite instead of transform
-        {
             
         }
+        // public static void OpenNewWindow(Transform transform,string header,string body) //may need to request sprite instead of transform
+        // {
+        //     
+        // }
         public static void CloseNewWindow()
         {
             _popupWindow.CloseWindow();

@@ -3,10 +3,12 @@ using Tzipory.Helpers;
 using Tzipory.Tools.TimeSystem;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.PoolSystem;
+using Tzipory.Systems.PopupSystem;
 using Tzipory.Systems.UISystem;
 using Tzipory.Systems.WaveSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Tzipory.GameplayLogic.UI.WaveIndicator
@@ -15,7 +17,6 @@ namespace Tzipory.GameplayLogic.UI.WaveIndicator
     {
         public event Action<WaveIndicator> OnDispose;
         
-        [SerializeField] private RectTransform _rectTransform;
         [SerializeField] private RectTransform _rotateIndicator;
         
         [SerializeField] private Vector2 _offSet;
@@ -98,6 +99,18 @@ namespace Tzipory.GameplayLogic.UI.WaveIndicator
             
             Vector3 pos = new Vector3(position.x + _offSet.x, position.y + _offSet.y, 0);
             Gizmos.DrawSphere(pos,5);
+        }
+
+        public override void OnPointerEnter(PointerEventData eventData)
+        {
+            base.OnPointerEnter(eventData);
+            PopupWindowManager.OpenNewWindow(_rectTransform,"Enemy Wave","incoming enemies: number");
+        }
+
+        public override void OnPointerExit(PointerEventData eventData)
+        {
+            base.OnPointerExit(eventData);
+            PopupWindowManager.CloseNewWindow();
         }
     }
 }

@@ -104,33 +104,24 @@ namespace Tzipory.Systems.CameraSystem
                 }
 
                 //Mouse Scroll Zoom 
-                var zoomChangeValue = _cameraSettings.ZoomMoveCameraValue;
-                var mouseWorldPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
-                var zoomcameraPos = _cameraFollowObject.position;
+                var zoomMoveCameraValue = _cameraSettings.ZoomMoveCameraValue;
+                var zoomcameraDirection = _mainCamera.ScreenToWorldPoint(Input.mousePosition) - _cameraFollowObject.position;
                 if (Input.mouseScrollDelta.y > 0)
                 {
-                    _targetOrthographicSize -= _cameraSettings.ZoomChangeValue;
-                    if (_enableZoomMovesCamera && _targetOrthographicSize > _cameraSettings.ZoomMinClamp)
+                    _targetOrthographicSize -= _cameraSettings.ZoomChangeValue; //zoom in
+                    if (_enableZoomMovesCamera && _targetOrthographicSize > _cameraSettings.ZoomMinClamp - 1)
                     {
-                        zoomcameraPos.x = Mathf.Lerp(_cameraFollowObject.position.x, mouseWorldPos.x,
-                            zoomChangeValue);
-                        zoomcameraPos.y = Mathf.Lerp(_cameraFollowObject.position.y, mouseWorldPos.y,
-                            zoomChangeValue);
-                        _cameraFollowObject.position = zoomcameraPos;
+                        _cameraFollowObject.Translate(zoomcameraDirection * zoomMoveCameraValue); //move the camera towards the mouse
                     }
                     else StartCoroutine(ChangeDampingForZoom(0, 0));
                 }
 
                 if (Input.mouseScrollDelta.y < 0)
                 {
-                    _targetOrthographicSize += _cameraSettings.ZoomChangeValue;
-                    if (_enableZoomMovesCamera && _targetOrthographicSize < _zoomPadding)
+                    _targetOrthographicSize += _cameraSettings.ZoomChangeValue; //zoom out
+                    if (_enableZoomMovesCamera && _targetOrthographicSize < _zoomPadding + 1)
                     {
-                        zoomcameraPos.x = Mathf.Lerp(_cameraFollowObject.position.x, mouseWorldPos.x,
-                            zoomChangeValue);
-                        zoomcameraPos.y = Mathf.Lerp(_cameraFollowObject.position.y, mouseWorldPos.y,
-                            zoomChangeValue);
-                        _cameraFollowObject.position = zoomcameraPos;
+                        _cameraFollowObject.Translate(-zoomcameraDirection * zoomMoveCameraValue); //move the camera away from the mouse
                     }
                     else StartCoroutine(ChangeDampingForZoom(0, 0));
                 }

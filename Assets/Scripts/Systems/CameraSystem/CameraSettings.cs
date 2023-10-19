@@ -35,7 +35,7 @@ namespace Tzipory.Systems.CameraSystem
         [TabGroup("Camera Zoom"),Tooltip("affects the lerp of the camera when zooming in and out")]public float ZoomSpeed = 6.5f;
         [TabGroup("Camera Zoom"),Tooltip("determines the value that will change each time you scroll up or down on the mouse wheel")]public float ZoomChangeValue = 1f;
         [TabGroup("Camera Zoom"),Tooltip("zoom starting value")]public float ZoomDefaultStartValue = 7f;
-        [TabGroup("Camera Zoom"),Tooltip("zoom starting value")]public float ZoomMoveCameraValue = 5f;
+        [TabGroup("Camera Zoom"),Range(0,1),Tooltip("zoom starting value")]public float ZoomMoveCameraValue = 5f;
         
         [Header("Clamping")]
         [TabGroup("Camera Zoom"),Tooltip("the smallest value that the zoom can reach")]public float ZoomMinClamp = 2f;

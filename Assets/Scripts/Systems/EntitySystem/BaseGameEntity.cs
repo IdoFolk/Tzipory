@@ -14,8 +14,6 @@ namespace Tzipory.Systems.Entity
         public int EntityInstanceID { get; private set; }
         public Transform EntityTransform { get; private set; }
         public TimerHandler EntityTimer { get; private set; }
-
-        public Ticker Ticker { get; } //need to implement
         public BaseGameEntity GameEntity => this;
 
         protected virtual void Awake()

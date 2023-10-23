@@ -5,6 +5,7 @@ using Tzipory.ConfigFiles.Level;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.PlayerData.Party;
+using Tzipory.Systems.CameraSystem;
 using Tzipory.Systems.SceneSystem;
 using Tzipory.Tools.GameSettings;
 using Tzipory.Tools.TimeSystem;
@@ -62,12 +63,21 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             }
             else
             {
-                _levelConfig = GameManager.GameData.LevelConfig;
+                _levelConfig = GameManager.GameData.CurrentLevelConfig;
                 PartyManager = new PartyManager(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData,
                     _shamanParent);
             }
 
             Instantiate(_levelConfig.Level, _levelParent);
+            if (GameManager.CameraHandler is null)
+            {
+               var camera = FindObjectOfType<CameraHandler>();//only for testing
+               camera.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
+            }
+            else
+            {
+                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
+            }
             EnemyManager = new EnemyManager(_enemiesParent);
             WaveManager = new WaveManager(_levelConfig, _waveIndicatorParent); //temp!
             CoreTemplete = FindObjectOfType<CoreTemple>(); //temp!!!
@@ -76,6 +86,8 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         private void Start()
         {
+            GameManager.CameraHandler.UnlockCamera();
+            GameManager.CameraHandler.ResetCamera();
             WaveManager.StartLevel();
             UIManager.Initialize();
             GAME_TIME.SetTimeStep(1);

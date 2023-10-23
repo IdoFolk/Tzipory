@@ -30,15 +30,22 @@ namespace Tzipory.GameplayLogic.UIElements
             UpdateUIData(_shaman.Health.CurrentValue);
         }
 
+        private void GoToShaman()
+        {
+            GameManager.CameraHandler.SetCameraPosition(_shaman.transform.position);
+        }
+
         public override void Show()
         {
             _shaman.Health.OnValueChangedData += OnHealthChange;
+            OnClickEvent += GoToShaman;
             base.Show();
         }
 
         public override void Hide()
         {
             _shaman.Health.OnValueChangedData -= OnHealthChange;
+            OnClickEvent -= GoToShaman;
             base.Hide();
         }
 

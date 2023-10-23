@@ -50,8 +50,8 @@ public class TEMP_NodeObject : MonoBehaviour
     public void Unlock()
     {
         _spriteRenderer.color = _avilableNodeColor;
-        gameObject.SetActive(true);
-       GameManager.GameData.SetLockNodeStat(_levelConfig.LevelId,true);
+        gameObject.SetActive(true); 
+        GameManager.GameData.SetLockNodeStat(_levelConfig.LevelId,true);
         IsUnlock = true;
     }
 
@@ -65,7 +65,7 @@ public class TEMP_NodeObject : MonoBehaviour
 
     private void OnNodeClick()
     {
-        GameManager.GameData.LevelConfig  = _levelConfig;
+        GameManager.GameData.CurrentLevelConfig  = _levelConfig;
         GameManager.PlayerManager.PlayerSerializeData.SetPartyData(_shamanConfigs);
         GameManager.SceneHandler.LoadScene(SceneType.Game);//temp!
     }

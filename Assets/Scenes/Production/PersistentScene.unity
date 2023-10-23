@@ -1528,12 +1528,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerConfig: {fileID: 11400000, guid: df3b5458f6662624d88ca67e7602fb14, type: 2}
   _sceneHandler: {fileID: 1157007721}
-  _playerSerializeData:
-    _currentWord: 0
-    _inventorySerializeData:
-      _itemData: []
-    _partySerializeData:
-      _shamanSerializeDatas: []
 --- !u!1 &1504020744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,7 +2272,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3493536373832206464, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3493536373832206464, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_LocalPosition.z

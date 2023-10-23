@@ -12,13 +12,26 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         /// Basically, the Map's resolution
         /// </summary>
         public static Vector2 MapSize { get; private set; }
-        
+
+        public Vector2 CameraBorder => _cameraBorders;
+
+        public Vector2 CameraStartPosition => _cameraStartPosition;
+        public float CameraStartZoom => _cameraStartZoom;
+
+        public bool OverrideCameraStartPositionAndZoom => _overrideCameraStartPositionAndZoom;
+
         /// <summary>
         /// The renderer for the map/floor
         /// </summary>
         [SerializeField] SpriteRenderer _bgRenderer; 
         [SerializeField] private Vector3 _fakeForward;
+        [Header("Camera setting")]
+        [SerializeField] private Vector2 _cameraBorders;
+        [SerializeField] private bool _overrideCameraStartPositionAndZoom;
+        [SerializeField,ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private Vector2 _cameraStartPosition;
+        [SerializeField,ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private float _cameraStartZoom;
         [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
+        [SerializeField] private bool _enableGizmos = true;
         private static List<WaveSpawner> _waveSpawners;
 
         private readonly List<Color> _spawnerColors = new()
@@ -61,6 +74,14 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         {
             Gizmos.color = Color.red;
             Gizmos.DrawLine(Vector3.zero, _fakeForward.normalized * 5);
+            
+            //camera borders
+            if (_enableGizmos)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireCube(Vector3.zero, _cameraBorders * 2);
+            }
+            
         }
         
         [Button("refrec")]

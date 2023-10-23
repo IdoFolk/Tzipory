@@ -1,6 +1,4 @@
-﻿using Tzipory.SerializeData.PlayerData.Party.Entity;
-
-namespace Tzipory.Systems.InitiailizeSystem
+﻿namespace Tzipory.Systems.InitiailizeSystem
 {
     public class InitiailizeHandler<T>
     {

@@ -4,8 +4,8 @@ using System.Linq;
 using Tzipory.ConfigFiles.Level;
 using Tzipory.GameplayLogic.UI.WaveIndicator;
 using Tzipory.Helpers;
-using Tzipory.Tools.TimeSystem;
 using Tzipory.Systems.WaveSystem;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.Managers.CoreGameManagers

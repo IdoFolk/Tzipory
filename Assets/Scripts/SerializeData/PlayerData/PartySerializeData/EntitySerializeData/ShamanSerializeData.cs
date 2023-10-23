@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles;
 using Tzipory.ConfigFiles.EntitySystem;
+using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.SerializeData.ItemSerializeData;
 using UnityEngine;
 

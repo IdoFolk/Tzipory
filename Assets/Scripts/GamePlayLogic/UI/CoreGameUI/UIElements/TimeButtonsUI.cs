@@ -1,4 +1,5 @@
 ﻿using System;
+using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.TimeSystem;
@@ -10,7 +11,9 @@ namespace Tzipory.GameplayLogic.UIElements
     {
         public event Action<TimeButtonsUI> OnTurnOn;
         [SerializeField] private float  _time;
-        
+
+        protected override UIGroupType GroupIndex => UIGroupType.GameUI;
+
         protected override void Awake()
         {
             UIManager.AddObserverObject(this);

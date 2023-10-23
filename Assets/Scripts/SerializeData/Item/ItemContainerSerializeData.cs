@@ -1,21 +1,32 @@
 ﻿using Tzipory.ConfigFiles;
-using Tzipory.ConfigFiles.Inventory;
 using Tzipory.ConfigFiles.Item;
+using Tzipory.ConfigFiles.Player.Inventory;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.InventorySystem;
+using Tzipory.Tools.Interface;
 using UnityEngine;
 
 namespace Tzipory.SerializeData.ItemSerializeData
 {
     [System.Serializable]
-    public class ItemContainerSerializeData : ISerializeData , ISlotItem
+    public class ItemContainerSerializeData : ISerializeData , ISlotItem , IInitialization<ItemConfig,int>
     {
         public bool IsInitialization { get; private set; }
-
+        
         [SerializeField] private int _itemId;
         [SerializeField] private int _itemStack;
         
         private ItemConfig _itemConfig;
+        
+        public void Init(ItemConfig itemConfig, int amount)
+        {
+            _itemConfig = itemConfig;
+            
+            _itemId = itemConfig.ObjectId;
+            _itemStack = amount;
+            
+            IsInitialization = true;
+        }
         
         public void Init(IConfigFile parameter)
         {
@@ -28,6 +39,10 @@ namespace Tzipory.SerializeData.ItemSerializeData
             
             IsInitialization = true;
         }
+
+        public void AddItemAmount(int amount)=>
+            _itemStack += amount;
+        
 
         public int SerializeTypeId => Constant.DataId.ITEM_DATA_ID;
         public Sprite ItemSlotSprite => _itemConfig.ItemIcon;

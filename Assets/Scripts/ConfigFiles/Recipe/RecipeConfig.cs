@@ -1,13 +1,13 @@
-using DefaultNamespace;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Tzipory.ConfigFiles.Item;
+using Tzipory.SerializeData.CurrencySystem;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Recipe", menuName = "ScriptableObjects/Recipe", order = 1)]
-public class RecipeConfig : ScriptableObject
-{
-    [SerializeField] private CurrencyContainer[] _currencies;
 
-    public CurrencyContainer[] Currencies => _currencies;
+namespace Tzipory.ConfigFiles.Recipe
+{
+    [CreateAssetMenu(fileName = "New Recipe", menuName = "ScriptableObjects/Recipe", order = 1)]
+    public class RecipeConfig : ScriptableObject
+    {
+        [SerializeField] private CurrencySerializeData[] _currencies;
+
+        public CurrencySerializeData[] Currencies => _currencies;
+    }
 }

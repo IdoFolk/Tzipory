@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.SerializeData.NodeSerializeData;
 using Tzipory.SerializeData.ProgressionSerializeData;
-using Sirenix.OdinInspector;
 using Tzipory.Systems.NodeSystem;
-using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.SceneSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;

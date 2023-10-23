@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using Tzipory.ConfigFiles;
 using Tzipory.Helpers.Consts;
-using Tzipory.Systems.NodeSystem;
 using Tzipory.SerializeData.NodeSerializeData;
+using Tzipory.Systems.NodeSystem;
 
 namespace Tzipory.SerializeData.ProgressionSerializeData
 {

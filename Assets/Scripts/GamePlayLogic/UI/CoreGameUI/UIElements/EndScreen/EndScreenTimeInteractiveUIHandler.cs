@@ -1,4 +1,5 @@
-﻿using Tzipory.Systems.UISystem;
+﻿using Tools.Enums;
+using Tzipory.Systems.UISystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ namespace Tzipory.GameplayLogic.UIElements.EndScreen
     public class EndScreenTimeInteractiveUIHandler : BaseUIElement
     {
         [SerializeField] private  TMPro.TextMeshProUGUI _text;
+
+        protected override UIGroupType GroupIndex => UIGroupType.EndGameUI;
 
         public override void Show()
         {

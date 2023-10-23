@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Tzipory.ConfigFiles.StatusSystem;
-using Tzipory.Systems.StatusSystem;
 
 namespace Tzipory.Systems.StatusSystem
 {

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
@@ -10,7 +11,9 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private List<TimeButtonsUI> _timeButtons;
         
         private TimeButtonsUI  _currentButton;
-        
+
+        protected override UIGroupType GroupIndex => UIGroupType.GameUI;
+
         protected override void Awake()
         {
             UIManager.AddObserverObject(this);
@@ -25,6 +28,14 @@ namespace Tzipory.GameplayLogic.UIElements
                     _currentButton = timeButtonsUI;
             }
             base.Show();
+        }
+        
+        
+        public override void Hide()
+        {
+            foreach (var timeButtonsUI in _timeButtons)
+                timeButtonsUI.OnTurnOn  -= OnButtonPressed;
+            base.Hide();
         }
 
         private void OnButtonPressed(TimeButtonsUI timeButtonsUI)

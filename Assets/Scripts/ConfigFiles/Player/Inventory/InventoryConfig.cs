@@ -2,7 +2,7 @@
 using Tzipory.Helpers.Consts;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.Inventory
+namespace Tzipory.ConfigFiles.Player.Inventory
 {
     [System.Serializable]
     public class InventoryConfig : IConfigFile

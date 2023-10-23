@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Tzipory.Helpers.Consts;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.Helpers.Consts;
 using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 

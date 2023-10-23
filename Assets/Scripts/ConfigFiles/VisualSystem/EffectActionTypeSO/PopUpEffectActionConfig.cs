@@ -1,11 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using MyNamespaceTzipory.Systems.VisualSystem;
-using Sirenix.OdinInspector;
-using Tzipory.Systems.StatusSystem;
 using Tzipory.Testing;
 using UnityEngine;
-
 
 namespace Tzipory.Systems.StatusSystem.EffectActionTypeSO
 {

@@ -28,7 +28,6 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
         private float _baseDecisionInterval;//temp
         
         private float _currentAttackRate;
-        public int EntityInstanceID { get; set; }
 
         public override void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {

@@ -1,4 +1,5 @@
 ﻿using TMPro;
+using Tools.Enums;
 using Tzipory.ConfigFiles.ToolTipConfig;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.Systems.UISystem;
@@ -14,6 +15,8 @@ namespace Tzipory.GameplayLogic.UIElements.EndScreen
         [SerializeField] private EndScreenEnemiesKilledInteractiveUIHandler  _enemiesKilledInteractiveHandler;
         [SerializeField] private EndScreenTimeInteractiveUIHandler _timeInteractiveHandler;
         [SerializeField] private EndScreenWaveInteractiveUIHandler _waveInteractiveUIHandler;
+
+        protected override UIGroupType GroupIndex => UIGroupType.EndGameUI;
 
         private void Awake()
         {

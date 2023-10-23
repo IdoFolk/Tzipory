@@ -1,7 +1,7 @@
 ﻿using System;
 using Tzipory.ConfigFiles;
 using Tzipory.ConfigFiles.EntitySystem;
-using Tzipory.ConfigFiles.Party;
+using Tzipory.ConfigFiles.Player;
 using Tzipory.Helpers.Consts;
 using Tzipory.SerializeData.Inventory;
 using Tzipory.SerializeData.PlayerData.Camp;

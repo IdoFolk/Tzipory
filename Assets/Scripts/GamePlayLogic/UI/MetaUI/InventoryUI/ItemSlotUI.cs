@@ -1,4 +1,5 @@
 using TMPro;
+using Tools.Enums;
 using Tzipory.Systems.InventorySystem;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Interface;
@@ -15,6 +16,7 @@ public class ItemSlotUI : BaseInteractiveUIElement , IInitialization<ISlotItem>
    private ISlotItem _item;
    
    private Vector3  _startPosition;
+   protected override UIGroupType GroupIndex => UIGroupType.MetaUI;
 
    public ISlotItem Item => _item;
 
@@ -46,4 +48,5 @@ public class ItemSlotUI : BaseInteractiveUIElement , IInitialization<ISlotItem>
       _item = parameter;
       IsInitialization = true;
    }
+
 }

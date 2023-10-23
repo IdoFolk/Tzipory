@@ -1,3 +1,4 @@
+using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.UISystem;
@@ -8,11 +9,17 @@ public class CampFireUIHandler : BaseUIElement
     [SerializeField] private InventoryUIHandler _inventoryUIHandler;
     [SerializeField] private CharacterUIHandler _characterUIHandler;
     [SerializeField] private CharacterStatsUIHandler _characterStatsUIHandler;
+    protected override UIGroupType GroupIndex => UIGroupType.MetaUI;
 
     private void Start()
     {
-        _inventoryUIHandler.Init(GameManager.PlayerManager.PlayerSerializeData.InventorySerializeData);
+        var inventoryData = GameManager.PlayerManager.PlayerSerializeData.InventorySerializeData;
+        
+        _inventoryUIHandler.Init(inventoryData);
+
+        _inventoryUIHandler.OnItemDropToInventory += inventoryData.AddItemData;
     }
+
 
     public override void Show()
     {
@@ -20,6 +27,11 @@ public class CampFireUIHandler : BaseUIElement
         _inventoryUIHandler.Show();
         _characterUIHandler.Show();
         _characterStatsUIHandler.Show();
+    }
+
+    public override void Hide()
+    {
+        _inventoryUIHandler.OnItemDropToInventory -= GameManager.PlayerManager.PlayerSerializeData.InventorySerializeData.AddItemData;
     }
 
 

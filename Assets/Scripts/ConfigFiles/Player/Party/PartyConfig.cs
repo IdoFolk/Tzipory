@@ -2,7 +2,7 @@
 using Tzipory.Helpers.Consts;
 using UnityEngine;
 
-namespace Tzipory.ConfigFiles.Party
+namespace Tzipory.ConfigFiles.Player.Party
 {
     [System.Serializable]
     public class PartyConfig : IConfigFile

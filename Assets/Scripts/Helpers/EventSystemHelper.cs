@@ -4,7 +4,7 @@ namespace Tzipory.Helpers
 {
     public class EventSystemHelper : MonoBehaviour
     {
-        private  static EventSystemHelper _instance;
+        private static EventSystemHelper _instance;
 
         private void Awake()
         {

@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 namespace Tzipory.Systems.UISystem
 {
-    public abstract class BaseInteractiveUIElement : MonoBehaviour , IUIElement , IPointerEnterHandler,IPointerExitHandler , IPointerClickHandler ,IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+    public abstract class BaseInteractiveUIElement : BaseUIElement , IPointerEnterHandler,IPointerExitHandler , IPointerClickHandler ,IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
         public event Action OnClickEvent;
         public event Action OnDragEvent;
@@ -15,10 +15,7 @@ namespace Tzipory.Systems.UISystem
         public event Action OnDoubleClickEvent;
         public event Action OnEnter;
         public event Action OnExit;
-        public Action OnShow { get; }
 
-        public Action OnHide { get; }
-        public string ElementName => gameObject.name;
 
         [SerializeField] private bool _enableDrag;
         
@@ -31,24 +28,7 @@ namespace Tzipory.Systems.UISystem
         private int _clickNum;
 
         private ITimer _doubleClickTimer;
-
-        protected virtual void Awake()
-        {
-        }
-
-        public virtual void Show()
-        {
-            gameObject.SetActive(true);
-            OnShow?.Invoke();
-            _clickNum = 0; 
-        }
-
-        public virtual void Hide()
-        {
-            gameObject.SetActive(false);
-            OnHide?.Invoke();
-        }
-
+        
         private void Update()
         {
             if (_clickNum == 0)

@@ -1,4 +1,4 @@
-using Tzipory.ConfigFiles.Party;
+using Tzipory.ConfigFiles.Player;
 using Tzipory.SerializeData;
 using Tzipory.Systems.DataManager;
 using Tzipory.Systems.SceneSystem;

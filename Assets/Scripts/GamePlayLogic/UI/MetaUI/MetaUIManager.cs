@@ -1,3 +1,4 @@
+using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using UnityEngine;
 
@@ -17,6 +18,7 @@ namespace Tzipory.GamePlayLogic.UI.MetaUI
 
         private void OnDestroy()
         {
+            UIManager.HideGroup((int)UIGroupType.MetaUI);
             _characterRosterUI.OnCharacterRosterSlotClicked -= _campUIManager.NewMainShamanSelected;
         }
     }

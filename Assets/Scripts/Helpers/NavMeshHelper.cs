@@ -7,15 +7,7 @@ namespace Tzipory.Helpers
     {
         [SerializeField] private NavMeshSurface _navMeshSurface;
 
-        void Start()
-        {
+        void Start()=>
             _navMeshSurface.BuildNavMesh();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }

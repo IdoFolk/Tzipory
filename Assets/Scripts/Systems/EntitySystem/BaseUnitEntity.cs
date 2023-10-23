@@ -179,7 +179,7 @@ namespace Tzipory.Systems.Entity
 
         #region Temps
         
-        [Header("TEMPS")] [SerializeField]
+        [Header("Temps")] [SerializeField]
         private Transform _shotPosition;
         [SerializeField] private bool _doShowHPBar;
         [SerializeField] private TEMP_UNIT_HPBarConnector _hpBarConnector;

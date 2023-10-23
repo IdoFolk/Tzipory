@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using Tzipory.ConfigFiles.Item;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Craft System Config", menuName = "ScriptableObjects/Crafting System Config", order = 2)]
 
-public class CraftingSystemConfig : ScriptableObject
+namespace Tzipory.ConfigFiles.Crafting
 {
-    [SerializeField] ItemConfig[] _items;
+    [CreateAssetMenu(fileName = "New Craft System Config", menuName = "ScriptableObjects/Crafting System Config", order = 2)]
 
-    public ItemConfig[] Items { get => _items; }
+    public class CraftingSystemConfig : ScriptableObject
+    {
+        [SerializeField] private ItemConfig[] _items;
+
+        public ItemConfig[] Items => _items;
+    }
 }

@@ -15,12 +15,7 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private Image _splash;
         private Shaman _shaman;
 
-        protected override UIGroupType GroupIndex => UIGroupType.GameUI;
-
-        protected override void Awake()
-        {
-            UIManager.AddObserverObject(this);
-        }
+        protected override UIGroupType UIGroup => UIGroupType.GameUI;
         
         public void Init(Shaman shaman)
         {

@@ -10,5 +10,6 @@
         PauseUI,
         GameOverlayUI,
         EndGameUI,
+        SettingsUI,
     }
 }

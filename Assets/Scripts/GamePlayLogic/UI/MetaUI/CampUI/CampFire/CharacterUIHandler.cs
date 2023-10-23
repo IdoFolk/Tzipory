@@ -18,7 +18,7 @@ public class CharacterUIHandler : BaseUIElement , IInitialization<ShamanDataCont
     
     public bool IsInitialization { get; }
 
-    protected override UIGroupType GroupIndex => UIGroupType.MetaUI;
+    protected override UIGroupType UIGroup => UIGroupType.MetaUI;
 
     public void Init(ShamanDataContainer parameter)
     {

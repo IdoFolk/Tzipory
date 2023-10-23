@@ -7,7 +7,7 @@ public class InfoText : BaseUIElement
 {
     [SerializeField] private TMP_Text _dataName;
     [SerializeField] private TMP_Text _dataValue;
-    protected override UIGroupType GroupIndex => UIGroupType.MetaUI;
+    protected override UIGroupType UIGroup => UIGroupType.MetaUI;
 
     public void SetData(string dataName, string value,bool bg)
     {

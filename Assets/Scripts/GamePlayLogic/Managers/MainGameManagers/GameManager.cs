@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
-
     public class GameManager : MonoBehaviour
     {
         public static ISceneHandler SceneHandler { get; private set; }
@@ -34,7 +33,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
         void Start()
         {
             SceneHandler.LoadScene(SceneType.MainMenu);
-
+            
             var playerSerializeData = DataManager.DataRequester.GetSerializeData<PlayerSerializeData>(_playerConfig);
             PlayerManager = new PlayerManager(playerSerializeData);
         }

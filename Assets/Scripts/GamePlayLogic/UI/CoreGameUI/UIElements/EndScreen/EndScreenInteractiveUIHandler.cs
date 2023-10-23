@@ -16,7 +16,7 @@ namespace Tzipory.GameplayLogic.UIElements.EndScreen
         [SerializeField] private EndScreenTimeInteractiveUIHandler _timeInteractiveHandler;
         [SerializeField] private EndScreenWaveInteractiveUIHandler _waveInteractiveUIHandler;
 
-        protected override UIGroupType GroupIndex => UIGroupType.EndGameUI;
+        protected override UIGroupType UIGroup => UIGroupType.EndGameUI;
 
         private void Awake()
         {

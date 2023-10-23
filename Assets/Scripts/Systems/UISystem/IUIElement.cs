@@ -10,5 +10,16 @@ namespace Tzipory.Systems.UISystem
         
         void Show();
         void Hide();
+        void UpdateUIVisual();
+    }
+
+    public enum UIGroup
+    {
+        GameUI,
+        PauseUI,
+        EndGameUI,
+        MainMenuUI,
+        SettingsUI,
+        LoadingUI,
     }
 }

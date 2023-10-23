@@ -18,7 +18,7 @@ namespace Tzipory.GamePlayLogic.UI
         private ShamanDataContainer _shamanDataContainer;
         public bool IsInitialization { get; private set; }
 
-        protected override UIGroupType GroupIndex => UIGroupType.GameOverlayUI;
+        protected override UIGroupType UIGroup => UIGroupType.GameOverlayUI;
 
         public override void Show()
         {

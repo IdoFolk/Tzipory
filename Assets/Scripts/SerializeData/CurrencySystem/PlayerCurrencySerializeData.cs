@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Tzipory.SerializeData.CurrencySystem
 {
@@ -9,15 +10,15 @@ namespace Tzipory.SerializeData.CurrencySystem
         
         public CurrencySerializeData[] CurrencySerializeData => _currencySerializeData;
         
-        public bool TryBuyItem(CurrencySerializeData[] purchaseBill,out PurchaseOder purchaseOder) 
+        public bool TryBuyItem(IEnumerable<CurrencySerializeData> purchaseBill,out PurchaseOder purchaseOder) 
         {
             foreach (var currencySerializeData in purchaseBill)
             {
-                for (int i = 0; i < _currencySerializeData.Length; i++)
+                foreach (var currencyData in _currencySerializeData)
                 {
-                    if (currencySerializeData.Material == _currencySerializeData[i].Material)
+                    if (currencySerializeData.Material == currencyData.Material)
                     {
-                        if (!_currencySerializeData[i].TryReduceAmount(currencySerializeData.Amount))
+                        if (!currencyData.TryReduceAmount(currencySerializeData.Amount))
                         {
                             purchaseOder = default;
                             return false;

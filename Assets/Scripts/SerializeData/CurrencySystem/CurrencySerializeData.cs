@@ -16,6 +16,12 @@ namespace Tzipory.SerializeData.CurrencySystem
             
             return true;
         }
+
+        public CurrencySerializeData(Constant.Materials material,int amount)
+        {
+            _material = material;
+            _amount = amount;
+        }
         
         public void ReduceAmount(int amount)=>
             _amount -= amount;

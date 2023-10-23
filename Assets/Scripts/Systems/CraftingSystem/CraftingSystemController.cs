@@ -1,6 +1,6 @@
-using DefaultNamespace;
 using Tzipory.ConfigFiles.Item;
 using Tzipory.Helpers.Consts;
+using Tzipory.SerializeData.CurrencySystem;
 using UnityEngine;
 
 public class CraftingSystemController : MonoBehaviour
@@ -13,7 +13,7 @@ public class CraftingSystemController : MonoBehaviour
     /// <param name="userCurrencies"></param>
     /// <param name="item"></param>
     /// <returns></returns>
-    public static bool CanPlayerCraftItem(CurrencyContainer[] userCurrencies, ItemConfig item)
+    public static bool CanPlayerCraftItem(CurrencySerializeData[] userCurrencies, ItemConfig item)
     {
         var recipe = item.Recipe;
         bool isRecipeViable = true;
@@ -40,7 +40,7 @@ public class CraftingSystemController : MonoBehaviour
         return isRecipeViable;
     }
     
-    public bool CanPlayerCraftItem(CurrencyContainer[] userCurrencies, RecipeConfig recipe)//overload
+    public bool CanPlayerCraftItem(CurrencySerializeData[] userCurrencies, RecipeConfig recipe)//overload
     {
         bool isRecipeViable = true;
 
@@ -71,7 +71,7 @@ public class CraftingSystemController : MonoBehaviour
     /// </summary>
     /// <param name="_userCurrencies"></param>
     /// <returns></returns>
-    public ItemConfig CompareMaterialsAndGetItem(CurrencyContainer[] _userCurrencies)//compare currencies to all items recipes // deprecated
+    public ItemConfig CompareMaterialsAndGetItem(CurrencySerializeData[] _userCurrencies)//compare currencies to all items recipes // deprecated
     {
         foreach (var item in _config.Items)
         {
@@ -116,10 +116,10 @@ public class CraftingSystemController : MonoBehaviour
     [ContextMenu("CheckIfCanCraftItemOneForDebuggingShouldResultFalse")]
     public void CheckIfCanCraftItemOneForDebuggingShouldResultFalse()
     {
-        CurrencyContainer[] UserTestInventory = new CurrencyContainer[2]//wrong amount
+        CurrencySerializeData[] UserTestInventory = new CurrencySerializeData[2]//wrong amount
         {
-            new CurrencyContainer(Constant.Materials.Bones,2),
-            new CurrencyContainer(Constant.Materials.Honey,3)
+            new CurrencySerializeData(Constant.Materials.Bones,2),
+            new CurrencySerializeData(Constant.Materials.Honey,3)
         };// user inventory
 
 
@@ -140,10 +140,10 @@ public class CraftingSystemController : MonoBehaviour
     {
 
 
-        CurrencyContainer[] UserTestInventory = new CurrencyContainer[2]//correct amount
+        CurrencySerializeData[] UserTestInventory = new CurrencySerializeData[2]//correct amount
         {
-            new CurrencyContainer(Constant.Materials.Honey,4),
-            new CurrencyContainer(Constant.Materials.Bones,2)
+            new CurrencySerializeData(Constant.Materials.Honey,4),
+            new CurrencySerializeData(Constant.Materials.Bones,2)
         };// user inventory
 
 
@@ -162,10 +162,10 @@ public class CraftingSystemController : MonoBehaviour
     [ContextMenu("TestGettingitemConfigResultNull")]
     public void TestGettingitemConfigResultNull()
     {
-        CurrencyContainer[] UserTestCurrencies = new CurrencyContainer[2]//wrong amount
+        CurrencySerializeData[] UserTestCurrencies = new CurrencySerializeData[2]//wrong amount
         {
-            new CurrencyContainer(Constant.Materials.Bones,2),
-            new CurrencyContainer(Constant.Materials.Honey,3)
+            new CurrencySerializeData(Constant.Materials.Bones,2),
+            new CurrencySerializeData(Constant.Materials.Honey,3)
         };
         ItemConfig resultingItem = CompareMaterialsAndGetItem(UserTestCurrencies);
         if (resultingItem == null)
@@ -180,10 +180,10 @@ public class CraftingSystemController : MonoBehaviour
     [ContextMenu("TestGettingitemConfigResultItem")]
     public void TestGettingitemConfigResultItem()
     {
-        CurrencyContainer[] UserTestCurrencies = new CurrencyContainer[2]//correct amount
+        CurrencySerializeData[] UserTestCurrencies = new CurrencySerializeData[2]//correct amount
         {
-            new CurrencyContainer(Constant.Materials.Honey,4),
-            new CurrencyContainer(Constant.Materials.Bones,2)
+            new CurrencySerializeData(Constant.Materials.Honey,4),
+            new CurrencySerializeData(Constant.Materials.Bones,2)
         };
         ItemConfig resultingItem = CompareMaterialsAndGetItem(UserTestCurrencies);
         if (resultingItem == null)

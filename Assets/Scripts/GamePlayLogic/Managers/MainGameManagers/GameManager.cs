@@ -1,7 +1,6 @@
 using Tzipory.ConfigFiles.Player;
 using Tzipory.SerializeData;
 using Tzipory.Systems.CameraSystem;
-using Tzipory.ConfigFiles.Party;
 using Tzipory.Systems.DataManager;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;

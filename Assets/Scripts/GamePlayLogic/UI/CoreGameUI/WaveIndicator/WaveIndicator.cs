@@ -73,6 +73,7 @@ namespace Tzipory.GameplayLogic.UI.WaveIndicator
         private void ClickEvent()
         {
             _timer.StopTimer();
+            PopupWindowManager.CloseWindow();
             Debug.Log("Click");
         }
         
@@ -81,6 +82,7 @@ namespace Tzipory.GameplayLogic.UI.WaveIndicator
             OnDispose?.Invoke(this);
             IsInitialization = false;
             gameObject.SetActive(false);
+            PopupWindowManager.CloseWindow();
         }
 
         public void Free()
@@ -104,13 +106,13 @@ namespace Tzipory.GameplayLogic.UI.WaveIndicator
         public override void OnPointerEnter(PointerEventData eventData)
         {
             base.OnPointerEnter(eventData);
-            PopupWindowManager.OpenNewWindow(_rectTransform,"Enemy Wave","incoming enemies: number");
+            PopupWindowManager.OpenWindow(this,"Enemy Wave","incoming enemies: number");
         }
 
         public override void OnPointerExit(PointerEventData eventData)
         {
             base.OnPointerExit(eventData);
-            PopupWindowManager.CloseNewWindow();
+            PopupWindowManager.CloseWindow();
         }
     }
 }

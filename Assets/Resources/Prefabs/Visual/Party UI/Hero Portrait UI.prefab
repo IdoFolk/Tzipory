@@ -478,8 +478,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enableDrag: 0
   _canvasGroup: {fileID: 0}
-  _popupWindowHandler: {fileID: 0}
   _doubleClickSpeed: 0.5
+  _popupWindowSettings: {fileID: 11400000, guid: 07238690dfec52a4c80ef8fd0a91168e, type: 2}
   _fill: {fileID: 2203700212569915012}
   _healthBar: {fileID: 8223283540287803632}
   _splash: {fileID: 1019704610706600701}

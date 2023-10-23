@@ -1,5 +1,6 @@
 ﻿using System;
 using Sirenix.OdinInspector;
+using Tzipory.Systems.PopupSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -19,13 +20,16 @@ namespace Tzipory.Systems.UISystem
 
         public Action OnHide { get; }
         public string ElementName => gameObject.name;
+        public RectTransform RectTransform => _rectTransform;
+        public PopupWindowSettings PopupWindowSettings => _popupWindowSettings;
 
         [SerializeField] private bool _enableDrag;
 
         [SerializeField,ShowIf("_enableDrag")] private CanvasGroup _canvasGroup;
         
         [SerializeField] private float _doubleClickSpeed = 0.5f;
-        [SerializeField] protected RectTransform _rectTransform;
+        [SerializeField] private PopupWindowSettings _popupWindowSettings;
+        protected RectTransform _rectTransform;
         private bool _isOn;
         
         private int _clickNum;
@@ -37,7 +41,7 @@ namespace Tzipory.Systems.UISystem
             
         }
 
-        private void OnEnable()
+        private void Start()
         {
             _rectTransform = GetComponent<RectTransform>();
         }

@@ -245,8 +245,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4a5aea4f0c7a2f4fbd13d3d9c1978f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableDrag: 0
+  _canvasGroup: {fileID: 0}
   _doubleClickSpeed: 0.5
-  _rectTransform: {fileID: 6384550637329320876}
+  _popupWindowSettings: {fileID: 11400000, guid: cfbe60ab08023124d84e8de6793bfbe3, type: 2}
   _rotateIndicator: {fileID: 9140210028701899648}
   _offSet: {x: 0, y: 0}
   _timerFill: {fileID: 4766003855562498267}

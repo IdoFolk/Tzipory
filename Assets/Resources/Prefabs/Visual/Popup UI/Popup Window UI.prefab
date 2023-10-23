@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 13534447234508109}
   - component: {fileID: 254107499126383498}
   m_Layer: 0
-  m_Name: Information
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -545,8 +545,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _uiHolder: {fileID: 5614603384721662045}
   _textHeader: {fileID: 7448455994202742060}
-  _textbody: {fileID: 254107499126383498}
-  _defaultPadding: {x: 5, y: 5}
+  _textBody: {fileID: 254107499126383498}
+  _defaultPopupWindowSettings: {fileID: 0}
 --- !u!225 &4446352150662966776
 CanvasGroup:
   m_ObjectHideFlags: 0

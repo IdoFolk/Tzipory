@@ -66,13 +66,13 @@ namespace Tzipory.GameplayLogic.UIElements
             var shamanName = _shaman.name;
             int index = shamanName.IndexOf('_');
             shamanName = shamanName.Substring(0, index);
-            PopupWindowManager.OpenNewWindow(_rectTransform,shamanName,"Stats");
+            PopupWindowManager.OpenWindow(this,shamanName,"Stats");
         }
 
         public override void OnPointerExit(PointerEventData eventData)
         {
             base.OnPointerExit(eventData);
-            PopupWindowManager.CloseNewWindow();
+            PopupWindowManager.CloseWindow();
         }
     }
 }

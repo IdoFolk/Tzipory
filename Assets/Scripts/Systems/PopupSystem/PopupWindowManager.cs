@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Tzipory.Systems.PopupSystem;
+using Tzipory.Systems.UISystem;
 using UnityEngine;
 
 namespace Tzipory.Systems.PopupSystem
@@ -10,7 +7,6 @@ namespace Tzipory.Systems.PopupSystem
     {
         [SerializeField] private PopupWindowHandler _popupWindowAsset;
         [SerializeField] private Transform _canvasParent;
-        [SerializeField] private PopupWindowSettings _popupWindowSettings;
         
         private static PopupWindowHandler _popupWindow;
 
@@ -19,16 +15,16 @@ namespace Tzipory.Systems.PopupSystem
             _popupWindow = Instantiate(_popupWindowAsset,_canvasParent);
         }
 
-        public static void OpenNewWindow(RectTransform rectTransform,string header,string body)
+        public static void OpenWindow(BaseInteractiveUIElement uiElement,string header,string body)
         {
-            _popupWindow.OpenWindow(rectTransform,header,body);
+            _popupWindow.OpenWindow(uiElement,header,body);
             
         }
         // public static void OpenNewWindow(Transform transform,string header,string body) //may need to request sprite instead of transform
         // {
         //     
         // }
-        public static void CloseNewWindow()
+        public static void CloseWindow()
         {
             _popupWindow.CloseWindow();
         }

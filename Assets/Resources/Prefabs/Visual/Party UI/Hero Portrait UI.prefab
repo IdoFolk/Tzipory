@@ -32,7 +32,6 @@ RectTransform:
   - {fileID: 2256086227895982784}
   - {fileID: 13051733713999422}
   m_Father: {fileID: 2177346916046582289}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -121,7 +120,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2177346916046582289}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -197,7 +195,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6317715027987796322}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -273,7 +270,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2177346916046582289}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -350,7 +346,6 @@ RectTransform:
   - {fileID: 2096356335216624450}
   - {fileID: 6317715027987796322}
   m_Father: {fileID: 1990358484108044902}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -388,7 +383,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 13051733713999422}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -464,7 +458,6 @@ RectTransform:
   m_Children:
   - {fileID: 2177346916046582289}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -483,6 +476,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c2c6edacbe4278ba6b9a326bc81c3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showOnAwake: 1
+  _enableDrag: 0
+  _canvasGroup: {fileID: 0}
   _doubleClickSpeed: 0.5
   _fill: {fileID: 2203700212569915012}
   _healthBar: {fileID: 8223283540287803632}
@@ -517,7 +513,6 @@ RectTransform:
   m_Children:
   - {fileID: 5815707746383899053}
   m_Father: {fileID: 6317715027987796322}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

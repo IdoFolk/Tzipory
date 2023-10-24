@@ -36,7 +36,7 @@ namespace Tzipory.Systems.TargetingSystem
             
             transform.localScale = new Vector3(_entityTargetingComponent.TargetingRange.CurrentValue, _entityTargetingComponent.TargetingRange.CurrentValue,1f);
             
-            _entityTargetingComponent.TargetingRange.OnValueChangedData += UpdateTargetingRange;
+            _entityTargetingComponent.TargetingRange.OnValueChanged += UpdateTargetingRange;
         }
 
         private void UpdateTargetingRange(StatChangeData statChangeData)=>
@@ -122,7 +122,7 @@ namespace Tzipory.Systems.TargetingSystem
         public void Reset()
         {
             _availableTargets.Clear();
-            _entityTargetingComponent.TargetingRange.OnValueChangedData -= UpdateTargetingRange;
+            _entityTargetingComponent.TargetingRange.OnValueChanged -= UpdateTargetingRange;
         }
     }
 }

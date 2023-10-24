@@ -80,7 +80,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
                 return;
 
             foreach (var statusEffect in OnEnterStatusEffects)
-                target.StatusHandler.AddStatusEffect(statusEffect);
+                target.StatHandler.AddStatEffect(statusEffect);
         }
         public void ExecuteOnExit(IEntityTargetAbleComponent target)
         {
@@ -88,7 +88,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
                 return;
 
             foreach (var statusEffect in OnExitStatusEffects)
-                target.StatusHandler.AddStatusEffect(statusEffect);
+                target.StatHandler.AddStatEffect(statusEffect);
         }
 
 

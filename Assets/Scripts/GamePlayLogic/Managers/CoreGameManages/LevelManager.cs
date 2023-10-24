@@ -24,7 +24,6 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         public static PartyManager PartyManager { get; private set; }
         public static EnemyManager EnemyManager { get; private set; }
         public static WaveManager WaveManager { get; private set; }
-        public static UIManager UIManager { get; private set; }
         public static CoreTemple CoreTemplete { get; private set; }
 
         public bool IsGameRunning { get; private set; }
@@ -52,7 +51,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         private void Awake()
         {
-            UIManager = new UIManager();
+            //UIManager = new UIManager();
             _poolManager = new PoolManager();
 
             if (GameManager.GameData == null) //for Testing(Start form level scene)
@@ -89,7 +88,6 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             GameManager.CameraHandler.UnlockCamera();
             GameManager.CameraHandler.ResetCamera();
             WaveManager.StartLevel();
-            UIManager.Initialize();
             GAME_TIME.SetTimeStep(1);
             IsGameRunning = true;
         }
@@ -113,7 +111,6 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         private void OnDestroy()
         {
-            UIManager.Dispose();
             EnemyManager.Dispose();
             PartyManager.Dispose();
             WaveManager.Dispose();

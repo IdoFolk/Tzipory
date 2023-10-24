@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 409197816}
   - component: {fileID: 409197817}
   m_Layer: 0
-  m_Name: TEMP_VisualData
+  m_Name: PopUpManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd74998339d35e428a6d165d6ac9901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defualtSO: {fileID: 11400000, guid: 60b2ee99298fa1b498ae8552db195e92, type: 2}
+  _defualtSo: {fileID: 11400000, guid: 1c477da2ae86013479986cb933c972e0, type: 2}
 --- !u!1001 &498852640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -263,6 +263,10 @@ PrefabInstance:
     - target: {fileID: 2742278124856079523, guid: 9d2703615fd5431449fca9e89363a272, type: 3}
       propertyPath: m_Name
       value: Hero Panel UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725264486677685256, guid: 9d2703615fd5431449fca9e89363a272, type: 3}
+      propertyPath: _showOnAwake
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4725264486677685256, guid: 9d2703615fd5431449fca9e89363a272, type: 3}
       propertyPath: _shamanInteractiveUIHanlder
@@ -391,6 +395,14 @@ PrefabInstance:
     - target: {fileID: 3493536373832206464, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444915598947704686, guid: a21658bf9c933454991365eeebc7d402, type: 3}
+      propertyPath: m_XDamping
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444915598947704686, guid: a21658bf9c933454991365eeebc7d402, type: 3}
+      propertyPath: m_YDamping
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7871334403514214793, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_Name
@@ -864,7 +876,7 @@ PrefabInstance:
       objectReference: {fileID: 1930332588}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.data[0]
@@ -873,7 +885,7 @@ PrefabInstance:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
+      objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.data[2]
       value: 

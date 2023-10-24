@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using Tzipory.ConfigFiles.PopUpText;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.StatusSystem;
 using UnityEngine;
@@ -20,9 +21,11 @@ namespace Tzipory.ConfigFiles.StatusSystem
         [Header("Status effect visual")]
         [SerializeField, Tooltip("")] private EffectSequenceConfig _effectSequence;//may need to change
 
+        [SerializeField] private bool _usePopUpTextConfig;
+        [SerializeField, Tooltip(""),ShowIf("_usePopUpTextConfig")] private PopUpTextConfig _popUpTextConfig;//may need to change
+
         private bool ShowDuration =>
             _statEffectType is StatEffectType.OverTime or StatEffectType.Interval; 
-        
         
         public string StatusEffectName => _statusEffectName;
         public int StatProcessPriority => _statProcessPriority;
@@ -32,6 +35,8 @@ namespace Tzipory.ConfigFiles.StatusSystem
         public StatEffectType StatEffectType => _statEffectType;
         public StatModifierConfig StatModifier => _statModifier;
         public EffectSequenceConfig EffectSequence => _effectSequence;
+        public bool UsePopUpTextConfig => _usePopUpTextConfig;
+        public PopUpTextConfig PopUpTextConfig => _popUpTextConfig;
         
         public int ObjectId { get; }
         

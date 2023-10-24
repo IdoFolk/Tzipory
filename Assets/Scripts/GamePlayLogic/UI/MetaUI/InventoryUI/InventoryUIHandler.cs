@@ -46,5 +46,4 @@ public class InventoryUIHandler : BaseInteractiveUIElement , IInitialization<Inv
         
         OnItemDropToInventory?.Invoke(characterItemSlotUI.StoreItemId,1);
     }
-
 }

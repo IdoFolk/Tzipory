@@ -34,12 +34,4 @@ namespace Tzipory.Systems.FactorySystem.ObjectFactory
             return new TransformEffectAction();
         }
     }
-    public class PopUpEffectActionFactory :  IFactory<PopUpEffectAction>
-    {
-        public PopUpEffectAction Create()
-        {
-            return new PopUpEffectAction();
-        }
-    }
-
 }

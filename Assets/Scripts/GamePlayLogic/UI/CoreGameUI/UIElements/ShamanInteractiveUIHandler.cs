@@ -37,14 +37,14 @@ namespace Tzipory.GameplayLogic.UIElements
 
         public override void Show()
         {
-            _shaman.Health.OnValueChangedData += OnHealthChange;
+            _shaman.Health.OnValueChanged += OnHealthChange;
             OnClickEvent += GoToShaman;
             base.Show();
         }
 
         public override void Hide()
         {
-            _shaman.Health.OnValueChangedData -= OnHealthChange;
+            _shaman.Health.OnValueChanged -= OnHealthChange;
             OnClickEvent -= GoToShaman;
             base.Hide();
         }

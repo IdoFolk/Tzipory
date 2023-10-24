@@ -17,7 +17,7 @@ namespace Tzipory.GameplayLogic.UIElements
 
         public override void Show()
         {
-            LevelManager.CoreTemplete.Health.OnValueChangedData += UpdateCoreUI;
+            LevelManager.CoreTemplete.Health.OnValueChanged += UpdateCoreUI;
             _maxCount.text = $"/{LevelManager.CoreTemplete.Health.BaseValue}";
             UpdateUiData(LevelManager.CoreTemplete.Health.CurrentValue);
             base.Show();
@@ -30,7 +30,7 @@ namespace Tzipory.GameplayLogic.UIElements
 
         public override void Hide()
         {
-            LevelManager.CoreTemplete.Health.OnValueChangedData -= UpdateCoreUI;
+            LevelManager.CoreTemplete.Health.OnValueChanged -= UpdateCoreUI;
             base.Hide();
         }
     }

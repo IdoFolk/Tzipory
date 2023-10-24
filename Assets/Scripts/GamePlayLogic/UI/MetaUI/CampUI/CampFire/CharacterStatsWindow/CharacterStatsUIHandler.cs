@@ -14,7 +14,7 @@ public class CharacterStatsUIHandler : BaseUIElement ,  IInitialization<ShamanSe
     
     private ShamanSerializeData _serializeData;
 
-    protected override UIGroupType GroupIndex => UIGroupType.MetaUI;
+    protected override UIGroupType UIGroup => UIGroupType.MetaUI;
     
     public void Init(ShamanSerializeData parameter)
     {

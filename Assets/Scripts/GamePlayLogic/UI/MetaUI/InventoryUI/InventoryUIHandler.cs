@@ -16,7 +16,7 @@ public class InventoryUIHandler : BaseInteractiveUIElement , IInitialization<Inv
     
     private List<ItemSlotUI> _itemSlotUis;
 
-    protected override UIGroupType GroupIndex => UIGroupType.MetaUI;
+    protected override UIGroupType UIGroup => UIGroupType.MetaUI;
     public bool IsInitialization { get; private set; }
     public void Init(InventorySerializeData parameter)
     {

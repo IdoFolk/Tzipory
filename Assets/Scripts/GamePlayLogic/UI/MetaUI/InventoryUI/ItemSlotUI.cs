@@ -16,7 +16,7 @@ public class ItemSlotUI : BaseInteractiveUIElement , IInitialization<ISlotItem>
    private ISlotItem _item;
    
    private Vector3  _startPosition;
-   protected override UIGroupType GroupIndex => UIGroupType.MetaUI;
+   protected override UIGroupType UIGroup => UIGroupType.MetaUI;
 
    public ISlotItem Item => _item;
 

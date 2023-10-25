@@ -4996,12 +4996,14 @@ PlayableDirector:
   m_GameObject: {fileID: 259951745}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: a01efb75052e908478c68b1eb41e65d3, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 40ba01866b825a14d8c5875150f293d1, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
-  m_SceneBindings: []
+  m_SceneBindings:
+  - key: {fileID: -199545576469418231, guid: 40ba01866b825a14d8c5875150f293d1, type: 2}
+    value: {fileID: 812558905}
   m_ExposedReferences:
     m_References: []
 --- !u!1 &398821039
@@ -9981,7 +9983,7 @@ GameObject:
   - component: {fileID: 577154237}
   - component: {fileID: 577154236}
   m_Layer: 0
-  m_Name: Smoke Bomb Clouds holder
+  m_Name: Smoke Bomb Clouds Entry holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10095,14 +10097,12 @@ PlayableDirector:
   m_GameObject: {fileID: 812558903}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 40ba01866b825a14d8c5875150f293d1, type: 2}
+  m_PlayableAsset: {fileID: 0}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
-  m_SceneBindings:
-  - key: {fileID: 4924156483253423010, guid: 40ba01866b825a14d8c5875150f293d1, type: 2}
-    value: {fileID: 812558905}
+  m_SceneBindings: []
   m_ExposedReferences:
     m_References: []
 --- !u!212 &812558907
@@ -35530,7 +35530,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7157788274958173542, guid: 454090e1f91243f4198cce31441648a2, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7938629577173727441, guid: 454090e1f91243f4198cce31441648a2, type: 3}
       propertyPath: m_LocalPosition.x

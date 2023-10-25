@@ -1,20 +1,20 @@
 ﻿using System.Collections.Generic;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.Systems.Entity.EntityComponents;
 
-namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
+namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 {
     public class SingleAbilityExecuter : IAbilityExecutor
     {
         public AbilityExecuteType AbilityExecuteType { get; }
         public IEntityTargetAbleComponent Caster { get; }
-        public List<StatusEffectConfig> OnEnterStatusEffects { get; }
+        public List<StatEffectConfig> OnEnterStatusEffects { get; }
 
         public SingleAbilityExecuter(IEntityTargetAbleComponent caster,AbilityConfig abilityConfig)
         {
             Caster = caster;
-            OnEnterStatusEffects = new List<StatusEffectConfig>();
+            OnEnterStatusEffects = new List<StatEffectConfig>();
 
            OnEnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
         }

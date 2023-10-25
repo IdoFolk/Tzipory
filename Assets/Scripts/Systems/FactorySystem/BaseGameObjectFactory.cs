@@ -1,7 +1,6 @@
-﻿using Tzipory.Systems.FactorySystem;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Systems.FactorySystem
+namespace Tzipory.Systems.FactorySystem
 {
     public abstract class BaseGameObjectFactory<T> : IFactory<T> where T : MonoBehaviour 
     {
@@ -14,7 +13,7 @@ namespace Systems.FactorySystem
             _monoBehaviour = Resources.Load<T>(GameObjectPath);
 
             if (_monoBehaviour == null)
-                throw new System.Exception($"Monobehavir not found in path {GameObjectPath}");
+                throw new System.Exception($"MonoBehaviour not found in path {GameObjectPath}");
         }
         
         public T Create()

@@ -1,13 +1,14 @@
 using System.Collections.Generic;
-using SerializeData.Nodes;
-using SerializeData.Progression;
 using Sirenix.OdinInspector;
-using Systems.NodeSystem;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.SerializeData.NodeSerializeData;
+using Tzipory.SerializeData.ProgressionSerializeData;
+using Tzipory.Systems.NodeSystem;
 using Tzipory.Systems.SceneSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-namespace GamePlayLogic.Managers
+namespace Tzipory.GameplayLogic.Managers.MapManagers
 {
     public class WorldMapNodesManager : BaseNodeManager , IInitialization<WorldMapProgressionSerializeData>
     {
@@ -72,7 +73,7 @@ namespace GamePlayLogic.Managers
 
         private void NodeClicked(BattleMapNodeStateConfig battleMapNodeStateConfig)//need to pass node data and not battleMapNodeStateConfig
         {
-            GameManager.GameData.LevelConfig  = battleMapNodeStateConfig.LevelToOpen;
+            GameManager.GameData.CurrentLevelConfig  = battleMapNodeStateConfig.LevelToOpen;
             GameManager.SceneHandler.LoadScene(SceneType.Game);//temp!
         }
 

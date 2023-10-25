@@ -1,15 +1,16 @@
-﻿using Helpers.Consts;
-using MovementSystem.HerosMovementSystem;
-using Tzipory.BaseSystem.TimeSystem;
-using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.Entitys;
+﻿using Sirenix.OdinInspector;
+using Tzipory.ConfigFiles.EntitySystem.EntityVisual;
+using Tzipory.GameplayLogic.UI.ProximityIndicators;
 using Tzipory.Helpers;
-using Sirenix.OdinInspector;
-using Tzipory.EntitySystem.EntityConfigSystem.EntityVisualConfig;
-using Tzipory.SerializeData;
+using Tzipory.Helpers.Consts;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.Entity;
+using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.MovementSystem.HerosMovementSystem;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace Shamans
+namespace Tzipory.GameplayLogic.EntitySystem.Shamans
 {
     public class Shaman : BaseUnitEntity
     {

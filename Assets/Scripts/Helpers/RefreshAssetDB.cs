@@ -1,13 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
-public class RefreshAssetDB : MonoBehaviour
+namespace Tzipory.Helpers
 {
-    //[ContextMenuItem()]
-   public void REFRESH()
+    public class RefreshAssetDB : MonoBehaviour
     {
-       //  AssetDatabase.Refresh();
+        //[ContextMenuItem()]
+        public void REFRESH()
+        {
+            //  AssetDatabase.Refresh();
+        }
     }
 }

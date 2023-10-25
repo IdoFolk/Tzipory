@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
-using Tzipory.SerializeData.StatSystemSerilazeData;
+using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.Systems.Entity.EntityComponents;
 
-namespace Tzipory.AbilitiesSystem
+namespace Tzipory.Systems.AbilitySystem
 {
     public interface IAbilityExecutor
     {
         public AbilityExecuteType AbilityExecuteType { get; }
         public IEntityTargetAbleComponent Caster { get; }
         
-        public List<StatusEffectConfig> OnEnterStatusEffects { get; }
+        public List<StatEffectConfig> OnEnterStatusEffects { get; }
 
         public void Init(IEntityTargetAbleComponent target);
         

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using GamePlayLogic.AbilitySystem.AbilityEntity;
-using Helpers.Consts;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
+using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.AbilitySystem.AbilityEntity;
+using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
+namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 {
     public class AoeAbilityExecuter :  IAbilityExecutor , IStatHolder
     {
@@ -39,13 +40,13 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
             }
         }
 
-        private List<BaseStatusEffect> _statusEffects;
+        private List<BaseModifyStatEffect> _statusEffects;
         public AbilityExecuteType AbilityExecuteType => AbilityExecuteType.AOE;
         public IEntityTargetAbleComponent Caster { get; }
 
         //Changes:
-        public List<StatusEffectConfig> OnEnterStatusEffects { get; }
-        public List<StatusEffectConfig> OnExitStatusEffects { get; }
+        public List<StatEffectConfig> OnEnterStatusEffects { get; }
+        public List<StatEffectConfig> OnExitStatusEffects { get; }
 
         [Obsolete("Use AbilitySerializeData")]
         public AoeAbilityExecuter(IEntityTargetAbleComponent caster,AbilityConfig abilityConfig)
@@ -53,8 +54,8 @@ namespace Tzipory.AbilitiesSystem.AbilityExecuteTypes
             Stats = new Dictionary<int, Stat>();
 
             Caster = caster;
-            OnEnterStatusEffects = new List<StatusEffectConfig>();
-            OnExitStatusEffects = new List<StatusEffectConfig>();
+            OnEnterStatusEffects = new List<StatEffectConfig>();
+            OnExitStatusEffects = new List<StatEffectConfig>();
             
             OnEnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
             if(abilityConfig.DoExitEffects)

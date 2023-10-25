@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f844fedc06466d858243361eaf313a, type: 3}
+  m_Name: LoadingScreenToolTip
+  m_EditorClassIdentifier: 
+  _toolTips:
+  - Watch out from enemies, they will attack you if you get to close
+  - When selecting a shaman use right click to cancel the selection
+  - Place shamans around natural resources to buff them
+  - Magic comes from the heart
+  - Press on the wave indicator to start the wave early
+  - You can increase game speed by pressing the Speed up button
+  - Believe in yourself and the stars will align

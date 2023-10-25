@@ -1,6 +1,7 @@
-using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.ConfigFiles.EntitySystem;
+using Tzipory.ConfigFiles.Level;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Helpers;
-using Tzipory.SerializeData.LevalSerializeData;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;
 
@@ -28,9 +29,11 @@ public class TEMP_NodeObject : MonoBehaviour
     {
         IsUnlock = isUnLock;
         IsCompleted = isCompleted;
-
-        gameObject.SetActive(IsUnlock);
-        _spriteRenderer.color = IsCompleted ? _winNodeColor : _avilableNodeColor;
+        
+        if (IsUnlock)
+            Unlock();
+        if (isCompleted)
+            Completed();
     }
 
     public void Lock()
@@ -47,12 +50,12 @@ public class TEMP_NodeObject : MonoBehaviour
     public void Unlock()
     {
         _spriteRenderer.color = _avilableNodeColor;
-        gameObject.SetActive(true);
+        gameObject.SetActive(true); 
         GameManager.GameData.SetLockNodeStat(_levelConfig.LevelId,true);
         IsUnlock = true;
     }
 
-    public void Completed()
+    private void Completed()
     {
         _spriteRenderer.color = _winNodeColor;
         
@@ -62,7 +65,7 @@ public class TEMP_NodeObject : MonoBehaviour
 
     private void OnNodeClick()
     {
-        GameManager.GameData.LevelConfig  = _levelConfig;
+        GameManager.GameData.CurrentLevelConfig  = _levelConfig;
         GameManager.PlayerManager.PlayerSerializeData.SetPartyData(_shamanConfigs);
         GameManager.SceneHandler.LoadScene(SceneType.Game);//temp!
     }

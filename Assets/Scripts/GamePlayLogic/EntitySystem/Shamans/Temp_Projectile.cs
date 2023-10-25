@@ -1,5 +1,5 @@
-using Tzipory.BaseSystem.TimeSystem;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
 public class Temp_Projectile : MonoBehaviour

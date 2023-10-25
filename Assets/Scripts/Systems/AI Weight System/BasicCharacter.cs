@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-
-namespace Tzipory.AI.WeightSystem
+namespace Tzipory.Systems.AIWeightSystem
 {
     /// <summary>
     /// Not the only type of Actor -> but the most common one.

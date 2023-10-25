@@ -1,12 +1,11 @@
-using Systems.TargetingSystem;
-using Tools.Enums;
-using Tzipory.AbilitiesSystem.AbilityEntity;
-using Tzipory.AbilitiesSystem.AbilityExecuteTypes;
-using Tzipory.BaseSystem.TimeSystem;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.Systems.AbilitySystem.AbilityExecuteTypes;
+using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.TargetingSystem;
+using Tzipory.Tools.Enums;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace GamePlayLogic.AbilitySystem.AbilityEntity
+namespace Tzipory.Systems.AbilitySystem.AbilityEntity
 {
     public class AoeAbilityEntity : BaseAbilityEntity, ITargetableReciever
     {

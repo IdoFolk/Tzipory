@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using Tzipory.EntitySystem.Entitys;
-using Tzipory.EntitySystem.TargetingSystem;
-using Tzipory.Leval;
-using Tzipory.SerializeData.LevalSerializeData;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.Entity;
+using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 
 public class TEMP_UnitFlipAndZFix : MonoBehaviour
@@ -23,13 +21,13 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     TargetingHandler _targeting;
     //TEMP! Should USE Init(BaseUnitEntity) INSTEAD 
 
-    static Vector3 cachedScaledMapSize => Level.MapSize * .01f; //fix take from consts
+    static Vector3 cachedScaledMapSize => LevelHandler.MapSize * .01f; //fix take from consts
     static float zDistanceModifier = .5f; //fix take from consts
 
     public static float GetZForLocalPosition(Transform t)
     {
-        float newZ = Level.FakeForward.x * t.position.x + Level.FakeForward.y * t.position.y;
-        float mapOffset = Mathf.Abs(Level.FakeForward.x) * cachedScaledMapSize.x + Mathf.Abs(Level.FakeForward.y) * cachedScaledMapSize.y; //should cause the bottom most point to be the flat-height
+        float newZ = LevelHandler.FakeForward.x * t.position.x + LevelHandler.FakeForward.y * t.position.y;
+        float mapOffset = Mathf.Abs(LevelHandler.FakeForward.x) * cachedScaledMapSize.x + Mathf.Abs(LevelHandler.FakeForward.y) * cachedScaledMapSize.y; //should cause the bottom most point to be the flat-height
 
         newZ += mapOffset;
         newZ *= zDistanceModifier;
@@ -68,13 +66,15 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
             var deltaV = transform.position - lastPos;
             if (deltaV.sqrMagnitude >= _flipPrefs.DeadZone)
             {
-                _spriteRenderer.flipX = deltaV.x >= 0;
+                //_spriteRenderer.flipX = deltaV.x >= 0;
+                _baseUnitEntity.SetSpriteFlipX( deltaV.x >= 0);
             }
             else
             {
-                if(_tgt)
+                if (_tgt)
                 {
-                    _spriteRenderer.flipX = (_tgt.position - transform.position).x >0;
+                    //_spriteRenderer.flipX = (_tgt.position - transform.position).x > 0;
+                    _baseUnitEntity.SetSpriteFlipX((_tgt.position - transform.position).x > 0);
                 }
             }
         }

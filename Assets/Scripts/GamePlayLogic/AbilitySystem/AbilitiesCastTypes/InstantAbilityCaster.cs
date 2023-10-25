@@ -1,8 +1,8 @@
 ﻿using System;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.Systems.Entity.EntityComponents;
 
-namespace Tzipory.AbilitiesSystem
+namespace Tzipory.Systems.AbilitySystem
 {
     public class InstantAbilityCaster : IAbilityCaster
     {

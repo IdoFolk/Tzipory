@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Shamans;
-using Sirenix.OdinInspector;
-using Systems.TargetingSystem;
-using Tools.Enums;
-using Tzipory.EntitySystem.StatusSystem;
-using Tzipory.EntitySystem;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.GameplayLogic.EntitySystem.Shamans;
+using Tzipory.GameplayLogic.UI.ProximityIndicators;
+using Tzipory.Systems.Entity;
+using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.TargetingSystem;
+using Tzipory.Tools.Enums;
 using UnityEngine;
 
 //TEMP NAME! BAD NAME!
@@ -15,7 +15,7 @@ public class TEMP_PowerStructure : BaseGameEntity , ITargetableReciever
     //temp config stuff
     [SerializeField] private float _range;
     
-    [SerializeField,AssetsOnly,Required] private StatusEffectConfig _myEffect;
+    [SerializeField] private StatEffectConfig _statEffectConfig;
     [SerializeField] private ColliderTargetingArea _colliderTargetingArea;
     [SerializeField] private ProximityIndicatorHandler _proximityIndicatorHandler;
     [SerializeField] private Color _activeColor;
@@ -59,7 +59,7 @@ public class TEMP_PowerStructure : BaseGameEntity , ITargetableReciever
         if (_activeStatusEffectOnShaman.ContainsKey(shaman.EntityInstanceID))//temp!!!
             return;
 
-        IDisposable disposable = shaman.StatusHandler.AddStatusEffect(_myEffect);
+        IDisposable disposable = shaman.StatusHandler.AddStatusEffect(_statEffectConfig);
         _activeStatusEffectOnShaman.Add(shaman.
             EntityInstanceID, disposable);
     }

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers.Consts;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.BaseSystem.TimeSystem;
-using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
-using Tzipory.EntitySystem.TargetingSystem;
+using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Systems.TargetingSystem;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace Tzipory.AbilitiesSystem
+namespace Tzipory.Systems.AbilitySystem
 {
     public class Ability : IStatHolder
     {
@@ -65,13 +65,13 @@ namespace Tzipory.AbilitiesSystem
                 (int)Constant.StatsId.AbilityCastTime));
             
 
-            _abilityCaster = Factory.AbilityFactory.GetAbilityCaster(entityTargetingComponent,config);
-            _abilityExecutor = Factory.AbilityFactory.GetAbilityExecutor(caster,config);
+            _abilityCaster = FactorySystem.ObjectFactory.AbilityFactory.GetAbilityCaster(entityTargetingComponent,config);
+            _abilityExecutor = FactorySystem.ObjectFactory.AbilityFactory.GetAbilityExecutor(caster,config);
 
             _abilityCaster.OnCast += StartCooldown;
             
             _priorityTargeting =
-                Factory.TargetingPriorityFactory.GetTargetingPriority(entityTargetingComponent,
+                FactorySystem.ObjectFactory.TargetingPriorityFactory.GetTargetingPriority(entityTargetingComponent,
                     config.TargetingPriorityType);
 
             _isReady = true;

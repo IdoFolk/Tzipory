@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using Helpers.Consts;
-using Systems.CampSystem;
-using Tools.Enums;
-using Tzipory.SerializeData;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.Helpers.Consts;
+using Tzipory.SerializeData.PlayerData.Camp;
+using Tzipory.Systems.CampSystem;
+using Tzipory.Tools.Enums;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-namespace GameplayeLogic.Managers
+namespace Tzipory.GameplayLogic.Managers.MapManagers
 {
     public class CampManager : MonoBehaviour, IInitialization<CampSerializeData>
     {
@@ -128,14 +128,6 @@ namespace GameplayeLogic.Managers
         #endregion
 
         #region ShamanManagment
-
-        public void ToggleItemOnShaman(int targetShamanID, int targetItemInstanceID,
-            CollectionActionType actionType)
-        {
-            GameManager.PlayerManager.PlayerSerializeData
-                .ToggleItemOnShaman(targetShamanID, targetItemInstanceID, actionType);
-
-        }
         
         public void AttachItemToShamanTest()
         {

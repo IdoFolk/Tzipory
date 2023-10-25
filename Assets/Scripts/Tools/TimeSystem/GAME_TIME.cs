@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
-using Helpers;
+using Tzipory.Helpers;
 using UnityEngine;
 
-namespace Tzipory.BaseSystem.TimeSystem
+namespace Tzipory.Tools.TimeSystem
 {
     public class GAME_TIME : MonoBehaviour
     {
@@ -45,7 +45,10 @@ namespace Tzipory.BaseSystem.TimeSystem
             }
 
             if (_fadeCoroutine != null)
+            {
                 _monoBehaviour.StopCoroutine(_fadeCoroutine);
+                _fadeCoroutine = null;
+            }
 
             if (curve == null)
                 SetTime(time);

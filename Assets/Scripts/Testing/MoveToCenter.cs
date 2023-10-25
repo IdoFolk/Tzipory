@@ -1,14 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-public class MoveToCenter : MonoBehaviour
+namespace Tzipory.Testing
 {
-    [SerializeField]
-    float speed;
-    void Update()
+    public class MoveToCenter : MonoBehaviour
     {
-        transform.Translate((Vector3.zero-transform.position).normalized * speed* GAME_TIME.GameDeltaTime, Space.World); //moves to center   
+        [SerializeField] float speed;
+
+        void Update()
+        {
+            transform.Translate((Vector3.zero - transform.position).normalized * speed * GAME_TIME.GameDeltaTime,
+                Space.World); //moves to center   
+        }
     }
 }

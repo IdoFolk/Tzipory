@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Systems.UISystem
+namespace Tzipory.Systems.UISystem
 {
-    public abstract class ChangeColorToggleButton : BaseToggelButtonUI
+    public abstract class ChangeColorToggleButton : BaseInteractiveToggelButtonUI
     {
         [SerializeField] private Image _image;
         [SerializeField] private Color onColor;

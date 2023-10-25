@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Tzipory.EntitySystem.EntityComponents
+namespace Tzipory.Systems.Entity.EntityComponents
 {
-    public interface IEntityTargetAbleComponent : IEntityHealthComponent , IEntityStatusEffectComponent
+    public interface IEntityTargetAbleComponent : IEntityHealthComponent , IEntityStatComponent
     {
         public event Action<IEntityTargetAbleComponent> OnTargetDisable;
         public bool IsTargetAble { get; }

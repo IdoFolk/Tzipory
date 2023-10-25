@@ -1,8 +1,9 @@
-﻿using Tzipory.Tools.Sound;
-using Tzipory.VisualSystem.EffectSequence;
+﻿using MyNamespaceTzipory.Systems.VisualSystem;
+using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
+using Tzipory.Tools.Sound;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.EntityComponents
+namespace Tzipory.Systems.Entity.EntityComponents
 {
     public interface IEntityVisualComponent : IEntityComponent
     {

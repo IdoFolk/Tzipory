@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Tzipory.SerializeData;
 
-namespace Systems.SaveLoadSystem
+namespace Tzipory.Systems.SaveLoadSystem
 {
     public class SaveAndLoadManager
     {

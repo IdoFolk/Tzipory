@@ -17,6 +17,6 @@ MonoBehaviour:
     color: {r: 1, g: 1, b: 1, a: 1}
     size: 5
     riseSpeed: 0.03
-    timeToLive: 1
+    timeToLive: 0.75
     damage: 20
   _levelVisualDataSO: {fileID: 11400000, guid: 1c477da2ae86013479986cb933c972e0, type: 2}

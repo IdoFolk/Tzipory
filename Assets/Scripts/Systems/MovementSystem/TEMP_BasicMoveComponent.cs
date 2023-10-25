@@ -1,11 +1,13 @@
 using System;
 using ProjectDawn.Navigation;
 using ProjectDawn.Navigation.Hybrid;
-using Tzipory.EntitySystem.StatusSystem;
-using Tzipory.BaseSystem.TimeSystem;
+using Tzipory.Systems.Entity;
+using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.EntityComponents
+namespace Tzipory.Systems.EntityComponents
 {
     public class TEMP_BasicMoveComponent : MonoBehaviour, IEntityMovementComponent
     {
@@ -27,18 +29,22 @@ namespace Tzipory.EntitySystem.EntityComponents
         public void Init(Stat newSpeed)
         {
             _speedStat = newSpeed;
-            _speedStat.OnValueChanged += AdjustAgentSpeed;
-            AdjustAgentSpeed(_speedStat.CurrentValue);
+            _speedStat.OnValueChangedData += AdjustAgentSpeed;
+            
+            AgentSteering aS = agent.DefaultSteering;
+            aS.Speed = _speedStat.CurrentValue * GAME_TIME.GetCurrentTimeRate;
+            agent.EntitySteering = aS;
+            
             _lastPosition = transform.position;
         }
 
         public Stat MovementSpeed => _speedStat;
 
-        public int EntityInstanceID => throw new System.NotImplementedException();
+        public int EntityInstanceID => throw new NotImplementedException();
 
         public Transform EntityTransform => agent.transform;
 
-        public BaseGameEntity GameEntity => throw new System.NotImplementedException();
+        public BaseGameEntity GameEntity => throw new NotImplementedException();
 
         public bool IsMoveing { get; private set; }    
 
@@ -74,30 +80,32 @@ namespace Tzipory.EntitySystem.EntityComponents
             _lastPosition = transform.position;
         }
 
-        void AdjustAgentSpeed(float currentSpeed) //subs to OnTimeRateChange
+        void AdjustAgentSpeed(StatChangeData statChangeData) //subs to OnTimeRateChange
         {
             //AgentSteering aS = agent.EntitySteering;
             AgentSteering aS = agent.DefaultSteering;
-            aS.Speed = currentSpeed * GAME_TIME.GetCurrentTimeRate;
+            aS.Speed = statChangeData.NewValue * GAME_TIME.GetCurrentTimeRate;
             agent.EntitySteering = aS;
         }
-
-        private void AdjustAgentSpeedTime()
+        
+        void AdjustAgentTime() //subs to OnTimeRateChange
         {
             if (_speedStat == null)
                 return;
-            AdjustAgentSpeed(_speedStat.CurrentValue);
+            AgentSteering aS = agent.DefaultSteering;
+            aS.Speed = _speedStat.CurrentValue * GAME_TIME.GetCurrentTimeRate;
+            agent.EntitySteering = aS;
         }
 
         private void OnEnable()
         {
-            GAME_TIME.OnTimeRateChange += AdjustAgentSpeedTime; //?
+            GAME_TIME.OnTimeRateChange += AdjustAgentTime; //?
         }
         private void OnDisable()
         {
-            GAME_TIME.OnTimeRateChange -= AdjustAgentSpeedTime;
+            GAME_TIME.OnTimeRateChange -= AdjustAgentTime;
             if(_speedStat != null)
-                _speedStat.OnValueChanged -= AdjustAgentSpeed;
+                _speedStat.OnValueChangedData -= AdjustAgentSpeed;
         }
 
     }

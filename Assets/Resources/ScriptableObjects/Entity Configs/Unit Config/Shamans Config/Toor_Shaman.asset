@@ -38,4 +38,12 @@ MonoBehaviour:
     _icon: {fileID: 21300000, guid: 97554a74e79997844a27c96e13c4e3dd, type: 3}
   _targetingPriority: 2
   _shamanId: 0
+  _earring1: {fileID: 0}
+  _earring2: {fileID: 0}
+  _necklace: {fileID: 0}
+  _belt: {fileID: 0}
+  _bracelet1: {fileID: 0}
+  _bracelet2: {fileID: 0}
+  _ring1: {fileID: 0}
+  _ring2: {fileID: 0}
   _decisionInterval: 0

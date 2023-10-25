@@ -1,34 +1,40 @@
 ﻿using System.Collections.Generic;
-using Helpers.Consts;
-using Systems.DataManagerSystem;
-using Tools.Enums;
 using Tzipory.ConfigFiles;
-using Tzipory.EntitySystem.EntityConfigSystem;
+using Tzipory.ConfigFiles.EntitySystem;
+using Tzipory.ConfigFiles.Player.Party;
+using Tzipory.Helpers.Consts;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.DataManager;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-namespace Tzipory.SerializeData
+namespace Tzipory.SerializeData.PlayerData.Party
 {
     [System.Serializable]
     public class PartySerializeData : ISerializeData , IInitialization<ShamanConfig[]>
     {
+#if UNITY_EDITOR
+        [SerializeField] private List<ShamanSerializeData> _shamanSerializeDatas;
+#endif
+        
         //all shamans
         private List<ShamanDataContainer> _shamanRosterDataContainers;
-
+        
         private List<ShamanDataContainer> _shamansPartyDataContainers;
         
         public List<ShamanDataContainer> ShamansPartyDataContainers => _shamansPartyDataContainers;
 
         public List<ShamanDataContainer> ShamanRosterDataContainers => _shamanRosterDataContainers;
-
-
-
+        
         public bool IsInitialization { get; private set; }
         
         public int SerializeTypeId => Constant.DataId.PARTY_DATA_ID;
         
         public void Init(ShamanConfig[] parameter)//for testing
         {
+#if UNITY_EDITOR
+            _shamanSerializeDatas = new List<ShamanSerializeData>();
+#endif
             _shamanRosterDataContainers = new List<ShamanDataContainer>();
             _shamansPartyDataContainers = new List<ShamanDataContainer>();
             
@@ -51,13 +57,20 @@ namespace Tzipory.SerializeData
         {
             var config = (PartyConfig)parameter;
             
+#if UNITY_EDITOR
+            _shamanSerializeDatas = new List<ShamanSerializeData>();
+#endif
+            
             _shamanRosterDataContainers = new List<ShamanDataContainer>();
 
             foreach (var shamanConfig in config.PartyMembers)
             {
-                var shamanSerializeData = DataManager.DataRequester.GetData<ShamanSerializeData>(shamanConfig);
+                var shamanSerializeData = DataManager.DataRequester.GetSerializeData<ShamanSerializeData>(shamanConfig);
+#if UNITY_EDITOR
+                _shamanSerializeDatas.Add(shamanSerializeData);
+#endif
                 var shamanVisual =(ShamanConfig)DataManager.DataRequester.ConfigManager.GetConfig(shamanConfig.ConfigTypeId,
-                    shamanConfig.ConfigObjectId);//temp!!!
+                    shamanConfig.ObjectId);//temp!!!
                 _shamanRosterDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanVisual.UnitEntityVisualConfig));
             }
             
@@ -101,27 +114,6 @@ namespace Tzipory.SerializeData
             }
 
             _shamansPartyDataContainers.Remove(shamanContainerDataFromRoster);
-        }
-
-        public void ToggleItemOnShaman(int targetShamanID, ShamanItemSerializeData targetItemSerializeData,
-            CollectionActionType actionType)
-        {
-            ShamanDataContainer shamanContainerDataFromRoster = _shamanRosterDataContainers.Find(shamanDataContainer =>
-                shamanDataContainer.ShamanSerializeData.ShamanId == targetShamanID);
-            if (shamanContainerDataFromRoster == null)
-            {
-                Debug.LogError("Trying to toggle item on shaman who does not exist?");
-                return;
-            }
-            
-            if (actionType == CollectionActionType.Add)
-            {
-                shamanContainerDataFromRoster.ShamanSerializeData.AttachItem(targetItemSerializeData);
-            }
-            else
-            {
-                shamanContainerDataFromRoster.ShamanSerializeData.RemoveItem(targetItemSerializeData);
-            }
         }
     }
 }

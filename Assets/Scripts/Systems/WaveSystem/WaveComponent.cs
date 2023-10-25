@@ -1,6 +1,6 @@
 ﻿using Tzipory.Tools.Interface;
 
-namespace Tzipory.WaveSystem
+namespace Tzipory.Systems.WaveSystem
 {
     public abstract class WaveComponent<T> : IProgress
     {

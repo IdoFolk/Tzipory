@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GamePlayLogic.Managers;
-using GamePlayLogic.UI.WaveIndicator;
-using Helpers;
-using Tzipory.BaseSystem.TimeSystem;
-using Tzipory.SerializeData.LevalSerializeData;
-using Tzipory.WaveSystem;
+using Tzipory.ConfigFiles.Level;
+using Tzipory.GameplayLogic.UI.WaveIndicator;
+using Tzipory.Helpers;
+using Tzipory.Systems.WaveSystem;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace Tzipory.Leval
+namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 {
     public class WaveManager : IDisposable
     {
@@ -62,8 +61,10 @@ namespace Tzipory.Leval
         {
             foreach (var waveSerialize in _levelConfig.Waves)
                 _waves.Add(new Wave(_levelConfig.Level.WaveSpawners,waveSerialize));
-
+            
+#if UNITY_EDITOR
             _isReportEndLevel = false;
+#endif
             
             _startLevelTimer = GAME_TIME.TimerHandler.StartNewTimer(_levelStartDelay,"Start Level Timer");
             CurrentWave.Init();

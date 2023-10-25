@@ -1,20 +1,26 @@
 ﻿using System;
-using Tzipory.EntitySystem.StatusSystem;
-using Tzipory.SerializeData.StatSystemSerilazeData;
+using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.SerializeData.LevalSerializeData.StstusEffectTypes;
+using Tzipory.Systems.StatusSystem;
 
-namespace Tzipory.Factory
+namespace Tzipory.Systems.FactorySystem.ObjectFactory
 {
     public class StatusEffectFactory
     {
-        public static BaseStatusEffect GetStatusEffect(StatusEffectConfig statusEffectConfig,Stat statToEffect)
+        public static IStatEffectProcess GetStatusEffect(StatEffectConfig statEffectConfig,Stat statToEffect)
         {
-            return statusEffectConfig.StatusEffectType switch
+            BaseStatEffect statEffect = statEffectConfig.StatEffectType switch
             {
-                StatusEffectType.OverTime => new OverTimeStatusEffect(statusEffectConfig,statToEffect),
-                StatusEffectType.Instant => new InstantStatusEffect(statusEffectConfig,statToEffect),
-                StatusEffectType.Interval => new IntervalStatusEffect(statusEffectConfig,statToEffect),
+                StatEffectType.Process => new ProcessStatEffect(),
+                StatEffectType.OverTime => new OverTimeStatEffect(),
+                StatEffectType.Interval => new IntervalStatEffect(),
+                StatEffectType.Instant => new InstantStatEffect(),
                 _ => throw new ArgumentOutOfRangeException()
             };
+
+            statEffect.Init(statEffectConfig,statToEffect); //TODO: need to be on the requester responsibility
+            
+            return statEffect;
         }
     }
 }

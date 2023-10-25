@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using PathCreation;
-using UnityEngine;
-using Tzipory.EntitySystem;
-using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.EntitySystem.StatusSystem;
 using Sirenix.OdinInspector;
+using Tzipory.Systems.Entity;
+using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.StatusSystem;
+using UnityEngine;
 
 public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 {
@@ -59,7 +59,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 
     public void Heal(float amount)
     {
-        _hpStat.AddToValue(amount);
+        _hpStat.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition));
         OnHealthChanged?.Invoke();
     }
 
@@ -68,7 +68,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
         if (_hpStat.CurrentValue <= 0)
             return;
         
-        _hpStat.ReduceFromValue(damage);
+        _hpStat.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce));
         OnHealthChanged?.Invoke();
 
         if (IsEntityDead)

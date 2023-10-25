@@ -1,11 +1,10 @@
 ﻿using System;
-using Tzipory.AbilitiesSystem;
-using Tzipory.AbilitiesSystem.AbilityConfigSystem;
-using Tzipory.AbilitiesSystem.AbilityExecuteTypes;
-using Tzipory.EntitySystem.EntityComponents;
-using Tzipory.SerializeData.AbilitySystemSerializeData;
+using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.Systems.AbilitySystem;
+using Tzipory.Systems.AbilitySystem.AbilityExecuteTypes;
+using Tzipory.Systems.Entity.EntityComponents;
 
-namespace Tzipory.Factory
+namespace Tzipory.Systems.FactorySystem.ObjectFactory
 {
     public class AbilityFactory
     {

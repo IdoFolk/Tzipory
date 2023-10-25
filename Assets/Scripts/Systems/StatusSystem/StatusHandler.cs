@@ -1,38 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using Helpers.Consts;
-using SerializeData.VisualSystemSerializeData;
-using Tzipory.EntitySystem.EntityComponents;
+using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
 
-namespace Tzipory.EntitySystem.StatusSystem
+namespace Tzipory.Systems.StatusSystem
 {
     public class StatusHandler
     {
         public event Action<EffectSequenceConfig> OnStatusEffectAdded; 
-        public event Action<int> OnStatusEffectInterrupt; 
 
-        private readonly IEntityStatusEffectComponent _entity;
+        private readonly IEntityStatComponent _entity;
 
         private readonly List<IStatHolder> _statHolders;
+        
+        private readonly Dictionary<Constant.StatHolderType,List<IStatHolder>> _statHolderByType = new();
 
 #if UNITY_EDITOR
         [Obsolete("Only in editor")]
         public List<IStatHolder> StatHolders => _statHolders;
 #endif
 
-        public StatusHandler(IEntityStatusEffectComponent entity)
+        public StatusHandler(IEntityStatComponent entity)
         {
             _statHolders = new List<IStatHolder>();
             
             _entity = entity;
             
-            _statHolders.AddRange(_entity.GetNestedStatHolders());
+            AddStatHolder(_entity.GetNestedStatHolders());
         }
 
-        public void AddStatHolder(IStatHolder statHolder)
+        private void AddStatHolder(IEnumerable<IStatHolder> statHolders)
         {
-            _statHolders.Add(statHolder);
+            _statHolders.AddRange(statHolders);  
         }
 
         public Stat GetStat(int id)
@@ -68,27 +69,38 @@ namespace Tzipory.EntitySystem.StatusSystem
             }
         }
         
-        public IDisposable AddStatusEffect(StatusEffectConfig statusEffectConfig)
+        public IDisposable AddStatusEffect(StatEffectConfig statEffectConfig)
         {
-            var statToEffect = GetStat(statusEffectConfig.AffectedStatId);
+            var statToEffect = GetStat(statEffectConfig.AffectedStatId);
             
             //   TODO need to Interrupt stats
 
-            OnStatusEffectAdded?.Invoke(statusEffectConfig.EffectSequence);
+            OnStatusEffectAdded?.Invoke(statEffectConfig.EffectSequence);
             
-            return statToEffect.AddStatusEffect(statusEffectConfig);
+            return statToEffect.AddStatusEffect(statEffectConfig);
+        }
+        
+        public IDisposable AddStatusEffect(IStatEffectProcess statEffectProcess)
+        {
+            var statToEffect = GetStat(statEffectProcess.StatToEffect.Id);
+            
+            //   TODO need to Interrupt stats
+
+            //OnStatusEffectAdded?.Invoke(statEffectProcess.EffectSequence);
+            
+            return statToEffect.AddStatusEffect(statEffectProcess);
         }
 
         //TODO need to fix the InterruptStatusEffects
-        // private void InterruptStatusEffects(IEnumerable<StatusEffectConfig> effectConfigSos)
+        // private void InterruptStatusEffects(IEnumerable<StatEffectConfigs> effectConfigSos)
         // {
         //     foreach (var effectConfigSo in effectConfigSos)
         //     {
-        //         if (_activeStatusEffects.TryGetValue(effectConfigSo.AffectedStatId,out var statusEffect))
+        //         if (_activeStatusEffects.TryGetValue(effectConfigSo.AffectedStatId,out var modifyStatEffect))
         //         {
-        //             statusEffect.StatusEffectInterrupt();
+        //             modifyStatEffect.StatusEffectInterrupt();
         //             _activeStatusEffects.Remove(effectConfigSo.AffectedStatId);
-        //             OnStatusEffectInterrupt?.Invoke(statusEffect.AffectedStatId);
+        //             OnStatusEffectInterrupt?.Invoke(modifyStatEffect.AffectedStatId);
         //         }
         //     }
         // }

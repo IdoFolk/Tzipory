@@ -1,12 +1,14 @@
-﻿using GameplayeLogic.Managers;
+﻿using Tzipory.SerializeData;
 
-namespace GamePlayLogic.Managers
+namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
     public class PlayerManager
     {
         private PlayerSerializeData  _playerSerializeData;
 
         public PlayerSerializeData PlayerSerializeData => _playerSerializeData;
+        
+        //TODO : add Inventory manager 
 
         public PlayerManager(PlayerSerializeData playerSerializeData)
         {

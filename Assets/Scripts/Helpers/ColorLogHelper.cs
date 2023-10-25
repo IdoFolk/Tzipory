@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Helpers
+namespace Tzipory.Helpers
 {
     /// <summary>
     /// A class that have reference to colors that represents a system or object log message color
@@ -16,6 +16,7 @@ namespace Helpers
         public const string TIMER_HANDLER_COLOR = "#00ff00";
         public const string EFFECT_HANDLER_COLOR = "#5b0f00";
         public const string GAME_MANAGER_COLOR = "#ff0000";
+        public const string CAMERA_HANDLER = "#00ffff";
 
         public static string SetColorToString(string message, Color color)
             => $"<color={ToRGBHex(color)}>{message}</color>";

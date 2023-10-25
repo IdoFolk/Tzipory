@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tools.Enums;
@@ -8,14 +9,15 @@ using UnityEngine.EventSystems;
 
 namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
 {
-    public class ItemDragUIHandler : BaseInteractiveUIElement
+    public class ItemDragUIHandler : MonoBehaviour
     {
-        [SerializeField] private Transform gameObjectHolder;
-        protected override UIGroupType UIGroup => UIGroupType.MetaUI;
 
-        public override void OnDrag(PointerEventData eventData)
+        private ItemSlotUI currentItemDragged;
+
+        public void AssignDraggedItem(ItemSlotUI itemSlotUI)
         {
-            base.OnDrag(eventData);
+            currentItemDragged = itemSlotUI;
         }
+        
     }
 }

@@ -16,6 +16,7 @@ public class CharacterItemSlotUI : BaseInteractiveUIElement
     [SerializeField] private ItemSlot _itemSlot;
    
     [SerializeField] private Image _itemSprite;
+    private Vector3 _startPosition;
 
     public bool HaveItem { get; private set; }
 
@@ -51,6 +52,8 @@ public class CharacterItemSlotUI : BaseInteractiveUIElement
         OnItemDropFail?.Invoke(null);
     }
 
+    
+
     public override void OnDrag(PointerEventData eventData)
     {
         base.OnDrag(eventData);
@@ -59,6 +62,8 @@ public class CharacterItemSlotUI : BaseInteractiveUIElement
 
         _itemSprite.transform.position = eventData.position;
     }
+
+    
 
     public void Init(ItemConfig itemConfig)
     {

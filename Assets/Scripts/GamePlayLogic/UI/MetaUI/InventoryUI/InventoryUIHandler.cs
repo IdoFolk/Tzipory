@@ -15,6 +15,7 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
 
         [SerializeField] private ItemSlotUI _itemSlotUI;
         [SerializeField] private Transform _holder;
+        [SerializeField] private ItemDragUIHandler _itemDragUIHandler;
 
         private List<ItemSlotUI> _itemSlotUis;
 
@@ -27,7 +28,8 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
 
             foreach (var itemContainerSerializeData in parameter.ItemData)
             {
-                ItemSlotUI itemSlotUI = Instantiate(_itemSlotUI, _holder);
+                ItemSlotUI itemSlotUI = Instantiate(_itemSlotUI, _holder); 
+                //_itemSlotUI.OnBeginDragEvent += _itemDragUIHandler.AssignDraggedItem();
                 itemSlotUI.Init(itemContainerSerializeData);
                 _itemSlotUis.Add(itemSlotUI);
             }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Cinemachine;
+using Sirenix.OdinInspector;
 using Tzipory.Helpers;
 using UnityEngine;
 
@@ -212,17 +213,31 @@ namespace Tzipory.Systems.CameraSystem
             }
         }
 
+        [Button("Reset Camera")]
         public void ResetCamera()
         {
             //calculating the current aspect ratio according to screen resolution
-            _currentAspectRatioX = FULL_HD_PIXELS_X / _mainCamera.pixelWidth;
-            _currentAspectRatioY = FULL_HD_PIXELS_y / _mainCamera.pixelHeight;
+            if (FULL_HD_PIXELS_X / FULL_HD_PIXELS_y == _mainCamera.aspect)
+            {
+                _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
+                _edgePaddingY = _cameraSettings.DefaultEdgePaddingY;
+                _zoomPadding = MAX_ZOOM_DEFINED_BY_BORDERS;
+                if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
+            }
+            else
+            {
+                _currentAspectRatioX = FULL_HD_PIXELS_X / _mainCamera.pixelWidth;
+                _currentAspectRatioY = FULL_HD_PIXELS_y / _mainCamera.pixelHeight;
+                
+                //calculating the current padding for movement borders and zoom
+                _edgePaddingX = _cameraSettings.DefaultEdgePaddingX / _currentAspectRatioX;
+                _edgePaddingY = _cameraSettings.DefaultEdgePaddingY / _currentAspectRatioY;
+                _zoomPadding = MAX_ZOOM_DEFINED_BY_BORDERS * _currentAspectRatioX;
+                if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
+            }
+            
 
-            //calculating the current padding for movement borders and zoom
-            _edgePaddingX = _cameraSettings.DefaultEdgePaddingX / _currentAspectRatioX;
-            _edgePaddingY = _cameraSettings.DefaultEdgePaddingY / _currentAspectRatioY;
-            _zoomPadding = MAX_ZOOM_DEFINED_BY_BORDERS * _currentAspectRatioX;
-            if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
+            
 
             //resetting the camera position and zoom
             LockCamera();

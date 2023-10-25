@@ -17,7 +17,6 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
     [Serializable]
     public class PopUpTexter
     {
-        [SerializeField] TextSpawnRepeatPatterns _repeatPattern;
         [SerializeField] private BasicPopupText _textBoxPrefab;
         [SerializeField] private Transform _textSpawnPoint;
 
@@ -31,63 +30,52 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
             
             popUpTextConfig = config.UsePopUpTextConfig ? config.PopUpTextConfig : PopUpTextManager.Instance.DefaultPopUpConfig;
             
-            switch (popUpTextConfig.PopUpTextType)
+            if(popUpTextConfig.DisablePopUp)
+                return;
+            
+            Vector3 value = _textSpawnPoint.localPosition;
+            
+            switch (popUpTextConfig.RepeatPattern)
             {
-                case PopUpTextType.ShowDelta:
-                    popUpTextConfig.Text = config.Delta.ToString(CultureInfo.CurrentCulture);
+                case TextSpawnRepeatPatterns.PingPong:
+                    value.x = Mathf.Sin(_currentPointerPlace) * _lineMagnitude;
+                    _currentPointerPlace += _lineStep;
                     break;
-                case PopUpTextType.ShowNewValue:
-                    popUpTextConfig.Text = config.NewValue.ToString(CultureInfo.CurrentCulture);
+                case TextSpawnRepeatPatterns.LoopRight:
+                    if (_currentPointerPlace >= _lineMagnitude)
+                        _currentPointerPlace = _lineMagnitude * -1f;
+            
+                    value.x = _currentPointerPlace;
+                    _currentPointerPlace += _lineStep;
+            
                     break;
-                case PopUpTextType.ShowText:
-                    popUpTextConfig.Text = config.StatEffectName;
+                case TextSpawnRepeatPatterns.LoopLeft:
+                    if (_currentPointerPlace <= _lineMagnitude * -1f)
+                        _currentPointerPlace = _lineMagnitude;
+            
+                    value.x = _currentPointerPlace;
+                    _currentPointerPlace -= _lineStep;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-                
+            
+            _textSpawnPoint.localPosition = value;
+
+            popUpTextConfig.Text = popUpTextConfig.PopUpTextType switch
+            {
+                PopUpTextType.ShowDelta => Mathf.Round(config.Delta).ToString(CultureInfo.CurrentCulture),
+                PopUpTextType.ShowNewValue => Mathf.Round(config.NewValue).ToString(CultureInfo.CurrentCulture),
+                PopUpTextType.ShowName => config.StatEffectName,
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
             if (!popUpTextConfig.OverrideSize)
-                popUpTextConfig.StartSize = PopUpTextManager.Instance.GetRelativeFontSizeForDamage(config.Delta);
+                popUpTextConfig.FontSize = PopUpTextManager.Instance.GetRelativeFontSizeForDamage(config.Delta);
             
             BasicPopupText popupText =
-                Object.Instantiate(_textBoxPrefab, _textSpawnPoint.position, Quaternion.identity);
+                Object.Instantiate(_textBoxPrefab,_textSpawnPoint.position, Quaternion.identity,PopUpTextManager.Instance._popUpTextCanvas.transform);
             popupText.Init(popUpTextConfig);
-            
-            //Old!!!
-            //Resize Text //may need to be moved somewhere else TBD
-
-            //Position is going to assume as the texter's position for now
-            // Vector3 value = _textSpawnPoint.localPosition;
-            // switch (_repeatPattern)
-            // {
-            //     case TextSpawnRepeatPatterns.PingPong:
-            //         value.x = Mathf.Sin(_currentPointerPlace) * _lineMagnitude;
-            //         _currentPointerPlace += _lineStep;
-            //
-            //         break;
-            //     case TextSpawnRepeatPatterns.LoopRight:
-            //         if (_currentPointerPlace >= _lineMagnitude)
-            //             _currentPointerPlace = _lineMagnitude * -1f;
-            //
-            //         value.x = _currentPointerPlace;
-            //         _currentPointerPlace += _lineStep;
-            //
-            //         break;
-            //     case TextSpawnRepeatPatterns.LoopLeft:
-            //         if (_currentPointerPlace <= _lineMagnitude * -1f)
-            //             _currentPointerPlace = _lineMagnitude;
-            //
-            //         value.x = _currentPointerPlace;
-            //         _currentPointerPlace -= _lineStep;
-            //         break;
-            // }
-            //
-            // _textSpawnPoint.localPosition = value;
-            //
-            // BasicPopupText popupText = GameObject
-            //     .Instantiate(_textBoxPrefab, _textSpawnPoint.position, Quaternion.identity)
-            //     .GetComponent<BasicPopupText>();
-            // popupText.Set(config.PopUpTextConfig);
         }
     }
 }

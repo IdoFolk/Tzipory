@@ -7,39 +7,40 @@ namespace Tzipory.ConfigFiles.PopUpText
     [System.Serializable]
     public struct PopUpTextConfig
     {
-        public PopUpTextType PopUpTextType;
-        [ShowIf("PopUpTextType",PopUpTextType.ShowText)] public string Text;
-        public Color Color;
-        public bool OverrideSize;
-        [ShowIf("OverrideSize")] public float StartSize;
-        public float RiseSpeed;
-        /// <summary>
-        /// In seconds
-        /// </summary>
-        public float TimeToLive;
-
-        public bool OverrideAnimationCurve;
-        public bool AddRandomMoveOffSet;
-        [ShowIf("AddRandomMoveOffSet")] [MinMaxSlider(0,5)] [SerializeField] public Vector2 MoveOffSet;
-        [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextMoveCurve;
-        [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextScaleCurve;
-        [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextAlphaCurve;
+        public bool DisablePopUp;
+        [HideIf("DisablePopUp")] public PopUpTextType PopUpTextType;
+        [HideIf("DisablePopUp")] public TextSpawnRepeatPatterns RepeatPattern;
+        [HideIf("DisablePopUp")] [ShowIf("PopUpTextType",PopUpTextType.ShowText)] public string Text;
+        [HideIf("DisablePopUp")] public Color Color;
+        [HideIf("DisablePopUp")] public bool OverrideSize;
+        [HideIf("DisablePopUp")] [ShowIf("OverrideSize")] public float FontSize;
+        [HideIf("DisablePopUp")] public float RiseSpeed;
+        [HideIf("DisablePopUp")] public float TimeToLive;
+        [HideIf("DisablePopUp")] public bool OverrideStartSize;
+        [HideIf("DisablePopUp"),ShowIf("OverrideStartSize")] public Vector2 StartSize;
+        [HideIf("DisablePopUp")] public bool AddRandomMoveOffSet;
+        [HideIf("DisablePopUp")] [ShowIf("AddRandomMoveOffSet")] [MinMaxSlider(0,5)] [SerializeField] public Vector2 MoveOffSet;
+        [HideIf("DisablePopUp")] public bool OverrideAnimationCurve;
+        [HideIf("DisablePopUp")] [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextMoveCurve;
+        [HideIf("DisablePopUp")] [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextScaleCurve;
+        [HideIf("DisablePopUp")] [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextAlphaCurve;
 
         public void SetText(int text)
         {
             Text = text.ToString();
-            StartSize = PopUpTextManager.Instance.GetRelativeFontSizeForDamage(text);
+            FontSize = PopUpTextManager.Instance.GetRelativeFontSizeForDamage(text);
         }
         
         public void SetText(string text,float size)
         {
             Text = text;
-            StartSize = size;
+            FontSize = size;
         }
     }
 
     public enum PopUpTextType
     {
+        ShowName,
         ShowDelta,
         ShowNewValue,
         ShowText

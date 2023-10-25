@@ -9,15 +9,16 @@ public class BasicPopupText : MonoBehaviour , IInitialization<PopUpTextConfig>
 {
     [SerializeField] private TMP_Text _text;
     
-    private float _moveSpeed;
+    private float _riseSpeed;
     private float _timeToLive;
 
     private float _timeAlive;
-    private Vector3 _originalLocalScale;
 
     private AnimationCurve _moveSpeedAnimationCurve;
     private AnimationCurve _scaleAnimationCurve;
     private AnimationCurve _alphaAnimationCurve;
+
+    private Vector3 _startSize;
 
     private float _moveOffSet;
     
@@ -25,23 +26,28 @@ public class BasicPopupText : MonoBehaviour , IInitialization<PopUpTextConfig>
     
     private void Awake()
     {
+        IsInitialization = false;
         _timeAlive = 0f;
-        _originalLocalScale = transform.localScale;
     }
     private void Update()
     {
-        transform.Translate(Vector3.up * ((_moveSpeedAnimationCurve.Evaluate(_timeAlive / _timeToLive) + _moveOffSet) * _moveSpeed * Time.deltaTime));
-        transform.localScale = _originalLocalScale * (_scaleAnimationCurve.Evaluate(_timeAlive / _timeToLive) * Time.deltaTime);
-        _text.alpha = _alphaAnimationCurve.Evaluate(_timeAlive / _timeToLive) * Time.deltaTime;
+        if (!IsInitialization)
+            return;
+        
+        transform.Translate(Vector3.up * ((_moveSpeedAnimationCurve.Evaluate(_timeAlive / _timeToLive) + _moveOffSet) * _riseSpeed * Time.deltaTime));
+        transform.localScale = _startSize + Vector3.one * (_scaleAnimationCurve.Evaluate(_timeAlive / _timeToLive));
+        _text.alpha = 100 - 100 * _alphaAnimationCurve.Evaluate(_timeAlive / _timeToLive);
         _timeAlive += Time.deltaTime;
     }
     
     public void Init(PopUpTextConfig parameter)
     {
+        _startSize = parameter.OverrideSize ? parameter.StartSize : Vector2.zero;
+        transform.localScale = _startSize;
         _text.text = parameter.Text;
         _text.color = parameter.Color;
-        _text.fontSize = parameter.StartSize;
-        _moveSpeed = parameter.RiseSpeed;
+        _text.fontSize = parameter.FontSize;
+        _riseSpeed = parameter.RiseSpeed;
         _timeToLive = parameter.TimeToLive;
 
         if (parameter.OverrideAnimationCurve)
@@ -71,14 +77,5 @@ public class BasicPopupText : MonoBehaviour , IInitialization<PopUpTextConfig>
     {
         yield return new WaitForSeconds(_timeToLive);
         Destroy(gameObject);
-    }
-
-    public void UnSet()
-    {
-        _text.text = "";
-        _text.color = Color.black;
-        _text.fontSize = 1;
-     
-        gameObject.SetActive(false);
     }
 }

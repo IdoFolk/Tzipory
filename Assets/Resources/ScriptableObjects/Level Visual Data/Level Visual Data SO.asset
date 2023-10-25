@@ -89,7 +89,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   DefaultPopUpConfig:
-    PopUpTextType: 0
+    PopUpTextType: 1
     Text: 
     Color: {r: 1, g: 1, b: 1, a: 1}
     OverrideSize: 0

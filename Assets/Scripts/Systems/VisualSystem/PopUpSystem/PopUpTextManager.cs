@@ -8,6 +8,12 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
 {
     public class PopUpTextManager : MonoSingleton<PopUpTextManager> //TODO: This will probably be integrated into LevelData TBF 
     {
+        [SerializeField] private PopUpTextConfig GetHitDefualtConfig;
+        [SerializeField] private PopUpTextConfig GetCritHitDefualtConfig;
+        [SerializeField] private PopUpTextConfig HealDefualtConfig;
+        
+        [SerializeField] public Canvas _popUpTextCanvas;
+        
         [SerializeField] private LevelVisualDataSO _defualtSo;
         private LevelVisualData _visualData;
 
@@ -18,6 +24,10 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
         public AnimationCurve PopUpTextMoveCurve => _visualData._popUpTextMoveCurve;
         public AnimationCurve PopUpTextScaleCurve => _visualData._popUpTextScaleCurve;
         public AnimationCurve PopUpTextAlphaCurve => _visualData._popUpTextAlphaCurve;
+        
+        public PopUpTextConfig GetHitDefaultConfig => GetHitDefualtConfig;
+        public PopUpTextConfig GetCritHitDefaultConfig => GetCritHitDefualtConfig;
+        public PopUpTextConfig HealDefaultConfig => HealDefualtConfig;
         
         public float GetRelativeFontSizeForDamage(float damage) => Mathf.Clamp( (FontSizeRange.y - FontSizeRange.x) * (damage - DamageRange.x) / (DamageRange.y - DamageRange.x) + FontSizeRange.x, FontSizeRange.x, FontSizeRange.y);
 

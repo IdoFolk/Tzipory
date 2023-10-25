@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Cinemachine;
+using Sirenix.OdinInspector;
 using Tzipory.Helpers;
 using UnityEngine;
 
@@ -211,7 +212,8 @@ namespace Tzipory.Systems.CameraSystem
                 _cameraStartZoom = startZoom;
             }
         }
-
+        
+        [Button("Reset camera")]
         public void ResetCamera()
         {
             //calculating the current aspect ratio according to screen resolution
@@ -306,6 +308,6 @@ namespace Tzipory.Systems.CameraSystem
 
                 yield return null;
             }
-        }
+        } 
     }
 }

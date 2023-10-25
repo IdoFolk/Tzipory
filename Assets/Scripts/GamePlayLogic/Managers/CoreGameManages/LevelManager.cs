@@ -51,7 +51,6 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         private void Awake()
         {
-            //UIManager = new UIManager();
             _poolManager = new PoolManager();
 
             if (GameManager.GameData == null) //for Testing(Start form level scene)
@@ -68,15 +67,17 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             }
 
             Instantiate(_levelConfig.Level, _levelParent);
+            
             if (GameManager.CameraHandler is null)
             {
-               var camera = FindObjectOfType<CameraHandler>();//only for testing
-               camera.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
+                GameManager.CameraHandler = FindObjectOfType<CameraHandler>();//only for testing
+                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
             }
             else
             {
                 GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
             }
+            
             EnemyManager = new EnemyManager(_enemiesParent);
             WaveManager = new WaveManager(_levelConfig, _waveIndicatorParent); //temp!
             CoreTemplete = FindObjectOfType<CoreTemple>(); //temp!!!
@@ -99,8 +100,8 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
             WaveManager.UpdateLevel();
 
-        if (GameSetting.CantLose)
-            return;
+            if (GameSetting.CantLose)
+                return;
 
             if (CoreTemplete.IsEntityDead)
                 EndGame(false);

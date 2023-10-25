@@ -6,7 +6,7 @@ namespace Tzipory.SerializeData.LevalSerializeData.StstusEffectTypes
     {
         public override bool ProcessEffect(ref float statValue)
         {
-            StatToEffect.ProcessStatModifier(StatModifier,StatProcessName);
+            StatToEffect.ProcessStatModifier(StatModifier,StatProcessName,PopUpTextConfig);
             Dispose();
             
             return true;

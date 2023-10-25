@@ -13,20 +13,18 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private SceneHandler _sceneHandler;
-
-        private static CameraHandler _cameraHandler;
-
+        
         public static GameData GameData { get; private set; }
         public static PlayerManager PlayerManager { get; private set; }
 
-        public static CameraHandler CameraHandler => _cameraHandler;
+        public static CameraHandler CameraHandler { get; set; }         
 
         private void Awake()
         {
             if (SceneHandler == null)
                 SceneHandler = _sceneHandler;
 
-            _cameraHandler = FindObjectOfType<CameraHandler>();//May need to change 
+            CameraHandler = FindObjectOfType<CameraHandler>();//May need to change 
             GameData = new GameData();
         }
 

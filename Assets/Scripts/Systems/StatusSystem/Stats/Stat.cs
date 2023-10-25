@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework.Internal.Filters;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.PopUpText;
 using Tzipory.ConfigFiles.StatusSystem;
@@ -15,7 +16,6 @@ namespace Tzipory.Systems.StatusSystem
     public class Stat
     {
         #region Events
-
         public event Action<StatChangeData> OnValueChanged;
         
         #endregion
@@ -140,7 +140,14 @@ namespace Tzipory.Systems.StatusSystem
             }
         }
         
-        public IDisposable AddStatusEffect(IStatEffectProcess statEffectProcess,PopUpTextConfig textConfig = default)
+        public IDisposable AddStatusEffect(IStatEffectProcess statEffectProcess,PopUpTextConfig popUpTextConfig)=>
+            AddStatusEffect(statEffectProcess, true,popUpTextConfig);
+        
+        public IDisposable AddStatusEffect(IStatEffectProcess statEffectProcess)=>
+            AddStatusEffect(statEffectProcess, false);
+
+        private IDisposable AddStatusEffect(IStatEffectProcess statEffectProcess, bool usePopUpText,
+            PopUpTextConfig popUpTextConfig = default)
         {
             //TODO: need to work on the overTime logic
             if (statEffectProcess.StatEffectType is StatEffectType.Process or StatEffectType.OverTime)
@@ -148,7 +155,12 @@ namespace Tzipory.Systems.StatusSystem
                 //TODO: make sure Performance
                 _processStatEffect.Add(statEffectProcess);
                 _orderProcessStatEffect = _processStatEffect.OrderBy(x => x.StatProcessPriority);
-                OnValueChanged?.Invoke(new StatChangeData(statEffectProcess.StatProcessName,statEffectProcess.StatModifier.Modifier,CurrentValue,textConfig));
+                
+                OnValueChanged?.Invoke(usePopUpText
+                    ? new StatChangeData(statEffectProcess.StatProcessName, statEffectProcess.StatModifier.Modifier,
+                        CurrentValue, popUpTextConfig)
+                    : new StatChangeData(statEffectProcess.StatProcessName, statEffectProcess.StatModifier.Modifier,
+                        CurrentValue));
             }
             else
                 _modifierStatEffect.Add(statEffectProcess);
@@ -158,12 +170,25 @@ namespace Tzipory.Systems.StatusSystem
             return statEffectProcess;
         }
         
-        public void ProcessStatModifier(StatModifier statModifier,string statEffectName,PopUpTextConfig textConfig = default)//may not need to be param
+        public void ProcessStatModifier(StatModifier statModifier,string statEffectName,PopUpTextConfig textConfig)//may not need to be param
+        {
+            ProcessStatModifier(statModifier,statEffectName,true,textConfig);
+        }
+        
+        public void ProcessStatModifier(StatModifier statModifier,string statEffectName)//may not need to be param
+        {
+            ProcessStatModifier(statModifier,statEffectName,false);
+        }
+        
+        private void ProcessStatModifier(StatModifier statModifier,string statEffectName,bool usePopUpText,PopUpTextConfig popUpTextConfig = default)//may not need to be param
         {
             _dynamicValue = statModifier.ProcessStatModifier(_dynamicValue);
             
-            StatChangeData changeData = new StatChangeData(statEffectName,statModifier.Modifier,CurrentValue,textConfig);
-            OnValueChanged?.Invoke(changeData);
+            OnValueChanged?.Invoke(usePopUpText
+                ? new StatChangeData(statEffectName, statModifier.Modifier,
+                    CurrentValue, popUpTextConfig)
+                : new StatChangeData(statEffectName, statModifier.Modifier,
+                    CurrentValue));
         }
         
         public void RestStatDynamicValue()

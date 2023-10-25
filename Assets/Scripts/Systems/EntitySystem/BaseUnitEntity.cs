@@ -44,9 +44,6 @@ namespace Tzipory.Systems.Entity
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetCritHit;
 
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpTexter _popUpTexter;
-        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpTextConfig _defaultPopUpText_Config;
-        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpTextConfig _critPopUpText_Config;
-        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpTextConfig _healPopUpText_Config;
 
         #region Visual Events
         public Action<bool> OnSpriteFlipX;
@@ -277,8 +274,12 @@ namespace Tzipory.Systems.Entity
             
             Stats = new Dictionary<int, Stat>();
 
-            foreach (var statConfig in parameter.StatConfigs)
-                Stats.Add(statConfig.ID,new Stat(statConfig));
+            foreach (var statSerializeData in parameter.StatConfigs)
+            {
+                var stat = new Stat(statSerializeData);
+                stat.OnValueChanged += _popUpTexter.SpawnPopUp; 
+                Stats.Add(statSerializeData.ID ,stat);
+            }
             
             DefaultPriorityTargeting =
                 Systems.FactorySystem.ObjectFactory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
@@ -380,7 +381,7 @@ namespace Tzipory.Systems.Entity
         
         public void Heal(float amount)
         {
-            Health.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition),"Heal");
+            Health.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition),"Heal",PopUpTextManager.Instance.HealDefaultConfig);
         }
 
         public void TakeDamage(float damage,bool isCrit)
@@ -392,21 +393,22 @@ namespace Tzipory.Systems.Entity
                     : Constant.EffectSequenceIds.GET_HIT);
                 
                 IsDamageable = false; // Is this what turns on InvincibleTime?
+
+                PopUpTextConfig popUpTextConfig;
+                string processName;
+
                 if (isCrit)
                 {
-                    _critPopUpText_Config.Text = $"{(int)damage}";
-                    _critPopUpText_Config.StartSize = PopUpTextManager.Instance.GetRelativeFontSizeForDamage(damage);
-                    _critPopUpText_Config.StartSize += PopUpTextManager.Instance.CritFontSizeBonus; //this is pretty bad imo
-                    //_popUpTexter.SpawnPopUp(_critPopUpText_Config);
+                    popUpTextConfig = PopUpTextManager.Instance.GetCritHitDefaultConfig;
+                    processName = "Crit Hit";
                 }
                 else
                 {
-                    _defaultPopUpText_Config.Text = $"{(int)damage}";
-                    _defaultPopUpText_Config.StartSize = PopUpTextManager.Instance.GetRelativeFontSizeForDamage(damage);
-                    //_popUpTexter.SpawnPopUp(_defaultPopUpText_Config);
+                    popUpTextConfig = PopUpTextManager.Instance.GetHitDefaultConfig;
+                    processName = "Hit";
                 }
                 
-                Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),"Hit");
+                Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),processName,popUpTextConfig);
                 IsDamageable = false;
             }
         }

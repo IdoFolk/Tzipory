@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Cinemachine;
+using Sirenix.OdinInspector;
 using Tzipory.Helpers;
 using UnityEngine;
 
@@ -167,6 +168,7 @@ namespace Tzipory.Systems.CameraSystem
             //calculating the current aspect ratio according to screen resolution
             _currentAspectRatioX = FULL_HD_PIXELS_X / _mainCamera.pixelWidth;
             _currentAspectRatioY = FULL_HD_PIXELS_y / _mainCamera.pixelHeight;
+            
 
             //calculating the current padding for movement borders and zoom
             _edgePaddingX = _cameraSettings.DefaultEdgePaddingX / _currentAspectRatioX;

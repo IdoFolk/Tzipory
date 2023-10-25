@@ -1,5 +1,6 @@
 using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.GameplayLogic.UI.MetaUI.InventoryUI;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.UISystem;
 using UnityEngine;

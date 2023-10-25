@@ -7,46 +7,49 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSlotUI : BaseInteractiveUIElement , IInitialization<ISlotItem>
+namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
 {
-   [SerializeField] private Image _image;
-   [SerializeField] private TMP_Text _itemName;
-   [SerializeField] private TMP_Text _itemAmount;
-   
-   private ISlotItem _item;
-   
-   private Vector3  _startPosition;
-   protected override UIGroupType UIGroup => UIGroupType.MetaUI;
-
-   public ISlotItem Item => _item;
-
-   public bool IsInitialization { get; private set; }
-   
-   public override void OnBeginDrag(PointerEventData eventData)
+   public class ItemSlotUI : BaseInteractiveUIElement, IInitialization<ISlotItem>
    {
-      base.OnBeginDrag(eventData);
-      _startPosition  = transform.position;
-   }
+      [SerializeField] private Image _image;
+      [SerializeField] private TMP_Text _itemName;
+      [SerializeField] private TMP_Text _itemAmount;
 
-   public override void OnDrag(PointerEventData eventData)
-   {
-      base.OnDrag(eventData);
-      transform.position = eventData.position;
-   }
+      private ISlotItem _item;
 
-   public override void OnEndDrag(PointerEventData eventData)
-   {
-      base.OnEndDrag(eventData);
-      transform.position  = _startPosition;
-   }
+      private Vector3 _startPosition;
+      protected override UIGroupType UIGroup => UIGroupType.MetaUI;
 
-   public void Init(ISlotItem parameter)
-   {
-      _image.sprite = parameter.ItemSlotSprite;
-      _itemName.text = parameter.ItemSlotName;
-      _itemAmount.text = parameter.ItemAmount.ToString();
-      _item = parameter;
-      IsInitialization = true;
-   }
+      public ISlotItem Item => _item;
 
+      public bool IsInitialization { get; private set; }
+
+      public override void OnBeginDrag(PointerEventData eventData)
+      {
+         base.OnBeginDrag(eventData);
+         _startPosition = transform.position;
+      }
+
+      public override void OnDrag(PointerEventData eventData)
+      {
+         base.OnDrag(eventData);
+         transform.position = eventData.position;
+      }
+
+      public override void OnEndDrag(PointerEventData eventData)
+      {
+         base.OnEndDrag(eventData);
+         transform.position = _startPosition;
+      }
+
+      public void Init(ISlotItem parameter)
+      {
+         _image.sprite = parameter.ItemSlotSprite;
+         _itemName.text = parameter.ItemSlotName;
+         _itemAmount.text = parameter.ItemAmount.ToString();
+         _item = parameter;
+         IsInitialization = true;
+      }
+
+   }
 }

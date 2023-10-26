@@ -24,7 +24,10 @@ namespace Tzipory.Systems.CameraSystem
 
         [SerializeField, Tooltip("toggle mouse edge scroll camera movement")]
         private bool _enableEdgeScroll = true;
-
+        
+        [SerializeField, Tooltip("toggle mouse Pan scroll camera movement")]
+        private bool _enablePanScroll = true;
+        
         [SerializeField, Tooltip("toggle whether the camera moves to the mouse position when zooming")]
         private bool _enableZoomMovesCamera = true;
 
@@ -48,6 +51,9 @@ namespace Tzipory.Systems.CameraSystem
         private float _edgePaddingX;
         private float _edgePaddingY;
         private float _zoomPadding;
+        
+        private bool _dragPanMoveActive = false;
+        private Vector2 _lastMousePosition;
 
         private void Awake()
         {
@@ -111,6 +117,29 @@ namespace Tzipory.Systems.CameraSystem
                     inputDir.y = +1f;
             }
 
+            if (_enablePanScroll)
+            {
+                if (Input.GetMouseButtonDown(1))
+                {
+                    _dragPanMoveActive = true;
+                    _lastMousePosition = Input.mousePosition;
+                }
+                if (Input.GetMouseButtonUp(1))
+                {
+                    _dragPanMoveActive = false;
+                }
+
+                if (_dragPanMoveActive)
+                {
+                    var dragPanSpeed = _cameraSettings.CameraDragPanSpeed;
+                    Vector2 mouseMovementDelta = (Vector2)Input.mousePosition - _lastMousePosition;
+                    inputDir.x = -mouseMovementDelta.x * dragPanSpeed;
+                    inputDir.y = -mouseMovementDelta.y * dragPanSpeed;
+
+                    _lastMousePosition = Input.mousePosition;
+                }
+            }
+
             return inputDir;
         }
 
@@ -138,6 +167,7 @@ namespace Tzipory.Systems.CameraSystem
                 }
             }
 
+            
             if (Input.mouseScrollDelta.y < 0) //zoom out
             {
                 _targetOrthographicSize += _cameraSettings.ZoomChangeValue;

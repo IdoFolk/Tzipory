@@ -1,7 +1,7 @@
 ﻿using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.TargetingSystem;
 using Tzipory.Tools.Enums;
 using Tzipory.Tools.TimeSystem;
-using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 
 namespace Tzipory.Systems.AbilitySystem.AbilityEntity

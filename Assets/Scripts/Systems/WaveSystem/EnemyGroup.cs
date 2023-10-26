@@ -1,8 +1,8 @@
 using System;
 using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.ConfigFiles.Level;
-using Tzipory.Tools.TimeSystem;
 using Tzipory.Tools.Interface;
+using Tzipory.Tools.TimeSystem;
 
 namespace Tzipory.Systems.WaveSystem
 {

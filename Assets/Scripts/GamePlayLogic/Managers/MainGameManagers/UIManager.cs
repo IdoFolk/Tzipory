@@ -5,14 +5,23 @@ using Unity.VisualScripting;
 
 namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
-    public class UIManager : BaseObserver<IUIElement> , IInitializable , IDisposable
+    public class UIManager : BaseMonoObserver<IUIElement> , IInitializable , IDisposable
     {
         public void Initialize()
         {
-            for (int i = 0; i < ObserverObjects.Count; i++)
-            {
-                ObserverObjects[i].Show();
-            }
+            
+        }
+
+        public static void ShowGroup(int groupIndex)
+        {
+            if (ObserverObjects.TryGetValue(groupIndex, out var observers))
+                observers.ForEach(observer => observer.Show());
+        }
+        
+        public static void HideGroup(int groupIndex)
+        {
+            if (ObserverObjects.TryGetValue(groupIndex, out var observers))
+                observers.ForEach(observer => observer.Hide());
         }
 
         public void Dispose()

@@ -1,4 +1,5 @@
 using System;
+using Tools.Enums;
 using Tzipory.ConfigFiles.Item;
 using Tzipory.SerializeData.ItemSerializeData;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
@@ -16,6 +17,8 @@ public class CharacterUIHandler : BaseUIElement , IInitialization<ShamanDataCont
     private ShamanDataContainer  _shamanDataContainer;
     
     public bool IsInitialization { get; }
+
+    protected override UIGroupType GroupIndex => UIGroupType.MetaUI;
 
     public void Init(ShamanDataContainer parameter)
     {

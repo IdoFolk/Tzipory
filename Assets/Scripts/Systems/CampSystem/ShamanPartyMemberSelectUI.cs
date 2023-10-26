@@ -1,5 +1,4 @@
 ﻿using System;
-using Tzipory.SerializeData.PlayerData.Party.Entity;
 using UnityEngine;
 using UnityEngine.UI;
 

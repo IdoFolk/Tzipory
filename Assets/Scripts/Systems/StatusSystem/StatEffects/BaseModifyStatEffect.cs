@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Tzipory.Helpers.Consts;
-using Tzipory.Systems.StatusSystem;
 
 namespace Tzipory.Systems.StatusSystem
 {

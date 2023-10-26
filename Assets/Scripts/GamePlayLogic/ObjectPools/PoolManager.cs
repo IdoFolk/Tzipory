@@ -2,10 +2,10 @@
 using Tzipory.GameplayLogic.EntitySystem.Enemies;
 using Tzipory.GameplayLogic.UI.WaveIndicator;
 using Tzipory.GameplayLogic.VisualSystem.EffectType;
+using Tzipory.Systems.FactorySystem.GameObjectFactory;
 using Tzipory.Systems.FactorySystem.ObjectFactory;
 using Tzipory.Systems.PoolSystem;
 using Tzipory.Systems.StatusSystem;
-using Tzipory.Systems.FactorySystem.GameObjectFactory;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 
 namespace Tzipory.GamePlayLogic.ObjectPools

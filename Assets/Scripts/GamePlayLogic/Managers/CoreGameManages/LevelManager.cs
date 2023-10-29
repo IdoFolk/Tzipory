@@ -89,7 +89,6 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             GameManager.CameraHandler.UnlockCamera();
             GameManager.CameraHandler.ResetCamera();
             WaveManager.StartLevel();
-            UIManager.Initialize();
             GAME_TIME.SetTimeStep(1);
             IsGameRunning = true;
         }
@@ -113,7 +112,6 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         private void OnDestroy()
         {
-            UIManager.Dispose();
             EnemyManager.Dispose();
             PartyManager.Dispose();
             WaveManager.Dispose();

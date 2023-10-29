@@ -13,18 +13,18 @@ namespace Tzipory.Systems.UISystem
         public Action OnShow { get; }
         public Action OnHide { get; }
 
-        protected abstract UIGroupType GroupIndex { get; }
+        protected abstract UIGroupType UIGroup { get; }
 
         protected virtual void Awake()
         {
-            UIManager.AddObserverObject(this,(int)GroupIndex);
+            UIManager.AddUIElement(UIGroup,this);
             
             if (_showOnAwake)
                 Show();
         }
 
         private void OnDestroy() =>
-            UIManager.RemoveObserverObject(this);
+            UIManager.RemoveUIElement(this);
 
         public virtual void Show()
         {
@@ -36,6 +36,11 @@ namespace Tzipory.Systems.UISystem
         {
             gameObject.SetActive(false);
             OnHide?.Invoke();
+        }
+
+        public virtual void UpdateUIVisual()
+        {
+            
         }
     }
 }

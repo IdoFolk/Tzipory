@@ -1,6 +1,5 @@
 ﻿using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
-using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
 
@@ -11,12 +10,7 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private RectTransform _heroContainer;
         [SerializeField] private ShamanInteractiveUIHandler _shamanInteractiveUIHanlder;
 
-        protected override UIGroupType GroupIndex => UIGroupType.GameUI;
-
-        protected override void Awake()
-        {
-            UIManager.AddObserverObject(this);
-        }
+        protected override UIGroupType UIGroup => UIGroupType.GameUI;
         
         public override void Show()
         {

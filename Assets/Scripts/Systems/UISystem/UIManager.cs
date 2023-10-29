@@ -7,9 +7,30 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
      public class UIManager : MonoBehaviour
     {
-        private static readonly Dictionary<UIGroupType, List<IUIElement>> UIGroups = new();
+        private static readonly Dictionary<UIGroup, List<IUIElement>> UIGroups = new();
+        
+        public static void Init(UIGroup parameter)
+        {
+            if (!UIGroups.TryGetValue(parameter, out var uiElements))
+            {
+                Debug.LogWarning($"Can not find UiGroup in tag {parameter}");
+                return;
+            }
 
-        public static void AddUIElement(UIGroupType group, IUIElement element)
+            for (int i = 0; i < uiElements.Count; i++)
+                uiElements[i].Init();
+        }
+
+        public static void Init()
+        {
+            foreach (var uiGroupsValue in UIGroups.Values)
+            {
+                foreach (var uiElement in uiGroupsValue)
+                    uiElement.Init();
+            }
+        }
+
+        public static void AddUIElement(UIGroup group, IUIElement element)
         {
             if (UIGroups.TryGetValue(group,out var foundUIGroup))
             {
@@ -40,7 +61,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
             Debug.LogWarning("UiElement not found in any group");
         }
         
-        public static void ShowUIGroup(UIGroupType group,bool updateOnShow = false)
+        public static void ShowUIGroup(UIGroup group,bool updateOnShow = false)
         {
             if (UIGroups.TryGetValue(group, out var foundUIGroup))
             {
@@ -55,7 +76,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
                 Debug.LogWarning($"Can not find {group} group");
         }
         
-        public static void HidUIGroup(UIGroupType group)
+        public static void HidUIGroup(UIGroup group)
         {
             if (UIGroups.TryGetValue(group, out var foundUIGroup))
             {
@@ -66,7 +87,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
                 Debug.LogWarning($"Can not find {group} group");
         }
 
-        public static void UpdateVisualUIGroup(UIGroupType group)
+        public static void UpdateVisualUIGroup(UIGroup group)
         {
             if (UIGroups.TryGetValue(group, out var foundUIGroup))
             {

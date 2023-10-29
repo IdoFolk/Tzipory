@@ -22,7 +22,7 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
       private ISlotItem _item;
 
       private Vector3 _startPosition;
-      protected override UIGroupType UIGroup => UIGroupType.MetaUI;
+      protected override UIGroup UIGroup => UIGroup.MetaUI;
 
       public ISlotItem Item => _item;
 

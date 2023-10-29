@@ -9,7 +9,7 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
     {
         [SerializeField] private TMP_Text _dataName;
         [SerializeField] private TMP_Text _dataValue;
-        protected override UIGroupType UIGroup => UIGroupType.MetaUI;
+        protected override UIGroup UIGroup => UIGroup.MetaUI;
 
         public void SetData(string dataName, string value, bool bg)
         {

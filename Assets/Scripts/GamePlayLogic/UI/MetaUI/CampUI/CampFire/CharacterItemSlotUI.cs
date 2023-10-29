@@ -22,7 +22,7 @@ public class CharacterItemSlotUI : BaseInteractiveUIElement
 
     public int StoreItemId { get; private set; }
 
-    protected override UIGroupType UIGroup => UIGroupType.MetaUI;
+    protected override UIGroup UIGroup => UIGroup.MetaUI;
     public ItemSlot ItemSlot => _itemSlot;
 
     public override void OnDrop(PointerEventData eventData)

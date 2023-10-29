@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Tools.Enums;
-using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
 
@@ -12,13 +11,8 @@ namespace Tzipory.GameplayLogic.UIElements
         
         private TimeButtonsUI  _currentButton;
 
-        protected override UIGroupType GroupIndex => UIGroupType.GameUI;
-
-        protected override void Awake()
-        {
-            UIManager.AddObserverObject(this);
-        }
-
+        protected override UIGroupType UIGroup => UIGroupType.GameUI;
+        
         public override void Show()
         {
             foreach (var timeButtonsUI in _timeButtons)

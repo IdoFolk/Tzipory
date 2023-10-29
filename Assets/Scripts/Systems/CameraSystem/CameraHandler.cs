@@ -25,17 +25,17 @@ namespace Tzipory.Systems.CameraSystem
         [SerializeField, Tooltip("toggle mouse edge scroll camera movement")]
         private bool _enableEdgeScroll = true;
 
+        [SerializeField, Tooltip("toggle whether the camera moves to the mouse position when zooming")]
+        private bool _enableZoomMovesCamera = true;
 
-        [Header("Gameobjects")] [SerializeField]
-        private Camera _mainCamera;
-
+        [Header("Gameobjects")] 
+        [SerializeField] private Camera _mainCamera;
         [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
         [SerializeField] private Transform _cameraFollowObject;
 
-        public static CameraSettings CameraSettings { get;}
         public Camera MainCamera => _mainCamera;
-        public readonly Vector3 LockedCameraPosition = new Vector3(0, -3, -80);
-        public readonly int LockedCameraZoom = 9;
+        private readonly Vector3 _lockedCameraPosition = new (0, -3, -80);
+        private readonly int _lockedCameraZoom = 9;
 
         private Vector2 _edgeScrollBorder;
         private Vector2 _cameraStartPosition;
@@ -72,7 +72,7 @@ namespace Tzipory.Systems.CameraSystem
             _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
             _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
             _edgePaddingY = _cameraSettings.DefaultEdgePaddingY;
-            LockCamera(LockedCameraPosition, LockedCameraZoom);
+            LockCamera(_lockedCameraPosition, _lockedCameraZoom);
         }
 
         private void Update()
@@ -81,76 +81,126 @@ namespace Tzipory.Systems.CameraSystem
 
             if (_enableCameraMovement) //option to disable camera movement and zoom
             {
-                Vector3 inputDir = new Vector3(0, 0, 0); //resetting the input direction
-
-                //WASD Detection
-                if (Input.GetKey(KeyCode.W)) inputDir.y = +1f;
-                if (Input.GetKey(KeyCode.S)) inputDir.y = -1f;
-                if (Input.GetKey(KeyCode.A)) inputDir.x = -1f;
-                if (Input.GetKey(KeyCode.D)) inputDir.x = +1f;
-
-                //Edge Scrolling Detection
-                if (_enableEdgeScroll)
-                {
-                    if (Input.mousePosition.x < (Screen.width * _cameraSettings.EdgeScrollDetectSizeX))
-                        inputDir.x = -1f;
-                    if (Input.mousePosition.y < (Screen.height * _cameraSettings.EdgeScrollDetectSizeY))
-                        inputDir.y = -1f;
-                    if (Input.mousePosition.x > Screen.width - (Screen.width * _cameraSettings.EdgeScrollDetectSizeX))
-                        inputDir.x = +1f;
-                    if (Input.mousePosition.y > Screen.height - (Screen.height * _cameraSettings.EdgeScrollDetectSizeY))
-                        inputDir.y = +1f;
-                }
-
-                //Mouse Scroll Zoom 
-                if (Input.mouseScrollDelta.y > 0)
-                {
-                    _targetOrthographicSize -= _cameraSettings.ZoomChangeValue;
-                    StartCoroutine(ChangeDampingForZoom(0, 0));
-                }
-
-                if (Input.mouseScrollDelta.y < 0)
-                {
-                    _targetOrthographicSize += _cameraSettings.ZoomChangeValue;
-                    StartCoroutine(ChangeDampingForZoom(0, 0));
-                }
-
-
-                //setting Variables
-                var cameraTransform = transform;
-                var cameraPosition = _cameraFollowObject.position;
-                var orthographicSize = _mainCamera.orthographicSize;
-
-                //setting the input direction to correspond with camera direction
-                var moveDir = cameraTransform.up * inputDir.y + cameraTransform.right * inputDir.x;
-
-                //determine the camera speed according to the camera zoom
-                float currentZoomNormalizedValue =
-                    (_cinemachineVirtualCamera.m_Lens.OrthographicSize - _cameraSettings.ZoomMinClamp) /
-                    (_zoomPadding - _cameraSettings.ZoomMinClamp);
-                float zoomSpeedChangeValue = currentZoomNormalizedValue * _cameraSettings.CameraSpeedZoomChangeValue;
-                float fixedCameraSpeed = _cameraSettings.MoveSpeedMinimum + zoomSpeedChangeValue;
-
-                //moving the camera
-                cameraPosition += moveDir * (fixedCameraSpeed * Time.deltaTime);
-                var orthographicSizeX = orthographicSize * (_edgePaddingX);
-                var orthographicSizeY = orthographicSize * (_edgePaddingY);
-
-                //clamping the camera to the borders of the map
-                cameraPosition.x = Mathf.Clamp(cameraPosition.x, -(_edgeScrollBorder.x - orthographicSizeX),
-                    _edgeScrollBorder.x - orthographicSizeX);
-                cameraPosition.y = Mathf.Clamp(cameraPosition.y, -(_edgeScrollBorder.y - orthographicSizeY),
-                    _edgeScrollBorder.y - orthographicSizeY);
-                _cameraFollowObject.position = cameraPosition;
-
-
-                //moving + clamping the camera zoom
-                _targetOrthographicSize =
-                    Mathf.Clamp(_targetOrthographicSize, _cameraSettings.ZoomMinClamp, _zoomPadding);
-                _cinemachineVirtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(
-                    _cinemachineVirtualCamera.m_Lens.OrthographicSize, _targetOrthographicSize,
-                    Time.deltaTime * _cameraSettings.ZoomSpeed);
+                Vector3 inputDir = HandleInput();
+                HandleZoom();
+               
+                HandleCameraMove(inputDir);
             }
+        }
+
+        private Vector3 HandleInput()
+        {
+            var inputDir = new Vector3(0, 0, 0); //resetting the input direction
+
+            //WASD Detection
+            if (Input.GetKey(KeyCode.W)) inputDir.y = +1f;
+            if (Input.GetKey(KeyCode.S)) inputDir.y = -1f;
+            if (Input.GetKey(KeyCode.A)) inputDir.x = -1f;
+            if (Input.GetKey(KeyCode.D)) inputDir.x = +1f;
+
+            //Edge Scrolling Detection
+            if (_enableEdgeScroll)
+            {
+                if (Input.mousePosition.x < (Screen.width * _cameraSettings.EdgeScrollDetectSizeX))
+                    inputDir.x = -1f;
+                if (Input.mousePosition.y < (Screen.height * _cameraSettings.EdgeScrollDetectSizeY))
+                    inputDir.y = -1f;
+                if (Input.mousePosition.x > Screen.width - (Screen.width * _cameraSettings.EdgeScrollDetectSizeX))
+                    inputDir.x = +1f;
+                if (Input.mousePosition.y > Screen.height - (Screen.height * _cameraSettings.EdgeScrollDetectSizeY))
+                    inputDir.y = +1f;
+            }
+
+            return inputDir;
+        }
+
+        private void HandleZoom()
+        {
+            //Mouse Scroll Zoom 
+            var zoomMoveCameraValue = _cameraSettings.ZoomMoveCameraValue;
+            var zoomCameraDirection =
+                _mainCamera.ScreenToWorldPoint(Input.mousePosition) - _cameraFollowObject.position;
+            
+            if (Input.mouseScrollDelta.y > 0) //zoom in
+            {
+                _targetOrthographicSize -= _cameraSettings.ZoomChangeValue;
+                if (_enableZoomMovesCamera)
+                {
+                    if (_targetOrthographicSize > _cameraSettings.ZoomMinClamp - 1)
+                    {
+                        _cameraFollowObject.Translate(zoomCameraDirection * zoomMoveCameraValue); //move the camera towards the mouse
+                        StartCoroutine(ChangeDampingUntilConditional(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY, CameraFinishedFollowUp()));
+                    }
+                }
+                else
+                {
+                    StartCoroutine(ChangeDampingUntilConditional(0, 0, CameraFinishedZoom()));
+                }
+            }
+
+            if (Input.mouseScrollDelta.y < 0) //zoom out
+            {
+                _targetOrthographicSize += _cameraSettings.ZoomChangeValue;
+                if (_enableZoomMovesCamera)
+                {
+                    if (_targetOrthographicSize < _zoomPadding + 1)
+                    {
+                        _cameraFollowObject.Translate(-zoomCameraDirection * zoomMoveCameraValue); //move the camera away from the mouse
+                        StartCoroutine(ChangeDampingUntilConditional(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY, CameraFinishedFollowUp()));
+                    }
+                }
+                else
+                {
+                    StartCoroutine(ChangeDampingUntilConditional(0, 0, CameraFinishedZoom()));
+                }
+            }
+            
+            CameraZoomClamp();
+        }
+
+        private void HandleCameraMove (Vector3 inputDir)
+        {
+            var cameraTransform = transform;
+            var cameraPosition = _cameraFollowObject.position;
+            
+            //setting the input direction to correspond with camera direction
+            var moveDir = cameraTransform.up * inputDir.y + cameraTransform.right * inputDir.x;
+
+            //determine the camera speed according to the camera zoom
+            float currentZoomNormalizedValue =
+                (_cinemachineVirtualCamera.m_Lens.OrthographicSize - _cameraSettings.ZoomMinClamp) /
+                (_zoomPadding - _cameraSettings.ZoomMinClamp);
+            float zoomSpeedChangeValue = currentZoomNormalizedValue * _cameraSettings.CameraSpeedZoomChangeValue;
+            float fixedCameraSpeed = _cameraSettings.MoveSpeedMinimum + zoomSpeedChangeValue;
+
+            //moving the camera
+            cameraPosition += moveDir * (fixedCameraSpeed * Time.deltaTime);
+            cameraPosition = CameraMoveClamp(cameraPosition);
+            _cameraFollowObject.position = cameraPosition;
+        }
+
+        private Vector3 CameraMoveClamp(Vector3 cameraPosition)
+        {
+            var orthographicSize = _mainCamera.orthographicSize;
+            Vector2 fixedOrthographicSize = new Vector2(orthographicSize * (_edgePaddingX), orthographicSize * (_edgePaddingY));
+
+            //clamping the camera to the borders of the map
+            cameraPosition.x = Mathf.Clamp(cameraPosition.x, -(_edgeScrollBorder.x - fixedOrthographicSize.x),
+                _edgeScrollBorder.x - fixedOrthographicSize.x);
+            cameraPosition.y = Mathf.Clamp(cameraPosition.y, -(_edgeScrollBorder.y - fixedOrthographicSize.y),
+                _edgeScrollBorder.y - fixedOrthographicSize.y);
+
+            return cameraPosition;
+        }
+
+        private void CameraZoomClamp()
+        {
+            //clamping the camera zoom
+            _targetOrthographicSize =
+                Mathf.Clamp(_targetOrthographicSize, _cameraSettings.ZoomMinClamp, _zoomPadding); 
+            //camera zoom 
+            _cinemachineVirtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(_cinemachineVirtualCamera.m_Lens.OrthographicSize, _targetOrthographicSize,
+                Time.deltaTime * _cameraSettings.ZoomSpeed);
         }
 
         public void SetCameraSettings(Vector2 cameraBorders, bool overWrite, Vector2 startPos, float startZoom)
@@ -188,6 +238,7 @@ namespace Tzipory.Systems.CameraSystem
                 _targetOrthographicSize = _cameraSettings.ZoomDefaultStartValue;
                 _mainCamera.orthographicSize = _cameraSettings.ZoomDefaultStartValue;
             }
+
             _cameraFollowObject.position = new Vector3(_cameraStartPosition.x, _cameraStartPosition.y, -80);
             _mainCamera.transform.position = new Vector3(_cameraStartPosition.x, _cameraStartPosition.y, -80);
             UnlockCamera();
@@ -198,11 +249,13 @@ namespace Tzipory.Systems.CameraSystem
             _enableCameraMovement = true;
             _mainCamera.GetComponent<CinemachineBrain>().enabled = true;
         }
+
         public void LockCamera()
         {
             _mainCamera.GetComponent<CinemachineBrain>().enabled = false;
             _enableCameraMovement = false;
         }
+
         public void LockCamera(Vector2 lockedCameraPos, int lockedCameraZoom)
         {
             _mainCamera.GetComponent<CinemachineBrain>().enabled = false;
@@ -210,59 +263,47 @@ namespace Tzipory.Systems.CameraSystem
             _mainCamera.orthographicSize = lockedCameraZoom;
             _enableCameraMovement = false;
         }
-        
+
         public void SetCameraPosition(Vector2 eventPosition)
         {
             //move the camera to Event Position
             var newPos = new Vector3(eventPosition.x, eventPosition.y, -80);
-            StartCoroutine(ChangeDampingForEventTransition(_cameraSettings.EventTransitionDampingX,
-                _cameraSettings.EventTransitionDampingY));
+            StartCoroutine(ChangeDampingUntilConditional(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY, CameraFinishedFollowUp()));
             _cameraFollowObject.position = newPos;
         }
 
-        IEnumerator ChangeDampingForZoom(float xdamping, float ydamping)
+        private bool CameraFinishedFollowUp()
         {
-            //change the damping speed to zero when zooming in and out
+            var mainCameraPos = _mainCamera.transform.position;
+            var cameraFollowObjectPos = _cameraFollowObject.position;
+            bool cameraFinishedFollowUpX = mainCameraPos.x <= (cameraFollowObjectPos.x + CAMERA_MOVEMENT_DETECT_RANGE) &&
+                                           mainCameraPos.x >= (cameraFollowObjectPos.x - CAMERA_MOVEMENT_DETECT_RANGE);
+            bool cameraFinishedFollowUpY = mainCameraPos.y <= (cameraFollowObjectPos.y + CAMERA_MOVEMENT_DETECT_RANGE) &&
+                                           mainCameraPos.y >= (cameraFollowObjectPos.y - CAMERA_MOVEMENT_DETECT_RANGE);
+            bool cameraFinishedFollowUp = cameraFinishedFollowUpX && cameraFinishedFollowUpY;
+            return cameraFinishedFollowUp;
+        }
+
+        private bool CameraFinishedZoom()
+        {
+            bool cameraFinishedZoom =
+                _cinemachineVirtualCamera.m_Lens.OrthographicSize <= (_targetOrthographicSize + ORTHOGRAPHIC_DETECT_RANGE) &&
+                _cinemachineVirtualCamera.m_Lens.OrthographicSize >= (_targetOrthographicSize - ORTHOGRAPHIC_DETECT_RANGE);
+            return cameraFinishedZoom;
+        }
+
+        IEnumerator ChangeDampingUntilConditional(float xdamping, float ydamping, bool condition)
+        {
             _cinemachineTransposer.m_XDamping = xdamping;
             _cinemachineTransposer.m_YDamping = ydamping;
 
             while (true)
             {
-                if (_cinemachineVirtualCamera.m_Lens.OrthographicSize <=
-                    (_targetOrthographicSize + ORTHOGRAPHIC_DETECT_RANGE) &&
-                    _cinemachineVirtualCamera.m_Lens.OrthographicSize >=
-                    (_targetOrthographicSize - ORTHOGRAPHIC_DETECT_RANGE))
+                if (condition)
                 {
                     _cinemachineTransposer.m_XDamping = _cameraSettings.XDamping;
                     _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
                     yield break;
-                }
-
-                yield return null;
-            }
-        }
-
-        IEnumerator ChangeDampingForEventTransition(float xdamping, float ydamping)
-        {
-            //change the damping speed when moving to an Event Position
-            _cinemachineTransposer.m_XDamping = xdamping;
-            _cinemachineTransposer.m_YDamping = ydamping;
-
-            while (true)
-            {
-                if (_mainCamera.transform.position.x <=
-                    (_cameraFollowObject.position.x + CAMERA_MOVEMENT_DETECT_RANGE) &&
-                    _mainCamera.transform.position.x >= (_cameraFollowObject.position.x - CAMERA_MOVEMENT_DETECT_RANGE))
-                {
-                    if (_mainCamera.transform.position.y <=
-                        (_cameraFollowObject.position.y + CAMERA_MOVEMENT_DETECT_RANGE) &&
-                        _mainCamera.transform.position.y >=
-                        (_cameraFollowObject.position.y - CAMERA_MOVEMENT_DETECT_RANGE))
-                    {
-                        _cinemachineTransposer.m_XDamping = _cameraSettings.XDamping;
-                        _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
-                        yield break;
-                    }
                 }
 
                 yield return null;

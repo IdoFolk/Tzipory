@@ -70,15 +70,26 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             }
 
             Instantiate(_levelConfig.Level, _levelParent);
+
+            #region OnlyForTesting
+
+#if UNITY_EDITOR
             if (GameManager.CameraHandler is null)
             {
-                var camera = FindObjectOfType<CameraHandler>();//only for testing
-                camera.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
+                GameManager.CameraHandler = FindObjectOfType<CameraHandler>();//only for testing
+                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
             }
             else
             {
                 GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
             }
+
+            if (GAME_TIME.TimerHandler is null)
+                Instantiate(Resources.Load<GameObject>("Prefabs/Managers/Temp/GameTimeManager"));//only for testing
+#endif
+           
+            #endregion
+            
             EnemyManager = new EnemyManager(_enemiesParent);
             WaveManager = new WaveManager(_levelConfig, _waveIndicatorParent); //temp!
             CoreTemplete = FindObjectOfType<CoreTemple>(); //temp!!!

@@ -10,7 +10,7 @@ public class CampFireUIHandler : BaseUIElement
     [SerializeField] private InventoryUIHandler _inventoryUIHandler;
     [SerializeField] private CharacterUIHandler _characterUIHandler;
     [SerializeField] private CharacterStatsUIHandler _characterStatsUIHandler;
-    protected override UIGroupType UIGroup => UIGroupType.MetaUI;
+    protected override UIGroup UIGroup => UIGroup.MetaUI;
 
     private void Start()
     {

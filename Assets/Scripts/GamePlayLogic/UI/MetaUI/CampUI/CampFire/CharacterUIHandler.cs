@@ -19,7 +19,7 @@ public class CharacterUIHandler : BaseUIElement , IInitialization<ShamanDataCont
     
     public bool IsInitialization { get; }
 
-    protected override UIGroupType UIGroup => UIGroupType.MetaUI;
+    protected override UIGroup UIGroup => UIGroup.MetaUI;
 
     public void Init(ShamanDataContainer parameter)
     {
@@ -33,7 +33,7 @@ public class CharacterUIHandler : BaseUIElement , IInitialization<ShamanDataCont
             var itemSlotUi = Array.Find(_characterItemSlotUis, x => x.ItemSlot == itemConfig.ItemSlot);
             itemSlotUi.Init(itemConfig);
         }
-        //UIManager.UpdateVisualUIGroup(UIGroupType.MetaUI); // need to add item refresh
+        //UIManager.UpdateVisualUIGroup(UIGroup.MetaUI); // need to add item refresh
     }
     
     private void OnEnable()

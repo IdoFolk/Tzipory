@@ -13,7 +13,8 @@ namespace Tzipory.Systems.UISystem
         public Action OnShow { get; }
         public Action OnHide { get; }
 
-        protected abstract UIGroupType UIGroup { get; }
+        public bool IsInitialization { get; private set; }
+        protected abstract UIGroup UIGroup { get; }
 
         protected virtual void Awake()
         {
@@ -21,6 +22,8 @@ namespace Tzipory.Systems.UISystem
             
             if (_showOnAwake)
                 Show();
+            else
+                gameObject.SetActive(false);
         }
 
         private void OnDestroy() =>
@@ -41,6 +44,11 @@ namespace Tzipory.Systems.UISystem
         public virtual void UpdateUIVisual()
         {
             
+        }
+
+        public virtual void Init()
+        {
+            IsInitialization = true;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Tzipory.GamePlayLogic.UI
         [SerializeField] private CharacterRosterSlotUI[] _rosterSlotUis;
         public bool IsInitialization { get; private set; }
 
-        protected override UIGroupType UIGroup => UIGroupType.GameOverlayUI;
+        protected override UIGroup UIGroup => UIGroup.GameOverlayUI;
         
         public void Init(IEnumerable<ShamanDataContainer> parameter)
         {

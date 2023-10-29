@@ -15,7 +15,6 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
 
         [SerializeField] private ItemSlotUI _itemSlotUI;
         [SerializeField] private Transform _holder;
-        [SerializeField] private ItemDragUIHandler _itemDragUIHandler;
 
         private List<ItemSlotUI> _itemSlotUis;
 

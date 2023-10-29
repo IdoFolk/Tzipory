@@ -1,22 +1,41 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Tools.Enums;
-using Tzipory.Systems.UISystem;
-using Unity.VisualScripting;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Unity.Entities;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
 {
     public class ItemDragUIHandler : MonoBehaviour
     {
+        [SerializeField] private GameObject itemSlotPrefab;
+        private ItemSlotUI _currentItemDragged;
+        private ItemSlotUI _currentItemDraggedCopy;
+        private bool _isItemDragged;
 
-        private ItemSlotUI currentItemDragged;
-
-        public void AssignDraggedItem(ItemSlotUI itemSlotUI)
+        public void BeginDragItem(ItemSlotUI itemSlotUI)
         {
-            currentItemDragged = itemSlotUI;
+            _currentItemDragged = itemSlotUI;
+            _currentItemDraggedCopy = itemSlotUI.Copy();
+            _currentItemDraggedCopy.gameObject.SetActive(true);
+            _currentItemDragged.ToggleVisual(false);
+            _isItemDragged = true;
+            _currentItemDraggedCopy.transform.SetParent(transform);
+        }
+
+        private void Update()
+        {
+            if (_isItemDragged && _currentItemDraggedCopy.EnableDrag)
+            {
+                _currentItemDraggedCopy.transform.position = Input.mousePosition;
+            }
+        }
+
+        public void EndDragItem()
+        {
+            _isItemDragged = false;
+            _currentItemDraggedCopy.gameObject.SetActive(false);
+            _currentItemDragged.ToggleVisual(true);
+
         }
         
     }

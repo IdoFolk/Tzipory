@@ -32,7 +32,7 @@ using UnityEngine;
 [AddComponentMenu("Physics 2D/Capsule Collider 2D")]
 
 [RequireComponent(typeof(EdgeCollider2D))]
-public class CapsuleCollider2D : MonoBehaviour {
+public class CapsuleCollider : MonoBehaviour {
 
     [HideInInspector]
     public bool bullet = false, flip = false;

@@ -265,6 +265,14 @@ PrefabInstance:
       value: Hero Panel UI
       objectReference: {fileID: 0}
     - target: {fileID: 4725264486677685256, guid: 9d2703615fd5431449fca9e89363a272, type: 3}
+      propertyPath: _showOnAwake
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4725264486677685256, guid: 9d2703615fd5431449fca9e89363a272, type: 3}
+      propertyPath: _shamanUIHanlder
+      value: 
+      objectReference: {fileID: 6141385975892492192, guid: f03e743a3c27da14e913f8460b3150e6, type: 3}
+    - target: {fileID: 4725264486677685256, guid: 9d2703615fd5431449fca9e89363a272, type: 3}
       propertyPath: _shamanInteractiveUIHanlder
       value: 
       objectReference: {fileID: 6141385975892492192, guid: f03e743a3c27da14e913f8460b3150e6, type: 3}
@@ -391,6 +399,14 @@ PrefabInstance:
     - target: {fileID: 3493536373832206464, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444915598947704686, guid: a21658bf9c933454991365eeebc7d402, type: 3}
+      propertyPath: m_XDamping
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7444915598947704686, guid: a21658bf9c933454991365eeebc7d402, type: 3}
+      propertyPath: m_YDamping
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7871334403514214793, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_Name

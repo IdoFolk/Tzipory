@@ -186,7 +186,7 @@ namespace Tzipory.Systems.Entity
         
         #endregion
         
-        #region Init
+        #region SetShamanData
 
         private void BaseInit()
         {

@@ -1,6 +1,6 @@
 ﻿namespace Tools.Enums
 {
-    public enum UIGroupType
+    public enum UIGroup
     {
         MetaUI,
         GameUI,
@@ -10,5 +10,6 @@
         PauseUI,
         GameOverlayUI,
         EndGameUI,
+        SettingsUI,
     }
 }

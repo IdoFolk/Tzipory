@@ -1,34 +1,28 @@
 ﻿using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
-using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.UIElements
 {
-    public class PartyUIManager : BaseInteractiveUIElement
+    public class PartyUIManager : BaseUIElement
     {
         [SerializeField] private RectTransform _heroContainer;
-        [SerializeField] private ShamanInteractiveUIHandler _shamanInteractiveUIHanlder;
+        [SerializeField] private ShamanUIHandler _shamanUIHanlder;
 
-        protected override UIGroupType GroupIndex => UIGroupType.GameUI;
+        protected override UIGroup UIGroup => UIGroup.GameUI;
 
-        protected override void Awake()
-        {
-            UIManager.AddObserverObject(this);
-        }
-        
-        public override void Show()
+        public override void Init()
         {
             var shamans = LevelManager.PartyManager.Party;
 
             foreach (var shaman in shamans)
             {
-                var shamanUI = Instantiate(_shamanInteractiveUIHanlder, _heroContainer);
-                shamanUI.Init(shaman);
+                var shamanUI = Instantiate(_shamanUIHanlder, _heroContainer);
+                shamanUI.SetShamanData(shaman);
             }
             
-            base.Show();
+            base.Init();
         }
     }
 }

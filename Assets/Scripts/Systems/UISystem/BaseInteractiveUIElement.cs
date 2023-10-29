@@ -16,7 +16,7 @@ namespace Tzipory.Systems.UISystem
         public event Action OnEnter;
         public event Action OnExit;
 
-
+        public bool EnableDrag => _enableDrag;
         [SerializeField] private bool _enableDrag;
         
         [SerializeField,ShowIf("_enableDrag")] private CanvasGroup _canvasGroup;
@@ -119,15 +119,5 @@ namespace Tzipory.Systems.UISystem
         public virtual void OnDrop(PointerEventData eventData)
         {
         }
-    }
-
-    public interface IUIElement
-    {
-        public string ElementName { get; }
-        public Action OnShow { get; }
-        public Action OnHide { get; }
-        
-        void Show();
-        void Hide();
     }
 }

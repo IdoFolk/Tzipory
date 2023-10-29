@@ -51,6 +51,11 @@ namespace Tzipory.SerializeData.Inventory
             _itemData.Add(serializeData);
         }
 
+        public void RemoveItemData()
+        {
+            
+        }
+
         public int SerializeTypeId => Constant.DataId.INVENTORY_DATA_ID;
     }
 }

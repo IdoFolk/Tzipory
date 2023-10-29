@@ -10,12 +10,12 @@ namespace Tzipory.GameplayLogic.UIElements.EndScreen
     {
         [SerializeField] private TMP_Text _text;
 
-        protected override UIGroupType GroupIndex => UIGroupType.EndGameUI;
+        protected override UIGroup UIGroup => UIGroup.EndGameUI;
 
-        public override void Show()
+        public override void UpdateUIVisual()
         {
+            base.UpdateUIVisual();
             _text.text = $"{LevelManager.WaveManager.WaveNumber}/{LevelManager.WaveManager.TotalNumberOfWaves}";
-            base.Show();
         }
     }
 }

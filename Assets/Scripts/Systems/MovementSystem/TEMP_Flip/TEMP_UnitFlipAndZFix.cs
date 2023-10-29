@@ -19,7 +19,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
 
     [SerializeField] BaseUnitEntity _baseUnitEntity;
     TargetingHandler _targeting;
-    //TEMP! Should USE Init(BaseUnitEntity) INSTEAD 
+    //TEMP! Should USE SetShamanData(BaseUnitEntity) INSTEAD 
 
     static Vector3 cachedScaledMapSize => LevelHandler.MapSize * .01f; //fix take from consts
     static float zDistanceModifier = .5f; //fix take from consts

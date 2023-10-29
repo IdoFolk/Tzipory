@@ -8,32 +8,23 @@ using UnityEngine.UI;
 
 namespace Tzipory.GameplayLogic.UIElements
 {
-    public class ShamanInteractiveUIHandler : BaseInteractiveUIElement
+    public class ShamanUIHandler : BaseInteractiveUIElement
     {
         [SerializeField] private Image _fill;
         [SerializeField] private Slider _healthBar;
         [SerializeField] private Image _splash;
         private Shaman _shaman;
 
-        protected override UIGroupType GroupIndex => UIGroupType.GameUI;
-
-        protected override void Awake()
-        {
-            UIManager.AddObserverObject(this);
-        }
+        protected override UIGroup UIGroup => UIGroup.GameUI;
         
-        public void Init(Shaman shaman)
+        public void SetShamanData(Shaman shaman)
         {
             _shaman = shaman;
             _splash.sprite = _shaman.SpriteRenderer.sprite;
-            Show();
-            UpdateUIData(_shaman.Health.CurrentValue);
         }
 
-        private void GoToShaman()
-        {
+        private void GoToShaman()=>
             GameManager.CameraHandler.SetCameraPosition(_shaman.transform.position);
-        }
 
         public override void Show()
         {
@@ -49,14 +40,13 @@ namespace Tzipory.GameplayLogic.UIElements
             base.Hide();
         }
 
-        private void OnHealthChange(StatChangeData statChangeData)
-        {
-            UpdateUIData(statChangeData.NewValue);
-        }
+        private void OnHealthChange(StatChangeData statChangeData)=>
+            UpdateUIVisual();
 
-        private void UpdateUIData(float cureentHP)
+        public override void UpdateUIVisual()
         {
-            _healthBar.value  = cureentHP / _shaman.Health.BaseValue;
+            base.UpdateUIVisual();
+            _healthBar.value  = _shaman.Health.CurrentValue / _shaman.Health.BaseValue;
             _fill.color = Color.Lerp(Color.red,Color.green,_shaman.Health.CurrentValue/_shaman.Health.BaseValue);
         }
     }

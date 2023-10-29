@@ -6,16 +6,16 @@ using UnityEngine;
 
 namespace Tzipory.GameplayLogic.UIElements.EndScreen
 {
-    public class EndScreenEnemiesKilledInteractiveUIHandler : BaseUIElement
+    public class EndScreenEnemiesKilledUIHandler : BaseUIElement
     {
         [SerializeField] private TMP_Text _countText;
 
-        protected override UIGroupType UIGroup => UIGroupType.EndGameUI;
+        protected override UIGroup UIGroup => UIGroup.EndGameUI;
 
-        public override void Show()
+        public override void UpdateUIVisual()
         {
+            base.UpdateUIVisual();
             _countText.text = LevelManager.EnemyManager.NumberOfEnemiesKilled.ToString();
-            base.Show();
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
+using Tzipory.Tools.Interface;
 
 namespace Tzipory.Systems.UISystem
 {
-    public interface IUIElement
+    public interface IUIElement : IInitialization
     {
         public string ElementName { get; }
         public Action OnShow { get; }
@@ -11,15 +12,5 @@ namespace Tzipory.Systems.UISystem
         void Show();
         void Hide();
         void UpdateUIVisual();
-    }
-
-    public enum UIGroup
-    {
-        GameUI,
-        PauseUI,
-        EndGameUI,
-        MainMenuUI,
-        SettingsUI,
-        LoadingUI,
     }
 }

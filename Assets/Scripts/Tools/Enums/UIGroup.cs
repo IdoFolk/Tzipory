@@ -15,6 +15,7 @@ namespace Tools.Enums
         GameOverlayUI = 64,
         EndGameUI = 128,
         SettingsUI = 256,
-        CampFireUI = 512
+        CampFireUI = 512,
+        MainCampUI = 1024,
     }
 }

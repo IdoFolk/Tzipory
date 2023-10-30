@@ -1541,7 +1541,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cd486cba82b47b8b74e331c0f004247, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tagHolder: {fileID: 11400000, guid: daaab5eba3a615b48889095c7ee63aed, type: 2}
 --- !u!1 &1504020744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2326,11 +2325,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7444915598947704686, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_XDamping
-      value: 0.8
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7444915598947704686, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_YDamping
-      value: 0.8
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7871334403514214793, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_Name

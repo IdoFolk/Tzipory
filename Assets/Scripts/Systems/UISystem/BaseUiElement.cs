@@ -9,8 +9,8 @@ namespace Tzipory.Systems.UISystem
     {
         [SerializeField] private bool _showOnAwake = false;
         [SerializeField] private UIGroup _uiGroupTags;
-        
-        public string ElementName { get; }
+
+        public string ElementName => gameObject.name;
         public Action OnShow { get; }
         public Action OnHide { get; }
         public UIGroup UIGroupTags => _uiGroupTags;
@@ -19,7 +19,7 @@ namespace Tzipory.Systems.UISystem
 
         protected virtual void Awake()
         {
-            //UIManager.AddUIElement(this,UIGroupTags);
+            UIManager.AddUIElement(this,UIGroupTags);
             
             if (_showOnAwake)
                 Show();

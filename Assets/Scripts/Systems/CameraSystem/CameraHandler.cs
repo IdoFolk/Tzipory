@@ -11,7 +11,6 @@ namespace Tzipory.Systems.CameraSystem
     {
         private const float ORTHOGRAPHIC_DETECT_RANGE = 0.2f;
         private const float CAMERA_MOVEMENT_DETECT_RANGE = 0.5f;
-        private const float MAX_ZOOM_DEFINED_BY_BORDERS = 9f;
 
         private const float FULL_HD_PIXELS_X = 1920;
         private const float FULL_HD_PIXELS_y = 1080;
@@ -45,6 +44,7 @@ namespace Tzipory.Systems.CameraSystem
         private float _cameraStartZoom;
         private float _targetOrthographicSize;
         private CinemachineTransposer _cinemachineTransposer;
+        private CinemachineBrain _cinemachineBrain;
 
         private float _currentAspectRatioX;
         private float _currentAspectRatioY;
@@ -74,6 +74,7 @@ namespace Tzipory.Systems.CameraSystem
 
             //caching CinemachineTransposer
             _cinemachineTransposer = _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
+            _cinemachineBrain = _mainCamera.GetComponent<CinemachineBrain>();
             _cinemachineTransposer.m_XDamping = _cameraSettings.XDamping;
             _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
             _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
@@ -251,7 +252,7 @@ namespace Tzipory.Systems.CameraSystem
             {
                 _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
                 _edgePaddingY = _cameraSettings.DefaultEdgePaddingY;
-                _zoomPadding = MAX_ZOOM_DEFINED_BY_BORDERS;
+                _zoomPadding = _cameraSettings.MaxZoomDefinedByBorders;
                 if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
             }
             else
@@ -262,7 +263,7 @@ namespace Tzipory.Systems.CameraSystem
                 //calculating the current padding for movement borders and zoom
                 _edgePaddingX = _cameraSettings.DefaultEdgePaddingX / _currentAspectRatioX;
                 _edgePaddingY = _cameraSettings.DefaultEdgePaddingY / _currentAspectRatioY;
-                _zoomPadding = MAX_ZOOM_DEFINED_BY_BORDERS * _currentAspectRatioX;
+                _zoomPadding = _cameraSettings.MaxZoomDefinedByBorders * _currentAspectRatioX;
                 if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
             }
             
@@ -270,7 +271,7 @@ namespace Tzipory.Systems.CameraSystem
             
 
             //resetting the camera position and zoom
-            LockCamera();
+            ToggleCameraLock(true);
             if (_cameraStartZoom > _cameraSettings.ZoomMinClamp && _cameraStartZoom < _zoomPadding)
             {
                 _targetOrthographicSize = _cameraStartZoom;
@@ -284,19 +285,13 @@ namespace Tzipory.Systems.CameraSystem
 
             _cameraFollowObject.position = new Vector3(_cameraStartPosition.x, _cameraStartPosition.y, -80);
             _mainCamera.transform.position = new Vector3(_cameraStartPosition.x, _cameraStartPosition.y, -80);
-            UnlockCamera();
+            ToggleCameraLock(false);
         }
 
-        public void UnlockCamera()
+        public void ToggleCameraLock(bool state)
         {
-            _enableCameraMovement = true;
-            _mainCamera.GetComponent<CinemachineBrain>().enabled = true;
-        }
-
-        public void LockCamera()
-        {
-            _mainCamera.GetComponent<CinemachineBrain>().enabled = false;
-            _enableCameraMovement = false;
+            _enableCameraMovement = !state;
+            _cinemachineBrain.enabled = !state;
         }
 
         public void LockCamera(Vector2 lockedCameraPos, int lockedCameraZoom)

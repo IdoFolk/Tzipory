@@ -40,7 +40,9 @@ namespace Tzipory.Systems.CameraSystem
         
         [Header("Clamping")]
         [TabGroup("Camera Zoom"),Tooltip("the smallest value that the zoom can reach")]public float ZoomMinClamp = 2f;
-        [TabGroup("Camera Zoom"),Tooltip("the largest value that the zoom can reach")]public float ZoomMaxClamp = 11f;
+        [TabGroup("Camera Zoom"),Tooltip("the largest value that the zoom can reach")]public float ZoomMaxClamp = 14f;
+        [TabGroup("Camera Zoom"),Tooltip("the largest value that the zoom can reach with the current borders")]public float MaxZoomDefinedByBorders = 12f;
+
         
         
         [Button("Set as camera setting")] //WIP (not working)

@@ -98,7 +98,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         private void Start()
         {
-            GameManager.CameraHandler.UnlockCamera();
+            GameManager.CameraHandler.ToggleCameraLock(false);
             GameManager.CameraHandler.ResetCamera();
             WaveManager.StartLevel();
             GAME_TIME.SetTimeStep(1);
@@ -144,7 +144,8 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         private void EndGame(bool isWon)
         {
             if (!IsGameRunning) return;
-
+            
+            GameManager.CameraHandler.ToggleCameraLock(true);
             GAME_TIME.SetTimeStep(0);
 
             if (isWon)

@@ -13,7 +13,6 @@ namespace Tzipory.GameplayLogic.UIElements.EndScreen
         [SerializeField] private TMP_Text _tips;
         [SerializeField] private EndScreenTextsConfig _config;
        
-        protected override UIGroup UIGroup => UIGroup.EndGameUI;
         
         public override void Show()
         {

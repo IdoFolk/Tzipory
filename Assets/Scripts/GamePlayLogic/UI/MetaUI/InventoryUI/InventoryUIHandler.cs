@@ -18,7 +18,6 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
 
         private List<ItemSlotUI> _itemSlotUis;
 
-        protected override UIGroup UIGroup => UIGroup.MetaUI;
         public bool IsInitialization { get; private set; }
 
         public void Init(InventorySerializeData parameter)

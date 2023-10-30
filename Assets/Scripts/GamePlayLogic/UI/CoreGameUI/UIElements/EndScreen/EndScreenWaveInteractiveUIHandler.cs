@@ -10,7 +10,6 @@ namespace Tzipory.GameplayLogic.UIElements.EndScreen
     {
         [SerializeField] private TMP_Text _text;
 
-        protected override UIGroup UIGroup => UIGroup.EndGameUI;
 
         public override void UpdateUIVisual()
         {

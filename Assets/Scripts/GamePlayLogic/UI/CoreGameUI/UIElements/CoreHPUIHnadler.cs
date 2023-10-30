@@ -7,7 +7,6 @@ namespace Tzipory.GameplayLogic.UIElements
 {
     public class CoreHPUIHnadler : BaseCounterUIHandler
     {
-        protected override UIGroup UIGroup => UIGroup.GameUI;
 
         public override void Init()
         {

@@ -689,6 +689,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 127a8faee79542f1bc5f2cc1932ed4b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showOnAwake: 0
+  _uiGroupTags: []
   _campFireUIHandler: {fileID: 412821608}
 --- !u!1001 &412821605
 PrefabInstance:
@@ -1281,6 +1283,10 @@ PrefabInstance:
     - target: {fileID: 1198601042741145668, guid: 762beac3c7ad7394c9638f637fcdb1c2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1231086778738289043, guid: 762beac3c7ad7394c9638f637fcdb1c2, type: 3}
+      propertyPath: _uiGroupTags.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1234695869627120121, guid: 762beac3c7ad7394c9638f637fcdb1c2, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4728,6 +4734,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9033988846719532720, guid: 762beac3c7ad7394c9638f637fcdb1c2, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9112313989629362550, guid: 762beac3c7ad7394c9638f637fcdb1c2, type: 3}
+      propertyPath: _showOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9112313989629362550, guid: 762beac3c7ad7394c9638f637fcdb1c2, type: 3}

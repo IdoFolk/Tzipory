@@ -1,15 +1,14 @@
-﻿using Tzipory.SerializeData.PlayerData.Party.Entity;
+﻿using Tools.Enums;
+using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.UISystem;
 using UnityEngine;
 
 namespace Tzipory.GamePlayLogic.UI.MetaUI
 {
-    public class CampUIManager : MonoBehaviour
+    public class CampUIManager : BaseUIElement
     {
         [SerializeField] private CampFireUIHandler _campFireUIHandler;
 
-        private void Awake()
-        {
-        }
 
         public void NewMainShamanSelected(ShamanDataContainer shamanDataContainer)
         {

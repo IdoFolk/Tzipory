@@ -15,7 +15,6 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private Image _splash;
         private Shaman _shaman;
 
-        protected override UIGroup UIGroup => UIGroup.GameUI;
         
         public void SetShamanData(Shaman shaman)
         {

@@ -49,7 +49,7 @@ namespace Tzipory.GameplayLogic.Managers.MapManagers
         {
             //Open Camp
             _campUIManager.NewMainShamanSelected(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData.ShamanRosterDataContainers[0]);
-            _campScreen.gameObject.SetActive(true);
+            UIManager.Init(UIGroup.CampFireUI,true,true);
             Debug.Log("Open camp");
         }
 

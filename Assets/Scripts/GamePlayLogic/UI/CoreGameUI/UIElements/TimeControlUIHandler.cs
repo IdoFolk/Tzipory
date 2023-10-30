@@ -11,7 +11,6 @@ namespace Tzipory.GameplayLogic.UIElements
         
         private TimeButtonsUI  _currentButton;
 
-        protected override UIGroup UIGroup => UIGroup.GameUI;
         
         public override void Show()
         {

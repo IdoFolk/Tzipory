@@ -10,7 +10,6 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private RectTransform _heroContainer;
         [SerializeField] private ShamanUIHandler _shamanUIHanlder;
 
-        protected override UIGroup UIGroup => UIGroup.GameUI;
 
         public override void Init()
         {

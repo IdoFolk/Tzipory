@@ -11,7 +11,6 @@ namespace Tzipory.GameplayLogic.UIElements
         public event Action<TimeButtonsUI> OnTurnOn;
         [SerializeField] private float  _time;
 
-        protected override UIGroup UIGroup => UIGroup.GameUI;
         
         protected override void On()
         {

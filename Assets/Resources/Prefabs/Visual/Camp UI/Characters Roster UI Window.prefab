@@ -287,6 +287,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8148a29f02aaa8249a73de28b50ad870, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showOnAwake: 0
+  _uiGroupTags: 1
   _rosterSlotUis:
   - {fileID: 1549437665083101415}
   - {fileID: 2479776295912068619}

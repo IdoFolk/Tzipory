@@ -88,5 +88,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e6cd34a1f06c743adcc0b58770a537, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showOnAwake: 0
+  _uiGroupTags: 1
+  _enableDrag: 0
+  _canvasGroup: {fileID: 0}
   _doubleClickSpeed: 0.5
   _image: {fileID: 2274609715056465284}

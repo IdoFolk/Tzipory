@@ -9,7 +9,6 @@ namespace Tzipory.GameplayLogic.UIElements.EndScreen
     {
         [SerializeField] private  TMPro.TextMeshProUGUI _text;
 
-        protected override UIGroup UIGroup => UIGroup.EndGameUI;
 
         public override void UpdateUIVisual()
         {

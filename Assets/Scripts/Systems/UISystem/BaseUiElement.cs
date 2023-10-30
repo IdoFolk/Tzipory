@@ -8,17 +8,18 @@ namespace Tzipory.Systems.UISystem
     public abstract class BaseUIElement : MonoBehaviour, IUIElement
     {
         [SerializeField] private bool _showOnAwake = false;
-        
-        public string ElementName { get; }
+        [SerializeField] private UIGroup _uiGroupTags;
+
+        public string ElementName => gameObject.name;
         public Action OnShow { get; }
         public Action OnHide { get; }
+        public UIGroup UIGroupTags => _uiGroupTags;
 
         public bool IsInitialization { get; private set; }
-        protected abstract UIGroup UIGroup { get; }
 
         protected virtual void Awake()
         {
-            UIManager.AddUIElement(UIGroup,this);
+            UIManager.AddUIElement(this,UIGroupTags);
             
             if (_showOnAwake)
                 Show();

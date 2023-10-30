@@ -1,5 +1,52 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &227047957164271224
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1220660950801558014}
+  - component: {fileID: 8966001170857930187}
+  m_Layer: 10
+  m_Name: ProximityCircles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1220660950801558014
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227047957164271224}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2062197455431657528}
+  m_Father: {fileID: 3248058890782170975}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8966001170857930187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 227047957164271224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a9ea53227e26ae14284787241778c70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _circleScalers:
+  - {fileID: 2062197455431657528}
 --- !u!1 &2992155674472561553
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,12 +136,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3248058890782170975}
-  - component: {fileID: 6448687465216425320}
   - component: {fileID: 3061585255560163672}
+  - component: {fileID: 887241511651357541}
   - component: {fileID: 4228493472124563496}
   - component: {fileID: 1150626198542210765}
   m_Layer: 10
-  m_Name: BasePowerStructures
+  m_Name: New_PS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,53 +161,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2386260263455321148}
-  - {fileID: 2062197455431657528}
+  - {fileID: 1220660950801558014}
   - {fileID: 6532541947532375423}
   - {fileID: 6619323321585655180}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6448687465216425320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8275930077482909604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6ebdde7d67fc4f498dc5bce4ecd2025, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _timerHandler:
-    _timerSerializeDatas: []
-  _range: 0
-  _statEffectConfig:
-    _statusEffectName: 
-    _statProcessPriority: 0
-    _affectedStatId: 0
-    _statEffectType: 0
-    _duration: 0
-    _interval: 0
-    _statModifier:
-      _statusModifierType: 0
-      _modifier: 0
-    _effectSequence:
-      _sequenceName: 
-      _id: 0
-      _startDelay: 0
-      _endDelay: 0
-      _isStackable: 0
-      _isInterruptable: 0
-      _effectActionContainers: []
-  _colliderTargetingArea: {fileID: 3010881160199426927}
-  _proximityIndicatorHandler:
-    _scaler: {fileID: 2062197455431657528}
-    _spriteRenderer: {fileID: 5768232329460113364}
-    _proximityConfig:
-      IndicatorConditions: 000000000100000002000000
-      Color: {r: 1, g: 1, b: 1, a: 0.34901962}
-    clickHelper: {fileID: 7087297887235683216}
-  _activeColor: {r: 0, g: 0.9706273, b: 1, a: 1}
 --- !u!50 &3061585255560163672
 Rigidbody2D:
   serializedVersion: 4
@@ -188,6 +193,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &887241511651357541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8275930077482909604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64b23018b91b5614aa78bbd36ebb189c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _proximityCirclesManager: {fileID: 8966001170857930187}
+  _range: 4.1
 --- !u!114 &4228493472124563496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,6 +242,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3248058890782170975}
     m_Modifications:
+    - target: {fileID: 409247158870852373, guid: ccf72829e2d57344c9c512ae0d92fa83, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 03c364836e9bd9e4290ae0855d457cad, type: 3}
+    - target: {fileID: 3291963132572350327, guid: ccf72829e2d57344c9c512ae0d92fa83, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 03c364836e9bd9e4290ae0855d457cad, type: 3}
+    - target: {fileID: 3291963132572350327, guid: ccf72829e2d57344c9c512ae0d92fa83, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4034551845544253931, guid: ccf72829e2d57344c9c512ae0d92fa83, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -289,11 +320,19 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3248058890782170975}
+    m_TransformParent: {fileID: 1220660950801558014}
     m_Modifications:
     - target: {fileID: 3263967547809563892, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
       propertyPath: m_Name
-      value: ProximityScaler
+      value: InnerCircle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3624282760470982138, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 4.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3624282760470982138, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 3624282760470982138, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -313,15 +352,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3624282760470982138, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3624282760470982138, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3624282760470982138, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3624282760470982138, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -335,6 +374,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6013095685099500343, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
+      propertyPath: m_Name
+      value: InnerCircleVisual
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645617711530701962, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
+      propertyPath: m_Name
+      value: InnerCircleTargeting
+      objectReference: {fileID: 0}
+    - target: {fileID: 9141899191732328982, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -343,22 +394,6 @@ PrefabInstance:
 --- !u!4 &2062197455431657528 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3624282760470982138, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
-  m_PrefabInstance: {fileID: 3373878226211702210}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3010881160199426927 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 511897607666947757, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
-  m_PrefabInstance: {fileID: 3373878226211702210}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd36f7b2468d4114c927e79b69d347a8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!212 &5768232329460113364 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 9141899191732328982, guid: c72e6d3d34cd39943b600ada9837a4bc, type: 3}
   m_PrefabInstance: {fileID: 3373878226211702210}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5675311114571247586

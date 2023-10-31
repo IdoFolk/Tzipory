@@ -1,5 +1,4 @@
 ﻿using System;
-using Tools.Enums;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;

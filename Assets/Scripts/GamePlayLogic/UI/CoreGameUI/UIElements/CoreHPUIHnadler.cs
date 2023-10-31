@@ -1,5 +1,4 @@
-﻿using Tools.Enums;
-using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.UISystem;
 

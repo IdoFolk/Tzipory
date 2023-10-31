@@ -1,5 +1,4 @@
 using System;
-using Tools.Enums;
 using Tzipory.ConfigFiles.Item;
 using Tzipory.GameplayLogic.UI.MetaUI.InventoryUI;
 using Tzipory.SerializeData.ItemSerializeData;

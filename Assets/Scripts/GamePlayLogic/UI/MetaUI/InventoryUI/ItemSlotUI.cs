@@ -1,7 +1,4 @@
-using System;
-using Sirenix.Utilities;
 using TMPro;
-using Tools.Enums;
 using Tzipory.Systems.InventorySystem;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Interface;

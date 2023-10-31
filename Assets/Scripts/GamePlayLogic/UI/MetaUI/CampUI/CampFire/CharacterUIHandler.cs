@@ -1,7 +1,5 @@
 using System;
-using Tools.Enums;
 using Tzipory.ConfigFiles.Item;
-using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.SerializeData.ItemSerializeData;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.DataManager;

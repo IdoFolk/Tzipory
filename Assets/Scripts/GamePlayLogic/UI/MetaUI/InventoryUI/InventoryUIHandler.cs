@@ -48,23 +48,5 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
 
             OnItemDropToInventory?.Invoke(characterItemSlotUI.StoreItemId, 1);
         }
-public override void OnDrop(PointerEventData eventData)
-    {
-        base.OnDrop(eventData);
-
-        var characterItemSlotUI = eventData.pointerDrag.GetComponentInParent<CharacterItemSlotUI>();
-
-        if (characterItemSlotUI is null)
-            return;
-
-        if (!characterItemSlotUI.HaveItem)
-            return;
-        
-        OnItemDropToInventory?.Invoke(characterItemSlotUI.StoreItemId,1);
     }
-    }
-
-    
-
-
 }

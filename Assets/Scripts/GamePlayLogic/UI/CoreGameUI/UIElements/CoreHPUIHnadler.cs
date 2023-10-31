@@ -16,7 +16,7 @@ namespace Tzipory.GameplayLogic.UIElements
         public override void Show()
         {
 
-            LevelManager.CoreTemplete.Health.OnValueChangedData += UpdateCoreUI;
+            LevelManager.CoreTemplete.Health.OnValueChanged += UpdateCoreUI;
             base.Show();
         }
 

@@ -1,5 +1,4 @@
 using System;
-using Tools.Enums;
 using Tzipory.ConfigFiles.Item;
 using Tzipory.SerializeData.ItemSerializeData;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
@@ -18,7 +17,6 @@ public class CharacterUIHandler : BaseUIElement , IInitialization<ShamanDataCont
     
     public bool IsInitialization { get; }
 
-    protected override UIGroupType UIGroup => UIGroupType.MetaUI;
 
     public void Init(ShamanDataContainer parameter)
     {
@@ -32,6 +30,7 @@ public class CharacterUIHandler : BaseUIElement , IInitialization<ShamanDataCont
             var itemSlotUi = Array.Find(_characterItemSlotUis, x => x.ItemSlot == itemConfig.ItemSlot);
             itemSlotUi.Init(itemConfig);
         }
+        //UIManager.UpdateVisualUIGroup(UIGroup.MetaUI); // need to add item refresh
     }
     
     private void OnEnable()
@@ -61,5 +60,6 @@ public class CharacterUIHandler : BaseUIElement , IInitialization<ShamanDataCont
     {
         Debug.Log($"Item {data.ItemId} was dropped");
         _shamanDataContainer.ShamanSerializeData.ItemIDList.Add(data.ItemId);
+        //remove item from inventory
     }
 }

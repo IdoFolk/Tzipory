@@ -1,61 +1,99 @@
-﻿using System.Collections.Generic;
-using Tools.Enums;
+﻿using System;
+using System.Collections.Generic;
 using Tzipory.Systems.UISystem;
+using Tzipory.Tools.Enums;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
-     public class UIManager : MonoBehaviour
+    public class UIManager : MonoBehaviour
     {
-        private static readonly Dictionary<UIGroupType, List<IUIElement>> UIGroups = new();
+        private static readonly Dictionary<UIGroup, List<BaseUIElement>> UIGroups = new();
 
-        public static void AddUIElement(UIGroupType group, IUIElement element)
+        public static void Init(UIGroup parameter, bool showOnInit = false, bool updateOnShow = false)
         {
-            if (UIGroups.TryGetValue(group,out var foundUIGroup))
+            if (!UIGroups.TryGetValue(parameter, out var uiElements))
             {
-                if (foundUIGroup.Contains(element))
-                {
-                    Debug.LogWarning("UiElement already exists in this group ");
-                    return;
-                }
-                
-                foundUIGroup.Add(element);
+                Debug.LogWarning($"Can not find UiGroup in tag {parameter}");
+                return;
             }
-            else
+
+            for (int i = 0; i < uiElements.Count; i++)
+                uiElements[i].Init();
+            if (showOnInit) ShowUIGroup(parameter, updateOnShow);
+        }
+
+        public static void Init()
+        {
+            foreach (var uiGroupsValue in UIGroups.Values)
             {
-                UIGroups.Add(group, new List<IUIElement>(){element});
+                foreach (var uiElement in uiGroupsValue)
+                    uiElement.Init();
             }
         }
-        
-        public static void RemoveUIElement(IUIElement element)
+
+        public static void AddUIElement(BaseUIElement element, UIGroup group)
+        {
+            if (group == UIGroup.None)
+            {
+                Debug.LogError($"Ui element group is none at {element.ElementName}",element);
+                return;
+            }
+
+            foreach (Enum uiGroupsKey in Enum.GetValues(group.GetType()))
+            {
+                if (!group.HasFlag(uiGroupsKey)) continue;
+                
+                if (UIGroups.TryGetValue((UIGroup)uiGroupsKey, out var foundUIGroup))
+                {
+                    if (foundUIGroup.Contains(element))
+                    {
+                        Debug.LogWarning("UiElement already exists in this group",element);
+                        return;
+                    }
+
+                    foundUIGroup.Add(element);
+                }
+                else
+                    UIGroups.Add((UIGroup)uiGroupsKey, new List<BaseUIElement>() { element });
+            }
+        }
+
+        public static void RemoveUIElement(BaseUIElement element)
         {
             foreach (var uiElements in UIGroups.Values)
             {
                 if (!uiElements.Contains(element)) continue;
-                
+
                 uiElements.Remove(element);
                 return;
             }
-            
-            Debug.LogWarning("UiElement not found in any group");
+
+            Debug.LogWarning("UiElement not found in any group",element);
         }
-        
-        public static void ShowUIGroup(UIGroupType group,bool updateOnShow = false)
+
+        public static void ShowUIGroup(UIGroup group, bool updateOnShow = false)
         {
             if (UIGroups.TryGetValue(group, out var foundUIGroup))
             {
-                foreach (var uiElement in foundUIGroup)
+                for (int i = 0; i < foundUIGroup.Count; i++)
                 {
-                    uiElement.Show();
+                    foundUIGroup[i].Show();
                     if (updateOnShow)
-                        uiElement.UpdateUIVisual();
+                        foundUIGroup[i].UpdateUIVisual();
                 }
             }
             else
                 Debug.LogWarning($"Can not find {group} group");
         }
-        
-        public static void HidUIGroup(UIGroupType group)
+
+        public static void ShowUIGroups(IEnumerable<UIGroup> groups, bool updateOnShow = false)
+        {
+            foreach (var uiGroup in groups)
+                ShowUIGroup(uiGroup, updateOnShow);
+        }
+
+        public static void HidUIGroup(UIGroup group)
         {
             if (UIGroups.TryGetValue(group, out var foundUIGroup))
             {
@@ -66,7 +104,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
                 Debug.LogWarning($"Can not find {group} group");
         }
 
-        public static void UpdateVisualUIGroup(UIGroupType group)
+        public static void UpdateVisualUIGroup(UIGroup group)
         {
             if (UIGroups.TryGetValue(group, out var foundUIGroup))
             {
@@ -75,6 +113,12 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
             }
             else
                 Debug.LogWarning($"Can not find {group} group");
+        }
+        
+        public static void UpdateVisualUIGroups(IEnumerable<UIGroup> groups)
+        {
+            foreach (var group in groups)
+                UpdateVisualUIGroup(group);
         }
     }
 }

@@ -8,6 +8,6 @@ namespace Tzipory.Systems.InventorySystem
         public string ItemSlotName { get; }
         public string ItemSlotDescription { get; }
         public int ItemId { get; }
-        public int ItemAmount { get; }
+        public int ItemAmount { get;}
     }
 }

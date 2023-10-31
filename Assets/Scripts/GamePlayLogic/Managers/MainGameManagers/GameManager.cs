@@ -13,11 +13,12 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private SceneHandler _sceneHandler;
-        
+
         public static GameData GameData { get; private set; }
         public static PlayerManager PlayerManager { get; private set; }
 
-        public static CameraHandler CameraHandler { get; set; }         
+        public static CameraHandler CameraHandler { get; set; }
+
 
         private void Awake()
         {

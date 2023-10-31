@@ -7,6 +7,7 @@ using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.PlayerData.Party;
 using Tzipory.Systems.CameraSystem;
 using Tzipory.Systems.SceneSystem;
+using Tzipory.Tools.Enums;
 using Tzipory.Tools.GameSettings;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         public static EnemyManager EnemyManager { get; private set; }
         public static WaveManager WaveManager { get; private set; }
         public static CoreTemple CoreTemplete { get; private set; }
+
+        public static bool IsWon { get; private set; }
 
         public bool IsGameRunning { get; private set; }
 
@@ -67,7 +70,10 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             }
 
             Instantiate(_levelConfig.Level, _levelParent);
-            
+
+            #region OnlyForTesting
+
+#if UNITY_EDITOR
             if (GameManager.CameraHandler is null)
             {
                 GameManager.CameraHandler = FindObjectOfType<CameraHandler>();//only for testing
@@ -77,6 +83,12 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             {
                 GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
             }
+
+            if (GAME_TIME.TimerHandler is null)
+                Instantiate(Resources.Load<GameObject>("Prefabs/Managers/Temp/GameTimeManager"));//only for testing
+#endif
+           
+            #endregion
             
             EnemyManager = new EnemyManager(_enemiesParent);
             WaveManager = new WaveManager(_levelConfig, _waveIndicatorParent); //temp!
@@ -90,6 +102,8 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             GameManager.CameraHandler.ResetCamera();
             WaveManager.StartLevel();
             GAME_TIME.SetTimeStep(1);
+            UIManager.Init(UIGroup.GameUI);
+            UIManager.ShowUIGroup(UIGroup.GameUI,true);
             IsGameRunning = true;
         }
 
@@ -104,10 +118,16 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
                 return;
 
             if (CoreTemplete.IsEntityDead)
-                EndGame(false);
+            {
+                IsWon  = false;
+                EndGame(IsWon);
+            }
 
             if (WaveManager.AllWaveAreDone && EnemyManager.AllEnemiesArDead)
-                EndGame(true);
+            {
+                IsWon = true;
+                EndGame(IsWon);
+            }
         }
 
         private void OnDestroy()
@@ -131,6 +151,8 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
                 GameManager.GameData?.SetCompletedNodeStat(_levelConfig.LevelId, true);
 
             OnEndGame?.Invoke(isWon);
+            UIManager.HidUIGroup(UIGroup.GameUI);
+            UIManager.ShowUIGroup(UIGroup.EndGameUI,true);
             IsGameRunning = false;
         }
 

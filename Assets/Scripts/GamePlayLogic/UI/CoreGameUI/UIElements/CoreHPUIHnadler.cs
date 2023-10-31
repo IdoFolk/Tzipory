@@ -1,5 +1,4 @@
-﻿using Tools.Enums;
-using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.UISystem;
 
@@ -7,19 +6,29 @@ namespace Tzipory.GameplayLogic.UIElements
 {
     public class CoreHPUIHnadler : BaseCounterUIHandler
     {
-        protected override UIGroupType UIGroup => UIGroupType.GameUI;
+
+        public override void Init()
+        {
+            _maxCount.text = $"/{LevelManager.CoreTemplete.Health.BaseValue}";
+            base.Init();
+        }
 
         public override void Show()
         {
-            LevelManager.CoreTemplete.Health.OnValueChanged += UpdateCoreUI;
-            _maxCount.text = $"/{LevelManager.CoreTemplete.Health.BaseValue}";
-            UpdateUiData(LevelManager.CoreTemplete.Health.CurrentValue);
+
+            LevelManager.CoreTemplete.Health.OnValueChangedData += UpdateCoreUI;
             base.Show();
         }
 
         private void UpdateCoreUI(StatChangeData statChangeData)
         {
-            UpdateUiData(statChangeData.NewValue);
+            UpdateUIVisual();
+        }
+
+        public override void UpdateUIVisual()
+        {
+            base.UpdateUIVisual();
+            UpdateUiData(LevelManager.CoreTemplete.Health.CurrentValue);
         }
 
         public override void Hide()

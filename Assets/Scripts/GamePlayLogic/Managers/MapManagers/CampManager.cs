@@ -1,5 +1,6 @@
 ﻿using System;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.GamePlayLogic.UI.MetaUI;
 using Tzipory.Helpers.Consts;
 using Tzipory.SerializeData.PlayerData.Camp;
 using Tzipory.Systems.CampSystem;
@@ -26,6 +27,8 @@ namespace Tzipory.GameplayLogic.Managers.MapManagers
         private CampSerializeData _campSerializeData;
         
         public CampSerializeData CampSerializeData => _campSerializeData;
+
+        [SerializeField] private CampUIManager _campUIManager;
         
         public bool IsInitialization { get; private set; }
 
@@ -43,7 +46,9 @@ namespace Tzipory.GameplayLogic.Managers.MapManagers
         public void OpenCamp()
         {
             //Open Camp
-            _campScreen.gameObject.SetActive(true);
+            _campUIManager.NewMainShamanSelected(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData.ShamanRosterDataContainers[0]);
+            UIManager.Init(UIGroup.MainCampUI,true,true);
+            //UIManager.Init(UIGroup.CampFireUI,true,true); disable!
             Debug.Log("Open camp");
         }
 

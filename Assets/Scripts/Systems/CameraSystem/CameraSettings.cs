@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEditor;
 using UnityEngine;
@@ -13,6 +11,7 @@ namespace Tzipory.Systems.CameraSystem
         [Header("Camera speed")]
         [TabGroup("Camera Movement"),Tooltip("the value of the camera speed when zoom in all the way")]public float MoveSpeedMinimum = 5f;
         [TabGroup("Camera Movement"),Range(0,20),Tooltip("adds that value to the camera move speed according to how zoomed out the camera is")]public float CameraSpeedZoomChangeValue = 4f;
+        [TabGroup("Camera Movement"),Range(0,0.1f),Tooltip("Determine the camera speed for the drag pan")]public float CameraDragPanSpeed = 2f;
         
         [Header("Edge Scroll Detect Size")]
         [TabGroup("Camera Movement"),Range(0,0.1f),Tooltip("determines how large the edge scroll detection box is on the X")]public float EdgeScrollDetectSizeX = 0.025f;

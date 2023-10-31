@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Tools.Enums;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Interface;
@@ -15,7 +14,6 @@ namespace Tzipory.GamePlayLogic.UI
         [SerializeField] private CharacterRosterSlotUI[] _rosterSlotUis;
         public bool IsInitialization { get; private set; }
 
-        protected override UIGroupType UIGroup => UIGroupType.GameOverlayUI;
         
         public void Init(IEnumerable<ShamanDataContainer> parameter)
         {

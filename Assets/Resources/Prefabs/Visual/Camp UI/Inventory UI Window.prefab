@@ -528,6 +528,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d89ebec491b92c45bf24c007ff6ba0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showOnAwake: 0
+  _uiGroupTags: 512
+  _enableDrag: 0
+  _canvasGroup: {fileID: 0}
+  _doubleClickSpeed: 0.5
   _itemSlotUI: {fileID: 5883294245058160934, guid: 38bdc41280af3fb4cb2da27285927fc6, type: 3}
   _holder: {fileID: 1604646470653277498}
 --- !u!1 &4452519376675064670
@@ -883,8 +888,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3411949883435151206}
   m_HandleRect: {fileID: 8819116261937517252}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

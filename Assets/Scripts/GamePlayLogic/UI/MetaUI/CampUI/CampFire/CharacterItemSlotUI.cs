@@ -1,6 +1,6 @@
 using System;
-using Tools.Enums;
 using Tzipory.ConfigFiles.Item;
+using Tzipory.GameplayLogic.UI.MetaUI.InventoryUI;
 using Tzipory.SerializeData.ItemSerializeData;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
@@ -15,12 +15,12 @@ public class CharacterItemSlotUI : BaseInteractiveUIElement
     [SerializeField] private ItemSlot _itemSlot;
    
     [SerializeField] private Image _itemSprite;
+    private Vector3 _startPosition;
 
     public bool HaveItem { get; private set; }
 
     public int StoreItemId { get; private set; }
 
-    protected override UIGroupType UIGroup => UIGroupType.MetaUI;
     public ItemSlot ItemSlot => _itemSlot;
 
     public override void OnDrop(PointerEventData eventData)
@@ -50,6 +50,8 @@ public class CharacterItemSlotUI : BaseInteractiveUIElement
         OnItemDropFail?.Invoke(null);
     }
 
+    
+
     public override void OnDrag(PointerEventData eventData)
     {
         base.OnDrag(eventData);
@@ -58,6 +60,8 @@ public class CharacterItemSlotUI : BaseInteractiveUIElement
 
         _itemSprite.transform.position = eventData.position;
     }
+
+    
 
     public void Init(ItemConfig itemConfig)
     {

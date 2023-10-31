@@ -1492,6 +1492,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1367575796}
   - component: {fileID: 1367575797}
+  - component: {fileID: 1367575798}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1528,6 +1529,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerConfig: {fileID: 11400000, guid: df3b5458f6662624d88ca67e7602fb14, type: 2}
   _sceneHandler: {fileID: 1157007721}
+--- !u!114 &1367575798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1367575795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cd486cba82b47b8b74e331c0f004247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1504020744
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,7 +2281,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1133403119959084057, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: orthographic size
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3493536373832206464, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2324,7 +2337,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8209895816503717536, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

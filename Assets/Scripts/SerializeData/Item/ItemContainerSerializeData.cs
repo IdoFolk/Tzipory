@@ -42,7 +42,8 @@ namespace Tzipory.SerializeData.ItemSerializeData
 
         public void AddItemAmount(int amount)=>
             _itemStack += amount;
-        
+        public void RemoveItemAmount(int amount)=>
+            _itemStack -= amount;
 
         public int SerializeTypeId => Constant.DataId.ITEM_DATA_ID;
         public Sprite ItemSlotSprite => _itemConfig.ItemIcon;

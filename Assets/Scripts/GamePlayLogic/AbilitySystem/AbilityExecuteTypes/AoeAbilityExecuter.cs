@@ -70,7 +70,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
         public void Init(IEntityTargetAbleComponent target)//temp
         {
             var aoeGameobject = Object.Instantiate(_aoePrefab,target.EntityTransform.position,Quaternion.identity).GetComponent<AoeAbilityEntity>();
-            //aoeGameobject.Init(target,Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
+            //aoeGameobject.SetShamanData(target,Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
             aoeGameobject.Init(target,Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
         }
 

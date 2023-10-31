@@ -55,17 +55,20 @@ MonoBehaviour:
     _usePopUpTextConfig: 1
     _popUpTextConfig:
       DisablePopUp: 0
-      PopUpTextType: 0
+      PopUpTextType: 1
       RepeatPattern: 0
       Text: 
       Color: {r: 1, g: 0, b: 0, a: 1}
       OverrideSize: 0
-      StartSize: 0
+      FontSize: 0
+      OverrideRiseSpeedAndTTL: 0
       RiseSpeed: 1
       TimeToLive: 1.5
-      OverrideAnimationCurve: 0
+      OverrideStartSize: 0
+      StartSize: {x: 0, y: 0}
       AddRandomMoveOffSet: 0
       MoveOffSet: {x: 0.8456391, y: 4.0746207}
+      OverrideAnimationCurve: 0
       PopUpTextMoveCurve:
         serializedVersion: 2
         m_Curve: []

@@ -185,7 +185,7 @@ namespace Tzipory.Systems.StatusSystem
             _dynamicValue = statModifier.ProcessStatModifier(_dynamicValue);
             
             OnValueChanged?.Invoke(usePopUpText
-                ? new StatChangeData(statEffectName, statModifier.Modifier,
+                ? new StatChangeData(statEffectName,6 ,statModifier.Modifier,
                     CurrentValue, popUpTextConfig)
                 : new StatChangeData(statEffectName, statModifier.Modifier,
                     CurrentValue));
@@ -262,6 +262,15 @@ namespace Tzipory.Systems.StatusSystem
         public readonly PopUpTextConfig PopUpTextConfig;
         public readonly bool UsePopUpTextConfig;
         
+        public StatChangeData(string statEffectName,float delta,float modifier, float newValue,PopUpTextConfig popUpTextConfig)
+        {
+            StatEffectName = statEffectName;
+            Delta = delta;
+            NewValue = newValue;
+            UsePopUpTextConfig = true;
+            PopUpTextConfig = popUpTextConfig;
+        }
+        
         public StatChangeData(string statEffectName,float delta, float newValue,PopUpTextConfig popUpTextConfig)
         {
             StatEffectName = statEffectName;
@@ -272,6 +281,15 @@ namespace Tzipory.Systems.StatusSystem
         }
         
         public StatChangeData(string statEffectName,float delta, float newValue)
+        {
+            StatEffectName = statEffectName;
+            Delta = delta;
+            NewValue = newValue;
+            UsePopUpTextConfig = true;
+            PopUpTextConfig = default;
+        }
+        
+        public StatChangeData(string statEffectName,float delta,float modifier, float newValue)
         {
             StatEffectName = statEffectName;
             Delta = delta;

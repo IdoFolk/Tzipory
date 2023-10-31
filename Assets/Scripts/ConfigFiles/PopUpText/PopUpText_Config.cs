@@ -14,8 +14,9 @@ namespace Tzipory.ConfigFiles.PopUpText
         [HideIf("DisablePopUp")] public Color Color;
         [HideIf("DisablePopUp")] public bool OverrideSize;
         [HideIf("DisablePopUp")] [ShowIf("OverrideSize")] public float FontSize;
-        [HideIf("DisablePopUp")] public float RiseSpeed;
-        [HideIf("DisablePopUp")] public float TimeToLive;
+        [HideIf("DisablePopUp")] public bool OverrideRiseSpeedAndTTL;
+        [HideIf("DisablePopUp"),ShowIf("OverrideRiseSpeedAndTTL")] public float RiseSpeed;
+        [HideIf("DisablePopUp"),ShowIf("OverrideRiseSpeedAndTTL")] public float TimeToLive;
         [HideIf("DisablePopUp")] public bool OverrideStartSize;
         [HideIf("DisablePopUp"),ShowIf("OverrideStartSize")] public Vector2 StartSize;
         [HideIf("DisablePopUp")] public bool AddRandomMoveOffSet;

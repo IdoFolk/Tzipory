@@ -105,12 +105,40 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._usePopUpTextConfig
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.Text
+      value: Crit Damage + 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: _statEffectConfig._statModifier._modifier
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: _myEffect._statModifier.Array.data[0]._modifier
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.PopUpTextType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: _statEffectConfig._statModifier._statusModifierType

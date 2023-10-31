@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using TMPro;
 using Tzipory.ConfigFiles.PopUpText;
+using Tzipory.Systems.PoolSystem;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
-public class BasicPopupText : MonoBehaviour , IInitialization<PopUpTextConfig>
+public class PopupText : MonoBehaviour , IInitialization<PopUpTextConfig> , IPoolable<PopupText>
 {
     [SerializeField] private TMP_Text _text;
     
@@ -42,13 +45,23 @@ public class BasicPopupText : MonoBehaviour , IInitialization<PopUpTextConfig>
     
     public void Init(PopUpTextConfig parameter)
     {
-        _startSize = parameter.OverrideSize ? parameter.StartSize : Vector2.zero;
+        _startSize = parameter.OverrideStartSize ? parameter.StartSize : Vector2.zero;
         transform.localScale = _startSize;
         _text.text = parameter.Text;
         _text.color = parameter.Color;
         _text.fontSize = parameter.FontSize;
-        _riseSpeed = parameter.RiseSpeed;
-        _timeToLive = parameter.TimeToLive;
+        
+        if (parameter.OverrideRiseSpeedAndTTL)
+        {
+            _riseSpeed = parameter.RiseSpeed;
+            _timeToLive = parameter.TimeToLive;
+        }
+        else
+        {
+            _riseSpeed = PopUpTextManager.Instance.DefaultPopUpConfig.RiseSpeed;
+            _timeToLive = PopUpTextManager.Instance.DefaultPopUpConfig.TimeToLive;
+        }
+        
 
         if (parameter.OverrideAnimationCurve)
         {
@@ -78,4 +91,22 @@ public class BasicPopupText : MonoBehaviour , IInitialization<PopUpTextConfig>
         yield return new WaitForSeconds(_timeToLive);
         Destroy(gameObject);
     }
+
+    #region ObjectPool
+    
+    public event Action<PopupText> OnDispose;
+    public void Dispose()
+    {
+        OnDispose?.Invoke(this);
+    }
+
+    public void Free()
+    {
+        OnDispose?.Invoke(this);
+        Destroy(gameObject);
+    }
+    
+    #endregion
+    
+    
 }

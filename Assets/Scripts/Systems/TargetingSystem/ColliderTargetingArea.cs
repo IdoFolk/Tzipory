@@ -7,18 +7,14 @@ namespace Tzipory.Systems.TargetingSystem
 {
     public class ColliderTargetingArea : MonoBehaviour
     {
+        public bool IsColliding => _isColliding;
+
         [SerializeField] private bool _testing = false;
         
         private ITargetableReciever _reciever;
+        private bool _isColliding;
         
         [Obsolete]
-        public void Init()
-        {
-            _reciever = GetComponentInParent(typeof(ITargetableReciever)) as ITargetableReciever;
-
-            if (_reciever == null)
-                Debug.LogError($"{transform.parent.name} did not get a <color=#ff0000>ITargetableReciever:</color>");
-        }
         
         public void Init(ITargetableReciever  reciever)
         {
@@ -31,9 +27,11 @@ namespace Tzipory.Systems.TargetingSystem
                 Debug.Log($"On target enter {other.name} from {gameObject.name}");
             
             _reciever.RecieveCollision(other, IOType.In);
+            if (other.gameObject.CompareTag("ShadowShaman"))
+                _isColliding = true;
             
             if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
-                _reciever.RecieveTargetableEntry(targetAbleComponent);
+            _reciever.RecieveTargetableEntry(targetAbleComponent);
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -42,9 +40,11 @@ namespace Tzipory.Systems.TargetingSystem
                 Debug.Log($"On target exit {other.name} from {gameObject.name}");
             
             _reciever.RecieveCollision(other, IOType.Out);
-            
+            if (other.gameObject.CompareTag("ShadowShaman"))
+                _isColliding = false;
+
             if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
-                _reciever.RecieveTargetableExit(targetAbleComponent);
+            _reciever.RecieveTargetableExit(targetAbleComponent);
         }
 
     }

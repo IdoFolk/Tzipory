@@ -169,17 +169,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GetHitDefualtConfig:
     DisablePopUp: 0
-    PopUpTextType: 1
+    PopUpTextType: 3
     RepeatPattern: 0
-    Text: 
+    Text: Test {Modifier}
     Color: {r: 1, g: 1, b: 1, a: 1}
     OverrideSize: 0
-    StartSize: 0
+    FontSize: 0
+    OverrideRiseSpeedAndTTL: 0
     RiseSpeed: 1
     TimeToLive: 1
-    OverrideAnimationCurve: 0
+    OverrideStartSize: 0
+    StartSize: {x: 0, y: 0}
     AddRandomMoveOffSet: 1
     MoveOffSet: {x: 0.6091858, y: 2.023177}
+    OverrideAnimationCurve: 0
     PopUpTextMoveCurve:
       serializedVersion: 2
       m_Curve: []
@@ -205,12 +208,15 @@ MonoBehaviour:
     Text: 
     Color: {r: 1, g: 0.8970643, b: 0, a: 1}
     OverrideSize: 0
-    StartSize: 0
+    FontSize: 0
+    OverrideRiseSpeedAndTTL: 0
     RiseSpeed: 1
     TimeToLive: 1
-    OverrideAnimationCurve: 0
+    OverrideStartSize: 0
+    StartSize: {x: 0, y: 0}
     AddRandomMoveOffSet: 1
     MoveOffSet: {x: 0.7048694, y: 2.172018}
+    OverrideAnimationCurve: 0
     PopUpTextMoveCurve:
       serializedVersion: 2
       m_Curve: []
@@ -236,12 +242,15 @@ MonoBehaviour:
     Text: 
     Color: {r: 0, g: 1, b: 0.073209524, a: 1}
     OverrideSize: 0
-    StartSize: 0
+    FontSize: 0
+    OverrideRiseSpeedAndTTL: 0
     RiseSpeed: 1
     TimeToLive: 1
-    OverrideAnimationCurve: 0
+    OverrideStartSize: 0
+    StartSize: {x: 0, y: 0}
     AddRandomMoveOffSet: 1
     MoveOffSet: {x: 0.821816, y: 2.150755}
+    OverrideAnimationCurve: 0
     PopUpTextMoveCurve:
       serializedVersion: 2
       m_Curve: []

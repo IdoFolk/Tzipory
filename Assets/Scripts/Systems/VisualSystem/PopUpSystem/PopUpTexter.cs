@@ -5,29 +5,8 @@ using System.Text.RegularExpressions;
 using Tzipory.ConfigFiles.PopUpText;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.Systems.StatusSystem;
+using Tzipory.Tools.RegularExpressions;
 using UnityEngine;
-
-/*
- * ^ - Starts with
- * $ - Ends with
- * [] - Range
- * () - Group
- * . - Single character once
- * + - one or more characters in a row
- * ? - optional preceding character match
- * \ - escape character
- * \n - New line
- * \d - Digit
- * \D - Non-digit
- * \s - White space
- * \S - non-white space
- * \w - alphanumeric/underscore character (word chars)
- * \W - non-word characters
- * {x,y} - Repeat low (x) to high (y) (no "y" means at least x, no ",y" means that many)
- * (x|y) - Alternative - x or y
- *
- * [^x] - Anything but x (where x is whatever character you want)
- */
 
 namespace Tzipory.Systems.VisualSystem.PopUpSystem
 {
@@ -41,7 +20,7 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
     [Serializable]
     public class PopUpTexter
     {
-        private const string MODIFIER_KEY_CODE = "Modifie";
+        private const string MODIFIER_KEY_CODE = "{Modifier}";
         
         [SerializeField] private Transform _textSpawnPoint;
 
@@ -96,35 +75,8 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
                     popUpTextConfig.Text = Mathf.Round(config.NewValue).ToString(CultureInfo.CurrentCulture);
                     break;
                 case PopUpTextType.ShowText:
-                    string text = popUpTextConfig.Text;
-                    
-                    bool foundKeyWord = false;
-                    int keyWordCount = 0;
-
-                    for (int i = 0; i < text.Length; i++)
-                    {
-                        int keyWordStartIndex = 0;
-                
-                        if (text[i] == '{')
-                        {
-                            foundKeyWord = true;
-                            keyWordCount = 0;
-                            keyWordStartIndex = i;
-                        }
-
-                        if(foundKeyWord)
-                        {
-                            if (text[i] != MODIFIER_KEY_CODE[keyWordCount])
-                                foundKeyWord = false;
-                            keyWordCount++;
-
-                            if (keyWordCount == MODIFIER_KEY_CODE.Length && foundKeyWord)
-                            {
-                                var keyWordEndIndex = i;
-                                popUpTextConfig.Text = text.Substring(0, keyWordStartIndex) + "" + text.Substring(keyWordEndIndex, text.Length);
-                            }
-                        }
-                    }
+                    string text = RegularExpressionsTool.SetValueOnKeyWord(popUpTextConfig.Text,
+                        new Dictionary<string, object>() {{MODIFIER_KEY_CODE, config.Delta} });
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -140,16 +92,5 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
             popupText.transform.position = _textSpawnPoint.position;
             popupText.Init(popUpTextConfig);
         }
-        
-        
-        IEnumerable<string> FindKeywords(string s)
-        {
-            var matches = Regex.Matches(s, "{(.*?)}");
-            foreach (Match match in matches)
-            {
-                yield return match.Groups[1].Value;
-            }
-        }
-
     }
 }

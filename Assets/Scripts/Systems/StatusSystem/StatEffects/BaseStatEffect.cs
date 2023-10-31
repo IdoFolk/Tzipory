@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tzipory.ConfigFiles.PopUpText;
 using Tzipory.ConfigFiles.StatusSystem;
 using Tzipory.Tools.Interface;
 
@@ -17,8 +18,8 @@ namespace Tzipory.Systems.StatusSystem
         public Stat StatToEffect { get; private set; }
         public StatModifier StatModifier { get; private set; }
         public StatEffectType StatEffectType { get; private set; }
-        
         public Dictionary<int, Stat> Stats { get; private set; }
+        protected PopUpTextConfig PopUpTextConfig  { get; private set; }
         public bool IsInitialization { get; private set; }
 
         #endregion
@@ -34,6 +35,9 @@ namespace Tzipory.Systems.StatusSystem
             StatProcessPriority = parameter.StatProcessPriority;
 
             StatEffectType = parameter.StatEffectType;
+
+            if (parameter.UsePopUpTextConfig)
+                PopUpTextConfig = parameter.PopUpTextConfig;
             
             IsInitialization = true;
 

@@ -1,5 +1,4 @@
-﻿using Tools.Enums;
-using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.UISystem;
 
@@ -16,7 +15,8 @@ namespace Tzipory.GameplayLogic.UIElements
 
         public override void Show()
         {
-            LevelManager.CoreTemplete.Health.OnValueChangedData += UpdateCoreUI;
+
+            LevelManager.CoreTemplete.Health.OnValueChanged += UpdateCoreUI;
             base.Show();
         }
 
@@ -33,7 +33,7 @@ namespace Tzipory.GameplayLogic.UIElements
 
         public override void Hide()
         {
-            LevelManager.CoreTemplete.Health.OnValueChangedData -= UpdateCoreUI;
+            LevelManager.CoreTemplete.Health.OnValueChanged -= UpdateCoreUI;
             base.Hide();
         }
     }

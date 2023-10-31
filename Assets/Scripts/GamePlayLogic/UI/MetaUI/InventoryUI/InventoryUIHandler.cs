@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Tools.Enums;
 using Tzipory.SerializeData.Inventory;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Interface;
@@ -49,6 +48,5 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
 
             OnItemDropToInventory?.Invoke(characterItemSlotUI.StoreItemId, 1);
         }
-
     }
 }

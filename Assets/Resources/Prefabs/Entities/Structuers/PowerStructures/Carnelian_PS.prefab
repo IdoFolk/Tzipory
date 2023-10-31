@@ -97,12 +97,56 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._usePopUpTextConfig
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.Text
+      value: Attack Damage X1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: _statEffectConfig._statModifier._modifier
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.Color.b
+      value: 0.13950695
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.Color.g
+      value: 0.25380313
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.Color.r
+      value: 0.8962264
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.RiseSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.StartSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.TimeToLive
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: _myEffect._statModifier.Array.data[0]._modifier
       value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.OverrideSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
+      propertyPath: _statEffectConfig._popUpTextConfig.PopUpTextType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6448687465216425320, guid: f842a8889eed7f44da670a3ea79af0db, type: 3}
       propertyPath: _statEffectConfig._statModifier._statusModifierType

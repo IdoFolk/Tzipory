@@ -1,5 +1,4 @@
 ﻿using TMPro;
-using Tools.Enums;
 using Tzipory.ConfigFiles.ToolTipConfig;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.Systems.UISystem;

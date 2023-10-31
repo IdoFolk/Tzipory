@@ -1,6 +1,6 @@
 ﻿using System;
-using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.Tools.Enums;
 using UnityEngine;
 
 namespace Tzipory.Systems.UISystem
@@ -27,8 +27,11 @@ namespace Tzipory.Systems.UISystem
                 gameObject.SetActive(false);
         }
 
-        private void OnDestroy() =>
+        private void OnDestroy()
+        {
+            Hide();
             UIManager.RemoveUIElement(this);
+        }
 
         public virtual void Show()
         {

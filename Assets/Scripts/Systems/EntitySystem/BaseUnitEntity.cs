@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameplayLogic.UI.HPBar;
-using MyNamespaceTzipory.Systems.VisualSystem;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.ConfigFiles.EntitySystem.EntityVisual;
+using Tzipory.ConfigFiles.PopUpText;
 using Tzipory.Helpers;
 using Tzipory.Helpers.Consts;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
@@ -13,6 +13,7 @@ using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.TargetingSystem;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
+using Tzipory.Systems.VisualSystem.PopUpSystem;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.Sound;
 using Tzipory.Tools.TimeSystem;
@@ -43,9 +44,6 @@ namespace Tzipory.Systems.Entity
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetCritHit;
 
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpTexter _popUpTexter;
-        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _defaultPopUpText_Config;
-        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _critPopUpText_Config;
-        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpText_Config _healPopUpText_Config;
 
         #region Visual Events
         public Action<bool> OnSpriteFlipX;
@@ -63,7 +61,7 @@ namespace Tzipory.Systems.Entity
 
         public Dictionary<int, Stat> Stats { get; private set; }
         
-        public StatusHandler StatusHandler { get; private set; }
+        public StatHandler StatHandler { get; private set; }
         
         public AbilityHandler AbilityHandler { get; private set; }
         
@@ -190,10 +188,10 @@ namespace Tzipory.Systems.Entity
 
         private void BaseInit()
         {
-            StatusHandler = new StatusHandler(this);//may need to work in init!
+            StatHandler = new StatHandler(this);//may need to work in init!
 
 #if UNITY_EDITOR
-            foreach (var statHolder in StatusHandler.StatHolders)
+            foreach (var statHolder in StatHandler.StatHolders)
                 _stats.AddRange(statHolder.Stats.Values);
 #endif
             
@@ -223,12 +221,12 @@ namespace Tzipory.Systems.Entity
 
             EffectSequenceHandler = new EffectSequenceHandler(this,effectSequence);
             
-            StatusHandler.OnStatusEffectAdded += AddStatusEffectVisual;
+            StatHandler.OnStatusEffectAdded += AddStatusEffectVisual;
 
             TargetingHandler.Init(this);
             
             if (_doShowHPBar)//Temp!
-                Health.OnValueChangedData += _hpBarConnector.SetBarToHealth;
+                Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
 
             if (_doShowHPBar)
                 _hpBarConnector.Init(this);
@@ -251,7 +249,11 @@ namespace Tzipory.Systems.Entity
             Stats = new Dictionary<int, Stat>();
 
             foreach (var statSerializeData in parameter.StatSerializeDatas)
-                Stats.Add(statSerializeData.ID ,new Stat(statSerializeData));
+            {
+                var stat = new Stat(statSerializeData);
+                stat.OnValueChanged += _popUpTexter.SpawnPopUp; 
+                Stats.Add(statSerializeData.ID ,stat);
+            }
             
             DefaultPriorityTargeting =
                 Systems.FactorySystem.ObjectFactory.TargetingPriorityFactory.GetTargetingPriority(this, (TargetingPriorityType)parameter.TargetingPriority);
@@ -272,8 +274,12 @@ namespace Tzipory.Systems.Entity
             
             Stats = new Dictionary<int, Stat>();
 
-            foreach (var statConfig in parameter.StatConfigs)
-                Stats.Add(statConfig.ID,new Stat(statConfig));
+            foreach (var statSerializeData in parameter.StatConfigs)
+            {
+                var stat = new Stat(statSerializeData);
+                stat.OnValueChanged += _popUpTexter.SpawnPopUp; 
+                Stats.Add(statSerializeData.ID ,stat);
+            }
             
             DefaultPriorityTargeting =
                 Systems.FactorySystem.ObjectFactory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
@@ -298,7 +304,7 @@ namespace Tzipory.Systems.Entity
             
             EffectSequenceHandler.UpdateEffectHandler();
             
-            StatusHandler.UpdateStatHandler();
+            StatHandler.UpdateStatHandler();
             HealthComponentUpdate();
             
             if (IsEntityDead)
@@ -340,9 +346,12 @@ namespace Tzipory.Systems.Entity
             if (!IsInitialization)
                 return;
 
-            StatusHandler.OnStatusEffectAdded -= AddStatusEffectVisual;
+            StatHandler.OnStatusEffectAdded -= AddStatusEffectVisual;
 
-            Health.OnValueChangedData  -= _hpBarConnector.SetBarToHealth;
+            Health.OnValueChanged  -= _hpBarConnector.SetBarToHealth;
+
+            foreach (var statsValue in Stats.Values)
+                statsValue.OnValueChanged -= _popUpTexter.SpawnPopUp;
         }
 
         #endregion
@@ -372,12 +381,7 @@ namespace Tzipory.Systems.Entity
         
         public void Heal(float amount)
         {
-            _healPopUpText_Config.damage = amount;
-            _healPopUpText_Config.text = $"+{(int)amount}";
-            _healPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(amount);
-            
-            _popUpTexter.SpawnPopUp(_healPopUpText_Config);
-            Health.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition));
+            Health.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition),"Heal",PopUpTextManager.Instance.HealDefaultConfig);
         }
 
         public void TakeDamage(float damage,bool isCrit)
@@ -389,23 +393,22 @@ namespace Tzipory.Systems.Entity
                     : Constant.EffectSequenceIds.GET_HIT);
                 
                 IsDamageable = false; // Is this what turns on InvincibleTime?
+
+                PopUpTextConfig popUpTextConfig;
+                string processName;
+
                 if (isCrit)
                 {
-                    _critPopUpText_Config.damage = damage;
-                    _critPopUpText_Config.text = $"{(int)damage}";
-                    _critPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
-                    _critPopUpText_Config.size += LevelVisualData_Monoton.Instance.Crit_FontSizeBonus; //this is pretty bad imo
-                    _popUpTexter.SpawnPopUp(_critPopUpText_Config);
+                    popUpTextConfig = PopUpTextManager.Instance.GetCritHitDefaultConfig;
+                    processName = "Crit Hit";
                 }
                 else
                 {
-                    _defaultPopUpText_Config.damage = damage;
-                    _defaultPopUpText_Config.text = $"{(int)damage}";
-                    _defaultPopUpText_Config.size = LevelVisualData_Monoton.Instance.GetRelativeFontSizeForDamage(damage);
-                    _popUpTexter.SpawnPopUp(_defaultPopUpText_Config);
+                    popUpTextConfig = PopUpTextManager.Instance.GetHitDefaultConfig;
+                    processName = "Hit";
                 }
                 
-                Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce));
+                Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),processName,popUpTextConfig);
                 IsDamageable = false;
             }
         }

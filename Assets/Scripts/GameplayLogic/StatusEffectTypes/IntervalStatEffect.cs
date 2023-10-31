@@ -34,7 +34,7 @@ namespace Tzipory.SerializeData.LevalSerializeData.StstusEffectTypes
             {
                 _currentInterval = Stats[(int)Constant.StatsId.Interval].CurrentValue;
                 //process on stat
-                StatToEffect.ProcessStatModifier(StatModifier,StatProcessName);
+                StatToEffect.ProcessStatModifier(StatModifier,StatProcessName,PopUpTextConfig);
                 return true;
             }
             

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tools.Enums;
 using Tzipory.Systems.UISystem;
+using Tzipory.Tools.Enums;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.Managers.MainGameManagers

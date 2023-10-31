@@ -38,7 +38,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Enemies
             EntityType = EntityType.Enemy;
             timer = 0;
             _isAttacking  = false;
-            _tempBasicMoveComponent.Init(StatusHandler.GetStat(Constant.StatsId.MovementSpeed));//temp!
+            _tempBasicMoveComponent.Init(StatHandler.GetStat(Constant.StatsId.MovementSpeed));//temp!
             
             var enemyConfig = (EnemyConfig)parameter;
             
@@ -114,14 +114,14 @@ namespace Tzipory.GameplayLogic.EntitySystem.Enemies
             if (TargetingHandler.CurrentTarget == null)
                 return;
             
-            if (timer >= StatusHandler.GetStat(Constant.StatsId.AttackRate).CurrentValue)
+            if (timer >= StatHandler.GetStat(Constant.StatsId.AttackRate).CurrentValue)
             {
                 timer = 0f;
                 float attackDamage = 0;
 
                 attackDamage = TargetingHandler.CurrentTarget.EntityType == EntityType.Core 
-                    ? StatusHandler.GetStat(Constant.StatsId.CoreAttackDamage).CurrentValue 
-                    : StatusHandler.GetStat(Constant.StatsId.AttackDamage).CurrentValue;
+                    ? StatHandler.GetStat(Constant.StatsId.CoreAttackDamage).CurrentValue 
+                    : StatHandler.GetStat(Constant.StatsId.AttackDamage).CurrentValue;
                 
                 TargetingHandler.CurrentTarget.TakeDamage(attackDamage, false);
             }

@@ -1,8 +1,6 @@
 ﻿using System;
-using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GamePlayLogic.UI.MetaUI;
-using Tzipory.GameplayLogic.UIElements;
 using Tzipory.Helpers.Consts;
 using Tzipory.SerializeData.PlayerData.Camp;
 using Tzipory.Systems.CampSystem;

@@ -1,5 +1,4 @@
-﻿using Tools.Enums;
-using Tzipory.GameplayLogic.EntitySystem.Shamans;
+﻿using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.UISystem;
@@ -15,7 +14,6 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private Image _splash;
         private Shaman _shaman;
 
-        protected override UIGroup UIGroup => UIGroup.GameUI;
         
         public void SetShamanData(Shaman shaman)
         {
@@ -28,14 +26,14 @@ namespace Tzipory.GameplayLogic.UIElements
 
         public override void Show()
         {
-            _shaman.Health.OnValueChangedData += OnHealthChange;
+            _shaman.Health.OnValueChanged += OnHealthChange;
             OnClickEvent += GoToShaman;
             base.Show();
         }
 
         public override void Hide()
         {
-            _shaman.Health.OnValueChangedData -= OnHealthChange;
+            _shaman.Health.OnValueChanged -= OnHealthChange;
             OnClickEvent -= GoToShaman;
             base.Hide();
         }

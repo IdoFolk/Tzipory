@@ -1,4 +1,3 @@
-using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GameplayLogic.UI.MetaUI.InventoryUI;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
@@ -10,7 +9,6 @@ public class CampFireUIHandler : BaseUIElement
     [SerializeField] private InventoryUIHandler _inventoryUIHandler;
     [SerializeField] private CharacterUIHandler _characterUIHandler;
     [SerializeField] private CharacterStatsUIHandler _characterStatsUIHandler;
-    protected override UIGroup UIGroup => UIGroup.MetaUI;
 
     private void Start()
     {

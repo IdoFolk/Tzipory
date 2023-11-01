@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Tzipory.Systems.StatusSystem
 {
-    public class StatusHandler
+    public class StatHandler
     {
         public event Action<EffectSequenceConfig> OnStatusEffectAdded; 
 
@@ -22,7 +22,7 @@ namespace Tzipory.Systems.StatusSystem
         public List<IStatHolder> StatHolders => _statHolders;
 #endif
 
-        public StatusHandler(IEntityStatComponent entity)
+        public StatHandler(IEntityStatComponent entity)
         {
             _statHolders = new List<IStatHolder>();
             
@@ -44,7 +44,7 @@ namespace Tzipory.Systems.StatusSystem
                     return stat;
             }
 
-            Debug.LogError($"Stat ID: {id} not found in StatusHandler of entity {_entity.GameEntity.name}");
+            Debug.LogError($"Stat ID: {id} not found in StatHandler of entity {_entity.GameEntity.name}");
             return  null;
         }
         
@@ -56,7 +56,7 @@ namespace Tzipory.Systems.StatusSystem
                     return stat;
             }
 
-            Debug.LogError($"Stat ID: {statIdToFind} not found in StatusHandler of entity {_entity.GameEntity.name}");
+            Debug.LogError($"Stat ID: {statIdToFind} not found in StatHandler of entity {_entity.GameEntity.name}");
             return  null;
         }
 
@@ -69,26 +69,20 @@ namespace Tzipory.Systems.StatusSystem
             }
         }
         
-        public IDisposable AddStatusEffect(StatEffectConfig statEffectConfig)
+        public IDisposable AddStatEffect(StatEffectConfig statEffectConfig)
         {
             var statToEffect = GetStat(statEffectConfig.AffectedStatId);
             
+            var statusEffect =  FactorySystem.ObjectFactory.StatusEffectFactory.GetStatusEffect(statEffectConfig,statToEffect);
             //   TODO need to Interrupt stats
 
             OnStatusEffectAdded?.Invoke(statEffectConfig.EffectSequence);
             
-            return statToEffect.AddStatusEffect(statEffectConfig);
-        }
-        
-        public IDisposable AddStatusEffect(IStatEffectProcess statEffectProcess)
-        {
-            var statToEffect = GetStat(statEffectProcess.StatToEffect.Id);
+            if (statEffectConfig.UsePopUpTextConfig)
+                return statToEffect.AddStatusEffect(statusEffect,statEffectConfig.PopUpTextConfig);
             
-            //   TODO need to Interrupt stats
+            return statToEffect.AddStatusEffect(statusEffect);
 
-            //OnStatusEffectAdded?.Invoke(statEffectProcess.EffectSequence);
-            
-            return statToEffect.AddStatusEffect(statEffectProcess);
         }
 
         //TODO need to fix the InterruptStatusEffects

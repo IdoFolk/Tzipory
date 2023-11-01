@@ -12,7 +12,6 @@ namespace Tzipory.Systems.StatusSystem
         Transform,
         Color,
         Outline,
-        PopUp,
         ParticleEffects,
         Sound,
         Sprite,

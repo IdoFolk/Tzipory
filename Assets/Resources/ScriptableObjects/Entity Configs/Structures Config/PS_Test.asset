@@ -21,3 +21,58 @@ MonoBehaviour:
   RingOnShamanHoverColor: {r: 0, g: 0.9706273, b: 1, a: 1}
   DefaultSpriteAlpha: 1
   SpriteAlphaFade: 0.33
+  StatEffectConfig:
+    _statusEffectName: 
+    _statProcessPriority: 0
+    _affectedStatId: 1
+    _statEffectType: 3
+    _duration: 0
+    _interval: 0
+    _statModifier:
+      _statusModifierType: 3
+      _modifier: 1.5
+    _effectSequence:
+      _sequenceName: 
+      _id: 0
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []
+    _usePopUpTextConfig: 1
+    _popUpTextConfig:
+      DisablePopUp: 0
+      PopUpTextType: 3
+      RepeatPattern: 0
+      Text: Attack Damage X1.5
+      Color: {r: 0.8962264, g: 0.25380313, b: 0.13950695, a: 1}
+      OverrideSize: 1
+      FontSize: 0
+      OverrideRiseSpeedAndTTL: 0
+      RiseSpeed: 2
+      TimeToLive: 0.5
+      OverrideStartSize: 0
+      StartSize: {x: 0, y: 0}
+      AddRandomMoveOffSet: 0
+      MoveOffSet: {x: 0, y: 0}
+      OverrideAnimationCurve: 0
+      PopUpTextMoveCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      PopUpTextScaleCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      PopUpTextAlphaCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  PowerStructureSprite: {fileID: 21300000, guid: 03c364836e9bd9e4290ae0855d457cad, type: 3}
+  StatEffectPopupWindowsDistance: 3

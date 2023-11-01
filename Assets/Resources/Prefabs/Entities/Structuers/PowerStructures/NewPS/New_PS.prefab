@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _proximityCircleManager: {fileID: 8966001170857930187}
   _powerStructureConfig: {fileID: 11400000, guid: 1a4e9022cb9a97643971c8100e6a9848, type: 2}
+  _powerStructureSpriteRenderer: {fileID: 4273722055985562272}
 --- !u!114 &4228493472124563496
 MonoBehaviour:
   m_ObjectHideFlags: 0

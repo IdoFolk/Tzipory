@@ -1,22 +1,24 @@
-using System;
-using Sirenix.OdinInspector;
-using Tzipory.Systems.Entity.EntityComponents;
-using Tzipory.Systems.TargetingSystem;
-using Tzipory.Tools.Enums;
+using Tzipory.ConfigFiles.StatusSystem;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 {
-    public class PowerStructureHandler : MonoBehaviour, ITargetableReciever
+    public class PowerStructureHandler : MonoBehaviour
     {
         [SerializeField] private ProximityCircleManager _proximityCircleManager;
         [SerializeField] private PowerStructureConfig _powerStructureConfig;
+        [SerializeField] private SpriteRenderer _powerStructureSpriteRenderer;
 
-        private bool _toggleShowCircles; // TEMP
-
+        
         private void Awake()
         {
-            _proximityCircleManager.Init(_powerStructureConfig, this);
+            _proximityCircleManager.Init(_powerStructureConfig);
+            if (_powerStructureConfig.PowerStructureSprite is null)
+            {
+                Debug.LogError("Config Sprite is missing");
+                return;
+            }
+            _powerStructureSpriteRenderer.sprite = _powerStructureConfig.PowerStructureSprite;
         }
 
         private void OnValidate()
@@ -27,25 +29,5 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             }
         }
         
-        [Button("ToggleShowCircles")]
-        private void ToggleShowRings()
-        {
-            _toggleShowCircles = !_toggleShowCircles;
-            _proximityCircleManager.ToggleShowRings(_powerStructureConfig, _toggleShowCircles);
-        }
-
-
-        public void RecieveCollision(Collider2D other, IOType ioType)
-        {
-            
-        }
-
-        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
-        {
-        }
-
-        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
-        {
-        }
     }
 }

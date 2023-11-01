@@ -32,6 +32,7 @@ namespace Tzipory.ConfigFiles.StatusSystem
         public float Duration => _duration;
         public float Interval => _interval;
         public int AffectedStatId => (int)_affectedStatId;
+        public Constant.StatsId AffectedStatType => _affectedStatId;
         public StatEffectType StatEffectType => _statEffectType;
         public StatModifierConfig StatModifier => _statModifier;
         public EffectSequenceConfig EffectSequence => _effectSequence;

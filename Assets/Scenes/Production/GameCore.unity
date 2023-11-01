@@ -1292,7 +1292,13 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 5776897059597873247, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4652372737932773766, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 3911791067164084180, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
 --- !u!4 &1279383590 stripped
 Transform:

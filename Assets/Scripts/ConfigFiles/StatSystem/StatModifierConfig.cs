@@ -13,5 +13,10 @@ namespace Tzipory.ConfigFiles.StatusSystem
         public StatusModifierType StatusModifierType => _statusModifierType;
 
         public float Modifier => _modifier;
+
+        public void ModifyStatEffect(float modifiedValue)
+        {
+            _modifier = modifiedValue;
+        }
     }
 }

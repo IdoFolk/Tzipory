@@ -7,12 +7,14 @@ namespace Tzipory.Systems.TargetingSystem
 {
     public class ColliderTargetingArea : MonoBehaviour
     {
-        public bool IsColliding => _isColliding;
+        public bool IsCollidingWithShadow => _isCollidingWithShadow;
+        public bool IsCollidingWithShaman => _isCollidingWithShaman;
 
         [SerializeField] private bool _testing = false;
         
         private ITargetableReciever _reciever;
-        private bool _isColliding;
+        private bool _isCollidingWithShadow;
+        private bool _isCollidingWithShaman;
         
         [Obsolete]
         
@@ -26,9 +28,11 @@ namespace Tzipory.Systems.TargetingSystem
             if (_testing)
                 Debug.Log($"On target enter {other.name} from {gameObject.name}");
             
-            _reciever.RecieveCollision(other, IOType.In);
             if (other.gameObject.CompareTag("ShadowShaman"))
-                _isColliding = true;
+                _isCollidingWithShadow = true;
+            if (other.gameObject.CompareTag("Shaman"))
+                _isCollidingWithShaman = true;
+            _reciever.RecieveCollision(other, IOType.In);
             
             if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
             _reciever.RecieveTargetableEntry(targetAbleComponent);
@@ -39,9 +43,11 @@ namespace Tzipory.Systems.TargetingSystem
             if (_testing)
                 Debug.Log($"On target exit {other.name} from {gameObject.name}");
             
-            _reciever.RecieveCollision(other, IOType.Out);
             if (other.gameObject.CompareTag("ShadowShaman"))
-                _isColliding = false;
+                _isCollidingWithShadow = false;
+            if (other.gameObject.CompareTag("Shaman"))
+                _isCollidingWithShaman = false;
+            _reciever.RecieveCollision(other, IOType.Out);
 
             if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
             _reciever.RecieveTargetableExit(targetAbleComponent);

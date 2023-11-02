@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using Tzipory.Helpers;
+using Unity.VisualScripting;
+using UnityEngine;
 
 namespace Tzipory.Tools.RegularExpressions
 {
@@ -29,10 +32,21 @@ namespace Tzipory.Tools.RegularExpressions
     {
         public static string SetValueOnKeyWord(string s,Dictionary<string,object> keywordValue)
         {
+            string output = s;
             foreach (var keyValuePair in keywordValue)
-                Regex.Replace(s, keyValuePair.Key, $"{keyValuePair.Value}");
+                output = Regex.Replace(output, keyValuePair.Key, $"{keyValuePair.Value}");
+            
+            return  output;
+        }
 
-            return s;
+        public static string ColorKeyWords(string s, List<string> keywords,Color color)
+        {
+            string colorHex = color.ToHexString();
+            string output = s;
+            foreach (var keyword in keywords)
+                output = Regex.Replace(output, keyword, $"<color={ColorLogHelper.GREEN}>{keyword}</color>");
+            
+            return  output;
         }
     }
 }

@@ -1,19 +1,15 @@
 using System;
 using System.Collections.Generic;
 using Tzipory.ConfigFiles.StatusSystem;
-using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Helpers;
-using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
-using Tzipory.Systems.TargetingSystem;
-using Tzipory.Tools.Enums;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 
 namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 {
-    public class ProximityCircleManager : MonoBehaviour, ITargetableReciever
+    public class ProximityCircleManager : MonoBehaviour
     {
+        [HideInInspector]public int Id { get; private set; }
         public ProximityRingHandler[] RingHandlers => _ringHandlers;
         [SerializeField] private ProximityRingHandler[] _ringHandlers;
         [SerializeField] private ClickHelper _clickHelper;
@@ -21,29 +17,83 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         private bool _lockSpriteToggle;
         private Color _defaultColor;
         private Color _activeColor;
+        private int _currentActiveRingId;
+        private bool _shamanSelected;
 
         private StatEffectConfig _statEffectConfig;
         private Dictionary<int, IDisposable> _activeStatusEffectOnShaman;
 
 
-        public void Init(PowerStructureConfig powerStructureConfig)
+        public void Init(int id, PowerStructureConfig powerStructureConfig)
         {
+            Id = id;
             float ringSpriteAlpha = powerStructureConfig.DefaultSpriteAlpha;
             for (int i = 0; i < _ringHandlers.Length; i++)
             {
-                _ringHandlers[i].Init(i + 1, this, ringSpriteAlpha);
+                _ringHandlers[i].Init(i, ringSpriteAlpha);
+                _ringHandlers[i].OnShadowEnter += OnShadowShamanEnter;
+                _ringHandlers[i].OnShadowExit += OnShadowShamanExit;
                 ringSpriteAlpha -= powerStructureConfig.SpriteAlphaFade;
             }
+
             _statEffectConfig = powerStructureConfig.StatEffectConfig;
             _defaultColor = powerStructureConfig.RingOnHoverColor;
             _activeColor = powerStructureConfig.RingOnShamanHoverColor;
-            ScaleCircles(powerStructureConfig.Range, powerStructureConfig.RingsRatios);
-            ChangeAllRingsColors(powerStructureConfig.RingOnHoverColor);
+            _currentActiveRingId = _ringHandlers.Length;
+
             _clickHelper.OnEnterHover += ActivateRingSprites;
             _clickHelper.OnExitHover += DeactivateRingSprites;
-            Systems.MovementSystem.HerosMovementSystem.TempHeroMovementManager.OnAnyShamanSelected += ActivateRingSpritesWithLock;
-            Systems.MovementSystem.HerosMovementSystem.TempHeroMovementManager.OnAnyShamanDeselected += DeactivateRingSpritesWithLock;
+            Systems.MovementSystem.HerosMovementSystem.TempHeroMovementManager.OnAnyShamanSelected += OnShamanSelect;
+            Systems.MovementSystem.HerosMovementSystem.TempHeroMovementManager.OnAnyShamanDeselected += OnShamanDeselect;
+            ScaleCircles(powerStructureConfig.Range, powerStructureConfig.RingsRatios);
+            ChangeAllRingsColors(_defaultColor);
         }
+
+        private void OnDestroy()
+        {
+            _clickHelper.OnEnterHover -= ActivateRingSprites;
+            _clickHelper.OnExitHover -= DeactivateRingSprites;
+            Systems.MovementSystem.HerosMovementSystem.TempHeroMovementManager.OnAnyShamanSelected -= OnShamanSelect;
+            Systems.MovementSystem.HerosMovementSystem.TempHeroMovementManager.OnAnyShamanDeselected -= OnShamanDeselect;
+            foreach (var ringHandler in _ringHandlers)
+            {
+                ringHandler.OnShadowEnter -= OnShadowShamanEnter;
+                ringHandler.OnShadowExit -= OnShadowShamanExit;
+            }
+        }
+
+        private void OnShadowShamanEnter(int ringId)
+        {
+            if (ringId < _currentActiveRingId)
+            {
+                var currentActiveRing = _ringHandlers[ringId];
+                EnterActiveSprite(currentActiveRing);
+                ShowStatPopupWindows(currentActiveRing);
+            }
+        }
+
+        private void OnShadowShamanExit(int ringId)
+        {
+            if (ringId == _currentActiveRingId)
+            {
+                var currentActiveRing = _ringHandlers[ringId];
+                ExitActiveSprite(currentActiveRing);
+                if (_currentActiveRingId == _ringHandlers.Length)
+                {
+                    HideStatPopupWindow();
+                }
+                else
+                {
+                    currentActiveRing = _ringHandlers[_currentActiveRingId];
+                    ShowStatPopupWindows(currentActiveRing);
+                }
+            }
+            else
+            {
+                Debug.LogError("ring detect Problem");
+            }
+        }
+
 
         private void ChangeAllRingsColors(Color color)
         {
@@ -53,31 +103,20 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             }
         }
 
-        private void ResetActiveRings()
-        {
-            foreach (var ring in _ringHandlers)
-            {
-                ring.ActivateRing(false);
-            }
-        }
+        
 
-        private void ChangeCurrentProximityRing()
+        private void ShowStatPopupWindows(ProximityRingHandler ringHandler)
         {
-            foreach (var ring in _ringHandlers)
-            {
-                if (!ring.ColliderTargetingArea.IsCollidingWithShadow) continue;
-                ring.ActivateRing(true);
-                ring.ChangeColor(_activeColor);
-                break;
-            }
-        }
-
-        private void ActivateStatPopupWindows()
-        {
-            var modifiedStatEffectValue = ModifyStatEffectByRing();
+            var modifiedStatEffectValue = ModifyStatEffectByRing(ringHandler);
             var modifiedStatEffectPrecent = CalculateStatPercent(modifiedStatEffectValue);
             var statEffectName = _statEffectConfig.AffectedStatType.ToString();
-            StatBonusPopupManager.ShowPopupWindows(statEffectName,modifiedStatEffectPrecent);
+            StatBonusPopupManager.ShowPopupWindows(Id,ringHandler.Id,statEffectName, modifiedStatEffectPrecent);
+        }
+
+        private void HideStatPopupWindow()
+        {
+            var statEffectName = _statEffectConfig.AffectedStatType.ToString();
+            StatBonusPopupManager.HidePopupWindows(Id);
         }
 
         private void ScaleCircles(float circleRange, float[] ringsRanges)
@@ -88,37 +127,24 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             }
         }
 
-        private float ModifyStatEffectByRing()
+        private float ModifyStatEffectByRing(ProximityRingHandler ringHandler)
         {
             float statEffectModifiedValue = 0;
             float ringPercentage;
-            ProximityRingHandler activeRing;
+            float modifier = _statEffectConfig.StatModifier.Modifier;
             switch (_statEffectConfig.StatModifier.StatusModifierType)
             {
                 case StatusModifierType.Addition:
-                    ringPercentage = _statEffectConfig.StatModifier.Modifier / _ringHandlers.Length;
-                    activeRing = FindActiveRing();
-                    if (activeRing is null) Debug.LogError("Active Ring is null");
-                    statEffectModifiedValue = ringPercentage * activeRing.Id;
+                    //ringPercentage = modifier / _ringHandlers.Length;
+                    //statEffectModifiedValue = modifier - ringPercentage * ringHandler.Id;
                     break;
                 case StatusModifierType.Multiplication:
-                    ringPercentage = _statEffectConfig.StatModifier.Modifier / _ringHandlers.Length;
-                    activeRing = FindActiveRing();
-                    if (activeRing is null) Debug.LogError("Active Ring is null");
-                    statEffectModifiedValue = ringPercentage * activeRing.Id;
+                    ringPercentage = modifier / _ringHandlers.Length;
+                    statEffectModifiedValue = modifier - ringPercentage * ringHandler.Id;
                     break;
             }
+
             return statEffectModifiedValue;
-        }
-
-        private ProximityRingHandler FindActiveRing()
-        {
-            foreach (var ring in _ringHandlers)
-            {
-                if (ring.ActiveRing) return ring;
-            }
-
-            return null;
         }
 
         private float CalculateStatPercent(float modifiedStatValue)
@@ -133,82 +159,45 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
             return modifiedStatValue; //change
         }
-
+        private void OnShamanSelect()
+        {
+            _shamanSelected = true;
+        }
+        private void OnShamanDeselect()
+        {
+            _shamanSelected = false;
+        }
+        
         #region SpriteActivationToggle
-
+        private void EnterActiveSprite(ProximityRingHandler ring)
+        {
+            if (_currentActiveRingId != _ringHandlers.Length)
+                _ringHandlers[_currentActiveRingId].ToggleSprite(false);
+            ring.ToggleSprite(true);
+            _currentActiveRingId = ring.Id;
+        }
+        private void ExitActiveSprite(ProximityRingHandler ring)
+        {
+            ring.ToggleSprite(false);
+            _currentActiveRingId += 1;
+            if (_currentActiveRingId == _ringHandlers.Length) return;
+            _ringHandlers[_currentActiveRingId].ToggleSprite(true);
+        }
         private void ActivateRingSprites()
         {
-            ToggleActiveSprite(true, false);
+            if (_shamanSelected) return;
+            ToggleActiveSprite(true);
         }
-
-        private void ActivateRingSpritesWithLock()
-        {
-            _lockSpriteToggle = true;
-            ToggleActiveSprite(true, true);
-        }
-
         private void DeactivateRingSprites()
         {
-            ToggleActiveSprite(false, false);
+            if (_shamanSelected) return;
+            ToggleActiveSprite(false);
         }
-
-        private void DeactivateRingSpritesWithLock()
+        private void ToggleActiveSprite(bool state)
         {
-            _lockSpriteToggle = false;
-            ToggleActiveSprite(false, true);
-        }
-
-        private void ToggleActiveSprite(bool state, bool lockOverride)
-        {
-            if (!lockOverride)
-                if (_lockSpriteToggle)
-                    return;
-
-            foreach (var ringHandler in _ringHandlers)
-            {
-                ringHandler.ToggleSprite(state);
-            }
+            _ringHandlers[^1].ToggleSprite(state);
         }
 
         #endregion
-
-        public void RecieveCollision(Collider2D other, IOType ioType)
-        {
-            if (other.gameObject.CompareTag("ShadowShaman"))
-            {
-                for (var i = 0; i < _ringHandlers.Length; i++)
-                {
-                    ChangeAllRingsColors(_defaultColor);
-                    ResetActiveRings();
-                    ChangeCurrentProximityRing();
-
-                    ActivateStatPopupWindows();
-                }
-            }
-        }
-
-        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
-        {
-            if (targetable is not Shaman shaman) return;
-
-            if (_activeStatusEffectOnShaman.ContainsKey(shaman.EntityInstanceID)) //temp!!!
-                return;
-
-            //_statEffectConfig.StatModifier.ModifyStatEffect(ModifyStatEffectByRing());
-
-            IDisposable disposable = shaman.StatHandler.AddStatEffect(_statEffectConfig); //need to modify the modifier
-            _activeStatusEffectOnShaman.Add(shaman.EntityInstanceID, disposable);
-        }
-
-        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
-        {
-            if (targetable is not Shaman shaman) return;
-
-            if (_activeStatusEffectOnShaman.TryGetValue(shaman.EntityInstanceID, out IDisposable disposable))
-            {
-                disposable.Dispose();
-                _activeStatusEffectOnShaman.Remove(shaman.EntityInstanceID);
-            }
-        }
     }
 }

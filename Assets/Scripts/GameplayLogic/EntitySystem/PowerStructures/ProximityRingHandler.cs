@@ -7,22 +7,21 @@ using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 {
-    public class ProximityRingHandler : MonoBehaviour
+    public class ProximityRingHandler : MonoBehaviour, ITargetableReciever
     {
+        public event Action<int> OnShadowEnter;
+        public event Action<int> OnShadowExit;
         [HideInInspector]public int Id { get; private set; }
-        public bool ActiveRing => _activeRing;
-        public ColliderTargetingArea ColliderTargetingArea => _colliderTargetingArea;
         
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private ColliderTargetingArea _colliderTargetingArea;
 
         private float _spriteAlpha;
-        private bool _activeRing;
         
         
-        public void Init(int id, ITargetableReciever reciever, float alpha)
+        public void Init(int id, float alpha)
         {
-            _colliderTargetingArea.Init(reciever);
+            _colliderTargetingArea.Init(this);
             _spriteAlpha = alpha;
             Id = id;
         }
@@ -43,9 +42,30 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             _spriteRenderer.color = color;
         }
 
-        public void ActivateRing(bool state)
+        public void RecieveCollision(Collider2D other, IOType ioType)
         {
-            _activeRing = state;
+            if (other.gameObject.CompareTag("ShadowShaman"))
+            {
+                if (ioType == IOType.In)
+                {
+                    OnShadowEnter?.Invoke(Id);
+                }
+
+                if (ioType == IOType.Out)
+                {
+                    OnShadowExit?.Invoke(Id);
+                }
+            }
+        }
+
+        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
+        {
+            
+        }
+
+        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
+        {
+            
         }
     }
 }

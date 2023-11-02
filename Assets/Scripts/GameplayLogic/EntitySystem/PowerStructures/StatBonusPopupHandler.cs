@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Tzipory.GameplayLogic.EntitySystem.PowerStructures;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
@@ -9,27 +9,32 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
     {
         [SerializeField] private StatBonusPopupWindowHandler[] _popupWindowHandlers;
         [SerializeField] private float StatEffectPopupWindowsDistance;
-        private List<string> _statBonusTexts;
+        [SerializeField,Range(0,1)] private float _popupWindowStartingAlpha;
+        [SerializeField,Range(0,1)] private float _popupWindowAlphaChange;
 
-        
-        public void ShowPopupWindows(string statBonusText, float value)
+        public void ShowPopupWindows(int PowerStructureId, int ringId, string statBonusText, float value)
         {
-            _statBonusTexts.Add(statBonusText);
             for (int i = 0; i < _popupWindowHandlers.Length; i++)
             {
+                if (_popupWindowHandlers[i].ActivePowerStructureId == PowerStructureId && _popupWindowHandlers[i].IsActive)
+                {
+                    //float alpha = _popupWindowStartingAlpha - _popupWindowAlphaChange * ringId;
+                    _popupWindowHandlers[i].UpdatePopupWindow(ringId,value);
+                    return;
+                }
                 if (_popupWindowHandlers[i].IsActive) continue;
-                _popupWindowHandlers[i].ShowPopupWindow(_statBonusTexts[i],value,(i)* StatEffectPopupWindowsDistance);
+                _popupWindowHandlers[i].ShowPopupWindow(PowerStructureId, ringId, statBonusText,value,(i)* StatEffectPopupWindowsDistance);
                 return;
             }
         }
 
-        public void HidePopupWindow(string statBonusText)
+        public void HidePopupWindow(int powerStructureId)
         {
-            foreach (var statBonusPopup in _popupWindowHandlers)
+            foreach (var PopupWindowHandler in _popupWindowHandlers)
             {
-                if (statBonusPopup.PopupText.text == statBonusText)
+                if (PopupWindowHandler.ActivePowerStructureId == powerStructureId)
                 {
-                    statBonusPopup.HidePopupWindow();
+                    PopupWindowHandler.HidePopupWindow();
                 }
             }
         }

@@ -5,6 +5,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 {
     public class PowerStructureHandler : MonoBehaviour
     {
+        [SerializeField] private int id;
         [SerializeField] private ProximityCircleManager _proximityCircleManager;
         [SerializeField] private PowerStructureConfig _powerStructureConfig;
         [SerializeField] private SpriteRenderer _powerStructureSpriteRenderer;
@@ -12,7 +13,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         
         private void Awake()
         {
-            _proximityCircleManager.Init(_powerStructureConfig);
+            _proximityCircleManager.Init(id, _powerStructureConfig);
             if (_powerStructureConfig.PowerStructureSprite is null)
             {
                 Debug.LogError("Config Sprite is missing");

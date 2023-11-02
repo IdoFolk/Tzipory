@@ -1,4 +1,3 @@
-using Tzipory.GameplayLogic.EntitySystem.PowerStructures;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
@@ -16,9 +15,13 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             _statBonusPopupHandler = Instantiate(_statBonusPopHandlerPrefab, _parentHolder).GetComponent<StatBonusPopupHandler>();
         }
 
-        public static void ShowPopupWindows(string statBonusText, float value)
+        public static void ShowPopupWindows(int powerStructureId, int ringId, string statBonusText, float value)
         {
-            _statBonusPopupHandler.ShowPopupWindows(statBonusText, value);
+            _statBonusPopupHandler.ShowPopupWindows(powerStructureId, ringId, statBonusText, value);
+        }
+        public static void HidePopupWindows(int powerStructureId)
+        {
+            _statBonusPopupHandler.HidePopupWindow(powerStructureId);
         }
     }
 }

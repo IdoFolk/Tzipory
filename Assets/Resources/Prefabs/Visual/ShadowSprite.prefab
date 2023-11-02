@@ -411,9 +411,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2875084884878845948, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3580604098099871670, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3660970038480926833, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
+      propertyPath: _popupWindowAlphaChange
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3660970038480926833, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
+      propertyPath: _popupWindowStartingAlpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5145689609226793444, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6736740130189679859, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
       propertyPath: m_Name
       value: ProximityStatBonusPopup
+      objectReference: {fileID: 0}
+    - target: {fileID: 6736740130189679859, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

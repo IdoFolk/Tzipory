@@ -7,8 +7,6 @@ namespace Tzipory.Systems.TargetingSystem
 {
     public class ColliderTargetingArea : MonoBehaviour
     {
-        public bool IsCollidingWithShadow => _isCollidingWithShadow;
-        public bool IsCollidingWithShaman => _isCollidingWithShaman;
 
         [SerializeField] private bool _testing = false;
         
@@ -28,10 +26,7 @@ namespace Tzipory.Systems.TargetingSystem
             if (_testing)
                 Debug.Log($"On target enter {other.name} from {gameObject.name}");
             
-            if (other.gameObject.CompareTag("ShadowShaman"))
-                _isCollidingWithShadow = true;
-            if (other.gameObject.CompareTag("Shaman"))
-                _isCollidingWithShaman = true;
+            
             _reciever.RecieveCollision(other, IOType.In);
             
             if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
@@ -43,10 +38,7 @@ namespace Tzipory.Systems.TargetingSystem
             if (_testing)
                 Debug.Log($"On target exit {other.name} from {gameObject.name}");
             
-            if (other.gameObject.CompareTag("ShadowShaman"))
-                _isCollidingWithShadow = false;
-            if (other.gameObject.CompareTag("Shaman"))
-                _isCollidingWithShaman = false;
+            
             _reciever.RecieveCollision(other, IOType.Out);
 
             if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;

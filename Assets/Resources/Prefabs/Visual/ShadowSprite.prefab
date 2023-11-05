@@ -142,7 +142,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!114 &7693390801151820247
 MonoBehaviour:
@@ -371,6 +371,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1618776912504356253}
     m_Modifications:
+    - target: {fileID: 190793508561383315, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2532964042394426752, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -428,6 +432,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5145689609226793444, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5901265050262968369, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

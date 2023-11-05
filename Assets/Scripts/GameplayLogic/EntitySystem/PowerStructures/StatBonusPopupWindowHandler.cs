@@ -8,37 +8,28 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
     {
         public bool IsActive => _isActive;
         public int ActivePowerStructureId => _activePowerStructureId;
-        public int ActiveRingId => _activeRingId;
-        public string StatBonusText => _statBonusText;
         [SerializeField] private TextMeshPro _popupText;
-        [SerializeField] private SpriteRenderer _popupVisual; //for changing the color
+        [SerializeField] private SpriteRenderer _popupVisual;
         private string _statBonusText;
         private bool _isActive;
-        private int _activePowerStructureId;
-        private int _activeRingId;
+        private int _activePowerStructureId = -1;
 
-        public void ShowPopupWindow(int powerStructureId, int ringId, string statBonusText, float value, float yAxisModifier)
+        public void ShowPopupWindow(int powerStructureId, string statBonusText, float value, Color color, float yAxisModifier)
         {
             _activePowerStructureId = powerStructureId;
-            _activeRingId = ringId;
             _popupVisual.gameObject.SetActive(true);
             _popupText.gameObject.SetActive(true);
             _isActive = true;
             _statBonusText = statBonusText;
             transform.localPosition = new Vector3(0,yAxisModifier,0);
             _popupText.text = $"{statBonusText} + {value}%";
-            // var color = _popupVisual.color;
-            // color.a = alphaValue;
-            // _popupVisual.color = color;
+            _popupVisual.color = color;
         }
 
-        public void UpdatePopupWindow(int ringId, float value)
+        public void UpdatePopupWindow(float value, Color color)
         {
-            _activeRingId = ringId;
             _popupText.text = $"{_statBonusText} + {value}%";
-            // var color = _popupVisual.color;
-            // color.a = alphaValue;
-            // _popupVisual.color = color;
+            _popupVisual.color = color;
         }
 
         public void HidePopupWindow()

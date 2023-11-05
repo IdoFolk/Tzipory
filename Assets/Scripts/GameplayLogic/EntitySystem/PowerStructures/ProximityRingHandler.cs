@@ -1,4 +1,5 @@
 using System;
+using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.TargetingSystem;
 using Tzipory.Systems.UISystem;
@@ -60,6 +61,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
         {
+
             
         }
 

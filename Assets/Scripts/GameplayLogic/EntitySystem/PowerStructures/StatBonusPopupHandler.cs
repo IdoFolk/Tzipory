@@ -12,31 +12,40 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         [SerializeField,Range(0,1)] private float _popupWindowStartingAlpha;
         [SerializeField,Range(0,1)] private float _popupWindowAlphaChange;
 
-        public void ShowPopupWindows(int PowerStructureId, int ringId, string statBonusText, float value)
+
+        public void ShowPopupWindows(int PowerStructureId, int ringId, string statBonusText, float value, Color color)
         {
             for (int i = 0; i < _popupWindowHandlers.Length; i++)
             {
+                float alpha = _popupWindowStartingAlpha - _popupWindowAlphaChange * ringId;
+                color.a = alpha;
                 if (_popupWindowHandlers[i].ActivePowerStructureId == PowerStructureId && _popupWindowHandlers[i].IsActive)
                 {
-                    //float alpha = _popupWindowStartingAlpha - _popupWindowAlphaChange * ringId;
-                    _popupWindowHandlers[i].UpdatePopupWindow(ringId,value);
+                    _popupWindowHandlers[i].UpdatePopupWindow(value,color);
                     return;
                 }
+            }
+            for (int i = 0; i < _popupWindowHandlers.Length; i++)
+            {
                 if (_popupWindowHandlers[i].IsActive) continue;
-                _popupWindowHandlers[i].ShowPopupWindow(PowerStructureId, ringId, statBonusText,value,(i)* StatEffectPopupWindowsDistance);
+                _popupWindowHandlers[i].ShowPopupWindow(PowerStructureId, statBonusText,value,color,(i)* StatEffectPopupWindowsDistance);
                 return;
             }
         }
-
+  
         public void HidePopupWindow(int powerStructureId)
         {
-            foreach (var PopupWindowHandler in _popupWindowHandlers)
+            bool deleted = false;
+            foreach (var popupWindowHandler in _popupWindowHandlers)
             {
-                if (PopupWindowHandler.ActivePowerStructureId == powerStructureId)
+                if (popupWindowHandler.ActivePowerStructureId == powerStructureId && popupWindowHandler.IsActive)
                 {
-                    PopupWindowHandler.HidePopupWindow();
+                    popupWindowHandler.HidePopupWindow();
+                    deleted = true;
                 }
             }
+            if(!deleted)
+                Debug.LogError("Did not found the correct power structure id");
         }
     }
 }

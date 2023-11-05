@@ -1,3 +1,4 @@
+using System;
 using Tzipory.ConfigFiles.StatusSystem;
 using UnityEngine;
 
@@ -7,12 +8,18 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
     public class PowerStructureConfig : ScriptableObject
     {
         [Range(0, 20)] public float Range;
-        [Range(0, 1)] public float[] RingsRatios;
-        public Color RingOnHoverColor;
-        public Color RingOnShamanHoverColor;
+        [Range(0, 1)] public float[] RingsRanges;
+        public Color RingDefaultColor;
+        public Color PowerStructureTypeColor;
         public float DefaultSpriteAlpha;
         public float SpriteAlphaFade;
         public StatEffectConfig StatEffectConfig;
         public Sprite PowerStructureSprite;
+
+        private void OnValidate()
+        {
+            if (StatEffectConfig.StatModifier.RingModifiers.Length != RingsRanges.Length)
+                StatEffectConfig.StatModifier.ChangeRingModifiersNumber(RingsRanges.Length);
+        }
     }
 }

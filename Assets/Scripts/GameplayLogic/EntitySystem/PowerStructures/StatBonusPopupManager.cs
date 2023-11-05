@@ -15,9 +15,9 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             _statBonusPopupHandler = Instantiate(_statBonusPopHandlerPrefab, _parentHolder).GetComponent<StatBonusPopupHandler>();
         }
 
-        public static void ShowPopupWindows(int powerStructureId, int ringId, string statBonusText, float value)
+        public static void ShowPopupWindows(ProximityCircleManager powerStructure, int ringId, string statBonusText, float value)
         {
-            _statBonusPopupHandler.ShowPopupWindows(powerStructureId, ringId, statBonusText, value);
+            _statBonusPopupHandler.ShowPopupWindows(powerStructure.Id, ringId, statBonusText, value, powerStructure.PowerStructureTypeColor);
         }
         public static void HidePopupWindows(int powerStructureId)
         {

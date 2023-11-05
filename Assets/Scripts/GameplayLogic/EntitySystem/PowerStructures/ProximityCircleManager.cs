@@ -11,22 +11,25 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
     {
         [HideInInspector]public int Id { get; private set; }
         public ProximityRingHandler[] RingHandlers => _ringHandlers;
+        public Color PowerStructureTypeColor => _powerStructureTypeColor;
         [SerializeField] private ProximityRingHandler[] _ringHandlers;
         [SerializeField] private ClickHelper _clickHelper;
-
+        private PowerStructureConfig _powerStructureConfig;
         private bool _lockSpriteToggle;
         private Color _defaultColor;
-        private Color _activeColor;
+        private Color _powerStructureTypeColor;
         private int _currentActiveRingId;
         private bool _shamanSelected;
+        private bool _testing;
 
         private StatEffectConfig _statEffectConfig;
         private Dictionary<int, IDisposable> _activeStatusEffectOnShaman;
 
 
-        public void Init(int id, PowerStructureConfig powerStructureConfig)
+        public void Init(int id, PowerStructureConfig powerStructureConfig, bool testing)
         {
             Id = id;
+            _testing = testing;
             float ringSpriteAlpha = powerStructureConfig.DefaultSpriteAlpha;
             for (int i = 0; i < _ringHandlers.Length; i++)
             {
@@ -36,17 +39,19 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
                 ringSpriteAlpha -= powerStructureConfig.SpriteAlphaFade;
             }
 
+            _powerStructureConfig = powerStructureConfig;
+            
             _statEffectConfig = powerStructureConfig.StatEffectConfig;
-            _defaultColor = powerStructureConfig.RingOnHoverColor;
-            _activeColor = powerStructureConfig.RingOnShamanHoverColor;
+            _defaultColor = powerStructureConfig.RingDefaultColor;
+            _powerStructureTypeColor = powerStructureConfig.PowerStructureTypeColor;
             _currentActiveRingId = _ringHandlers.Length;
 
             _clickHelper.OnEnterHover += ActivateRingSprites;
             _clickHelper.OnExitHover += DeactivateRingSprites;
             Systems.MovementSystem.HerosMovementSystem.TempHeroMovementManager.OnAnyShamanSelected += OnShamanSelect;
             Systems.MovementSystem.HerosMovementSystem.TempHeroMovementManager.OnAnyShamanDeselected += OnShamanDeselect;
-            ScaleCircles(powerStructureConfig.Range, powerStructureConfig.RingsRatios);
-            ChangeAllRingsColors(_defaultColor);
+            ScaleCircles(powerStructureConfig.Range, powerStructureConfig.RingsRanges);
+            ChangeAllRingsColors(_powerStructureTypeColor);
         }
 
         private void OnDestroy()
@@ -64,6 +69,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         private void OnShadowShamanEnter(int ringId)
         {
+            if (_testing) Debug.Log($"Shadow Enter: {ringId}");
+            
             if (ringId < _currentActiveRingId)
             {
                 var currentActiveRing = _ringHandlers[ringId];
@@ -74,14 +81,13 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         private void OnShadowShamanExit(int ringId)
         {
-            if (ringId == _currentActiveRingId)
+            if (_testing) Debug.Log($"Shadow Exit: {ringId}");
+            
+            if (ringId >= _currentActiveRingId)
             {
                 var currentActiveRing = _ringHandlers[ringId];
                 ExitActiveSprite(currentActiveRing);
-                if (_currentActiveRingId == _ringHandlers.Length)
-                {
-                    HideStatPopupWindow();
-                }
+                if (_currentActiveRingId >= _ringHandlers.Length) StatBonusPopupManager.HidePopupWindows(Id);
                 else
                 {
                     currentActiveRing = _ringHandlers[_currentActiveRingId];
@@ -90,7 +96,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             }
             else
             {
-                Debug.LogError("ring detect Problem");
+                Debug.LogError("ring id could not be found");
             }
         }
 
@@ -103,20 +109,13 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             }
         }
 
-        
-
         private void ShowStatPopupWindows(ProximityRingHandler ringHandler)
         {
             var modifiedStatEffectValue = ModifyStatEffectByRing(ringHandler);
             var modifiedStatEffectPrecent = CalculateStatPercent(modifiedStatEffectValue);
+            var roundedValue = MathF.Round(modifiedStatEffectPrecent);
             var statEffectName = _statEffectConfig.AffectedStatType.ToString();
-            StatBonusPopupManager.ShowPopupWindows(Id,ringHandler.Id,statEffectName, modifiedStatEffectPrecent);
-        }
-
-        private void HideStatPopupWindow()
-        {
-            var statEffectName = _statEffectConfig.AffectedStatType.ToString();
-            StatBonusPopupManager.HidePopupWindows(Id);
+            StatBonusPopupManager.ShowPopupWindows(this,ringHandler.Id,statEffectName, roundedValue);
         }
 
         private void ScaleCircles(float circleRange, float[] ringsRanges)
@@ -129,20 +128,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         private float ModifyStatEffectByRing(ProximityRingHandler ringHandler)
         {
-            float statEffectModifiedValue = 0;
-            float ringPercentage;
-            float modifier = _statEffectConfig.StatModifier.Modifier;
-            switch (_statEffectConfig.StatModifier.StatusModifierType)
-            {
-                case StatusModifierType.Addition:
-                    //ringPercentage = modifier / _ringHandlers.Length;
-                    //statEffectModifiedValue = modifier - ringPercentage * ringHandler.Id;
-                    break;
-                case StatusModifierType.Multiplication:
-                    ringPercentage = modifier / _ringHandlers.Length;
-                    statEffectModifiedValue = modifier - ringPercentage * ringHandler.Id;
-                    break;
-            }
+            float statEffectModifiedValue = _statEffectConfig.StatModifier.RingModifiers[ringHandler.Id];
 
             return statEffectModifiedValue;
         }
@@ -150,14 +136,19 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         private float CalculateStatPercent(float modifiedStatValue)
         {
             float statPercent = 0;
+            float unModifiedStatValue = _statEffectConfig.StatModifier.Modifier;
             switch (_statEffectConfig.StatModifier.StatusModifierType)
             {
                 case StatusModifierType.Addition:
-                    //turn into prectentage
+                    var modifiedRatio = modifiedStatValue / unModifiedStatValue;
+                    statPercent = (modifiedRatio - 1) * 100;
+                    break;
+                case StatusModifierType.Multiplication:
+                    statPercent = (modifiedStatValue - 1) * 100;
                     break;
             }
 
-            return modifiedStatValue; //change
+            return statPercent; 
         }
         private void OnShamanSelect()
         {
@@ -171,17 +162,25 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         #region SpriteActivationToggle
         private void EnterActiveSprite(ProximityRingHandler ring)
         {
-            if (_currentActiveRingId != _ringHandlers.Length)
+            if (_currentActiveRingId < _ringHandlers.Length)
                 _ringHandlers[_currentActiveRingId].ToggleSprite(false);
             ring.ToggleSprite(true);
             _currentActiveRingId = ring.Id;
         }
         private void ExitActiveSprite(ProximityRingHandler ring)
         {
-            ring.ToggleSprite(false);
-            _currentActiveRingId += 1;
-            if (_currentActiveRingId == _ringHandlers.Length) return;
+            ToggleAllSprites(false);
+            _currentActiveRingId = ring.Id + 1;
+            if (_currentActiveRingId >= _ringHandlers.Length) return;
             _ringHandlers[_currentActiveRingId].ToggleSprite(true);
+        }
+
+        private void ToggleAllSprites(bool state)
+        {
+            foreach (var ring in _ringHandlers)
+            {
+                ring.ToggleSprite(state);
+            }
         }
         private void ActivateRingSprites()
         {
@@ -191,7 +190,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         private void DeactivateRingSprites()
         {
             if (_shamanSelected) return;
-            ToggleActiveSprite(false);
+            ToggleAllSprites(false);
         }
         private void ToggleActiveSprite(bool state)
         {

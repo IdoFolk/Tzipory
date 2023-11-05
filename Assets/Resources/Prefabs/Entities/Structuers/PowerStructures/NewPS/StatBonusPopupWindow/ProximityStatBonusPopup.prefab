@@ -50,6 +50,8 @@ MonoBehaviour:
   - {fileID: 6302678697689922162}
   - {fileID: 2426993775887250464}
   StatEffectPopupWindowsDistance: 0.5
+  _popupWindowStartingAlpha: 1
+  _popupWindowAlphaChange: 0.3
 --- !u!1001 &4286062459880172653
 PrefabInstance:
   m_ObjectHideFlags: 0

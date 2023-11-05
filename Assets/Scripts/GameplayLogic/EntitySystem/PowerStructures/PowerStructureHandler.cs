@@ -9,11 +9,12 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         [SerializeField] private ProximityCircleManager _proximityCircleManager;
         [SerializeField] private PowerStructureConfig _powerStructureConfig;
         [SerializeField] private SpriteRenderer _powerStructureSpriteRenderer;
+        [SerializeField] private bool _testing;
 
         
         private void Awake()
         {
-            _proximityCircleManager.Init(id, _powerStructureConfig);
+            _proximityCircleManager.Init(id, _powerStructureConfig, _testing);
             if (_powerStructureConfig.PowerStructureSprite is null)
             {
                 Debug.LogError("Config Sprite is missing");
@@ -24,7 +25,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         private void OnValidate()
         {
-            if (_powerStructureConfig.RingsRatios.Length != _proximityCircleManager.RingHandlers.Length)
+            if (_powerStructureConfig.RingsRanges.Length != _proximityCircleManager.RingHandlers.Length)
             {
                 Debug.LogError("the number of Rings in the SO is different than the actual rings in the prefab");
             }

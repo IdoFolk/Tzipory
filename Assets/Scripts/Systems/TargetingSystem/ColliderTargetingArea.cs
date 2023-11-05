@@ -7,12 +7,9 @@ namespace Tzipory.Systems.TargetingSystem
 {
     public class ColliderTargetingArea : MonoBehaviour
     {
-
         [SerializeField] private bool _testing = false;
         
         private ITargetableReciever _reciever;
-        private bool _isCollidingWithShadow;
-        private bool _isCollidingWithShaman;
         
         [Obsolete]
         
@@ -25,8 +22,7 @@ namespace Tzipory.Systems.TargetingSystem
         {
             if (_testing)
                 Debug.Log($"On target enter {other.name} from {gameObject.name}");
-            
-            
+
             _reciever.RecieveCollision(other, IOType.In);
             
             if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
@@ -37,7 +33,6 @@ namespace Tzipory.Systems.TargetingSystem
         {
             if (_testing)
                 Debug.Log($"On target exit {other.name} from {gameObject.name}");
-            
             
             _reciever.RecieveCollision(other, IOType.Out);
 

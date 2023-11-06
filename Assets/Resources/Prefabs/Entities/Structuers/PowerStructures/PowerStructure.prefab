@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4228493472124563496}
   - component: {fileID: 1150626198542210765}
   m_Layer: 10
-  m_Name: New_PS
+  m_Name: PowerStructure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,10 +158,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64b23018b91b5614aa78bbd36ebb189c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  _id: 0
   _proximityCircleManager: {fileID: 8966001170857930187}
   _powerStructureConfig: {fileID: 11400000, guid: 1a4e9022cb9a97643971c8100e6a9848, type: 2}
   _powerStructureSpriteRenderer: {fileID: 4273722055985562272}
+  _testing: 0
 --- !u!114 &4228493472124563496
 MonoBehaviour:
   m_ObjectHideFlags: 0

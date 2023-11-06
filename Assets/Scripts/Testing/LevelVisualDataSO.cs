@@ -1,3 +1,4 @@
+using System;
 using Tzipory.ConfigFiles.PopUpText;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
 using UnityEngine;
@@ -9,5 +10,10 @@ namespace Tzipory.Testing
     {
         public LevelVisualData level_VisualData;
         public PopUpTextConfig DefaultPopUpConfig;
+
+        private void OnEnable()
+        {
+            DefaultPopUpConfig.RoundNumbers = true;
+        }
     }
 }

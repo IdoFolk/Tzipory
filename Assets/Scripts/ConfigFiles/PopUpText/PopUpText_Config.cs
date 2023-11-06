@@ -16,6 +16,7 @@ namespace Tzipory.ConfigFiles.PopUpText
         public bool DisablePopUp;
         [HideIf("DisablePopUp")] public PopUpTextType PopUpTextType;
         [HideIf("DisablePopUp")] public TextSpawnRepeatPatterns RepeatPattern;
+        [HideIf("DisablePopUp")] public bool RoundNumbers;
         [HideIf("DisablePopUp")] [ShowIf("PopUpTextType",PopUpTextType.ShowText),TextArea(4,4)] public string Text;
         [HideIf("DisablePopUp")] public Color Color;
         [HideIf("DisablePopUp")] public bool OverrideSize;

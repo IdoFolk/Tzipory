@@ -167,199 +167,92 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd74998339d35e428a6d165d6ac9901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GetHitDefualtConfig:
+  getHitDefualtConfig:
     DisablePopUp: 0
-    PopUpTextType: 3
+    PopUpTextType: 1
     RepeatPattern: 0
-    Text: '<color=#00ff00>{NewValue}</color>
-
-'
+    RoundNumbers: 1
+    Text: 
     Color: {r: 1, g: 1, b: 1, a: 1}
     OverrideSize: 0
     FontSize: 0
-    OverrideRiseSpeedAndTTL: 1
-    RiseSpeed: 2
-    TimeToLive: 1
+    OverrideRiseSpeedAndTTL: 0
+    RiseSpeed: 0
+    TimeToLive: 0
     OverrideStartSize: 0
     StartSize: {x: 0, y: 0}
-    AddRandomMoveOffSet: 1
-    MoveOffSet: {x: 0.6091858, y: 2.023177}
-    OverrideAnimationCurve: 1
+    AddRandomMoveOffSet: 0
+    MoveOffSet: {x: 0, y: 0}
+    OverrideAnimationCurve: 0
     PopUpTextMoveCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     PopUpTextScaleCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     PopUpTextAlphaCurve:
       serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
+      m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  GetCritHitDefualtConfig:
+  getCritHitDefualtConfig:
     DisablePopUp: 0
     PopUpTextType: 1
     RepeatPattern: 0
+    RoundNumbers: 1
     Text: 
-    Color: {r: 1, g: 0.8970643, b: 0, a: 1}
-    OverrideSize: 0
-    FontSize: 0
-    OverrideRiseSpeedAndTTL: 1
-    RiseSpeed: 2
-    TimeToLive: 1
-    OverrideStartSize: 0
-    StartSize: {x: 0, y: 0}
-    AddRandomMoveOffSet: 1
-    MoveOffSet: {x: 0.7048694, y: 2.172018}
-    OverrideAnimationCurve: 1
-    PopUpTextMoveCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextScaleCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextAlphaCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 1
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  HealDefualtConfig:
-    DisablePopUp: 0
-    PopUpTextType: 1
-    RepeatPattern: 0
-    Text: 
-    Color: {r: 0, g: 1, b: 0.073209524, a: 1}
+    Color: {r: 1, g: 0.9532509, b: 0, a: 1}
     OverrideSize: 0
     FontSize: 0
     OverrideRiseSpeedAndTTL: 0
-    RiseSpeed: 1
-    TimeToLive: 1
+    RiseSpeed: 0
+    TimeToLive: 0
     OverrideStartSize: 0
     StartSize: {x: 0, y: 0}
-    AddRandomMoveOffSet: 1
-    MoveOffSet: {x: 0.821816, y: 2.150755}
+    AddRandomMoveOffSet: 0
+    MoveOffSet: {x: 0, y: 0}
+    OverrideAnimationCurve: 0
+    PopUpTextMoveCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    PopUpTextScaleCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    PopUpTextAlphaCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  healDefualtConfig:
+    DisablePopUp: 0
+    PopUpTextType: 1
+    RepeatPattern: 0
+    RoundNumbers: 1
+    Text: 
+    Color: {r: 0, g: 1, b: 0.003575325, a: 1}
+    OverrideSize: 0
+    FontSize: 0
+    OverrideRiseSpeedAndTTL: 0
+    RiseSpeed: 0
+    TimeToLive: 0
+    OverrideStartSize: 0
+    StartSize: {x: 0, y: 0}
+    AddRandomMoveOffSet: 0
+    MoveOffSet: {x: 0, y: 0}
     OverrideAnimationCurve: 0
     PopUpTextMoveCurve:
       serializedVersion: 2

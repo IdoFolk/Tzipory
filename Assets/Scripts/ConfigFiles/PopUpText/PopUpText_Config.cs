@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using Sirenix.OdinInspector;
-using TMPro;
+﻿using Sirenix.OdinInspector;
+using Tzipory.Editor;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
-using Tzipory.Tools.RegularExpressions;
 using UnityEngine;
 
 namespace Tzipory.ConfigFiles.PopUpText
@@ -15,12 +13,10 @@ namespace Tzipory.ConfigFiles.PopUpText
         public static string NewValueKeyCode = "{NewValue}";
         public static string NameKeyCode = "{Name}";
         
-        private const  string SET_COLOR_NAME_FUNCTION = nameof(SetTextColor);
-        
         public bool DisablePopUp;
         [HideIf("DisablePopUp")] public PopUpTextType PopUpTextType;
         [HideIf("DisablePopUp")] public TextSpawnRepeatPatterns RepeatPattern;
-        [HideIf("DisablePopUp")] [ShowIf("PopUpTextType",PopUpTextType.ShowText),OnValueChanged(SET_COLOR_NAME_FUNCTION),TextArea(4,4)] public string Text;
+        [HideIf("DisablePopUp")] [ShowIf("PopUpTextType",PopUpTextType.ShowText),TextArea(4,4),ColorfulString] public string Text;
         [HideIf("DisablePopUp")] public Color Color;
         [HideIf("DisablePopUp")] public bool OverrideSize;
         [HideIf("DisablePopUp")] [ShowIf("OverrideSize")] public float FontSize;
@@ -35,13 +31,6 @@ namespace Tzipory.ConfigFiles.PopUpText
         [HideIf("DisablePopUp")] [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextMoveCurve;
         [HideIf("DisablePopUp")] [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextScaleCurve;
         [HideIf("DisablePopUp")] [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextAlphaCurve;
-
-        [SerializeField] private RichTextTagAttribute Test;
-        
-        private void SetTextColor()
-        {
-            Text = RegularExpressionsTool.ColorKeyWords(Text, new List<string>() { NameKeyCode,NewValueKeyCode,DeltaKeyCode,ModifierKeyCode }, Color.yellow);
-        }
     }
 
     public enum PopUpTextType

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Tzipory.Helpers;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -28,7 +27,7 @@ namespace Tzipory.Tools.RegularExpressions
      * [^x] - Anything but x (where x is whatever character you want)
      */
     
-    public class RegularExpressionsTool
+    public static class RegularExpressionsTool
     {
         public static string SetValueOnKeyWord(string s,Dictionary<string,object> keywordValue)
         {
@@ -44,7 +43,7 @@ namespace Tzipory.Tools.RegularExpressions
             string colorHex = color.ToHexString();
             string output = s;
             foreach (var keyword in keywords)
-                output = Regex.Replace(output, keyword, $"<color={ColorLogHelper.GREEN}>{keyword}</color>");
+                output = Regex.Replace(output, keyword, $"<color={colorHex}>{keyword}</color>");
             
             return  output;
         }

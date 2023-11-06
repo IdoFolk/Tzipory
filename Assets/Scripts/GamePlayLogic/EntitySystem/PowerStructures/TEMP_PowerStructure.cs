@@ -58,7 +58,7 @@ public class TEMP_PowerStructure : BaseGameEntity , ITargetableReciever
         
         if (_activeStatusEffectOnShaman.ContainsKey(shaman.EntityInstanceID))//temp!!!
             return;
-
+        
         IDisposable disposable = shaman.StatHandler.AddStatEffect(_statEffectConfig);
         _activeStatusEffectOnShaman.Add(shaman.
             EntityInstanceID, disposable);

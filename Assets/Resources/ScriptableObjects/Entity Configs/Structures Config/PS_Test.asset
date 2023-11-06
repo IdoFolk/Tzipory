@@ -28,9 +28,9 @@ MonoBehaviour:
     _statEffectType: 3
     _duration: 0
     _interval: 0
-    _statModifier:
+    StatModifier:
       _statusModifierType: 3
-      _modifier: 1.5
+      Modifier: 0
       _ringModifiers:
       - 1.7
       - 1.5

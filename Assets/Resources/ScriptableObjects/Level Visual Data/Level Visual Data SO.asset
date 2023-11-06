@@ -92,7 +92,7 @@ MonoBehaviour:
     DisablePopUp: 0
     PopUpTextType: 1
     RepeatPattern: 0
-    Text: 
+    Text: Hit {NewValue} by {Name}!
     Color: {r: 1, g: 1, b: 1, a: 1}
     OverrideSize: 0
     FontSize: 0
@@ -103,7 +103,7 @@ MonoBehaviour:
     StartSize: {x: 0, y: 0}
     AddRandomMoveOffSet: 1
     MoveOffSet: {x: 0, y: 1.5139626}
-    OverrideAnimationCurve: 1
+    OverrideAnimationCurve: 0
     PopUpTextMoveCurve:
       serializedVersion: 2
       m_Curve:

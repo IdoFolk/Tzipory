@@ -28,9 +28,7 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
 
         public void SpawnPopUp(StatChangeData changeData)
         {
-            PopUpTextConfig popUpTextConfig;
-            
-            popUpTextConfig = changeData.UsePopUpTextConfig ? changeData.PopUpTextConfig : PopUpTextManager.Instance.DefaultPopUpConfig;
+            var popUpTextConfig = changeData.UsePopUpTextConfig ? changeData.PopUpTextConfig : PopUpTextManager.Instance.DefaultPopUpConfig;
             
             if(popUpTextConfig.DisablePopUp)
                 return;
@@ -99,6 +97,7 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
             popupText.gameObject.SetActive(true);
             popupText.transform.SetParent(PopUpTextManager.Instance._popUpTextCanvas.transform);
             popupText.transform.position = _textSpawnPoint.position;
+            
             popupText.Init(popUpTextConfig);
         }
     }

@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using Tzipory.Editor;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
 using UnityEngine;
 
@@ -7,10 +8,15 @@ namespace Tzipory.ConfigFiles.PopUpText
     [System.Serializable]
     public struct PopUpTextConfig
     {
+        public static string DeltaKeyCode = "{Delta}";
+        public static string ModifierKeyCode = "{Modifier}";
+        public static string NewValueKeyCode = "{NewValue}";
+        public static string NameKeyCode = "{Name}";
+        
         public bool DisablePopUp;
         [HideIf("DisablePopUp")] public PopUpTextType PopUpTextType;
         [HideIf("DisablePopUp")] public TextSpawnRepeatPatterns RepeatPattern;
-        [HideIf("DisablePopUp")] [ShowIf("PopUpTextType",PopUpTextType.ShowText)] public string Text;
+        [HideIf("DisablePopUp")] [ShowIf("PopUpTextType",PopUpTextType.ShowText),TextArea(4,4)] public string Text;
         [HideIf("DisablePopUp")] public Color Color;
         [HideIf("DisablePopUp")] public bool OverrideSize;
         [HideIf("DisablePopUp")] [ShowIf("OverrideSize")] public float FontSize;
@@ -25,18 +31,6 @@ namespace Tzipory.ConfigFiles.PopUpText
         [HideIf("DisablePopUp")] [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextMoveCurve;
         [HideIf("DisablePopUp")] [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextScaleCurve;
         [HideIf("DisablePopUp")] [ShowIf("OverrideAnimationCurve")] public AnimationCurve PopUpTextAlphaCurve;
-
-        public void SetText(int text)
-        {
-            Text = text.ToString();
-            FontSize = PopUpTextManager.Instance.GetRelativeFontSizeForDamage(text);
-        }
-        
-        public void SetText(string text,float size)
-        {
-            Text = text;
-            FontSize = size;
-        }
     }
 
     public enum PopUpTextType
@@ -44,6 +38,7 @@ namespace Tzipory.ConfigFiles.PopUpText
         ShowName,
         ShowDelta,
         ShowNewValue,
-        ShowText
+        ShowText,
+        ShowModifier
     }
 }

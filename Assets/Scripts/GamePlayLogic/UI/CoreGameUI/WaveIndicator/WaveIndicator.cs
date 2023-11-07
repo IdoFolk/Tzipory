@@ -1,6 +1,5 @@
 using System;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
-using Tzipory.Helpers;
 using Tzipory.Systems.PoolSystem;
 using Tzipory.Systems.UISystem;
 using Tzipory.Systems.WaveSystem;
@@ -57,7 +56,7 @@ namespace Tzipory.GameplayLogic.UI.WaveIndicator
             
             var transformPosition = _waveSpawner.WaveIndicatorPosition.position;
             
-            _rectTransform.SetScreenPointRelativeToWordPoint(transformPosition,_offSet);
+            //_rectTransform.SetScreenPointRelativeToWordPoint(transformPosition,_offSet);
 
             _timerFill.fillAmount = _timer.TimeRemaining / _delay;
 

@@ -4,10 +4,11 @@ namespace Tzipory.Systems.StatusSystem
 {
     public struct UIIndicatorConfig
     {
-        public float Time;
         public Sprite Image;
-        public Vector2 RefPoint;
-        public float Radios;
-        public Vector2 OffSet;
+        public Color Color;
+        public float OffSetRadios;
+        public bool StartFlashing;
+        public Color FlashingColor;
+
     }
 }

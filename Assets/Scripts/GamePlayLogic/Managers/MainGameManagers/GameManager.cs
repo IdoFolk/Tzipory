@@ -1,4 +1,6 @@
+using System;
 using Tzipory.ConfigFiles.Player;
+using Tzipory.Helpers;
 using Tzipory.SerializeData;
 using Tzipory.Systems.CameraSystem;
 using Tzipory.Systems.DataManager;
@@ -14,10 +16,26 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private SceneHandler _sceneHandler;
 
+        private static CameraHandler _cameraHandler;
+
         public static GameData GameData { get; private set; }
         public static PlayerManager PlayerManager { get; private set; }
 
-        public static CameraHandler CameraHandler { get; set; }
+        public static CameraHandler CameraHandler
+        {
+            get
+            {
+                if (_cameraHandler != null) return _cameraHandler;
+                
+                if (Camera.main != null)
+                    _cameraHandler = Camera.main.GetComponent<CameraHandler>();
+                else
+                    throw new Exception("Can not find a valid camera");
+
+                return _cameraHandler;
+            }
+            private set => _cameraHandler = value;
+        }
 
 
         private void Awake()

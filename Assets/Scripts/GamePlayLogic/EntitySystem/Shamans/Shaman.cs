@@ -59,7 +59,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
                 TargetingHandler.GetPriorityTarget();
                 _currentDecisionInterval = _baseDecisionInterval;
             }
-            
+
             if (TargetingHandler.CurrentTarget != null)//temp
                 Attack();
         }

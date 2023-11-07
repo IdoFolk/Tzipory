@@ -7,17 +7,18 @@ namespace Tzipory.Systems.UISystem
 {
     public abstract class BaseUIElement : MonoBehaviour, IUIElement
     {
+        public Action OnShow;
+        public Action OnHide;
+        
         [SerializeField] private bool _showOnAwake = false;
         [SerializeField] private UIGroup _uiGroupTags;
         
-        protected RectTransform _rectTransform;
+        [SerializeField,HideInInspector] protected RectTransform RectTransform;
         
         public string ElementName => gameObject.name;
-        public Action OnShow { get; }
-        public Action OnHide { get; }
         public UIGroup UIGroupTags => _uiGroupTags;
 
-        public bool IsInitialization { get; private set; }
+        public bool IsInitialization { get; protected set; }
 
         protected virtual void Awake()
         {
@@ -59,7 +60,7 @@ namespace Tzipory.Systems.UISystem
 
         private void OnValidate()
         {
-            _rectTransform ??= GetComponent<RectTransform>();
+            RectTransform ??= GetComponent<RectTransform>();
         }
     }
 }

@@ -70,24 +70,15 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             }
 
             Instantiate(_levelConfig.Level, _levelParent);
+            
+            GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
 
             #region OnlyForTesting
-
 #if UNITY_EDITOR
-            if (GameManager.CameraHandler is null)
-            {
-                GameManager.CameraHandler = FindObjectOfType<CameraHandler>();//only for testing
-                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
-            }
-            else
-            {
-                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
-            }
-
+               
             if (GAME_TIME.TimerHandler is null)
                 Instantiate(Resources.Load<GameObject>("Prefabs/Managers/Temp/GameTimeManager"));//only for testing
 #endif
-           
             #endregion
             
             EnemyManager = new EnemyManager(_enemiesParent);

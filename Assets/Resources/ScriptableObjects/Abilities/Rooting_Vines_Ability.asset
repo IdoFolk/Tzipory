@@ -44,7 +44,42 @@ MonoBehaviour:
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
-  - _statusEffectName: 
+    _usePopUpTextConfig: 1
+    _popUpTextConfig:
+      DisablePopUp: 1
+      PopUpTextType: 0
+      RepeatPattern: 0
+      Text: 
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      OverrideSize: 0
+      FontSize: 0
+      OverrideRiseSpeedAndTTL: 0
+      RiseSpeed: 0
+      TimeToLive: 0
+      OverrideStartSize: 0
+      StartSize: {x: 0, y: 0}
+      AddRandomMoveOffSet: 0
+      MoveOffSet: {x: 0, y: 0}
+      OverrideAnimationCurve: 0
+      PopUpTextMoveCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      PopUpTextScaleCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      PopUpTextAlphaCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  - _statusEffectName: Root
     _statProcessPriority: 999
     _affectedStatId: 5
     _statEffectType: 0
@@ -61,5 +96,40 @@ MonoBehaviour:
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
+    _usePopUpTextConfig: 1
+    _popUpTextConfig:
+      DisablePopUp: 0
+      PopUpTextType: 3
+      RepeatPattern: 0
+      Text: '{Name}! {NewValue}'
+      Color: {r: 0.010145942, g: 0.7169812, b: 0.020953974, a: 1}
+      OverrideSize: 0
+      FontSize: 0
+      OverrideRiseSpeedAndTTL: 0
+      RiseSpeed: 0
+      TimeToLive: 0
+      OverrideStartSize: 0
+      StartSize: {x: 0, y: 0}
+      AddRandomMoveOffSet: 0
+      MoveOffSet: {x: 0, y: 0}
+      OverrideAnimationCurve: 0
+      PopUpTextMoveCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      PopUpTextScaleCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      PopUpTextAlphaCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
   _doExitEffects: 0
   _statusEffectConfigsOnExit: []

@@ -134,15 +134,16 @@ MonoBehaviour:
   _timerHandler:
     _timerSerializeDatas: []
   _range: 0
-  _myEffect:
+  _statEffectConfig:
     _statusEffectName: 
+    _statProcessPriority: 0
     _affectedStatId: 0
-    _effectType: 0
-    _statusEffectType: 0
+    _statEffectType: 0
     _duration: 0
     _interval: 0
-    _disableDuration: 0
-    _statModifier: []
+    _statModifier:
+      _statusModifierType: 0
+      _modifier: 0
     _effectSequence:
       _sequenceName: 
       _id: 0

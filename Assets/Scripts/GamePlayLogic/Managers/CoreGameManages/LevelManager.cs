@@ -123,13 +123,13 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         private void OnDestroy()
         {
-            EnemyManager.Dispose();
-            PartyManager.Dispose();
-            WaveManager.Dispose();
-
-            PartyManager = null;
-            EnemyManager = null;
-            WaveManager = null;
+            // EnemyManager.Dispose();
+            // PartyManager.Dispose();
+            // WaveManager.Dispose();
+            //
+            // PartyManager = null;
+            // EnemyManager = null;
+            // WaveManager = null;
         }
 
         private void EndGame(bool isWon)

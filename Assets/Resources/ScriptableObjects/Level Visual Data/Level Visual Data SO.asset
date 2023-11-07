@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level_VisualData:
     DamageRange: {x: 30, y: 100}
-    FontSizeRange: {x: 5, y: 8}
+    FontSizeRange: {x: 2.6836736, y: 6.2193875}
     _critFontSizeBonus: 3
     _popUpTextMoveCurve:
       serializedVersion: 2
@@ -89,31 +89,90 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   DefaultPopUpConfig:
+    DisablePopUp: 0
     PopUpTextType: 1
-    Text: 
+    RepeatPattern: 0
+    Text: Hit {NewValue} by {Name}!
     Color: {r: 1, g: 1, b: 1, a: 1}
     OverrideSize: 0
-    StartSize: 0
-    RiseSpeed: 1
+    FontSize: 0
+    OverrideRiseSpeedAndTTL: 1
+    RiseSpeed: 2
     TimeToLive: 1.5
-    OverrideAnimationCurve: 0
+    OverrideStartSize: 0
+    StartSize: {x: 0, y: 0}
     AddRandomMoveOffSet: 1
     MoveOffSet: {x: 0, y: 1.5139626}
+    OverrideAnimationCurve: 0
     PopUpTextMoveCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     PopUpTextScaleCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     PopUpTextAlphaCurve:
       serializedVersion: 2
-      m_Curve: []
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

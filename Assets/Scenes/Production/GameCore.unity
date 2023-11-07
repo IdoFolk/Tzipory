@@ -123,6 +123,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &64720929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 64720930}
+  - component: {fileID: 64720932}
+  m_Layer: 0
+  m_Name: StatEffectPopupManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &64720930
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64720929}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1774659271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &64720932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64720929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a089b1159a4b054e9d419aeea2001f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _parentHolder: {fileID: 1279383591}
+  _statEffectPopupHandlerPrefab: {fileID: 6736740130189679859, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
 --- !u!1 &409197815
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,21 +213,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fd74998339d35e428a6d165d6ac9901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GetHitDefualtConfig:
+  getHitDefualtConfig:
     DisablePopUp: 0
-    PopUpTextType: 3
+    PopUpTextType: 1
     RepeatPattern: 0
-    Text: Test {Modifier}
+    RoundNumbers: 1
+    Text: 
     Color: {r: 1, g: 1, b: 1, a: 1}
     OverrideSize: 0
     FontSize: 0
     OverrideRiseSpeedAndTTL: 0
-    RiseSpeed: 1
-    TimeToLive: 1
+    RiseSpeed: 0
+    TimeToLive: 0
     OverrideStartSize: 0
     StartSize: {x: 0, y: 0}
-    AddRandomMoveOffSet: 1
-    MoveOffSet: {x: 0.6091858, y: 2.023177}
+    AddRandomMoveOffSet: 0
+    MoveOffSet: {x: 0, y: 0}
     OverrideAnimationCurve: 0
     PopUpTextMoveCurve:
       serializedVersion: 2
@@ -201,21 +248,22 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  GetCritHitDefualtConfig:
+  getCritHitDefualtConfig:
     DisablePopUp: 0
     PopUpTextType: 1
     RepeatPattern: 0
+    RoundNumbers: 1
     Text: 
-    Color: {r: 1, g: 0.8970643, b: 0, a: 1}
+    Color: {r: 1, g: 0.9532509, b: 0, a: 1}
     OverrideSize: 0
     FontSize: 0
     OverrideRiseSpeedAndTTL: 0
-    RiseSpeed: 1
-    TimeToLive: 1
+    RiseSpeed: 0
+    TimeToLive: 0
     OverrideStartSize: 0
     StartSize: {x: 0, y: 0}
-    AddRandomMoveOffSet: 1
-    MoveOffSet: {x: 0.7048694, y: 2.172018}
+    AddRandomMoveOffSet: 0
+    MoveOffSet: {x: 0, y: 0}
     OverrideAnimationCurve: 0
     PopUpTextMoveCurve:
       serializedVersion: 2
@@ -235,21 +283,22 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  HealDefualtConfig:
+  healDefualtConfig:
     DisablePopUp: 0
     PopUpTextType: 1
     RepeatPattern: 0
+    RoundNumbers: 1
     Text: 
-    Color: {r: 0, g: 1, b: 0.073209524, a: 1}
+    Color: {r: 0, g: 1, b: 0.003575325, a: 1}
     OverrideSize: 0
     FontSize: 0
     OverrideRiseSpeedAndTTL: 0
-    RiseSpeed: 1
-    TimeToLive: 1
+    RiseSpeed: 0
+    TimeToLive: 0
     OverrideStartSize: 0
     StartSize: {x: 0, y: 0}
-    AddRandomMoveOffSet: 1
-    MoveOffSet: {x: 0.821816, y: 2.150755}
+    AddRandomMoveOffSet: 0
+    MoveOffSet: {x: 0, y: 0}
     OverrideAnimationCurve: 0
     PopUpTextMoveCurve:
       serializedVersion: 2
@@ -965,7 +1014,7 @@ PrefabInstance:
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelConfig
       value: 
-      objectReference: {fileID: 11400000, guid: 06b8e78b430d1a247b55094e69f053e1, type: 2}
+      objectReference: {fileID: 11400000, guid: bec8e34ce550fc946a0455184e5193c8, type: 2}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _levelParent
       value: 
@@ -1119,6 +1168,14 @@ PrefabInstance:
     - target: {fileID: 2630470798933903477, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
       propertyPath: m_UseWorldSpace
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2972034957128605101, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+      propertyPath: _parentHolder
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3148950593164696678, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+      propertyPath: m_Name
+      value: StatEffectPopup
       objectReference: {fileID: 0}
     - target: {fileID: 5057946402660152332, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
       propertyPath: m_Name
@@ -1288,15 +1345,23 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2972034957128605101, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
     m_RemovedGameObjects:
     - {fileID: 5776897059597873247, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+    - {fileID: 5478831685082074436, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+    - {fileID: 2642920327998479984, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
 --- !u!4 &1279383590 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6188361263742963524, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
+  m_PrefabInstance: {fileID: 1279383589}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1279383591 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2057861850105847899, guid: c91c6ede795c888488b1c30d700e1d46, type: 3}
   m_PrefabInstance: {fileID: 1279383589}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1433655959
@@ -2636,6 +2701,7 @@ Transform:
   - {fileID: 1133488927}
   - {fileID: 923561989}
   - {fileID: 409197816}
+  - {fileID: 64720930}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1796887655

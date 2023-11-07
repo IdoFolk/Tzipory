@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level_VisualData:
     DamageRange: {x: 30, y: 100}
-    FontSizeRange: {x: 5, y: 8}
+    FontSizeRange: {x: 2.6836736, y: 6.2193875}
     _critFontSizeBonus: 3
     _popUpTextMoveCurve:
       serializedVersion: 2

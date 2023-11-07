@@ -2284,6 +2284,10 @@ PrefabInstance:
       value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2794710943949227540, guid: a21658bf9c933454991365eeebc7d402, type: 3}
+      propertyPath: _enableEdgeScroll
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794710943949227540, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: _enableZoomMovesCamera
       value: 0
       objectReference: {fileID: 0}

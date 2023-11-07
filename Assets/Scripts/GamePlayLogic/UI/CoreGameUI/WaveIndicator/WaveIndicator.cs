@@ -55,7 +55,7 @@ namespace Tzipory.GameplayLogic.UI.WaveIndicator
             if (!IsInitialization)
                 return;
             
-            var transformPosition = _waveSpawner.WaveIndicatorPosition.transform.position;
+            var transformPosition = _waveSpawner.WaveIndicatorPosition.position;
             
             _rectTransform.SetScreenPointRelativeToWordPoint(transformPosition,_offSet);
 

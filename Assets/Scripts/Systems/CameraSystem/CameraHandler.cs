@@ -22,13 +22,13 @@ namespace Tzipory.Systems.CameraSystem
         private bool _enableCameraMovement = false;
 
         [SerializeField, Tooltip("toggle mouse edge scroll camera movement")]
-        private bool _enableEdgeScroll = true;
+        private bool _enableEdgeScroll = false;
         
         [SerializeField, Tooltip("toggle mouse Pan scroll camera movement")]
         private bool _enablePanScroll = true;
         
         [SerializeField, Tooltip("toggle whether the camera moves to the mouse position when zooming")]
-        private bool _enableZoomMovesCamera = true;
+        private bool _enableZoomMovesCamera = false;
 
         [Header("Gameobjects")] 
         [SerializeField] private Camera _mainCamera;

@@ -121,7 +121,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
             
         }
         
-        [Button("refrec")]
+        [Button("refresh")]
         private void GetWaveSpawners()
         {
             for (int i = 0; i < _waveSpawnersSerialize.Count; i++)

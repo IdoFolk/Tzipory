@@ -1528,6 +1528,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Onyx_PS
       objectReference: {fileID: 0}
+    - target: {fileID: 4596685173509028684, guid: 9e457d9276a4d9445b5b72c9fcb2e2ab, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4815817136942709703, guid: 9e457d9276a4d9445b5b72c9fcb2e2ab, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.36

@@ -82,7 +82,6 @@ namespace Tzipory.Systems.WaveSystem
 
         private void Awake()
         {
-            LevelHandler.AddWaveSpawner(this);
             _enemyGroupsConfig = new List<EnemyGroupConfig>();
         }
 

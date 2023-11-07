@@ -21,9 +21,7 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
       private Vector3 _startPosition;
 
       public ISlotItem Item => _item;
-
-      public bool IsInitialization { get; private set; }
-
+      
       private void OnValidate()
       {
          _rectTransform ??= GetComponent<RectTransform>();
@@ -48,7 +46,7 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
          _itemName.text = parameter.ItemSlotName;
          _itemAmount.text = parameter.ItemAmount.ToString();
          _item = parameter;
-         IsInitialization = true;
+         base.Init();
       }
 
       public ItemSlotUI Copy()

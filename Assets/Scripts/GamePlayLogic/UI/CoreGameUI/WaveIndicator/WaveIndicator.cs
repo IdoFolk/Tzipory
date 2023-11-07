@@ -1,5 +1,4 @@
 using System;
-using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Helpers;
 using Tzipory.Systems.PoolSystem;
@@ -31,7 +30,6 @@ namespace Tzipory.GameplayLogic.UI.WaveIndicator
         
         public bool IsInitialization { get; private set; }
 
-        protected override UIGroup UIGroup => UIGroup.GameUI;
 
         protected override void Awake()
         {

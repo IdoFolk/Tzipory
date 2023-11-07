@@ -1,6 +1,5 @@
 using System;
 using Sirenix.OdinInspector;
-using Tools.Enums;
 using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.ConfigFiles.Level;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
@@ -8,6 +7,7 @@ using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.PlayerData.Party;
 using Tzipory.Systems.CameraSystem;
 using Tzipory.Systems.SceneSystem;
+using Tzipory.Tools.Enums;
 using Tzipory.Tools.GameSettings;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
@@ -132,13 +132,13 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         private void OnDestroy()
         {
-            EnemyManager.Dispose();
-            PartyManager.Dispose();
-            WaveManager.Dispose();
-
-            PartyManager = null;
-            EnemyManager = null;
-            WaveManager = null;
+            // EnemyManager.Dispose();
+            // PartyManager.Dispose();
+            // WaveManager.Dispose();
+            //
+            // PartyManager = null;
+            // EnemyManager = null;
+            // WaveManager = null;
         }
 
         private void EndGame(bool isWon)

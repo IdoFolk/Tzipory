@@ -188,5 +188,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4f20771c53c4b62a3849aa53814d84e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _doubleClickSpeed: 0.5
+  _showOnAwake: 0
+  _uiGroupTags: 128
   _countText: {fileID: 3138153996169515674}

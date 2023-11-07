@@ -1,12 +1,10 @@
-﻿using Tools.Enums;
-using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+﻿using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.Systems.UISystem;
 
 namespace Tzipory.GameplayLogic.UIElements
 {
     public class WaveCountUIHandler : BaseCounterUIHandler
     {
-        protected override UIGroup UIGroup => UIGroup.GameUI;
         
         public override void Show()
         {

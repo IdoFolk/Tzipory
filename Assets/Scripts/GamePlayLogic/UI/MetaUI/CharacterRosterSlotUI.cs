@@ -1,5 +1,4 @@
 using System;
-using Tools.Enums;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Interface;
@@ -18,7 +17,6 @@ namespace Tzipory.GamePlayLogic.UI
         private ShamanDataContainer _shamanDataContainer;
         public bool IsInitialization { get; private set; }
 
-        protected override UIGroup UIGroup => UIGroup.GameOverlayUI;
 
         public override void Show()
         {

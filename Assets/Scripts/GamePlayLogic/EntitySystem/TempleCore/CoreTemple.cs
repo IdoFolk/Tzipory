@@ -30,7 +30,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
     public Stat Health => _hpStat;
     public bool IsEntityDead => Health.CurrentValue <= 0;
 
-    public StatusHandler StatusHandler => throw new System.NotImplementedException();
+    public StatHandler StatHandler => throw new System.NotImplementedException();
 
     public System.Action OnHealthChanged;
 
@@ -59,7 +59,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 
     public void Heal(float amount)
     {
-        _hpStat.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition));
+        _hpStat.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition),"Heal");
         OnHealthChanged?.Invoke();
     }
 
@@ -68,7 +68,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
         if (_hpStat.CurrentValue <= 0)
             return;
         
-        _hpStat.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce));
+        _hpStat.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),"Damage");
         OnHealthChanged?.Invoke();
 
         if (IsEntityDead)

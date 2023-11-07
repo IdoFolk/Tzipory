@@ -1,5 +1,4 @@
 ﻿using TMPro;
-using Tools.Enums;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
@@ -10,7 +9,6 @@ namespace Tzipory.GameplayLogic.UIElements.EndScreen
     {
         [SerializeField] private TMP_Text _text;
 
-        protected override UIGroup UIGroup => UIGroup.EndGameUI;
 
         public override void UpdateUIVisual()
         {

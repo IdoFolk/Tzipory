@@ -1,7 +1,4 @@
-using System;
-using Sirenix.Utilities;
 using TMPro;
-using Tools.Enums;
 using Tzipory.Systems.InventorySystem;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Interface;
@@ -22,7 +19,6 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
       private ISlotItem _item;
 
       private Vector3 _startPosition;
-      protected override UIGroup UIGroup => UIGroup.MetaUI;
 
       public ISlotItem Item => _item;
 

@@ -3,7 +3,6 @@ using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using Tzipory.ConfigFiles.Item;
-using Tzipory.Systems;
 using UnityEditor;
 using UnityEngine;
 
@@ -23,7 +22,6 @@ public class ItemDataEditor : OdinMenuEditorWindow
         var window = GetWindow<ItemDataEditor>();
         window.position = new Rect(200,200,1000,1000);
         window.Show();
-   
     }
 
     protected override OdinMenuTree BuildMenuTree()

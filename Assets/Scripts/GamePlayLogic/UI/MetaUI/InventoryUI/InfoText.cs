@@ -1,5 +1,4 @@
 using TMPro;
-using Tools.Enums;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
 
@@ -9,7 +8,6 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
     {
         [SerializeField] private TMP_Text _dataName;
         [SerializeField] private TMP_Text _dataValue;
-        protected override UIGroup UIGroup => UIGroup.MetaUI;
 
         public void SetData(string dataName, string value, bool bg)
         {

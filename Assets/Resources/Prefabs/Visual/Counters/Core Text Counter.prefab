@@ -187,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cba76db3745f4265849c4ff5cad211b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _doubleClickSpeed: 0.5
+  _showOnAwake: 0
+  _uiGroupTags: 2
   _currentCount: {fileID: 5918233749627350633}
   _maxCount: {fileID: 3742937414717935717}

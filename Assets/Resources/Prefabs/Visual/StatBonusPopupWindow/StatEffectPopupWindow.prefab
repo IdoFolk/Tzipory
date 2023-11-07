@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5556002504405258477
 Transform:
   m_ObjectHideFlags: 0
@@ -101,7 +101,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4149447875594615131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: crit attack + 15%
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1dd56befe8001c64eb21b35747903f9d, type: 2}
   m_sharedMaterial: {fileID: -5220944690944815495, guid: 1dd56befe8001c64eb21b35747903f9d, type: 2}
@@ -195,7 +195,7 @@ MonoBehaviour:
     rgba: 4278190080
   m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
-  m_colorMode: 3
+  m_colorMode: 0
   m_fontColorGradient:
     topLeft: {r: 1, g: 1, b: 1, a: 1}
     topRight: {r: 1, g: 1, b: 1, a: 1}
@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 7657395324522743235}
   - component: {fileID: 7785804532519392799}
   m_Layer: 0
-  m_Name: StatBonusPopupWindow
+  m_Name: StatEffectPopupWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

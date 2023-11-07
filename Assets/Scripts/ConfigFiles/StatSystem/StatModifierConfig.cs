@@ -10,8 +10,8 @@ namespace Tzipory.ConfigFiles.StatusSystem
     {
         [SerializeField] private StatusModifierType _statusModifierType;
         [SerializeField, HideIf("_enableRingModifiers")] public float Modifier;
-        [SerializeField, ShowIf("_enableRingModifiers")] private float[] _ringModifiers;
-        [SerializeField] private bool _enableRingModifiers;
+        [SerializeField, ShowIf("_enableRingModifiers")] public float[] _ringModifiers;
+        private bool _enableRingModifiers;
 
         public StatusModifierType StatusModifierType => _statusModifierType;
 
@@ -23,6 +23,11 @@ namespace Tzipory.ConfigFiles.StatusSystem
             {
                 _ringModifiers = new float[ringAmount];
             }
+        }
+
+        public void ToggleRingModifiers(bool state)
+        {
+            _enableRingModifiers = state;
         }
     }
 }

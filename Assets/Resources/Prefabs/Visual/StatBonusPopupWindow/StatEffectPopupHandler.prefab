@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2532964042394426752}
   - component: {fileID: 3660970038480926833}
   m_Layer: 0
-  m_Name: ProximityStatBonusPopup
+  m_Name: StatEffectPopupHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,10 +30,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5854590881828514222}
-  - {fileID: 2875084884878845948}
-  - {fileID: 3603975667711303919}
-  - {fileID: 8939632123166193718}
+  - {fileID: 3822826296597602059}
+  - {fileID: 4881952800908023747}
+  - {fileID: 4947099775771079979}
+  - {fileID: 3879041312212655852}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3660970038480926833
@@ -49,14 +49,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _popupWindowHandlers:
-  - {fileID: 6302678697689922162}
-  - {fileID: 2426993775887250464}
-  - {fileID: 3768342203916546867}
-  - {fileID: 8811230617101822954}
+  - {fileID: 3694459956014304471}
+  - {fileID: 5010287254476882975}
+  - {fileID: 4823234854699427575}
+  - {fileID: 3719177279312203056}
   StatEffectPopupWindowsDistance: 0.5
-  _popupWindowStartingAlpha: 1
-  _popupWindowAlphaChange: 0.3
---- !u!1001 &1606514544192503285
+--- !u!1001 &2991698910490317312
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -106,21 +104,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8940224112470187401, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
       propertyPath: m_Name
-      value: StatBonusPopupWindow (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8940224112470187401, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: StatEffectPopupWindow (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
---- !u!114 &8811230617101822954 stripped
+--- !u!4 &4881952800908023747 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7657395324522743235, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
+  m_PrefabInstance: {fileID: 2991698910490317312}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5010287254476882975 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7785804532519392799, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-  m_PrefabInstance: {fileID: 1606514544192503285}
+  m_PrefabInstance: {fileID: 2991698910490317312}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -128,12 +127,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5576aa9409a84864585f74c7dcf9210d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &8939632123166193718 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7657395324522743235, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-  m_PrefabInstance: {fileID: 1606514544192503285}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &4286062459880172653
+--- !u!1001 &3378589719856525544
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -183,26 +177,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8940224112470187401, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
       propertyPath: m_Name
-      value: StatBonusPopupWindow
-      objectReference: {fileID: 0}
-    - target: {fileID: 8940224112470187401, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: StatEffectPopupWindow (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
---- !u!4 &5854590881828514222 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7657395324522743235, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-  m_PrefabInstance: {fileID: 4286062459880172653}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6302678697689922162 stripped
+--- !u!114 &4823234854699427575 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7785804532519392799, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-  m_PrefabInstance: {fileID: 4286062459880172653}
+  m_PrefabInstance: {fileID: 3378589719856525544}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -210,7 +195,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5576aa9409a84864585f74c7dcf9210d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &5594264594532409919
+--- !u!4 &4947099775771079979 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7657395324522743235, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
+  m_PrefabInstance: {fileID: 3378589719856525544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6866265642997291720
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -260,21 +250,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8940224112470187401, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
       propertyPath: m_Name
-      value: StatBonusPopupWindow (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8940224112470187401, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: StatEffectPopupWindow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
---- !u!114 &2426993775887250464 stripped
+--- !u!114 &3694459956014304471 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7785804532519392799, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-  m_PrefabInstance: {fileID: 5594264594532409919}
+  m_PrefabInstance: {fileID: 6866265642997291720}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -282,12 +268,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5576aa9409a84864585f74c7dcf9210d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2875084884878845948 stripped
+--- !u!4 &3822826296597602059 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7657395324522743235, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-  m_PrefabInstance: {fileID: 5594264594532409919}
+  m_PrefabInstance: {fileID: 6866265642997291720}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &6361172555339867436
+--- !u!1001 &6886452428400122671
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -337,26 +323,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8940224112470187401, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
       propertyPath: m_Name
-      value: StatBonusPopupWindow (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 8940224112470187401, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      value: StatEffectPopupWindow (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
---- !u!4 &3603975667711303919 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7657395324522743235, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-  m_PrefabInstance: {fileID: 6361172555339867436}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3768342203916546867 stripped
+--- !u!114 &3719177279312203056 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7785804532519392799, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
-  m_PrefabInstance: {fileID: 6361172555339867436}
+  m_PrefabInstance: {fileID: 6886452428400122671}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -364,3 +341,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5576aa9409a84864585f74c7dcf9210d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &3879041312212655852 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7657395324522743235, guid: f83604371ce63c64cbe143c6a8918052, type: 3}
+  m_PrefabInstance: {fileID: 6886452428400122671}
+  m_PrefabAsset: {fileID: 0}

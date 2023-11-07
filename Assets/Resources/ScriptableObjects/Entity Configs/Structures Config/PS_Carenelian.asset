@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d045d64ee080c743805e5430faff02c, type: 3}
   m_Name: PS_Carenelian
   m_EditorClassIdentifier: 
-  Range: 10
+  Range: 11
   RingsRanges:
   - 0.33
   - 0.66

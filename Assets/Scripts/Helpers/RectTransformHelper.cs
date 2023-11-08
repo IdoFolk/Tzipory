@@ -5,7 +5,7 @@ namespace Tzipory.Helpers
 {
     public static class RectTransformHelper
     {
-        public static Vector2 SetScreenPointRelativeToWordPoint(this RectTransform rectTransform,Vector2 wordPos,float offSetRadios)
+        public static Vector2 SetScreenPointRelativeToWordPoint(this RectTransform rectTransform,Vector2 wordPos)
         {
             var rect = rectTransform.rect;
             
@@ -19,12 +19,7 @@ namespace Tzipory.Helpers
             
             screenPos.x = Mathf.Clamp(screenPos.x, minX, maxX);
             screenPos.y = Mathf.Clamp(screenPos.y, minY, maxY);
-
-            if (Vector2.Distance(screenPos, rectTransform.position) < offSetRadios)
-                return screenPos;
-
-            rectTransform.position = screenPos;
-
+            
             return screenPos;
         }
     }

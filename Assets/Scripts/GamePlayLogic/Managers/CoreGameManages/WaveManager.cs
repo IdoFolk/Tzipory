@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Tzipory.ConfigFiles.Level;
 using Tzipory.GameplayLogic.UI.Indicator;
-using Tzipory.GameplayLogic.UI.WaveIndicator;
 using Tzipory.Helpers;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.WaveSystem;
@@ -71,9 +70,12 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             CurrentWave.Init();
             
             var waveSpawners = CurrentWave.GetActiveWaveSpawners();
-
+            List<Transform> waveIndicatorPositions = new List<Transform>();
+            
             foreach (var waveSpawner in waveSpawners)
-                _waveIndicators = UIIndicatorHandler.SetNewIndicator(waveSpawner.WaveIndicatorPosition,new UIIndicatorConfig(),_startLevelTimer);
+                waveIndicatorPositions.Add(waveSpawner.WaveIndicatorPosition);
+                
+            _waveIndicators = UIIndicatorHandler.SetNewIndicators(waveIndicatorPositions,_levelConfig.UIIndicatorConfig,_startLevelTimer);
         }
 
         public void UpdateLevel()
@@ -125,9 +127,12 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             _delayBetweenWavesTimer = GAME_TIME.TimerHandler.StartNewTimer(_delayBetweenWaves,"Delay Between Waves Timer");
             
             var waveSpawners = CurrentWave.GetActiveWaveSpawners();
-
+            List<Transform> waveIndicatorPositions = new List<Transform>();
+            
             foreach (var waveSpawner in waveSpawners)
-                _waveIndicators = UIIndicatorHandler.SetNewIndicator(waveSpawner.WaveIndicatorPosition,new UIIndicatorConfig(),_delayBetweenWavesTimer);
+                waveIndicatorPositions.Add(waveSpawner.WaveIndicatorPosition);
+                
+            _waveIndicators = UIIndicatorHandler.SetNewIndicators(waveIndicatorPositions,_levelConfig.UIIndicatorConfig,_startLevelTimer);
         }
 
         public void Dispose()

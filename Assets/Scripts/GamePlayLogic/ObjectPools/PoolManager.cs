@@ -1,6 +1,5 @@
 ﻿using System;
 using Tzipory.GameplayLogic.EntitySystem.Enemies;
-using Tzipory.GameplayLogic.UI.WaveIndicator;
 using Tzipory.GameplayLogic.VisualSystem.EffectType;
 using Tzipory.Systems.FactorySystem.GameObjectFactory;
 using Tzipory.Systems.FactorySystem.ObjectFactory;

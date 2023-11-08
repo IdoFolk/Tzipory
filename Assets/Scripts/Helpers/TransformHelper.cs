@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using UnityEngine;
 
 namespace Tzipory.Helpers
 {
@@ -6,12 +7,12 @@ namespace Tzipory.Helpers
     {
         public static bool InVisibleOnScreen(this Transform transform)
         {
-            var position = transform.position;
+            var screenPosition = GameManager.CameraHandler.MainCamera.WorldToScreenPoint(transform.position); 
             
-            if (position.x < 0 || position.x > Screen.width)
+            if (screenPosition.x < 0 || screenPosition.x > Screen.width)
                 return false;
 
-            if (position.y < 0 || position.y > Screen.height)
+            if (screenPosition.y < 0 || screenPosition.y > Screen.height)
                 return false;
             
             return true;

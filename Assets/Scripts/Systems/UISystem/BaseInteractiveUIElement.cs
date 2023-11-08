@@ -15,23 +15,22 @@ namespace Tzipory.Systems.UISystem
         public event Action OnDoubleClickEvent;
         public event Action OnEnter;
         public event Action OnExit;
-
-        public bool EnableDrag => _enableDrag;
+        
         [SerializeField] private bool _enableDrag;
+        [SerializeField,ShowIf(nameof(_enableDrag))] private CanvasGroup _canvasGroup;
+        [SerializeField] private bool _enableDoubleClick;
+        [SerializeField,ShowIf(nameof(_enableDoubleClick))] private float _doubleClickSpeed = 0.5f;
         
-        [SerializeField,ShowIf("_enableDrag")] private CanvasGroup _canvasGroup;
-        
-        [SerializeField] private float _doubleClickSpeed = 0.5f;
-        
-        private bool _isOn;
         
         private int _clickNum;
 
         private ITimer _doubleClickTimer;
         
+        public bool EnableDrag => _enableDrag;
+        
         private void Update()
         {
-            if (_clickNum == 0)
+            if (_clickNum == 0 || !_enableDoubleClick)
                 return;
 
             _doubleClickTimer ??= GAME_TIME.TimerHandler.StartNewTimer(_doubleClickSpeed,"Double Click UI Timer");
@@ -45,13 +44,11 @@ namespace Tzipory.Systems.UISystem
 
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
-            _isOn = true;
             OnEnter?.Invoke();
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
-            _isOn = false;
             OnExit?.Invoke();
         }
 

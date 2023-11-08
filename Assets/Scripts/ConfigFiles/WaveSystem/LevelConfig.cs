@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
 namespace Tzipory.ConfigFiles.Level
@@ -12,6 +13,7 @@ namespace Tzipory.ConfigFiles.Level
         [SerializeField,PropertyOrder(-1)] private LevelHandler _level;
         [SerializeField,PropertyOrder(-1)] private float _levelStartDelay = 0.2f;
         [SerializeField,PropertyOrder(-1)] private float _delayBetweenWaves;
+        [SerializeField,PropertyOrder(-1)] private UIIndicatorConfig _uiIndicatorConfig;//only for testing TEMP
         [SerializeField,PropertyOrder(1),ListDrawerSettings(HideAddButton = true,HideRemoveButton = true)] private List<WaveConfig> _waves;
 
         public int LevelId => _levelId;
@@ -23,7 +25,9 @@ namespace Tzipory.ConfigFiles.Level
         public float LevelStartDelay => _levelStartDelay;
 
         public float DelayBetweenWaves => _delayBetweenWaves;
-        
+
+        public UIIndicatorConfig UIIndicatorConfig => _uiIndicatorConfig;
+
         [Button("Add new wave"),PropertyOrder(0)]
         public void AddWave()
         {

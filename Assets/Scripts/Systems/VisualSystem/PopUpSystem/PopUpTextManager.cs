@@ -29,7 +29,7 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
         public PopUpTextConfig GetCritHitDefaultConfig => getCritHitDefualtConfig;
         public PopUpTextConfig HealDefaultConfig => healDefualtConfig;
         
-        public float GetRelativeFontSizeForDamage(float damage) => Mathf.Clamp( (FontSizeRange.y - FontSizeRange.x) * (damage - DamageRange.x) / (DamageRange.y - DamageRange.x) + FontSizeRange.x, FontSizeRange.x, FontSizeRange.y);
+        public float GetRelativeFontSizeForDamage(float damage) => Mathf.Clamp((FontSizeRange.y - FontSizeRange.x) * (damage - DamageRange.x) / (DamageRange.y - DamageRange.x) + FontSizeRange.x, FontSizeRange.x, FontSizeRange.y);
 
         public override void Awake()
         {

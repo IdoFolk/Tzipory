@@ -1028,6 +1028,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 978384404}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorParent
+      value: 
+      objectReference: {fileID: 1930332588}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _waveIndicatorParent
       value: 
       objectReference: {fileID: 1930332588}

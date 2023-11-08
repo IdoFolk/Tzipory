@@ -6,7 +6,7 @@ using Tzipory.Tools.Interface;
 
 namespace Tzipory.Systems.WaveSystem
 {
-    public class Wave : IInitialization
+    public class Wave
     {
         private readonly WaveSpawner[] _waveSpawners;
 
@@ -40,7 +40,7 @@ namespace Tzipory.Systems.WaveSystem
             IsInitialization = false;
         }
         
-        public void Init()
+        public WaveConfig Init()
         {
             foreach (var waveSpawner in _waveSpawners)
             {
@@ -53,6 +53,8 @@ namespace Tzipory.Systems.WaveSystem
 
             IsComplete = false;
             IsInitialization = true;
+                
+            return _data;
         }
 
         public IEnumerable<WaveSpawner> GetActiveWaveSpawners() =>

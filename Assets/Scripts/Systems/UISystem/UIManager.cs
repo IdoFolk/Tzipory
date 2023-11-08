@@ -70,7 +70,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
                 return;
             }
 
-            Debug.LogWarning("UiElement not found in any group",element);
+            Debug.LogError("UiElement not found in any group",element);
         }
 
         public static void ShowUIGroup(UIGroup group, bool updateOnShow = false)

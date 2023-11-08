@@ -4,6 +4,7 @@ using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.ConfigFiles.Level;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GamePlayLogic.ObjectPools;
+using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.SerializeData.PlayerData.Party;
 using Tzipory.Systems.CameraSystem;
 using Tzipory.Systems.SceneSystem;
@@ -48,13 +49,19 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         [SerializeField, TabGroup("Spawn parents")]
         private Transform _shamanParent;
+        
+        [SerializeField, TabGroup("Spawn parents")]
+        private Transform _uiIndicatorParent;
 
         [SerializeField, TabGroup("Spawn parents")]
         private Transform _enemiesParent;
 
+        private UIIndicatorHandler _uiIndicatorHandler;
+
         private void Awake()
         {
             _poolManager = new PoolManager();
+            _uiIndicatorHandler = new UIIndicatorHandler(_uiIndicatorParent,10);
 
             if (GameManager.GameData == null) //for Testing(Start form level scene)
             {

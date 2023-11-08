@@ -39,8 +39,9 @@ namespace Tzipory.Systems.CameraSystem
         private readonly Vector3 _lockedCameraPosition = new (0, -3, -80);
         private readonly int _lockedCameraZoom = 9;
 
-        private Vector2 _edgeScrollBorder;
+        private Vector2 _cameraBorders;
         private Vector2 _cameraStartPosition;
+        private float _cameraMaxZoom;
         private float _cameraStartZoom;
         private float _targetOrthographicSize;
         private CinemachineTransposer _cinemachineTransposer;
@@ -72,13 +73,14 @@ namespace Tzipory.Systems.CameraSystem
                 throw new Exception($"{cameraSettingNullLog} is null"); //stop program?
             }
 
-            //caching CinemachineTransposer
+            //caching
             _cinemachineTransposer = _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
             _cinemachineBrain = _mainCamera.GetComponent<CinemachineBrain>();
             _cinemachineTransposer.m_XDamping = _cameraSettings.XDamping;
             _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
             _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
             _edgePaddingY = _cameraSettings.DefaultEdgePaddingY;
+            _cameraMaxZoom = _cameraSettings.ZoomMaxClamp;
             LockCamera(_lockedCameraPosition, _lockedCameraZoom);
         }
 
@@ -216,10 +218,10 @@ namespace Tzipory.Systems.CameraSystem
             Vector2 fixedOrthographicSize = new Vector2(orthographicSize * (_edgePaddingX), orthographicSize * (_edgePaddingY));
 
             //clamping the camera to the borders of the map
-            cameraPosition.x = Mathf.Clamp(cameraPosition.x, -(_edgeScrollBorder.x - fixedOrthographicSize.x),
-                _edgeScrollBorder.x - fixedOrthographicSize.x);
-            cameraPosition.y = Mathf.Clamp(cameraPosition.y, -(_edgeScrollBorder.y - fixedOrthographicSize.y),
-                _edgeScrollBorder.y - fixedOrthographicSize.y);
+            cameraPosition.x = Mathf.Clamp(cameraPosition.x, -(_cameraBorders.x - fixedOrthographicSize.x),
+                _cameraBorders.x - fixedOrthographicSize.x);
+            cameraPosition.y = Mathf.Clamp(cameraPosition.y, -(_cameraBorders.y - fixedOrthographicSize.y),
+                _cameraBorders.y - fixedOrthographicSize.y);
 
             return cameraPosition;
         }
@@ -234,9 +236,10 @@ namespace Tzipory.Systems.CameraSystem
                 Time.deltaTime * _cameraSettings.ZoomSpeed);
         }
 
-        public void SetCameraSettings(Vector2 cameraBorders, bool overWrite, Vector2 startPos, float startZoom)
+        public void SetCameraSettings(Vector2 cameraBorders, float cameraMaxZoom, bool overWrite, Vector2 startPos, float startZoom)
         {
-            _edgeScrollBorder = cameraBorders;
+            _cameraBorders = cameraBorders;
+            _cameraMaxZoom = cameraMaxZoom;
             if (overWrite)
             {
                 _cameraStartPosition = startPos;
@@ -252,7 +255,7 @@ namespace Tzipory.Systems.CameraSystem
             {
                 _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
                 _edgePaddingY = _cameraSettings.DefaultEdgePaddingY;
-                _zoomPadding = _cameraSettings.MaxZoomDefinedByBorders;
+                _zoomPadding = _cameraMaxZoom;
                 if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
             }
             else
@@ -263,12 +266,9 @@ namespace Tzipory.Systems.CameraSystem
                 //calculating the current padding for movement borders and zoom
                 _edgePaddingX = _cameraSettings.DefaultEdgePaddingX / _currentAspectRatioX;
                 _edgePaddingY = _cameraSettings.DefaultEdgePaddingY / _currentAspectRatioY;
-                _zoomPadding = _cameraSettings.MaxZoomDefinedByBorders * _currentAspectRatioX;
+                _zoomPadding = _cameraMaxZoom * _currentAspectRatioX;
                 if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
             }
-            
-
-            
 
             //resetting the camera position and zoom
             ToggleCameraLock(true);

@@ -35,7 +35,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 75928f8badccef2498c77125ef0f7375, type: 2}
   _unitEntityVisualConfig:
     _sprite: {fileID: 21300000, guid: fc2805c32b6ccbe429d23e618777dbee, type: 3}
-    _icon: {fileID: 21300000, guid: fc2805c32b6ccbe429d23e618777dbee, type: 3}
+    _icon: {fileID: 1908098078, guid: 2a862c0ebda887f42a111fbbce4d7fc0, type: 3}
   _targetingPriority: 6
   _shamanId: 1
+  _earring1: {fileID: 0}
+  _earring2: {fileID: 0}
+  _necklace: {fileID: 0}
+  _belt: {fileID: 0}
+  _bracelet1: {fileID: 0}
+  _bracelet2: {fileID: 0}
+  _ring1: {fileID: 0}
+  _ring2: {fileID: 0}
   _decisionInterval: 0

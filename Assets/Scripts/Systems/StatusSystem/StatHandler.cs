@@ -78,7 +78,7 @@ namespace Tzipory.Systems.StatusSystem
 
             OnStatusEffectAdded?.Invoke(statEffectConfig.EffectSequence);
             
-            if (statEffectConfig.UsePopUpTextConfig)
+            if (statEffectConfig.OverrideGlobalPopUpTextConfig)
                 return statToEffect.AddStatusEffect(statusEffect,statEffectConfig.PopUpTextConfig);
             
             return statToEffect.AddStatusEffect(statusEffect);

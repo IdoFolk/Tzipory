@@ -319,7 +319,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   _popUpTextCanvas: {fileID: 1527176942}
-  _defualtSo: {fileID: 11400000, guid: 1c477da2ae86013479986cb933c972e0, type: 2}
+  _defaultSo: {fileID: 11400000, guid: 1c477da2ae86013479986cb933c972e0, type: 2}
 --- !u!1001 &498852640
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -77,11 +77,11 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             if (GameManager.CameraHandler is null)
             {
                 GameManager.CameraHandler = FindObjectOfType<CameraHandler>();//only for testing
-                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
+                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder, _levelConfig.Level.CameraMaxZoom, _levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
             }
             else
             {
-                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
+                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder, _levelConfig.Level.CameraMaxZoom,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
             }
 
             if (GAME_TIME.TimerHandler is null)

@@ -21,8 +21,8 @@ namespace Tzipory.ConfigFiles.StatusSystem
         [Header("Status effect visual")]
         [SerializeField, Tooltip(""),TabGroup("Visual config")] private EffectSequenceConfig _effectSequence;//may need to change
 
-        [SerializeField,TabGroup("Visual config")] private bool _usePopUpTextConfig;
-        [SerializeField, Tooltip(""),ShowIf("_usePopUpTextConfig"),TabGroup("Visual config")] private PopUpTextConfig _popUpTextConfig;//may need to change
+        [SerializeField,TabGroup("Visual config")] private bool _overrideGlobalPopUpTextConfig;
+        [SerializeField, Tooltip(""),ShowIf(nameof(_overrideGlobalPopUpTextConfig)),TabGroup("Visual config")] private PopUpTextConfig _popUpTextConfig;//may need to change
 
         private bool ShowDuration =>
             _statEffectType is StatEffectType.OverTime or StatEffectType.Interval; 
@@ -35,7 +35,7 @@ namespace Tzipory.ConfigFiles.StatusSystem
         public Constant.StatsId AffectedStatType => _affectedStatId;
         public StatEffectType StatEffectType => _statEffectType;
         public EffectSequenceConfig EffectSequence => _effectSequence;
-        public bool UsePopUpTextConfig => _usePopUpTextConfig;
+        public bool OverrideGlobalPopUpTextConfig => _overrideGlobalPopUpTextConfig;
         public PopUpTextConfig PopUpTextConfig => _popUpTextConfig;
         
         public int ObjectId { get; }

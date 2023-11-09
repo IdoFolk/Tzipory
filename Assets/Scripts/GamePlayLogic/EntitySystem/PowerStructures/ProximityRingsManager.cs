@@ -16,20 +16,21 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         private Color _defaultColor;
         private Color _powerStructureTypeColor;
         private bool _shamanSelected;
+        private float _ringDefaultSpriteAlpha;
+        private float _ringSpriteAlphaFade;
 
         private Dictionary<int, IDisposable> _activeStatusEffectOnShaman;
 
 
         public void Init(PowerStructureConfig powerStructureConfig)
         {
-            float ringSpriteAlpha = powerStructureConfig.DefaultSpriteAlpha;
             for (int i = 0; i < _ringHandlers.Length; i++)
             {
-                _ringHandlers[i].Init(i, ringSpriteAlpha);
-                
-                ringSpriteAlpha -= powerStructureConfig.SpriteAlphaFade;
+                _ringHandlers[i].Init(i);
             }
-
+            
+            _ringDefaultSpriteAlpha = powerStructureConfig.DefaultSpriteAlpha;
+            _ringSpriteAlphaFade = powerStructureConfig.SpriteAlphaFade;
             _defaultColor = powerStructureConfig.RingDefaultColor;
             _powerStructureTypeColor = powerStructureConfig.PowerStructureTypeColor;
 
@@ -50,9 +51,12 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         }
         private void ChangeAllRingsColors(Color color)
         {
+            var ringSpriteAlpha = _ringDefaultSpriteAlpha;
             foreach (var ring in _ringHandlers)
             {
+                color.a = ringSpriteAlpha;
                 ring.ChangeColor(color);
+                ringSpriteAlpha -= _ringSpriteAlphaFade;
             }
         }
         private void ScaleCircles(float circleRange, float[] ringsRanges)

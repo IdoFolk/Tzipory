@@ -1,4 +1,5 @@
 using System;
+using Tzipory.GameplayLogic.EntitySystem.Enemies;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.TargetingSystem;
@@ -14,19 +15,26 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         public event Action<int> OnShadowExit;
         public event Action<int,Shaman> OnShamanEnter;
         public event Action<int,Shaman> OnShamanExit;
+        public event Action<int,Enemy> OnEnemyEnter;
+        public event Action<int,Enemy> OnEnemyExit;
         [HideInInspector]public int Id { get; private set; }
         
         [SerializeField] private SpriteRenderer _spriteRenderer;
         [SerializeField] private ColliderTargetingArea _colliderTargetingArea;
 
-        private float _spriteAlpha;
         
         
-        public void Init(int id, float alpha)
+        public void Init(int id)
         {
             _colliderTargetingArea.Init(this);
-            _spriteAlpha = alpha;
             Id = id;
+        }
+        public void Init(int id, float range, Color color)
+        {
+            _colliderTargetingArea.Init(this);
+            Id = id;
+            Scale(range);
+            ChangeColor(color);
         }
 
         public void Scale(float range)
@@ -41,7 +49,6 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         public void ChangeColor(Color color)
         {
-            color.a = _spriteAlpha;
             _spriteRenderer.color = color;
         }
 
@@ -49,30 +56,35 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         {
             if (other.gameObject.CompareTag("ShadowShaman"))
             {
-                if (ioType == IOType.In)
-                {
-                    OnShadowEnter?.Invoke(Id);
-                }
-
-                if (ioType == IOType.Out)
-                {
-                    OnShadowExit?.Invoke(Id);
-                }
+                if (ioType == IOType.In) OnShadowEnter?.Invoke(Id);
+                else if (ioType == IOType.Out) OnShadowExit?.Invoke(Id);
             }
         }
 
         public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
         {
-            if (targetable is not Shaman shaman) return;
-            
-            OnShamanEnter?.Invoke(Id,shaman);
+            switch (targetable)
+            {
+                case Shaman shaman:
+                    OnShamanEnter?.Invoke(Id,shaman);
+                    break;
+                case Enemy enemy:
+                    OnEnemyEnter?.Invoke(Id,enemy);
+                    break;
+            }
         }
 
         public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
         {
-            if (targetable is not Shaman shaman) return;
-
-            OnShamanExit?.Invoke(Id,shaman);
+            switch (targetable)
+            {
+                case Shaman shaman:
+                    OnShamanExit?.Invoke(Id,shaman);
+                    break;
+                case Enemy enemy:
+                    OnEnemyExit?.Invoke(Id,enemy);
+                    break;
+            }
         }
     }
 }

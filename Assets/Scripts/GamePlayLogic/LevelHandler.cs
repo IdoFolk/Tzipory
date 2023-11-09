@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tzipory.GameplayLogic.EntitySystem.PowerStructures;
+using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.Systems.WaveSystem;
 using UnityEngine;
 
@@ -38,6 +39,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         [Header("Serialized Components")]
         [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         [SerializeField] private List<PowerStructure> _powerStructuresSerialize;
+        [SerializeField] private List<Totem> _totemsSerialize;
         private static List<WaveSpawner> _waveSpawners;
 
         private readonly List<Color> _spawnerColors = new()
@@ -63,6 +65,10 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
             foreach (var powerStructure in _powerStructuresSerialize)
             {
                 powerStructure.Init();
+            }
+            foreach (var totem in _totemsSerialize)
+            {
+                totem.Init();
             }
             AddWaveSpawners(_waveSpawnersSerialize);
         }

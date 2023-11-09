@@ -1,5 +1,4 @@
 ﻿using System;
-using Tools.Enums;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
@@ -11,7 +10,6 @@ namespace Tzipory.GameplayLogic.UIElements
         public event Action<TimeButtonsUI> OnTurnOn;
         [SerializeField] private float  _time;
 
-        protected override UIGroup UIGroup => UIGroup.GameUI;
         
         protected override void On()
         {

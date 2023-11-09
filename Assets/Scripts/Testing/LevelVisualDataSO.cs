@@ -1,3 +1,6 @@
+using System;
+using Tzipory.ConfigFiles.PopUpText;
+using Tzipory.Systems.VisualSystem.PopUpSystem;
 using UnityEngine;
 
 namespace Tzipory.Testing
@@ -5,12 +8,12 @@ namespace Tzipory.Testing
     [CreateAssetMenu()]
     public class LevelVisualDataSO : ScriptableObject
     {
-        public Level_VisualData level_VisualData;
+        public LevelVisualData level_VisualData;
+        public PopUpTextConfig DefaultPopUpConfig;
 
-        public float GetRelativeFontSizeForDamage(float damage) => Mathf.Clamp(
-            (level_VisualData.FontSizeRange.y - level_VisualData.FontSizeRange.x) *
-            (damage - level_VisualData.DamageRange.x) /
-            (level_VisualData.DamageRange.y - level_VisualData.DamageRange.x) + level_VisualData.FontSizeRange.x,
-            level_VisualData.FontSizeRange.x, level_VisualData.FontSizeRange.y);
+        private void OnEnable()
+        {
+            DefaultPopUpConfig.RoundNumbers = true;
+        }
     }
 }

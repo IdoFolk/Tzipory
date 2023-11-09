@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Tzipory.GameplayLogic.EntitySystem.PowerStructures;
 using Tzipory.Systems.WaveSystem;
 using UnityEngine;
 
@@ -30,8 +32,10 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         [SerializeField] private bool _overrideCameraStartPositionAndZoom;
         [SerializeField,ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private Vector2 _cameraStartPosition;
         [SerializeField,ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private float _cameraStartZoom;
-        [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         [SerializeField] private bool _enableGizmos = true;
+        [Header("Serialized Components")]
+        [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
+        [SerializeField] private List<PowerStructure> _powerStructuresSerialize;
         private static List<WaveSpawner> _waveSpawners;
 
         private readonly List<Color> _spawnerColors = new()
@@ -54,15 +58,48 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         {
             FakeForward = _fakeForward.normalized;
             MapSize = new Vector2(_bgRenderer.sprite.texture.width, _bgRenderer.sprite.texture.height);
+            foreach (var powerStructure in _powerStructuresSerialize)
+            {
+                powerStructure.Init();
+            }
+            AddWaveSpawners(_waveSpawnersSerialize);
         }
 
-        public static void AddWaveSpawner(WaveSpawner waveSpawner)
+        [Button("Update Serialized Entities")]
+        private void UpdateSerializedEntities()
         {
-            _waveSpawners ??= new List<WaveSpawner>();
+            PowerStructure[] powerStructures = GetComponentsInChildren<PowerStructure>();
+            WaveSpawner[] waveSpawners = GetComponentsInChildren<WaveSpawner>();
             
-            if (_waveSpawners.Contains(waveSpawner))
-                return;
-            _waveSpawners.Add(waveSpawner);
+            foreach (var powerStructure in powerStructures)
+            {
+                _powerStructuresSerialize ??= new List<PowerStructure>();
+            
+                if (_powerStructuresSerialize.Contains(powerStructure))
+                    continue;
+                _powerStructuresSerialize.Add(powerStructure);
+            }
+
+            foreach (var waveSpawner in waveSpawners)
+            {
+                _waveSpawnersSerialize ??= new List<WaveSpawner>();
+            
+                if (_waveSpawnersSerialize.Contains(waveSpawner))
+                    continue;
+                _waveSpawnersSerialize.Add(waveSpawner);
+            }
+        }
+        
+        private static void AddWaveSpawners(List<WaveSpawner> waveSpawners)
+        {
+            foreach (var waveSpawner in waveSpawners)
+            {
+                _waveSpawners ??= new List<WaveSpawner>();
+            
+                if (_waveSpawners.Contains(waveSpawner))
+                    return;
+                _waveSpawners.Add(waveSpawner);
+            }
         }
 
         private void OnDestroy()

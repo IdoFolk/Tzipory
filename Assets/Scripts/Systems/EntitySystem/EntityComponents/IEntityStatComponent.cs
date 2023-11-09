@@ -5,6 +5,6 @@ namespace Tzipory.Systems.Entity.EntityComponents
 {
     public interface IEntityStatComponent : IEntityComponent , IStatHolder
     {
-        public StatusHandler StatusHandler { get; }
+        public StatHandler StatHandler { get; }
     }
 }

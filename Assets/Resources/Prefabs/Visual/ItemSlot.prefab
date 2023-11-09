@@ -260,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _showOnAwake: 0
+  _uiGroupTags: 512
   _enableDrag: 1
   _canvasGroup: {fileID: 6839924148579422741}
   _doubleClickSpeed: 0.5

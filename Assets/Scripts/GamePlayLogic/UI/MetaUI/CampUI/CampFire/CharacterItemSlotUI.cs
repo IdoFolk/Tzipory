@@ -1,5 +1,4 @@
 using System;
-using Tools.Enums;
 using Tzipory.ConfigFiles.Item;
 using Tzipory.GameplayLogic.UI.MetaUI.InventoryUI;
 using Tzipory.SerializeData.ItemSerializeData;
@@ -22,7 +21,6 @@ public class CharacterItemSlotUI : BaseInteractiveUIElement
 
     public int StoreItemId { get; private set; }
 
-    protected override UIGroup UIGroup => UIGroup.MetaUI;
     public ItemSlot ItemSlot => _itemSlot;
 
     public override void OnDrop(PointerEventData eventData)

@@ -1,7 +1,4 @@
-using System;
-using Sirenix.Utilities;
 using TMPro;
-using Tools.Enums;
 using Tzipory.Systems.InventorySystem;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Interface;
@@ -22,12 +19,9 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
       private ISlotItem _item;
 
       private Vector3 _startPosition;
-      protected override UIGroup UIGroup => UIGroup.MetaUI;
 
       public ISlotItem Item => _item;
-
-      public bool IsInitialization { get; private set; }
-
+      
       private void OnValidate()
       {
          _rectTransform ??= GetComponent<RectTransform>();
@@ -52,7 +46,7 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
          _itemName.text = parameter.ItemSlotName;
          _itemAmount.text = parameter.ItemAmount.ToString();
          _item = parameter;
-         IsInitialization = true;
+         base.Init();
       }
 
       public ItemSlotUI Copy()

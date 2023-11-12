@@ -72,3 +72,4 @@ MonoBehaviour:
   TotemSprite: {fileID: 21300000, guid: 83d8d0680c95bb94cb18ac95ca04f3e3, type: 3}
   TotemEffectUnitType: 0
   TotemEffectInterval: 3
+  TotemCooldown: 20

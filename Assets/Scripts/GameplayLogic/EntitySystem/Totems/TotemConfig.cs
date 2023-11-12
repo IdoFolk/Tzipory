@@ -12,6 +12,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
         public Sprite TotemSprite;
         public TotemEffectUnitType TotemEffectUnitType;
         public float TotemEffectInterval;
+        public float TotemCooldown;
 
     }
 

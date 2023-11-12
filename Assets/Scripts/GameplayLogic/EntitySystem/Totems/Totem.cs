@@ -4,12 +4,13 @@ using Tzipory.GameplayLogic.EntitySystem.Enemies;
 using Tzipory.GameplayLogic.EntitySystem.PowerStructures;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Helpers;
+using Tzipory.Systems.Entity;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Totems
 {
-    public class Totem : MonoBehaviour
+    public class Totem : BaseGameEntity
     {
         [Header("Totem Config")] [SerializeField]
         private TotemConfig _totemConfig;
@@ -23,7 +24,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
         private bool _isActive;
         private float _abilityTimer;
 
-        
+        public TotemConfig TotemConfig => _totemConfig;
         public void Init()
         {
             _proximityRingHandler.Init(0, _totemConfig.Range, _totemConfig.RingColor);
@@ -42,7 +43,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             _isActive = true;
         }
 
-        private void Update()
+        private void Update() //temp
         {
             if (!_isActive) return;
             
@@ -53,6 +54,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
                 _abilityTimer = _totemConfig.TotemEffectInterval;
             }
         }
+
+        
 
         private void OnValidate()
         {

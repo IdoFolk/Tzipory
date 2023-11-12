@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 5990658218603361049}
   - component: {fileID: 8712825162818960483}
   m_Layer: 0
-  m_Name: Totem
+  m_Name: Totem Slow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timerHandler:
     _timerSerializeDatas: []
-  _totemConfig: {fileID: 11400000, guid: 88ce86f0560000045bdb135a3d30da5f, type: 2}
+  _totemConfig: {fileID: 11400000, guid: 0e68584a6ba79af41b8ed0129bfc25e5, type: 2}
   _totemSpriteRenderer: {fileID: 11499873601995162}
   _proximityRingHandler: {fileID: 205005312758831316}
   _clickHelper: {fileID: 7006924026144185453}

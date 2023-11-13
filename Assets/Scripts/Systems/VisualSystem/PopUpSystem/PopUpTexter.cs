@@ -28,6 +28,9 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
 
         public void SpawnPopUp(StatChangeData changeData)
         {
+            if (!changeData.HavePopUpTextConfig)
+                return;
+            
             var popUpTextConfig = changeData.UsePopUpTextConfig ? changeData.PopUpTextConfig : PopUpTextManager.Instance.DefaultPopUpConfig;
 
             if (popUpTextConfig.DisablePopUp)

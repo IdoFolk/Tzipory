@@ -1,5 +1,4 @@
-﻿using System;
-using Tzipory.Tools.Enums;
+﻿using Tzipory.Tools.Enums;
 using Tzipory.Tools.Interface;
 
 namespace Tzipory.Systems.UISystem
@@ -7,9 +6,6 @@ namespace Tzipory.Systems.UISystem
     public interface IUIElement : IInitialization
     {
         public string ElementName { get; }
-        public Action OnShow { get; }
-        public Action OnHide { get; }
-
         public UIGroup UIGroupTags { get; }
         
         void Show();

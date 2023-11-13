@@ -20,6 +20,8 @@ namespace Tzipory.Systems.UISystem
 
         public bool IsInitialization { get; protected set; }
 
+        public Vector2 UIScreenPoint => GameManager.CameraHandler.MainCamera.WorldToScreenPoint(transform.position);
+
         protected virtual void Awake()
         {
             UIManager.AddUIElement(this,UIGroupTags);

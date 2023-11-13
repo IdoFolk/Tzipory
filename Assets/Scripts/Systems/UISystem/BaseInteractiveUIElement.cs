@@ -24,7 +24,7 @@ namespace Tzipory.Systems.UISystem
         
         private int _clickNum;
 
-        private ITimer _doubleClickTimer;
+        private float _doubleClickTimer;
         
         public bool EnableDrag => _enableDrag;
         
@@ -32,13 +32,13 @@ namespace Tzipory.Systems.UISystem
         {
             if (_clickNum == 0 || !_enableDoubleClick)
                 return;
-
-            _doubleClickTimer ??= GAME_TIME.TimerHandler.StartNewTimer(_doubleClickSpeed,"Double Click UI Timer");
             
-            if (_doubleClickTimer.IsDone)
+            _doubleClickTimer -= Time.deltaTime;
+            
+            if (_doubleClickTimer <= _doubleClickSpeed)
             {
                 _clickNum  = 0;
-                _doubleClickTimer  = null;
+                _doubleClickTimer  = 0;
             }
         }
 
@@ -60,7 +60,6 @@ namespace Tzipory.Systems.UISystem
                 return;
             
             _clickNum = 0;
-            _doubleClickTimer = null;
             
             _canvasGroup.alpha = 0.6f;
             _canvasGroup.blocksRaycasts = false;
@@ -104,17 +103,24 @@ namespace Tzipory.Systems.UISystem
         {
             OnClickEvent?.Invoke();
             _clickNum++;
+            _doubleClickTimer = _doubleClickSpeed;
         }
         
         protected virtual void OnDoubleClick(PointerEventData eventData)
         {
             OnDoubleClickEvent?.Invoke();
-            _doubleClickTimer = null;
+            _doubleClickTimer = 0;
             _clickNum = 0;
         }
 
         public virtual void OnDrop(PointerEventData eventData)
         {
+        }
+
+        private void OnDisable()
+        {
+            _clickNum = 0;
+            _doubleClickTimer = 0;
         }
     }
 }

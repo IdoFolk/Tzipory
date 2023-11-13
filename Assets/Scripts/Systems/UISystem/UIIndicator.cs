@@ -19,7 +19,7 @@ namespace Tzipory.Systems.UISystem.Indicators
         [SerializeField] private Image _bg;
         [SerializeField] private Image _timerFill;
         
-        private Transform _transform;
+        private Transform _objectTransform;
         private UIIndicatorConfig _config;
         
         private ITimer _timer;
@@ -31,9 +31,6 @@ namespace Tzipory.Systems.UISystem.Indicators
         private bool _isFlashing;
 
         private float _flashingTime;
-        
-        private Vector2 _flashSize;
-        private Vector2 _baseSize;
         
         public int ObjectInstanceId { get; private set; }
 
@@ -53,7 +50,7 @@ namespace Tzipory.Systems.UISystem.Indicators
 
         public void Init(Transform objectTransform, UIIndicatorConfig config, ITimer timer)
         {
-            _transform = objectTransform;
+            _objectTransform = objectTransform;
             _config = config;
             _timer = timer;
             
@@ -62,11 +59,6 @@ namespace Tzipory.Systems.UISystem.Indicators
                 var flashConfig = _config.FlashConfig;
                 
                 _isFlashing = true;
-            
-                var sizeDelta = RectTransform.localScale;
-            
-                _flashSize = new Vector2(sizeDelta.x * flashConfig.SizeFactor,sizeDelta.y * flashConfig.SizeFactor);
-                _baseSize = sizeDelta;
                 
                 if (flashConfig.UseTime)
                     _flashingTime = flashConfig.Time;
@@ -86,7 +78,7 @@ namespace Tzipory.Systems.UISystem.Indicators
         
         public void Init(Transform objectTransform, UIIndicatorConfig config, Action onCompleted = null)
         {
-            _transform = objectTransform;
+            _objectTransform = objectTransform;
             _config = config;
             _onCompleted = onCompleted;
 
@@ -95,12 +87,7 @@ namespace Tzipory.Systems.UISystem.Indicators
                 var flashConfig = _config.FlashConfig;
                 
                 _isFlashing = true;
-            
-                var sizeDelta = RectTransform.localScale;
-            
-                _flashSize = new Vector2(sizeDelta.x * flashConfig.SizeFactor,sizeDelta.y * flashConfig.SizeFactor);
-                _baseSize = sizeDelta;
-
+                
                 if (flashConfig.UseTime)
                     _flashingTime = flashConfig.Time;
             }
@@ -120,7 +107,7 @@ namespace Tzipory.Systems.UISystem.Indicators
 
             if (!_config.AllwaysShow)
             {
-                if (_transform.InVisibleOnScreen())
+                if (_objectTransform.InVisibleOnScreen())
                 {
                     _objectVisual.SetActive(false);
                     return;
@@ -133,13 +120,13 @@ namespace Tzipory.Systems.UISystem.Indicators
             if (_timer is not null)
                 _timerFill.fillAmount = _timer.TimeRemaining / _delay;
             
-            var screenPoint = RectTransform.SetScreenPointRelativeToWordPoint(_transform.position);
+            var screenPoint = RectTransform.SetScreenPointRelativeToWordPoint(_objectTransform.position,_config.OffSetRadios);
 
             if (_isFlashing)
             {
                 float lerpDelta = Mathf.PingPong(Time.time * _config.FlashConfig.FlashSpeed, 1);
                 
-                RectTransform.localScale = Vector2.Lerp(_baseSize,_flashSize,lerpDelta);
+                RectTransform.localScale = Vector2.Lerp(Vector2.one, Vector2.one * _config.FlashConfig.SizeFactor, lerpDelta);
                 if (_config.FlashConfig.OverrideFlashingColor)
                     _bg.color = Color.Lerp(_config.Color,_config.FlashConfig.FlashingColor,lerpDelta);
                 
@@ -148,17 +135,12 @@ namespace Tzipory.Systems.UISystem.Indicators
                     _flashingTime -= GAME_TIME.GameDeltaTime;
                     
                     if (_flashingTime <= 0)
-                    {
-                        _isFlashing = false;
-                        RectTransform.sizeDelta = _baseSize;
-                    }
+                        CancelFlashing();
                 }
             }
             
-            RectTransform.position = Vector2.MoveTowards(RectTransform.position,screenPoint,_config.OffSetRadios);
-            
-            Vector3 dir = (new Vector3(screenPoint.x,screenPoint.y,0) - new Vector3(transform.position.x,transform.position.y,0)).normalized;
-            float angle = Vector3.Angle(Vector3.up, dir);
+            Vector3 dir = (new Vector3(screenPoint.x,screenPoint.y,0) - new Vector3(RectTransform.position.x,RectTransform.position.y,0)).normalized;
+            float angle = Vector2Helper.AngleBetween360(Vector2.up, dir);
             Vector3 newDir = new Vector3(0, 0, angle);
             _rotateIndicator.localEulerAngles = newDir;
         }
@@ -196,8 +178,6 @@ namespace Tzipory.Systems.UISystem.Indicators
             }
             
             _config.FlashConfig = config;
-
-            _flashSize = new Vector2(_baseSize.x * config.SizeFactor,_baseSize.y * config.SizeFactor);
             
             _flashingTime = config.Time;
             
@@ -206,8 +186,13 @@ namespace Tzipory.Systems.UISystem.Indicators
             return CancelFlashing;
         }
 
-        private void CancelFlashing()=>
+        private void CancelFlashing()
+        {
             _flashingTime = 0;
+            _isFlashing = false;
+            _bg.color = Color.white;
+            RectTransform.localScale = Vector3.one;
+        }
 
         protected override void OnClick(PointerEventData eventData)
         {
@@ -215,6 +200,9 @@ namespace Tzipory.Systems.UISystem.Indicators
             _onCompleted?.Invoke();
             _timer?.StopTimer();
 
+            if (_isFlashing)
+                CancelFlashing();
+            
             if (_config.DisposOnClick)
                 Dispose();
         }

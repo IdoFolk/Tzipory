@@ -56,7 +56,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
                 Color = Color.white,
                 AllwaysShow = false,
                 DisposOnClick = false,
-                OffSetRadios = 100,
+                OffSetRadios = 25,
                 StartFlashing = false,
                 FlashConfig = new UIIndicatorFlashConfig()
                 {

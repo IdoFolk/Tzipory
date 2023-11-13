@@ -28,7 +28,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
                 if (_cameraHandler != null) return _cameraHandler;
                 
                 if (Camera.main != null)
-                    _cameraHandler = Camera.main.GetComponent<CameraHandler>();
+                    _cameraHandler = FindObjectOfType<CameraHandler>();
                 else
                     throw new Exception("Can not find a valid camera");
 

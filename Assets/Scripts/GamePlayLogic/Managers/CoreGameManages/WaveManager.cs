@@ -132,7 +132,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             foreach (var waveSpawner in waveSpawners)
                 waveIndicatorPositions.Add(waveSpawner.WaveIndicatorPosition);
                 
-            _waveIndicators = UIIndicatorHandler.SetNewIndicators(waveIndicatorPositions,_levelConfig.UIIndicatorConfig,_startLevelTimer);
+            _waveIndicators = UIIndicatorHandler.SetNewIndicators(waveIndicatorPositions,_levelConfig.UIIndicatorConfig,_delayBetweenWavesTimer);
         }
 
         public void Dispose()

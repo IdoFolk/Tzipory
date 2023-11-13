@@ -6,8 +6,8 @@ using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.SerializeData.PlayerData.Party;
-using Tzipory.Systems.CameraSystem;
 using Tzipory.Systems.SceneSystem;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Enums;
 using Tzipory.Tools.GameSettings;
 using Tzipory.Tools.TimeSystem;
@@ -55,7 +55,9 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         [SerializeField, TabGroup("Spawn parents")]
         private Transform _enemiesParent;
-
+        
+        [SerializeField,PropertyOrder(-1)] private UIIndicatorConfig _uiIndicatorConfig;//only for testing TEMP
+        
         private UIIndicatorHandler _uiIndicatorHandler;
 
         private void Awake()
@@ -78,7 +80,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
             Instantiate(_levelConfig.Level, _levelParent);
             
-            GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
+            GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.CameraMaxZoom, _levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
 
             #region OnlyForTesting
 #if UNITY_EDITOR
@@ -89,14 +91,14 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             #endregion
             
             EnemyManager = new EnemyManager(_enemiesParent);
-            WaveManager = new WaveManager(_levelConfig, _waveIndicatorParent); //temp!
+            WaveManager = new WaveManager(_levelConfig,_uiIndicatorConfig); //temp!
             CoreTemplete = FindObjectOfType<CoreTemple>(); //temp!!!
             PartyManager.SpawnShaman();
         }
 
         private void Start()
         {
-            GameManager.CameraHandler.UnlockCamera();
+            GameManager.CameraHandler.ToggleCameraLock(false);
             GameManager.CameraHandler.ResetCamera();
             WaveManager.StartLevel();
             GAME_TIME.SetTimeStep(1);

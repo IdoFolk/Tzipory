@@ -18,6 +18,8 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         private readonly LevelConfig _levelConfig;
         private readonly List<Wave> _waves;
         
+        private readonly UIIndicatorConfig _uiIndicatorConfig;
+        
         private float _levelStartDelay;
         private float _delayBetweenWaves;
 
@@ -48,10 +50,11 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         #endregion
         
-        public WaveManager(LevelConfig levelConfig,Transform waveIndicatorParent)
+        public WaveManager(LevelConfig levelConfig,UIIndicatorConfig uiIndicatorConfig)//temp UIIndicator config
         {
             _levelConfig = levelConfig;
             _waves = new List<Wave>();
+            _uiIndicatorConfig = uiIndicatorConfig;
             _currentWaveIndex = 0;
             _levelStartDelay = _levelConfig.LevelStartDelay;
             _delayBetweenWaves = _levelConfig.DelayBetweenWaves;
@@ -75,7 +78,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             foreach (var waveSpawner in waveSpawners)
                 waveIndicatorPositions.Add(waveSpawner.WaveIndicatorPosition);
                 
-            _waveIndicators = UIIndicatorHandler.SetNewIndicators(waveIndicatorPositions,_levelConfig.UIIndicatorConfig,_startLevelTimer);
+            _waveIndicators = UIIndicatorHandler.SetNewIndicators(waveIndicatorPositions,_uiIndicatorConfig,_startLevelTimer);
         }
 
         public void UpdateLevel()
@@ -132,7 +135,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             foreach (var waveSpawner in waveSpawners)
                 waveIndicatorPositions.Add(waveSpawner.WaveIndicatorPosition);
                 
-            _waveIndicators = UIIndicatorHandler.SetNewIndicators(waveIndicatorPositions,_levelConfig.UIIndicatorConfig,_delayBetweenWavesTimer);
+            _waveIndicators = UIIndicatorHandler.SetNewIndicators(waveIndicatorPositions,_uiIndicatorConfig,_delayBetweenWavesTimer);
         }
 
         public void Dispose()

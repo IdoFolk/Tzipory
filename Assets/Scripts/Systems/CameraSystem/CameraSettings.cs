@@ -1,5 +1,4 @@
 using Sirenix.OdinInspector;
-using UnityEditor;
 using UnityEngine;
 
 namespace Tzipory.Systems.CameraSystem
@@ -38,7 +37,8 @@ namespace Tzipory.Systems.CameraSystem
         
         [Header("Clamping")]
         [TabGroup("Camera Zoom"),Tooltip("the smallest value that the zoom can reach")]public float ZoomMinClamp = 2f;
-        [TabGroup("Camera Zoom"),Tooltip("the largest value that the zoom can reach")]public float ZoomMaxClamp = 11f;
+        [TabGroup("Camera Zoom"),Tooltip("the largest value that the zoom can reach")]public float ZoomMaxClamp = 14f;
+
         
         
         [Button("Set as camera setting")] //WIP (not working)
@@ -48,18 +48,18 @@ namespace Tzipory.Systems.CameraSystem
             Debug.Log($"Set {name} as the active camera setting");
         }
         
-        [MenuItem("Game Setting/New camera settings")]
-        public static void CreateNewCameraSetting()
-        {
-            var cameraSetting = CreateInstance<CameraSettings>();
-            
-            System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo($"{Application.dataPath}{CAMERA_SETTING_PATH}");
-            int count = dir.GetFiles().Length / 2;
-            
-            cameraSetting.name = $"CameraSetting{count + 1}";
-            
-            AssetDatabase.CreateAsset(cameraSetting,$"Assets/{CAMERA_SETTING_PATH}/{cameraSetting.name}.asset");
-            AssetDatabase.SaveAssets();
-        }
+        // //[MenuItem("Game Setting/New camera settings")]
+        // public static void CreateNewCameraSetting()
+        // {
+        //     var cameraSetting = CreateInstance<CameraSettings>();
+        //     
+        //     System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo($"{Application.dataPath}{CAMERA_SETTING_PATH}");
+        //     int count = dir.GetFiles().Length / 2;
+        //     
+        //     cameraSetting.name = $"CameraSetting{count + 1}";
+        //     
+        //     AssetDatabase.CreateAsset(cameraSetting,$"Assets/{CAMERA_SETTING_PATH}/{cameraSetting.name}.asset");
+        //     AssetDatabase.SaveAssets();
+        // }
     }
 }

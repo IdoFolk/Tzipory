@@ -18,7 +18,7 @@ MonoBehaviour:
   - 0.66
   - 1
   RingDefaultColor: {r: 1, g: 1, b: 1, a: 1}
-  PowerStructureTypeColor: {r: 0.5764706, g: 0.28627452, b: 0, a: 0.7647059}
+  PowerStructureTypeColor: {r: 0.5849056, g: 0.3462531, b: 0.10760058, a: 0.7647059}
   DefaultSpriteAlpha: 1
   SpriteAlphaFade: 0.33
   StatEffectConfig:
@@ -35,7 +35,6 @@ MonoBehaviour:
       - 100
       - 75
       - 50
-      _enableRingModifiers: 1
     _effectSequence:
       _sequenceName: 
       _id: 0
@@ -44,13 +43,13 @@ MonoBehaviour:
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
-    _usePopUpTextConfig: 1
+    _overrideGlobalPopUpTextConfig: 1
     _popUpTextConfig:
-      DisablePopUp: 0
+      DisablePopUp: 1
       PopUpTextType: 3
       RepeatPattern: 0
       RoundNumbers: 1
-      Text: Crit Damage +{Modifier}
+      Text: 
       Color: {r: 0.5764706, g: 0.28627452, b: 0, a: 1}
       OverrideSize: 0
       FontSize: 0

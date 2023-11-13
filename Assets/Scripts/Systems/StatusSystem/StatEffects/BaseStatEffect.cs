@@ -36,7 +36,7 @@ namespace Tzipory.Systems.StatusSystem
 
             StatEffectType = parameter.StatEffectType;
 
-            if (parameter.UsePopUpTextConfig)
+            if (parameter.OverrideGlobalPopUpTextConfig)
                 PopUpTextConfig = parameter.PopUpTextConfig;
             
             IsInitialization = true;

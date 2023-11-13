@@ -132,24 +132,19 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         {
             if (_testing) Debug.Log($"Shadow Exit: {ringId}");
 
-            if (ringId >= _currentActiveRingId)
-            {
-                var currentActiveRing = proximityRingsManager.RingHandlers[ringId];
-                proximityRingsManager.ToggleAllSprites(false);
-                _currentActiveRingId = currentActiveRing.Id + 1;
+            if (ringId < _currentActiveRingId) return;
+            var currentActiveRing = proximityRingsManager.RingHandlers[ringId];
+            proximityRingsManager.ToggleAllSprites(false);
+            _currentActiveRingId = currentActiveRing.Id + 1;
+            if (_currentActiveRingId > proximityRingsManager.RingHandlers.Length) _currentActiveRingId = proximityRingsManager.RingHandlers.Length;
 
-                if (_currentActiveRingId >= proximityRingsManager.RingHandlers.Length)
-                    StatEffectPopupManager.HidePopupWindows(EntityInstanceID);
-                else
-                {
-                    proximityRingsManager.ToggleRingSprite(_currentActiveRingId, true);
-                    currentActiveRing = proximityRingsManager.RingHandlers[_currentActiveRingId];
-                    ShowStatPopupWindows(currentActiveRing);
-                }
-            }
+            if (_currentActiveRingId >= proximityRingsManager.RingHandlers.Length)
+                StatEffectPopupManager.HidePopupWindows(EntityInstanceID);
             else
             {
-                Debug.LogError("ring id could not be found");
+                proximityRingsManager.ToggleRingSprite(_currentActiveRingId, true);
+                currentActiveRing = proximityRingsManager.RingHandlers[_currentActiveRingId];
+                ShowStatPopupWindows(currentActiveRing);
             }
         }
 

@@ -16,6 +16,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         public static Vector2 MapSize { get; private set; }
 
         public Vector2 CameraBorder => _cameraBorders;
+        public float CameraMaxZoom => _cameraMaxZoom;
 
         public Vector2 CameraStartPosition => _cameraStartPosition;
         public float CameraStartZoom => _cameraStartZoom;
@@ -29,6 +30,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         [SerializeField] private Vector3 _fakeForward;
         [Header("Camera setting")]
         [SerializeField] private Vector2 _cameraBorders;
+        [SerializeField] private float _cameraMaxZoom;
         [SerializeField] private bool _overrideCameraStartPositionAndZoom;
         [SerializeField,ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private Vector2 _cameraStartPosition;
         [SerializeField,ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private float _cameraStartZoom;
@@ -121,7 +123,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
             
         }
         
-        [Button("refrec")]
+        [Button("refresh")]
         private void GetWaveSpawners()
         {
             for (int i = 0; i < _waveSpawnersSerialize.Count; i++)

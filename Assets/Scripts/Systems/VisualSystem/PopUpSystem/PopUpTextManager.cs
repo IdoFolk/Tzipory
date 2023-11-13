@@ -36,11 +36,6 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
             base.Awake();
             _visualData = _defualtSo.level_VisualData;
         }
-
-        public void SetLevelVisualDataSO(LevelVisualDataSO levelVisualDataSO)
-        {
-            _visualData = levelVisualDataSO.level_VisualData;
-        }
     }
 
     [System.Serializable]

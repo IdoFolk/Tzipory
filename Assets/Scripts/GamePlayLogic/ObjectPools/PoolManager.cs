@@ -1,11 +1,11 @@
 ﻿using System;
 using Tzipory.GameplayLogic.EntitySystem.Enemies;
-using Tzipory.GameplayLogic.UI.WaveIndicator;
 using Tzipory.GameplayLogic.VisualSystem.EffectType;
 using Tzipory.Systems.FactorySystem.GameObjectFactory;
 using Tzipory.Systems.FactorySystem.ObjectFactory;
 using Tzipory.Systems.PoolSystem;
 using Tzipory.Systems.StatusSystem;
+using Tzipory.Systems.UISystem.Indicators;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 
 namespace Tzipory.GamePlayLogic.ObjectPools
@@ -14,7 +14,7 @@ namespace Tzipory.GamePlayLogic.ObjectPools
     {
         public static VisualSystemPool  VisualSystemPool { get; private set; }
         public static ObjectPool<Enemy> EnemyPool { get; private set; }
-        public static ObjectPool<WaveIndicator> IndicatorPool { get; private set; }
+        public static ObjectPool<UIIndicator> IndicatorPool { get; private set; }
         
         public static ObjectPool<PopupText> PopUpTextPool { get; private set; }
         
@@ -24,7 +24,7 @@ namespace Tzipory.GamePlayLogic.ObjectPools
         {
             VisualSystemPool  = new VisualSystemPool();
             EnemyPool = new ObjectPool<Enemy>(new EnemyFactory(),50);
-            IndicatorPool  = new ObjectPool<WaveIndicator>(new WaveIndicatorFactory());
+            IndicatorPool  = new ObjectPool<UIIndicator>(new IndicatorFactory());
             PopUpTextPool = new ObjectPool<PopupText>(new PopUpTextFactory(),50);
         }
     }

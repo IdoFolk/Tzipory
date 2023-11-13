@@ -266,6 +266,7 @@ namespace Tzipory.Systems.StatusSystem
         public readonly float NewValue;
         public readonly PopUpTextConfig PopUpTextConfig;
         public readonly bool UsePopUpTextConfig;
+        public readonly bool HavePopUpTextConfig;
         
         public StatChangeData(string statEffectName,float delta,float modifier, float newValue,PopUpTextConfig popUpTextConfig)
         {
@@ -275,17 +276,9 @@ namespace Tzipory.Systems.StatusSystem
             NewValue = newValue;
             UsePopUpTextConfig = true;
             PopUpTextConfig = popUpTextConfig;
+            HavePopUpTextConfig = true;
         }
         
-        public StatChangeData(string statEffectName,float delta, float newValue,PopUpTextConfig popUpTextConfig)
-        {
-            StatEffectName = statEffectName;
-            Delta = delta;
-            NewValue = newValue;
-            UsePopUpTextConfig = true;
-            PopUpTextConfig = popUpTextConfig;
-            Modifier = 0;
-        }
         
         public StatChangeData(string statEffectName,float delta, float newValue)
         {
@@ -294,6 +287,7 @@ namespace Tzipory.Systems.StatusSystem
             NewValue = newValue;
             UsePopUpTextConfig = true;
             PopUpTextConfig = default;
+            HavePopUpTextConfig = false;
             Modifier = 0;
         }
         
@@ -304,6 +298,7 @@ namespace Tzipory.Systems.StatusSystem
             Modifier = modifier;
             NewValue = newValue;
             PopUpTextConfig = default;
+            HavePopUpTextConfig = false;
             UsePopUpTextConfig = false;
         }
     }

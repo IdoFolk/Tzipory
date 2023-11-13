@@ -1,5 +1,7 @@
 ﻿using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem.EntityVisual;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.GameplayLogic.UI.ProximityIndicators;
 using Tzipory.Helpers;
 using Tzipory.Helpers.Consts;
@@ -7,6 +9,8 @@ using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.MovementSystem.HerosMovementSystem;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Tools.Interface;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
@@ -28,6 +32,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
         private float _baseDecisionInterval;//temp
         
         private float _currentAttackRate;
+        
+        private IObjectDisposable _uiIndicator;
 
         public override void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
@@ -43,7 +49,29 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             _clickHelper.OnClick += _tempHeroMovement.SelectHero;
             
             _proximityHandler.Init(AttackRange.CurrentValue);//MAY need to move to OnEnable - especially if we use ObjectPooling instead of instantiate
+            
+            _uiIndicator = UIIndicatorHandler.SetNewIndicator(transform, new UIIndicatorConfig()
+            {
+                Image = visualConfig.Icon,
+                Color = Color.white,
+                AllwaysShow = false,
+                DisposOnClick = false,
+                OffSetRadios = 25,
+                StartFlashing = false,
+                FlashConfig = new UIIndicatorFlashConfig()
+                {
+                    SizeFactor = 1.2f,
+                    FlashSpeed = .8f,
+                    UseTime = true,
+                    Time = 3,
+                    OverrideFlashingColor = true,
+                    FlashingColor = Color.red
+                }
+            },null,GoToShaman);
         }
+        
+        private void GoToShaman()=>
+            GameManager.CameraHandler.SetCameraPosition(transform.position);
 
         private void OnDisable()
         {
@@ -59,7 +87,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
                 TargetingHandler.GetPriorityTarget();
                 _currentDecisionInterval = _baseDecisionInterval;
             }
-            
+
             if (TargetingHandler.CurrentTarget != null)//temp
                 Attack();
         }
@@ -108,6 +136,12 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             }
             EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
             _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue,false);
+        }
+
+        public override void TakeDamage(float damage, bool isCrit)
+        {
+            base.TakeDamage(damage, isCrit);
+            UIIndicatorHandler.StartFlashOnIndicator(_uiIndicator.ObjectInstanceId);
         }
 
         protected override void EntityDied()

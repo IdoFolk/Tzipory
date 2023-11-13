@@ -4,6 +4,7 @@ using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.ConfigFiles.Level;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GamePlayLogic.ObjectPools;
+using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.SerializeData.PlayerData.Party;
 using Tzipory.Systems.CameraSystem;
 using Tzipory.Systems.SceneSystem;
@@ -48,13 +49,19 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         [SerializeField, TabGroup("Spawn parents")]
         private Transform _shamanParent;
+        
+        [SerializeField, TabGroup("Spawn parents")]
+        private Transform _uiIndicatorParent;
 
         [SerializeField, TabGroup("Spawn parents")]
         private Transform _enemiesParent;
 
+        private UIIndicatorHandler _uiIndicatorHandler;
+
         private void Awake()
         {
             _poolManager = new PoolManager();
+            _uiIndicatorHandler = new UIIndicatorHandler(_uiIndicatorParent,10);
 
             if (GameManager.GameData == null) //for Testing(Start form level scene)
             {
@@ -70,24 +77,15 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             }
 
             Instantiate(_levelConfig.Level, _levelParent);
+            
+            GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
 
             #region OnlyForTesting
-
 #if UNITY_EDITOR
-            if (GameManager.CameraHandler is null)
-            {
-                GameManager.CameraHandler = FindObjectOfType<CameraHandler>();//only for testing
-                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
-            }
-            else
-            {
-                GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
-            }
-
+               
             if (GAME_TIME.TimerHandler is null)
                 Instantiate(Resources.Load<GameObject>("Prefabs/Managers/Temp/GameTimeManager"));//only for testing
 #endif
-           
             #endregion
             
             EnemyManager = new EnemyManager(_enemiesParent);

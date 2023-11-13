@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.Item;
+using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.Helpers.Consts;
 using UnityEngine;
 
@@ -37,9 +38,17 @@ namespace Tzipory.ConfigFiles.EntitySystem
         private bool _ring2Check => _ring2 is not null && _ring2 is not {ItemSlot: ItemSlot.Ring};
 
         #endregion
+
+        #region Totem
+
+        [SerializeField] private TotemConfig _totemConfig;
+
+        #endregion
         
         [SerializeField,TabGroup("AI")] private float _decisionInterval;//temp
         public float DecisionInterval => _decisionInterval;
+
+        public TotemConfig TotemConfig => _totemConfig;
 
         public override int ObjectId => _shamanId;
         public override int ConfigTypeId => Constant.DataId.SHAMAN_DATA_ID;

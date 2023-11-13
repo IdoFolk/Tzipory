@@ -151,6 +151,12 @@ namespace Tzipory.Systems.Entity
                 throw new Exception($"{Constant.StatsId.MovementSpeed} not found in entity {GameEntity.name}");
             }
         }
+
+        public void SetDestination(Vector3 destination, MoveType moveType, Action oncomplete)
+        {
+            throw new NotImplementedException();
+        }
+
         public Stat TargetingRange {
             get
             {

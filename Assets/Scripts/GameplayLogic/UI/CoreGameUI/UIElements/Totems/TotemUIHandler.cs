@@ -1,7 +1,6 @@
 using System;
 using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.Systems.UISystem;
-using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,56 +10,46 @@ namespace Tzipory.GameplayLogic.UIElements
     public class TotemUIHandler : BaseInteractiveUIElement
     {
         [SerializeField] private Image _splash;
-        private Totem _totem;
-        public event Action<int> OnTotemClick;
-        private int _id;
-        private bool _cooldownActive;
-        private float _cooldownTimer;
+        private TotemConfig _totemConfig;
+        public event Action<int,int> OnTotemClick;
+        private int _totemId;
+        private int _shamanId;
 
-        private Color _cooldownColor;
+        public int ShamanId => _shamanId;
+
+        private bool _totemPlaced;
+        private Color _disabledColor;
         private Color _activeColor;
 
 
-        public void Init(int id)
+        public void Init(TotemConfig totemConfig, int shamanId)
         {
-            _id = id;
-            base.Init();
+            _totemId = totemConfig.ObjectId;
+            _shamanId = shamanId;
+            _splash.sprite = totemConfig.TotemSprite;
             _activeColor = _splash.color;
-            _cooldownColor = _activeColor;
-            _cooldownColor.a = 0.5f;
-        }
-
-        private void Update()
-        {
-            if (_cooldownActive)
-            {
-                _cooldownTimer -= GAME_TIME.GameDeltaTime;
-                if (_cooldownTimer <= 0)
-                {
-                    _cooldownActive = false;
-                    _cooldownTimer = _totem.TotemConfig.TotemCooldown;
-                    _splash.color = _activeColor;
-                }
-            }
+            _disabledColor = _activeColor;
+            _disabledColor.a = 0.5f;
+            base.Init();
         }
 
         protected override void OnClick(PointerEventData eventData)
         {
-            if (_cooldownActive) return;
+            if (_totemPlaced) return;
             base.OnClick(eventData);
-            OnTotemClick?.Invoke(_id);
+            OnTotemClick?.Invoke(_totemId,_shamanId);
         }
 
-        public void SetTotemData(Totem totem)
+        public void SetTotemData(TotemConfig totemConfig)
         {
-            _totem = totem;
-            _splash.sprite = _totem.TotemConfig.TotemSprite;
+            _totemConfig = totemConfig;
+            _splash.sprite = totemConfig.TotemSprite;
         }
 
-        public void ActivateCooldown()
+        public void ShowTotemPlaced()
         {
-            _cooldownActive = true;
-            _splash.color = _cooldownColor;
+            _totemPlaced = true;
+            _splash.color = _disabledColor;
         }
     }
 }

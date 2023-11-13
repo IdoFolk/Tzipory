@@ -14,8 +14,8 @@ public class TotemsManager : MonoBehaviour
         _totemPlacer.Init();
     }
     
-    public static void PlaceTotem(Totem totem)
+    public static void PlaceTotem(int shamanId)
     {
-        _totemPlacer.PlaceTotem(totem);
+        _totemPlacer.PlaceTotem(shamanId);
     }
 }

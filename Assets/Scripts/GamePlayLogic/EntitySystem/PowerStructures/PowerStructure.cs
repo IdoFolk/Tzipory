@@ -72,8 +72,6 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         private void OnShamanRingEnter(int ringId, Shaman shaman)
         {
-            Debug.Log($"shaman entered ring {ringId}");
-
             var ringModifiedStatEffectConfig = _powerStructureConfig.StatEffectConfig;
             ringModifiedStatEffectConfig.StatModifier.Modifier = ringModifiedStatEffectConfig.StatModifier.RingModifiers[ringId];
 
@@ -87,7 +85,6 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         private void OnShamanRingExit(int ringId, Shaman shaman)
         {
-            Debug.Log($"shaman exited ring {ringId}");
             var ringModifiedStatEffectConfig = _powerStructureConfig.StatEffectConfig;
 
 
@@ -113,8 +110,6 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         private void OnShadowShamanEnter(int ringId)
         {
-            if (_testing) Debug.Log($"Shadow Enter: {ringId}");
-
             if (ringId < _currentActiveRingId)
             {
                 var currentActiveRing = proximityRingsManager.RingHandlers[ringId];
@@ -130,8 +125,6 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         private void OnShadowShamanExit(int ringId)
         {
-            if (_testing) Debug.Log($"Shadow Exit: {ringId}");
-
             if (ringId < _currentActiveRingId) return;
             var currentActiveRing = proximityRingsManager.RingHandlers[ringId];
             proximityRingsManager.ToggleAllSprites(false);

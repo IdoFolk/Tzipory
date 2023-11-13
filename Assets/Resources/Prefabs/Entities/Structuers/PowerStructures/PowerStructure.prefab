@@ -209,7 +209,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 03c364836e9bd9e4290ae0855d457cad, type: 3}
     - target: {fileID: 3291963132572350327, guid: ccf72829e2d57344c9c512ae0d92fa83, type: 3}
       propertyPath: m_SortingOrder
-      value: 6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3291963132572350327, guid: ccf72829e2d57344c9c512ae0d92fa83, type: 3}
       propertyPath: m_WasSpriteAssigned
@@ -597,7 +597,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7026605730497799101, guid: ea767b75b4e13514faa6303cf324fa1f, type: 3}
       propertyPath: m_SortingOrder
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7026605730497799101, guid: ea767b75b4e13514faa6303cf324fa1f, type: 3}
       propertyPath: m_RenderingLayerMask
@@ -1372,7 +1372,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7026605730497799101, guid: ea767b75b4e13514faa6303cf324fa1f, type: 3}
       propertyPath: m_SortingOrder
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1501,7 +1501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7026605730497799101, guid: ea767b75b4e13514faa6303cf324fa1f, type: 3}
       propertyPath: m_SortingOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

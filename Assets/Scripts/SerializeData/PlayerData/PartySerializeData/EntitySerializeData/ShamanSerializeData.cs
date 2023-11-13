@@ -3,7 +3,9 @@ using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles;
 using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
+using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.SerializeData.ItemSerializeData;
+using Tzipory.Systems.DataManager;
 using UnityEngine;
 
 namespace Tzipory.SerializeData.PlayerData.Party.Entity
@@ -19,6 +21,8 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         [SerializeField] private float _decisionInterval;//temp
 
         [SerializeField] private List<int> _itemIDList;
+
+        [SerializeField] private int _totemID;
         
         //add consumables serializeData
         
@@ -29,6 +33,8 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
 
         public List<int> ItemIDList => _itemIDList;
 
+        public int TotemID => _totemID;
+
         public override void Init(IConfigFile parameter)
         {
             base.Init(parameter);
@@ -37,6 +43,9 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
             _decisionInterval = config.DecisionInterval;
             _itemIDList = new List<int>();
             _shamanId = config.ObjectId;
+            
+            if (config.TotemConfig is not null)
+                _totemID = config.TotemConfig.ObjectId;
             //Need 
             //Need to be in config?
             //need to add more shaman config logic

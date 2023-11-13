@@ -1,4 +1,5 @@
-﻿using Tzipory.Systems.StatusSystem;
+﻿using System;
+using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
 namespace Tzipory.Systems.Entity.EntityComponents
@@ -7,7 +8,7 @@ namespace Tzipory.Systems.Entity.EntityComponents
     {
         public Stat MovementSpeed { get; }
 
-        public void SetDestination(Vector3 destination,MoveType moveType);
+        public void SetDestination(Vector3 destination,MoveType moveType,Action oncomplete);
     }
 
     public enum MoveType

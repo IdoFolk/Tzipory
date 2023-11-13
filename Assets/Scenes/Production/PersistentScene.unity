@@ -453,6 +453,10 @@ MonoBehaviour:
       _config:
       - {fileID: 11400000, guid: 987b231e3dbb0af45a58d4cb8a221806, type: 2}
       - {fileID: 11400000, guid: dc2af1d1427c5db4586b124166e28aaa, type: 2}
+    _totemConfig:
+      _config:
+      - {fileID: 11400000, guid: 88ce86f0560000045bdb135a3d30da5f, type: 2}
+      - {fileID: 11400000, guid: 0e68584a6ba79af41b8ed0129bfc25e5, type: 2}
 --- !u!1 &192807189
 GameObject:
   m_ObjectHideFlags: 0

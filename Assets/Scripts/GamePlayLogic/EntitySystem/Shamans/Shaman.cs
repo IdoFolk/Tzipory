@@ -1,9 +1,11 @@
 ﻿using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem.EntityVisual;
+using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.GameplayLogic.UI.ProximityIndicators;
 using Tzipory.Helpers;
 using Tzipory.Helpers.Consts;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.DataManager;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.MovementSystem.HerosMovementSystem;
@@ -24,11 +26,15 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
         
         private ShamanSerializeData  _serializeData;
 
+        private TotemConfig _totem;
+
         private float _currentDecisionInterval = 0;//temp
         private float _baseDecisionInterval;//temp
         
         private float _currentAttackRate;
         public BaseUnitEntityVisualConfig  VisualConfig { get; private set; } //temp
+
+        public TotemConfig Totem => _totem;
 
         public override void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
@@ -45,6 +51,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             _clickHelper.OnClick += _tempHeroMovement.SelectHero;
             
             _proximityHandler.Init(AttackRange.CurrentValue);//MAY need to move to OnEnable - especially if we use ObjectPooling instead of instantiate
+
+            _totem = DataManager.DataRequester.GetConfigData<TotemConfig>(shamanSerializeData.TotemID);
         }
 
         private void OnDisable()
@@ -117,6 +125,19 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             base.EntityDied();
             Debug.Log($"{gameObject.name} as Died!");
             gameObject.SetActive(false);
+        }
+
+        public void GoPlaceTotem(Vector3 position)
+        {
+            //move to totem pos
+            _tempHeroMovement.SetTarget(position,PlaceTotem);
+            //begin totem placement animation
+            
+        }
+
+        private void PlaceTotem()
+        {
+            Debug.Log("totem placed");
         }
     }
 }

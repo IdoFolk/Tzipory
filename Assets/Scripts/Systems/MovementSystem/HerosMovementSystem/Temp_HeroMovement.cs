@@ -1,4 +1,5 @@
-﻿using ProjectDawn.Navigation.Hybrid;
+﻿using System;
+using ProjectDawn.Navigation.Hybrid;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.EntityComponents;
@@ -19,9 +20,9 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         {
             _moveComponent.Init(_shaman.StatHandler.GetStat(Constant.StatsId.MovementSpeed));
         }
-        public void SetTarget(Vector3 pos)
+        public void SetTarget(Vector3 pos,Action Oncomplete = null)
         {
-            _moveComponent.SetDestination(pos, MoveType.Free); //MoveType is not really used at all
+            _moveComponent.SetDestination(pos, MoveType.Free,Oncomplete); //MoveType is not really used at all
         }
 
         public void SelectHero()

@@ -31,6 +31,7 @@ namespace Tzipory.Helpers.Consts
             public const int CAMP_BUILDING_DATA_ID = 11;
             public const int CAMP_FACILITY_DATA_ID = 12;
             public const int INVENTORY_DATA_ID = 13;
+            public const int TOTEM_DATA_ID = 14;
         }
 
         public enum Materials

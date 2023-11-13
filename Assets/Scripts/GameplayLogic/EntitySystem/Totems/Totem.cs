@@ -40,7 +40,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             _proximityRingHandler.OnShamanEnter += OnShamanEnter;
             _proximityRingHandler.OnShamanExit += OnShamanExit;
             _abilityTimer = _totemConfig.TotemEffectInterval;
-            _isActive = true;
+            _isActive = false;
         }
 
         private void Update() //temp

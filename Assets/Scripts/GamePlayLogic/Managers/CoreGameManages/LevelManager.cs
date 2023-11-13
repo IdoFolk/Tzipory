@@ -6,8 +6,8 @@ using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.SerializeData.PlayerData.Party;
-using Tzipory.Systems.CameraSystem;
 using Tzipory.Systems.SceneSystem;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Enums;
 using Tzipory.Tools.GameSettings;
 using Tzipory.Tools.TimeSystem;
@@ -55,7 +55,9 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         [SerializeField, TabGroup("Spawn parents")]
         private Transform _enemiesParent;
-
+        
+        [SerializeField,PropertyOrder(-1)] private UIIndicatorConfig _uiIndicatorConfig;//only for testing TEMP
+        
         private UIIndicatorHandler _uiIndicatorHandler;
 
         private void Awake()
@@ -89,7 +91,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             #endregion
             
             EnemyManager = new EnemyManager(_enemiesParent);
-            WaveManager = new WaveManager(_levelConfig, _waveIndicatorParent); //temp!
+            WaveManager = new WaveManager(_levelConfig,_uiIndicatorConfig); //temp!
             CoreTemplete = FindObjectOfType<CoreTemple>(); //temp!!!
             PartyManager.SpawnShaman();
         }

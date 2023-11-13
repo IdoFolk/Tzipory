@@ -78,7 +78,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
             Instantiate(_levelConfig.Level, _levelParent);
             
-            GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
+            GameManager.CameraHandler.SetCameraSettings(_levelConfig.Level.CameraBorder,_levelConfig.Level.CameraMaxZoom, _levelConfig.Level.OverrideCameraStartPositionAndZoom,_levelConfig.Level.CameraStartPosition,_levelConfig.Level.CameraStartZoom);
 
             #region OnlyForTesting
 #if UNITY_EDITOR
@@ -96,7 +96,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         private void Start()
         {
-            GameManager.CameraHandler.UnlockCamera();
+            GameManager.CameraHandler.ToggleCameraLock(false);
             GameManager.CameraHandler.ResetCamera();
             WaveManager.StartLevel();
             GAME_TIME.SetTimeStep(1);

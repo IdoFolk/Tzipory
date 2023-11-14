@@ -46,4 +46,5 @@ MonoBehaviour:
   _bracelet2: {fileID: 0}
   _ring1: {fileID: 0}
   _ring2: {fileID: 0}
+  _totemConfig: {fileID: 11400000, guid: 0e68584a6ba79af41b8ed0129bfc25e5, type: 2}
   _decisionInterval: 0

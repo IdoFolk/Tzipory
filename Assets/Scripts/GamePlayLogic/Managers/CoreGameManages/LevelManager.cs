@@ -26,6 +26,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         public static PartyManager PartyManager { get; private set; }
         public static EnemyManager EnemyManager { get; private set; }
         public static WaveManager WaveManager { get; private set; }
+        public static TotemManager TotemManager { get; private set; }
         public static CoreTemple CoreTemplete { get; private set; }
 
         public static bool IsWon { get; private set; }
@@ -55,6 +56,9 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         [SerializeField, TabGroup("Spawn parents")]
         private Transform _enemiesParent;
+        
+        [SerializeField, TabGroup("Spawn parents")]
+        private Transform _totemsParent;
         
         [SerializeField,PropertyOrder(-1)] private UIIndicatorConfig _uiIndicatorConfig;//only for testing TEMP
         
@@ -92,13 +96,16 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             
             EnemyManager = new EnemyManager(_enemiesParent);
             WaveManager = new WaveManager(_levelConfig,_uiIndicatorConfig); //temp!
+            TotemManager = new TotemManager(_totemsParent.GetComponent<TotemPlacer>());
+            
+            
             CoreTemplete = FindObjectOfType<CoreTemple>(); //temp!!!
             PartyManager.SpawnShaman();
         }
 
         private void Start()
         {
-            GameManager.CameraHandler.UnlockCamera();
+            GameManager.CameraHandler.ToggleCameraLock(false);
             GameManager.CameraHandler.ResetCamera();
             WaveManager.StartLevel();
             GAME_TIME.SetTimeStep(1);

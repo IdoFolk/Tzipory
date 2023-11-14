@@ -153,7 +153,7 @@ namespace Tzipory.Systems.Entity
             }
         }
 
-        public void SetDestination(Vector3 destination, MoveType moveType, Action oncomplete)
+        public void SetDestination(Vector3 destination, MoveType moveType, Action onComplete)
         {
             throw new NotImplementedException();
         }

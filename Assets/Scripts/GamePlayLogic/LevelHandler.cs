@@ -39,8 +39,6 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         [Header("Serialized Components")]
         [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         [SerializeField] private List<PowerStructure> _powerStructuresSerialize;
-        [SerializeField] private List<Totem> _totemsSerialize; //temp
-        [SerializeField] private TotemsManager _totemsManager;
         private static List<WaveSpawner> _waveSpawners;
 
         private readonly List<Color> _spawnerColors = new()
@@ -67,11 +65,6 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
             {
                 powerStructure.Init();
             }
-            foreach (var totem in _totemsSerialize) // temp
-            {
-                totem.Init();
-            }
-            _totemsManager.init();
             AddWaveSpawners(_waveSpawnersSerialize);
         }
 

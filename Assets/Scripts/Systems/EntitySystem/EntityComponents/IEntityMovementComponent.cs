@@ -8,7 +8,7 @@ namespace Tzipory.Systems.Entity.EntityComponents
     {
         public Stat MovementSpeed { get; }
 
-        public void SetDestination(Vector3 destination,MoveType moveType,Action oncomplete);
+        public void SetDestination(Vector3 destination,MoveType moveType,Action onComplete);
     }
 
     public enum MoveType

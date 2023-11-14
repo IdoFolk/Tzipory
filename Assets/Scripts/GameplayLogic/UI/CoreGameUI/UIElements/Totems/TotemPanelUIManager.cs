@@ -1,12 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
-using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.UISystem;
-using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Tzipory.GameplayLogic.UIElements
 {
@@ -21,43 +18,45 @@ namespace Tzipory.GameplayLogic.UIElements
         private int _activeShamanId;
         public override void Init()
         {
+            _totemPlacementUIHandler.OnTotemClick += OnTotemPlacementClick;
+            LevelManager.TotemManager.TotemPlaced += HideTotemUI;
             foreach (var shaman in LevelManager.PartyManager.Party)
             {
-                if (shaman.Totem is null) return;
+                if (shaman.TotemConfig is null) return;
                 var totemUI = Instantiate(_totemUIHandler, _totemContainer);
-                totemUI.SetTotemData(shaman.Totem);
-                totemUI.Init(shaman.Totem,shaman.EntityInstanceID);
+                totemUI.Init(shaman.TotemConfig,shaman.EntityInstanceID);
                 _totemUIHandlers.Add(totemUI);
                 totemUI.OnTotemClick += OnTotemClick;
             }            
             base.Init();
         }
-        //add unsubscribe to event
+
         public override void Hide()
         {
+            _totemPlacementUIHandler.OnTotemClick -= OnTotemPlacementClick;
+            LevelManager.TotemManager.TotemPlaced -= HideTotemUI;
             foreach (var totemUIHandler in _totemUIHandlers)
             {
                 totemUIHandler.OnTotemClick -= OnTotemClick;
             }
             base.Hide();
         }
-
-        private void Update() // temp
+        private void OnTotemPlacementClick(PointerEventData eventData)
         {
-            if (_placementActive)
+            if (!_placementActive) return;
+            switch (eventData.button)
             {
-                if(Input.GetMouseButtonDown(0))
-                {
-                   _totemPlacementUIHandler.ToggleSprite(false);
-                   _placementActive = false;
-                   PlaceTotem();
-                }
-
-                if (Input.GetMouseButtonDown(1))
+                case PointerEventData.InputButton.Left:
                 {
                     _totemPlacementUIHandler.ToggleSprite(false);
                     _placementActive = false;
+                    LevelManager.TotemManager.PlaceTotem(_activeShamanId);
+                    break;
                 }
+                case PointerEventData.InputButton.Right:
+                    _totemPlacementUIHandler.ToggleSprite(false);
+                    _placementActive = false;
+                    break;
             }
         }
 
@@ -68,9 +67,8 @@ namespace Tzipory.GameplayLogic.UIElements
             _activeShamanId = shamanId;
         }
 
-        private void PlaceTotem()
+        public void HideTotemUI()
         {
-            TotemsManager.PlaceTotem(_activeShamanId);
             foreach (var totemUI in _totemUIHandlers.Where(totemUI => totemUI.ShamanId == _activeShamanId))
             {
                 totemUI.ShowTotemPlaced();

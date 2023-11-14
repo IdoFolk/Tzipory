@@ -1,5 +1,7 @@
-﻿using Sirenix.OdinInspector;
+﻿using System;
+using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem.EntityVisual;
+using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.GameplayLogic.UI.ProximityIndicators;
@@ -12,7 +14,9 @@ using Tzipory.Systems.MovementSystem.HerosMovementSystem;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.TimeSystem;
+using Unity.VisualScripting;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Shamans
 {
@@ -33,8 +37,11 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
         
         private float _currentAttackRate;
         public BaseUnitEntityVisualConfig  VisualConfig { get; private set; } //temp
+        public TotemConfig  TotemConfig { get; private set; } //temp
+        
         
         private IObjectDisposable _uiIndicator;
+        
 
         public override void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
@@ -42,8 +49,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             VisualConfig = visualConfig;
             var shamanSerializeData = (ShamanSerializeData)parameter;
             _serializeData = shamanSerializeData;
-            
             _shotVisual.Init(this);
+            TotemConfig = shamanSerializeData.TotemConfig;
 
             _baseDecisionInterval = shamanSerializeData.DecisionInterval;
 
@@ -144,6 +151,12 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
         {
             base.TakeDamage(damage, isCrit);
             UIIndicatorHandler.StartFlashOnIndicator(_uiIndicator.ObjectInstanceId);
+        }
+
+        public void GoPlaceTotem(Vector3 pos, Action OnComplete)
+        {
+            var newPos = new Vector3(pos.x, pos.y - 1, pos.z);
+            _tempHeroMovement.SetTarget(newPos,OnComplete);
         }
 
         protected override void EntityDied()

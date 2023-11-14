@@ -20,9 +20,9 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         {
             _moveComponent.Init(_shaman.StatHandler.GetStat(Constant.StatsId.MovementSpeed));
         }
-        public void SetTarget(Vector3 pos,Action Oncomplete = null)
+        public void SetTarget(Vector3 pos,Action onComplete = null)
         {
-            _moveComponent.SetDestination(pos, MoveType.Free,Oncomplete); //MoveType is not really used at all
+            _moveComponent.SetDestination(pos, MoveType.Free,onComplete); //MoveType is not really used at all
         }
 
         public void SelectHero()

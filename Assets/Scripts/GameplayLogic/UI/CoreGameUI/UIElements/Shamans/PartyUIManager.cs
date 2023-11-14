@@ -8,7 +8,6 @@ namespace Tzipory.GameplayLogic.UIElements
     {
         [SerializeField] private RectTransform _heroContainer;
         [SerializeField] private ShamanUIHandler _shamanUIHanlder;
-        [SerializeField] private TotemPanelUIManager _totemPanelUIManager; //for instantiating totems in the ui pane
 
 
         public override void Init()
@@ -19,8 +18,6 @@ namespace Tzipory.GameplayLogic.UIElements
             {
                 var shamanUI = Instantiate(_shamanUIHanlder, _heroContainer);
                 shamanUI.SetShamanData(shaman);
-                
-                //if shaman has totem equipped then instantiate the totem in the totem panel ui
             }
             
             base.Init();

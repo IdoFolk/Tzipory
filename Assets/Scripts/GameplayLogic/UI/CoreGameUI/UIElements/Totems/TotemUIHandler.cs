@@ -24,9 +24,11 @@ namespace Tzipory.GameplayLogic.UIElements
 
         public void Init(TotemConfig totemConfig, int shamanId)
         {
-            _totemId = totemConfig.ObjectId;
-            _shamanId = shamanId;
+            _totemConfig = totemConfig;
             _splash.sprite = totemConfig.TotemSprite;
+            _splash.color = totemConfig.RingColor;
+            
+            _shamanId = shamanId;
             _activeColor = _splash.color;
             _disabledColor = _activeColor;
             _disabledColor.a = 0.5f;
@@ -36,20 +38,12 @@ namespace Tzipory.GameplayLogic.UIElements
         protected override void OnClick(PointerEventData eventData)
         {
             if (_totemPlaced) return;
-            base.OnClick(eventData);
             OnTotemClick?.Invoke(_totemId,_shamanId);
         }
-
-        public void SetTotemData(TotemConfig totemConfig)
-        {
-            _totemConfig = totemConfig;
-            _splash.sprite = totemConfig.TotemSprite;
-        }
-
         public void ShowTotemPlaced()
         {
             _totemPlaced = true;
-            _splash.color = _disabledColor;
+            _splash.enabled = false;
         }
     }
 }

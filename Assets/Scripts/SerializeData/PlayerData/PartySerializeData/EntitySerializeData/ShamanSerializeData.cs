@@ -22,7 +22,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
 
         [SerializeField] private List<int> _itemIDList;
 
-        [SerializeField] private int _totemID;
+        [SerializeField] private TotemConfig _totemConfig;
         
         //add consumables serializeData
         
@@ -33,7 +33,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
 
         public List<int> ItemIDList => _itemIDList;
 
-        public int TotemID => _totemID;
+        public TotemConfig TotemConfig => _totemConfig;
 
         public override void Init(IConfigFile parameter)
         {
@@ -45,7 +45,8 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
             _shamanId = config.ObjectId;
             
             if (config.TotemConfig is not null)
-                _totemID = config.TotemConfig.ObjectId;
+                _totemConfig = config.TotemConfig;
+            
             //Need 
             //Need to be in config?
             //need to add more shaman config logic

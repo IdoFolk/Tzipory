@@ -1084,6 +1084,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1908155565}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _totemsParent
+      value: 
+      objectReference: {fileID: 1669356715}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _enemiesParent
       value: 
       objectReference: {fileID: 978384404}
@@ -2649,6 +2653,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3216714463152588658, guid: 9c3032910c8036644bde17d12bf15cbe, type: 3}
   m_PrefabInstance: {fileID: 1610192906}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1669356714
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1669356715}
+  - component: {fileID: 1669356716}
+  m_Layer: 0
+  m_Name: =====Totems=====
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1669356715
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669356714}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2024843463}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1669356716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669356714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9f95e06ebd94534888b4f48d7056a54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1715907248
 GameObject:
   m_ObjectHideFlags: 0
@@ -3298,6 +3346,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1669356715}
   - {fileID: 1220341649}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3309,6 +3358,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 968795897}
     m_Modifications:
+    - target: {fileID: 343892750987939950, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
       propertyPath: _totems.Array.size
       value: 0
@@ -3336,6 +3389,14 @@ PrefabInstance:
     - target: {fileID: 6707137193144556452, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
       propertyPath: m_Name
       value: Totem Panel UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 7877477109347982175, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7987855826876382965, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8098626516000786021, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
       propertyPath: m_Pivot.x
@@ -3420,6 +3481,10 @@ PrefabInstance:
     - target: {fileID: 8713322059884282820, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9012752054616578365, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: _uiGroupTags
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -25,8 +25,9 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
         private float _abilityTimer;
 
         public TotemConfig TotemConfig => _totemConfig;
-        public void Init()
+        public void Init(TotemConfig totemConfig)
         {
+            _totemConfig = totemConfig;
             _proximityRingHandler.Init(0, _totemConfig.Range, _totemConfig.RingColor);
             _proximityRingHandler.ToggleSprite(true);
 
@@ -40,7 +41,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             _proximityRingHandler.OnShamanEnter += OnShamanEnter;
             _proximityRingHandler.OnShamanExit += OnShamanExit;
             _abilityTimer = _totemConfig.TotemEffectInterval;
-            _isActive = false;
+            _isActive = true;
         }
 
         private void Update() //temp

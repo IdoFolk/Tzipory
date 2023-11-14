@@ -1,22 +1,36 @@
+using System;
+using Tzipory.Systems.UISystem;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using Image = UnityEngine.UI.Image;
 
-public class TotemPlacementUIHandler : MonoBehaviour
+namespace Tzipory.GameplayLogic.UIElements
 {
-    [SerializeField] private Image _splash;
-    private bool _isActive;
-
-    private void Update()
+    public class TotemPlacementUIHandler : BaseInteractiveUIElement
     {
-        if (_isActive)
+        [SerializeField] private Image _splash;
+        private bool _isActive;
+
+        public event Action<PointerEventData> OnTotemClick;
+
+        protected override void OnClick(PointerEventData eventData)
         {
-            transform.position = Input.mousePosition;
+            OnTotemClick?.Invoke(eventData);
         }
-    }
 
-    public void ToggleSprite(bool state)
-    {
-        _splash.enabled = state;
-        _isActive = state;
+        private void Update()
+        {
+            if (_isActive)
+            {
+                transform.position = Input.mousePosition;
+            }
+        }
+
+        public void ToggleSprite(bool state)
+        {
+            _splash.enabled = state;
+            _isActive = state;
+            if (!state) transform.position = Vector3.zero;
+        }
     }
 }

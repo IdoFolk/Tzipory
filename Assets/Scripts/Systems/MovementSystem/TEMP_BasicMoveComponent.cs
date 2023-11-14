@@ -22,7 +22,7 @@ namespace Tzipory.Systems.EntityComponents
 
         private Vector2 _destination = Vector2.zero;
 
-        private Action oncomplet;
+        private Action _onComplete;
 
         //Set/init by Unit
 
@@ -50,13 +50,13 @@ namespace Tzipory.Systems.EntityComponents
 
         public bool IsMoveing { get; private set; }    
 
-        public void SetDestination(Vector3 destination, MoveType moveType,Action oncomplete = null)
+        public void SetDestination(Vector3 destination, MoveType moveType,Action onComplete = null)
         {
             agent.SetDestination(destination);
             _destination  = destination;
             IsMoveing  = true;
 
-            this.oncomplet = oncomplete;
+            this._onComplete = onComplete;
         }
 
         public void Stop()
@@ -72,7 +72,7 @@ namespace Tzipory.Systems.EntityComponents
 
             if (!IsMoveing) return;
             
-            oncomplet?.Invoke();
+            _onComplete?.Invoke();
             _destination = Vector2.zero;
             IsMoveing = false;
         }

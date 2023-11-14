@@ -34,8 +34,8 @@ namespace Tzipory.Systems.UISystem
 
         private void OnDestroy()
         {
-            Hide();
             UIManager.RemoveUIElement(this);
+            Hide();
         }
 
         public virtual void Show()

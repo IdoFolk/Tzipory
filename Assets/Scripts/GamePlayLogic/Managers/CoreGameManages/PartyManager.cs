@@ -18,7 +18,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         private readonly PartySerializeData _partySerializeData;
         private const string SHAMAN_PREFAB_PATH = "Prefabs/Entities/Shaman/BaseShamanEntity";
 
-        public IEnumerable<Shaman> Party { get; private set; }
+        public Shaman[] Party;//Temp fix
 
         public PartyManager(PartySerializeData partySerializeData,Transform partyParent)
         {
@@ -28,8 +28,10 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             _partyParent = partyParent;
         }
 
-        public void SpawnShaman()=>
-            Party = CreateParty(_partySerializeData.ShamansPartyDataContainers);
+        public void SpawnShaman()
+        {
+            Party = CreateParty(_partySerializeData.ShamansPartyDataContainers).ToArray();
+        }
 
         public void AddSpawnPoint(Vector3 spawnPoint)=>
             _partySpawnPoints.Add(spawnPoint, false);

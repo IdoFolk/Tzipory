@@ -409,6 +409,9 @@ MonoBehaviour:
   _cameraSettings: {fileID: 11400000, guid: 2fcc4c10b2fed7f408f9dce37e653946, type: 2}
   _enableCameraMovement: 1
   _enableEdgeScroll: 0
+  _enablePanScroll: 1
+  _enableZoomMovesCamera: 0
   _mainCamera: {fileID: 1133403119959084057}
   _cinemachineVirtualCamera: {fileID: 8209895816503717536}
   _cameraFollowObject: {fileID: 4805690003894856463}
+  _cinemachineBrain: {fileID: 7041495173240390223}

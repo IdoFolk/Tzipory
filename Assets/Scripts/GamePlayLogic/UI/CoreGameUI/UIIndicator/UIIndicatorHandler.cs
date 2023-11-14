@@ -12,12 +12,14 @@ namespace Tzipory.GameplayLogic.UI.Indicator
 {
     public class UIIndicatorHandler :  IDisposable
     {
-        private static readonly Dictionary<int,UIIndicator> UIIndicators = new();
+        private static Dictionary<int, UIIndicator> UIIndicators;
         
         public bool IsInitialization { get; private set; }
         
         public UIIndicatorHandler(Transform parent,int numberOfUIIndicators)
         {
+            UIIndicators = new  Dictionary<int, UIIndicator>();
+            
             for (int i = 0; i < numberOfUIIndicators; i++)
             {
                 var uiIndicator = PoolManager.IndicatorPool.GetObject();

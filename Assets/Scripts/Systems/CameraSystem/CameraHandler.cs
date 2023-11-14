@@ -34,6 +34,7 @@ namespace Tzipory.Systems.CameraSystem
         [SerializeField] private Camera _mainCamera;
         [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
         [SerializeField] private Transform _cameraFollowObject;
+        [SerializeField] private CinemachineBrain _cinemachineBrain;
 
         public Camera MainCamera => _mainCamera;
         private readonly Vector3 _lockedCameraPosition = new (0, -3, -80);
@@ -45,7 +46,6 @@ namespace Tzipory.Systems.CameraSystem
         private float _cameraStartZoom;
         private float _targetOrthographicSize;
         private CinemachineTransposer _cinemachineTransposer;
-        private CinemachineBrain _cinemachineBrain;
 
         private float _currentAspectRatioX;
         private float _currentAspectRatioY;

@@ -319,7 +319,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   _popUpTextCanvas: {fileID: 1527176942}
-  _defaultSo: {fileID: 11400000, guid: 1c477da2ae86013479986cb933c972e0, type: 2}
+  _defualtSo: {fileID: 11400000, guid: 1c477da2ae86013479986cb933c972e0, type: 2}
 --- !u!1001 &498852640
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1028,6 +1028,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1056200572}
   m_CullTransparentMesh: 1
+--- !u!1 &1130214568
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1130214569}
+  m_Layer: 0
+  m_Name: UIIndicator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1130214569
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130214568}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1774659271}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1133488925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1065,8 +1096,28 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1930332588}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.Image
+      value: 
+      objectReference: {fileID: 21300000, guid: 4b105f1d19edb9841b991af55b797ba5, type: 3}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.size
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: _shamanConfigs.Array.data[0]
@@ -1080,17 +1131,61 @@ PrefabInstance:
       propertyPath: _shamanConfigs.Array.data[2]
       value: 
       objectReference: {fileID: 11400000, guid: 1860914778f26304ebb1455b9221a5ef, type: 2}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.AllwaysShow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.OffSetRadios
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.DisposOnClick
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.StartFlashing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.FlashConfig.FlashSpeed
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.FlashConfig.SizeFactor
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.FlashConfig.FlashingColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.FlashConfig.FlashingColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.FlashConfig.FlashingColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.FlashConfig.FlashingColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 711364138736782852, guid: f626234657e1f6144961fe4427bfb087, type: 3}
+      propertyPath: _uiIndicatorConfig.FlashConfig.OverrideFlashingColor
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3616092513852329415, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
     - target: {fileID: 4045480606999645621, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.16
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4045480606999645621, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.04
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4045480606999645621, guid: f626234657e1f6144961fe4427bfb087, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2734,6 +2829,7 @@ Transform:
   - {fileID: 1133488927}
   - {fileID: 923561989}
   - {fileID: 409197816}
+  - {fileID: 1130214569}
   - {fileID: 64720930}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

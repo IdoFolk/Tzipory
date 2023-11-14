@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Enums;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
     public class UIManager : MonoBehaviour
     {
         private static readonly Dictionary<UIGroup, List<BaseUIElement>> UIGroups = new();
-
+        
         public static void Init(UIGroup parameter, bool showOnInit = false, bool updateOnShow = false)
         {
             if (!UIGroups.TryGetValue(parameter, out var uiElements))
@@ -69,7 +70,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
                 return;
             }
 
-            Debug.LogWarning("UiElement not found in any group",element);
+            Debug.LogError("UiElement not found in any group",element);
         }
 
         public static void ShowUIGroup(UIGroup group, bool updateOnShow = false)

@@ -45,6 +45,7 @@ namespace Tzipory.Systems.Entity
 
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpTexter _popUpTexter;
 
+
         #region Visual Events
         public Action<bool> OnSpriteFlipX;
         public Action<Sprite> OnSetSprite;
@@ -269,7 +270,6 @@ namespace Tzipory.Systems.Entity
             //SpriteRenderer.sprite = visualConfig.Sprite;
             SetSprite(visualConfig.Sprite);
 
-
             BaseInit();
         }
         
@@ -390,7 +390,7 @@ namespace Tzipory.Systems.Entity
             Health.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition),"Heal",PopUpTextManager.Instance.HealDefaultConfig);
         }
 
-        public void TakeDamage(float damage,bool isCrit)
+        public virtual void TakeDamage(float damage,bool isCrit)
         {
             if (IsDamageable)
             {
@@ -413,7 +413,7 @@ namespace Tzipory.Systems.Entity
                     popUpTextConfig = PopUpTextManager.Instance.GetHitDefaultConfig;
                     processName = "Hit";
                 }
-                
+
                 Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),processName,popUpTextConfig);
                 IsDamageable = false;
             }

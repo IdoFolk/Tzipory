@@ -13,7 +13,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
 
         [SerializeField] private AgentAuthoring _agentAuthoring;
         [SerializeField] private TEMP_BasicMoveComponent _moveComponent;
-        [SerializeField] Tzipory.GameplayLogic.EntitySystem.Shamans.Shaman _shaman;
+        [SerializeField] GameplayLogic.EntitySystem.Shamans.Shaman _shaman;
 
         public event Action TotemPlaced;
 
@@ -51,7 +51,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
 
         private void PlaceTotem(Vector3 pos)
         {
-            TotemManager.Instance.PlaceTotem(new Vector3(pos.x,pos.y + 1,0),_shaman.TotemConfig);
+            TotemManager.Instance.PlaceTotem(new Vector3(pos.x,pos.y + 1,0),_shaman);
             TotemPlaced?.Invoke();
         }
     }

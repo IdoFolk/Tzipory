@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
@@ -15,6 +16,8 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private List<TotemUIHandler> _totemUIHandlers; //temp
         private bool _placementActive;
         private int _activeShamanId;
+
+        public event Action<int,int> TotemClicked;
         public override void Init()
         {
             TotemManager.TotemPlaced += HideTotemUI;
@@ -39,13 +42,9 @@ namespace Tzipory.GameplayLogic.UIElements
             base.Hide();
         }
 
-        private void OnTotemClick(int totemId, int shamanId) //totemId may be redundent
+        private void OnTotemClick(int totemId, int shamanId) 
         {
-            foreach (var shaman in LevelManager.PartyManager.Party.Where(shaman => shaman.EntityInstanceID == shamanId))
-            {
-                TotemSelected = true;
-                shaman.TempHeroMovement.SelectHero();
-            }
+            TotemClicked?.Invoke(totemId,shamanId);
             _activeShamanId = shamanId;
         }
 

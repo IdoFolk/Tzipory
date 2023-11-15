@@ -771,6 +771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _totemPlacer: {fileID: 1669356716}
+  _totemPanelUIManager: {fileID: 748242563}
 --- !u!1 &968795896
 GameObject:
   m_ObjectHideFlags: 0

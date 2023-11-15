@@ -6,7 +6,6 @@ using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Helpers;
 using Tzipory.Systems.Entity;
 using Tzipory.Tools.TimeSystem;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Totems
@@ -24,20 +23,24 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
         private List<Enemy> _enemiesInsideTotemRange;
         private bool _isActive;
         private float _abilityTimer;
+        private Shaman _connectedShaman;
+
+        public Shaman ConnectedShaman => _connectedShaman;
 
         public TotemConfig TotemConfig => _totemConfig;
-        public void Init(TotemConfig totemConfig)
+        public void Init(TotemConfig totemConfig, Shaman connectedShaman)
         {
             _totemConfig = totemConfig;
             _proximityRingHandler.Init(0, _totemConfig.Range, _totemConfig.RingColor);
             _proximityRingHandler.ToggleSprite(true);
-
+            _connectedShaman = connectedShaman;
+                
             _enemiesInsideTotemRange = new List<Enemy>();
             _shamansInsideTotemRange = new List<Shaman>();
             
             _clickHelper.OnEnterHover += OnMouseEnter;
             _clickHelper.OnExitHover += OnMouseExit;
-            _clickHelper.OnClick += OnClick;
+            _clickHelper.OnHoldClick += OnHoldClick;
             _proximityRingHandler.OnEnemyEnter += OnEnemyEnter;
             _proximityRingHandler.OnEnemyExit += OnEnemyExit;
             _proximityRingHandler.OnShamanEnter += OnShamanEnter;
@@ -46,10 +49,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             _isActive = true;
         }
 
-        private void OnClick()
-        {
-            throw new NotImplementedException();
-        }
+        
 
         private void Update() //temp
         {
@@ -74,6 +74,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
 
         private void OnDestroy()
         {
+            _clickHelper.OnHoldClick -= OnHoldClick;
             _clickHelper.OnEnterHover -= OnMouseEnter;
             _clickHelper.OnExitHover -= OnMouseExit;
             _proximityRingHandler.OnEnemyEnter -= OnEnemyEnter;
@@ -81,6 +82,10 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
         }
 
         #region Events
+        private void OnHoldClick()
+        {
+            TotemManager.Instance.SelectTotem(EntityInstanceID,_connectedShaman.EntityInstanceID);
+        }
         private void OnMouseEnter()
         {
         }

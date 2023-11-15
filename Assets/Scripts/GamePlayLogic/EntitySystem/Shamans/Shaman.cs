@@ -29,7 +29,9 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
         [Header("Temps")]
         [SerializeField] private Temp_ShamanShotVisual _shotVisual;
         [SerializeField] private Temp_HeroMovement _tempHeroMovement;
-        
+
+        public Temp_HeroMovement TempHeroMovement => _tempHeroMovement;
+
         private ShamanSerializeData  _serializeData;
 
         private float _currentDecisionInterval = 0;//temp

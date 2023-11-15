@@ -62,6 +62,10 @@ namespace Tzipory.GameplayLogic.UIElements
 
         private void OnTotemClick(int totemId, int shamanId) //totemId may be redundent
         {
+            // foreach (var shaman in LevelManager.PartyManager.Party.Where(shaman => shaman.EntityInstanceID == _activeShamanId))
+            // {
+            //     shaman.TempHeroMovement.SelectHero();
+            // }
             _totemPlacementUIHandler.ToggleSprite(true);
             _placementActive = true;
             _activeShamanId = shamanId;

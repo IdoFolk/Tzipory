@@ -38,6 +38,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             _enemiesInsideTotemRange = new List<Enemy>();
             _shamansInsideTotemRange = new List<Shaman>();
             
+            _clickHelper.SetHoldClickWaitTime(totemConfig.HoldClickWaitTime);
             _clickHelper.OnEnterHover += OnMouseEnter;
             _clickHelper.OnExitHover += OnMouseExit;
             _clickHelper.OnHoldClick += OnHoldClick;

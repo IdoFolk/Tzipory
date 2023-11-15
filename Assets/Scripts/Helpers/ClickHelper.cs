@@ -15,21 +15,27 @@ namespace Tzipory.Helpers
         public bool IsHover { get; private set; }   
         
         private const int CLICKABLE_LAYER_INDEX = 11;
+        private const float HOLD_CLICK_WAIT_TIME = 1.5f;
 
-        private float _holdClickWaitTime = 2f;
+        private float _holdClickWaitTime;
         private float _holdClickTimer;
         private bool _holdClickTimerActive;
         private bool _holdClickTimerFinished;
         
         private void Awake()
         {
+            _holdClickWaitTime = HOLD_CLICK_WAIT_TIME;
             gameObject.layer = CLICKABLE_LAYER_INDEX;
             _holdClickTimer = _holdClickWaitTime;
         }
 
         public void SetHoldClickWaitTime(float waitTime)
         {
-            _holdClickWaitTime = waitTime;
+            if (waitTime == 0)
+                _holdClickTimer = HOLD_CLICK_WAIT_TIME;
+            else
+                _holdClickWaitTime = waitTime;
+            
             _holdClickTimer = _holdClickWaitTime;
         }
         public void OnPointerClick(PointerEventData eventData)
@@ -60,7 +66,7 @@ namespace Tzipory.Helpers
         {
             if (_holdClickTimerFinished) return;
             _holdClickTimerActive = false;
-            _holdClickTimer = _holdClickWaitTime;
+            _holdClickTimer = HOLD_CLICK_WAIT_TIME;
         }
 
         private void Update()
@@ -70,7 +76,7 @@ namespace Tzipory.Helpers
             if (_holdClickTimer <= 0)
             {
                 _holdClickTimerFinished = true;
-                _holdClickTimer = _holdClickWaitTime;
+                _holdClickTimer = HOLD_CLICK_WAIT_TIME;
                 _holdClickTimerActive = false;
                 OnHoldClick?.Invoke();
             }

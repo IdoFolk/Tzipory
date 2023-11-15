@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem.EntityVisual;
+using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.GameplayLogic.UI.ProximityIndicators;
@@ -29,6 +30,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
         
         private ShamanSerializeData  _serializeData;
 
+        public Temp_HeroMovement TempHeroMovement => _tempHeroMovement;
+
         private float _currentDecisionInterval = 0;//temp
         private float _baseDecisionInterval;//temp
         
@@ -36,6 +39,9 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
         public BaseUnitEntityVisualConfig  VisualConfig { get; private set; } //temp
         
         private IObjectDisposable _uiIndicator;
+        private TotemConfig _totemConfig;
+
+        public TotemConfig TotemConfig => _totemConfig;
 
         public override void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
@@ -43,7 +49,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             VisualConfig = visualConfig;
             var shamanSerializeData = (ShamanSerializeData)parameter;
             _serializeData = shamanSerializeData;
-            
+            _totemConfig = _serializeData.TotemConfig;
             _shotVisual.Init(this);
 
             _baseDecisionInterval = shamanSerializeData.DecisionInterval;

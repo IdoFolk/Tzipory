@@ -41,7 +41,7 @@ namespace Tzipory.Systems.EntityComponents
         }
 
         public Stat MovementSpeed => _speedStat;
-        
+
         public int EntityInstanceID => throw new NotImplementedException();
 
         public Transform EntityTransform => agent.transform;

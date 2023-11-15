@@ -14,7 +14,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
         public Sprite TotemSprite;
         public TotemEffectUnitType TotemEffectUnitType;
         public float TotemEffectInterval;
-        public float TotemCooldown;
+        public float HoldClickWaitTime;
 
         public int ObjectId => name.GetHashCode();
         public int ConfigTypeId => Constant.DataId.TOTEM_DATA_ID;

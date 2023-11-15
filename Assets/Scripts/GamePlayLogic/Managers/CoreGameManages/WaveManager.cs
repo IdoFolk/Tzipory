@@ -8,11 +8,13 @@ using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.WaveSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 {
     public class WaveManager : IDisposable
     {
+        public const string WAVE_MANAGER_LOG_GROUP = "WaveManager";
         public event Action<int> OnNewWaveStarted;
         
         private readonly LevelConfig _levelConfig;
@@ -91,9 +93,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
             if (!CurrentWave.IsActive && !CurrentWave.IsComplete)
             {
-#if UNITY_EDITOR
-                Debug.Log($"<color={ColorLogHelper.WAVE_MANAGER_COLOR}>WaveManager:</color> start wave-{_currentWaveIndex + 1}");
-#endif
+                Logger.Log($"Start wave-{_currentWaveIndex + 1}",WAVE_MANAGER_LOG_GROUP);
                 CurrentWave.StartWave();
 
                 foreach (var indicator in _waveIndicators)
@@ -108,7 +108,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             if (CurrentWave.IsActive && !CurrentWave.IsComplete)
             {
                 CurrentWave.EndWave();
-                Debug.Log($"<color={ColorLogHelper.WAVE_MANAGER_COLOR}>WaveManager:</color> ended wave-{_currentWaveIndex + 1}");
+                Logger.Log($"Ended wave-{_currentWaveIndex + 1}",WAVE_MANAGER_LOG_GROUP);
             }
             
             if (_currentWaveIndex + 1 < _waves.Count)
@@ -119,7 +119,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
                 if (!_isReportEndLevel)
                 {
                     _isReportEndLevel = true;
-                    Debug.Log($"<color={ColorLogHelper.WAVE_MANAGER_COLOR}>WaveManager:</color> <color=#f20505>Level Ended</color>");
+                    Logger.Log($"<color=#f20505>Level Ended</color>",WAVE_MANAGER_LOG_GROUP);
                 }
 #endif
                 return; // End level

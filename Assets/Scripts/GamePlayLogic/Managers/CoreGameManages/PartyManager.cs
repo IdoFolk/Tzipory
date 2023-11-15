@@ -28,7 +28,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             _partyParent = partyParent;
         }
 
-        public void SpawnShaman()=>
+        public void SpawnShaman() =>
             Party = CreateParty(_partySerializeData.ShamansPartyDataContainers);
 
         public void AddSpawnPoint(Vector3 spawnPoint)=>

@@ -18,6 +18,7 @@ using Tzipory.Tools.Interface;
 using Tzipory.Tools.Sound;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.Entity
 {
@@ -25,6 +26,8 @@ namespace Tzipory.Systems.Entity
         IEntityTargetingComponent, IEntityAbilitiesComponent, IEntityVisualComponent, IInitialization<BaseUnitEntityConfig> , IInitialization<UnitEntitySerializeData,BaseUnitEntityVisualConfig>
     {
         #region Fields
+
+        private const string ENTITY_LOG_GROUP = "Entity";
 
 #if UNITY_EDITOR
         [SerializeField, ReadOnly,TabGroup("StatsId")] private List<Stat> _stats;
@@ -438,9 +441,7 @@ namespace Tzipory.Systems.Entity
         public virtual void StartDeathSequence()
         {
             _startedDeathSequence = true;
-#if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as started death sequence");
-#endif
+            Logger.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as started death sequence",ENTITY_LOG_GROUP);
             
             IsTargetAble = false;
             IsDamageable = false;
@@ -455,9 +456,7 @@ namespace Tzipory.Systems.Entity
             IsInitialization = false;
             TargetingHandler.Reset();
             EffectSequenceHandler.Reset();
-#if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as died!");
-#endif
+            Logger.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as died!",ENTITY_LOG_GROUP);
         }
 
         #endregion

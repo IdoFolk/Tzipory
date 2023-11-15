@@ -8,12 +8,15 @@ using Tzipory.Systems.MovementSystem;
 using Tzipory.Systems.PoolSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 using Random = UnityEngine.Random;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Enemies
 {
     public class Enemy : BaseUnitEntity , IPoolable<Enemy>
     {
+        private const string ENEMY_LOG_GROUP = "Enemy";
+        
         private float _decisionInterval;//temp
         private float _aggroLevel;//temp
         private float _returnLevel;//temp
@@ -65,7 +68,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Enemies
                         {
                             _isAttacking  = true;
 #if UNITY_EDITOR
-                            Debug.Log($"{gameObject.name} InstanceID: {EntityInstanceID} is attacking {TargetingHandler.CurrentTarget.EntityTransform.name}");
+                            Logger.Log($"{gameObject.name} InstanceID: {EntityInstanceID} is attacking {TargetingHandler.CurrentTarget.EntityTransform.name}",ENEMY_LOG_GROUP);
 #endif
                         }
                     }

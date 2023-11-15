@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using Tzipory.GameplayLogic.EntitySystem.Totems;
-using Tzipory.GameplayLogic.Managers.CoreGameManagers;
-using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Unity.Mathematics;
 using UnityEngine;
 

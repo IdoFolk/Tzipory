@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Tzipory.GameplayLogic.UIElements;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
@@ -10,6 +11,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         [SerializeField] private StatEffectPopupWindowHandler[] _popupWindowHandlers;
         [SerializeField] private float StatEffectPopupWindowsDistance;
         
+        [SerializeField] private Shadow _shadow;
 
         private void Awake()
         {
@@ -17,6 +19,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             {
                 popupWindowHandler.Init();
             }
+
+            _shadow ??= GetComponentInParent<Shadow>();
         }
 
         public void ShowPopupWindows(int EntityId, string statBonusText, float value, bool isPercent, Color color)

@@ -6,6 +6,7 @@ using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Helpers;
 using Tzipory.Systems.Entity;
 using Tzipory.Tools.TimeSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Totems
@@ -36,12 +37,18 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             
             _clickHelper.OnEnterHover += OnMouseEnter;
             _clickHelper.OnExitHover += OnMouseExit;
+            _clickHelper.OnClick += OnClick;
             _proximityRingHandler.OnEnemyEnter += OnEnemyEnter;
             _proximityRingHandler.OnEnemyExit += OnEnemyExit;
             _proximityRingHandler.OnShamanEnter += OnShamanEnter;
             _proximityRingHandler.OnShamanExit += OnShamanExit;
             _abilityTimer = _totemConfig.TotemEffectInterval;
             _isActive = true;
+        }
+
+        private void OnClick()
+        {
+            throw new NotImplementedException();
         }
 
         private void Update() //temp

@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentHolder: {fileID: 1618776912504356253}
-  _statBonusPopHandlerPrefab: {fileID: 6736740130189679859, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
+  _statEffectPopupHandlerPrefab: {fileID: 0}
 --- !u!1 &5249046983319933460
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,8 +222,8 @@ Transform:
   m_GameObject: {fileID: 7117625766000666590}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 1.5038, y: 1.5038, z: 1.5038}
+  m_LocalPosition: {x: -0.0452, y: 0.4661, z: 0}
+  m_LocalScale: {x: 1.5941783, y: 1.8424963, z: 1.5038}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1447107314027615554}
@@ -268,7 +268,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0.26321647, g: 0.8584906, b: 0.8315704, a: 0.5294118}
   m_FlipX: 0
@@ -521,6 +521,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f4e62ad13a5770c44aac2a924dab6155, type: 3}
+    - target: {fileID: 9049190174793075535, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049190174793075535, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9049190174793075535, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

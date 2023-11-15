@@ -1,6 +1,7 @@
 using System;
 using Tzipory.GameplayLogic.EntitySystem.Enemies;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
+using Tzipory.GameplayLogic.UIElements;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.TargetingSystem;
 using Tzipory.Systems.UISystem;
@@ -54,6 +55,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         public void RecieveCollision(Collider2D other, IOType ioType)
         {
+            if (TotemPanelUIManager.TotemSelected) return;
             if (other.gameObject.CompareTag("ShadowShaman"))
             {
                 if (ioType == IOType.In) OnShadowEnter?.Invoke(Id);

@@ -1,5 +1,4 @@
-﻿using System;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem.EntityVisual;
 using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
@@ -14,7 +13,6 @@ using Tzipory.Systems.MovementSystem.HerosMovementSystem;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.TimeSystem;
-using Unity.VisualScripting;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -153,12 +151,6 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
         {
             base.TakeDamage(damage, isCrit);
             UIIndicatorHandler.StartFlashOnIndicator(_uiIndicator.ObjectInstanceId);
-        }
-
-        public void GoPlaceTotem(Vector3 pos, Action OnComplete)
-        {
-            var newPos = new Vector3(pos.x, pos.y - 1, pos.z);
-            _tempHeroMovement.SetTarget(newPos,OnComplete);
         }
 
         protected override void EntityDied()

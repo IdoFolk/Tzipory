@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Tzipory.GameplayLogic.UIElements;
 using Tzipory.Helpers;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         public event Action<Vector3> OnMove;
 
         private Temp_HeroMovement _currentTarget;
+        private Temp_HeroMovement _waitForTotemTarget;
         private Camera _camera;
 
         private bool _isValidClick;
@@ -31,8 +33,6 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         
         //temp?
         bool isCooldown;
-
-
         private void Start()
         {
             _shadow.gameObject.SetActive(false);
@@ -40,18 +40,17 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             _camera = Camera.main;
         }
 
-        //public void SelectTarget(Temp_HeroMovement  target)
-        //{
-        //    _currentTarget = target;
-        //    OnAnyShamanSelected?.Invoke();
-        //}
         public void SelectTarget(Temp_HeroMovement  target, Sprite shadowSprite, float range)
         {
             if (isCooldown)
                 return;
             _currentTarget = target;
+            if (TotemPanelUIManager.TotemSelected)
+            {
+                _waitForTotemTarget = _currentTarget;
+                _waitForTotemTarget.TotemPlaced += ClearTarget;
+            }
             _shadow.SetShadow(target.transform, shadowSprite, range);
-
             Cursor.visible = false;
             _previousTimeRate = GAME_TIME.GetCurrentTimeRate;
             GAME_TIME.SetTimeStep(_slowTime,_slowTimeTransitionTime,_startSlowTimeCurve);
@@ -60,19 +59,34 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
 
         public void ClearTarget()
         {
+            if (TotemPanelUIManager.TotemSelected) 
+                _waitForTotemTarget.TotemPlaced -= ClearTarget;
             _currentTarget = null;
-            _shadow.ClearShadow();
+            _shadow.ClearShadow(false);
             Cursor.visible = true;
             isCooldown = true;
             StartCoroutine(SetIsCooldownWaitOneFrame(false));
-            
+            TotemPanelUIManager.ToggleTotemSelected(false);
             GAME_TIME.SetTimeStep(_previousTimeRate,_slowTimeTransitionTime,_endSlowTimeCurve);
             OnAnyShamanDeselected?.Invoke();
         }
+
         private IEnumerator SetIsCooldownWaitOneFrame(bool isIt)
         {
             yield return new WaitForSeconds(.1f);
             isCooldown = isIt;
+        }
+
+        private void PlaceShadowTotem()
+        {
+            _currentTarget = null;
+            _shadow.ClearShadow(true);
+            Cursor.visible = true;
+            isCooldown = true;
+            StartCoroutine(SetIsCooldownWaitOneFrame(false));
+            TotemPanelUIManager.ToggleTotemSelected(false);
+            GAME_TIME.SetTimeStep(_previousTimeRate,_slowTimeTransitionTime,_endSlowTimeCurve);
+            OnAnyShamanDeselected?.Invoke();
         }
 
         private void Update()
@@ -87,7 +101,6 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             {
                 if(Mouse.current.rightButton.wasPressedThisFrame)
                 {
-                    _shadow.ClearShadow();
                     ClearTarget();
                     return;
                 }
@@ -104,7 +117,8 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
                 _currentTarget.SetTarget(worldPos);
                 OnMove?.Invoke(worldPos);
 
-                ClearTarget();
+                if (TotemPanelUIManager.TotemSelected) PlaceShadowTotem();
+                else ClearTarget();
             }
 
             if (_currentTarget != null)

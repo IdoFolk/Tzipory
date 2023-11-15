@@ -29,13 +29,12 @@ public class Shadow : MonoBehaviour
         //_agent.SetDestination(transform.position);
     }
 
-    public void ClearShadow()
+    public void ClearShadow(bool gameObjectState)
     {
         IsOn = false;
         _lineRenderer.gameObject.SetActive(false);
-        gameObject.SetActive(false);
+        gameObject.SetActive(gameObjectState);
     }
-
     private void Update()
     {
         if (IsOn) // need to be IsOn

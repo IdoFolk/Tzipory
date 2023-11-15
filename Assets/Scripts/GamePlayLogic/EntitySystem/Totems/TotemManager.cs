@@ -1,43 +1,27 @@
 using System;
-using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.GameplayLogic.EntitySystem.Totems;
-using Tzipory.GameplayLogic.Managers.CoreGameManagers;
-using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.Helpers;
 using UnityEngine;
 
-public class TotemManager : IDisposable
+public class TotemManager : MonoSingleton<TotemManager>
 {
-    [SerializeField] private TotemPlacer _totemPlacerPrefab;
-    private TotemPlacer _totemPlacer;
+    [SerializeField] private TotemPlacer _totemPlacer;
     private TotemConfig _totemConfig;
-    private Vector3 _totemPlacePos;
 
-    public event Action TotemPlaced;
-    public TotemManager(TotemPlacer totemPlacer)
+    public static event Action TotemPlaced;
+
+    private void Start()
     {
-        _totemPlacer = totemPlacer;
         _totemPlacer.Init();
     }
-    
-    public void PlaceTotem(int shamanId)
-    {
-        _totemPlacePos = GameManager.CameraHandler.MainCamera.ScreenToWorldPoint(Input.mousePosition);
-        _totemPlacePos.z = 0;
-        foreach (var shaman in LevelManager.PartyManager.Party)
-        {
-            if (shaman.EntityInstanceID == shamanId)
-            {
-                shaman.GoPlaceTotem(_totemPlacePos, PlaceTotem);
-                _totemConfig = shaman.TotemConfig;
-            }
-        } 
-    }
 
-    private void PlaceTotem()
+
+    public void PlaceTotem(Vector3 pos, TotemConfig totemConfig)
     {
-        _totemPlacer.PlaceTotem(_totemPlacePos,_totemConfig);
+        _totemPlacer.PlaceTotem(pos,totemConfig);
         TotemPlaced?.Invoke();
     }
+
 
     public void Dispose()
     {

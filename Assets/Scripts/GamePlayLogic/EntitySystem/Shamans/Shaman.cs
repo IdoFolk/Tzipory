@@ -13,6 +13,7 @@ using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Shamans
 {

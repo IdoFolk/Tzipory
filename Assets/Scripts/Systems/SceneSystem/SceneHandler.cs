@@ -3,11 +3,14 @@ using System.Collections;
 using Tzipory.Tools.LoadingScreen;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.SceneSystem
 {
     public class SceneHandler : MonoBehaviour , ISceneHandler
     {
+        private const string  SCENE_HANDLER_LOG__GROUP = "SceneHandler";
+        
         public static event Action<SceneType> OnSceneLoaded;
         
         private const int MAIN_MENU_SCENE_INDEX = 1;
@@ -52,7 +55,7 @@ namespace Tzipory.Systems.SceneSystem
             if (preventsScene.buildIndex != 0)
             {
                 SceneManager.SetActiveScene(PresistanteScene);
-                Debug.Log($"Unloading scene {preventsScene.name}");
+                Logger.Log($"Unloading scene {preventsScene.name}",SCENE_HANDLER_LOG__GROUP);
 
                 yield return _loadingScreenHandler.FadeIn();
                 
@@ -60,10 +63,10 @@ namespace Tzipory.Systems.SceneSystem
                 
                 yield return SceneLoaderAndUnLoader(unloadSceneAsync);
                 
-                Debug.Log($"Unloaded scene {preventsScene.name}");
+                Logger.Log($"Unloaded scene {preventsScene.name}",SCENE_HANDLER_LOG__GROUP);
             }
 
-            Debug.Log($"start loading sceneType");
+            Logger.Log($"start loading sceneType",SCENE_HANDLER_LOG__GROUP);
             
             var loadSceneAsync = SceneManager.LoadSceneAsync(sceneIndex,LoadSceneMode.Additive);
             
@@ -87,7 +90,7 @@ namespace Tzipory.Systems.SceneSystem
 
             IsLoading = false;
             
-            Debug.Log($"Loaded sceneType {CurrentScene.name}");
+            Logger.Log($"Loaded sceneType {CurrentScene.name}",SCENE_HANDLER_LOG__GROUP);
         }
 
         private IEnumerator SceneLoaderAndUnLoader(AsyncOperation asyncOperation)
@@ -99,7 +102,7 @@ namespace Tzipory.Systems.SceneSystem
                 if (asyncOperation.progress  >= 0.9f)
                     asyncOperation.allowSceneActivation = true;
                 
-                Debug.Log($"loading progress {asyncOperation.progress * 100}%");
+                Logger.Log($"loading progress {asyncOperation.progress * 100}%",SCENE_HANDLER_LOG__GROUP);
                 yield return null;
             }
         }

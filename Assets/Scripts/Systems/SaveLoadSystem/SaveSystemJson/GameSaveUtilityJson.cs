@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using Tzipory.Systems.SaveLoadSystem.PlayerPref;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.SaveLoadSystem.SaveSystemJson
 {
@@ -12,7 +13,7 @@ namespace Tzipory.Systems.SaveLoadSystem.SaveSystemJson
         {
             string dataAsString = JsonUtility.ToJson(data);
             File.WriteAllText($"{path}/{data.ObjectName}.json", dataAsString);
-            Debug.Log($"The file have been saved successfully key: {path}");
+            Logger.Log($"The file have been saved successfully key: {path}");
         }
 
         public static bool LoadObject<T>(string path,out T saveData) where T : class , ISave
@@ -20,13 +21,13 @@ namespace Tzipory.Systems.SaveLoadSystem.SaveSystemJson
             if (!File.Exists(path))
             {
                 saveData = default;
-                Debug.LogWarning($"Can not find save data using key: {path}");
+                Logger.LogWarning($"Can not find save data using key: {path}");
                 return false;
             }
             
             string dataAsString = File.ReadAllText(path);
             saveData = JsonUtility.FromJson<T>(dataAsString);
-            Debug.Log($"The file have been loaded successfully key: {path}");
+            Logger.Log($"The file have been loaded successfully key: {path}");
             return true;
         }
         
@@ -34,7 +35,7 @@ namespace Tzipory.Systems.SaveLoadSystem.SaveSystemJson
         {
             if (!Directory.Exists(path))
             {
-                Debug.LogWarning($"Can not find save data using key: {path}");
+                Logger.LogWarning($"Can not find save data using key: {path}");
                 Directory.CreateDirectory(path);
             }
             
@@ -44,7 +45,7 @@ namespace Tzipory.Systems.SaveLoadSystem.SaveSystemJson
                 File.WriteAllText($"{path}/{save.ObjectName}.json", dataAsString);
             }
             
-            Debug.Log($"The files have been saved successfully key: {path}");
+            Logger.Log($"The files have been saved successfully key: {path}");
         }
 
         public static bool LoadObjects<T>(string path,out IEnumerable<T> saveData) where T : class ,ISave 
@@ -52,7 +53,7 @@ namespace Tzipory.Systems.SaveLoadSystem.SaveSystemJson
             if (!Directory.Exists(path))
             {
                 saveData = default;
-                Debug.LogWarning($"Can not find save data using key: {path}");
+                Logger.LogWarning($"Can not find save data using key: {path}");
                 return false;
             }
 
@@ -64,7 +65,7 @@ namespace Tzipory.Systems.SaveLoadSystem.SaveSystemJson
                 string dataAsString = File.ReadAllText(file);
                 var fileData = JsonUtility.FromJson<T>(dataAsString);
                 
-                Debug.Log($"The file have been loaded successfully key: {file}");
+                Logger.Log($"The file have been loaded successfully key: {file}");
                 serializeData.SavedData.Add(fileData);
             }
             
@@ -72,16 +73,29 @@ namespace Tzipory.Systems.SaveLoadSystem.SaveSystemJson
             return true;
         }
 
-        public static bool DeleteKey(string path)
+        public static bool DeleteObject(string path)
         {
             if (!File.Exists(path))
             {
-                Debug.LogWarning($"Can not find and delete save data using key: {path}");
+                Logger.LogWarning($"Can not find and delete save data using key: {path}");
                 return false;
             }
             
             File.Delete(path);
-            Debug.Log($"The file have been deleted successfully key: {path}");
+            Logger.Log($"The file have been deleted successfully key: {path}");
+            return true;
+        }
+        
+        public static bool DeleteObject<T>(string path,T data) where T : ISave
+        {
+            if (!File.Exists($"{path}/{data.ObjectName}.json"))
+            {
+                Logger.LogWarning($"Can not find and delete save data using key: {path}");
+                return false;
+            }
+            
+            File.Delete($"{path}/{data.ObjectName}.json");
+            Logger.Log($"The file have been deleted successfully key: {path}");
             return true;
         }
     }

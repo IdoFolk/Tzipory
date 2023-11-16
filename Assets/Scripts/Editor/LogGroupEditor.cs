@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
+using Sirenix.Utilities.Editor;
+using Tzipory.ConfigFiles.Item;
 using Tzipory.Systems.SaveLoadSystem.SaveSystemJson;
 using Tzipory.Tools.Debag;
 using UnityEditor;
@@ -12,21 +15,14 @@ namespace Tzipory.Editor
 {
     public class LogGroupEditor : OdinMenuEditorWindow
     {
-        private static readonly string LOGGroupPath = $"{Application.dataPath}/GameSetting/LogGroups";
+        private static List<LogGroup> _logGroups;
         
         private LogGroupSerialize _newLogGroupSerialize;
-        
-        private List<LogGroup> _logGroups;
         
         [MenuItem("Tools/Log Editor")]
         private static void OpenWindows()
         {
             var window = GetWindow<LogGroupEditor>();
-
-            // if (GameSaveUtilityJson.LoadObjects($"{Application.dataPath}/GameSetting/LogGroups",out IEnumerable<LogGroup> saveData))
-            // {
-            //     Logger.LogGroups = saveData.ToList();
-            // }
             
             window.position = new Rect(200,200,1000,1000);
             window.Show();
@@ -37,9 +33,21 @@ namespace Tzipory.Editor
             var tree = new OdinMenuTree();
             _newLogGroupSerialize = new LogGroupSerialize(CreateNewLogGroup);
             
-            tree.Add("Create log group",_newLogGroupSerialize);
+            if (GameSaveUtilityJson.LoadObjects($"{Application.dataPath}/GameSetting/LogGroups",out IEnumerable<LogGroup> saveData))
+                _logGroups = saveData.ToList();
+            else
+                Logger.LogError("Can not load log group to the log editor");
             
-            foreach (var logGroup in Logger.LogGroups.Values)
+            tree.Add("Create log group",_newLogGroupSerialize);
+
+            IEnumerable<LogGroup> logGroups;
+
+            if (Application.isPlaying)
+                logGroups = Logger.LogGroups.Values;
+            else
+                logGroups = _logGroups;
+            
+            foreach (var logGroup in logGroups)
             {
                 var logGroupGroupName = logGroup.Name ?? "";
                 
@@ -49,21 +57,65 @@ namespace Tzipory.Editor
             return tree;
         }
         
+        protected override void OnBeginDrawEditors()
+        {
+            base.OnBeginDrawEditors();
+            OdinMenuTreeSelection selection  = MenuTree.Selection;
+        
+            SirenixEditorGUI.BeginHorizontalToolbar();
+            {
+                GUILayout.FlexibleSpace();
+            
+                if (SirenixEditorGUI.ToolbarButton("Enable All"))
+                {
+                    foreach (var logGroup in _logGroups)
+                        logGroup.IsActive = true;
+                    
+                    GameSaveUtilityJson.SaveObjects(Logger.LOGGroupPath,_logGroups);
+                }
+                
+                if (SirenixEditorGUI.ToolbarButton("Disable All"))
+                {
+                    foreach (var logGroup in _logGroups)
+                        logGroup.IsActive = false;
+                    
+                    GameSaveUtilityJson.SaveObjects(Logger.LOGGroupPath,_logGroups);
+                }
+            }
+            SirenixEditorGUI.EndHorizontalToolbar();
+        
+        }
+        
+        public static void DeleteGroup(LogGroup logGroup)
+        {
+            if (!_logGroups.Contains(logGroup))
+                throw  new System.Exception($"Log group {logGroup.Name} not found!");
+                    
+            _logGroups.Remove(logGroup);
+
+            GameSaveUtilityJson.DeleteObject($"{Logger.LOGGroupPath}/{logGroup.Name}.json");
+            GameSaveUtilityJson.DeleteObject($"{Logger.LOGGroupPath}/{logGroup.Name}.json.meta");
+        }
+        
         private void CreateNewLogGroup(LogGroup logGroup)
         {
-            Logger.LogGroups.Add(logGroup.Name,logGroup);
-            GameSaveUtilityJson.SaveObject(LOGGroupPath,logGroup);
-            EditorUtility.SetDirty(this);
+            GameSaveUtilityJson.SaveObject(Logger.LOGGroupPath,logGroup);
+            BuildMenuTree();
         }
         
         protected override void OnDestroy()
         {
             base.OnDestroy();
             
-            Logger.SaveLogData();
+            SaveLogData();
             
             if (_newLogGroupSerialize is not null)
                 _newLogGroupSerialize = null;
+        }
+
+        private static void SaveLogData()
+        {
+            GameSaveUtilityJson.SaveObjects(Logger.LOGGroupPath,_logGroups);
         }
         
         [System.Serializable]

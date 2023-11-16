@@ -9,8 +9,8 @@ namespace Tzipory.Tools.Debag
     [InitializeOnLoad]
     public class Logger
     {
-        private static readonly string LOGGroupPath = $"{Application.dataPath}/GameSetting/LogGroups";
-        
+        public static readonly string LOGGroupPath = $"{Application.dataPath}/GameSetting/LogGroups";
+
         public static readonly Dictionary<string, LogGroup> LogGroups;
         
         static Logger()
@@ -22,28 +22,13 @@ namespace Tzipory.Tools.Debag
                 foreach (var logGroup in saveData)
                     LogGroups.Add(logGroup.Name,logGroup);                   
                
-                Debug.Log("Load log group");
+                Log("Load log group");
             }
             else
             {
                 LogGroups = new  Dictionary<string, LogGroup>();
+                LogWarning("No log group found!");
             }
-        }
-
-        public static void DeleteGroup(LogGroup logGroup)
-        {
-            if (!LogGroups.TryGetValue(logGroup.Name,out var group))
-                throw  new System.Exception($"Log group {logGroup.Name} not found!");
-                    
-            LogGroups.Remove(logGroup.Name);
-
-            GameSaveUtilityJson.DeleteKey($"{LOGGroupPath}/{group.Name}.json");
-            GameSaveUtilityJson.DeleteKey($"{LOGGroupPath}/{group.Name}.json.meta");
-        }
-
-        public static void SaveLogData()
-        {
-            GameSaveUtilityJson.SaveObjects(LOGGroupPath,LogGroups.Values);
         }
 
         public static void Log(object message, string groupName = null)

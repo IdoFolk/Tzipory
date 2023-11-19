@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeedMinimum: 6
   CameraSpeedZoomChangeValue: 12
-  CameraDragPanSpeed: 0.07
+  CameraDragPanSpeed: 0.15
   EdgeScrollDetectSizeX: 0.025
   EdgeScrollDetectSizeY: 0.025
-  XDamping: 0.2
-  YDamping: 0.2
-  EventTransitionDampingX: 0.8
-  EventTransitionDampingY: 0.8
+  XDamping: 0.1
+  YDamping: 0.1
+  EventTransitionDampingX: 0.6
+  EventTransitionDampingY: 0.6
   DefaultEdgePaddingX: 1.8
   DefaultEdgePaddingY: 1.1
   ZoomSpeed: 6.5
@@ -29,4 +29,3 @@ MonoBehaviour:
   ZoomMoveCameraValue: 0.2
   ZoomMinClamp: 3
   ZoomMaxClamp: 14
-  MaxZoomDefinedByBorders: 13

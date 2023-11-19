@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Tzipory.Systems.SaveLoadSystem;
+using Tzipory.Systems.SaveLoadSystem.SaveSystemJson;
 using UnityEngine;
 
 namespace Tzipory.Tools.Debag
@@ -8,14 +9,19 @@ namespace Tzipory.Tools.Debag
     public class LogGroup : ISave
     {
         [SerializeField,HideInInspector] public string Name;
-        [SerializeField] public bool IsActive;
-        [SerializeField] public Color Color;
+        [SerializeField,OnValueChanged(nameof(Save))] public bool IsActive;
+        [SerializeField,OnValueChanged(nameof(Save))] public Color Color;
         public string ObjectName => Name;
 
         [Button]
         public void Delete()
         {
-            Logger.DeleteGroup(this);
+            GameSaveUtilityJson.DeleteObject(Logger.LOGGroupPath,this);
+        }
+
+        private void Save()
+        {
+            GameSaveUtilityJson.SaveObject(Logger.LOGGroupPath,this);
         }
     }
 }

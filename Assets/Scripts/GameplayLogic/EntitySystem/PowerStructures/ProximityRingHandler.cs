@@ -55,7 +55,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         public void RecieveCollision(Collider2D other, IOType ioType)
         {
-            if (TotemPanelUIManager.TotemSelected) return;
+            if (TotemPanelUIManager.TotemSelected.ContainsValue(true)) return;
             if (other.gameObject.CompareTag("ShadowShaman"))
             {
                 if (ioType == IOType.In) OnShadowEnter?.Invoke(Id);

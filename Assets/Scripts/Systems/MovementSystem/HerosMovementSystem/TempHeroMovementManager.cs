@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.GameplayLogic.UIElements;
 using Tzipory.Helpers;
 using Tzipory.Tools.TimeSystem;
@@ -16,7 +17,6 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         public event Action<Vector3> OnMove;
 
         private Temp_HeroMovement _currentTarget;
-        private Temp_HeroMovement _waitForTotemTarget;
         private Camera _camera;
 
         private bool _isValidClick;
@@ -27,12 +27,13 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         [SerializeField] private AnimationCurve _endSlowTimeCurve;
         [SerializeField] private float _slowTimeTransitionTime;
         [SerializeField] private float _slowTime;
-        
+
         [SerializeField] private Shadow _shadow;
 
-        
+
         //temp?
         bool isCooldown;
+
         private void Start()
         {
             _shadow.gameObject.SetActive(false);
@@ -40,34 +41,42 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             _camera = Camera.main;
         }
 
-        public void SelectTarget(Temp_HeroMovement  target, Sprite shadowSprite, float range)
+        public void SelectTarget(Temp_HeroMovement target, Sprite shadowSprite, float range)
         {
             if (isCooldown)
                 return;
             _currentTarget = target;
-            if (TotemPanelUIManager.TotemSelected)
+            if (TotemPanelUIManager.TotemSelected.TryGetValue(target.Shaman.EntityInstanceID, out var value))
             {
-                _waitForTotemTarget = _currentTarget;
-                _waitForTotemTarget.TotemPlaced += ClearTarget;
+                if (value)
+                {
+                    _currentTarget.TotemPlaced += TotemPlaced;
+                }
+                else
+                {
+                    TotemManager.Instance.TotemPanelUIManager.TotemPlacementUI.HideShadowTotem(_currentTarget.Shaman.EntityInstanceID);
+                }
+                
             }
+
             _shadow.SetShadow(target.transform, shadowSprite, range);
             Cursor.visible = false;
             _previousTimeRate = GAME_TIME.GetCurrentTimeRate;
-            GAME_TIME.SetTimeStep(_slowTime,_slowTimeTransitionTime,_startSlowTimeCurve);
+            GAME_TIME.SetTimeStep(_slowTime, _slowTimeTransitionTime, _startSlowTimeCurve);
             OnAnyShamanSelected?.Invoke();
         }
 
-        public void ClearTarget()
+        private void ClearTarget(int id = -1)
         {
-            if (TotemPanelUIManager.TotemSelected) 
-                _waitForTotemTarget.TotemPlaced -= ClearTarget;
+            if (TotemPanelUIManager.TotemSelected is not null)
+                TotemPanelUIManager.ToggleAllTotemsSelected(false);
+
             _currentTarget = null;
-            _shadow.ClearShadow(false);
+            _shadow.ClearShadow();
             Cursor.visible = true;
             isCooldown = true;
             StartCoroutine(SetIsCooldownWaitOneFrame(false));
-            TotemPanelUIManager.ToggleTotemSelected(false);
-            GAME_TIME.SetTimeStep(_previousTimeRate,_slowTimeTransitionTime,_endSlowTimeCurve);
+            GAME_TIME.SetTimeStep(_previousTimeRate, _slowTimeTransitionTime, _endSlowTimeCurve);
             OnAnyShamanDeselected?.Invoke();
         }
 
@@ -77,16 +86,16 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             isCooldown = isIt;
         }
 
-        private void PlaceShadowTotem()
+        private void PlaceShadowTotem(int id, Vector3 pos)
         {
-            _currentTarget = null;
-            _shadow.ClearShadow(true);
-            Cursor.visible = true;
-            isCooldown = true;
-            StartCoroutine(SetIsCooldownWaitOneFrame(false));
-            TotemPanelUIManager.ToggleTotemSelected(false);
-            GAME_TIME.SetTimeStep(_previousTimeRate,_slowTimeTransitionTime,_endSlowTimeCurve);
-            OnAnyShamanDeselected?.Invoke();
+            TotemManager.Instance.TotemPanelUIManager.TotemPlacementUI.PlaceShadowTotem(id, pos);
+            ClearTarget(id);
+        }
+
+        private void TotemPlaced(Temp_HeroMovement target)
+        {
+            target.TotemPlaced -= TotemPlaced;
+            TotemManager.Instance.TotemPanelUIManager.TotemPlacementUI.HideShadowTotem(target.Shaman.EntityInstanceID);
         }
 
         private void Update()
@@ -99,16 +108,17 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
 
             if (_shadow.IsOn)
             {
-                if(Mouse.current.rightButton.wasPressedThisFrame)
+                if (Mouse.current.rightButton.wasPressedThisFrame)
                 {
                     ClearTarget();
                     return;
                 }
+
                 Vector3 newPos = _camera.ScreenToWorldPoint(Input.mousePosition);
                 newPos.z = 0f; //TEMP, needs to be set to same Z as shaman
                 _shadow.transform.position = newPos;
             }
-            
+
             if (Mouse.current.leftButton.wasPressedThisFrame && _isValidClick)
             {
                 var screenPos = Mouse.current.position.ReadValue();
@@ -117,8 +127,15 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
                 _currentTarget.SetTarget(worldPos);
                 OnMove?.Invoke(worldPos);
 
-                if (TotemPanelUIManager.TotemSelected) PlaceShadowTotem();
-                else ClearTarget();
+                if (TotemPanelUIManager.TotemSelected.TryGetValue(_currentTarget.Shaman.EntityInstanceID, out var value))
+                {
+                    if (value)
+                        PlaceShadowTotem(_currentTarget.Shaman.EntityInstanceID, worldPos);
+                    else 
+                        ClearTarget();
+                }
+                else
+                    ClearTarget();
             }
 
             if (_currentTarget != null)

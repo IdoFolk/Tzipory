@@ -1,43 +1,51 @@
 using System;
 using System.Linq;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
-using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.GameplayLogic.UIElements;
 using Tzipory.Helpers;
 using UnityEngine;
 
-public class TotemManager : MonoSingleton<TotemManager>
+
+namespace Tzipory.GameplayLogic.EntitySystem.Totems
 {
-    [SerializeField] private TotemPlacer _totemPlacer;
-    [SerializeField] private TotemPanelUIManager _totemPanelUIManager;
-    private TotemConfig _totemConfig;
-
-    public static event Action TotemPlaced;
-
-    private void Start()
+    public class TotemManager : MonoSingleton<TotemManager>
     {
-        _totemPlacer.Init();
-        _totemPanelUIManager.TotemClicked += SelectTotem;
-    }
+        [SerializeField] private TotemPlacer _totemPlacer;
+        [SerializeField] private TotemPanelUIManager _totemPanelUIManager;
+        private TotemConfig _totemConfig;
 
-    
-    public void PlaceTotem(Vector3 pos, Shaman connectedShaman)
-    {
-        _totemPlacer.PlaceTotem(pos, connectedShaman.TotemConfig, connectedShaman);
-        TotemPlaced?.Invoke();
-    }
+        public TotemPanelUIManager TotemPanelUIManager => _totemPanelUIManager;
 
-    public void SelectTotem(int totemId, int shamanId)
-    {
-        foreach (var shaman in LevelManager.PartyManager.Party.Where(shaman => shaman.EntityInstanceID == shamanId))
+        public static event Action<int> TotemPlaced;
+
+        private void Start()
         {
-            TotemPanelUIManager.ToggleTotemSelected(true);
-            shaman.TempHeroMovement.SelectHero();
+            _totemPlacer.Init();
+            _totemPanelUIManager.TotemClicked += SelectTotem;
         }
-    }
-    public void Dispose()
-    {
-        _totemPanelUIManager.TotemClicked -= SelectTotem;
+
+
+        public void PlaceTotem(Vector3 pos, Shaman connectedShaman)
+        {
+            _totemPlacer.PlaceTotem(pos, connectedShaman.TotemConfig, connectedShaman);
+            TotemPlaced?.Invoke(connectedShaman.EntityInstanceID);
+        }
+
+        public void SelectTotem(int shamanId)
+        {
+            foreach (var shaman in LevelManager.PartyManager.Party.Where(shaman => shaman.EntityInstanceID == shamanId))
+            {
+                TotemPanelUIManager.ToggleTotemSelected(shamanId,true);
+                shaman.TempHeroMovement.SelectHero();
+            }
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            _totemPanelUIManager.TotemClicked -= SelectTotem;
+
+        }
     }
 }

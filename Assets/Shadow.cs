@@ -28,12 +28,31 @@ public class Shadow : MonoBehaviour
         //_agent.speed = 0; //make sure it doesnt really move
         //_agent.SetDestination(transform.position);
     }
+    public void SetShadowTotem(Sprite shadowSprite, float range)
+    {
+        IsOn = false;
+        _shadowRenderer.sprite = shadowSprite;
+        _mask.sprite = shadowSprite;
+        _shadowRenderer.gameObject.SetActive(true);
+        _proximityRenderer.transform.localScale = new Vector3(range, range, 1);
+        gameObject.SetActive(false);
+    }
 
-    public void ClearShadow(bool gameObjectState)
+    public void ClearShadow()
     {
         IsOn = false;
         _lineRenderer.gameObject.SetActive(false);
-        gameObject.SetActive(gameObjectState);
+        gameObject.SetActive(false);
+    }
+    public void PlaceShadowTotem()
+    {
+        IsOn = false;
+        gameObject.SetActive(true);
+    }
+
+    public void ClearShadowTotem()
+    {
+        gameObject.SetActive(false);
     }
     private void Update()
     {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Totem_Damage
   m_EditorClassIdentifier: 
   Range: 6
-  RingColor: {r: 1, g: 0.504717, b: 0.50987613, a: 0.60784316}
+  RingColor: {r: 1, g: 0.504717, b: 0.50987613, a: 0.19607843}
   StatEffectConfig:
     _statusEffectName: 
     _statProcessPriority: 0

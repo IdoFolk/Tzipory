@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Totem_Slow
   m_EditorClassIdentifier: 
   Range: 6
-  RingColor: {r: 1, g: 0.88189393, b: 0.5058824, a: 0.60784316}
+  RingColor: {r: 1, g: 0.88189393, b: 0.5058824, a: 0.19607843}
   StatEffectConfig:
     _statusEffectName: 
     _statProcessPriority: 0

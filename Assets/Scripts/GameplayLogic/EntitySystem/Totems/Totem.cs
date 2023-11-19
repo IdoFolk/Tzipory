@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Tzipory.GameplayLogic.EntitySystem.Enemies;
 using Tzipory.GameplayLogic.EntitySystem.PowerStructures;
@@ -7,6 +8,7 @@ using Tzipory.Helpers;
 using Tzipory.Systems.Entity;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Totems
 {
@@ -16,6 +18,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
         private TotemConfig _totemConfig;
 
         [Space] [SerializeField] private SpriteRenderer _totemSpriteRenderer;
+        [SerializeField] private SpriteRenderer _loadingcircleSpriteRenderer;
         [SerializeField] private ProximityRingHandler _proximityRingHandler;
         [SerializeField] private ClickHelper _clickHelper;
 
@@ -28,20 +31,22 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
         public Shaman ConnectedShaman => _connectedShaman;
 
         public TotemConfig TotemConfig => _totemConfig;
+
         public void Init(TotemConfig totemConfig, Shaman connectedShaman)
         {
             _totemConfig = totemConfig;
             _proximityRingHandler.Init(0, _totemConfig.Range, _totemConfig.RingColor);
             _proximityRingHandler.ToggleSprite(true);
             _connectedShaman = connectedShaman;
-                
+
             _enemiesInsideTotemRange = new List<Enemy>();
             _shamansInsideTotemRange = new List<Shaman>();
-            
+
             _clickHelper.SetHoldClickWaitTime(totemConfig.HoldClickWaitTime);
             _clickHelper.OnEnterHover += OnMouseEnter;
             _clickHelper.OnExitHover += OnMouseExit;
-            _clickHelper.OnHoldClick += OnHoldClick;
+            _clickHelper.OnHoldClickFinish += OnHoldClickFinish;
+            _clickHelper.OnHoldClickStart += OnHoldClickStart;
             _proximityRingHandler.OnEnemyEnter += OnEnemyEnter;
             _proximityRingHandler.OnEnemyExit += OnEnemyExit;
             _proximityRingHandler.OnShamanEnter += OnShamanEnter;
@@ -50,12 +55,11 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             _isActive = true;
         }
 
-        
 
         private void Update() //temp
         {
             if (!_isActive) return;
-            
+
             _abilityTimer -= GAME_TIME.GameDeltaTime;
             if (_abilityTimer <= 0)
             {
@@ -64,7 +68,6 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             }
         }
 
-        
 
         private void OnValidate()
         {
@@ -75,7 +78,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
 
         private void OnDestroy()
         {
-            _clickHelper.OnHoldClick -= OnHoldClick;
+            _clickHelper.OnHoldClickFinish -= OnHoldClickFinish;
+            _clickHelper.OnHoldClickStart -= OnHoldClickStart;
             _clickHelper.OnEnterHover -= OnMouseEnter;
             _clickHelper.OnExitHover -= OnMouseExit;
             _proximityRingHandler.OnEnemyEnter -= OnEnemyEnter;
@@ -83,32 +87,49 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
         }
 
         #region Events
-        private void OnHoldClick()
+
+        private void OnHoldClickStart()
         {
-            TotemManager.Instance.SelectTotem(EntityInstanceID,_connectedShaman.EntityInstanceID);
+            _loadingcircleSpriteRenderer.gameObject.SetActive(true);
+            Cursor.visible = false;
+            StartCoroutine(LoadingCircle());
         }
+
+
+        private void OnHoldClickFinish()
+        {
+            _loadingcircleSpriteRenderer.gameObject.SetActive(false);
+            TotemManager.Instance.SelectTotem(_connectedShaman.EntityInstanceID);
+        }
+
         private void OnMouseEnter()
         {
         }
+
         private void OnMouseExit()
         {
         }
+
         private void OnEnemyEnter(int id, Enemy enemy)
         {
             _enemiesInsideTotemRange.Add(enemy);
         }
+
         private void OnEnemyExit(int id, Enemy enemy)
         {
             _enemiesInsideTotemRange.Remove(enemy);
         }
+
         private void OnShamanEnter(int id, Shaman shaman)
         {
             _shamansInsideTotemRange.Add(shaman);
         }
+
         private void OnShamanExit(int id, Shaman shaman)
         {
             _shamansInsideTotemRange.Remove(shaman);
         }
+
         #endregion
 
         private void ApplyTotemEffect()
@@ -120,14 +141,28 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
                     {
                         enemy.StatHandler.AddStatEffect(_totemConfig.StatEffectConfig);
                     }
+
                     break;
                 case TotemEffectUnitType.Shaman:
                     foreach (var shaman in _shamansInsideTotemRange)
                     {
                         shaman.StatHandler.AddStatEffect(_totemConfig.StatEffectConfig);
                     }
+
                     break;
             }
+        }
+
+        IEnumerator LoadingCircle()
+        {
+            while (true)
+            {
+                var circleRatio = 360 / _totemConfig.HoldClickWaitTime;
+                var radius = _clickHelper.HoldClickTimer * circleRatio;
+                _loadingcircleSpriteRenderer.material.SetFloat("_Arc2",radius);
+                yield return new WaitUntil(() => _clickHelper.HoldClickTimerActive);
+            }
+            
         }
     }
 }

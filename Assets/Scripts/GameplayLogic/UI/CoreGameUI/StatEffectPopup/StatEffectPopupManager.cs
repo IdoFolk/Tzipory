@@ -19,12 +19,12 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         public static void ShowPopupWindows(int EntityId, string statBonusText, float value, bool isPercent, Color color)
         {
-            if (TotemPanelUIManager.TotemSelected) return;
+            if (TotemPanelUIManager.TotemSelected.ContainsValue(true)) return;
             _statEffectPopupHandler.ShowPopupWindows(EntityId, statBonusText, value, isPercent, color);
         }
         public static void HidePopupWindows(int powerStructureId)
         {
-            if (TotemPanelUIManager.TotemSelected) return;
+            if (TotemPanelUIManager.TotemSelected.ContainsValue(true)) return;
             _statEffectPopupHandler.HidePopupWindow(powerStructureId);
         }
     }

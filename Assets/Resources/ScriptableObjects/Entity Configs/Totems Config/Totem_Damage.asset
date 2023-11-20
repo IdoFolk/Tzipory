@@ -73,3 +73,8 @@ MonoBehaviour:
   TotemEffectUnitType: 0
   TotemEffectInterval: 2
   HoldClickWaitTime: 1.5
+  StatConfigs:
+  - _statsId: 0
+    _baseValue: 150
+  - _statsId: 8
+    _baseValue: 0

@@ -239,7 +239,7 @@ namespace Tzipory.Systems.Entity
                 Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
 
             if (_doShowHPBar)
-                _hpBarConnector.Init(this);
+                _hpBarConnector.Init(Health.BaseValue);
             else
                 _hpBarConnector.gameObject.SetActive(false);
             

@@ -1,6 +1,7 @@
 using Tzipory.ConfigFiles;
 using Tzipory.ConfigFiles.StatusSystem;
 using Tzipory.Helpers.Consts;
+using Tzipory.SerializeData.StatSystemSerializeData;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Totems
@@ -15,6 +16,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
         public TotemEffectUnitType TotemEffectUnitType;
         public float TotemEffectInterval;
         public float HoldClickWaitTime;
+        public StatConfig[] StatConfigs;
 
         public int ObjectId => name.GetHashCode();
         public int ConfigTypeId => Constant.DataId.TOTEM_DATA_ID;

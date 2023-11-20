@@ -14,6 +14,7 @@ namespace Tzipory.Systems.Entity.EntityComponents
         Hero,
         Enemy,
         Structure,
-        Core
+        Core,
+        Totem
     }
 }

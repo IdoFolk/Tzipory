@@ -9,12 +9,10 @@ namespace GameplayLogic.UI.HPBar
         [SerializeField] TEMP_HP_Bar hP_Bar;
 
         [SerializeField] private GameObject _objWithUnit; //TEMP!
-        BaseUnitEntity _unit;
 
-        public void Init(BaseUnitEntity unit)
+        public void Init(float maxHP)
         {
-            _unit = unit;
-            hP_Bar.Init(_unit.Health.BaseValue);
+            hP_Bar.Init(maxHP);
 
         }
 

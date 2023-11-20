@@ -59,6 +59,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5681348044168406484, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+      propertyPath: _testing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7921501042575430128, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -303,98 +307,9 @@ MonoBehaviour:
       _effectActionStart: 0
       _effectActionConfig: {fileID: 11400000, guid: efd2a47c331e44c4d80a605273ecc06f, type: 2}
   _popUpTexter:
-    _repeatPattern: 1
-    _textBoxPrefab: {fileID: 555815565967925592, guid: 0a0724f7566067d478ba48523e410bbf, type: 3}
     _textSpawnPoint: {fileID: 8000410366679377436}
     _lineMagnitude: 1.2
     _lineStep: 0.5
-  _defaultPopUpText_Config:
-    PopUpTextType: 0
-    Text: 
-    Color: {r: 0, g: 0, b: 0, a: 0}
-    OverrideSize: 0
-    StartSize: 0
-    RiseSpeed: 0
-    TimeToLive: 0
-    OverrideAnimationCurve: 0
-    AddRandomMoveOffSet: 0
-    MoveOffSet: {x: 0, y: 0}
-    PopUpTextMoveCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextScaleCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextAlphaCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  _critPopUpText_Config:
-    PopUpTextType: 0
-    Text: 
-    Color: {r: 0, g: 0, b: 0, a: 0}
-    OverrideSize: 0
-    StartSize: 0
-    RiseSpeed: 0
-    TimeToLive: 0
-    OverrideAnimationCurve: 0
-    AddRandomMoveOffSet: 0
-    MoveOffSet: {x: 0, y: 0}
-    PopUpTextMoveCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextScaleCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextAlphaCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  _healPopUpText_Config:
-    PopUpTextType: 0
-    Text: 
-    Color: {r: 0, g: 0, b: 0, a: 0}
-    OverrideSize: 0
-    StartSize: 0
-    RiseSpeed: 0
-    TimeToLive: 0
-    OverrideAnimationCurve: 0
-    AddRandomMoveOffSet: 0
-    MoveOffSet: {x: 0, y: 0}
-    PopUpTextMoveCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextScaleCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextAlphaCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
   _shotPosition: {fileID: 1668354888428069289}
   _doShowHPBar: 1
   _hpBarConnector: {fileID: 4613587498334124606}

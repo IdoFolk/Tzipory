@@ -21,7 +21,7 @@ namespace Tzipory.Systems.StatusSystem
         public Dictionary<int, Stat> Stats { get; private set; }
         protected PopUpTextConfig PopUpTextConfig  { get; private set; }
         public bool IsInitialization { get; private set; }
-
+        
         #endregion
         
         public virtual void Init(StatEffectConfig parameter,Stat statToEffectToEffect)
@@ -36,7 +36,7 @@ namespace Tzipory.Systems.StatusSystem
 
             StatEffectType = parameter.StatEffectType;
 
-            if (parameter.UsePopUpTextConfig)
+            if (parameter.OverrideGlobalPopUpTextConfig)
                 PopUpTextConfig = parameter.PopUpTextConfig;
             
             IsInitialization = true;

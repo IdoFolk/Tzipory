@@ -20,25 +20,24 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
     [Serializable]
     public class PopUpTexter
     {
-        private const string MODIFIER_KEY_CODE = "{Modifier}";
-        
         [SerializeField] private Transform _textSpawnPoint;
 
         [SerializeField] private float _lineMagnitude;
         [SerializeField] private float _lineStep;
         private float _currentPointerPlace = 0f;
 
-        public void SpawnPopUp(StatChangeData config)
+        public void SpawnPopUp(StatChangeData changeData)
         {
-            PopUpTextConfig popUpTextConfig;
-            
-            popUpTextConfig = config.UsePopUpTextConfig ? config.PopUpTextConfig : PopUpTextManager.Instance.DefaultPopUpConfig;
-            
-            if(popUpTextConfig.DisablePopUp)
+            if (!changeData.HavePopUpTextConfig)
                 return;
             
+            var popUpTextConfig = changeData.UsePopUpTextConfig ? changeData.PopUpTextConfig : PopUpTextManager.Instance.DefaultPopUpConfig;
+
+            if (popUpTextConfig.DisablePopUp)
+                return;
+
             Vector3 value = _textSpawnPoint.localPosition;
-            
+
             switch (popUpTextConfig.RepeatPattern)
             {
                 case TextSpawnRepeatPatterns.PingPong:
@@ -60,36 +59,85 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
             _textSpawnPoint.localPosition = value;
 
-            switch (popUpTextConfig.PopUpTextType)
+            if (popUpTextConfig.RoundNumbers)
             {
-                case PopUpTextType.ShowName:
-                    popUpTextConfig.Text = config.StatEffectName;
-                    break;
-                case PopUpTextType.ShowDelta:
-                    popUpTextConfig.Text = Mathf.Round(config.Delta).ToString(CultureInfo.CurrentCulture);
-                    break;
-                case PopUpTextType.ShowNewValue:
-                    popUpTextConfig.Text = Mathf.Round(config.NewValue).ToString(CultureInfo.CurrentCulture);
-                    break;
-                case PopUpTextType.ShowText:
-                    string text = RegularExpressionsTool.SetValueOnKeyWord(popUpTextConfig.Text,
-                        new Dictionary<string, object>() {{MODIFIER_KEY_CODE, config.Delta} });
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                switch (popUpTextConfig.PopUpTextType)
+                {
+                    case PopUpTextType.ShowName:
+                        popUpTextConfig.Text = changeData.StatEffectName;
+                        break;
+                    case PopUpTextType.ShowDelta:
+                        popUpTextConfig.Text = changeData.Delta < 0 ? Mathf.Round(changeData.Delta * -1).ToString(CultureInfo.CurrentCulture) : 
+                            Mathf.Round(changeData.Delta).ToString(CultureInfo.CurrentCulture);
+                        break;
+                    case PopUpTextType.ShowNewValue:
+                        popUpTextConfig.Text = Mathf.Round(changeData.NewValue).ToString(CultureInfo.CurrentCulture);
+                        break;
+                    case PopUpTextType.ShowText:
 
+                        var keyWordData = new Dictionary<string, object>()
+                        {
+                            { PopUpTextConfig.DeltaKeyCode, Mathf.Round(changeData.Delta) },
+                            { PopUpTextConfig.ModifierKeyCode, Mathf.Round(changeData.Modifier) },
+                            { PopUpTextConfig.NameKeyCode, changeData.StatEffectName },
+                            { PopUpTextConfig.NewValueKeyCode, Mathf.Round(changeData.NewValue) }
+                        };
+
+                        popUpTextConfig.Text = RegularExpressionsTool.SetValueOnKeyWord(popUpTextConfig.Text, keyWordData);
+                        break;
+                    case PopUpTextType.ShowModifier:
+                        popUpTextConfig.Text = Mathf.Round(changeData.Modifier).ToString(CultureInfo.CurrentCulture);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            else
+            {
+                switch (popUpTextConfig.PopUpTextType)
+                {
+                    case PopUpTextType.ShowName:
+                        popUpTextConfig.Text = changeData.StatEffectName;
+                        break;
+                    case PopUpTextType.ShowDelta:
+                        popUpTextConfig.Text = changeData.Delta < 0 ? (changeData.Delta * -1).ToString(CultureInfo.CurrentCulture) : 
+                           changeData.Delta.ToString(CultureInfo.CurrentCulture);
+                        break;
+                    case PopUpTextType.ShowNewValue:
+                        popUpTextConfig.Text = changeData.NewValue.ToString(CultureInfo.CurrentCulture);
+                        break;
+                    case PopUpTextType.ShowText:
+
+                        var keyWordData = new Dictionary<string, object>()
+                        {
+                            { PopUpTextConfig.DeltaKeyCode, changeData.Delta },
+                            { PopUpTextConfig.ModifierKeyCode, changeData.Modifier },
+                            { PopUpTextConfig.NameKeyCode, changeData.StatEffectName },
+                            { PopUpTextConfig.NewValueKeyCode, changeData.NewValue }
+                        };
+
+                        popUpTextConfig.Text = RegularExpressionsTool.SetValueOnKeyWord(popUpTextConfig.Text, keyWordData);
+                        break;
+                    case PopUpTextType.ShowModifier:
+                        popUpTextConfig.Text = changeData.Modifier.ToString(CultureInfo.CurrentCulture);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            
             if (!popUpTextConfig.OverrideSize)
-                popUpTextConfig.FontSize = PopUpTextManager.Instance.GetRelativeFontSizeForDamage(config.Delta);
+                popUpTextConfig.FontSize = PopUpTextManager.Instance.GetRelativeFontSizeForDamage(changeData.Delta);
 
             PopupText popupText = PoolManager.PopUpTextPool.GetObject();
-           
+
             popupText.gameObject.SetActive(true);
             popupText.transform.SetParent(PopUpTextManager.Instance._popUpTextCanvas.transform);
             popupText.transform.position = _textSpawnPoint.position;
+
             popupText.Init(popUpTextConfig);
         }
     }

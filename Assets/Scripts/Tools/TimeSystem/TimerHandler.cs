@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using Tzipory.Helpers;
 using Tzipory.Systems.Entity;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Tools.TimeSystem
 {
@@ -107,8 +108,8 @@ namespace Tzipory.Tools.TimeSystem
         private void AddTimer(ITimer timer)
         {
             _timersList.Add(timer);
+            Logger.Log($"{ColorLogHelper.SetColorToString("Start",Color.cyan)} timer {timer.TimerName} at time {timer.TimeRemaining}",GAME_TIME.LOG_GROUP_NAME);
 #if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Timer Handler:</color>{ColorLogHelper.SetColorToString("Start",Color.cyan)} timer {timer.TimerName} at time {timer.TimeRemaining}");
             _timerSerializeDatas.Add(new TimerSerializeData(timer));
 #endif
             timer.OnTimerComplete += TimeComplete;
@@ -127,12 +128,10 @@ namespace Tzipory.Tools.TimeSystem
         private void TimeComplete(ITimer timer,bool isStopped)
         {
 
-#if UNITY_EDITOR
             if (isStopped)
-                Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Timer Handler:</color><color={ColorLogHelper.RED}>Stop</color> timer {timer.TimerName} at time reminding: {timer.TimeRemaining}");
+                Logger.Log($"<color={ColorLogHelper.RED}>Stop</color> timer {timer.TimerName} at time reminding: {timer.TimeRemaining}",GAME_TIME.LOG_GROUP_NAME);
             else
-                Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Timer Handler:</color><color={ColorLogHelper.RED}>Complete</color> timer {timer.TimerName} at time reminding: {timer.TimeRemaining}");
-#endif
+                Logger.Log($"<color={ColorLogHelper.RED}>Complete</color> timer {timer.TimerName} at time reminding: {timer.TimeRemaining}",GAME_TIME.LOG_GROUP_NAME);
             
 #if UNITY_EDITOR
             for (int i = 0; i < _timerSerializeDatas.Count; i++)
@@ -148,7 +147,7 @@ namespace Tzipory.Tools.TimeSystem
                 return;
             }
 
-            Debug.LogError("Could not find time to remove");
+            Logger.LogError("Could not find time to remove");
         }
     }
 }

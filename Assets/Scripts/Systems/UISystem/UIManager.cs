@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Enums;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
     public class UIManager : MonoBehaviour
     {
         private static readonly Dictionary<UIGroup, List<BaseUIElement>> UIGroups = new();
+
+        private static readonly Array UIGroupTagsArray = Enum.GetValues(typeof(UIGroup));
 
         public static void Init(UIGroup parameter, bool showOnInit = false, bool updateOnShow = false)
         {
@@ -40,7 +43,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
                 return;
             }
 
-            foreach (Enum uiGroupsKey in Enum.GetValues(group.GetType()))
+            foreach (Enum uiGroupsKey in UIGroupTagsArray)
             {
                 if (!group.HasFlag(uiGroupsKey)) continue;
                 
@@ -61,15 +64,19 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 
         public static void RemoveUIElement(BaseUIElement element)
         {
-            foreach (var uiElements in UIGroups.Values)
+            var group = element.UIGroupTags;
+            
+            foreach (Enum uiGroupsKey in UIGroupTagsArray)
             {
-                if (!uiElements.Contains(element)) continue;
+                if (!group.HasFlag(uiGroupsKey)) continue;
 
-                uiElements.Remove(element);
-                return;
+                if (!UIGroups.TryGetValue((UIGroup) uiGroupsKey, out var foundUIGroup)) continue;
+                
+                if (foundUIGroup.Contains(element))
+                    foundUIGroup.Remove(element);
+                else
+                    Debug.LogError("UiElement dont exist in this group",element);
             }
-
-            Debug.LogWarning("UiElement not found in any group",element);
         }
 
         public static void ShowUIGroup(UIGroup group, bool updateOnShow = false)

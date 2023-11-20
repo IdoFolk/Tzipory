@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using Tzipory.Helpers;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Tools.TimeSystem
 {
     public class GAME_TIME : MonoBehaviour
     {
+        public const string LOG_GROUP_NAME = "TimeHandler";
+
         public static event Action OnTimeRateChange;
         
         private static float _timeRate = 1f;
@@ -40,7 +43,7 @@ namespace Tzipory.Tools.TimeSystem
         {
             if (time < 0)
             {
-                Debug.LogError("Can not set timeStep to less or equal to 0");
+                Logger.LogError("Can not set timeStep to less or equal to 0");
                 return;
             }
 
@@ -79,18 +82,16 @@ namespace Tzipory.Tools.TimeSystem
         private static void SetTime(float timeRate)
         {
             _timeRate = timeRate;
-#if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Time Handler:</color> set time to {timeRate}");
-#endif
+            
+            Logger.Log($"Set time to {timeRate}",LOG_GROUP_NAME);
             OnTimeRateChange?.Invoke();
         }
 
         public static void Play()
         { 
             SetTimeStep(_tempTimeData);
-#if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Time Handler:</color> <color={ColorLogHelper.GREEN}>PLAY</color>");
-#endif
+            
+            Logger.Log($"<color={ColorLogHelper.GREEN}>PLAY</color>",LOG_GROUP_NAME);
             _tempTimeData = 0;
         }
         
@@ -98,9 +99,8 @@ namespace Tzipory.Tools.TimeSystem
         {
             if (_timeRate == 0) return;
             _tempTimeData = _timeRate;
-#if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.TIMER_HANDLER_COLOR}>Time Handler:</color> <color={ColorLogHelper.RED}>PLAY</color>");
-#endif
+            
+            Logger.Log($"<color={ColorLogHelper.RED}>PLAY</color>",LOG_GROUP_NAME);
             SetTimeStep(0);
         }
     }

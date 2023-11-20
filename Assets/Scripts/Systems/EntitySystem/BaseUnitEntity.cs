@@ -18,6 +18,7 @@ using Tzipory.Tools.Interface;
 using Tzipory.Tools.Sound;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.Entity
 {
@@ -25,6 +26,8 @@ namespace Tzipory.Systems.Entity
         IEntityTargetingComponent, IEntityAbilitiesComponent, IEntityVisualComponent, IInitialization<BaseUnitEntityConfig> , IInitialization<UnitEntitySerializeData,BaseUnitEntityVisualConfig>
     {
         #region Fields
+
+        private const string ENTITY_LOG_GROUP = "Entity";
 
 #if UNITY_EDITOR
         [SerializeField, ReadOnly,TabGroup("StatsId")] private List<Stat> _stats;
@@ -44,6 +47,7 @@ namespace Tzipory.Systems.Entity
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetCritHit;
 
         [SerializeField, TabGroup("Pop-Up Texter")] private PopUpTexter _popUpTexter;
+
 
         #region Visual Events
         public Action<bool> OnSpriteFlipX;
@@ -184,7 +188,7 @@ namespace Tzipory.Systems.Entity
         
         #endregion
         
-        #region SetShamanData
+        #region Inits
 
         private void BaseInit()
         {
@@ -262,7 +266,6 @@ namespace Tzipory.Systems.Entity
 
             //SpriteRenderer.sprite = visualConfig.Sprite;
             SetSprite(visualConfig.Sprite);
-
 
             BaseInit();
         }
@@ -384,7 +387,7 @@ namespace Tzipory.Systems.Entity
             Health.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition),"Heal",PopUpTextManager.Instance.HealDefaultConfig);
         }
 
-        public void TakeDamage(float damage,bool isCrit)
+        public virtual void TakeDamage(float damage,bool isCrit)
         {
             if (IsDamageable)
             {
@@ -407,7 +410,7 @@ namespace Tzipory.Systems.Entity
                     popUpTextConfig = PopUpTextManager.Instance.GetHitDefaultConfig;
                     processName = "Hit";
                 }
-                
+
                 Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),processName,popUpTextConfig);
                 IsDamageable = false;
             }
@@ -438,9 +441,7 @@ namespace Tzipory.Systems.Entity
         public virtual void StartDeathSequence()
         {
             _startedDeathSequence = true;
-#if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as started death sequence");
-#endif
+            Logger.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as started death sequence",ENTITY_LOG_GROUP);
             
             IsTargetAble = false;
             IsDamageable = false;
@@ -455,9 +456,7 @@ namespace Tzipory.Systems.Entity
             IsInitialization = false;
             TargetingHandler.Reset();
             EffectSequenceHandler.Reset();
-#if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as died!");
-#endif
+            Logger.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as died!",ENTITY_LOG_GROUP);
         }
 
         #endregion

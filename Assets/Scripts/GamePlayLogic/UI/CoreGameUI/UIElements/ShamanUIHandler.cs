@@ -18,7 +18,7 @@ namespace Tzipory.GameplayLogic.UIElements
         public void SetShamanData(Shaman shaman)
         {
             _shaman = shaman;
-            _splash.sprite = _shaman.SpriteRenderer.sprite;
+            _splash.sprite = _shaman.VisualConfig.Icon;
         }
 
         private void GoToShaman()=>

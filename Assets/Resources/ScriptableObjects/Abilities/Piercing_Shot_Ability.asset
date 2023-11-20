@@ -33,9 +33,10 @@ MonoBehaviour:
     _statEffectType: 1
     _duration: 5
     _interval: 1
-    _statModifier:
+    StatModifier:
       _statusModifierType: 2
-      _modifier: 100
+      Modifier: 100
+      _ringModifiers: []
     _effectSequence:
       _sequenceName: 
       _id: 0
@@ -52,11 +53,12 @@ MonoBehaviour:
         _startDelay: 0
         _effectActionStart: 0
         _effectActionConfig: {fileID: 11400000, guid: a623487578b155d448fa5c0657da923b, type: 2}
-    _usePopUpTextConfig: 1
+    _overrideGlobalPopUpTextConfig: 1
     _popUpTextConfig:
       DisablePopUp: 0
       PopUpTextType: 1
       RepeatPattern: 0
+      RoundNumbers: 0
       Text: 
       Color: {r: 1, g: 0, b: 0, a: 1}
       OverrideSize: 0

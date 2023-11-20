@@ -7,13 +7,13 @@ namespace Tzipory.Systems.TargetingSystem
 {
     public class ColliderTargetingArea : MonoBehaviour
     {
-        [SerializeField] private bool _testing = false;
+        [SerializeField] private bool _testing;
         
         private ITargetableReciever _reciever;
         
         [Obsolete]
         
-        public void Init(ITargetableReciever  reciever)
+        public void Init(ITargetableReciever reciever)
         {
             _reciever = reciever;
         }
@@ -26,7 +26,7 @@ namespace Tzipory.Systems.TargetingSystem
             _reciever.RecieveCollision(other, IOType.In);
             
             if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
-            _reciever.RecieveTargetableEntry(targetAbleComponent);
+                 _reciever.RecieveTargetableEntry(targetAbleComponent);
         }
 
         private void OnTriggerExit2D(Collider2D other)
@@ -37,7 +37,7 @@ namespace Tzipory.Systems.TargetingSystem
             _reciever.RecieveCollision(other, IOType.Out);
 
             if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
-            _reciever.RecieveTargetableExit(targetAbleComponent);
+                _reciever.RecieveTargetableExit(targetAbleComponent);
         }
 
     }

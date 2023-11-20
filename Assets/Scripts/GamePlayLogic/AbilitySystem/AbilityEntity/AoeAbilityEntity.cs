@@ -17,10 +17,15 @@ namespace Tzipory.Systems.AbilitySystem.AbilityEntity
         public void Init(IEntityTargetAbleComponent target, float radius, float duration, AoeAbilityExecuter abilityExecutor)
         {
             base.Init(target,abilityExecutor);
+
+            _renderer.playableAsset = abilityExecutor.Visual;
+            
             _aoeAbilityExecuter = abilityExecutor;
             _duration = duration;
             _colliderTargetingArea.Init(this);
-            visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
+            _visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
+            
+            _renderer.Play();
         }
 
         public void RecieveCollision(Collider2D other, IOType ioType)

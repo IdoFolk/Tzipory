@@ -199,8 +199,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8805199842458645851, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
-    m_RemovedGameObjects:
-    - {fileID: 2871512326192594661, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4431456642009094626, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       insertIndex: -1
@@ -209,7 +208,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4838851316483935421, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1230081100396536090}
+    - targetCorrespondingSourceObject: {fileID: 4838851316483935421, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 632295842136560476}
   m_SourcePrefab: {fileID: 100100000, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
+--- !u!4 &1260212071725068928 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8200931897204109112, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
+  m_PrefabInstance: {fileID: 6967838487786659256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2564150783937696005 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4838851316483935421, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
@@ -229,8 +236,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timerHandler:
     _timerSerializeDatas: []
-  visualTransform: {fileID: 7304830557626300753}
+  _visualTransform: {fileID: 1260212071725068928}
+  _renderer: {fileID: 632295842136560476}
   _colliderTargetingArea: {fileID: 5767230331226046982}
+--- !u!320 &632295842136560476
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2564150783937696005}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: df695a72a85cb7842b00dfb0913230f1, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -8652490102831491931, guid: df695a72a85cb7842b00dfb0913230f1, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: -5068633095405965348, guid: df695a72a85cb7842b00dfb0913230f1, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 5788871843599945993, guid: df695a72a85cb7842b00dfb0913230f1, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 2332959610830675166, guid: df695a72a85cb7842b00dfb0913230f1, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
 --- !u!4 &6759074531638166618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4431456642009094626, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}

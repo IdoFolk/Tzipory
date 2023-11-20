@@ -1,28 +1,30 @@
 ﻿using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace Tzipory.Systems.AbilitySystem.AbilityEntity
 {
     public abstract class BaseAbilityEntity : BaseGameEntity
     {
-        [SerializeField] protected Transform visualTransform;
+        [SerializeField] protected Transform _visualTransform;
+        [SerializeField] protected PlayableDirector _renderer;
         
-        protected IAbilityExecutor _abilityExecutor;
-        protected IEntityTargetAbleComponent _target;
+        protected IAbilityExecutor AbilityExecutor;
+        protected IEntityTargetAbleComponent Target;
 
         protected void Init(IEntityTargetAbleComponent target, IAbilityExecutor abilityExecutor)
         {
-            _target = target;
-            _abilityExecutor = abilityExecutor;
+            Target = target;
+            AbilityExecutor = abilityExecutor;
         }
 
         protected virtual void Cast(IEntityTargetAbleComponent target)
         {
-            if (target.EntityInstanceID == _abilityExecutor.Caster.EntityInstanceID)
+            if (target.EntityInstanceID == AbilityExecutor.Caster.EntityInstanceID)
                 return;
             
-            _abilityExecutor.Execute(target);
+            AbilityExecutor.Execute(target);
         }
     }
 }

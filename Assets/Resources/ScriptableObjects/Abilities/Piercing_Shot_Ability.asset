@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityId: 21
   _abilityName: Piercing Shot
-  abilityCastType: 0
+  _targetingPriorityType: 0
+  _abilityCastType: 0
   _projectileSpeed: 20
   _projectilePenetration: 5
-  abilityExecuteType: 1
+  _abilityExecuteType: 1
   _aoeRadius: 0
   _aoeDuration: 0
   _chainRadius: 0
   _chainDuration: 0
   _chainAmount: 0
-  targetingPriorityType: 3
   _cooldown: 6
   _castTime: 1
   _statusEffectConfigs:
@@ -91,3 +91,11 @@ MonoBehaviour:
         m_RotationOrder: 4
   _doExitEffects: 0
   _statusEffectConfigsOnExit: []
+  _abilityProjectileSprite: {fileID: 21300000, guid: 49b75274dc52ce24886efb97723e83f5, type: 3}
+  _abilityAoeSprite: {fileID: 0}
+  _abilityChainSprite: {fileID: 0}
+  _haveEffectOnEntity: 0
+  _effectOnEntityConfig:
+    _entryTimeLine: {fileID: 0}
+    _loopTimeLine: {fileID: 0}
+    _exitTimeLine: {fileID: 0}

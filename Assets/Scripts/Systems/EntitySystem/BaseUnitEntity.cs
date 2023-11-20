@@ -12,7 +12,6 @@ using Tzipory.Systems.AbilitySystem;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.TargetingSystem;
-using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.Sound;
@@ -22,9 +21,18 @@ using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.Entity
 {
-    public abstract class BaseUnitEntity : BaseGameEntity, IEntityTargetAbleComponent, IEntityCombatComponent, IEntityMovementComponent, 
-        IEntityTargetingComponent, IEntityAbilitiesComponent, IEntityVisualComponent, IInitialization<BaseUnitEntityConfig> , IInitialization<UnitEntitySerializeData,BaseUnitEntityVisualConfig>
+    public abstract class BaseUnitEntity : BaseGameEntity, IEntityTargetAbleComponent, IEntityCombatComponent, 
+        IEntityTargetingComponent, IEntityAbilitiesComponent, IInitialization<BaseUnitEntityConfig> , IInitialization<UnitEntitySerializeData,BaseUnitEntityVisualConfig>
     {
+        public event Action<IEntityTargetAbleComponent> OnTargetDisable;
+
+        #region Visual Events
+        
+        public Action<bool> OnSpriteFlipX;
+        public Action<Sprite> OnSetSprite;
+
+        #endregion
+        
         #region Fields
 
         private const string ENTITY_LOG_GROUP = "Entity";
@@ -32,12 +40,10 @@ namespace Tzipory.Systems.Entity
 #if UNITY_EDITOR
         [SerializeField, ReadOnly,TabGroup("StatsId")] private List<Stat> _stats;
 #endif
-        [SerializeField,TabGroup("Component")] private Transform _particleEffectPosition;
         [SerializeField,TabGroup("Component")] private SoundHandler _soundHandler;
         [SerializeField,TabGroup("Component")] private TargetingHandler _targetingHandler;
         [Header("Visual components")]
-        [SerializeField,TabGroup("Component")] private SpriteRenderer _spriteRenderer;
-        [SerializeField,TabGroup("Component")] private Transform _visualQueueEffectPosition;
+        [SerializeField,TabGroup("Component")] private UnitEntityVisualHandler _entityVisualHandler;
 
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onDeath;
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onAttack;
@@ -45,17 +51,8 @@ namespace Tzipory.Systems.Entity
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onMove;
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetHit;
         [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetCritHit;
-
-        [SerializeField, TabGroup("Pop-Up Texter")] private PopUpTexter _popUpTexter;
-
-
-        #region Visual Events
-        public Action<bool> OnSpriteFlipX;
-        public Action<Sprite> OnSetSprite;
-
-        #endregion
-
-        private float  _currentInvincibleTime;
+        
+        private float _currentInvincibleTime;
 
         private bool _startedDeathSequence;
 
@@ -68,16 +65,20 @@ namespace Tzipory.Systems.Entity
         public StatHandler StatHandler { get; private set; }
         
         public AbilityHandler AbilityHandler { get; private set; }
-        
-        public EffectSequenceHandler EffectSequenceHandler { get; private set; }
-        public SpriteRenderer SpriteRenderer => _spriteRenderer;
-        public SoundHandler SoundHandler => _soundHandler;
-        public Transform ParticleEffectPosition => _particleEffectPosition;
-        public Transform VisualQueueEffectPosition => _visualQueueEffectPosition;
-        public PopUpTexter PopUpTexter => _popUpTexter;
+
+        public IEntityVisualComponent EntityVisualComponent => _entityVisualHandler;
         
         public bool IsDamageable { get; private set; }
         public bool IsEntityDead => Health.CurrentValue <= 0;
+        
+        public bool IsTargetAble { get; private set; }//not in use!
+        
+        public EntityType EntityType { get; protected set; }
+        public Vector2 ShotPosition => _shotPosition.position;
+        public IPriorityTargeting DefaultPriorityTargeting { get; private set; }
+        public TargetingHandler TargetingHandler => _targetingHandler;
+        
+        public bool IsInitialization { get; private set; }
         
         //need to remove this and only use the Dictionary!!!
         #region StatsId
@@ -167,16 +168,6 @@ namespace Tzipory.Systems.Entity
 
         #endregion
         
-        public event Action<IEntityTargetAbleComponent> OnTargetDisable;
-        public bool IsTargetAble { get; private set; }//not in use!
-        
-        public EntityType EntityType { get; protected set; }
-        public Vector2 ShotPosition => _shotPosition.position;
-        public IPriorityTargeting DefaultPriorityTargeting { get; private set; }
-        public TargetingHandler TargetingHandler => _targetingHandler;
-        
-        public bool IsInitialization { get; private set; }
-        
         #endregion
 
         #region Temps
@@ -222,8 +213,8 @@ namespace Tzipory.Systems.Entity
                 _onGetHit,
                 _onGetCritHit
             };
-
-            EffectSequenceHandler = new EffectSequenceHandler(this,effectSequence);
+            
+            _entityVisualHandler.Init(this,effectSequence);
             
             StatHandler.OnStatusEffectAdded += AddStatusEffectVisual;
 
@@ -255,7 +246,7 @@ namespace Tzipory.Systems.Entity
             foreach (var statSerializeData in parameter.StatSerializeDatas)
             {
                 var stat = new Stat(statSerializeData);
-                stat.OnValueChanged += _popUpTexter.SpawnPopUp; 
+                stat.OnValueChanged += EntityVisualComponent.PopUpTexter.SpawnPopUp; 
                 Stats.Add(statSerializeData.ID ,stat);
             }
             
@@ -280,7 +271,7 @@ namespace Tzipory.Systems.Entity
             foreach (var statSerializeData in parameter.StatConfigs)
             {
                 var stat = new Stat(statSerializeData);
-                stat.OnValueChanged += _popUpTexter.SpawnPopUp; 
+                stat.OnValueChanged += EntityVisualComponent.PopUpTexter.SpawnPopUp; 
                 Stats.Add(statSerializeData.ID ,stat);
             }
             
@@ -289,7 +280,7 @@ namespace Tzipory.Systems.Entity
             
             AbilityHandler = new AbilityHandler(this,this, parameter.AbilityConfigs);//making new every time we init new enemy(memory waste) 
             
-            SpriteRenderer.sprite = parameter.UnitEntityVisualConfig.Sprite;
+            EntityVisualComponent.SpriteRenderer.sprite = parameter.UnitEntityVisualConfig.Sprite;
             
             BaseInit();
         }
@@ -304,8 +295,6 @@ namespace Tzipory.Systems.Entity
 
             if (!IsInitialization)
                 return;
-            
-            EffectSequenceHandler.UpdateEffectHandler();
             
             StatHandler.UpdateStatHandler();
             HealthComponentUpdate();
@@ -351,10 +340,10 @@ namespace Tzipory.Systems.Entity
 
             StatHandler.OnStatusEffectAdded -= AddStatusEffectVisual;
 
-            Health.OnValueChanged  -= _hpBarConnector.SetBarToHealth;
+            Health.OnValueChanged -= _hpBarConnector.SetBarToHealth;
 
             foreach (var statsValue in Stats.Values)
-                statsValue.OnValueChanged -= _popUpTexter.SpawnPopUp;
+                statsValue.OnValueChanged -= EntityVisualComponent.PopUpTexter.SpawnPopUp;
         }
 
         #endregion
@@ -391,7 +380,7 @@ namespace Tzipory.Systems.Entity
         {
             if (IsDamageable)
             {
-                EffectSequenceHandler.PlaySequenceById(isCrit
+                _entityVisualHandler.EffectSequenceHandler.PlaySequenceById(isCrit
                     ? Constant.EffectSequenceIds.GET_CRIT_HIT
                     : Constant.EffectSequenceIds.GET_HIT);
                 
@@ -455,7 +444,7 @@ namespace Tzipory.Systems.Entity
         {
             IsInitialization = false;
             TargetingHandler.Reset();
-            EffectSequenceHandler.Reset();
+            EntityVisualComponent.EffectSequenceHandler.Reset();
             Logger.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{name}</color> as died!",ENTITY_LOG_GROUP);
         }
 
@@ -473,20 +462,19 @@ namespace Tzipory.Systems.Entity
         #region VisualComponent
         
         private void AddStatusEffectVisual(EffectSequenceConfig effectSequenceConfig) =>
-            EffectSequenceHandler.PlaySequenceByData(effectSequenceConfig);//temp
+            EntityVisualComponent.EffectSequenceHandler.PlaySequenceByData(effectSequenceConfig);//temp
 
         private void SetSprite(Sprite newSprite)
         {
-            _spriteRenderer.sprite = newSprite;
+            EntityVisualComponent.SpriteRenderer.sprite = newSprite;
             OnSetSprite?.Invoke(newSprite);
         }
         public void SetSpriteFlipX(bool doFlip)
         {
-            _spriteRenderer.flipX = doFlip;
+            EntityVisualComponent.SpriteRenderer.flipX = doFlip;
             OnSpriteFlipX?.Invoke(doFlip);
         }
-
-
+        
         #endregion
     }
 }

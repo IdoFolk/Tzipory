@@ -294,11 +294,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4357314417853133059, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
   m_PrefabInstance: {fileID: 4080524451218561172}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &800062657850464996 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3727445444298982000, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
-  m_PrefabInstance: {fileID: 4080524451218561172}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &953535957855614546 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3862765461723033286, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
@@ -313,11 +308,6 @@ MonoBehaviour:
 --- !u!212 &1134045535185383931 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 3971083303523068271, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
-  m_PrefabInstance: {fileID: 4080524451218561172}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1692306035326806345 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3448816137356898781, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
   m_PrefabInstance: {fileID: 4080524451218561172}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &2200670044425848587 stripped
@@ -345,11 +335,9 @@ MonoBehaviour:
   _timerHandler:
     _timerSerializeDatas: []
   _stats: []
-  _particleEffectPosition: {fileID: 1692306035326806345}
   _soundHandler: {fileID: 3215233828703679931}
   _targetingHandler: {fileID: 7318013273454548065}
-  _spriteRenderer: {fileID: 2200670044425848587}
-  _visualQueueEffectPosition: {fileID: 800062657850464996}
+  _entityVisualHandler: {fileID: 8246116733595245467}
   _onDeath:
     _sequenceName: 
     _id: 0
@@ -407,98 +395,8 @@ MonoBehaviour:
     _isInterruptable: 0
     _effectActionContainers: []
   _popUpTexter:
-    _repeatPattern: 0
-    _textBoxPrefab: {fileID: 555815565967925592, guid: 0a0724f7566067d478ba48523e410bbf, type: 3}
-    _textSpawnPoint: {fileID: 800062657850464996}
     _lineMagnitude: 0.4
     _lineStep: 0.5
-  _defaultPopUpText_Config:
-    PopUpTextType: 0
-    Text: 
-    Color: {r: 0, g: 0, b: 0, a: 0}
-    OverrideSize: 0
-    StartSize: 0
-    RiseSpeed: 0
-    TimeToLive: 0
-    OverrideAnimationCurve: 0
-    AddRandomMoveOffSet: 0
-    MoveOffSet: {x: 0, y: 0}
-    PopUpTextMoveCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextScaleCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextAlphaCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  _critPopUpText_Config:
-    PopUpTextType: 0
-    Text: 
-    Color: {r: 0, g: 0, b: 0, a: 0}
-    OverrideSize: 0
-    StartSize: 0
-    RiseSpeed: 0
-    TimeToLive: 0
-    OverrideAnimationCurve: 0
-    AddRandomMoveOffSet: 0
-    MoveOffSet: {x: 0, y: 0}
-    PopUpTextMoveCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextScaleCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextAlphaCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-  _healPopUpText_Config:
-    PopUpTextType: 0
-    Text: 
-    Color: {r: 0, g: 0, b: 0, a: 0}
-    OverrideSize: 0
-    StartSize: 0
-    RiseSpeed: 0
-    TimeToLive: 0
-    OverrideAnimationCurve: 0
-    AddRandomMoveOffSet: 0
-    MoveOffSet: {x: 0, y: 0}
-    PopUpTextMoveCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextScaleCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    PopUpTextAlphaCurve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
   _shotPosition: {fileID: 6492586933135502789}
   _doShowHPBar: 0
   _hpBarConnector: {fileID: 953535957855614546}
@@ -687,6 +585,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff23114f060d4e029e94556756dd680f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8246116733595245467 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5391081591062971151, guid: 7c1a41cb864c24b4881d9c5fe8c356a1, type: 3}
+  m_PrefabInstance: {fileID: 4080524451218561172}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f235469da383c846acbcd2e6df32a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8261065706269650863

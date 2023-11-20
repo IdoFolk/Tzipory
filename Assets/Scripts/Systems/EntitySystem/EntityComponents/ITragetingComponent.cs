@@ -11,7 +11,6 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public EntityType EntityType { get; }
         public Vector2 ShotPosition { get;}
         public IPriorityTargeting DefaultPriorityTargeting { get; }
-        public TargetingHandler TargetingHandler { get; }
         public float GetDistanceToTarget(IEntityTargetAbleComponent targetAbleComponent);
     }
 }

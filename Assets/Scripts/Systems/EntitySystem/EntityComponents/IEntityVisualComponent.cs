@@ -1,7 +1,8 @@
-﻿using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
+﻿using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
-using Tzipory.Tools.Sound;
 using UnityEngine;
+using UnityEngine.Playables;
 
 namespace Tzipory.Systems.Entity.EntityComponents
 {
@@ -9,9 +10,11 @@ namespace Tzipory.Systems.Entity.EntityComponents
     {
         public EffectSequenceHandler EffectSequenceHandler { get; }
         public SpriteRenderer SpriteRenderer { get; }
-        public SoundHandler SoundHandler { get; }
-        public Transform ParticleEffectPosition { get; }
-        public Transform VisualQueueEffectPosition { get; }
+        public PlayableDirector ParticleEffectPlayableDirector { get; }
         public PopUpTexter PopUpTexter { get; }
+
+        public void StartTimeLineEffect(EffectOnEntityConfig config);
+
+        public void ResetVisual();
     }
 }

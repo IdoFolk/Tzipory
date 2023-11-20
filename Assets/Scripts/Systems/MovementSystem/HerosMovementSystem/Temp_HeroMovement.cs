@@ -27,7 +27,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         public void SelectHero()
         {
             //TempHeroMovementManager.Instance.SelectTarget(this);
-            TempHeroMovementManager.Instance.SelectTarget(this,_shaman.SpriteRenderer.sprite, _shaman.TargetingRange.CurrentValue); //temp?
+            TempHeroMovementManager.Instance.SelectTarget(this,_shaman.EntityVisualComponent.SpriteRenderer.sprite, _shaman.TargetingRange.CurrentValue); //temp?
         }
     }
 }

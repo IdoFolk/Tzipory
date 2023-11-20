@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _abilityId: 11
   _abilityName: Rooting Vines
-  abilityCastType: 1
+  _targetingPriorityType: 0
+  _abilityCastType: 1
   _projectileSpeed: 0
   _projectilePenetration: 0
-  abilityExecuteType: 0
+  _abilityExecuteType: 0
   _aoeRadius: 5
   _aoeDuration: 1
   _chainRadius: 0
   _chainDuration: 0
   _chainAmount: 0
-  targetingPriorityType: 4
   _cooldown: 8
   _castTime: 1
   _statusEffectConfigs:
@@ -137,3 +137,8 @@ MonoBehaviour:
         m_RotationOrder: 4
   _doExitEffects: 0
   _statusEffectConfigsOnExit: []
+  _abilityProjectileSprite: {fileID: 0}
+  _abilityAoeSprite: {fileID: 21300000, guid: 448119b726adddd45ab436830a4f6560, type: 3}
+  _abilityChainSprite: {fileID: 0}
+  _haveEffectOnEntity: 1
+  _timelineAsset: {fileID: 11400000, guid: 7b0e21277756f264cb84447d24a6b0c2, type: 2}

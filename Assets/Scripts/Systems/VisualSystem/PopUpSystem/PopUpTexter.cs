@@ -20,11 +20,16 @@ namespace Tzipory.Systems.VisualSystem.PopUpSystem
     [Serializable]
     public class PopUpTexter
     {
-        [SerializeField] private Transform _textSpawnPoint;
-
         [SerializeField] private float _lineMagnitude;
         [SerializeField] private float _lineStep;
+        
+        private Transform _textSpawnPoint;
         private float _currentPointerPlace = 0f;
+
+        public PopUpTexter(Transform  textSpawnPoint)
+        {
+            _textSpawnPoint = textSpawnPoint;
+        }
 
         public void SpawnPopUp(StatChangeData changeData)
         {

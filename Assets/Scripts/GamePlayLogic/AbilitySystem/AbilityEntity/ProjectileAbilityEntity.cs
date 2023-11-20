@@ -21,7 +21,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityEntity
             _speed = speed;
             _penetrationNumber = penetrationNumber;
             _dir = (target.EntityTransform.position - transform.position).normalized;
-            visualTransform.up = _dir;
+            _visualTransform.up = _dir;
         }
 
         protected override void Update()
@@ -41,12 +41,12 @@ namespace Tzipory.Systems.AbilitySystem.AbilityEntity
 
         public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
         {
-            if (targetable.EntityInstanceID == _abilityExecutor.Caster.EntityInstanceID) return;
+            if (targetable.EntityInstanceID == AbilityExecutor.Caster.EntityInstanceID) return;
             
             // if (targetable.EntityType == Caster.EntityType)
             //     return;
 
-            _abilityExecutor.Init(targetable);
+            AbilityExecutor.Init(targetable);
             _penetrationNumber--;
         }
 

@@ -139,6 +139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2287106194813289559}
+  - component: {fileID: 6099308852592900491}
   m_Layer: 0
   m_Name: ParticleEffectPosition
   m_TagString: Untagged
@@ -161,6 +162,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 871882582661858441}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!320 &6099308852592900491
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8822867710584737078}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 1
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings: []
+  m_ExposedReferences:
+    m_References: []
 --- !u!1001 &7772753988569653594
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -171,7 +189,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3589908934695121934, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
       propertyPath: m_Name
-      value: ShamanVisual
+      value: UnitVisual
       objectReference: {fileID: 0}
     - target: {fileID: 7478176625026721235, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
       propertyPath: m_RootOrder
@@ -229,10 +247,38 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7478176625026721235, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
       insertIndex: -1
       addedObject: {fileID: 303076990929439334}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3589908934695121934, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 8840916618353522309}
   m_SourcePrefab: {fileID: 100100000, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
 --- !u!4 &871882582661858441 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7478176625026721235, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
   m_PrefabInstance: {fileID: 7772753988569653594}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &1606500935877454357 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 9049190174793075535, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
+  m_PrefabInstance: {fileID: 7772753988569653594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6489605381146350932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3589908934695121934, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
+  m_PrefabInstance: {fileID: 7772753988569653594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8840916618353522309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6489605381146350932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f235469da383c846acbcd2e6df32a5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainSprite: {fileID: 1606500935877454357}
+  _visualQueueEffectPosition: {fileID: 277900565620275194}
+  _particleEffectPosition: {fileID: 6099308852592900491}

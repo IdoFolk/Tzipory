@@ -133,11 +133,12 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             
             if (CritChance.CurrentValue > Random.Range(0, 100))
             {
-                EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
+                EntityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
                 _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true);
                 return;
             }
-            EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
+            
+            EntityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
             _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue,false);
         }
 

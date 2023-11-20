@@ -12,7 +12,7 @@ namespace Tzipory.Systems.AbilitySystem
 {
     public class Ability : IStatHolder
     {
-        public const string ABILITY_LOG_GROUP = "AbilityHandler";
+        private const string ABILITY_LOG_GROUP = "AbilityHandler";
         
         private readonly IEntityTargetingComponent _entityTargetingComponent;
         private readonly IAbilityCaster _abilityCaster;
@@ -66,7 +66,6 @@ namespace Tzipory.Systems.AbilitySystem
             Stats.Add((int)Constant.StatsId.AbilityCastTime,new Stat(Constant.StatsId.AbilityCastTime.ToString(), config.CastTime, int.MaxValue,
                 (int)Constant.StatsId.AbilityCastTime));
             
-
             _abilityCaster = FactorySystem.ObjectFactory.AbilityFactory.GetAbilityCaster(entityTargetingComponent,config);
             _abilityExecutor = FactorySystem.ObjectFactory.AbilityFactory.GetAbilityExecutor(caster,config);
 
@@ -99,9 +98,10 @@ namespace Tzipory.Systems.AbilitySystem
 
             _isReady = false;
             IsCasting = true;
+            
             Logger.Log($"{_entityTargetingComponent.GameEntity.name} start casting ability {AbilityName} castTime: {CastTime.CurrentValue}",ABILITY_LOG_GROUP);
             
-            _castTimer = _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(CastTime.CurrentValue,"Ability cast time", Cast,ref availableTarget);
+            _castTimer = _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(CastTime.CurrentValue,"Ability cast time",Cast,ref availableTarget);
         }
 
         private void Cast(IEnumerable<IEntityTargetAbleComponent> availableTarget)

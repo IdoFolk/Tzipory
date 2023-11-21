@@ -161,16 +161,13 @@ namespace Tzipory.Systems.CameraSystem
                     if (_targetOrthographicSize > _cameraSettings.ZoomMinClamp - 1)
                     {
                         _cameraFollowObject.Translate(zoomCameraDirection * zoomMoveCameraValue); //move the camera towards the mouse
-                        StartCoroutine(ChangeDampingUntilConditional(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY, CameraFinishedFollowUp()));
+                        StartCoroutine(ChangeDampingUntilCameraFinishZoom(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY));
                     }
-                }
-                else
-                {
-                    StartCoroutine(ChangeDampingUntilConditional(0, 0, CameraFinishedZoom()));
+                    else
+                        StartCoroutine(ChangeDampingUntilCameraFinishZoom(0, 0));
                 }
             }
 
-            
             if (Input.mouseScrollDelta.y < 0) //zoom out
             {
                 _targetOrthographicSize += _cameraSettings.ZoomChangeValue;
@@ -179,15 +176,13 @@ namespace Tzipory.Systems.CameraSystem
                     if (_targetOrthographicSize < _zoomPadding + 1)
                     {
                         _cameraFollowObject.Translate(-zoomCameraDirection * zoomMoveCameraValue); //move the camera away from the mouse
-                        StartCoroutine(ChangeDampingUntilConditional(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY, CameraFinishedFollowUp()));
+                        StartCoroutine(ChangeDampingUntilCameraFinishZoom(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY));
                     }
-                }
-                else
-                {
-                    StartCoroutine(ChangeDampingUntilConditional(0, 0, CameraFinishedZoom()));
+                    else
+                        StartCoroutine(ChangeDampingUntilCameraFinishZoom(0, 0));
                 }
             }
-            
+
             CameraZoomClamp();
         }
 
@@ -306,8 +301,8 @@ namespace Tzipory.Systems.CameraSystem
         {
             //move the camera to Event Position
             var newPos = new Vector3(eventPosition.x, eventPosition.y, -80);
-            StartCoroutine(ChangeDampingUntilConditional(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY, CameraFinishedFollowUp()));
             _cameraFollowObject.position = newPos;
+            StartCoroutine(ChangeDampingUntilCameraFinishFollowUp(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY));
         }
 
         private bool CameraFinishedFollowUp()
@@ -330,14 +325,31 @@ namespace Tzipory.Systems.CameraSystem
             return cameraFinishedZoom;
         }
 
-        IEnumerator ChangeDampingUntilConditional(float xdamping, float ydamping, bool condition)
+        IEnumerator ChangeDampingUntilCameraFinishFollowUp(float xdamping, float ydamping)
         {
             _cinemachineTransposer.m_XDamping = xdamping;
             _cinemachineTransposer.m_YDamping = ydamping;
 
             while (true)
             {
-                if (condition)
+                if (CameraFinishedFollowUp())
+                {
+                    _cinemachineTransposer.m_XDamping = _cameraSettings.XDamping;
+                    _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
+                    yield break;
+                }
+
+                yield return null;
+            }
+        }
+        IEnumerator ChangeDampingUntilCameraFinishZoom(float xdamping, float ydamping)
+        {
+            _cinemachineTransposer.m_XDamping = xdamping;
+            _cinemachineTransposer.m_YDamping = ydamping;
+
+            while (true)
+            {
+                if (CameraFinishedZoom())
                 {
                     _cinemachineTransposer.m_XDamping = _cameraSettings.XDamping;
                     _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;

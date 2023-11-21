@@ -8,13 +8,15 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public bool IsTargetAble { get; }
         public EntityType EntityType { get; }
     }
-
+    
+    [Flags]
     public enum EntityType
     {
-        Hero,
-        Enemy,
-        Structure,
-        Core,
-        Totem
+        None = 0,
+        Hero = 1,
+        Enemy = 2,
+        Structure = 4,
+        Core = 8,
+        Totem = 16
     }
 }

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 341e118819fdfe44997f7d4ac3b48013, type: 3}
-  m_Name: Totem_Damage
+  m_Name: Totem_AttackSpeed
   m_EditorClassIdentifier: 
   Range: 6
-  RingColor: {r: 1, g: 0.504717, b: 0.50987613, a: 0.19607843}
-  TotemEffectUnitType: 0
+  RingColor: {r: 0.34827864, g: 0.8867924, b: 0.30535775, a: 0.19607843}
+  TotemEffectUnitType: 1
   TotemSprite: {fileID: 21300000, guid: 83d8d0680c95bb94cb18ac95ca04f3e3, type: 3}
   TotemEffectInterval: 2
   HoldClickWaitTime: 1.5
@@ -24,15 +24,15 @@ MonoBehaviour:
   - _statsId: 8
     _baseValue: 0
   StatEffectConfig:
-    _statusEffectName: 
+    _statusEffectName: Attack Speed
     _statProcessPriority: 0
-    _affectedStatId: 0
-    _statEffectType: 1
-    _duration: 0
+    _affectedStatId: 2
+    _statEffectType: 0
+    _duration: 2
     _interval: 0
     StatModifier:
       _statusModifierType: 2
-      Modifier: 30
+      Modifier: 0.2
       _ringModifiers: []
     _effectSequence:
       _sequenceName: 
@@ -45,18 +45,18 @@ MonoBehaviour:
     _overrideGlobalPopUpTextConfig: 1
     _popUpTextConfig:
       DisablePopUp: 0
-      PopUpTextType: 1
+      PopUpTextType: 0
       RepeatPattern: 0
       RoundNumbers: 1
-      Text: 
-      Color: {r: 0.75294125, g: 0, b: 0.007843138, a: 0}
+      Text: Attack Speed
+      Color: {r: 0.34901962, g: 0.8862746, b: 0.30588236, a: 0}
       OverrideSize: 0
       FontSize: 0
       OverrideRiseSpeedAndTTL: 0
       RiseSpeed: 0
       TimeToLive: 0
       OverrideStartSize: 0
-      StartSize: {x: 0, y: 0}
+      StartSize: {x: 0.4, y: 0.4}
       AddRandomMoveOffSet: 0
       MoveOffSet: {x: 0, y: 0}
       OverrideAnimationCurve: 0
@@ -68,7 +68,25 @@ MonoBehaviour:
         m_RotationOrder: 4
       PopUpTextScaleCurve:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4

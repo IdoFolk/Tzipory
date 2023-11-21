@@ -177,6 +177,7 @@ namespace Tzipory.Systems.Entity
         public bool IsTargetAble { get; private set; }//not in use!
         
         public EntityType EntityType { get; protected set; }
+        public EntityType TargetedEntityType { get; private set; }
         public Vector2 ShotPosition => _shotPosition.position;
         public IPriorityTargeting DefaultPriorityTargeting { get; private set; }
         public TargetingHandler TargetingHandler => _targetingHandler;
@@ -257,6 +258,8 @@ namespace Tzipory.Systems.Entity
             gameObject.name =  $"{parameter.EntityName} InstanceID: {EntityInstanceID}";
             
             Stats = new Dictionary<int, Stat>();
+            
+            TargetedEntityType = (EntityType)parameter.TargetedEntityType;
 
             foreach (var statSerializeData in parameter.StatSerializeDatas)
             {
@@ -289,6 +292,8 @@ namespace Tzipory.Systems.Entity
                 stat.OnValueChanged += _popUpTexter.SpawnPopUp; 
                 Stats.Add(statSerializeData.ID ,stat);
             }
+
+            TargetedEntityType = parameter.TargetedEntityType;
             
             DefaultPriorityTargeting =
                 Systems.FactorySystem.ObjectFactory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);

@@ -37,6 +37,7 @@ MonoBehaviour:
     _sprite: {fileID: 21300000, guid: f4e62ad13a5770c44aac2a924dab6155, type: 3}
     _icon: {fileID: 1885256787, guid: 2a862c0ebda887f42a111fbbce4d7fc0, type: 3}
   _targetingPriority: 2
+  _targetedEntityType: 2
   _shamanId: 0
   _earring1: {fileID: 0}
   _earring2: {fileID: 0}
@@ -46,5 +47,5 @@ MonoBehaviour:
   _bracelet2: {fileID: 0}
   _ring1: {fileID: 0}
   _ring2: {fileID: 0}
-  _totemConfig: {fileID: 11400000, guid: 88ce86f0560000045bdb135a3d30da5f, type: 2}
+  _totemConfig: {fileID: 11400000, guid: 5cb9b88a2e490f04aa4584c8796cbd70, type: 2}
   _decisionInterval: 0

@@ -14,6 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Range: 6
   RingColor: {r: 1, g: 0.88189393, b: 0.5058824, a: 0.19607843}
+  TotemEffectUnitType: 0
+  TotemSprite: {fileID: 21300000, guid: 83d8d0680c95bb94cb18ac95ca04f3e3, type: 3}
+  TotemEffectInterval: 3
+  HoldClickWaitTime: 1.5
+  TotemStatConfigs:
+  - _statsId: 0
+    _baseValue: 150
+  - _statsId: 8
+    _baseValue: 0
   StatEffectConfig:
     _statusEffectName: 
     _statProcessPriority: 0
@@ -69,12 +78,3 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-  TotemSprite: {fileID: 21300000, guid: 83d8d0680c95bb94cb18ac95ca04f3e3, type: 3}
-  TotemEffectUnitType: 0
-  TotemEffectInterval: 3
-  HoldClickWaitTime: 1.5
-  StatConfigs:
-  - _statsId: 0
-    _baseValue: 150
-  - _statsId: 8
-    _baseValue: 0

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using GameplayLogic.UI.HPBar;
 using Tzipory.ConfigFiles.PopUpText;
 using Tzipory.GameplayLogic.EntitySystem.Enemies;
@@ -73,7 +74,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             _connectedShaman = connectedShaman;
             EntityType = EntityType.Totem;
             Stats = new Dictionary<int, Stat>();
-            foreach (var statConfig in _totemConfig.StatConfigs)
+            foreach (var statConfig in _totemConfig.TotemStatConfigs)
             {
                 var stat = new Stat(statConfig);
                 Stats.Add((int)statConfig._statsId,stat);
@@ -231,41 +232,36 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
 
         public void TakeDamage(float damage, bool isCrit)
         {
-            if (IsDamageable)
-            {
-                //EffectSequenceHandler.PlaySequenceById(isCrit
-               //     ? Constant.EffectSequenceIds.GET_CRIT_HIT
-                //    : Constant.EffectSequenceIds.GET_HIT);
+            if (!IsDamageable) return;
+            //EffectSequenceHandler.PlaySequenceById(isCrit
+            //     ? Constant.EffectSequenceIds.GET_CRIT_HIT
+            //    : Constant.EffectSequenceIds.GET_HIT);
                 
-                PopUpTextConfig popUpTextConfig;
-                string processName;
+            PopUpTextConfig popUpTextConfig;
+            string processName;
 
-                if (isCrit)
-                {
-                    popUpTextConfig = PopUpTextManager.Instance.GetCritHitDefaultConfig;
-                    processName = "Crit Hit";
-                }
-                else
-                {
-                    popUpTextConfig = PopUpTextManager.Instance.GetHitDefaultConfig;
-                    processName = "Hit";
-                }
-
-                Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),processName,popUpTextConfig);
+            if (isCrit)
+            {
+                popUpTextConfig = PopUpTextManager.Instance.GetCritHitDefaultConfig;
+                processName = "Crit Hit";
             }
+            else
+            {
+                popUpTextConfig = PopUpTextManager.Instance.GetHitDefaultConfig;
+                processName = "Hit";
+            }
+
+            Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),processName,popUpTextConfig);
         }
         private void HealthComponentUpdate()
         {
-            if (!IsDamageable)
-            {
-                _currentInvincibleTime -= GAME_TIME.GameDeltaTime;
+            if (IsDamageable) return;
+            _currentInvincibleTime -= GAME_TIME.GameDeltaTime;
 
-                if (_currentInvincibleTime < 0)
-                {
-                    IsDamageable = true;
-                    _currentInvincibleTime = InvincibleTime.CurrentValue;
-                }
-            }
+            if (!(_currentInvincibleTime < 0)) return;
+            IsDamageable = true;
+            _currentInvincibleTime = InvincibleTime.CurrentValue;
+
         }
         public void StartDeathSequence()
         {

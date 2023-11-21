@@ -38,6 +38,7 @@ MonoBehaviour:
     _sprite: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
     _icon: {fileID: 0}
   _targetingPriority: 2
+  _targetedEntityType: 25
   _enemyId: 0
   _decisionInterval: 5
   _aggroLevel: 5

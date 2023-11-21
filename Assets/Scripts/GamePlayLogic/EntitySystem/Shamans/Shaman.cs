@@ -97,7 +97,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
                 _currentDecisionInterval = _baseDecisionInterval;
             }
 
-            if (TargetingHandler.CurrentTarget != null && TargetingHandler.CurrentTarget.EntityType != EntityType.Totem)//temp
+            if (TargetingHandler.CurrentTarget != null)
                 Attack();
         }
 

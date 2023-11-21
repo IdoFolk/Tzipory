@@ -1,7 +1,7 @@
+using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles;
 using Tzipory.ConfigFiles.StatusSystem;
 using Tzipory.Helpers.Consts;
-using Tzipory.SerializeData.StatSystemSerializeData;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Totems
@@ -11,12 +11,12 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
     {
         [Range(0, 20)] public float Range;
         public Color RingColor;
-        public StatEffectConfig StatEffectConfig;
-        public Sprite TotemSprite;
         public TotemEffectUnitType TotemEffectUnitType;
+        public Sprite TotemSprite;
         public float TotemEffectInterval;
         public float HoldClickWaitTime;
-        public StatConfig[] StatConfigs;
+        [TabGroup("Totem Stats")]public StatConfig[] TotemStatConfigs;
+        [TabGroup("Ability Stat Effect")] public StatEffectConfig StatEffectConfig;
 
         public int ObjectId => name.GetHashCode();
         public int ConfigTypeId => Constant.DataId.TOTEM_DATA_ID;

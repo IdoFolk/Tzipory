@@ -43,6 +43,8 @@ namespace Tzipory.Systems.AbilitySystem.AbilityEntity
         {
             if (targetable.EntityInstanceID == _abilityExecutor.Caster.EntityInstanceID) return;
             
+            if (targetable.EntityType is EntityType.Hero or EntityType.Totem) return; //TEMP Ahosharmuta
+            
             // if (targetable.EntityType == Caster.EntityType)
             //     return;
 

@@ -110,6 +110,7 @@ namespace Tzipory.Systems.AbilitySystem
             
             if (currentTarget == null)
                 return;
+            
             Logger.Log($"{_entityTargetingComponent.GameEntity.name} cast ability {AbilityName} on {currentTarget.GameEntity.name}",ABILITY_LOG_GROUP);
             _abilityCaster.Cast(currentTarget,_abilityExecutor);
         }

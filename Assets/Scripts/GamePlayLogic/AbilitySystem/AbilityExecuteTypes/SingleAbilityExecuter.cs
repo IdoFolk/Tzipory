@@ -18,10 +18,9 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 
            EnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
         }
-        
+
         public void Init(IEntityTargetAbleComponent target)
         {
-            Execute(target);
         }
 
         public void Execute(IEntityTargetAbleComponent target)

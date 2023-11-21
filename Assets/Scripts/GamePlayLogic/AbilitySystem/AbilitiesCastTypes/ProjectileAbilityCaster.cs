@@ -12,9 +12,9 @@ namespace Tzipory.Systems.AbilitySystem
 {
     public class ProjectileAbilityCaster : IAbilityCaster , IStatHolder
     {
-        private const string PROJECTILE_PREFAB_PATH = "Prefabs/Ability/ProjectileAbilityEntity";
-
         public event Action OnCast;
+
+        private const string PROJECTILE_PREFAB_PATH = "Prefabs/Ability/ProjectileAbilityEntity";
         
         public IEntityTargetingComponent EntityCasterTargetingComponent { get; }
         
@@ -48,13 +48,20 @@ namespace Tzipory.Systems.AbilitySystem
         {
             EntityCasterTargetingComponent = entityCasterTargetingComponent;
             
-            Stats = new Dictionary<int, Stat>();
-            
-            Stats.Add((int)Constant.StatsId.ProjectileSpeed,  new Stat("ProjectileSpeed", config.ProjectileSpeed, int.MaxValue,
-                (int)Constant.StatsId.ProjectileSpeed));
-            Stats.Add((int)Constant.StatsId.ProjectilePenetration, new Stat("ProjectilePenetration", config.ProjectilePenetration, int.MaxValue,
-                (int)Constant.StatsId.ProjectilePenetration));
-            
+            Stats = new Dictionary<int, Stat>
+            {
+                {
+                    (int)Constant.StatsId.ProjectileSpeed, new Stat("ProjectileSpeed", config.ProjectileSpeed,
+                        int.MaxValue,
+                        (int)Constant.StatsId.ProjectileSpeed)
+                },
+                {
+                    (int)Constant.StatsId.ProjectilePenetration, new Stat("ProjectilePenetration",
+                        config.ProjectilePenetration, int.MaxValue,
+                        (int)Constant.StatsId.ProjectilePenetration)
+                }
+            };
+
             _projectilePrefab = Resources.Load<GameObject>(PROJECTILE_PREFAB_PATH);
 
             if (_projectilePrefab is null)

@@ -13,7 +13,7 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public PlayableDirector ParticleEffectPlayableDirector { get; }
         public PopUpTexter PopUpTexter { get; }
 
-        public void StartTimeLineEffect(EffectOnEntityConfig config);
+        public void StartTimeLineEffect(AbilityVisualConfig config);
 
         public void ResetVisual();
     }

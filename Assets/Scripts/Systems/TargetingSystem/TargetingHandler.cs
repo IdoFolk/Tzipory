@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Enums;
+using Tzipory.Tools.Interface;
 using UnityEngine;
 using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.TargetingSystem
 {
-    public class TargetingHandler : MonoBehaviour , ITargetableReciever
+    public class TargetingHandler : MonoBehaviour , ITargetableAllReciever
     {
         private const string TARGETING_HANDLER_LOG_GROUP = "TargetingHandler";
         
@@ -22,13 +22,6 @@ namespace Tzipory.Systems.TargetingSystem
         public IEntityTargetAbleComponent CurrentTarget { get; private set; }
         
         public List<IEntityTargetAbleComponent> AvailableTargets => _availableTargets;
-        
-        [Obsolete]
-        public TargetingHandler(IEntityTargetingComponent targetingComponent)//may whnt to not be a monobehavior
-        {
-            _availableTargets = new List<IEntityTargetAbleComponent>();
-            _entityTargetingComponent = targetingComponent;
-        }
 
         public void Init(IEntityTargetingComponent targetingComponent)
         {

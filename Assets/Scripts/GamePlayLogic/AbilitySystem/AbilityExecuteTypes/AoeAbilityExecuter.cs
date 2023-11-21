@@ -19,7 +19,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
         
         private readonly GameObject _aoePrefab;
 
-        public readonly EffectOnEntityConfig EffectOnEntityConfig;
+        public readonly AbilityVisualConfig AbilityVisualConfig;
 
         public readonly PlayableAsset Visual;
         
@@ -65,8 +65,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
             EnterStatusEffects = new List<StatEffectConfig>();
             ExitStatusEffects = new List<StatEffectConfig>();
 
-            Visual = abilityConfig.AbilityAoeSprite;
-            EffectOnEntityConfig = abilityConfig.EffectOnEntityConfig;
+            AbilityVisualConfig = abilityConfig.AbilityVisualConfig;
             
             EnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
             if(abilityConfig.DoExitEffects)
@@ -80,9 +79,9 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
         
         public void Init(IEntityTargetAbleComponent target)//temp
         {
-            var aoeGameObject = Object.Instantiate(_aoePrefab,target.EntityTransform.position,Quaternion.identity).GetComponent<AoeAbilityEntity>();
-            
-            aoeGameObject.Init(target,Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
+            var aoeGameObject = Object.Instantiate(_aoePrefab).GetComponent<AoeAbilityEntity>();
+            aoeGameObject.gameObject.SetActive(false);
+            aoeGameObject.Init(Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
         }
 
         public void Execute(IEntityTargetAbleComponent target)

@@ -4,11 +4,12 @@ using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.TargetingSystem;
 using Tzipory.Systems.UISystem;
 using Tzipory.Tools.Enums;
+using Tzipory.Tools.Interface;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 {
-    public class ProximityRingHandler : MonoBehaviour, ITargetableReciever
+    public class ProximityRingHandler : MonoBehaviour, ITargetableAllReciever
     {
         public event Action<int> OnShadowEnter;
         public event Action<int> OnShadowExit;

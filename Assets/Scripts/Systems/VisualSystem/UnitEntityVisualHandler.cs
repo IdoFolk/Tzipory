@@ -44,7 +44,7 @@ public class UnitEntityVisualHandler : MonoBehaviour , IEntityVisualComponent , 
         EffectSequenceHandler.UpdateEffectHandler();
     }
 
-    public void StartTimeLineEffect(EffectOnEntityConfig config)
+    public void StartTimeLineEffect(AbilityVisualConfig config)
     {
         _particleEffectPosition.playableAsset = config.EntryTimeLine;
         _particleEffectPosition.Play();

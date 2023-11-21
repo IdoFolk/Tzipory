@@ -5,6 +5,7 @@ using Tzipory.Helpers.Consts;
 using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 using UnityEngine.Playables;
+using UnityEngine.Timeline;
 
 namespace Tzipory.ConfigFiles.AbilitySystem
 {
@@ -35,14 +36,12 @@ namespace Tzipory.ConfigFiles.AbilitySystem
         [SerializeField,TabGroup("Ability parameters"),Tooltip(""), ShowIf(nameof(_doExitEffects))] private List<StatEffectConfig> _statusEffectConfigsOnExit;
         
         //abilityVisualConfig
-        [SerializeField,TabGroup("Ability Visual Config"),Tooltip(""),ShowIf(nameof(_abilityCastType),AbilityCastType.Projectile)] private PlayableAsset _abilityProjectileSprite;
-        [SerializeField,TabGroup("Ability Visual Config"),Tooltip(""),ShowIf(nameof(_abilityExecuteType),AbilityExecuteType.AOE)] private PlayableAsset _abilityAoeSprite;
-        [SerializeField,TabGroup("Ability Visual Config"),Tooltip(""),ShowIf(nameof(_abilityExecuteType),AbilityExecuteType.Chain)] private Sprite _abilityChainSprite;
+        [SerializeField,TabGroup("Ability Visual Config"),Tooltip("")] private PlayableAsset _abilityProjectileSprite;
         [SerializeField,TabGroup("Ability Visual Config"),Tooltip("")]
         private bool _haveEffectOnEntity;
 
         [SerializeField, TabGroup("Ability Visual Config"), Tooltip(""), ShowIf(nameof(_haveEffectOnEntity))]
-        private EffectOnEntityConfig _effectOnEntityConfig;
+        private AbilityVisualConfig _abilityVisualConfig;
         
         public string AbilityName => _abilityName;
         public int AbilityId => _abilityId;
@@ -54,14 +53,10 @@ namespace Tzipory.ConfigFiles.AbilitySystem
         public List<StatEffectConfig> StatusEffectConfigsOnExit => _statusEffectConfigsOnExit;
 
         public PlayableAsset AbilityProjectileSprite => _abilityProjectileSprite;
-
-        public PlayableAsset AbilityAoeSprite => _abilityAoeSprite;
-
-        public Sprite AbilityChainSprite => _abilityChainSprite;
-
+        
         public bool HaveEffectOnEntity => _haveEffectOnEntity;
 
-        public EffectOnEntityConfig EffectOnEntityConfig => _effectOnEntityConfig;
+        public AbilityVisualConfig AbilityVisualConfig => _abilityVisualConfig;
 
         public float ProjectileSpeed => _projectileSpeed;
 
@@ -90,15 +85,15 @@ namespace Tzipory.ConfigFiles.AbilitySystem
     }
 
     [System.Serializable]
-    public struct EffectOnEntityConfig
+    public struct AbilityVisualConfig
     {
-        [SerializeField] public PlayableAsset EntryTimeLine;
-        [SerializeField] public PlayableAsset LoopTimeLine;
-        [SerializeField] public PlayableAsset ExitTimeLine;
-        
-        [SerializeField] public float EntryTime;
-        [SerializeField] public float LoopTime;
-        [SerializeField] public float ExitTime;
+        [SerializeField] public TimelineAsset EntryTimeLine;
+        [SerializeField] public TimelineAsset LoopTimeLine;
+        [SerializeField] public TimelineAsset ExitTimeLine;
+
+        public float EntryTime => (float)EntryTimeLine.duration;
+        public float LoopTime;
+        public float ExitTime => (float)ExitTimeLine.duration;
     }
 
     public enum AbilityExecuteType

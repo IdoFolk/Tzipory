@@ -13,6 +13,7 @@ using Tzipory.Tools.GameSettings;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 {
@@ -77,6 +78,8 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
                 PartyManager = new PartyManager(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData,
                     _shamanParent);
             }
+            
+            Logger.LogError("Test");
 
             Instantiate(_levelConfig.Level, _levelParent);
             

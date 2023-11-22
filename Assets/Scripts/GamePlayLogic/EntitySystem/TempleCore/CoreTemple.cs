@@ -110,7 +110,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
         OnHealthChanged?.Invoke();
     }
 
-    public void TakeDamage(float damage, bool isCrit)
+    public void TakeDamage(float damage, bool isCrit, Vector3 dir)
     {
         if (_hpStat.CurrentValue <= 0)
             return;

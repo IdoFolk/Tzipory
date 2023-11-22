@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity;
@@ -6,6 +7,7 @@ using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.EntityComponents;
 using Tzipory.Systems.MovementSystem;
 using Tzipory.Systems.PoolSystem;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using Logger = Tzipory.Tools.Debag.Logger;
@@ -126,12 +128,21 @@ namespace Tzipory.GameplayLogic.EntitySystem.Enemies
                     ? StatHandler.GetStat(Constant.StatsId.CoreAttackDamage).CurrentValue 
                     : StatHandler.GetStat(Constant.StatsId.AttackDamage).CurrentValue;
                 
-                TargetingHandler.CurrentTarget.TakeDamage(attackDamage, false);
+                TargetingHandler.CurrentTarget.TakeDamage(attackDamage, false, Vector3.zero);
             }
             else
             {
                 timer += GAME_TIME.GameDeltaTime;
             }
+        }
+
+        public override void TakeDamage(float damage, bool isCrit, Vector3 dir)
+        {
+            base.TakeDamage(damage, isCrit, dir);
+            float weight = Stats.TryGetValue((int)Constant.StatsId.Weight, out var weightStat) ? weightStat.BaseValue : 0.5f;
+            float fixedWeight = (weight/10) + 0.9f;
+            var newPos = transform.position + (dir * (1-fixedWeight));
+            transform.DOMove(newPos, 1-weight).SetEase(Ease.OutBack);
         }
 
         public override void StartDeathSequence()

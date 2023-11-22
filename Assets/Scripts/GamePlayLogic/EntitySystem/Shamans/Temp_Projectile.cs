@@ -57,7 +57,7 @@ public class Temp_Projectile : MonoBehaviour
             if (hitedTarget.EntityType == EntityType.Hero) return;
             //if (target.EntityInstanceID == _casterId) return;
             
-            hitedTarget.TakeDamage(_damage,_isCrit);
+            hitedTarget.TakeDamage(_damage,_isCrit,_dir);
             Destroy(gameObject);
         }
     }

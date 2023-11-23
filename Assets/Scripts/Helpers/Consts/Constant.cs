@@ -110,7 +110,8 @@ namespace Tzipory.Helpers.Consts
             CoreAttackDamage,
             Modifier,
             Duration,
-            Interval
+            Interval,
+            Weight
         }
         
         public enum StatHolderType

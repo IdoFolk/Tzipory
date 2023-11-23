@@ -14,7 +14,6 @@ using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
-using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Shamans
 {
@@ -147,9 +146,9 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue,false);
         }
 
-        public override void TakeDamage(float damage, bool isCrit)
+        public override void TakeDamage(float damage, bool isCrit, Vector3 dir)
         {
-            base.TakeDamage(damage, isCrit);
+            base.TakeDamage(damage, isCrit, dir);
             UIIndicatorHandler.StartFlashOnIndicator(_uiIndicator.ObjectInstanceId);
         }
 

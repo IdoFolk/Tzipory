@@ -398,7 +398,7 @@ namespace Tzipory.Systems.Entity
             Health.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition),"Heal",PopUpTextManager.Instance.HealDefaultConfig);
         }
 
-        public virtual void TakeDamage(float damage,bool isCrit)
+        public virtual void TakeDamage(float damage,bool isCrit, Vector3 dir)
         {
             if (IsDamageable)
             {

@@ -1,4 +1,5 @@
 ﻿using Tzipory.Systems.StatusSystem;
+using UnityEngine;
 
 namespace Tzipory.Systems.Entity.EntityComponents
 {
@@ -10,7 +11,7 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public bool IsEntityDead { get; }
         
         public void Heal(float amount);
-        public void TakeDamage(float damage,bool isCrit);
+        public void TakeDamage(float damage,bool isCrit, Vector3 dir);
         public void StartDeathSequence();
     }
 }

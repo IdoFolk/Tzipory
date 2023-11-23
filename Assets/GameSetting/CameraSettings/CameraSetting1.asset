@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeedMinimum: 6
   CameraSpeedZoomChangeValue: 12
-  CameraDragPanSpeed: 2.6
+  CameraDragPanSpeed: 0.7
   EdgeScrollDetectSizeX: 0.025
   EdgeScrollDetectSizeY: 0.025
   XDamping: 0.1

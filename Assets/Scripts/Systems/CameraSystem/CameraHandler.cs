@@ -93,6 +93,7 @@ namespace Tzipory.Systems.CameraSystem
             _cameraMaxZoom = _cameraSettings.ZoomMaxClamp;
             LockCamera(_lockedCameraPosition, LOCKED_CAMERA_ZOOM);
             _dragPanSpeed = _cameraSettings.CameraDragPanSpeed * 100f;
+            Cursor.lockState = CursorLockMode.Confined;
         }
         #endregion
 
@@ -119,7 +120,7 @@ namespace Tzipory.Systems.CameraSystem
             if (Input.GetKey(KeyCode.S)) inputDir.y = -1f;
             if (Input.GetKey(KeyCode.A)) inputDir.x = -1f;
             if (Input.GetKey(KeyCode.D)) inputDir.x = +1f;
-
+#if !UNITY_EDITOR            
             //Edge Scrolling Detection
             if (_enableEdgeScroll)
             {
@@ -132,7 +133,7 @@ namespace Tzipory.Systems.CameraSystem
                 if (Input.mousePosition.y > Screen.height - (Screen.height * _cameraSettings.EdgeScrollDetectSizeY))
                     inputDir.y = +1f;
             }
-
+#endif
             if (!_enablePanScroll) return inputDir;
             
             

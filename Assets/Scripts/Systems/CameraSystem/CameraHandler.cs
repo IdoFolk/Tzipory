@@ -91,8 +91,8 @@ namespace Tzipory.Systems.CameraSystem
             _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
             _edgePaddingY = _cameraSettings.DefaultEdgePaddingY;
             _cameraMaxZoom = _cameraSettings.ZoomMaxClamp;
-            _dragPanSpeed = _cameraSettings.CameraDragPanSpeed * 100f;
             LockCamera(_lockedCameraPosition, LOCKED_CAMERA_ZOOM);
+            _dragPanSpeed = _cameraSettings.CameraDragPanSpeed * 100f;
         }
         #endregion
 

@@ -232,7 +232,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             
         }
 
-        public void TakeDamage(float damage, bool isCrit)
+        public void TakeDamage(float damage, bool isCrit, Vector3 dir)
         {
             if (!IsDamageable) return;
             //EffectSequenceHandler.PlaySequenceById(isCrit

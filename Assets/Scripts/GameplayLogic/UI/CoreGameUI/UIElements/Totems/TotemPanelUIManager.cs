@@ -14,7 +14,7 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private RectTransform _totemContainer;
         [SerializeField] private TotemUIHandler _totemUIHandler;
         [SerializeField] private TotemPlacementUI _totemPlacementUI;
-
+        [SerializeField] private KeyCode[] _keybinds;
         public TotemPlacementUI TotemPlacementUI => _totemPlacementUI;
 
         [SerializeField] private List<TotemUIHandler> _totemUIHandlers; //temp
@@ -26,15 +26,16 @@ namespace Tzipory.GameplayLogic.UIElements
             TotemSelected = new Dictionary<int, bool>();
             TotemManager.TotemPlaced += HideTotemUI;
             _totemPlacementUI.Init();
-            foreach (var shaman in LevelManager.PartyManager.Party)
+            for (int i = 0; i < LevelManager.PartyManager.Party.Length; i++)
             {
+                var shaman = LevelManager.PartyManager.Party[i];
                 if (shaman.TotemConfig is null) return;
                 var totemUI = Instantiate(_totemUIHandler, _totemContainer);
-                totemUI.Init(shaman.TotemConfig,shaman.EntityInstanceID);
+                totemUI.Init(shaman.TotemConfig,shaman.EntityInstanceID,_keybinds[i],i+1);
                 _totemUIHandlers.Add(totemUI);
                 TotemSelected.Add(shaman.EntityInstanceID,false);
                 totemUI.OnTotemClick += OnTotemClick;
-            }            
+            }
             base.Init();
         }
 

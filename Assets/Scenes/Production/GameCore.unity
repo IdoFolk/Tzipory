@@ -3418,12 +3418,48 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: _keybinds.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
       propertyPath: _totems.Array.data[0]
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
       propertyPath: _totems.Array.data[1]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: _keybinds.Array.data[0]
+      value: 49
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: _keybinds.Array.data[1]
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: _keybinds.Array.data[2]
+      value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: _keybinds.Array.data[3]
+      value: 52
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: _keybinds.Array.data[4]
+      value: 53
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: _keybinds.Array.data[5]
+      value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: _keybinds.Array.data[6]
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
+      propertyPath: _keybinds.Array.data[7]
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 2416272177258401105, guid: 74072dbfc8e6d114983e3655f98a33d3, type: 3}
       propertyPath: _totemsSerialize.Array.size

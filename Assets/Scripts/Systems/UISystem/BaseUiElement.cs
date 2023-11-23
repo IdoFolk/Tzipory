@@ -32,7 +32,7 @@ namespace Tzipory.Systems.UISystem
                 gameObject.SetActive(false);
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             UIManager.RemoveUIElement(this);
             Hide();

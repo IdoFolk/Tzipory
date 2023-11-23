@@ -61,6 +61,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
 
             _shadow.SetShadow(target.transform, shadowSprite, range);
             Cursor.visible = false;
+            if (GAME_TIME.GetCurrentTimeRate == _slowTime) return;
             _previousTimeRate = GAME_TIME.GetCurrentTimeRate;
             GAME_TIME.SetTimeStep(_slowTime, _slowTimeTransitionTime, _startSlowTimeCurve);
             OnAnyShamanSelected?.Invoke();

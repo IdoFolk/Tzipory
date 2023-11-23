@@ -38,6 +38,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             {
                 TotemPanelUIManager.ToggleTotemSelected(shamanId,true);
                 shaman.TempHeroMovement.SelectHero();
+                _totemPanelUIManager.ShowTotemUISelected(shamanId);
             }
         }
 

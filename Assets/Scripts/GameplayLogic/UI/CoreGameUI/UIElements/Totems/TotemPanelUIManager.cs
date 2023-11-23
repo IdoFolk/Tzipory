@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
+using Tzipory.Systems.MovementSystem.HerosMovementSystem;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
 
@@ -12,12 +13,12 @@ namespace Tzipory.GameplayLogic.UIElements
     {
         public static Dictionary<int,bool> TotemSelected { get; private set; }
         [SerializeField] private RectTransform _totemContainer;
-        [SerializeField] private TotemUIHandler _totemUIHandler;
+        [SerializeField] private TotemUIHandler _totemUIHandlerPrefab;
         [SerializeField] private TotemPlacementUI _totemPlacementUI;
         [SerializeField] private KeyCode[] _keybinds;
         public TotemPlacementUI TotemPlacementUI => _totemPlacementUI;
 
-        [SerializeField] private List<TotemUIHandler> _totemUIHandlers; //temp
+        [SerializeField] private List<TotemUIHandler> _totemUIHandlers;
         private bool _placementActive;
 
         public event Action<int> TotemClicked;
@@ -30,7 +31,7 @@ namespace Tzipory.GameplayLogic.UIElements
             {
                 var shaman = LevelManager.PartyManager.Party[i];
                 if (shaman.TotemConfig is null) return;
-                var totemUI = Instantiate(_totemUIHandler, _totemContainer);
+                var totemUI = Instantiate(_totemUIHandlerPrefab, _totemContainer);
                 totemUI.Init(shaman.TotemConfig,shaman.EntityInstanceID,_keybinds[i],i+1);
                 _totemUIHandlers.Add(totemUI);
                 TotemSelected.Add(shaman.EntityInstanceID,false);
@@ -49,8 +50,9 @@ namespace Tzipory.GameplayLogic.UIElements
             base.Hide();
         }
 
-        private void OnTotemClick(int shamanId) 
+        private void OnTotemClick(int shamanId)
         {
+            
             TotemClicked?.Invoke(shamanId);
         }
 
@@ -59,6 +61,14 @@ namespace Tzipory.GameplayLogic.UIElements
             foreach (var totemUI in _totemUIHandlers.Where(totemUI => totemUI.ShamanId == shamanId))
             {
                 totemUI.ShowTotemPlaced();
+            }
+        }
+
+        public void ShowTotemUISelected(int shamanId)
+        {
+            foreach (var totemUIHandler in _totemUIHandlers.Where(totemUI => totemUI.ShamanId == shamanId))
+            {
+                totemUIHandler.ShowTotemSelected();
             }
         }
 

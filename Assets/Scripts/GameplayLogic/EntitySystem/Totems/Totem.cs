@@ -7,6 +7,7 @@ using Tzipory.ConfigFiles.PopUpText;
 using Tzipory.GameplayLogic.EntitySystem.Enemies;
 using Tzipory.GameplayLogic.EntitySystem.PowerStructures;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
+using Tzipory.GameplayLogic.UIElements;
 using Tzipory.Helpers;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity;
@@ -140,8 +141,9 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
             _clickHelper.OnExitHover -= OnMouseExit;
             _proximityRingHandler.OnEnemyEnter -= OnEnemyEnter;
             _proximityRingHandler.OnEnemyExit -= OnEnemyExit;
+            TotemPanelUIManager.RemoveTotemSelected(_connectedShaman.EntityInstanceID);
         }
-
+        
         private void ApplyTotemAbility()
         {
             switch (_totemConfig.TotemEffectUnitType)
@@ -227,7 +229,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Totems
         
         public void Heal(float amount)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void TakeDamage(float damage, bool isCrit)

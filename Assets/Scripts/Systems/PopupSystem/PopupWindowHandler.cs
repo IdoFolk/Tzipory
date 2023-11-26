@@ -14,7 +14,6 @@ namespace Tzipory.Systems.PopupSystem
         [SerializeField] private PopupWindowConfig _defaultPopupWindowConfig;
         private void Start()
         {
-            if (_rectTransform is null) _rectTransform = GetComponent<RectTransform>();
             if (_uiHolder.activeSelf) _uiHolder.SetActive(false);
         }
         

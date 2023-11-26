@@ -4,6 +4,7 @@ using Tzipory.ConfigFiles.AbilitySystem;
 using Tzipory.ConfigFiles.EntitySystem.EntityVisual;
 using Tzipory.ConfigFiles.StatusSystem;
 using Tzipory.Helpers.Consts;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 
@@ -18,11 +19,13 @@ namespace Tzipory.ConfigFiles.EntitySystem
         private AbilityConfig[] _abilityConfigs;
 
         [SerializeField, TabGroup("Visual")] private BaseUnitEntityVisualConfig _unitEntityVisualConfig;
-        [SerializeField] private TargetingPriorityType _targetingPriority;
-
+        [SerializeField, TabGroup("Targeting")] private TargetingPriorityType _targetingPriority;
+        [SerializeField, TabGroup("Targeting")] private EntityType _targetedEntityType;
         public List<StatConfig> StatConfigs => _statConfigs;
 
         public TargetingPriorityType TargetingPriority => _targetingPriority;
+
+        public EntityType TargetedEntityType => _targetedEntityType;
 
         public AbilityConfig[] AbilityConfigs => _abilityConfigs;
 

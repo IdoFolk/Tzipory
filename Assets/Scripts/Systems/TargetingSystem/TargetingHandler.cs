@@ -74,7 +74,7 @@ namespace Tzipory.Systems.TargetingSystem
 
         private void TryAddTarget(IEntityTargetAbleComponent targetAbleComponent)
         {
-            if (targetAbleComponent.EntityType == _entityTargetingComponent.EntityType)
+            if (!_entityTargetingComponent.TargetedEntityType.HasFlag(targetAbleComponent.EntityType))
                 return;
             
             Logger.Log($"Entity: <color=#de05f2>{_entityTargetingComponent.GameEntity.name}</color>: added {targetAbleComponent.GameEntity.name} to targets list",TARGETING_HANDLER_LOG_GROUP);

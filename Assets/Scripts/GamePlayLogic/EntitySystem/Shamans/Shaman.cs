@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem.EntityVisual;
+using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.GameplayLogic.UI.ProximityIndicators;
@@ -13,7 +14,6 @@ using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
-using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Shamans
 {
@@ -29,6 +29,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
         
         private ShamanSerializeData  _serializeData;
 
+        public Temp_HeroMovement TempHeroMovement => _tempHeroMovement;
+
         private float _currentDecisionInterval = 0;//temp
         private float _baseDecisionInterval;//temp
         
@@ -36,6 +38,9 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
         public BaseUnitEntityVisualConfig  VisualConfig { get; private set; } //temp
         
         private IObjectDisposable _uiIndicator;
+        private TotemConfig _totemConfig;
+
+        public TotemConfig TotemConfig => _totemConfig;
 
         public override void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
@@ -43,7 +48,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             VisualConfig = visualConfig;
             var shamanSerializeData = (ShamanSerializeData)parameter;
             _serializeData = shamanSerializeData;
-            
+            _totemConfig = _serializeData.TotemConfig;
             _shotVisual.Init(this);
 
             _baseDecisionInterval = shamanSerializeData.DecisionInterval;
@@ -91,7 +96,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
                 _currentDecisionInterval = _baseDecisionInterval;
             }
 
-            if (TargetingHandler.CurrentTarget != null)//temp
+            if (TargetingHandler.CurrentTarget != null)
                 Attack();
         }
 
@@ -141,9 +146,9 @@ namespace Tzipory.GameplayLogic.EntitySystem.Shamans
             _shotVisual.Shot(TargetingHandler.CurrentTarget,AttackDamage.CurrentValue,false);
         }
 
-        public override void TakeDamage(float damage, bool isCrit)
+        public override void TakeDamage(float damage, bool isCrit, Vector3 dir)
         {
-            base.TakeDamage(damage, isCrit);
+            base.TakeDamage(damage, isCrit, dir);
             UIIndicatorHandler.StartFlashOnIndicator(_uiIndicator.ObjectInstanceId);
         }
 

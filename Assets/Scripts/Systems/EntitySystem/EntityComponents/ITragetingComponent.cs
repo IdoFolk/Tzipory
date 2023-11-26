@@ -9,6 +9,7 @@ namespace Tzipory.Systems.Entity.EntityComponents
         //TODO may need to add OnTargetSelected event
         public Stat TargetingRange { get; }
         public EntityType EntityType { get; }
+        public EntityType TargetedEntityType { get; }
         public Vector2 ShotPosition { get;}
         public IPriorityTargeting DefaultPriorityTargeting { get; }
         public TargetingHandler TargetingHandler { get; }

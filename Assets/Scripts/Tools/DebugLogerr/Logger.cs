@@ -6,7 +6,9 @@ using UnityEngine;
 
 namespace Tzipory.Tools.Debag
 {
+#if UNITY_EDITOR
     [InitializeOnLoad]
+#endif
     public class Logger
     {
         public static readonly string LOGGroupPath = $"{Application.dataPath}/GameSetting/LogGroups";
@@ -55,6 +57,12 @@ namespace Tzipory.Tools.Debag
        
         public static void LogWarning(object message, string groupName = null)
         {
+            
+            if (Application.isPlaying)
+            {
+                Debug.LogError(groupName is null ? message : $"{groupName}: {message}");
+                return;
+            }
 #if UNITY_EDITOR
             if (groupName == null)
             {
@@ -72,7 +80,15 @@ namespace Tzipory.Tools.Debag
                 return;
             
             Debug.LogWarning(ProcessMessage(message, logGroup));
+            
+            return;
 #endif
+            
+            if (Application.isPlaying)
+            {
+                Debug.LogWarning(groupName is null ? message : $"{groupName}: {message}");
+                return;
+            }
         }
 
         public static void LogError(object message, string groupName = null)
@@ -94,7 +110,15 @@ namespace Tzipory.Tools.Debag
                 return;
             
             Debug.LogError(ProcessMessage(message, logGroup));
+            
+            return;
 #endif
+           
+            if (Application.isPlaying)
+            {
+                Debug.LogError(groupName is null ? message : $"{groupName}: {message}");
+                return;
+            }
         }
 
         private static string ProcessMessage(object message, LogGroup logGroup)

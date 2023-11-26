@@ -22,6 +22,8 @@ namespace Tzipory.Systems.EntityComponents
 
         private Vector2 _destination = Vector2.zero;
 
+        private Action<Vector3> _onComplete;
+
         //Set/init by Unit
 
         //public float AdjustedSpeed => _speedStat.CurrentValue * GAME_TIME.TimeRate;
@@ -48,11 +50,12 @@ namespace Tzipory.Systems.EntityComponents
 
         public bool IsMoveing { get; private set; }    
 
-        public void SetDestination(Vector3 destination, MoveType moveType)
+        public void SetDestination(Vector3 destination, MoveType moveType,Action<Vector3> onComplete = null)
         {
             agent.SetDestination(destination);
             _destination  = destination;
-            IsMoveing  = true;
+            IsMoveing  = true; 
+            _onComplete = onComplete;
         }
 
         public void Stop()
@@ -65,7 +68,10 @@ namespace Tzipory.Systems.EntityComponents
             if (_destination == Vector2.zero) return;
             
             if (Vector2.Distance(_destination, transform.position) > 0.2f) return;
+
+            if (!IsMoveing) return;
             
+            _onComplete?.Invoke(_destination);
             _destination = Vector2.zero;
             IsMoveing = false;
         }

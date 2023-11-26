@@ -155,6 +155,12 @@ namespace Tzipory.Systems.Entity
                 throw new Exception($"{Constant.StatsId.MovementSpeed} not found in entity {GameEntity.name}");
             }
         }
+
+        public void SetDestination(Vector3 destination, MoveType moveType, Action<Vector3> onComplete)
+        {
+            throw new NotImplementedException();
+        }
+
         public Stat TargetingRange {
             get
             {
@@ -171,6 +177,7 @@ namespace Tzipory.Systems.Entity
         public bool IsTargetAble { get; private set; }//not in use!
         
         public EntityType EntityType { get; protected set; }
+        public EntityType TargetedEntityType { get; private set; }
         public Vector2 ShotPosition => _shotPosition.position;
         public IPriorityTargeting DefaultPriorityTargeting { get; private set; }
         public TargetingHandler TargetingHandler => _targetingHandler;
@@ -233,7 +240,7 @@ namespace Tzipory.Systems.Entity
                 Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
 
             if (_doShowHPBar)
-                _hpBarConnector.Init(this);
+                _hpBarConnector.Init(Health.BaseValue);
             else
                 _hpBarConnector.gameObject.SetActive(false);
             
@@ -251,6 +258,8 @@ namespace Tzipory.Systems.Entity
             gameObject.name =  $"{parameter.EntityName} InstanceID: {EntityInstanceID}";
             
             Stats = new Dictionary<int, Stat>();
+            
+            TargetedEntityType = (EntityType)parameter.TargetedEntityType;
 
             foreach (var statSerializeData in parameter.StatSerializeDatas)
             {
@@ -283,6 +292,8 @@ namespace Tzipory.Systems.Entity
                 stat.OnValueChanged += _popUpTexter.SpawnPopUp; 
                 Stats.Add(statSerializeData.ID ,stat);
             }
+
+            TargetedEntityType = parameter.TargetedEntityType;
             
             DefaultPriorityTargeting =
                 Systems.FactorySystem.ObjectFactory.TargetingPriorityFactory.GetTargetingPriority(this, parameter.TargetingPriority);
@@ -387,7 +398,7 @@ namespace Tzipory.Systems.Entity
             Health.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition),"Heal",PopUpTextManager.Instance.HealDefaultConfig);
         }
 
-        public virtual void TakeDamage(float damage,bool isCrit)
+        public virtual void TakeDamage(float damage,bool isCrit, Vector3 dir)
         {
             if (IsDamageable)
             {

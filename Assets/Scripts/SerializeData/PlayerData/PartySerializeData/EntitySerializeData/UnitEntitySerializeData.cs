@@ -9,6 +9,7 @@ using Tzipory.SerializeData.AbilitySystem;
 using Tzipory.SerializeData.StatSystemSerializeData;
 using Tzipory.Systems.Entity;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Tzipory.SerializeData.PlayerData.Party.Entity
 {
@@ -17,6 +18,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
     {
         [SerializeField,TabGroup("General"),ReadOnly] private string _entityName;
         [SerializeField,TabGroup("General"),ReadOnly] private int _targetingPriority;
+        [SerializeField,TabGroup("General"),ReadOnly] private int _targetedEntityType;
         [SerializeField,TabGroup("StatsId"),ReadOnly] private List<StatSerializeData> _statSerializeDatas;
 
         [SerializeField, TabGroup("Ability"), ReadOnly] private AbilitySerializeData[] _ability;
@@ -25,6 +27,8 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         public string EntityName => _entityName;
 
         public int TargetingPriority => _targetingPriority;
+
+        public int TargetedEntityType => _targetedEntityType;
 
         public AbilitySerializeData[] Ability => _ability;
         
@@ -42,6 +46,8 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
             var baseUnitEntityConfig = (BaseUnitEntityConfig)parameter;
             
             _statSerializeDatas  = new List<StatSerializeData>();
+
+            _targetedEntityType = (int)baseUnitEntityConfig.TargetingPriority;
             
             _entityName = baseUnitEntityConfig.name;
             

@@ -341,7 +341,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1735494549323767867, guid: 7affbdbe11fb30e478a4679f54425446, type: 3}
       propertyPath: m_Name
-      value: ProximityCircle
+      value: ProximityManager
       objectReference: {fileID: 0}
     - target: {fileID: 2048352138870247467, guid: 7affbdbe11fb30e478a4679f54425446, type: 3}
       propertyPath: m_LocalScale.x

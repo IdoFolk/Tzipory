@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tzipory.GameplayLogic.EntitySystem.PowerStructures;
+using Tzipory.GameplayLogic.EntitySystem.Totems;
 using Tzipory.Systems.WaveSystem;
 using UnityEngine;
 

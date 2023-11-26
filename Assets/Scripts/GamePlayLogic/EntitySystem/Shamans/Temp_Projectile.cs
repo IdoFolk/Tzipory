@@ -54,10 +54,10 @@ public class Temp_Projectile : MonoBehaviour
     {
         if (other.TryGetComponent<IEntityTargetAbleComponent>(out var hitedTarget))
         {
-            if (hitedTarget.EntityType == EntityType.Hero) return;
+            if (hitedTarget.EntityType is EntityType.Hero or EntityType.Totem) return;
             //if (target.EntityInstanceID == _casterId) return;
             
-            hitedTarget.TakeDamage(_damage,_isCrit);
+            hitedTarget.TakeDamage(_damage,_isCrit,_dir);
             Destroy(gameObject);
         }
     }

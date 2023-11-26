@@ -32,7 +32,7 @@ namespace Tzipory.Systems.UISystem
         
         public bool EnableDrag => _enableDrag;
         
-        private void Update()
+        protected virtual void Update()
         {
             if (_clickNum == 0 || !_enableDoubleClick)
                 return;

@@ -120,13 +120,13 @@ namespace Tzipory.Systems.UISystem.Indicators
             if (_timer is not null)
                 _timerFill.fillAmount = _timer.TimeRemaining / _delay;
             
-            var screenPoint = RectTransform.SetScreenPointRelativeToWordPoint(_objectTransform.position,_config.OffSetRadios);
+            var screenPoint = _rectTransform.SetScreenPointRelativeToWordPoint(_objectTransform.position,_config.OffSetRadios);
 
             if (_isFlashing)
             {
                 float lerpDelta = Mathf.PingPong(Time.time * _config.FlashConfig.FlashSpeed, 1);
                 
-                RectTransform.localScale = Vector2.Lerp(Vector2.one, Vector2.one * _config.FlashConfig.SizeFactor, lerpDelta);
+                _rectTransform.localScale = Vector2.Lerp(Vector2.one, Vector2.one * _config.FlashConfig.SizeFactor, lerpDelta);
                 if (_config.FlashConfig.OverrideFlashingColor)
                     _bg.color = Color.Lerp(_config.Color,_config.FlashConfig.FlashingColor,lerpDelta);
                 
@@ -139,7 +139,7 @@ namespace Tzipory.Systems.UISystem.Indicators
                 }
             }
             
-            Vector3 dir = (new Vector3(screenPoint.x,screenPoint.y,0) - new Vector3(RectTransform.position.x,RectTransform.position.y,0)).normalized;
+            Vector3 dir = (new Vector3(screenPoint.x,screenPoint.y,0) - new Vector3(_rectTransform.position.x,_rectTransform.position.y,0)).normalized;
             float angle = Vector2Helper.AngleBetween360(Vector2.up, dir);
             Vector3 newDir = new Vector3(0, 0, angle);
             _rotateIndicator.localEulerAngles = newDir;
@@ -191,7 +191,7 @@ namespace Tzipory.Systems.UISystem.Indicators
             _flashingTime = 0;
             _isFlashing = false;
             _bg.color = Color.white;
-            RectTransform.localScale = Vector3.one;
+            _rectTransform.localScale = Vector3.one;
         }
 
         protected override void OnClick(PointerEventData eventData)

@@ -13,7 +13,6 @@ namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
       [SerializeField] private Image _image;
       [SerializeField] private TMP_Text _itemName;
       [SerializeField] private TMP_Text _itemAmount;
-      [SerializeField] private RectTransform _rectTransform;
       [SerializeField] private GameObject _holder;
 
       private ISlotItem _item;

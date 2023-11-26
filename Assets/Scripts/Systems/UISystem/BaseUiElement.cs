@@ -12,8 +12,7 @@ namespace Tzipory.Systems.UISystem
         
         [SerializeField] private bool _showOnAwake = false;
         [SerializeField] private UIGroup _uiGroupTags;
-        
-        [SerializeField,HideInInspector] protected RectTransform RectTransform;
+        [SerializeField,HideInInspector]protected internal RectTransform _rectTransform;
         
         public string ElementName => gameObject.name;
         public UIGroup UIGroupTags => _uiGroupTags;
@@ -62,7 +61,7 @@ namespace Tzipory.Systems.UISystem
 
         private void OnValidate()
         {
-            RectTransform ??= GetComponent<RectTransform>();
+            _rectTransform ??= GetComponent<RectTransform>();
         }
     }
 }

@@ -478,9 +478,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showOnAwake: 0
   _uiGroupTags: 2
+  _rectTransform: {fileID: 1990358484108044902}
   _enableDrag: 0
   _canvasGroup: {fileID: 0}
+  _enableDoubleClick: 0
   _doubleClickSpeed: 0.5
+  _enablePopupWindow: 1
+  _popupWindowConfig:
+    PositionPadding: {x: 0, y: 150}
+    WindowSize: {x: 250, y: 170}
+    HeaderFontSize: 24
+    BodyFontSize: 16
+    HeaderText: shaman
+    BodyText: stats
   _fill: {fileID: 2203700212569915012}
   _healthBar: {fileID: 8223283540287803632}
   _splash: {fileID: 1019704610706600701}

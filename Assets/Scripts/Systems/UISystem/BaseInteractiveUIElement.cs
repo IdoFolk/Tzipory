@@ -1,5 +1,6 @@
 ﻿using System;
 using Sirenix.OdinInspector;
+using Tzipory.Systems.PopupSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -20,8 +21,11 @@ namespace Tzipory.Systems.UISystem
         [SerializeField,ShowIf(nameof(_enableDrag))] private CanvasGroup _canvasGroup;
         [SerializeField] private bool _enableDoubleClick;
         [SerializeField,ShowIf(nameof(_enableDoubleClick))] private float _doubleClickSpeed = 0.5f;
-        
-        
+        [SerializeField] private bool _enablePopupWindow;
+        [SerializeField] private PopupWindowConfig _popupWindowConfig;
+
+        public PopupWindowConfig PopupWindowConfig => _popupWindowConfig;
+
         private int _clickNum;
 
         private float _doubleClickTimer;
@@ -45,11 +49,13 @@ namespace Tzipory.Systems.UISystem
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
             OnEnter?.Invoke();
+            if (_enablePopupWindow) PopupWindowManager.OpenWindow(this);
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
             OnExit?.Invoke();
+            if (_enablePopupWindow) PopupWindowManager.CloseWindow();
         }
 
         #region DragLogic

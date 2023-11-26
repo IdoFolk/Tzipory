@@ -543,10 +543,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c0d8b0d6bb68a540a234cdb636ced7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showOnAwake: 0
+  _uiGroupTags: 3
+  _rectTransform: {fileID: 920397399060956381}
   _uiHolder: {fileID: 5614603384721662045}
   _textHeader: {fileID: 7448455994202742060}
   _textBody: {fileID: 254107499126383498}
-  _defaultPopupWindowSettings: {fileID: 0}
+  _defaultPopupWindowConfig:
+    PositionPadding: {x: 0, y: 0}
+    WindowSize: {x: 250, y: 170}
+    HeaderFontSize: 24
+    BodyFontSize: 16
+    HeaderText: 
+    BodyText: 
 --- !u!225 &4446352150662966776
 CanvasGroup:
   m_ObjectHideFlags: 0

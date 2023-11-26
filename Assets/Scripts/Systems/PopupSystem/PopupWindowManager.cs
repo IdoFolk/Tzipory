@@ -15,15 +15,11 @@ namespace Tzipory.Systems.PopupSystem
             _popupWindow = Instantiate(_popupWindowAsset,_canvasParent);
         }
 
-        public static void OpenWindow(BaseInteractiveUIElement uiElement,string header,string body)
+        public static void OpenWindow(BaseInteractiveUIElement uiElement)
         {
-            _popupWindow.OpenWindow(uiElement,header,body);
+            _popupWindow.OpenWindow(uiElement,uiElement.PopupWindowConfig.HeaderText,uiElement.PopupWindowConfig.BodyText);
             
         }
-        // public static void OpenNewWindow(Transform transform,string header,string body) //may need to request sprite instead of transform
-        // {
-        //     
-        // }
         public static void CloseWindow()
         {
             _popupWindow.CloseWindow();

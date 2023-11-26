@@ -11,14 +11,7 @@ namespace Tzipory.Systems.PopupSystem
         [SerializeField] private GameObject _uiHolder;
         [SerializeField] private TextMeshProUGUI _textHeader;
         [SerializeField] private TextMeshProUGUI _textBody;
-        [SerializeField] private PopupWindowSettings _defaultPopupWindowSettings;
-        private RectTransform _rectTransform;
-
-        protected override void Awake()
-        {
-            
-        }
-
+        [SerializeField] private PopupWindowConfig _defaultPopupWindowConfig;
         private void Start()
         {
             if (_rectTransform is null) _rectTransform = GetComponent<RectTransform>();
@@ -27,18 +20,18 @@ namespace Tzipory.Systems.PopupSystem
         
         public void OpenWindow(BaseInteractiveUIElement uiElement,string header,string body)
         {
-            PopupWindowSettings uiElementPopupSetting;
-            if (uiElement.PopupWindowSettings is null)
+            PopupWindowConfig uiElementPopupConfig;
+            if (uiElement.PopupWindowConfig is null)
             {
                 Debug.Log("PopupWindowSetting is Null");
-                uiElementPopupSetting = _defaultPopupWindowSettings;
+                uiElementPopupConfig = _defaultPopupWindowConfig;
             }
             else
             {
-                uiElementPopupSetting = uiElement.PopupWindowSettings;
+                uiElementPopupConfig = uiElement.PopupWindowConfig;
             }
-            Init(uiElementPopupSetting, header, body);
-            transform.position = CalculateWindowPosition(uiElement.RectTransform, uiElementPopupSetting);
+            Init(uiElementPopupConfig, header, body);
+            transform.position = CalculateWindowPosition(uiElement._rectTransform, uiElementPopupConfig);
             _uiHolder.SetActive(true);
         }
 
@@ -47,17 +40,17 @@ namespace Tzipory.Systems.PopupSystem
             _uiHolder.SetActive(false);
         }
 
-        private void Init(PopupWindowSettings popupWindowSettings, string header, string body)
+        private void Init(PopupWindowConfig popupWindowConfig, string header, string body)
         {
-            _textHeader.fontSize = popupWindowSettings.HeaderFontSize;
-            _textBody.fontSize = popupWindowSettings.BodyFontSize;
+            _textHeader.fontSize = popupWindowConfig.HeaderFontSize;
+            _textBody.fontSize = popupWindowConfig.BodyFontSize;
             _textHeader.text = header;
             _textBody.text = body;
-            _rectTransform.rect.SetSize(popupWindowSettings.WindowSize.x, popupWindowSettings.WindowSize.y);
+            _rectTransform.rect.SetSize(popupWindowConfig.WindowSize.x, popupWindowConfig.WindowSize.y);
         }
-        private Vector3 CalculateWindowPosition(RectTransform uiElementRect,PopupWindowSettings uiElementPopupSettings)
+        private Vector3 CalculateWindowPosition(RectTransform uiElementRect,PopupWindowConfig uiElementPopupConfig)
         {
-            Vector3 padding = new Vector3(uiElementPopupSettings.PositionPadding.x,uiElementPopupSettings.PositionPadding.y,0);
+            Vector3 padding = new Vector3(uiElementPopupConfig.PositionPadding.x,uiElementPopupConfig.PositionPadding.y,0);
             var PopupWindowPosition = uiElementRect.position + padding;
             var paddingCorrection = CheckIfWindowFitsScreen(PopupWindowPosition,uiElementRect);
             padding = Vector3.Scale(padding, paddingCorrection);

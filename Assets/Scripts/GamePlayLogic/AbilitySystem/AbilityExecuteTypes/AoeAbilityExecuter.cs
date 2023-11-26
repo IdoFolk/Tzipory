@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Tzipory.ConfigFiles.AbilitySystem;
 using Tzipory.ConfigFiles.StatusSystem;
 using Tzipory.Helpers.Consts;
-using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.AbilitySystem.AbilityEntity;
 using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -70,7 +70,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
         public void Init(IEntityTargetAbleComponent target)//temp
         {
             var aoeGameobject = Object.Instantiate(_aoePrefab,target.EntityTransform.position,Quaternion.identity).GetComponent<AoeAbilityEntity>();
-            //aoeGameobject.Init(target,Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
+            //aoeGameobject.SetShamanData(target,Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
             aoeGameobject.Init(target,Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
         }
 
@@ -80,7 +80,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
                 return;
 
             foreach (var statusEffect in OnEnterStatusEffects)
-                target.StatusHandler.AddStatusEffect(statusEffect);
+                target.StatHandler.AddStatEffect(statusEffect);
         }
         public void ExecuteOnExit(IEntityTargetAbleComponent target)
         {
@@ -88,7 +88,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
                 return;
 
             foreach (var statusEffect in OnExitStatusEffects)
-                target.StatusHandler.AddStatusEffect(statusEffect);
+                target.StatHandler.AddStatEffect(statusEffect);
         }
 
 

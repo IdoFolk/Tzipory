@@ -1,13 +1,12 @@
 ﻿using System;
 using Sirenix.OdinInspector;
-using Tzipory.Systems.PopupSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace Tzipory.Systems.UISystem
 {
-    public abstract class BaseInteractiveUIElement : MonoBehaviour , IUIElement , IPointerEnterHandler,IPointerExitHandler , IPointerClickHandler ,IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+    public abstract class BaseInteractiveUIElement : BaseUIElement , IPointerEnterHandler,IPointerExitHandler , IPointerClickHandler ,IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
     {
         public event Action OnClickEvent;
         public event Action OnDragEvent;
@@ -16,72 +15,40 @@ namespace Tzipory.Systems.UISystem
         public event Action OnDoubleClickEvent;
         public event Action OnEnter;
         public event Action OnExit;
-        public Action OnShow { get; }
-
-        public Action OnHide { get; }
-        public string ElementName => gameObject.name;
-        public RectTransform RectTransform => _rectTransform;
-        public PopupWindowSettings PopupWindowSettings => _popupWindowSettings;
-
-        [SerializeField] private bool _enableDrag;
-
-        [SerializeField,ShowIf("_enableDrag")] private CanvasGroup _canvasGroup;
         
-        [SerializeField] private float _doubleClickSpeed = 0.5f;
-        [SerializeField] private PopupWindowSettings _popupWindowSettings;
-        protected RectTransform _rectTransform;
-        private bool _isOn;
+        [SerializeField] private bool _enableDrag;
+        [SerializeField,ShowIf(nameof(_enableDrag))] private CanvasGroup _canvasGroup;
+        [SerializeField] private bool _enableDoubleClick;
+        [SerializeField,ShowIf(nameof(_enableDoubleClick))] private float _doubleClickSpeed = 0.5f;
+        
         
         private int _clickNum;
 
-        private ITimer _doubleClickTimer;
-
-        protected virtual void Awake()
-        {
-            
-        }
-
-        private void Start()
-        {
-            _rectTransform = GetComponent<RectTransform>();
-        }
-
-        public virtual void Show()
-        {
-            gameObject.SetActive(true);
-            OnShow?.Invoke();
-            _clickNum = 0; 
-        }
-
-        public virtual void Hide()
-        {
-            gameObject.SetActive(false);
-            OnHide?.Invoke();
-        }
-
+        private float _doubleClickTimer;
+        
+        public bool EnableDrag => _enableDrag;
+        
         private void Update()
         {
-            if (_clickNum == 0)
+            if (_clickNum == 0 || !_enableDoubleClick)
                 return;
-
-            _doubleClickTimer ??= GAME_TIME.TimerHandler.StartNewTimer(_doubleClickSpeed,"Double Click UI Timer");
             
-            if (_doubleClickTimer.IsDone)
+            _doubleClickTimer -= Time.deltaTime;
+            
+            if (_doubleClickTimer <= _doubleClickSpeed)
             {
                 _clickNum  = 0;
-                _doubleClickTimer  = null;
+                _doubleClickTimer  = 0;
             }
         }
 
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
-            _isOn = true;
             OnEnter?.Invoke();
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
-            _isOn = false;
             OnExit?.Invoke();
         }
 
@@ -93,7 +60,6 @@ namespace Tzipory.Systems.UISystem
                 return;
             
             _clickNum = 0;
-            _doubleClickTimer = null;
             
             _canvasGroup.alpha = 0.6f;
             _canvasGroup.blocksRaycasts = false;
@@ -137,27 +103,24 @@ namespace Tzipory.Systems.UISystem
         {
             OnClickEvent?.Invoke();
             _clickNum++;
+            _doubleClickTimer = _doubleClickSpeed;
         }
         
         protected virtual void OnDoubleClick(PointerEventData eventData)
         {
             OnDoubleClickEvent?.Invoke();
-            _doubleClickTimer = null;
+            _doubleClickTimer = 0;
             _clickNum = 0;
         }
 
         public virtual void OnDrop(PointerEventData eventData)
         {
         }
-    }
 
-    public interface IUIElement
-    {
-        public string ElementName { get; }
-        public Action OnShow { get; }
-        public Action OnHide { get; }
-        
-        void Show();
-        void Hide();
+        private void OnDisable()
+        {
+            _clickNum = 0;
+            _doubleClickTimer = 0;
+        }
     }
 }

@@ -6,44 +6,65 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemSlotUI : BaseInteractiveUIElement , IInitialization<ISlotItem>
+namespace Tzipory.GameplayLogic.UI.MetaUI.InventoryUI
 {
-   [SerializeField] private Image _image;
-   [SerializeField] private TMP_Text _itemName;
-   [SerializeField] private TMP_Text _itemAmount;
-   
-   private ISlotItem _item;
-   
-   private Vector3  _startPosition;
-
-   public ISlotItem Item => _item;
-
-   public bool IsInitialization { get; private set; }
-   
-   public override void OnBeginDrag(PointerEventData eventData)
+   public class ItemSlotUI : BaseInteractiveUIElement, IInitialization<ISlotItem>, ICopy<ItemSlotUI>
    {
-      base.OnBeginDrag(eventData);
-      _startPosition  = transform.position;
-   }
+      [SerializeField] private Image _image;
+      [SerializeField] private TMP_Text _itemName;
+      [SerializeField] private TMP_Text _itemAmount;
+      [SerializeField] private RectTransform _rectTransform;
+      [SerializeField] private GameObject _holder;
 
-   public override void OnDrag(PointerEventData eventData)
-   {
-      base.OnDrag(eventData);
-      transform.position = eventData.position;
-   }
+      private ISlotItem _item;
 
-   public override void OnEndDrag(PointerEventData eventData)
-   {
-      base.OnEndDrag(eventData);
-      transform.position  = _startPosition;
-   }
+      private Vector3 _startPosition;
 
-   public void Init(ISlotItem parameter)
-   {
-      _image.sprite = parameter.ItemSlotSprite;
-      _itemName.text = parameter.ItemSlotName;
-      _itemAmount.text = parameter.ItemAmount.ToString();
-      _item = parameter;
-      IsInitialization = true;
+      public ISlotItem Item => _item;
+      
+      private void OnValidate()
+      {
+         _rectTransform ??= GetComponent<RectTransform>();
+      }
+
+      public override void OnBeginDrag(PointerEventData eventData)
+      {
+         base.OnBeginDrag(eventData);
+         _startPosition = transform.position;
+         ItemDragUIManager.AssignDraggedItem(this);
+      }
+
+      public override void OnEndDrag(PointerEventData eventData)
+      {
+         base.OnEndDrag(eventData);
+         ItemDragUIManager.UnassignDraggedItem();
+      }
+
+      public void Init(ISlotItem parameter)
+      {
+         _image.sprite = parameter.ItemSlotSprite;
+         _itemName.text = parameter.ItemSlotName;
+         _itemAmount.text = parameter.ItemAmount.ToString();
+         _item = parameter;
+         base.Init();
+      }
+
+      public ItemSlotUI Copy()
+      {
+         ItemSlotUI itemSlotCopy = Instantiate(this);
+         itemSlotCopy._image = _image;
+         itemSlotCopy._itemName = _itemName;
+         itemSlotCopy._itemAmount = _itemAmount;
+         itemSlotCopy._item = _item;
+         itemSlotCopy._rectTransform.sizeDelta = new Vector2(_rectTransform.rect.width, _rectTransform.rect.height);
+         itemSlotCopy._startPosition = _startPosition;
+         return itemSlotCopy;
+      }
+
+      public void ToggleVisual(bool state)
+      {
+         _holder.SetActive(state);
+      }
+      
    }
 }

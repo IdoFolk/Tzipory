@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tzipory.Helpers;
-using Tzipory.Tools.TimeSystem;
 using Tzipory.GamePlayLogic.ObjectPools;
+using Tzipory.Helpers;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.PoolSystem;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.VisualSystem.EffectSequenceSystem
 {
     public class EffectSequence : IInitialization<IEntityVisualComponent,EffectSequenceConfig,Action> , IPoolable<EffectSequence>
     {
         #region Fields
+        private const string EFFECT_SEQUENCE_LOG_GROUP = "EffectSequence";
 
         private Action _onComplete;
         
@@ -37,9 +39,7 @@ namespace Tzipory.Systems.VisualSystem.EffectSequenceSystem
         #endregion
 
         #region Properties
-
-
-
+        
         public bool IsInterruptable { get; private set; }
         
         public string SequenceName { get; private set; }
@@ -77,9 +77,7 @@ namespace Tzipory.Systems.VisualSystem.EffectSequenceSystem
             
             IsInitialization = true;
             
-#if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.EFFECT_HANDLER_COLOR}>Effect Handler:</color> sequence {SequenceName} as started on entity <color={ColorLogHelper.ENTITY_COLOR}>{_entityVisualComponent.GameEntity.name}</color>");
-#endif
+            Logger.Log($"Sequence {SequenceName} as started on entity <color={ColorLogHelper.ENTITY_COLOR}>{_entityVisualComponent.GameEntity.name}</color>",EFFECT_SEQUENCE_LOG_GROUP);
             _startDelayTimer = _entityVisualComponent.GameEntity.EntityTimer.StartNewTimer(parameter2.StartDelay,$"EffectSequence: {SequenceName} start Delay Timer");
         }
         
@@ -90,9 +88,8 @@ namespace Tzipory.Systems.VisualSystem.EffectSequenceSystem
         private void OnCompleteEffectSequence()
         {
             _onComplete?.Invoke();
-#if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.EFFECT_HANDLER_COLOR}>Effect Handler:</color> sequence {SequenceName} as completed on entity <color={ColorLogHelper.ENTITY_COLOR}>{_entityVisualComponent.GameEntity.name}</color>");
-#endif
+            
+            Logger.Log($"Sequence {SequenceName} as completed on entity <color={ColorLogHelper.ENTITY_COLOR}>{_entityVisualComponent.GameEntity.name}</color>",EFFECT_SEQUENCE_LOG_GROUP);
             Dispose();
         }
         
@@ -201,9 +198,7 @@ namespace Tzipory.Systems.VisualSystem.EffectSequenceSystem
             _activeEffectActions.Clear();
             _startDelayTimer = null;
             IsInitialization = false;
-#if UNITY_EDITOR
-            Debug.Log($"<color={ColorLogHelper.EFFECT_HANDLER_COLOR}>Effect Handler:</color> sequence {SequenceName} as <color={ColorLogHelper.RED}>Dispose</color> on entity <color={ColorLogHelper.ENTITY_COLOR}>{_entityVisualComponent.GameEntity.name}</color>");
-#endif
+            Logger.Log($"Sequence {SequenceName} as <color={ColorLogHelper.RED}>Dispose</color> on entity <color={ColorLogHelper.ENTITY_COLOR}>{_entityVisualComponent.GameEntity.name}</color>",EFFECT_SEQUENCE_LOG_GROUP);
             OnDispose?.Invoke(this);
         }
 

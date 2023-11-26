@@ -1,8 +1,7 @@
 using System.Collections;
-using Tzipory.Systems;
-using Tzipory.Systems.TargetingSystem;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.Entity;
+using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
 
 public class TEMP_UnitFlipAndZFix : MonoBehaviour
@@ -20,7 +19,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
 
     [SerializeField] BaseUnitEntity _baseUnitEntity;
     TargetingHandler _targeting;
-    //TEMP! Should USE Init(BaseUnitEntity) INSTEAD 
+    //TEMP! Should USE SetShamanData(BaseUnitEntity) INSTEAD 
 
     static Vector3 cachedScaledMapSize => LevelHandler.MapSize * .01f; //fix take from consts
     static float zDistanceModifier = .5f; //fix take from consts

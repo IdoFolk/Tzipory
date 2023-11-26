@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using Tzipory.ConfigFiles;
-using Tzipory.Systems.SaveLoadSystem;
-using Tzipory.ConfigFiles.Party;
 using Tzipory.SerializeData;
+using Tzipory.Systems.SaveLoadSystem;
 using UnityEngine;
 
 namespace Tzipory.Systems.DataManager

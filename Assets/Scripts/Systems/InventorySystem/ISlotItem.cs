@@ -1,5 +1,4 @@
-﻿using Tzipory.ConfigFiles.Item;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Tzipory.Systems.InventorySystem
 {
@@ -9,6 +8,6 @@ namespace Tzipory.Systems.InventorySystem
         public string ItemSlotName { get; }
         public string ItemSlotDescription { get; }
         public int ItemId { get; }
-        public int ItemAmount { get; }
+        public int ItemAmount { get;}
     }
 }

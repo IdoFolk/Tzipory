@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Tzipory.Systems.SceneSystem;
 using UnityEngine;
 
 namespace Tzipory.Testing

@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using Tzipory.ConfigFiles.AbilitySystem;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity.EntityComponents;
-using Tzipory.Tools.TimeSystem;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.TargetingSystem;
-using UnityEngine;
+using Tzipory.Tools.TimeSystem;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.AbilitySystem
 {
     public class Ability : IStatHolder
     {
+        public const string ABILITY_LOG_GROUP = "AbilityHandler";
+        
         private readonly IEntityTargetingComponent _entityTargetingComponent;
         private readonly IAbilityCaster _abilityCaster;
         private readonly IAbilityExecutor _abilityExecutor;
@@ -97,10 +99,8 @@ namespace Tzipory.Systems.AbilitySystem
 
             _isReady = false;
             IsCasting = true;
-#if UNITY_EDITOR
-            Debug.Log($"<color=#0008ff>AbilityHandler:</color> {_entityTargetingComponent.GameEntity.name} start casting ability {AbilityName} castTime: {CastTime.CurrentValue}");
+            Logger.Log($"{_entityTargetingComponent.GameEntity.name} start casting ability {AbilityName} castTime: {CastTime.CurrentValue}",ABILITY_LOG_GROUP);
             
-#endif
             _castTimer = _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(CastTime.CurrentValue,"Ability cast time", Cast,ref availableTarget);
         }
 
@@ -110,17 +110,13 @@ namespace Tzipory.Systems.AbilitySystem
             
             if (currentTarget == null)
                 return;
-#if UNITY_EDITOR
-            Debug.Log($"<color=#0008ff>AbilityHandler:</color> {_entityTargetingComponent.GameEntity.name} cast ability {AbilityName} on {currentTarget.GameEntity.name}");
-#endif
+            Logger.Log($"{_entityTargetingComponent.GameEntity.name} cast ability {AbilityName} on {currentTarget.GameEntity.name}",ABILITY_LOG_GROUP);
             _abilityCaster.Cast(currentTarget,_abilityExecutor);
         }
         
         public void CancelCast()
         {
-#if UNITY_EDITOR
-            Debug.Log($"<color=#0008ff>AbilityHandler:</color> {_entityTargetingComponent.GameEntity.name} ability {AbilityName} cancel cast {_castTimer.TimeRemaining}");
-#endif
+            Logger.Log($"{_entityTargetingComponent.GameEntity.name} ability {AbilityName} cancel cast {_castTimer.TimeRemaining}",ABILITY_LOG_GROUP);
             _castTimer.StopTimer();
             IsCasting = false;
             _isReady = true;

@@ -1,18 +1,41 @@
 ﻿using System;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.Tools.Enums;
 using UnityEngine;
 
 namespace Tzipory.Systems.UISystem
 {
     public abstract class BaseUIElement : MonoBehaviour, IUIElement
     {
-        public string ElementName { get; }
-        public Action OnShow { get; }
-        public Action OnHide { get; }
+        public Action OnShow;
+        public Action OnHide;
+        
+        [SerializeField] private bool _showOnAwake = false;
+        [SerializeField] private UIGroup _uiGroupTags;
+        
+        [SerializeField,HideInInspector] protected RectTransform RectTransform;
+        
+        public string ElementName => gameObject.name;
+        public UIGroup UIGroupTags => _uiGroupTags;
+
+        public bool IsInitialization { get; protected set; }
+
+        public Vector2 UIScreenPoint => GameManager.CameraHandler.MainCamera.WorldToScreenPoint(transform.position);
 
         protected virtual void Awake()
         {
-            Show();
+            UIManager.AddUIElement(this,UIGroupTags);
+            
+            if (_showOnAwake)
+                Show();
+            else
+                gameObject.SetActive(false);
+        }
+
+        private void OnDestroy()
+        {
+            UIManager.RemoveUIElement(this);
+            Hide();
         }
 
         public virtual void Show()
@@ -25,6 +48,21 @@ namespace Tzipory.Systems.UISystem
         {
             gameObject.SetActive(false);
             OnHide?.Invoke();
+        }
+
+        public virtual void UpdateUIVisual()
+        {
+            
+        }
+
+        public virtual void Init()
+        {
+            IsInitialization = true;
+        }
+
+        private void OnValidate()
+        {
+            RectTransform ??= GetComponent<RectTransform>();
         }
     }
 }

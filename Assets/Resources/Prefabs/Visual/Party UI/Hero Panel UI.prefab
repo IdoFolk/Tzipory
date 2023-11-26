@@ -86,12 +86,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9289c300bcec4b1bb841f87c96ff0571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enableDrag: 0
-  _canvasGroup: {fileID: 0}
-  _popupWindowHandler: {fileID: 0}
-  _doubleClickSpeed: 0.5
+  _showOnAwake: 0
+  _uiGroupTags: 2
   _heroContainer: {fileID: 2817122895327603443}
-  _shamanInteractiveUIHanlder: {fileID: 0}
+  _shamanUIHanlder: {fileID: 0}
 --- !u!1 &3846718230969615506
 GameObject:
   m_ObjectHideFlags: 0

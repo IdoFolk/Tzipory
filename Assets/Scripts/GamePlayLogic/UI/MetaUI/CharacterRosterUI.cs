@@ -13,7 +13,8 @@ namespace Tzipory.GamePlayLogic.UI
     
         [SerializeField] private CharacterRosterSlotUI[] _rosterSlotUis;
         public bool IsInitialization { get; private set; }
-    
+
+        
         public void Init(IEnumerable<ShamanDataContainer> parameter)
         {
             ShamanDataContainer[] shamanDataContainers = parameter.ToArray();
@@ -42,7 +43,7 @@ namespace Tzipory.GamePlayLogic.UI
         {
             OnCharacterRosterSlotClicked?.Invoke(shamanDataContainer);
         }
-
+        
         private void OnDestroy()
         {
             for (int i = 0; i < _rosterSlotUis.Length; i++)

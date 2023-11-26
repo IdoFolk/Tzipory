@@ -3,10 +3,9 @@ using System;
 
 namespace Tzipory.Systems.PoolSystem
 {
-    public interface IDisposable<out T>
+    public interface IDisposable<out T> : IDisposable
     {
         public event Action<T> OnDispose;
-        public void Dispose();
     }
     public interface IPoolable<out T> : IDisposable<T>
     {

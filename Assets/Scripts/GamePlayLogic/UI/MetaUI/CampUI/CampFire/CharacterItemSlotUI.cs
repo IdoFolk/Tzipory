@@ -1,5 +1,6 @@
 using System;
 using Tzipory.ConfigFiles.Item;
+using Tzipory.GameplayLogic.UI.MetaUI.InventoryUI;
 using Tzipory.SerializeData.ItemSerializeData;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
@@ -14,6 +15,11 @@ public class CharacterItemSlotUI : BaseInteractiveUIElement
     [SerializeField] private ItemSlot _itemSlot;
    
     [SerializeField] private Image _itemSprite;
+    private Vector3 _startPosition;
+
+    public bool HaveItem { get; private set; }
+
+    public int StoreItemId { get; private set; }
 
     public ItemSlot ItemSlot => _itemSlot;
 
@@ -28,6 +34,9 @@ public class CharacterItemSlotUI : BaseInteractiveUIElement
                 if (serializeData.ItemSlot == _itemSlot)
                 {
                     _itemSprite.sprite = serializeData.ItemSlotSprite;
+                    _itemSprite.color = Color.white;
+                    StoreItemId = serializeData.ItemId;
+                    HaveItem = true;
                     OnItemDropSuccess?.Invoke(serializeData);
                     return;
                 }
@@ -41,8 +50,22 @@ public class CharacterItemSlotUI : BaseInteractiveUIElement
         OnItemDropFail?.Invoke(null);
     }
 
+    
+
+    public override void OnDrag(PointerEventData eventData)
+    {
+        base.OnDrag(eventData);
+        if (!HaveItem)
+            return;
+
+        _itemSprite.transform.position = eventData.position;
+    }
+
+    
+
     public void Init(ItemConfig itemConfig)
     {
         _itemSprite.sprite = itemConfig.ItemIcon;
     }
+
 }

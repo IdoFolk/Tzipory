@@ -9,10 +9,11 @@ namespace Tzipory.GameplayLogic.UIElements.EndScreen
     {
         [SerializeField] private TMP_Text _text;
 
-        public override void Show()
+
+        public override void UpdateUIVisual()
         {
+            base.UpdateUIVisual();
             _text.text = $"{LevelManager.WaveManager.WaveNumber}/{LevelManager.WaveManager.TotalNumberOfWaves}";
-            base.Show();
         }
     }
 }

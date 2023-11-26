@@ -17,16 +17,18 @@ namespace Tzipory.GamePlayLogic.UI
         private ShamanDataContainer _shamanDataContainer;
         public bool IsInitialization { get; private set; }
 
+
         public override void Show()
         {
             base.Show();
-            _image.sprite = _shamanDataContainer.UnitEntityVisualConfig.Sprite;
+            _image.sprite = _shamanDataContainer.UnitEntityVisualConfig.Icon;
         }
 
         public void Init(ShamanDataContainer parameter)
         {
             _shamanDataContainer = parameter;
             IsInitialization = true;
+            Show();
         }
 
         protected override void OnClick(PointerEventData eventData)

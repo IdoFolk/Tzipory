@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using Tzipory.SerializeData;
-using Tzipory.SerializeData.PlayerData.Party.Entity;
 
 namespace Tzipory.Systems.SaveLoadSystem
 {
     public class SaveAndLoadManager
     {
+        public static string SAVE_SYSTEM_LOG_GROUP = "SaveSystem";
+        
         public bool GetSaveData<T>(out T output) where T : class, ISerializeData, new()
         {
             //need to add save and load logic

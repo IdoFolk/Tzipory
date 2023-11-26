@@ -16,6 +16,20 @@ MonoBehaviour:
   _level: {fileID: 1758735506430089248, guid: 3cd48872507905648a65e6803d716626, type: 3}
   _levelStartDelay: 10
   _delayBetweenWaves: 20
+  _uiIndicatorConfig:
+    Image: {fileID: 21300000, guid: 4b105f1d19edb9841b991af55b797ba5, type: 3}
+    Color: {r: 1, g: 1, b: 1, a: 1}
+    AllwaysShow: 1
+    DisposOnClick: 1
+    OffSetRadios: 25
+    StartFlashing: 1
+    FlashConfig:
+      SizeFactor: 1.3
+      FlashSpeed: 2
+      UseTime: 0
+      Time: 0
+      OverrideFlashingColor: 1
+      FlashingColor: {r: 1, g: 0, b: 0, a: 1}
   _waves:
   - _name: Wave 1
     _waveSpawnerConfig:

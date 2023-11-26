@@ -1,7 +1,6 @@
-﻿using MyNamespaceTzipory.Systems.VisualSystem;
+﻿using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
+using Tzipory.Systems.VisualSystem.PopUpSystem;
 using Tzipory.Tools.Sound;
-using Tzipory.Systems.StatusSystem;
-using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using UnityEngine;
 
 namespace Tzipory.Systems.Entity.EntityComponents
@@ -13,7 +12,6 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public SoundHandler SoundHandler { get; }
         public Transform ParticleEffectPosition { get; }
         public Transform VisualQueueEffectPosition { get; }
-
         public PopUpTexter PopUpTexter { get; }
     }
 }

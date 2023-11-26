@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1f43305f4f0a1f48aed44bad51136ba, type: 3}
+  m_Name: CameraSetting1
+  m_EditorClassIdentifier: 
+  MoveSpeedMinimum: 6
+  CameraSpeedZoomChangeValue: 12
+  CameraDragPanSpeed: 0.15
+  EdgeScrollDetectSizeX: 0.025
+  EdgeScrollDetectSizeY: 0.025
+  XDamping: 0.1
+  YDamping: 0.1
+  EventTransitionDampingX: 0.6
+  EventTransitionDampingY: 0.6
+  DefaultEdgePaddingX: 1.8
+  DefaultEdgePaddingY: 1.1
+  ZoomSpeed: 6.5
+  ZoomChangeValue: 1
+  ZoomDefaultStartValue: 7
+  ZoomMoveCameraValue: 0.2
+  ZoomMinClamp: 3
+  ZoomMaxClamp: 14

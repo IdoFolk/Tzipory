@@ -1,13 +1,14 @@
+using System;
+using Tzipory.ConfigFiles.Player;
+using Tzipory.Helpers;
 using Tzipory.SerializeData;
 using Tzipory.Systems.CameraSystem;
-using Tzipory.ConfigFiles.Party;
 using Tzipory.Systems.DataManager;
 using Tzipory.Systems.SceneSystem;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
-
     public class GameManager : MonoBehaviour
     {
         public static ISceneHandler SceneHandler { get; private set; }
@@ -20,21 +21,36 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
         public static GameData GameData { get; private set; }
         public static PlayerManager PlayerManager { get; private set; }
 
-        public static CameraHandler CameraHandler => _cameraHandler;
+        public static CameraHandler CameraHandler
+        {
+            get
+            {
+                if (_cameraHandler != null) return _cameraHandler;
+                
+                if (Camera.main != null)
+                    _cameraHandler = FindObjectOfType<CameraHandler>();
+                else
+                    throw new Exception("Can not find a valid camera");
+
+                return _cameraHandler;
+            }
+            private set => _cameraHandler = value;
+        }
+
 
         private void Awake()
         {
             if (SceneHandler == null)
                 SceneHandler = _sceneHandler;
 
-            _cameraHandler = FindObjectOfType<CameraHandler>();//May need to change 
+            CameraHandler = FindObjectOfType<CameraHandler>();//May need to change 
             GameData = new GameData();
         }
 
         void Start()
         {
             SceneHandler.LoadScene(SceneType.MainMenu);
-
+            
             var playerSerializeData = DataManager.DataRequester.GetSerializeData<PlayerSerializeData>(_playerConfig);
             PlayerManager = new PlayerManager(playerSerializeData);
         }

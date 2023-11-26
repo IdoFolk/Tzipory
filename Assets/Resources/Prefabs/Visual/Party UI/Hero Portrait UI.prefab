@@ -33,11 +33,11 @@ RectTransform:
   - {fileID: 13051733713999422}
   m_Father: {fileID: 2177346916046582289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 5, y: 75}
-  m_Pivot: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 8, y: 0}
+  m_SizeDelta: {x: 4, y: 60}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &8223283540287803632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,11 +121,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2177346916046582289}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 56.25, y: 75}
-  m_Pivot: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 3.5, y: 0}
+  m_SizeDelta: {x: 38, y: 42}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8900222621415077010
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 97554a74e79997844a27c96e13c4e3dd, type: 3}
+  m_Sprite: {fileID: 1885256787, guid: 2a862c0ebda887f42a111fbbce4d7fc0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -297,14 +297,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5137255, g: 0.43137255, b: 0.2901961, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 93d27c84899728c43b1fa90a058556d4, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -476,10 +476,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c2c6edacbe4278ba6b9a326bc81c3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showOnAwake: 0
+  _uiGroupTags: 2
   _enableDrag: 0
   _canvasGroup: {fileID: 0}
   _doubleClickSpeed: 0.5
-  _popupWindowSettings: {fileID: 11400000, guid: 07238690dfec52a4c80ef8fd0a91168e, type: 2}
   _fill: {fileID: 2203700212569915012}
   _healthBar: {fileID: 8223283540287803632}
   _splash: {fileID: 1019704610706600701}

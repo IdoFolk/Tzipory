@@ -1,5 +1,4 @@
-﻿using Tzipory.Systems.StatusSystem;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Tzipory.Systems.StatusSystem.EffectActionTypeSO
 {

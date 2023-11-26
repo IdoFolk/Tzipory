@@ -1,14 +1,15 @@
 using System.Collections.Generic;
-using Tzipory.Helpers;
-using UnityEngine;
 using PathCreation;
 using Tzipory.ConfigFiles.Level;
+using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.GamePlayLogic.ObjectPools;
+using Tzipory.Helpers;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.MovementSystem;
 using Tzipory.Tools.Enums;
 using Tzipory.Tools.Interface;
-using Random = UnityEngine.Random;
+using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.WaveSystem
 {
@@ -83,7 +84,6 @@ namespace Tzipory.Systems.WaveSystem
 
         private void Awake()
         {
-            LevelHandler.AddWaveSpawner(this);
             _enemyGroupsConfig = new List<EnemyGroupConfig>();
         }
 
@@ -123,8 +123,8 @@ namespace Tzipory.Systems.WaveSystem
                     return;
                 }
 
-                Debug.Log(
-                    $"<color={ColorLogHelper.WAVE_MANAGER_COLOR}>WaveManager:</color> start enemyGroup-{_currentEnemyGroupIndex} at {gameObject.name}");
+                Logger.Log(
+                    $"Start enemyGroup-{_currentEnemyGroupIndex} at {gameObject.name}",WaveManager.WAVE_MANAGER_LOG_GROUP);
             }
 
             foreach (var enemyGroup in _activeEnemyGroup)
@@ -148,8 +148,8 @@ namespace Tzipory.Systems.WaveSystem
 
             if (_currentEnemyGroupIndex >= _enemyGroupsConfig.Count)
             {
-                Debug.Log(
-                    $"<color={ColorLogHelper.WAVE_MANAGER_COLOR}>WaveManager:</color> No more enemy group for {gameObject.name}");
+                Logger.Log(
+                    $"No more enemy group for {gameObject.name}",WaveManager.WAVE_MANAGER_LOG_GROUP);
                 IsSpawning = false;
                 return false;
             }

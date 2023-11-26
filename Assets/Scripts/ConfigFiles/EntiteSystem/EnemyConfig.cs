@@ -1,6 +1,6 @@
-﻿using Tzipory.Helpers.Consts;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.Helpers.Consts;
 using UnityEngine;
 
 namespace Tzipory.ConfigFiles.EntitySystem

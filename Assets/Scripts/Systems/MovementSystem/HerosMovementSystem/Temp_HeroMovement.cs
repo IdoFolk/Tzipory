@@ -1,7 +1,7 @@
 ﻿using ProjectDawn.Navigation.Hybrid;
-using Tzipory.Systems.EntityComponents;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.EntityComponents;
 using UnityEngine;
 
 namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
@@ -17,7 +17,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         
         private void Start()
         {
-            _moveComponent.Init(_shaman.StatusHandler.GetStat(Constant.StatsId.MovementSpeed));
+            _moveComponent.Init(_shaman.StatHandler.GetStat(Constant.StatsId.MovementSpeed));
         }
         public void SetTarget(Vector3 pos)
         {

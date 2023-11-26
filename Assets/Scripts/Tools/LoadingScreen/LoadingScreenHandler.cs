@@ -1,7 +1,7 @@
 using System.Collections;
-using Tzipory.ConfigFiles.ToolTipConfig;
 using Sirenix.OdinInspector;
 using TMPro;
+using Tzipory.ConfigFiles.ToolTipConfig;
 using UnityEngine;
 using UnityEngine.UI;
 

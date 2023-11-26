@@ -1,4 +1,5 @@
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.GameplayLogic.UI.MetaUI.InventoryUI;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.UISystem;
 using UnityEngine;
@@ -11,8 +12,13 @@ public class CampFireUIHandler : BaseUIElement
 
     private void Start()
     {
-        _inventoryUIHandler.Init(GameManager.PlayerManager.PlayerSerializeData.InventorySerializeData);
+        var inventoryData = GameManager.PlayerManager.PlayerSerializeData.InventorySerializeData;
+        
+        _inventoryUIHandler.Init(inventoryData);
+
+        _inventoryUIHandler.OnItemDropToInventory += inventoryData.AddItemData;
     }
+
 
     public override void Show()
     {
@@ -20,6 +26,11 @@ public class CampFireUIHandler : BaseUIElement
         _inventoryUIHandler.Show();
         _characterUIHandler.Show();
         _characterStatsUIHandler.Show();
+    }
+
+    public override void Hide()
+    {
+        _inventoryUIHandler.OnItemDropToInventory -= GameManager.PlayerManager.PlayerSerializeData.InventorySerializeData.AddItemData;
     }
 
 

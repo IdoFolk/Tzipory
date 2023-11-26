@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Tzipory.ConfigFiles;
-using Tzipory.ConfigFiles.Party;
 using Tzipory.SerializeData;
 
 namespace Tzipory.Systems.DataManager

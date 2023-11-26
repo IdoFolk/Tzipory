@@ -17,6 +17,7 @@ public class CharacterUIHandler : BaseUIElement , IInitialization<ShamanDataCont
     
     public bool IsInitialization { get; }
 
+
     public void Init(ShamanDataContainer parameter)
     {
         _shamanDataContainer = parameter;
@@ -29,6 +30,7 @@ public class CharacterUIHandler : BaseUIElement , IInitialization<ShamanDataCont
             var itemSlotUi = Array.Find(_characterItemSlotUis, x => x.ItemSlot == itemConfig.ItemSlot);
             itemSlotUi.Init(itemConfig);
         }
+        //UIManager.UpdateVisualUIGroup(UIGroup.MetaUI); // need to add item refresh
     }
     
     private void OnEnable()
@@ -58,5 +60,6 @@ public class CharacterUIHandler : BaseUIElement , IInitialization<ShamanDataCont
     {
         Debug.Log($"Item {data.ItemId} was dropped");
         _shamanDataContainer.ShamanSerializeData.ItemIDList.Add(data.ItemId);
+        //remove item from inventory
     }
 }

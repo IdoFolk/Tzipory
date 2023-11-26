@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tzipory.Systems.Entity.EntityComponents;
-using Tzipory.Tools.Enums;
 using Tzipory.Systems.StatusSystem;
+using Tzipory.Tools.Enums;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.TargetingSystem
 {
     public class TargetingHandler : MonoBehaviour , ITargetableReciever
     {
+        private const string TARGETING_HANDLER_LOG_GROUP = "TargetingHandler";
+        
         [SerializeField,Required] private ColliderTargetingArea _targetingArea;
 
         private IEntityTargetingComponent _entityTargetingComponent;
@@ -36,7 +39,7 @@ namespace Tzipory.Systems.TargetingSystem
             
             transform.localScale = new Vector3(_entityTargetingComponent.TargetingRange.CurrentValue, _entityTargetingComponent.TargetingRange.CurrentValue,1f);
             
-            _entityTargetingComponent.TargetingRange.OnValueChangedData += UpdateTargetingRange;
+            _entityTargetingComponent.TargetingRange.OnValueChanged += UpdateTargetingRange;
         }
 
         private void UpdateTargetingRange(StatChangeData statChangeData)=>
@@ -73,9 +76,9 @@ namespace Tzipory.Systems.TargetingSystem
         {
             if (targetAbleComponent.EntityType == _entityTargetingComponent.EntityType)
                 return;
-#if UNITY_EDITOR
-            Debug.Log($"<color=#f2db05>Targeting Handler:</color> Entity: <color=#de05f2>{_entityTargetingComponent.GameEntity.name}</color>: added {targetAbleComponent.GameEntity.name} to targets list");
-#endif
+            
+            Logger.Log($"Entity: <color=#de05f2>{_entityTargetingComponent.GameEntity.name}</color>: added {targetAbleComponent.GameEntity.name} to targets list",TARGETING_HANDLER_LOG_GROUP);
+            
             if (!targetAbleComponent.IsTargetAble)
                 return;
             
@@ -87,9 +90,7 @@ namespace Tzipory.Systems.TargetingSystem
         {
             if (_availableTargets.Contains(targetAbleComponent))
             {
-#if UNITY_EDITOR
-                Debug.Log($"<color=#f2db05>Targeting Handler:</color> Entity: <color=#de05f2>{_entityTargetingComponent.GameEntity.name}</color>: Remove {targetAbleComponent.GameEntity.name} from targets list entity");
-#endif
+                Logger.Log($"Entity: <color=#de05f2>{_entityTargetingComponent.GameEntity.name}</color>: Remove {targetAbleComponent.GameEntity.name} from targets list entity",TARGETING_HANDLER_LOG_GROUP);
                 
                 targetAbleComponent.OnTargetDisable -= RemoveTarget;
                 _availableTargets.Remove(targetAbleComponent);
@@ -122,7 +123,7 @@ namespace Tzipory.Systems.TargetingSystem
         public void Reset()
         {
             _availableTargets.Clear();
-            _entityTargetingComponent.TargetingRange.OnValueChangedData -= UpdateTargetingRange;
+            _entityTargetingComponent.TargetingRange.OnValueChanged -= UpdateTargetingRange;
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Tzipory.Helpers.Consts;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Tzipory.ConfigFiles
 {
@@ -7,8 +6,6 @@ namespace Tzipory.ConfigFiles
     public class ConfigHandler<T>  where T : IConfigFile
     {
         [SerializeField] private T[] _config;
-
-        public int ConfigTypeId => Constant.DataId.SHAMAN_DATA_ID;
         
         public T GetConfigFile(int id)
         {

@@ -71,7 +71,7 @@ namespace Tzipory.Systems.AbilitySystem
         public void Cast(ITargetAbleEntity target, IAbilityExecutor abilityExecutor)
         {
             OnCast?.Invoke();
-            var projectilePrefab = Object.Instantiate(_projectilePrefab,EntityCasterTargetingComponent.ShotPosition,Quaternion.identity);
+            var projectilePrefab = Object.Instantiate(_projectilePrefab,EntityCasterTargetingComponent.GameEntity.transform.position,Quaternion.identity);
             projectilePrefab.GetComponent<ProjectileAbilityEntity>().Init(target,ProjectileSpeed.CurrentValue,ProjectilePenetration.CurrentValue,abilityExecutor);
         }
 

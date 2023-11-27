@@ -9,7 +9,9 @@ using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.DataManager;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.EntityComponents;
 using Tzipory.Systems.FactorySystem;
+using Tzipory.Systems.PoolSystem;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.TargetingSystem;
 using Tzipory.Tools.Interface;
@@ -18,8 +20,9 @@ using UnityEngine;
 
 namespace Tzipory.GamePlayLogic.EntitySystem
 {
-    public class UnitEntity : BaseGameEntity, ITargetAbleEntity, IInitialization<UnitEntityConfig> , IInitialization<UnitEntitySerializeData>
+    public class UnitEntity : BaseGameEntity, ITargetAbleEntity, IInitialization<UnitEntityConfig> , IInitialization<UnitEntitySerializeData>, IPoolable<UnitEntity>
     {
+        public event Action<UnitEntity> OnDispose;
         public event Action<ITargetAbleEntity> OnTargetDisable;
         
         #region Visual Events
@@ -37,6 +40,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         [SerializeField,TabGroup("Component")] private SoundHandler _soundHandler;
         [SerializeField,TabGroup("Component")] private TargetingComponent _entityTargetingComponent;//temp
         [SerializeField,TabGroup("Component")] private ColliderTargetingArea _colliderTargeting;
+        [SerializeField,TabGroup("Component")] private AgentMoveComponent _agentMoveComponent;
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private UnitEntityVisualComponent _entityVisualComponent;//temp
 
@@ -72,6 +76,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public IEntityHealthComponent EntityHealthComponent { get; private set; }
         public IEntityStatComponent EntityStatComponent { get; private set; }
         public IEntityCombatComponent  EntityCombatComponent { get; private set; }
+        public IEntityExperienceComponent EntityExperienceComponent { get; private set; }
+        private IEntityAIComponent EntityAIComponent { get; set; }
         
         public bool IsTargetAble { get; }
         public EntityType EntityType { get; }
@@ -118,7 +124,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
                 _onGetCritHit
             };
             
-            _entityVisualComponent.Init(this,effectSequence);
+            _entityVisualComponent.Init(this,effectSequence,_config.VisualComponentConfig);
             EntityTargetingComponent.Init(this,_colliderTargeting,_config.TargetingComponentConfig);
             
             EntityHealthComponent = HealthComponentFactory.GetHealthComponent(_config.HealthComponentConfig);
@@ -139,7 +145,13 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             if (_config.HaveMovementComponent)
             {
                 EntityMovementComponent = MovementComponentFactory.GetMovementComponent(_config.MovementComponentConfig);
-                EntityMovementComponent.Init(this,_config.MovementComponentConfig);
+                EntityMovementComponent.Init(this,_config.MovementComponentConfig,_agentMoveComponent);
+            }
+            
+            if (_config.HaveAiComponent)
+            {
+                EntityAIComponent = AIComponentFactory.GetAIComponent(_config.AIComponentConfig);
+                EntityAIComponent.Init(this,this,_config.AIComponentConfig);
             }
 
             IStatHolder[] statHolders = {
@@ -150,7 +162,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
                 EntityCombatComponent
             };
             
-            EntityStatComponent = new StatHandlerComponent(this,statHolders);//may need to work in init!
+            EntityStatComponent = new StatHandlerComponent();//may need to work in init!
+            EntityStatComponent.Init(this,statHolders);
             
             EntityStatComponent.OnStatusEffectAdded += AddStatusEffectVisual;
             
@@ -169,7 +182,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
                 EntityAbilitiesComponent,
                 EntityHealthComponent,
                 EntityStatComponent,
-                EntityCombatComponent
+                EntityCombatComponent,
+                EntityAIComponent
             };
             
             SetSprite(_config.VisualComponentConfig.Sprite);
@@ -271,5 +285,16 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         }
         
         #endregion
+
+        public void Free()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            EntityMovementComponent?.Dispose();
+            OnDispose?.Invoke(this);
+        }
     }
 }

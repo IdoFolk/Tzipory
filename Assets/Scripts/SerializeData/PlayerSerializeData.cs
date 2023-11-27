@@ -6,6 +6,7 @@ using Tzipory.Helpers.Consts;
 using Tzipory.SerializeData.Inventory;
 using Tzipory.SerializeData.PlayerData.Camp;
 using Tzipory.SerializeData.PlayerData.Party;
+using Tzipory.SerializeData.ProgressionSerializeData;
 using Tzipory.Systems.DataManager;
 using Tzipory.Tools.Enums;
 using UnityEngine;
@@ -27,6 +28,7 @@ namespace Tzipory.SerializeData
         public PartySerializeData PartySerializeData => _partySerializeData;
         public CampSerializeData CampSerializeData => _campSerializeData;
         public InventorySerializeData InventorySerializeData => _inventorySerializeData;
+        public WorldMapProgressionSerializeData WorldMapProgressionSerializeData { get; private set; }
         
         public bool IsInitialization { get; private set; }
         public int SerializeObjectId { get; }
@@ -38,6 +40,7 @@ namespace Tzipory.SerializeData
             
             _partySerializeData = DataManager.DataRequester.GetSerializeData<PartySerializeData>(config.PartyConfig);
             _campSerializeData = DataManager.DataRequester.GetSerializeData<CampSerializeData>(Constant.DataId.CAMP_DATA_ID);
+            WorldMapProgressionSerializeData = DataManager.DataRequester.GetSerializeData<WorldMapProgressionSerializeData>(Constant.DataId.MAP_DATA_ID);
             _inventorySerializeData = DataManager.DataRequester.GetSerializeData<InventorySerializeData>(config.InventoryConfig);
             
             IsInitialization = true;
@@ -57,16 +60,5 @@ namespace Tzipory.SerializeData
         }
         
         //send him id
-        public void ModifyPartyMember(int targetShamanID, CollectionActionType actionType)
-        {
-            if (actionType == CollectionActionType.Add)
-            {
-                PartySerializeData.AddPartyMember(targetShamanID);
-            }
-            else
-            {
-                PartySerializeData.RemovePartyMember(targetShamanID);
-            }
-        }
     }
 }

@@ -91,7 +91,9 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
                 return;
 
             foreach (var statusEffect in EnterStatusEffects)
-                target.StatHandler.AddStatEffect(statusEffect);
+                target.EntityStatComponent.AddStatEffect(statusEffect);
+            
+            target.EntityVisualComponent.StartAnimationEffect(AnimationConfig);
         }
         
         public void ExecuteOnExit(ITargetAbleEntity target)
@@ -100,11 +102,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
                 return;
 
             foreach (var statusEffect in ExitStatusEffects)
-                target.StatHandler.AddStatEffect(statusEffect);
-
-            if (target is BaseUnitEntity baseUnitEntity)
-            {
-            }
+                target.EntityStatComponent.AddStatEffect(statusEffect);
         }
         
         public IEnumerable<IStatHolder> GetNestedStatHolders()

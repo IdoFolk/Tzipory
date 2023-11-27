@@ -1,63 +1,47 @@
-using System;
 using ProjectDawn.Navigation;
 using ProjectDawn.Navigation.Hybrid;
-using Tzipory.Systems.Entity;
-using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
 namespace Tzipory.Systems.EntityComponents
 {
-    public class TEMP_BasicMoveComponent : MonoBehaviour, IEntityMovementComponent
+    public class AgentMoveComponent : MonoBehaviour
     {
         [SerializeField]
-        private AgentAuthoring agent;
+        private AgentAuthoring _agent;
         
         private Stat _speedStat;
-
-        private float _speed;
         
         private Vector3 _lastPosition;
 
         private Vector2 _destination = Vector2.zero;
-
-        //Set/init by Unit
-
-        //public float AdjustedSpeed => _speedStat.CurrentValue * GAME_TIME.TimeRate;
-        //public float AdjustedSpeed => _speedStat.CurrentValue * GAME_TIME;
+        
+        public bool IsMoveing { get; private set; }    
+        
         public void Init(Stat newSpeed)
         {
             _speedStat = newSpeed;
             _speedStat.OnValueChanged += AdjustAgentSpeed;
             
-            AgentSteering aS = agent.DefaultSteering;
+            AgentSteering aS = _agent.DefaultSteering;
             aS.Speed = _speedStat.CurrentValue * GAME_TIME.GetCurrentTimeRate;
-            agent.EntitySteering = aS;
+            _agent.EntitySteering = aS;
             
             _lastPosition = transform.position;
         }
 
-        public Stat MovementSpeed => _speedStat;
 
-        public int EntityInstanceID => throw new NotImplementedException();
-
-        public Transform EntityTransform => agent.transform;
-
-        public BaseGameEntity GameEntity => throw new NotImplementedException();
-
-        public bool IsMoveing { get; private set; }    
-
-        public void SetDestination(Vector3 destination, MoveType moveType)
+        public void SetAgentDestination(Vector3 destination)
         {
-            agent.SetDestination(destination);
+            _agent.SetDestination(destination);
             _destination  = destination;
             IsMoveing  = true;
         }
 
         public void Stop()
         {
-            agent.Stop();
+            _agent.Stop();
         }
 
         private void Update()
@@ -70,31 +54,21 @@ namespace Tzipory.Systems.EntityComponents
             IsMoveing = false;
         }
 
-        private void FixedUpdate()
-        { 
-            if (GAME_TIME.GameDeltaTime == 0)
-                _speed = 0;
-            else
-                _speed = Vector3.Distance(transform.position, _lastPosition) / Time.fixedDeltaTime;
-            
-            _lastPosition = transform.position;
-        }
-
-        void AdjustAgentSpeed(StatChangeData statChangeData) //subs to OnTimeRateChange
+        private void AdjustAgentSpeed(StatChangeData statChangeData) //subs to OnTimeRateChange
         {
             //AgentSteering aS = agent.EntitySteering;
-            AgentSteering aS = agent.DefaultSteering;
+            AgentSteering aS = _agent.DefaultSteering;
             aS.Speed = statChangeData.NewValue * GAME_TIME.GetCurrentTimeRate;
-            agent.EntitySteering = aS;
+            _agent.EntitySteering = aS;
         }
         
-        void AdjustAgentTime() //subs to OnTimeRateChange
+        private void AdjustAgentTime() //subs to OnTimeRateChange
         {
             if (_speedStat == null)
                 return;
-            AgentSteering aS = agent.DefaultSteering;
+            AgentSteering aS = _agent.DefaultSteering;
             aS.Speed = _speedStat.CurrentValue * GAME_TIME.GetCurrentTimeRate;
-            agent.EntitySteering = aS;
+            _agent.EntitySteering = aS;
         }
 
         private void OnEnable()

@@ -13,12 +13,18 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 {
     public class TargetingComponent : MonoBehaviour , ITargetableEntryReciever,ITargetableExitReciever, IEntityTargetingComponent
     {
+        #region Fields
+
         private const string TARGETING_HANDLER_LOG_GROUP = "TargetingHandler";
         
         private List<ITargetAbleEntity> _availableTargets;
 
         private EntityType _targetedEntities;
-        
+
+        #endregion
+
+        #region Proprtys
+
         public bool HaveTarget => CurrentTarget != null;
         public ITargetAbleEntity CurrentTarget { get; private set; }
         
@@ -27,10 +33,16 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public Stat TargetingRange => Stats[(int)Constant.StatsId.TargetingRange];
         public EntityType EntityType { get; private set;  }
         public IPriorityTargeting PriorityTargeting { get; private set; }
-        
+        public IEnumerable<ITargetAbleEntity> AvailableTargets => _availableTargets;
+
         public Dictionary<int, Stat> Stats { get; private set; }
         
         public bool IsInitialization { get; private set; }
+
+        #endregion
+
+        #region Init
+
         public void Init(BaseGameEntity baseGameEntity)
         {
             GameEntity = baseGameEntity;
@@ -61,7 +73,12 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             
             IsInitialization = true;
         }
-        
+
+
+        #endregion
+
+        #region PublicMethod
+
         public void UpdateComponent()
         {
             throw new System.NotImplementedException();
@@ -101,23 +118,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         
         public void SetAttackTarget(ITargetAbleEntity target)=>
             CurrentTarget = target;
-
-        private void UpdateTargetingRange(StatChangeData statChangeData)=>
-            transform.localScale = new Vector3(statChangeData.NewValue, statChangeData.NewValue,1f);
-        
-        private void RemoveTarget(ITargetAbleEntity targetAbleEntity)
-        {
-            if (_availableTargets.Contains(targetAbleEntity))
-            {
-                Logger.Log($"Entity: <color=#de05f2>{GameEntity.name}</color>: Remove {targetAbleEntity.GameEntity.name} from targets list entity",TARGETING_HANDLER_LOG_GROUP);
-                
-                targetAbleEntity.OnTargetDisable -= RemoveTarget;
-                _availableTargets.Remove(targetAbleEntity);
-                
-                if (targetAbleEntity.GameEntity.EntityInstanceID == CurrentTarget.GameEntity.EntityInstanceID)
-                    TrySetNewTarget();
-            }
-        }
         
         public void RecieveTargetableEntry(ITargetAbleEntity targetable)
         {
@@ -143,5 +143,29 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             _availableTargets.Clear();
             TargetingRange.OnValueChanged -= UpdateTargetingRange;
         }
+
+
+        #endregion
+
+        #region PrivateMethod
+
+        private void UpdateTargetingRange(StatChangeData statChangeData)=>
+            transform.localScale = new Vector3(statChangeData.NewValue, statChangeData.NewValue,1f);
+        
+        private void RemoveTarget(ITargetAbleEntity targetAbleEntity)
+        {
+            if (_availableTargets.Contains(targetAbleEntity))
+            {
+                Logger.Log($"Entity: <color=#de05f2>{GameEntity.name}</color>: Remove {targetAbleEntity.GameEntity.name} from targets list entity",TARGETING_HANDLER_LOG_GROUP);
+                
+                targetAbleEntity.OnTargetDisable -= RemoveTarget;
+                _availableTargets.Remove(targetAbleEntity);
+                
+                if (targetAbleEntity.GameEntity.EntityInstanceID == CurrentTarget.GameEntity.EntityInstanceID)
+                    TrySetNewTarget();
+            }
+        }
+
+        #endregion
     }
 }

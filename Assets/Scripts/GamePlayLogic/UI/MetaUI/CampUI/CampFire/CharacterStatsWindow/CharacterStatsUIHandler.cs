@@ -50,7 +50,7 @@ public class CharacterStatsUIHandler : BaseUIElement ,  IInitialization<ShamanSe
                 }
             }
 
-            SetStatData(i, _serializeData.StatSerializeDatas[i].Name, _serializeData.StatSerializeDatas[i].BaseValue, modifier, bg);
+            //SetStatData(i, _serializeData.StatSerializeDatas[i].Name, _serializeData.StatSerializeDatas[i].BaseValue, modifier, bg);
             bg = !bg;
         }
     }

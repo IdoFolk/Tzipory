@@ -26,17 +26,17 @@ public class Temp_Projectile : MonoBehaviour
         _target = target;
         _damage = damage;
         _isCrit = isCrit;
-        _dir = (_target.EntityTransform.position - transform.position).normalized;
+        _dir = (_target.GameEntity.transform.position - transform.position).normalized;
         transform.up = _dir;
     }
 
     void Update()
     {
-        var lastTargetPosition = _target.EntityTransform.position;
+        var lastTargetPosition = _target.GameEntity.transform.position;
         
         _particleSystem.playbackSpeed = 1 * GAME_TIME.GetCurrentTimeRate;
 
-        if (_target.IsEntityDead)
+        if (_target.EntityHealthComponent.IsEntityDead)
             if (Vector2.Distance(lastTargetPosition,transform.position) < _midDisToDeadTarget)
                 _timeToDie = 0;
             else
@@ -57,7 +57,7 @@ public class Temp_Projectile : MonoBehaviour
             if (hitedTarget.EntityType == EntityType.Hero) return;
             //if (target.EntityInstanceID == _casterId) return;
             
-            hitedTarget.TakeDamage(_damage,_isCrit);
+            hitedTarget.EntityHealthComponent.TakeDamage(_damage,_isCrit);
             Destroy(gameObject);
         }
     }

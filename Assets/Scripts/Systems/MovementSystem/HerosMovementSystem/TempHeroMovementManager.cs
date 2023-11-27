@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Helpers;
+using Tzipory.Systems.EntityComponents;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,10 +13,8 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
     {
         public static event Action OnAnyShamanSelected;
         public static event Action OnAnyShamanDeselected;
-
-        public event Action<Vector3> OnMove;
-
-        private Temp_HeroMovement _currentTarget;
+        
+        private AgentMoveComponent _currentTarget;
         private Camera _camera;
 
         private bool _isValidClick;
@@ -27,27 +27,19 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         [SerializeField] private float _slowTime;
         
         [SerializeField] private Shadow _shadow;
-
         
-        //temp?
-        bool isCooldown;
-
-
+        private bool _isCooldown;
+        
         private void Start()
         {
             _shadow.gameObject.SetActive(false);
-            isCooldown = false;
-            _camera = Camera.main;
+            _isCooldown = false;
+            _camera = GameManager.CameraHandler.MainCamera;
         }
-
-        //public void SelectTarget(Temp_HeroMovement  target)
-        //{
-        //    _currentTarget = target;
-        //    OnAnyShamanSelected?.Invoke();
-        //}
-        public void SelectTarget(Temp_HeroMovement  target, Sprite shadowSprite, float range)
+        
+        public void SelectTarget(AgentMoveComponent target, Sprite shadowSprite, float range)
         {
-            if (isCooldown)
+            if (_isCooldown)
                 return;
             _currentTarget = target;
             _shadow.SetShadow(target.transform, shadowSprite, range);
@@ -58,21 +50,22 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             OnAnyShamanSelected?.Invoke();
         }
 
-        public void ClearTarget()
+        private void ClearTarget()
         {
             _currentTarget = null;
             _shadow.ClearShadow();
             Cursor.visible = true;
-            isCooldown = true;
+            _isCooldown = true;
             StartCoroutine(SetIsCooldownWaitOneFrame(false));
             
             GAME_TIME.SetTimeStep(_previousTimeRate,_slowTimeTransitionTime,_endSlowTimeCurve);
             OnAnyShamanDeselected?.Invoke();
         }
+        
         private IEnumerator SetIsCooldownWaitOneFrame(bool isIt)
         {
             yield return new WaitForSeconds(.1f);
-            isCooldown = isIt;
+            _isCooldown = isIt;
         }
 
         private void Update()
@@ -101,8 +94,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
                 var screenPos = Mouse.current.position.ReadValue();
                 var worldPos = _camera.ScreenToWorldPoint(screenPos);
                 worldPos = new Vector3(worldPos.x, worldPos.y, 0);
-                _currentTarget.SetTarget(worldPos);
-                OnMove?.Invoke(worldPos);
+                _currentTarget.SetAgentDestination(worldPos);
 
                 ClearTarget();
             }

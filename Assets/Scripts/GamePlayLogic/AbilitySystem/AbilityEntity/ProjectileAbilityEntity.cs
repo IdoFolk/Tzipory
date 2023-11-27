@@ -21,7 +21,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityEntity
             _colliderTargeting.Init(this);
             _speed = speed;
             _penetrationNumber = penetrationNumber;
-            _dir = (target.EntityTransform.position - transform.position).normalized;
+            _dir = (target.GameEntity.transform.position - transform.position).normalized;
             _visualTransform.up = _dir;
         }
 
@@ -37,7 +37,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityEntity
 
         public void RecieveTargetableEntry(ITargetAbleEntity targetable)
         {
-            if (targetable.EntityInstanceID == AbilityExecutor.Caster.EntityInstanceID) return;
+            if (targetable.GameEntity.EntityInstanceID == AbilityExecutor.Caster.GameEntity.EntityInstanceID) return;
             
             AbilityExecutor.Execute(targetable);
             _penetrationNumber--;

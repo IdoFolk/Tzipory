@@ -45,6 +45,7 @@ namespace Tzipory.SerializeData.ItemSerializeData
         public void RemoveItemAmount(int amount)=>
             _itemStack -= amount;
 
+        public int SerializeObjectId { get; }
         public int SerializeTypeId => Constant.DataId.ITEM_DATA_ID;
         public Sprite ItemSlotSprite => _itemConfig.ItemIcon;
         public string ItemSlotName => _itemConfig.ItemName;

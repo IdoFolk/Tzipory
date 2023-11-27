@@ -2,6 +2,7 @@
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles;
 using Tzipory.ConfigFiles.EntitySystem;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.SerializeData.ItemSerializeData;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine;
 namespace Tzipory.SerializeData.PlayerData.Party.Entity
 {
     [System.Serializable]
-    public class ShamanSerializeData : UnitEntitySerializeData , IUpdateData<Shaman>
+    public class ShamanSerializeData : UnitEntitySerializeData
     {
         //changed to public for testing until i figure ouot that data requester
         [SerializeField,TabGroup("General"),ReadOnly] private int _shamanId;
@@ -33,21 +34,8 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         {
             base.Init(parameter);
             var config = (UnitEntityConfig)parameter;
-
-            _decisionInterval = config.DecisionInterval;
-            _itemIDList = new List<int>();
-            _shamanId = config.ObjectId;
-            //Need 
-            //Need to be in config?
-            //need to add more shaman config logic
         }
-
-        public void UpdateData(Shaman data)
-        {
-            base.UpdateData(data);
-            //need to add dataUpdate for shaman
-        }
-
+        
         public void AddItemData(ItemContainerSerializeData itemData)
         {
             _itemIDList.Add(itemData.ItemId);

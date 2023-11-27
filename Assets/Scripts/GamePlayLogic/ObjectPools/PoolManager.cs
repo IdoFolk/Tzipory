@@ -1,5 +1,5 @@
 ﻿using System;
-using Tzipory.GameplayLogic.EntitySystem.Enemies;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.VisualSystem.EffectType;
 using Tzipory.Systems.FactorySystem.GameObjectFactory;
 using Tzipory.Systems.FactorySystem.ObjectFactory;
@@ -13,7 +13,7 @@ namespace Tzipory.GamePlayLogic.ObjectPools
     public class PoolManager
     {
         public static VisualSystemPool  VisualSystemPool { get; private set; }
-        public static ObjectPool<Enemy> EnemyPool { get; private set; }
+        public static ObjectPool<UnitEntity> UnitEntityPool { get; private set; }
         public static ObjectPool<UIIndicator> IndicatorPool { get; private set; }
         
         public static ObjectPool<PopupText> PopUpTextPool { get; private set; }
@@ -23,7 +23,7 @@ namespace Tzipory.GamePlayLogic.ObjectPools
         public PoolManager()
         {
             VisualSystemPool  = new VisualSystemPool();
-            EnemyPool = new ObjectPool<Enemy>(new EnemyFactory(),50);
+            UnitEntityPool = new ObjectPool<UnitEntity>(new UnitEntityFactory(),50);
             IndicatorPool  = new ObjectPool<UIIndicator>(new IndicatorFactory());
             PopUpTextPool = new ObjectPool<PopupText>(new PopUpTextFactory(),50);
         }

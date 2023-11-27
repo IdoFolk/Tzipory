@@ -2,43 +2,38 @@
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.Helpers.Consts;
+using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
 
 namespace Tzipory.ConfigFiles.EntitySystem
 {
+    [CreateAssetMenu(fileName = "UnitEntityConfig", menuName = "ScriptableObjects/Entity/NewEntity")]
     public class UnitEntityConfig : ScriptableObject, IConfigFile
     {
-        [SerializeField] private int _entityId;
-        [SerializeField] private UnitType _unitType;
+        [SerializeField,TabGroup("Main config")] private int _entityId;
+        [SerializeField,TabGroup("Main config")] private UnitType _unitType;
 
-        [SerializeField] private HealthComponentConfig _healthComponentConfig;
+        [SerializeField,TabGroup("Base Component")] public HealthComponentConfig HealthComponentConfig;
 
-        [SerializeField] private TargetingComponentConfig _targetingComponentConfig;
+        [SerializeField,TabGroup("Base Component")] public TargetingComponentConfig TargetingComponentConfig;
 
-        [SerializeField] private VisualComponentConfig _visualComponentConfig;
+        [SerializeField,TabGroup("Base Component")] public VisualComponentConfig VisualComponentConfig;
         
-        [SerializeField] private bool _haveCombatComponent;
-        [SerializeField,ShowIf(nameof(_haveCombatComponent))] private CombatComponentConfig _combatComponentConfig;
+        [SerializeField,TabGroup("Optional Component")] private bool _haveCombatComponent;
+        [SerializeField,ShowIf(nameof(_haveCombatComponent)),TabGroup("Optional Component")] public CombatComponentConfig CombatComponentConfig;
         
-        [SerializeField] private bool _haveMovementComponent;
-        [SerializeField,ShowIf(nameof(_haveMovementComponent))] private MovementComponentConfig _movementComponentConfig;
+        [SerializeField,TabGroup("Optional Component")] private bool _haveMovementComponent;
+        [SerializeField,ShowIf(nameof(_haveMovementComponent)),TabGroup("Optional Component")] public MovementComponentConfig MovementComponentConfig;
         
-        [SerializeField] private bool _haveAbilityComponent;
-        [SerializeField,ShowIf(nameof(_haveAbilityComponent))] private AbilityComponentConfig _abilityComponentConfig;
+        [SerializeField,TabGroup("Optional Component")] private bool _haveAbilityComponent;
+        [SerializeField,ShowIf(nameof(_haveAbilityComponent)),TabGroup("Optional Component")] public AbilityComponentConfig AbilityComponentConfig;
+        
+        [SerializeField,TabGroup("Optional Component")] private bool _haveAiComponent;
+        [SerializeField,ShowIf(nameof(_haveAiComponent)),TabGroup("Optional Component")] public AIComponentConfig AIComponentConfig;
         
         public UnitType UnitType => _unitType;
-
-        public HealthComponentConfig HealthComponentConfig => _healthComponentConfig;
-
-        public TargetingComponentConfig TargetingComponentConfig => _targetingComponentConfig;
-
-        public VisualComponentConfig VisualComponentConfig => _visualComponentConfig;
-
-        public CombatComponentConfig CombatComponentConfig => _combatComponentConfig;
-
-        public MovementComponentConfig MovementComponentConfig => _movementComponentConfig;
-
-        public AbilityComponentConfig AbilityComponentConfig => _abilityComponentConfig;
+        
+        public bool HaveAiComponent => _haveAiComponent;
 
         public bool HaveCombatComponent => _haveCombatComponent;
 
@@ -61,6 +56,24 @@ namespace Tzipory.ConfigFiles.EntitySystem
             }
         }
 
+        private void OnValidate()
+        {
+            if (_unitType == UnitType.Shaman)
+            {
+                TargetingComponentConfig.EntityType = EntityType.Hero;
+                TargetingComponentConfig.TargetedEntity = EntityType.Enemy;
+                
+                AIComponentConfig.AIType = AIComponentType.Hero;
+            }
+            
+            if (_unitType == UnitType.Enemy)
+            {
+                TargetingComponentConfig.EntityType = EntityType.Enemy;
+                TargetingComponentConfig.TargetedEntity = EntityType.Hero | EntityType.Core;
+
+                AIComponentConfig.AIType = AIComponentType.Enemy;
+            }
+        }
     }
 
     public enum UnitType

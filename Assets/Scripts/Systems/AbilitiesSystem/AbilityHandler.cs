@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
+using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
 namespace Tzipory.Systems.AbilitySystem
 {
-    public class AbilityHandler
+    public class AbilityHandler : IEntityAbilitiesComponent
     {
         private ITargetAbleEntity Caster { get; }
         public Dictionary<string, Ability> Abilities { get; }
@@ -29,7 +32,7 @@ namespace Tzipory.Systems.AbilitySystem
             if (Abilities.TryGetValue(abilityName, out var ability))
                 ability.ExecuteAbility(availableTargets);
             else
-                Debug.LogError($"{Caster.EntityTransform.name} cant find ability {abilityName}");
+                Debug.LogError($"{Caster.GameEntity.name} cant find ability {abilityName}");
         }
 
         public void CastAbility(IEnumerable<ITargetAbleEntity> availableTargets)
@@ -46,6 +49,30 @@ namespace Tzipory.Systems.AbilitySystem
                 if (abilities.IsCasting)
                     abilities.CancelCast();
             }
+        }
+
+
+        public bool IsInitialization { get; }
+        public void Init(BaseGameEntity parameter1, AbilityComponentConfig parameter2)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Init(BaseGameEntity parameter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public BaseGameEntity GameEntity { get; }
+        public void UpdateComponent()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<int, Stat> Stats { get; }
+        public IEnumerable<IStatHolder> GetNestedStatHolders()
+        {
+            throw new NotImplementedException();
         }
     }
 }

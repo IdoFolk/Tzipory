@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea472f36b2a4dc0b0810fdfb6687265, type: 3}
+  m_Name: Gallanite
+  m_EditorClassIdentifier: 
+  _entityId: 0
+  _unitType: 0
+  HealthComponentConfig:
+    HealthComponentType: 0
+    HealthStat: 0
+    InvincibleTimeStat: 0
+  TargetingComponentConfig:
+    TargetingRange: 0
+    EntityType: 0
+    TargetedEntity: 0
+    TargetingPriorityType: 0
+  VisualComponentConfig:
+    Sprite: {fileID: 0}
+    Icon: {fileID: 0}
+  _haveCombatComponent: 0
+  CombatComponentConfig:
+    CombatComponentType: 0
+    AttackDamage: 0
+    AttackRate: 0
+    AttackRange: 0
+    AttackCooldown: 0
+    CritDamage: 0
+    CritChance: 0
+  _haveMovementComponent: 0
+  MovementComponentConfig:
+    MovementComponentType: 0
+    MoveSpeed: 0
+    PathCreator: {fileID: 0}
+    privateRabbitIncrement: 0
+    acceptableDistanceFromPath: 0
+    acceptableDistanceToCompletion: 0
+  _haveAbilityComponent: 0
+  AbilityComponentConfig:
+    _abilityConfigs: []
+  _haveAiComponent: 0
+  AIComponentConfig:
+    AIType: 0
+    DecisionInterval: 0
+    AggroLevel: 0
+    ReturnLevel: 0

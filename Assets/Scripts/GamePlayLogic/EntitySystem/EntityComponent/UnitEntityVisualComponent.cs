@@ -1,18 +1,20 @@
 using System;
+using System.Collections.Generic;
+using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.ConfigFiles.Visual;
+using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
-using Tzipory.Tools.Interface;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.Playables;
 
 namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 {
-    public class UnitEntityVisualComponent : MonoBehaviour , IEntityVisualComponent , IInitialization<UnitEntity,EffectSequenceConfig[]>
+    public class UnitEntityVisualComponent : MonoBehaviour , IEntityVisualComponent 
 {
     [SerializeField] private SpriteRenderer _mainSprite;
     
@@ -26,21 +28,26 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
     
     public PopUpTexter PopUpTexter { get; private set; }
 
+    public VisualComponentConfig VisualComponentConfig { get; private set; }
     public EffectSequenceHandler EffectSequenceHandler { get; private set; }
     public SpriteRenderer SpriteRenderer => _mainSprite;
+    public IDisposable UIIndicator { get; private set; }
     public PlayableDirector ParticleEffectPlayableDirector => _playableDirector;
     public bool IsInitialization { get; private set; }
-    
+
     public void Init(BaseGameEntity parameter)
     {
         GameEntity = parameter;
     }
     
-    public void Init(UnitEntity parameter,EffectSequenceConfig[] effectSequence)
+    public void Init(BaseGameEntity parameter,IEnumerable<EffectSequenceConfig> effectSequence,VisualComponentConfig config)
     {
         Init(parameter);
         
         PopUpTexter = new PopUpTexter(_visualQueueEffectPosition);
+
+        if (config.UIIndicator)
+            UIIndicator = UIIndicatorHandler.SetNewIndicator(GameEntity.transform,config.UiIndicatorConfig,null,GameEntity.FocusOnEntity);
         
         EffectSequenceHandler = new EffectSequenceHandler(this,effectSequence);
         
@@ -90,8 +97,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         
         _currentActiveTimer = GAME_TIME.TimerHandler.StartNewTimer(_animationConfig.ExitTime, "Ability animation Exit Time",StopAnimation);
     }
-    
-    public void StopAnimation()
+
+    private void StopAnimation()
     {
         _currentActiveTimer.StopTimer();
         

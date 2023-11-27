@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Tools;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
@@ -32,6 +33,9 @@ namespace Tzipory.Systems.Entity
         {
             EntityTimer.TickAllTimers();
         }
+        
+        public void FocusOnEntity()=>
+            GameManager.CameraHandler.SetCameraPosition(transform.position);
     }
     
 }

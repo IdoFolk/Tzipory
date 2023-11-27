@@ -1,8 +1,8 @@
-﻿using Tzipory.GameplayLogic.EntitySystem.Enemies;
+﻿using Tzipory.GamePlayLogic.EntitySystem;
 
 namespace Tzipory.Systems.FactorySystem.GameObjectFactory
 {
-    public class EnemyFactory : BaseGameObjectFactory<Enemy>
+    public class UnitEntityFactory : BaseGameObjectFactory<UnitEntity>
     {
         protected override string GameObjectPath => "Prefabs/Entities/Enemies/BaseEnemyEntity";
     }

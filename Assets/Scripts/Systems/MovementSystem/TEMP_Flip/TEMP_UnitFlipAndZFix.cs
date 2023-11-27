@@ -1,7 +1,7 @@
 using System.Collections;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
-using Tzipory.Systems.Entity;
-using Tzipory.Systems.TargetingSystem;
+using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
 
 public class TEMP_UnitFlipAndZFix : MonoBehaviour
@@ -17,8 +17,8 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
 
     
 
-    [SerializeField] BaseUnitEntity _baseUnitEntity;
-    TargetingComponent _targeting;
+    [SerializeField] UnitEntity _baseUnitEntity;
+    IEntityTargetingComponent _targeting;
     //TEMP! Should USE SetShamanData(BaseUnitEntity) INSTEAD 
 
     static Vector3 cachedScaledMapSize => LevelHandler.MapSize * .01f; //fix take from consts
@@ -37,7 +37,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     private void Start()
     {
         StartCoroutine(nameof(CheckForFlip));
-        _targeting = _baseUnitEntity.TargetingComponent;
+        _targeting = _baseUnitEntity.EntityTargetingComponent;
 
 
         //This should be applied differently between Shamans and Enemies.
@@ -50,7 +50,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
         _spriteRenderer.transform.localPosition = new Vector3(_spriteRenderer.transform.localPosition.x, _spriteRenderer.transform.localPosition.y, GetZForLocalPosition(transform));
 
         if (_targeting.HaveTarget)
-            _tgt = _targeting.CurrentTarget.EntityTransform;
+            _tgt = _targeting.CurrentTarget.GameEntity.transform;
         else
             _tgt = null;
     }

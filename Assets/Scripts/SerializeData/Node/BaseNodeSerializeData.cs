@@ -10,6 +10,7 @@ namespace Tzipory.SerializeData.NodeSerializeData
         private bool _visitedByPlayer;
         public int NodeId { get; protected set; }
         public bool IsInitialization { get; protected set; }
+        public int SerializeObjectId { get; }
         public int SerializeTypeId => Constant.DataId.NODE_DATA_ID;
 
         public virtual void Init(IConfigFile parameter)

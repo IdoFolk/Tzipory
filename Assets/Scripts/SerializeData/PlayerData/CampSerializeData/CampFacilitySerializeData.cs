@@ -14,6 +14,7 @@ namespace Tzipory.SerializeData.PlayerData.Camp
         
         #region ISerializeData
 
+        public int SerializeObjectId { get; }
         public int SerializeTypeId => Constant.DataId.CAMP_FACILITY_DATA_ID;
         
         public bool IsInitialization { get; }

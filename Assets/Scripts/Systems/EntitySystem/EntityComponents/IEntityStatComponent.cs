@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using Tzipory.ConfigFiles.StatusSystem;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.StatusSystem;
+using Tzipory.Tools.Interface;
 
 namespace Tzipory.Systems.Entity.EntityComponents
 {
-    public interface IEntityStatComponent : IEntityComponent
+    public interface IEntityStatComponent : IEntityComponent , IInitialization<BaseGameEntity,IEnumerable<IStatHolder>>
     {
         event Action<EffectSequenceConfig> OnStatusEffectAdded;//Temp!
 

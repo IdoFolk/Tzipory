@@ -1,7 +1,8 @@
 ﻿using System;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
+using Tzipory.GamePlayLogic.EntitySystem.AIComponent;
 using Tzipory.GamePlayLogic.EntitySystem.EntityComponent;
-using Tzipory.Systems.Entity;
+using Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents;
 using Tzipory.Systems.Entity.EntityComponents;
 
 namespace Tzipory.Systems.FactorySystem
@@ -35,10 +36,12 @@ namespace Tzipory.Systems.FactorySystem
 
             switch (movementComponentConfig.MovementComponentType)
             {
-                case MovementComponentType.Ground:
-                    throw new NotImplementedException();
+                case MovementComponentType.GroundMoveOnSelect:
+                    return new OnSelectMoveComponent();
+                case MovementComponentType.GroundMoveOnPath:
+                    return new MovementOnPathComponent();
                 case MovementComponentType.Air:
-                    throw new NotImplementedException();
+                    throw  new NotImplementedException();
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -49,7 +52,6 @@ namespace Tzipory.Systems.FactorySystem
     {
         public static IEntityAbilitiesComponent GetAbilitiesComponent(AbilityComponentConfig abilityComponentConfig)
         {
-            IEntityMovementComponent output;
             
             throw new NotImplementedException();
         }
@@ -59,9 +61,31 @@ namespace Tzipory.Systems.FactorySystem
     {
         public static IEntityCombatComponent GetCombatComponent(CombatComponentConfig combatComponentConfig)
         {
-            IEntityMovementComponent output;
-            
-            throw new NotImplementedException();
+            switch (combatComponentConfig.CombatComponentType)
+            {
+                case CombatComponentType.Range:
+                    return new SimpleRangeCombatComponent();
+                case CombatComponentType.Melee:
+                    throw new NotImplementedException();
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+    }
+    
+    public class AIComponentFactory
+    {
+        public static IEntityAIComponent GetAIComponent(AIComponentConfig aiComponentConfig)
+        {
+            switch (aiComponentConfig.AIType)
+            {
+                case AIComponentType.Hero:
+                    return new SimpleHeroAI();
+                case AIComponentType.Enemy:
+                    return  new SimpleEnemyAI();
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

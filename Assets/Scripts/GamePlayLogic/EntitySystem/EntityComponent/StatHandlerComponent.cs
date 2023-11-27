@@ -12,14 +12,25 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 {
     public class StatHandlerComponent : IEntityStatComponent
     {
+        #region Events
+
         public event Action<EffectSequenceConfig> OnStatusEffectAdded; 
 
+        #endregion
+        
+        #region Proprty
+
         public bool IsInitialization { get; private set; }
+        
         public BaseGameEntity GameEntity { get; private set; }
         
-        private readonly List<IStatHolder> _statHolders;
-        
-        public StatHandlerComponent(BaseGameEntity baseGameEntity,IEnumerable<IStatHolder> statHolders)
+        private List<IStatHolder> _statHolders;
+
+        #endregion
+
+        #region Init
+
+        public void Init(BaseGameEntity baseGameEntity, IEnumerable<IStatHolder> statHolders)
         {
             Init(baseGameEntity);
             
@@ -29,11 +40,17 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             
             IsInitialization = true;
         }
+        
 
         public void Init(BaseGameEntity parameter)
         {
             GameEntity = parameter;
         }
+
+
+        #endregion
+
+        #region PublicMethod
 
         public void UpdateComponent()
         {
@@ -89,7 +106,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 return statToEffect.AddStatusEffect(statusEffect,statEffectConfig.PopUpTextConfig);
             
             return statToEffect.AddStatusEffect(statusEffect);
-
         }
+
+        #endregion
     }
 }

@@ -26,7 +26,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
         public void Execute(ITargetAbleEntity target)
         {
             foreach (var statusEffect in EnterStatusEffects)
-                target.StatHandler.AddStatEffect(statusEffect);
+                target.EntityStatComponent.AddStatEffect(statusEffect);
         }
     }
 }

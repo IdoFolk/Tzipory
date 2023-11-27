@@ -13,8 +13,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
     {
         public event Action<int> OnShadowEnter;
         public event Action<int> OnShadowExit;
-        public event Action<int,Shaman> OnShamanEnter;
-        public event Action<int,Shaman> OnShamanExit;
+        public event Action<int,ITargetAbleEntity> OnShamanEnter;
+        public event Action<int,ITargetAbleEntity> OnShamanExit;
         [HideInInspector]public int Id { get; private set; }
         
         [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -64,16 +64,16 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
         public void RecieveTargetableEntry(ITargetAbleEntity targetable)
         {
-            if (targetable is not Shaman shaman) return;
+            if (targetable.EntityType != EntityType.Hero) return;
             
-            OnShamanEnter?.Invoke(Id,shaman);
+            OnShamanEnter?.Invoke(Id,targetable);
         }
 
         public void RecieveTargetableExit(ITargetAbleEntity targetable)
         {
-            if (targetable is not Shaman shaman) return;
+            if (targetable.EntityType != EntityType.Hero) return;
 
-            OnShamanExit?.Invoke(Id,shaman);
+            OnShamanExit?.Invoke(Id,targetable);
         }
     }
 }

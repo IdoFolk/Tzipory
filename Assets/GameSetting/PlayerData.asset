@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _partyConfig:
     _partyMembers:
-    - {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
-    - {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
+    - {fileID: 11400000, guid: cde60de47b1ebb04a872a5813e15c9be, type: 2}
   _inventoryConfig:
     _items:
     - _itemConfig: {fileID: 11400000, guid: 987b231e3dbb0af45a58d4cb8a221806, type: 2}

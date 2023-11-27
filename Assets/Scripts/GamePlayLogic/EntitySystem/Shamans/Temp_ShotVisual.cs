@@ -1,7 +1,7 @@
 using Tzipory.Systems.Entity.EntityComponents;
 using UnityEngine;
 
-public class Temp_ShamanShotVisual : MonoBehaviour
+public class Temp_ShotVisual : MonoBehaviour
 {
     [SerializeField] private float _projectileSpeed;
     [SerializeField] private float _timeToDie;

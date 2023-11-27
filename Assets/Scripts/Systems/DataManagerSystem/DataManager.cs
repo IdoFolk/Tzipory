@@ -66,6 +66,11 @@ namespace Tzipory.Systems.DataManager
             return configFile as T;
         }
 
+        public T GetConfigData<T>(int id) where T : class, IConfigFile
+        {
+            return null;
+        }
+
         public IEnumerable<T> GetSerializeDatas<T>(IConfigFile configFile) where T : class, ISerializeData, new()
         {
             throw new System.NotImplementedException();

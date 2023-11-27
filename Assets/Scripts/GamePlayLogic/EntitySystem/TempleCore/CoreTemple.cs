@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using PathCreation;
 using Sirenix.OdinInspector;
-using Tzipory.GameplayLogic.EntitySystem.Enemies;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.Systems.Entity;
@@ -22,7 +22,7 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity
 
     [SerializeField,ReadOnly] private Stat _hpStat;
     
-    private List<Enemy> _enemies = new List<Enemy>();
+    private List<UnitEntity> _enemies = new List<UnitEntity>();
     
     private IObjectDisposable _uiIndicator;
 
@@ -34,6 +34,9 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity
     public PathCreator PatrolPath => _patrolPath;
 
     public EntityType EntityType => EntityType.Core;
+    public IEntityHealthComponent EntityHealthComponent { get; }
+    public IEntityStatComponent EntityStatComponent { get; }
+    public IEntityVisualComponent EntityVisualComponent { get; }
 
     public Stat InvincibleTime => throw new System.NotImplementedException();
 
@@ -50,6 +53,12 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity
 
     
     public Dictionary<int, Stat> Stats { get; }
+    
+    public bool IsInitialization { get; }
+    public void Init(BaseGameEntity parameter)
+    {
+        throw new NotImplementedException();
+    }
     
     public IEnumerable<IStatHolder> GetNestedStatHolders()
     {
@@ -128,7 +137,7 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<Enemy>(out var enemy))
+        if (other.TryGetComponent<UnitEntity>(out var enemy))
         {
             _enemies.Add(enemy);
         }
@@ -136,7 +145,7 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent<Enemy>(out var enemy))
+        if (other.TryGetComponent<UnitEntity>(out var enemy))
         {
             _enemies.Remove(enemy);
         }

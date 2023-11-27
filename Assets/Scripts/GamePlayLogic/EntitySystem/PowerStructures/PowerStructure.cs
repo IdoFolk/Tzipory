@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Systems.Entity;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 using Logger = Tzipory.Tools.Debag.Logger;
@@ -73,22 +73,22 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             }
         }
 
-        private void OnShamanRingEnter(int ringId, Shaman shaman)
+        private void OnShamanRingEnter(int ringId, ITargetAbleEntity shaman)
         {
             Logger.Log($"shaman entered ring {ringId}",POWER_STRUCTURE_LOG_GROUP);
 
             var ringModifiedStatEffectConfig = _powerStructureConfig.StatEffectConfig;
             ringModifiedStatEffectConfig.StatModifier.Modifier = ringModifiedStatEffectConfig.StatModifier.RingModifiers[ringId];
 
-            if (_activeStatusEffectOnShamans.TryGetValue(shaman.EntityInstanceID, out var currentActiveStatusEffect))
+            if (_activeStatusEffectOnShamans.TryGetValue(shaman.GameEntity.EntityInstanceID, out var currentActiveStatusEffect))
                 currentActiveStatusEffect.Dispose();
 
-            IDisposable shamanDisposable = shaman.StatHandler.AddStatEffect(ringModifiedStatEffectConfig);
+            IDisposable shamanDisposable = shaman.EntityStatComponent.AddStatEffect(ringModifiedStatEffectConfig);
 
-            _activeStatusEffectOnShamans[shaman.EntityInstanceID] = shamanDisposable;
+            _activeStatusEffectOnShamans[shaman.GameEntity.EntityInstanceID] = shamanDisposable;
         }
 
-        private void OnShamanRingExit(int ringId, Shaman shaman)
+        private void OnShamanRingExit(int ringId, ITargetAbleEntity shaman)
         {
             Logger.Log($"shaman exited ring {ringId}",POWER_STRUCTURE_LOG_GROUP);
             var ringModifiedStatEffectConfig = _powerStructureConfig.StatEffectConfig;
@@ -96,21 +96,21 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
             if (ringId == proximityRingsManager.RingHandlers.Length - 1)
             {
-                if (!_activeStatusEffectOnShamans.TryGetValue(shaman.EntityInstanceID, out IDisposable currentActiveStatusEffect)) return;
+                if (!_activeStatusEffectOnShamans.TryGetValue(shaman.GameEntity.EntityInstanceID, out IDisposable currentActiveStatusEffect)) return;
                 currentActiveStatusEffect.Dispose();
-                _activeStatusEffectOnShamans.Remove(shaman.EntityInstanceID);
+                _activeStatusEffectOnShamans.Remove(shaman.GameEntity.EntityInstanceID);
             }
             else if (ringId < proximityRingsManager.RingHandlers.Length - 1)
             {
-                if (_activeStatusEffectOnShamans.TryGetValue(shaman.EntityInstanceID, out IDisposable currentActiveStatusEffect))
+                if (_activeStatusEffectOnShamans.TryGetValue(shaman.GameEntity.EntityInstanceID, out IDisposable currentActiveStatusEffect))
                 {
                     currentActiveStatusEffect.Dispose();
-                    _activeStatusEffectOnShamans.Remove(shaman.EntityInstanceID);
+                    _activeStatusEffectOnShamans.Remove(shaman.GameEntity.EntityInstanceID);
                 }
 
                 ringModifiedStatEffectConfig.StatModifier.Modifier = ringModifiedStatEffectConfig.StatModifier.RingModifiers[ringId + 1];
-                IDisposable disposable = shaman.StatHandler.AddStatEffect(ringModifiedStatEffectConfig);
-                _activeStatusEffectOnShamans.Add(shaman.EntityInstanceID, disposable);
+                IDisposable disposable = shaman.EntityStatComponent.AddStatEffect(ringModifiedStatEffectConfig);
+                _activeStatusEffectOnShamans.Add(shaman.GameEntity.EntityInstanceID, disposable);
             }
         }
 

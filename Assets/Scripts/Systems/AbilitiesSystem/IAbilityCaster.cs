@@ -6,6 +6,6 @@ namespace Tzipory.Systems.AbilitySystem
     public interface IAbilityCaster
     {
         public event Action OnCast;
-        public void Cast(IEntityTargetAbleComponent target,IAbilityExecutor abilityExecutor);
+        public void Cast(ITargetAbleEntity target,IAbilityExecutor abilityExecutor);
     }
 }

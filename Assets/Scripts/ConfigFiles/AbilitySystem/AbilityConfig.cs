@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.ConfigFiles.Visual;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
@@ -41,7 +42,7 @@ namespace Tzipory.ConfigFiles.AbilitySystem
         private bool _haveEffectOnEntity;
 
         [SerializeField, TabGroup("Ability Visual Config"), Tooltip(""), ShowIf(nameof(_haveEffectOnEntity))]
-        private AbilityVisualConfig _abilityVisualConfig;
+        private AnimationConfig _animationConfig;
         
         public string AbilityName => _abilityName;
         public int AbilityId => _abilityId;
@@ -56,7 +57,7 @@ namespace Tzipory.ConfigFiles.AbilitySystem
         
         public bool HaveEffectOnEntity => _haveEffectOnEntity;
 
-        public AbilityVisualConfig AbilityVisualConfig => _abilityVisualConfig;
+        public AnimationConfig AnimationConfig => _animationConfig;
 
         public float ProjectileSpeed => _projectileSpeed;
 
@@ -82,18 +83,6 @@ namespace Tzipory.ConfigFiles.AbilitySystem
         public int ConfigTypeId => Constant.DataId.ABILITY_DATA_ID;
         public bool DoExitEffects => _doExitEffects;
         public List<StatEffectConfig> OnExitStatusEffectConfigs => _doExitEffects? _statusEffectConfigsOnExit : null;
-    }
-
-    [System.Serializable]
-    public struct AbilityVisualConfig
-    {
-        [SerializeField] public TimelineAsset EntryTimeLine;
-        [SerializeField] public TimelineAsset LoopTimeLine;
-        [SerializeField] public TimelineAsset ExitTimeLine;
-
-        public float EntryTime => (float)EntryTimeLine.duration;
-        public float LoopTime;
-        public float ExitTime => (float)ExitTimeLine.duration;
     }
 
     public enum AbilityExecuteType

@@ -89,7 +89,7 @@ namespace Tzipory.Systems.MovementSystem
 
             //TEMP!!!!!!
             Enemy enemy = GetComponent<Enemy>();
-            enemy.SetAttackTarget(LevelManager.CoreTemplete);
+            enemy.EntityTargetingComponent.SetAttackTarget(LevelManager.CoreTemplete);
             enemy.IsAttckingCore = true;
         }
 

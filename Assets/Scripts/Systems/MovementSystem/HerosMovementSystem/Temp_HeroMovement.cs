@@ -17,7 +17,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         
         private void Start()
         {
-            _moveComponent.Init(_shaman.StatHandler.GetStat(Constant.StatsId.MovementSpeed));
+            _moveComponent.Init(_shaman.EntityStatComponent.GetStat(Constant.StatsId.MovementSpeed));
         }
         public void SetTarget(Vector3 pos)
         {
@@ -27,7 +27,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         public void SelectHero()
         {
             //TempHeroMovementManager.Instance.SelectTarget(this);
-            TempHeroMovementManager.Instance.SelectTarget(this,_shaman.EntityVisualComponent.SpriteRenderer.sprite, _shaman.TargetingRange.CurrentValue); //temp?
+            TempHeroMovementManager.Instance.SelectTarget(this,_shaman.EntityVisualComponent.SpriteRenderer.sprite, _shaman.EntityTargetingComponent.TargetingRange.CurrentValue); //temp?
         }
     }
 }

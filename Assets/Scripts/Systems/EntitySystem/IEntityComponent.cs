@@ -1,12 +1,14 @@
-﻿using UnityEngine;
+﻿using Tzipory.Tools.Interface;
 
 namespace Tzipory.Systems.Entity
 {
-    public interface IEntityComponent
+    public interface IEntityComponent :  IEntity
     {
-        public int EntityInstanceID { get; }
-        public Transform EntityTransform { get; }
-
+        public void UpdateComponent();
+    }
+    
+    public interface IEntity : IInitialization<BaseGameEntity>
+    {
         public BaseGameEntity GameEntity { get; }
     }
 }

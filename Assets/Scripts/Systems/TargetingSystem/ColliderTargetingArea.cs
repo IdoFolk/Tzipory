@@ -5,14 +5,16 @@ using UnityEngine;
 
 namespace Tzipory.Systems.TargetingSystem
 {
-    public class ColliderTargetingArea : MonoBehaviour
+    public class ColliderTargetingArea : MonoBehaviour, IInitialization<ITargetableReciever>
     {
         [SerializeField] private bool _testing;
 
         private ITargetableCollisionReciever _collisionReciever;
         private ITargetableEntryReciever _entryReciever;
         private ITargetableExitReciever _exitReciever;
-        
+
+        public bool IsInitialization { get; private set; }
+
         public void Init(ITargetableReciever reciever)
         {
             if (reciever is ITargetableCollisionReciever collisionReciever)
@@ -21,6 +23,8 @@ namespace Tzipory.Systems.TargetingSystem
                 _entryReciever = entryReciever;
             if (reciever is ITargetableExitReciever exitReciever)
                 _exitReciever = exitReciever;
+            
+            IsInitialization = true;
         }
         
         private void OnTriggerEnter2D(Collider2D other)
@@ -30,7 +34,7 @@ namespace Tzipory.Systems.TargetingSystem
 
             _collisionReciever?.RecieveCollision(other, IOType.In);
 
-            if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
+            if (!other.TryGetComponent<ITargetAbleEntity>(out var targetAbleComponent)) return;
             
             _entryReciever?.RecieveTargetableEntry(targetAbleComponent);
         }
@@ -42,7 +46,7 @@ namespace Tzipory.Systems.TargetingSystem
 
             _collisionReciever?.RecieveCollision(other, IOType.In);
 
-            if (!other.TryGetComponent<IEntityTargetAbleComponent>(out var targetAbleComponent)) return;
+            if (!other.TryGetComponent<ITargetAbleEntity>(out var targetAbleComponent)) return;
             
             _exitReciever?.RecieveTargetableExit(targetAbleComponent);
         }

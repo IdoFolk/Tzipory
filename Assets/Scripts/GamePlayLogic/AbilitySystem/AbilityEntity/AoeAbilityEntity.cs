@@ -24,7 +24,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityEntity
             _visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
         }
 
-        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
+        public void RecieveTargetableEntry(ITargetAbleEntity targetable)
         {
             if (targetable == _aoeAbilityExecuter.Caster)
                 return;
@@ -32,7 +32,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityEntity
             _aoeAbilityExecuter.Execute(targetable);
         }
 
-        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
+        public void RecieveTargetableExit(ITargetAbleEntity targetable)
         {
             if (targetable == _aoeAbilityExecuter.Caster)
                 return;

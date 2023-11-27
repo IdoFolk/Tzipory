@@ -59,11 +59,9 @@ namespace Tzipory.Systems.DataManager
             return output;
         }
 
-        public T GetConfigData<T>(int objectId) where T : class, IConfigFile, new()
+        public T GetConfigData<T>(ISerializeData serializeData) where T : class, IConfigFile
         {
-            var output = new T();
-            
-            var configFile = _configManager.GetConfig(output.ConfigTypeId,objectId);
+            var configFile = _configManager.GetConfig(serializeData.SerializeTypeId,serializeData.SerializeObjectId);
             
             return configFile as T;
         }

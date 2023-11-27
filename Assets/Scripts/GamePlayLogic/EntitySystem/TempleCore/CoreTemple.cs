@@ -11,7 +11,7 @@ using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
+public class CoreTemple : BaseGameEntity, ITargetAbleEntity
 {
     [SerializeField] private PathCreator _patrolPath;
     [SerializeField] private UIIndicatorConfig _uiIndicatorConfig;
@@ -28,7 +28,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 
     private Action CanacleFlash;
     
-    public event Action<IEntityTargetAbleComponent> OnTargetDisable;
+    public event Action<ITargetAbleEntity> OnTargetDisable;
     public bool IsTargetAble => true;
 
     public PathCreator PatrolPath => _patrolPath;
@@ -42,7 +42,6 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
     public Stat Health => _hpStat;
     public bool IsEntityDead => Health.CurrentValue <= 0;
 
-    public StatHandler StatHandler => throw new System.NotImplementedException();
 
     public System.Action OnHealthChanged;
 

@@ -1,8 +1,10 @@
-﻿using Tzipory.Systems.StatusSystem;
+﻿using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
+using Tzipory.Systems.StatusSystem;
+using Tzipory.Tools.Interface;
 
 namespace Tzipory.Systems.Entity.EntityComponents
 {
-    public interface IEntityCombatComponent : IEntityComponent
+    public interface IEntityCombatComponent : IEntityComponent , IInitialization<BaseGameEntity,CombatComponentConfig> ,IStatHolder
     {
         public Stat AttackDamage { get; }
         public Stat CritDamage { get; }

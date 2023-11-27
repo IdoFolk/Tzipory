@@ -28,7 +28,7 @@ namespace Tzipory.Systems.FactorySystem.ObjectFactory
         }
 
         [Obsolete("Use AbilitySerializeData")]
-        public static IAbilityExecutor GetAbilityExecutor(IEntityTargetAbleComponent caster,AbilityConfig abilityConfig)
+        public static IAbilityExecutor GetAbilityExecutor(ITargetAbleEntity caster,AbilityConfig abilityConfig)
         {
             switch (abilityConfig.AbilityExecuteType)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using Tzipory.ConfigFiles.EntitySystem;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
@@ -13,7 +14,7 @@ using Random = UnityEngine.Random;
 
 namespace Tzipory.GameplayLogic.EntitySystem.Enemies
 {
-    public class Enemy : BaseUnitEntity , IPoolable<Enemy>
+    public class Enemy : UnitEntity , IPoolable<Enemy>
     {
         private const string ENEMY_LOG_GROUP = "Enemy";
         
@@ -33,12 +34,11 @@ namespace Tzipory.GameplayLogic.EntitySystem.Enemies
 
         float timer;
         
-        public override void Init(BaseUnitEntityConfig parameter)
+        public override void Init(UnitEntityConfig parameter)
         {
             base.Init(parameter);
             
             IsAttckingCore = false;
-            EntityType = EntityType.Enemy;
             timer = 0;
             _isAttacking  = false;
             _tempBasicMoveComponent.Init(StatHandler.GetStat(Constant.StatsId.MovementSpeed));//temp!
@@ -64,11 +64,11 @@ namespace Tzipory.GameplayLogic.EntitySystem.Enemies
                 {
                     if (Random.Range(0, 100) < _aggroLevel)
                     {
-                        if (TargetingHandler.HaveTarget)
+                        if (EntityTargetingComponent.HaveTarget)
                         {
                             _isAttacking  = true;
 #if UNITY_EDITOR
-                            Logger.Log($"{gameObject.name} InstanceID: {EntityInstanceID} is attacking {TargetingHandler.CurrentTarget.EntityTransform.name}",ENEMY_LOG_GROUP);
+                            Logger.Log($"{gameObject.name} InstanceID: {EntityInstanceID} is attacking {EntityTargetingComponent.CurrentTarget.GameEntity.name}",ENEMY_LOG_GROUP);
 #endif
                         }
                     }
@@ -76,11 +76,11 @@ namespace Tzipory.GameplayLogic.EntitySystem.Enemies
 
                 if (_isAttacking)
                 {
-                    _tempBasicMoveComponent.SetDestination(TargetingHandler.CurrentTarget.EntityTransform.position, MoveType.Free);//temp!
+                    _tempBasicMoveComponent.SetDestination(EntityTargetingComponent.CurrentTarget.GameEntity.EntityTransform.position, MoveType.Free);//temp!
 
                     if (Random.Range(0, 100) < _returnLevel +
                         Vector3.Distance(EntityTransform.position, _movementOnPath.CurrentPointOnPath) ||
-                        TargetingHandler.CurrentTarget.IsEntityDead)
+                        EntityTargetingComponent.CurrentTarget.EntityHealthComponent.IsEntityDead)
                     {
                         _isAttacking = false;
                         Debug.Log($"{gameObject.name} return to path");
@@ -94,27 +94,27 @@ namespace Tzipory.GameplayLogic.EntitySystem.Enemies
             
             if (_isAttacking)
             {
-                if (!TargetingHandler.HaveTarget)
+                if (!EntityTargetingComponent.HaveTarget)
                 {
                     _isAttacking = false;
                     return;
                 }//plastr
 
-                if (Vector3.Distance(transform.position, TargetingHandler.CurrentTarget.EntityTransform.position) < AttackRange.CurrentValue)
+                if (Vector3.Distance(transform.position, EntityTargetingComponent.CurrentTarget.GameEntity.EntityTransform.position) < AttackRange.CurrentValue)
                     Attack();
             }
             
             _currentDecisionInterval -= GAME_TIME.GameDeltaTime;
         }
 
-        public void TakeTarget(IEntityTargetAbleComponent target)
+        public void TakeTarget(ITargetAbleEntity target)
         {
             SetAttackTarget(target);
         }
 
         public override void Attack()
         {
-            if (TargetingHandler.CurrentTarget == null)
+            if (EntityTargetingComponent.CurrentTarget == null)
                 return;
             
             if (timer >= StatHandler.GetStat(Constant.StatsId.AttackRate).CurrentValue)
@@ -122,11 +122,11 @@ namespace Tzipory.GameplayLogic.EntitySystem.Enemies
                 timer = 0f;
                 float attackDamage = 0;
 
-                attackDamage = TargetingHandler.CurrentTarget.EntityType == EntityType.Core 
+                attackDamage = EntityTargetingComponent.CurrentTarget.EntityType == EntityType.Core 
                     ? StatHandler.GetStat(Constant.StatsId.CoreAttackDamage).CurrentValue 
                     : StatHandler.GetStat(Constant.StatsId.AttackDamage).CurrentValue;
                 
-                TargetingHandler.CurrentTarget.TakeDamage(attackDamage, false);
+                EntityTargetingComponent.CurrentTarget.EntityHealthComponent.TakeDamage(attackDamage, false);
             }
             else
             {

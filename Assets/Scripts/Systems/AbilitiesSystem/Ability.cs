@@ -52,7 +52,7 @@ namespace Tzipory.Systems.AbilitySystem
         }
         
         [Obsolete("Use AbilitySerializeData")]
-        public Ability(IEntityTargetAbleComponent caster,IEntityTargetingComponent entityTargetingComponent, AbilityConfig config)
+        public Ability(ITargetAbleEntity caster,IEntityTargetingComponent entityTargetingComponent, AbilityConfig config)
         {
             _entityTargetingComponent = entityTargetingComponent;
 
@@ -91,7 +91,7 @@ namespace Tzipory.Systems.AbilitySystem
             return statHolders;
         }
 
-        public void ExecuteAbility(IEnumerable<IEntityTargetAbleComponent> availableTarget)
+        public void ExecuteAbility(IEnumerable<ITargetAbleEntity> availableTarget)
         {
             if (!_isReady)
                 return;
@@ -104,7 +104,7 @@ namespace Tzipory.Systems.AbilitySystem
             _castTimer = _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(CastTime.CurrentValue,"Ability cast time",Cast,ref availableTarget);
         }
 
-        private void Cast(IEnumerable<IEntityTargetAbleComponent> availableTarget)
+        private void Cast(IEnumerable<ITargetAbleEntity> availableTarget)
         {
             var currentTarget = _priorityTargeting.GetPriorityTarget(availableTarget);
             

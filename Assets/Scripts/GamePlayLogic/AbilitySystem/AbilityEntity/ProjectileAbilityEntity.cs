@@ -14,7 +14,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityEntity
         private float _speed;
         private Vector3 _dir;
         
-        public void Init(IEntityTargetAbleComponent target,float speed, float penetrationNumber,IAbilityExecutor abilityExecutor) 
+        public void Init(ITargetAbleEntity target,float speed, float penetrationNumber,IAbilityExecutor abilityExecutor) 
         {
             base.Init(abilityExecutor);
             
@@ -35,7 +35,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityEntity
                 Destroy(gameObject);
         }
 
-        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
+        public void RecieveTargetableEntry(ITargetAbleEntity targetable)
         {
             if (targetable.EntityInstanceID == AbilityExecutor.Caster.EntityInstanceID) return;
             

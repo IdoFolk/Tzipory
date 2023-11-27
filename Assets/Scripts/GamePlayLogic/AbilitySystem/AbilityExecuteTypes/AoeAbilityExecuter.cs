@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Tzipory.ConfigFiles.AbilitySystem;
 using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.ConfigFiles.Visual;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.AbilitySystem.AbilityEntity;
 using Tzipory.Systems.Entity;
@@ -19,13 +20,13 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
         
         private readonly GameObject _aoePrefab;
 
-        public readonly AbilityVisualConfig AbilityVisualConfig;
+        public readonly AnimationConfig AnimationConfig;
 
         public readonly PlayableAsset Visual;
         
         private List<BaseModifyStatEffect> _statusEffects;
         public AbilityExecuteType AbilityExecuteType => AbilityExecuteType.AOE;
-        public IEntityTargetAbleComponent Caster { get; }
+        public ITargetAbleEntity Caster { get; }
 
         //Changes:
         public List<StatEffectConfig> EnterStatusEffects { get; }
@@ -56,7 +57,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
         }
 
         [Obsolete("Use AbilitySerializeData")]
-        public AoeAbilityExecuter(IEntityTargetAbleComponent caster,AbilityConfig abilityConfig)
+        public AoeAbilityExecuter(ITargetAbleEntity caster,AbilityConfig abilityConfig)
         {
             Stats = new Dictionary<int, Stat>();
 
@@ -65,7 +66,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
             EnterStatusEffects = new List<StatEffectConfig>();
             ExitStatusEffects = new List<StatEffectConfig>();
 
-            AbilityVisualConfig = abilityConfig.AbilityVisualConfig;
+            AnimationConfig = abilityConfig.AnimationConfig;
             
             EnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
             if(abilityConfig.DoExitEffects)
@@ -77,14 +78,14 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
             _aoePrefab = Resources.Load<GameObject>(AOE_PREFAB_PATH);
         }
         
-        public void Init(IEntityTargetAbleComponent target)//temp
+        public void Init(ITargetAbleEntity target)//temp
         {
             var aoeGameObject = Object.Instantiate(_aoePrefab).GetComponent<AoeAbilityEntity>();
             aoeGameObject.gameObject.SetActive(false);
             aoeGameObject.Init(Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
         }
 
-        public void Execute(IEntityTargetAbleComponent target)
+        public void Execute(ITargetAbleEntity target)
         {
             if (target.EntityType == Caster.EntityType)
                 return;
@@ -93,7 +94,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
                 target.StatHandler.AddStatEffect(statusEffect);
         }
         
-        public void ExecuteOnExit(IEntityTargetAbleComponent target)
+        public void ExecuteOnExit(ITargetAbleEntity target)
         {
             if (target.EntityType == Caster.EntityType)
                 return;

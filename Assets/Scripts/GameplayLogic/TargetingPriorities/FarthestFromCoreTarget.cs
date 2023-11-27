@@ -12,15 +12,15 @@ namespace Tzipory.GameplayLogic.TargetingPriorities
         {
         }
 
-        public override IEntityTargetAbleComponent GetPriorityTarget(IEnumerable<IEntityTargetAbleComponent> targets)
+        public override ITargetAbleEntity GetPriorityTarget(IEnumerable<ITargetAbleEntity> targets)
         {
-            IEntityTargetAbleComponent currentFarthestTarget = null;
+            ITargetAbleEntity currentFarthestTarget = null;
 
             float currentLongestDistance = float.MinValue;
 
             foreach (var target in targets)
             {
-                var distance = Vector3.Distance(CoreTemple.CoreTrans.position, target.EntityTransform.position);
+                var distance = Vector3.Distance(CoreTemple.CoreTrans.position, target.GameEntity.transform.position);
 
                 if (distance > currentLongestDistance)
                 {

@@ -12,9 +12,9 @@ namespace Tzipory.GameplayLogic.TargetingPriorities
         {
         }
 
-        public override IEntityTargetAbleComponent GetPriorityTarget(IEnumerable<IEntityTargetAbleComponent> targets)
+        public override ITargetAbleEntity GetPriorityTarget(IEnumerable<ITargetAbleEntity> targets)
         {
-            List<IEntityTargetAbleComponent> tempList = targets.ToList();
+            List<ITargetAbleEntity> tempList = targets.ToList();
             if (tempList.Count == 0)
                 return null;
             return tempList[Random.Range(0, tempList.Count- 1)];

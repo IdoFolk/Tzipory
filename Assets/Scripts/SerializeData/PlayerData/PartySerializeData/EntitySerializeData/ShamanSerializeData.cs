@@ -32,7 +32,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         public override void Init(IConfigFile parameter)
         {
             base.Init(parameter);
-            var config = (ShamanConfig)parameter;
+            var config = (UnitEntityConfig)parameter;
 
             _decisionInterval = config.DecisionInterval;
             _itemIDList = new List<int>();

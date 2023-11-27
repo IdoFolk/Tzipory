@@ -30,7 +30,7 @@ namespace Tzipory.Systems.FactorySystem.ObjectFactory
                 case TargetingPriorityType.HighestHpPercentageEntity:
                     return new HighestHealthPercentageTarget(entityTargetingComponent);
                 case TargetingPriorityType.Default:
-                    return entityTargetingComponent.DefaultPriorityTargeting ?? new ClosestToEntityTarget(entityTargetingComponent);
+                    return entityTargetingComponent.PriorityTargeting ?? new ClosestToEntityTarget(entityTargetingComponent);
                 default:
                     throw  new ArgumentOutOfRangeException();
             }

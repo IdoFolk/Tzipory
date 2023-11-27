@@ -1,4 +1,4 @@
-using Tzipory.Systems.Entity;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
@@ -9,16 +9,14 @@ namespace GameplayLogic.UI.HPBar
         [SerializeField] TEMP_HP_Bar hP_Bar;
 
         [SerializeField] private GameObject _objWithUnit; //TEMP!
-        BaseUnitEntity _unit;
+        UnitEntity _unit;
 
-        public void Init(BaseUnitEntity unit)
+        public void Init(UnitEntity unit)
         {
             _unit = unit;
-            hP_Bar.Init(_unit.Health.BaseValue);
-
+            hP_Bar.Init(_unit.EntityHealthComponent.Health.BaseValue);
         }
-
-
+        
         public void SetBarToHealth(StatChangeData statChangeData)
         {
             hP_Bar.SetBarValue(statChangeData.NewValue);

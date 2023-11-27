@@ -9,13 +9,13 @@ namespace Tzipory.Systems.AbilitySystem
 {
     public class AbilityHandler
     {
-        private IEntityTargetAbleComponent Caster { get; }
+        private ITargetAbleEntity Caster { get; }
         public Dictionary<string, Ability> Abilities { get; }
         
         public bool IsCasting => Abilities.Any(ability => ability.Value.IsCasting);
         
         [Obsolete("Use AbilitySerializeData")]
-        public AbilityHandler(IEntityTargetAbleComponent caster,IEntityTargetingComponent entityTargetingComponent,IEnumerable<AbilityConfig> abilitiesConfig)//temp
+        public AbilityHandler(ITargetAbleEntity caster,IEntityTargetingComponent entityTargetingComponent,IEnumerable<AbilityConfig> abilitiesConfig)//temp
         {
             Abilities = new Dictionary<string, Ability>();
             Caster = caster;
@@ -24,7 +24,7 @@ namespace Tzipory.Systems.AbilitySystem
                 Abilities.Add(abilityConfig.AbilityName,new Ability(caster,entityTargetingComponent,abilityConfig));
         }
 
-        public void CastAbilityByName(string abilityName,IEnumerable<IEntityTargetAbleComponent> availableTargets)
+        public void CastAbilityByName(string abilityName,IEnumerable<ITargetAbleEntity> availableTargets)
         {
             if (Abilities.TryGetValue(abilityName, out var ability))
                 ability.ExecuteAbility(availableTargets);
@@ -32,7 +32,7 @@ namespace Tzipory.Systems.AbilitySystem
                 Debug.LogError($"{Caster.EntityTransform.name} cant find ability {abilityName}");
         }
 
-        public void CastAbility(IEnumerable<IEntityTargetAbleComponent> availableTargets)
+        public void CastAbility(IEnumerable<ITargetAbleEntity> availableTargets)
         {
             if (Abilities.Count == 0)
                 return;

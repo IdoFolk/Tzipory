@@ -8,7 +8,7 @@ namespace Tzipory.Systems.WaveSystem
 {
     public class EnemyGroup : IProgress
     {
-        private readonly EnemyConfig _enemyConfig;
+        private readonly UnitEntityConfig _enemyConfig;
         private readonly EnemyGroupConfig _data;
         
         private int _spawnAmountPreInterval;
@@ -33,7 +33,7 @@ namespace Tzipory.Systems.WaveSystem
             _spawnAmountPreInterval = enemyGroupConfig.SpawnAmountPreInterval;
         }
 
-        public bool TryGetEnemy(out EnemyConfig enemyPrefab)
+        public bool TryGetEnemy(out UnitEntityConfig enemyPrefab)
         {
             if (TotalSpawnAmount <= 0)
             {

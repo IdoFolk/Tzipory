@@ -11,19 +11,19 @@ namespace Tzipory.GameplayLogic.TargetingPriorities
         {
         }
 
-        public override IEntityTargetAbleComponent GetPriorityTarget(IEnumerable<IEntityTargetAbleComponent> targets)
+        public override ITargetAbleEntity GetPriorityTarget(IEnumerable<ITargetAbleEntity> targets)
         {
-            IEntityTargetAbleComponent currentLowestTarget = null;
+            ITargetAbleEntity currentLowestTarget = null;
 
             float currentHighestHP = float.MinValue;
 
             foreach (var target in targets)
             {
                 //USE BASE VALUE HERE! NOT MAXVALUE! 
-                if (target.Health.CurrentValue / target.Health.BaseValue > currentHighestHP)
+                if (target.EntityHealthComponent.Health.CurrentValue / target.EntityHealthComponent.Health.BaseValue > currentHighestHP)
                 {
                     currentLowestTarget = target;
-                    currentHighestHP = target.Health.CurrentValue;
+                    currentHighestHP = target.EntityHealthComponent.Health.CurrentValue;
                 }
             }
 

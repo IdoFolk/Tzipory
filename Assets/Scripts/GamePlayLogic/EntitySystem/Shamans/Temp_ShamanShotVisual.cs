@@ -8,16 +8,16 @@ public class Temp_ShamanShotVisual : MonoBehaviour
     [SerializeField] private Temp_Projectile _projectile;
     [SerializeField] private Transform _parent;
     
-    private IEntityTargetingComponent  _targetingComponent;
+    private Transform  _shotPosition;
     
-    public void Init(IEntityTargetingComponent  targetingComponent)
+    public void Init(Transform shotPosition)
     {
-        _targetingComponent = targetingComponent;
+        _shotPosition = shotPosition;
     }
     
-    public void Shot(IEntityTargetAbleComponent target,float damage,bool isCrit)
+    public void Shot(ITargetAbleEntity target,float damage,bool isCrit)
     {
-        var projectile = Instantiate(_projectile, _targetingComponent.ShotPosition, Quaternion.identity,_parent);
+        var projectile = Instantiate(_projectile, _shotPosition.position, Quaternion.identity,_parent);
         projectile.Init(target,_projectileSpeed,damage,_timeToDie,isCrit);
     }
 }

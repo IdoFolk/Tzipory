@@ -10,7 +10,7 @@ namespace Tzipory.Systems.DataManager
         
         public T GetSerializeData<T>(IConfigFile configFile) where T : class, ISerializeData, new();
         public T GetSerializeData<T>(int objectId) where T : class, ISerializeData, new();
-        public T GetConfigData<T>(int objectId) where T : class, IConfigFile, new();
+        public T GetConfigData<T>(ISerializeData serializeData) where T : class, IConfigFile;
         public IEnumerable<T> GetSerializeDatas<T>(IConfigFile configFile) where T : class, ISerializeData, new();
         public IEnumerable<T> GetSerializeDatas<T>(int objectId) where T : class, ISerializeData, new();
     }

@@ -1,4 +1,4 @@
-﻿using Tzipory.ConfigFiles.AbilitySystem;
+﻿using Tzipory.ConfigFiles.Visual;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
 using UnityEngine;
@@ -13,7 +13,7 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public PlayableDirector ParticleEffectPlayableDirector { get; }
         public PopUpTexter PopUpTexter { get; }
 
-        public void StartTimeLineEffect(AbilityVisualConfig config);
+        public void StartAnimationEffect(AnimationConfig config);
 
         public void ResetVisual();
     }

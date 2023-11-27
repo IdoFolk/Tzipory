@@ -8,7 +8,7 @@ namespace Tzipory.ConfigFiles.Level
     [System.Serializable]
     public class EnemyGroupConfig
     {
-        [SerializeField,AssetsOnly,Required] private EnemyConfig _enemyConfig;
+        [SerializeField,AssetsOnly,Required] private UnitEntityConfig _enemyConfig;
         [SerializeField] private  float _groupStartDelay;
         [SerializeField] private int _totalSpawnAmount;
         [SerializeField] private int _spawnAmountPreInterval;
@@ -43,7 +43,7 @@ namespace Tzipory.ConfigFiles.Level
         [ShowInInspector, ReadOnly,PropertyOrder(-1)]
         public float EndTime => _startTime + TotalGroupSpawnTime;
 
-        public EnemyConfig EnemyConfig => _enemyConfig;
+        public UnitEntityConfig EnemyConfig => _enemyConfig;
 
         public int TotalSpawnAmount => _totalSpawnAmount;
         

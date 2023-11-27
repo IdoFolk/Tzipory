@@ -11,7 +11,7 @@ using UnityEngine;
 namespace Tzipory.SerializeData.PlayerData.Party
 {
     [System.Serializable]
-    public class PartySerializeData : ISerializeData , IInitialization<ShamanConfig[]>
+    public class PartySerializeData : ISerializeData , IInitialization<UnitEntityConfig[]>
     {
 #if UNITY_EDITOR
         [SerializeField] private List<ShamanSerializeData> _shamanSerializeDatas;
@@ -27,10 +27,11 @@ namespace Tzipory.SerializeData.PlayerData.Party
         public List<ShamanDataContainer> ShamanRosterDataContainers => _shamanRosterDataContainers;
         
         public bool IsInitialization { get; private set; }
-        
+
+        public int SerializeObjectId { get; }
         public int SerializeTypeId => Constant.DataId.PARTY_DATA_ID;
         
-        public void Init(ShamanConfig[] parameter)//for testing
+        public void Init(UnitEntityConfig[] parameter)//for testing
         {
 #if UNITY_EDITOR
             _shamanSerializeDatas = new List<ShamanSerializeData>();
@@ -42,7 +43,7 @@ namespace Tzipory.SerializeData.PlayerData.Party
             {
                 var shamanSerializeData = new ShamanSerializeData();
                 shamanSerializeData.Init(shamanConfig);
-                _shamanRosterDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanConfig.UnitEntityVisualConfig));
+                _shamanRosterDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanConfig.VisualComponentConfig));
             }
 
             _shamansPartyDataContainers = new List<ShamanDataContainer>();
@@ -69,7 +70,7 @@ namespace Tzipory.SerializeData.PlayerData.Party
 #if UNITY_EDITOR
                 _shamanSerializeDatas.Add(shamanSerializeData);
 #endif
-                var shamanVisual =(ShamanConfig)DataManager.DataRequester.ConfigManager.GetConfig(shamanConfig.ConfigTypeId,
+                var shamanVisual = (ShamanConfig)DataManager.DataRequester.ConfigManager.GetConfig(shamanConfig.ConfigTypeId,
                     shamanConfig.ObjectId);//temp!!!
                 _shamanRosterDataContainers.Add(new ShamanDataContainer(shamanSerializeData, shamanVisual.UnitEntityVisualConfig));
             }

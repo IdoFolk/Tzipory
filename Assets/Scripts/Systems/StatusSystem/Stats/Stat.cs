@@ -5,6 +5,7 @@ using NUnit.Framework.Internal.Filters;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.PopUpText;
 using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.Helpers.Consts;
 using Tzipory.SerializeData.StatSystemSerializeData;
 using UnityEngine;
 
@@ -76,12 +77,14 @@ namespace Tzipory.Systems.StatusSystem
         public float BaseValue { get; }
         public float MaxValue { get; private set; }
 
+        public float DynamicValue => _dynamicValue;
+
         #endregion
 
         #region Constructors
 
         [Obsolete("Use StatSerializeData as a parameter")]
-        public Stat(StatConfig statConfig)
+        public Stat(StatConfig statConfig,StatSerializeData statSerializeData)
         {
             Name = statConfig.Name;
             Id = statConfig.ID;
@@ -93,12 +96,12 @@ namespace Tzipory.Systems.StatusSystem
             _name = Name;
 #endif
         }
-        
-        public Stat(StatSerializeData statSerializeData)
+
+        public Stat(Constant.StatsId statsId,float value)
         {
-            Name = statSerializeData.Name;
-            Id = statSerializeData.ID;
-            BaseValue = statSerializeData.BaseValue;
+            Name = statsId.ToString();
+            Id = (int)statsId;
+            BaseValue = value;
             MaxValue = StatLimiters.MaxStatValue;
             _zeroSetModifier = 1;
 #if UNITY_EDITOR

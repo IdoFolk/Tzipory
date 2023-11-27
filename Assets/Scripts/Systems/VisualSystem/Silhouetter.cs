@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Tzipory.Systems.Entity;
+using Tzipory.GamePlayLogic.EntitySystem;
 using UnityEngine;
 
 public class Silhouetter : MonoBehaviour
 {
-    [SerializeField] private BaseUnitEntity _unit;   
+    [SerializeField] private UnitEntity _unit;   
     [SerializeField] private SpriteRenderer _silhouetteSpriteRenderer;
 
     private List<float> _obstaclesZs = new List<float>();

@@ -7,7 +7,7 @@ public class Temp_Projectile : MonoBehaviour
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private float _midDisToDeadTarget;
     
-    private IEntityTargetAbleComponent _target;
+    private ITargetAbleEntity _target;
     private float _speed;
 
     private float _damage;
@@ -19,7 +19,7 @@ public class Temp_Projectile : MonoBehaviour
     private Vector3 _dir;
 
     
-    public void Init(IEntityTargetAbleComponent target,float speed,float damage,float timeToDie,bool isCrit)
+    public void Init(ITargetAbleEntity target,float speed,float damage,float timeToDie,bool isCrit)
     {
         _timeToDie = timeToDie;
         _speed = speed;
@@ -52,7 +52,7 @@ public class Temp_Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<IEntityTargetAbleComponent>(out var hitedTarget))
+        if (other.TryGetComponent<ITargetAbleEntity>(out var hitedTarget))
         {
             if (hitedTarget.EntityType == EntityType.Hero) return;
             //if (target.EntityInstanceID == _casterId) return;

@@ -62,14 +62,14 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             }
         }
 
-        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
+        public void RecieveTargetableEntry(ITargetAbleEntity targetable)
         {
             if (targetable is not Shaman shaman) return;
             
             OnShamanEnter?.Invoke(Id,shaman);
         }
 
-        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
+        public void RecieveTargetableExit(ITargetAbleEntity targetable)
         {
             if (targetable is not Shaman shaman) return;
 

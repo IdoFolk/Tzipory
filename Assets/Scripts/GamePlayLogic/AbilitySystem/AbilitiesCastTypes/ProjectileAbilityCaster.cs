@@ -68,7 +68,7 @@ namespace Tzipory.Systems.AbilitySystem
                 throw  new Exception($"{nameof(ProjectileAbilityCaster)} ProjectilePrefab not found");
         }
 
-        public void Cast(IEntityTargetAbleComponent target, IAbilityExecutor abilityExecutor)
+        public void Cast(ITargetAbleEntity target, IAbilityExecutor abilityExecutor)
         {
             OnCast?.Invoke();
             var projectilePrefab = Object.Instantiate(_projectilePrefab,EntityCasterTargetingComponent.ShotPosition,Quaternion.identity);

@@ -2,7 +2,7 @@
 using Tzipory.Tools.Enums;
 using UnityEngine;
 
-namespace Tzipory.Tools.Interface
+namespace Tzipory.Systems.TargetingSystem
 {
     public interface ITargetableAllReciever : ITargetableCollisionReciever,ITargetableExitReciever,ITargetableEntryReciever
     {
@@ -10,12 +10,12 @@ namespace Tzipory.Tools.Interface
 
     public interface ITargetableEntryReciever : ITargetableReciever
     {
-        void RecieveTargetableEntry(IEntityTargetAbleComponent targetable);
+        void RecieveTargetableEntry(ITargetAbleEntity targetable);
     }
     
     public interface ITargetableExitReciever : ITargetableReciever
     {
-        void RecieveTargetableExit(IEntityTargetAbleComponent targetable);
+        void RecieveTargetableExit(ITargetAbleEntity targetable);
     }
     
     public interface ITargetableCollisionReciever : ITargetableReciever

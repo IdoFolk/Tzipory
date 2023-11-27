@@ -12,28 +12,29 @@ namespace Tzipory.SerializeData.StatSystemSerializeData
     {
         [SerializeField,ReadOnly] private string _name;
         [SerializeField,ReadOnly] private int _id;
-        [SerializeField,ReadOnly] private float _baseValue;
+        [SerializeField,ReadOnly] private float _value;
 
         public string Name => _name;
 
         public int ID => _id;
 
-        public float BaseValue => _baseValue;
-        
+        public float Value => _value;
+
+        public int SerializeObjectId => _id;
         public int SerializeTypeId => Constant.DataId.STAT_DATA_ID;
 
         public StatSerializeData(StatConfig statConfig)
         {
              _name  = statConfig.Name;
              _id = statConfig.ID;
-             _baseValue = statConfig.BaseValue;
+             _value = 0;
         }
 
         public StatSerializeData(Stat stat)
         {
             _name  = stat.Name;
             _id = stat.Id;
-            _baseValue = stat.BaseValue;
+            _value = stat.DynamicValue;
         }
 
         public bool IsInitialization { get; }
@@ -44,7 +45,7 @@ namespace Tzipory.SerializeData.StatSystemSerializeData
 
         public void UpdateData(Stat data)
         {
-            _baseValue = data.BaseValue;
+            _value = data.DynamicValue;
         }
     }
 }

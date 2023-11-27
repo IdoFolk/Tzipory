@@ -2,6 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.ConfigFiles.Level;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.GameplayLogic.UI.Indicator;
@@ -33,7 +34,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         public bool IsGameRunning { get; private set; }
 
         [SerializeField, TabGroup("Party manager")]
-        private ShamanConfig[] _shamanConfigs;
+        private UnitEntityConfig[] _shamanConfigs;
 
         [SerializeField, TabGroup("Level manager"), Tooltip("Make the level that you can lose or win the game")]
         private bool _cantLose;

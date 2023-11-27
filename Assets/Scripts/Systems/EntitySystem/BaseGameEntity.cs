@@ -5,8 +5,10 @@ using UnityEngine;
 
 namespace Tzipory.Systems.Entity
 {
-    public abstract class BaseGameEntity : MonoBehaviour , IEntityComponent
+    public abstract class BaseGameEntity : MonoBehaviour
     {
+        public const string ENTITY_LOG_GROUP = "Entity";
+        
 #if UNITY_EDITOR
         [SerializeField, ReadOnly,TabGroup("Timers")] private TimerHandler _timerHandler; 
 #endif

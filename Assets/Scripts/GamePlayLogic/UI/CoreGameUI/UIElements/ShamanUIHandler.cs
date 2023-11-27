@@ -26,14 +26,14 @@ namespace Tzipory.GameplayLogic.UIElements
 
         public override void Show()
         {
-            _shaman.Health.OnValueChanged += OnHealthChange;
+            _shaman.EntityHealthComponent.Health.OnValueChanged += OnHealthChange;
             OnClickEvent += GoToShaman;
             base.Show();
         }
 
         public override void Hide()
         {
-            _shaman.Health.OnValueChanged -= OnHealthChange;
+            _shaman.EntityHealthComponent.Health.OnValueChanged -= OnHealthChange;
             OnClickEvent -= GoToShaman;
             base.Hide();
         }
@@ -44,8 +44,8 @@ namespace Tzipory.GameplayLogic.UIElements
         public override void UpdateUIVisual()
         {
             base.UpdateUIVisual();
-            _healthBar.value  = _shaman.Health.CurrentValue / _shaman.Health.BaseValue;
-            _fill.color = Color.Lerp(Color.red,Color.green,_shaman.Health.CurrentValue/_shaman.Health.BaseValue);
+            _healthBar.value  = _shaman.EntityHealthComponent.Health.CurrentValue / _shaman.EntityHealthComponent.Health.BaseValue;
+            _fill.color = Color.Lerp(Color.red,Color.green,_shaman.EntityHealthComponent.Health.CurrentValue/_shaman.EntityHealthComponent.Health.BaseValue);
         }
     }
 }

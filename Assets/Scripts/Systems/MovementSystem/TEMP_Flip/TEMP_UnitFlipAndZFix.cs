@@ -18,7 +18,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     
 
     [SerializeField] BaseUnitEntity _baseUnitEntity;
-    TargetingHandler _targeting;
+    TargetingComponent _targeting;
     //TEMP! Should USE SetShamanData(BaseUnitEntity) INSTEAD 
 
     static Vector3 cachedScaledMapSize => LevelHandler.MapSize * .01f; //fix take from consts
@@ -37,7 +37,7 @@ public class TEMP_UnitFlipAndZFix : MonoBehaviour
     private void Start()
     {
         StartCoroutine(nameof(CheckForFlip));
-        _targeting = _baseUnitEntity.TargetingHandler;
+        _targeting = _baseUnitEntity.TargetingComponent;
 
 
         //This should be applied differently between Shamans and Enemies.

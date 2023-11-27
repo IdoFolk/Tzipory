@@ -412,11 +412,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showOnAwake: 0
   _uiGroupTags: 2
-  RectTransform: {fileID: 1990358484108044902}
+  _rectTransform: {fileID: 1990358484108044902}
   _enableDrag: 0
   _canvasGroup: {fileID: 0}
   _enableDoubleClick: 0
   _doubleClickSpeed: 0.5
+  _enablePopupWindow: 1
+  _popupWindowConfig:
+    PositionPadding: {x: 0, y: 150}
+    WindowSize: {x: 250, y: 170}
+    HeaderFontSize: 24
+    BodyFontSize: 16
+    HeaderText: Totem
+    BodyText: 'Ability:'
   _splash: {fileID: 1019704610706600701}
   _splashBackground: {fileID: 719390076140990890}
   _keybindText: {fileID: 8116478885437191400}

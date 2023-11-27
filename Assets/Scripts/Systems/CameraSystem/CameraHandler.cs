@@ -93,7 +93,9 @@ namespace Tzipory.Systems.CameraSystem
             _cameraMaxZoom = _cameraSettings.ZoomMaxClamp;
             LockCamera(_lockedCameraPosition, LOCKED_CAMERA_ZOOM);
             _dragPanSpeed = _cameraSettings.CameraDragPanSpeed * 100f;
+#if !UNITY_EDITOR
             Cursor.lockState = CursorLockMode.Confined;
+#endif
         }
         #endregion
 

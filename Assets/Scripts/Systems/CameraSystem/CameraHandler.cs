@@ -4,7 +4,9 @@ using Cinemachine;
 using Sirenix.OdinInspector;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Helpers;
+using Tzipory.Tools.TimeSystem;
 using UnityEngine;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.CameraSystem
 {
@@ -17,6 +19,7 @@ namespace Tzipory.Systems.CameraSystem
         private const float FULL_HD_PIXELS_X = 1920;
         private const float FULL_HD_PIXELS_Y = 1080;
         private const int LOCKED_CAMERA_ZOOM = 9;
+        private const string CAMERA_LOG_GROUP = "CameraSystem";
         #endregion
         
         #region SerialzedFields
@@ -55,7 +58,7 @@ namespace Tzipory.Systems.CameraSystem
         private float _currentAspectRatioY;
 
         private bool _dragPanMoveActive = false;
-        private float _dragPanSpeed;
+        private Vector2 _dragPanSpeed;
         private float _edgePaddingX;
         private float _edgePaddingY;
         private Vector2 _lastMousePosition;
@@ -91,8 +94,12 @@ namespace Tzipory.Systems.CameraSystem
             _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
             _edgePaddingY = _cameraSettings.DefaultEdgePaddingY;
             _cameraMaxZoom = _cameraSettings.ZoomMaxClamp;
-            _dragPanSpeed = _cameraSettings.CameraDragPanSpeed * 100f;
+            _dragPanSpeed.x = _cameraSettings.CameraDragPanSpeed * _mainCamera.aspect;
+            _dragPanSpeed.y = _cameraSettings.CameraDragPanSpeed;
             LockCamera(_lockedCameraPosition, LOCKED_CAMERA_ZOOM);
+#if !UNITY_EDITOR
+            Cursor.lockState = CursorLockMode.Confined;
+#endif
         }
         #endregion
 
@@ -119,7 +126,7 @@ namespace Tzipory.Systems.CameraSystem
             if (Input.GetKey(KeyCode.S)) inputDir.y = -1f;
             if (Input.GetKey(KeyCode.A)) inputDir.x = -1f;
             if (Input.GetKey(KeyCode.D)) inputDir.x = +1f;
-
+#if !UNITY_EDITOR
             //Edge Scrolling Detection
             if (_enableEdgeScroll)
             {
@@ -132,7 +139,7 @@ namespace Tzipory.Systems.CameraSystem
                 if (Input.mousePosition.y > Screen.height - (Screen.height * _cameraSettings.EdgeScrollDetectSizeY))
                     inputDir.y = +1f;
             }
-
+#endif
             if (!_enablePanScroll) return inputDir;
             
             
@@ -146,15 +153,17 @@ namespace Tzipory.Systems.CameraSystem
                 _dragPanMoveActive = false;
             }
 
-            if (!_dragPanMoveActive) return inputDir;
+            if (!_dragPanMoveActive) return inputDir.normalized;
             
-            var mouseMovementDelta = (Vector2)GameManager.CameraHandler._mainCamera.ScreenToViewportPoint(Input.mousePosition) - _lastMousePosition;
-            inputDir.x = -mouseMovementDelta.x * _dragPanSpeed;
-            inputDir.y = -mouseMovementDelta.y * _dragPanSpeed;
-
+            var mouseMovementDelta = _lastMousePosition - (Vector2)GameManager.CameraHandler._mainCamera.ScreenToViewportPoint(Input.mousePosition);
+            
             _lastMousePosition = GameManager.CameraHandler._mainCamera.ScreenToViewportPoint(Input.mousePosition);
-
-            return inputDir;
+            _dragPanSpeed.x = _cameraSettings.CameraDragPanSpeed * _mainCamera.aspect;
+            _dragPanSpeed.y = _cameraSettings.CameraDragPanSpeed;
+            var tempLogDragPanSpeed = _dragPanSpeed;
+            _dragPanSpeed *= mouseMovementDelta.magnitude;
+            Logger.Log($"drag speed: {tempLogDragPanSpeed}, Magnitude: {_dragPanSpeed}",CAMERA_LOG_GROUP);
+            return mouseMovementDelta.normalized;
         }
 
         private void HandleZoom()
@@ -211,6 +220,11 @@ namespace Tzipory.Systems.CameraSystem
                 (_zoomPadding - _cameraSettings.ZoomMinClamp);
             float zoomSpeedChangeValue = currentZoomNormalizedValue * _cameraSettings.CameraSpeedZoomChangeValue;
             float fixedCameraSpeed = _cameraSettings.MoveSpeedMinimum + zoomSpeedChangeValue;
+            if (_dragPanMoveActive)
+            {
+                moveDir.x *= _dragPanSpeed.x;
+                moveDir.y *= _dragPanSpeed.y;
+            }
 
             //moving the camera
             cameraPosition += moveDir * (fixedCameraSpeed * Time.deltaTime);
@@ -263,6 +277,8 @@ namespace Tzipory.Systems.CameraSystem
             {
                 _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
                 _edgePaddingY = _cameraSettings.DefaultEdgePaddingY;
+                _dragPanSpeed.x = _cameraSettings.CameraDragPanSpeed * _mainCamera.aspect;
+                _dragPanSpeed.y = _cameraSettings.CameraDragPanSpeed;
                 _zoomPadding = _cameraMaxZoom;
                 if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
             }
@@ -274,6 +290,8 @@ namespace Tzipory.Systems.CameraSystem
                 //calculating the current padding for movement borders and zoom
                 _edgePaddingX = _cameraSettings.DefaultEdgePaddingX / _currentAspectRatioX;
                 _edgePaddingY = _cameraSettings.DefaultEdgePaddingY / _currentAspectRatioY;
+                // _dragPanSpeedX = (_cameraSettings.CameraDragPanSpeed * 100f) / _currentAspectRatioX;
+                // _dragPanSpeedY = (_cameraSettings.CameraDragPanSpeed * 100f) / _currentAspectRatioY;
                 _zoomPadding = _cameraMaxZoom * _currentAspectRatioX;
                 if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
             }

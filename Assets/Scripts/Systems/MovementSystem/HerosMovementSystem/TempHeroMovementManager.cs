@@ -55,6 +55,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             Cursor.visible = false;
             _previousTimeRate = GAME_TIME.GetCurrentTimeRate;
             GAME_TIME.SetTimeStep(_slowTime,_slowTimeTransitionTime,_startSlowTimeCurve);
+            BgMusicManager.Instance.SetSlowMotionEffect(); //temp
             OnAnyShamanSelected?.Invoke();
         }
 
@@ -67,6 +68,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             StartCoroutine(SetIsCooldownWaitOneFrame(false));
             
             GAME_TIME.SetTimeStep(_previousTimeRate,_slowTimeTransitionTime,_endSlowTimeCurve);
+            BgMusicManager.Instance.SetDefaultEffect(); //temp
             OnAnyShamanDeselected?.Invoke();
         }
         private IEnumerator SetIsCooldownWaitOneFrame(bool isIt)

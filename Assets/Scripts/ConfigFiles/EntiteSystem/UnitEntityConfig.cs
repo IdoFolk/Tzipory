@@ -10,7 +10,7 @@ namespace Tzipory.ConfigFiles.EntitySystem
     [CreateAssetMenu(fileName = "UnitEntityConfig", menuName = "ScriptableObjects/Entity/NewEntity")]
     public class UnitEntityConfig : ScriptableObject, IConfigFile
     {
-        [SerializeField,TabGroup("Main config")] private int _entityId;
+        [SerializeField,ReadOnly] private int _entityId;
         [SerializeField,TabGroup("Main config")] private UnitType _unitType;
 
         [SerializeField,TabGroup("Base Component")] public HealthComponentConfig HealthComponentConfig;
@@ -19,27 +19,27 @@ namespace Tzipory.ConfigFiles.EntitySystem
 
         [SerializeField,TabGroup("Base Component")] public VisualComponentConfig VisualComponentConfig;
         
-        [SerializeField,TabGroup("Optional Component")] private bool _haveCombatComponent;
-        [SerializeField,ShowIf(nameof(_haveCombatComponent)),TabGroup("Optional Component")] public CombatComponentConfig CombatComponentConfig;
+        [SerializeField,TabGroup("Optional Component")] private bool _combatComponent;
+        [SerializeField,ShowIf(nameof(_combatComponent)),TabGroup("Optional Component")] public CombatComponentConfig CombatComponentConfig;
         
-        [SerializeField,TabGroup("Optional Component")] private bool _haveMovementComponent;
-        [SerializeField,ShowIf(nameof(_haveMovementComponent)),TabGroup("Optional Component")] public MovementComponentConfig MovementComponentConfig;
+        [SerializeField,TabGroup("Optional Component")] private bool _movementComponent;
+        [SerializeField,ShowIf(nameof(_movementComponent)),TabGroup("Optional Component")] public MovementComponentConfig MovementComponentConfig;
         
-        [SerializeField,TabGroup("Optional Component")] private bool _haveAbilityComponent;
-        [SerializeField,ShowIf(nameof(_haveAbilityComponent)),TabGroup("Optional Component")] public AbilityComponentConfig AbilityComponentConfig;
+        [SerializeField,TabGroup("Optional Component")] private bool _abilityComponent;
+        [SerializeField,ShowIf(nameof(_abilityComponent)),TabGroup("Optional Component")] public AbilityComponentConfig AbilityComponentConfig;
         
-        [SerializeField,TabGroup("Optional Component")] private bool _haveAiComponent;
-        [SerializeField,ShowIf(nameof(_haveAiComponent)),TabGroup("Optional Component")] public AIComponentConfig AIComponentConfig;
+        [SerializeField,TabGroup("Optional Component")] private bool _aiComponent;
+        [SerializeField,ShowIf(nameof(_aiComponent)),TabGroup("Optional Component")] public AIComponentConfig AIComponentConfig;
         
         public UnitType UnitType => _unitType;
         
-        public bool HaveAiComponent => _haveAiComponent;
+        public bool AIComponent => _aiComponent;
 
-        public bool HaveCombatComponent => _haveCombatComponent;
+        public bool CombatComponent => _combatComponent;
 
-        public bool HaveMovementComponent => _haveMovementComponent;
+        public bool MovementComponent => _movementComponent;
 
-        public bool HaveAbilityComponent => _haveAbilityComponent;
+        public bool AbilityComponent => _abilityComponent;
 
         public int ObjectId => _entityId;
 
@@ -58,6 +58,8 @@ namespace Tzipory.ConfigFiles.EntitySystem
 
         private void OnValidate()
         {
+            _entityId = name.GetHashCode();
+            
             if (_unitType == UnitType.Shaman)
             {
                 TargetingComponentConfig.EntityType = EntityType.Hero;

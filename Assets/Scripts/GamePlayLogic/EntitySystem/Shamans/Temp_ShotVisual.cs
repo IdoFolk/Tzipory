@@ -3,21 +3,22 @@ using UnityEngine;
 
 public class Temp_ShotVisual : MonoBehaviour
 {
-    [SerializeField] private float _projectileSpeed;
-    [SerializeField] private float _timeToDie;
-    [SerializeField] private Temp_Projectile _projectile;
-    [SerializeField] private Transform _parent;
+    [SerializeField] private Transform _shotPosition;
     
-    private Transform  _shotPosition;
+    private float _projectileSpeed;
+    private float _timeToDie; 
+    private Temp_Projectile _projectile;
     
-    public void Init(Transform shotPosition)
+    public void Init(Temp_Projectile  projectile,float projectileSpeed,float timeToDie)
     {
-        _shotPosition = shotPosition;
+        _projectile = projectile;
+        _projectileSpeed = projectileSpeed;
+        _timeToDie = timeToDie;
     }
     
     public void Shot(ITargetAbleEntity target,float damage,bool isCrit)
     {
-        var projectile = Instantiate(_projectile, _shotPosition.position, Quaternion.identity,_parent);
+        var projectile = Instantiate(_projectile, _shotPosition.position, Quaternion.identity,_shotPosition);
         projectile.Init(target,_projectileSpeed,damage,_timeToDie,isCrit);
     }
 }

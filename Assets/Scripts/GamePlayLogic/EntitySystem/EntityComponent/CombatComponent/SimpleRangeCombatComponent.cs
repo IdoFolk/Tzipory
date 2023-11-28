@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.TimeSystem;
-using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 {
@@ -31,19 +32,24 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             GameEntity = parameter;
         }
         
-        public void Init(BaseGameEntity parameter1, CombatComponentConfig parameter2)
+        public void Init(BaseGameEntity parameter1, CombatComponentConfig config)
         {
             Init(parameter1);
             
-            _shotVisual = GameEntity.GetComponentInChildren<Temp_ShotVisual>();
+            _shotVisual = GameEntity.GetComponentInChildren<Temp_ShotVisual>();//temp may need to change
+
+            if (_shotVisual is null)
+                throw new Exception($"Can not find Temp_ShotVisual in {GameEntity.name}");
+            
+            _shotVisual.Init(config.ProjectilePrefab,config.ProjectileSpeed,config.ProjectileTimeToDie);
 
             Stats = new Dictionary<int, Stat>()
             {
-                {(int)Constant.StatsId.AttackDamage,new Stat(Constant.StatsId.AttackDamage,parameter2.AttackDamage)},
-                {(int)Constant.StatsId.AttackRate,new Stat(Constant.StatsId.AttackRate,parameter2.AttackRate)},
-                {(int)Constant.StatsId.AttackRange,new Stat(Constant.StatsId.AttackRange,parameter2.AttackRange)},
-                {(int)Constant.StatsId.CritChance,new Stat(Constant.StatsId.CritChance,parameter2.CritChance)},
-                {(int)Constant.StatsId.CritDamage,new Stat(Constant.StatsId.CritDamage,parameter2.CritDamage)},
+                {(int)Constant.StatsId.AttackDamage,new Stat(Constant.StatsId.AttackDamage,config.AttackDamage)},
+                {(int)Constant.StatsId.AttackRate,new Stat(Constant.StatsId.AttackRate,config.AttackRate)},
+                {(int)Constant.StatsId.AttackRange,new Stat(Constant.StatsId.AttackRange,config.AttackRange)},
+                {(int)Constant.StatsId.CritChance,new Stat(Constant.StatsId.CritChance,config.CritChance)},
+                {(int)Constant.StatsId.CritDamage,new Stat(Constant.StatsId.CritDamage,config.CritDamage)},
             };
             
             IsInitialization = true;

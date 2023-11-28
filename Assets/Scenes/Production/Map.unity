@@ -691,6 +691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showOnAwake: 0
   _uiGroupTags: 1025
+  RectTransform: {fileID: 401025546}
   _campFireUIHandler: {fileID: 412821608}
 --- !u!1001 &412821605
 PrefabInstance:
@@ -7283,6 +7284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showOnAwake: 0
   _uiGroupTags: 1025
+  RectTransform: {fileID: 1899764367}
 --- !u!1 &2037537005
 GameObject:
   m_ObjectHideFlags: 0
@@ -7478,7 +7480,7 @@ PrefabInstance:
     - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: _shamanConfigs.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
+      objectReference: {fileID: 11400000, guid: cde60de47b1ebb04a872a5813e15c9be, type: 2}
     - target: {fileID: 7947276915454292336, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: m_Name
       value: MapNode

@@ -12,11 +12,11 @@ public class CampFireUIHandler : BaseUIElement
 
     private void Start()
     {
-        var inventoryData = GameManager.PlayerManager.PlayerSerializeData.InventorySerializeData;
+       // var inventoryData = GameManager.PlayerManager.PlayerSerializeData.InventorySerializeData;
         
-        _inventoryUIHandler.Init(inventoryData);
+        //_inventoryUIHandler.Init(inventoryData);
 
-        _inventoryUIHandler.OnItemDropToInventory += inventoryData.AddItemData;
+        //_inventoryUIHandler.OnItemDropToInventory += inventoryData.AddItemData;
     }
 
 
@@ -30,7 +30,7 @@ public class CampFireUIHandler : BaseUIElement
 
     public override void Hide()
     {
-        _inventoryUIHandler.OnItemDropToInventory -= GameManager.PlayerManager.PlayerSerializeData.InventorySerializeData.AddItemData;
+        //_inventoryUIHandler.OnItemDropToInventory -= GameManager.PlayerManager.PlayerSerializeData.InventorySerializeData.AddItemData;
     }
 
 

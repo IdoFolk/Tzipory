@@ -4,7 +4,6 @@ using GameplayLogic.UI.HPBar;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.GamePlayLogic.EntitySystem.EntityComponent;
-using Tzipory.Helpers.Consts;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.DataManager;
 using Tzipory.Systems.Entity;
@@ -43,24 +42,15 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         [SerializeField,TabGroup("Component")] private AgentMoveComponent _agentMoveComponent;
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private UnitEntityVisualComponent _entityVisualComponent;//temp
-
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onDeath;
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onAttack;
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onCritAttack;
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onMove;
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetHit;
-        [SerializeField,TabGroup("Visual Events")] private EffectSequenceConfig _onGetCritHit;
         
         #region Temps
         
-        [Header("Temps")] 
-        [SerializeField] private Transform _shotPosition;
-        [SerializeField] private bool _doShowHPBar;
-        [SerializeField] private TEMP_UNIT_HPBarConnector _hpBarConnector;
+        [Header("Temps"),TabGroup("Component")] 
+        [SerializeField,TabGroup("Component")] private TEMP_UNIT_HPBarConnector _hpBarConnector;
         
         #endregion
 
-        private IEntityComponent[] _entityComponent;
+        private List<IEntityComponent> _entityComponent;
         
         private UnitEntitySerializeData _serializeData;
         private UnitEntityConfig _config;
@@ -99,71 +89,57 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             _config = DataManager.DataRequester.GetConfigData<UnitEntityConfig>(parameter);
             
             gameObject.name =  $"{_config.name} InstanceID: {EntityInstanceID}";
+
+            _entityComponent = new List<IEntityComponent>();
+            List<IStatHolder> statHolders = new List<IStatHolder>();
             
-            _onDeath.ID = Constant.EffectSequenceIds.DEATH;
-            _onAttack.ID = Constant.EffectSequenceIds.ATTACK;
-            _onCritAttack.ID = Constant.EffectSequenceIds.CRIT_ATTACK;
-            _onMove.ID = Constant.EffectSequenceIds.MOVE;
-            _onGetHit.ID = Constant.EffectSequenceIds.GET_HIT;
-            _onGetCritHit.ID = Constant.EffectSequenceIds.GET_CRIT_HIT;
             
-            _onDeath.SequenceName = "OnDeath";
-            _onAttack.SequenceName = "OnAttack";
-            _onCritAttack.SequenceName = "OnCritAttack";
-            _onMove.SequenceName = "OnMove";
-            _onGetHit.SequenceName = "OnGetHit";
-            _onGetCritHit.SequenceName = "OnGetCritHit";
+            EntityVisualComponent.Init(this,_config.VisualComponentConfig);
+            _entityComponent.Add(EntityVisualComponent);
             
-            var effectSequence = new[]
-            {
-                _onDeath,
-                _onAttack,
-                _onCritAttack,
-                _onMove,
-                _onGetHit,
-                _onGetCritHit
-            };
-            
-            _entityVisualComponent.Init(this,effectSequence,_config.VisualComponentConfig);
             EntityTargetingComponent.Init(this,_colliderTargeting,_config.TargetingComponentConfig);
+            _entityComponent.Add(EntityTargetingComponent);
+            statHolders.Add(EntityTargetingComponent);
             
             EntityHealthComponent = HealthComponentFactory.GetHealthComponent(_config.HealthComponentConfig);
             EntityHealthComponent.Init(this,_config.HealthComponentConfig);
-
-            if (_config.HaveCombatComponent)
+            _entityComponent.Add(EntityHealthComponent);
+            statHolders.Add(EntityHealthComponent);
+            
+            if (_config.CombatComponent)
             {
                 EntityCombatComponent = CombatComponentFactory.GetCombatComponent(_config.CombatComponentConfig);
                 EntityCombatComponent.Init(this,_config.CombatComponentConfig);
+                _entityComponent.Add(EntityCombatComponent);
+                statHolders.Add(EntityCombatComponent);
             }
             
-            if (_config.HaveAbilityComponent)
+            if (_config.AbilityComponent)
             {
                 EntityAbilitiesComponent = AbilityComponentFactory.GetAbilitiesComponent(_config.AbilityComponentConfig);
                 EntityAbilitiesComponent.Init(this,_config.AbilityComponentConfig);
+                _entityComponent.Add(EntityAbilitiesComponent);
+                statHolders.Add(EntityAbilitiesComponent);
             }
             
-            if (_config.HaveMovementComponent)
+            if (_config.MovementComponent)
             {
                 EntityMovementComponent = MovementComponentFactory.GetMovementComponent(_config.MovementComponentConfig);
                 EntityMovementComponent.Init(this,_config.MovementComponentConfig,_agentMoveComponent);
+                _entityComponent.Add(EntityMovementComponent);
+                statHolders.Add(EntityMovementComponent);
             }
             
-            if (_config.HaveAiComponent)
+            if (_config.AIComponent)
             {
                 EntityAIComponent = AIComponentFactory.GetAIComponent(_config.AIComponentConfig);
                 EntityAIComponent.Init(this,this,_config.AIComponentConfig);
+                _entityComponent.Add(EntityAIComponent);
             }
-
-            IStatHolder[] statHolders = {
-                EntityHealthComponent,
-                EntityTargetingComponent,
-                EntityMovementComponent,
-                EntityAbilitiesComponent,
-                EntityCombatComponent
-            };
             
             EntityStatComponent = new StatHandlerComponent();//may need to work in init!
             EntityStatComponent.Init(this,statHolders);
+            _entityComponent.Add(EntityStatComponent);
             
             EntityStatComponent.OnStatusEffectAdded += AddStatusEffectVisual;
             
@@ -175,25 +151,12 @@ namespace Tzipory.GamePlayLogic.EntitySystem
 #endif
             }
             
-            _entityComponent = new IEntityComponent[]
-            {
-                EntityTargetingComponent,
-                EntityMovementComponent,
-                EntityAbilitiesComponent,
-                EntityHealthComponent,
-                EntityStatComponent,
-                EntityCombatComponent,
-                EntityAIComponent
-            };
-            
-            SetSprite(_config.VisualComponentConfig.Sprite);
-
             #region Temp
 
-            if (_doShowHPBar)//Temp!
+            if (_config.VisualComponentConfig.HpBar)//Temp!
                 EntityHealthComponent.Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
 
-            if (_doShowHPBar)
+            if (_config.VisualComponentConfig.HpBar)
                 _hpBarConnector.Init(this);
             else
                 _hpBarConnector.gameObject.SetActive(false);
@@ -208,7 +171,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         [Obsolete("may need to use UnitEntitySerializeData only")]
         public virtual void Init(UnitEntityConfig parameter)//need to oder logic to many responsibility
         {
-            var serializeData = DataManager.DataRequester.GetSerializeData<UnitEntitySerializeData>(parameter.ObjectId);
+            var serializeData = DataManager.DataRequester.GetSerializeData<UnitEntitySerializeData>(parameter);
             
             Init(serializeData);
         }
@@ -239,6 +202,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             _colliderTargeting ??= GetComponentInChildren<ColliderTargetingArea>();
             _entityVisualComponent ??= GetComponentInChildren<UnitEntityVisualComponent>();
             _hpBarConnector ??= GetComponentInChildren<TEMP_UNIT_HPBarConnector>();
+            _agentMoveComponent ??= GetComponent<AgentMoveComponent>();
         }
 
         private void OnDrawGizmosSelected()
@@ -272,17 +236,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         
         private void AddStatusEffectVisual(EffectSequenceConfig effectSequenceConfig) =>
             EntityVisualComponent.EffectSequenceHandler.PlaySequenceByData(effectSequenceConfig);//temp
-
-        private void SetSprite(Sprite newSprite)
-        {
-            EntityVisualComponent.SpriteRenderer.sprite = newSprite;
-            OnSetSprite?.Invoke(newSprite);
-        }
-        public void SetSpriteFlipX(bool doFlip)
-        {
-            EntityVisualComponent.SpriteRenderer.flipX = doFlip;
-            OnSpriteFlipX?.Invoke(doFlip);
-        }
+        
         
         #endregion
 

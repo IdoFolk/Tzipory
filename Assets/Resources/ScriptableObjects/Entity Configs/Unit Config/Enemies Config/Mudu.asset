@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea472f36b2a4dc0b0810fdfb6687265, type: 3}
   m_Name: Mudu
   m_EditorClassIdentifier: 
-  _entityId: 1
+  _entityId: 83432869
   _unitType: 1
   HealthComponentConfig:
     HealthComponentType: 2
@@ -27,29 +27,96 @@ MonoBehaviour:
   VisualComponentConfig:
     Sprite: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
     Icon: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
-  _haveCombatComponent: 0
+    HpBar: 0
+    UIIndicator: 0
+    UiIndicatorConfig:
+      Image: {fileID: 0}
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      AllwaysShow: 0
+      DisposOnClick: 0
+      OffSetRadios: 0
+      StartFlashing: 0
+      FlashConfig:
+        SizeFactor: 0
+        FlashSpeed: 0
+        UseTime: 0
+        Time: 0
+        OverrideFlashingColor: 0
+        FlashingColor: {r: 0, g: 0, b: 0, a: 0}
+    OnDeath:
+      _sequenceName: OnDeath
+      _id: 1
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []
+    OnAttack:
+      _sequenceName: OnAttack
+      _id: 2
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []
+    OnCritAttack:
+      _sequenceName: OnCritAttack
+      _id: 3
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []
+    OnMove:
+      _sequenceName: OnMove
+      _id: 4
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []
+    OnGetHit:
+      _sequenceName: OnGetHit
+      _id: 5
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []
+    OnGetCritHit:
+      _sequenceName: OnGetCritHit
+      _id: 6
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []
+  _combatComponent: 1
   CombatComponentConfig:
     CombatComponentType: 0
-    AttackDamage: 0
-    AttackRate: 0
-    AttackRange: 0
+    AttackDamage: 30
+    AttackRate: 2
     AttackCooldown: 0
-    CritDamage: 0
-    CritChance: 0
-  _haveMovementComponent: 0
+    CritDamage: 5
+    CritChance: 5
+    AttackRange: 0
+    ProjectileTimeToDie: 0
+    ProjectileSpeed: 0
+    ProjectilePrefab: {fileID: 0}
+  _movementComponent: 1
   MovementComponentConfig:
-    MovementComponentType: 0
-    MoveSpeed: 0
+    MovementComponentType: 1
+    MoveSpeed: 2
     PathCreator: {fileID: 0}
-    privateRabbitIncrement: 0
-    acceptableDistanceFromPath: 0
-    acceptableDistanceToCompletion: 0
-  _haveAbilityComponent: 0
+    MaxDistanceFromPath: 0.4
+    PrivateRabbitIncrement: 0.1
+    PrivateRabbitDistanceToUpdate: 1
+  _abilityComponent: 0
   AbilityComponentConfig:
     _abilityConfigs: []
-  _haveAiComponent: 1
+  _aiComponent: 1
   AIComponentConfig:
     AIType: 1
-    DecisionInterval: 0
+    DecisionInterval: 1
     AggroLevel: 0
     ReturnLevel: 0

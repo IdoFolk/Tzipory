@@ -10,9 +10,9 @@ namespace Tzipory.ConfigFiles.EntitySystem.ComponentConfig
         [SerializeField] public MovementComponentType MovementComponentType;
         [SerializeField] public float MoveSpeed;
         [ShowIf(nameof(MovementComponentType), MovementComponentType.GroundMoveOnPath),HideInInspector] public PathCreator PathCreator;
-        [SerializeField,ShowIf(nameof(MovementComponentType), MovementComponentType.GroundMoveOnPath)] private float privateRabbitIncrement; 
-        [SerializeField,ShowIf(nameof(MovementComponentType), MovementComponentType.GroundMoveOnPath)] private float acceptableDistanceFromPath;
-        [SerializeField,ShowIf(nameof(MovementComponentType), MovementComponentType.GroundMoveOnPath)] private float acceptableDistanceToCompletion;
+        [SerializeField,ShowIf(nameof(MovementComponentType), MovementComponentType.GroundMoveOnPath)] public float MaxDistanceFromPath;
+        [SerializeField,ShowIf(nameof(MovementComponentType), MovementComponentType.GroundMoveOnPath)] public float PrivateRabbitIncrement;
+        [SerializeField,ShowIf(nameof(MovementComponentType), MovementComponentType.GroundMoveOnPath)] public float PrivateRabbitDistanceToUpdate;
     }
 
     public enum MovementComponentType

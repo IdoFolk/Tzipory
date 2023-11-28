@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
+using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.PlayerData.Party;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.FactorySystem.GameObjectFactory;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -41,8 +43,9 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         {
             foreach (var shamanSerializeData in party)
             {
-                var shaman = Object.Instantiate(_shamanPrefab,GetSpawnPoint(),Quaternion.identity,_partyParent);
-                
+                var shaman = PoolManager.UnitEntityPool.GetObject();
+                shaman.transform.position = GetSpawnPoint();
+                shaman.transform.SetParent(_partyParent);
                 shaman.Init(shamanSerializeData);
                 yield return shaman;
             }

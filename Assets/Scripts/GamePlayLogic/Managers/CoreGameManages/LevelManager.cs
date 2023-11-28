@@ -92,7 +92,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             #endregion
             
             EnemyManager = new EnemyManager(_enemiesParent);
-            WaveManager = new WaveManager(_levelConfig,_uiIndicatorConfig); //temp!
+            WaveManager = new WaveManager(_levelConfig,_uiIndicatorConfig); //temp!!!
             CoreTemplete = FindObjectOfType<CoreTemple>(); //temp!!!
             PartyManager.SpawnShaman();
         }

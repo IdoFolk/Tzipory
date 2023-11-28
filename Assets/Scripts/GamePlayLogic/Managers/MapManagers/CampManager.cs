@@ -40,7 +40,7 @@ namespace Tzipory.GameplayLogic.Managers.MapManagers
         //Here for TESTING!!
         private void Start()
         {
-            Init(GameManager.PlayerManager.PlayerSerializeData.CampSerializeData);
+            //Init(GameManager.PlayerManager.PlayerSerializeData.CampSerializeData);
         }
 
         public void OpenCamp()

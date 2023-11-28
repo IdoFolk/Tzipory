@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dea472f36b2a4dc0b0810fdfb6687265, type: 3}
-  m_Name: Gallanite
+  m_Name: Toor
   m_EditorClassIdentifier: 
-  _entityId: -657904259
-  _unitType: 1
+  _entityId: 0
+  _unitType: 0
   HealthComponentConfig:
-    HealthComponentType: 0
+    HealthComponentType: 2
     HealthStat: 0
     InvincibleTimeStat: 0
     RegenSpeedStat: 0
   TargetingComponentConfig:
     TargetingRange: 0
-    EntityType: 2
-    TargetedEntity: 9
-    TargetingPriorityType: 0
+    EntityType: 1
+    TargetedEntity: 2
+    TargetingPriorityType: 2
   VisualComponentConfig:
-    Sprite: {fileID: 0}
-    Icon: {fileID: 0}
+    Sprite: {fileID: 21300000, guid: f4e62ad13a5770c44aac2a924dab6155, type: 3}
+    Icon: {fileID: 21300000, guid: 97554a74e79997844a27c96e13c4e3dd, type: 3}
     HpBar: 0
     UIIndicator: 0
     UiIndicatorConfig:
@@ -116,7 +116,7 @@ MonoBehaviour:
     _abilityConfigs: []
   _aiComponent: 0
   AIComponentConfig:
-    AIType: 1
+    AIType: 0
     DecisionInterval: 0
     AggroLevel: 0
     ReturnLevel: 0

@@ -10,7 +10,7 @@ using UnityEngine.Playables;
 
 namespace Tzipory.Systems.Entity.EntityComponents
 {
-    public interface IEntityVisualComponent : IEntityComponent , IInitialization<BaseGameEntity,IEnumerable<EffectSequenceConfig>,VisualComponentConfig>
+    public interface IEntityVisualComponent : IEntityComponent , IInitialization<BaseGameEntity,VisualComponentConfig>
     {
         public VisualComponentConfig VisualComponentConfig { get; }
         public EffectSequenceHandler EffectSequenceHandler { get; }

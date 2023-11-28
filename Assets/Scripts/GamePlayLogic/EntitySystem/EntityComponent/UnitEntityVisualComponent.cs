@@ -1,14 +1,14 @@
 using System;
-using System.Collections.Generic;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.ConfigFiles.Visual;
 using Tzipory.GameplayLogic.UI.Indicator;
+using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
-using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
 using Tzipory.Tools.TimeSystem;
+using Tzipory.Tools.ZFixTool;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -16,6 +16,10 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 {
     public class UnitEntityVisualComponent : MonoBehaviour , IEntityVisualComponent 
 {
+    public event Action<Sprite> OnSetSprite;
+    
+    public event Action<bool> OnSpriteFlipX;
+    
     [SerializeField] private SpriteRenderer _mainSprite;
     
     [SerializeField] private Transform _visualQueueEffectPosition;
@@ -24,6 +28,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
     private ITimer _currentActiveTimer;
     private AnimationConfig _animationConfig;
     
+    private Vector2 _lastPos;
+
     public BaseGameEntity GameEntity { get; private set; }
     
     public PopUpTexter PopUpTexter { get; private set; }
@@ -40,9 +46,33 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         GameEntity = parameter;
     }
     
-    public void Init(BaseGameEntity parameter,IEnumerable<EffectSequenceConfig> effectSequence,VisualComponentConfig config)
+    public void Init(BaseGameEntity parameter,VisualComponentConfig config)
     {
         Init(parameter);
+        
+        config.OnDeath.ID = Constant.EffectSequenceIds.DEATH;
+        config.OnAttack.ID = Constant.EffectSequenceIds.ATTACK;
+        config.OnCritAttack.ID = Constant.EffectSequenceIds.CRIT_ATTACK;
+        config.OnMove.ID = Constant.EffectSequenceIds.MOVE;
+        config.OnGetHit.ID = Constant.EffectSequenceIds.GET_HIT;
+        config.OnGetCritHit.ID = Constant.EffectSequenceIds.GET_CRIT_HIT;
+            
+        config.OnDeath.SequenceName = "OnDeath";
+        config.OnAttack.SequenceName = "OnAttack";
+        config.OnCritAttack.SequenceName = "OnCritAttack";
+        config.OnMove.SequenceName = "OnMove";
+        config.OnGetHit.SequenceName = "OnGetHit";
+        config.OnGetCritHit.SequenceName = "OnGetCritHit";
+            
+        var effectSequence = new[]
+        {
+            config.OnDeath,
+            config.OnAttack,
+            config.OnCritAttack,
+            config.OnMove,
+            config.OnGetHit,
+            config.OnGetCritHit
+        };
         
         PopUpTexter = new PopUpTexter(_visualQueueEffectPosition);
 
@@ -51,19 +81,40 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         
         EffectSequenceHandler = new EffectSequenceHandler(this,effectSequence);
         
+        SetSprite(config.Sprite);
+        
         IsInitialization = true;
     }
     
     public void UpdateComponent()
     {
-        throw new NotImplementedException();
-    }
-
-    private void Update()
-    {
         EffectSequenceHandler.UpdateEffectHandler();
-    }
 
+        var position = (Vector2)transform.position;
+        _lastPos = position;
+        var deltaV = position - _lastPos;
+        
+        if (deltaV.sqrMagnitude >= 0.1f)
+            SetSpriteFlipX(deltaV.x >= 0);
+
+        var spriteRendererPosition = SpriteRenderer.transform.localPosition;
+        
+        spriteRendererPosition = new Vector3(spriteRendererPosition.x,
+            spriteRendererPosition.y, TEMP_UnitFlipAndZFix.GetZForLocalPosition(transform));
+        SpriteRenderer.transform.localPosition = spriteRendererPosition;
+    }
+    
+    private void SetSprite(Sprite newSprite)
+    {
+        SpriteRenderer.sprite = newSprite;
+        OnSetSprite?.Invoke(newSprite);
+    }
+    public void SetSpriteFlipX(bool doFlip)
+    {
+        SpriteRenderer.flipX = doFlip;
+        OnSpriteFlipX?.Invoke(doFlip);
+    }
+    
     public void StartAnimationEffect(AnimationConfig config)
     {
         _animationConfig = config;

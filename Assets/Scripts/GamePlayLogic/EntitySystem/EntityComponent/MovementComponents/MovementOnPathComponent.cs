@@ -18,8 +18,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents
         private PathCreator _pathCreator;
         private PathCreator _finalDestinaion;
         
-        private float _privateRabbitIncrement; 
-        private float _acceptableDistanceFromPath;
+        private float _privateRabbitIncrement;
+        private float _privateRabbitDistanceToUpdate;
+        private float _maxDistanceFromPath;
         private float _acceptableDistanceToCompletion;
         
         private float _privateRabbitProgress;
@@ -35,19 +36,35 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents
         public AgentMoveComponent AgentMoveComponent { get; private set; }
         public Vector2 Destination { get; private set; }
         public BaseGameEntity GameEntity { get; private set; }
+
+        public bool OnPath { get; private set; }
         
-        public void Init(BaseGameEntity parameter1, MovementComponentConfig parameter2,AgentMoveComponent agentMoveComponent)
+        public void Init(BaseGameEntity parameter1, MovementComponentConfig config,AgentMoveComponent agentMoveComponent)
         {
             Init(parameter1);
+
+            _privateRabbitProgress = 0;
             
             AgentMoveComponent = agentMoveComponent;
+
+            _privateRabbitIncrement = config.PrivateRabbitIncrement;
+            _privateRabbitDistanceToUpdate = config.PrivateRabbitDistanceToUpdate;
+            _maxDistanceFromPath = config.MaxDistanceFromPath;
+
+            _pathCreator = config.PathCreator;
 
             Stats = new Dictionary<int, Stat>()
             {
                 {
-                    (int)Constant.StatsId.MovementSpeed, new Stat(Constant.StatsId.MovementSpeed, parameter2.MoveSpeed)
+                    (int)Constant.StatsId.MovementSpeed, new Stat(Constant.StatsId.MovementSpeed, config.MoveSpeed)
                 },
             };
+            
+            AgentMoveComponent.Init(MovementSpeed);
+
+            CanMove = true;
+
+            MoveToNextRabbitPoint();
         }
 
         public void Init(BaseGameEntity parameter)
@@ -59,24 +76,31 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents
         {
             if (_pathCreator == null || !CanMove)
                 return;
-
-            _currentPointOnPath = _pathCreator.path.GetPointAtDistance(_privateRabbitProgress, EndOfPathInstruction.Stop);
-
-            SetDestination(_currentPointOnPath, MoveType.Guided);
-
-            Vector3 closestPointOnPath = _pathCreator.path.GetClosestPointOnPath(GameEntity.transform.position);
-
-            //if (Vector3.Distance(transform.position, pointOnPath) <= acceptableDistanceFromPath)
-            if (Vector3.Distance(GameEntity.transform.position, closestPointOnPath) <= _acceptableDistanceFromPath)
+            
+            if (_privateRabbitProgress >= 1)
             {
-                _privateRabbitProgress += _privateRabbitIncrement;
-                if (_privateRabbitProgress > _pathCreator.path.length &&
-                    Vector3.Distance(GameEntity.transform.position, _currentPointOnPath) <= _acceptableDistanceToCompletion)
-                {
-                    _finalDestinaion = LevelManager.CoreTemplete.PatrolPath;
-                    CircleFinalDestination();
-                }
+                _finalDestinaion = LevelManager.CoreTemplete.PatrolPath;
+                CircleFinalDestination();
+                return;
             }
+
+            var position = GameEntity.transform.position;
+            
+            Vector3 closestPointOnPath = _pathCreator.path.GetClosestPointOnPath(position);
+
+            OnPath = Vector2.Distance(position, closestPointOnPath) <= _maxDistanceFromPath;
+
+            if (Vector2.Distance(_currentPointOnPath, position) <= _privateRabbitDistanceToUpdate)
+                MoveToNextRabbitPoint();
+        }
+
+        private void MoveToNextRabbitPoint()
+        {
+            _privateRabbitProgress += _privateRabbitIncrement;
+            
+            _currentPointOnPath = _pathCreator.path.GetPointAtTime(_privateRabbitProgress, EndOfPathInstruction.Stop);
+            
+            SetDestination(_currentPointOnPath, MoveType.Guided);
         }
         
         private void CircleFinalDestination()

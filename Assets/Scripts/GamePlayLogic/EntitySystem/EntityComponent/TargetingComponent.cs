@@ -81,7 +81,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         public void UpdateComponent()
         {
-            throw new System.NotImplementedException();
         }
         
         public IEnumerable<IStatHolder> GetNestedStatHolders()

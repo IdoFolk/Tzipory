@@ -39,9 +39,9 @@ namespace Tzipory.SerializeData
             var config = (PlayerConfig)parameter;
             
             _partySerializeData = DataManager.DataRequester.GetSerializeData<PartySerializeData>(config.PartyConfig);
-            _campSerializeData = DataManager.DataRequester.GetSerializeData<CampSerializeData>(Constant.DataId.CAMP_DATA_ID);
+            //_campSerializeData = DataManager.DataRequester.GetSerializeData<CampSerializeData>(Constant.DataId.CAMP_DATA_ID);
             WorldMapProgressionSerializeData = DataManager.DataRequester.GetSerializeData<WorldMapProgressionSerializeData>(Constant.DataId.MAP_DATA_ID);
-            _inventorySerializeData = DataManager.DataRequester.GetSerializeData<InventorySerializeData>(config.InventoryConfig);
+            //_inventorySerializeData = DataManager.DataRequester.GetSerializeData<InventorySerializeData>(config.InventoryConfig);
             
             IsInitialization = true;
         }

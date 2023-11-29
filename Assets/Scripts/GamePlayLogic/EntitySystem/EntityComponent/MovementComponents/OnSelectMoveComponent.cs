@@ -24,16 +24,23 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents
         public bool CanMove { get; set; }
         public BaseGameEntity GameEntity { get; private set; }
         
-        public void Init(BaseGameEntity parameter1, MovementComponentConfig parameter2,AgentMoveComponent agentMoveComponent)
-        {
-            Init(parameter1);
-
-            AgentMoveComponent = agentMoveComponent;
-        }
-
         public void Init(BaseGameEntity parameter)
         {
             GameEntity = parameter;
+        }
+        
+        public void Init(BaseGameEntity parameter1, MovementComponentConfig config,AgentMoveComponent agentMoveComponent)
+        {
+            Init(parameter1);
+            
+            Stats = new Dictionary<int, Stat>()
+            {
+                {
+                    (int)Constant.StatsId.MovementSpeed, new Stat(Constant.StatsId.MovementSpeed, config.MoveSpeed)
+                },
+            };
+            
+            AgentMoveComponent = agentMoveComponent;
             
             _clickHelper = GameEntity.GetComponentInChildren<ClickHelper>();//Temp
             

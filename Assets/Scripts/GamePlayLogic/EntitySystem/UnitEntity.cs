@@ -24,13 +24,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public event Action<UnitEntity> OnDispose;
         public event Action<ITargetAbleEntity> OnTargetDisable;
         
-        #region Visual Events
-        
-        public Action<bool> OnSpriteFlipX;
-        public Action<Sprite> OnSetSprite;
-
-        #endregion
-        
         #region Fields
         
 #if UNITY_EDITOR
@@ -40,6 +33,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         [SerializeField,TabGroup("Component")] private TargetingComponent _entityTargetingComponent;//temp
         [SerializeField,TabGroup("Component")] private ColliderTargetingArea _colliderTargeting;
         [SerializeField,TabGroup("Component")] private AgentMoveComponent _agentMoveComponent;
+        //[SerializeField,TabGroup("Component")] private ClickHelper _clickHelper;
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private UnitEntityVisualComponent _entityVisualComponent;//temp
         
@@ -49,8 +43,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         [SerializeField,TabGroup("Component")] private TEMP_UNIT_HPBarConnector _hpBarConnector;
         
         #endregion
-
-        private List<IEntityComponent> _entityComponent;
         
         private UnitEntitySerializeData _serializeData;
         private UnitEntityConfig _config;
@@ -69,8 +61,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public IEntityExperienceComponent EntityExperienceComponent { get; private set; }
         private IEntityAIComponent EntityAIComponent { get; set; }
         
-        public bool IsTargetAble { get; }
-        public EntityType EntityType { get; }
+        public bool IsTargetAble { get; set; }
+        public EntityType EntityType { get; private set; }
         
         public bool IsInitialization { get; private set; }
         
@@ -83,65 +75,71 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         
         #region Inits
         
-        public virtual void Init(UnitEntitySerializeData parameter)
+        public void Init(UnitEntitySerializeData parameter)
         {
             _serializeData = parameter;
             _config = DataManager.DataRequester.GetConfigData<UnitEntityConfig>(parameter);
             
             gameObject.name =  $"{_config.name} InstanceID: {EntityInstanceID}";
 
-            _entityComponent = new List<IEntityComponent>();
             List<IStatHolder> statHolders = new List<IStatHolder>();
             
-            
-            EntityVisualComponent.Init(this,_config.VisualComponentConfig);
-            _entityComponent.Add(EntityVisualComponent);
-            
-            EntityTargetingComponent.Init(this,_colliderTargeting,_config.TargetingComponentConfig);
-            _entityComponent.Add(EntityTargetingComponent);
+            AddComponent(EntityVisualComponent);
+            AddComponent(EntityTargetingComponent);
+
             statHolders.Add(EntityTargetingComponent);
             
             EntityHealthComponent = HealthComponentFactory.GetHealthComponent(_config.HealthComponentConfig);
-            EntityHealthComponent.Init(this,_config.HealthComponentConfig);
-            _entityComponent.Add(EntityHealthComponent);
+            AddComponent(EntityHealthComponent);
             statHolders.Add(EntityHealthComponent);
+            EntityHealthComponent.OnDeath += Dispose;
             
             if (_config.CombatComponent)
             {
                 EntityCombatComponent = CombatComponentFactory.GetCombatComponent(_config.CombatComponentConfig);
-                EntityCombatComponent.Init(this,_config.CombatComponentConfig);
-                _entityComponent.Add(EntityCombatComponent);
+                AddComponent(EntityCombatComponent);
                 statHolders.Add(EntityCombatComponent);
             }
             
             if (_config.AbilityComponent)
             {
                 EntityAbilitiesComponent = AbilityComponentFactory.GetAbilitiesComponent(_config.AbilityComponentConfig);
-                EntityAbilitiesComponent.Init(this,_config.AbilityComponentConfig);
-                _entityComponent.Add(EntityAbilitiesComponent);
+                AddComponent(EntityAbilitiesComponent);
                 statHolders.Add(EntityAbilitiesComponent);
             }
             
             if (_config.MovementComponent)
             {
                 EntityMovementComponent = MovementComponentFactory.GetMovementComponent(_config.MovementComponentConfig);
-                EntityMovementComponent.Init(this,_config.MovementComponentConfig,_agentMoveComponent);
-                _entityComponent.Add(EntityMovementComponent);
+                AddComponent(EntityMovementComponent);
                 statHolders.Add(EntityMovementComponent);
             }
             
             if (_config.AIComponent)
             {
                 EntityAIComponent = AIComponentFactory.GetAIComponent(_config.AIComponentConfig);
-                EntityAIComponent.Init(this,this,_config.AIComponentConfig);
-                _entityComponent.Add(EntityAIComponent);
+                AddComponent(EntityAIComponent);
             }
             
             EntityStatComponent = new StatHandlerComponent();//may need to work in init!
-            EntityStatComponent.Init(this,statHolders);
-            _entityComponent.Add(EntityStatComponent);
+            AddComponent(EntityStatComponent);
             
             EntityStatComponent.OnStatusEffectAdded += AddStatusEffectVisual;
+            
+            EntityVisualComponent.Init(this,_config.VisualComponentConfig);
+            EntityHealthComponent.Init(this,_config.HealthComponentConfig);
+            EntityTargetingComponent.Init(this,_colliderTargeting,_config.TargetingComponentConfig);
+            EntityAbilitiesComponent?.Init(this,_config.AbilityComponentConfig);
+            EntityMovementComponent?.Init(this,_config.MovementComponentConfig,_agentMoveComponent);
+            EntityCombatComponent?.Init(this,_config.CombatComponentConfig);
+            EntityAIComponent?.Init(this,this,_config.AIComponentConfig);
+            
+            EntityType = _config.TargetingComponentConfig.EntityType;
+            
+            if (EntityType == EntityType.None)
+                throw new Exception($"{GameEntity.name} as None in is Entitytype");
+            
+            EntityStatComponent.Init(this,statHolders);
             
             foreach (var stat in EntityStatComponent.GetAllStats())
             {
@@ -162,6 +160,10 @@ namespace Tzipory.GamePlayLogic.EntitySystem
                 _hpBarConnector.gameObject.SetActive(false);
 
             #endregion
+
+            IsTargetAble = true;
+
+            UpdateComponent = true;
             
             gameObject.SetActive(true);
             
@@ -169,7 +171,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         }
         
         [Obsolete("may need to use UnitEntitySerializeData only")]
-        public virtual void Init(UnitEntityConfig parameter)//need to oder logic to many responsibility
+        public void Init(UnitEntityConfig parameter)//need to oder logic to many responsibility
         {
             var serializeData = DataManager.DataRequester.GetSerializeData<UnitEntitySerializeData>(parameter);
             
@@ -186,14 +188,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
 
             if (!IsInitialization)
                 return;
-            
-            foreach (var entityComponent in _entityComponent)
-                entityComponent?.UpdateComponent();
-
-            if (EntityTargetingComponent.CurrentTarget == null ||
-                EntityTargetingComponent.CurrentTarget.EntityHealthComponent.IsEntityDead)
-                EntityTargetingComponent.TrySetNewTarget();
         }
+        
 
         private void OnValidate()
         {
@@ -217,7 +213,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             }
         }
 
-        protected virtual void OnDestroy()
+        private void OnDestroy()
         {
             if (!IsInitialization)
                 return;
@@ -225,6 +221,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             EntityStatComponent.OnStatusEffectAdded -= AddStatusEffectVisual;
 
             EntityHealthComponent.Health.OnValueChanged -= _hpBarConnector.SetBarToHealth;
+            EntityHealthComponent.OnDeath -= Dispose;
 
             foreach (var stat in EntityStatComponent.GetAllStats())
                 stat.OnValueChanged -= EntityVisualComponent.PopUpTexter.SpawnPopUp;
@@ -248,6 +245,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public void Dispose()
         {
             EntityMovementComponent?.Dispose();
+            gameObject.SetActive(false);
+            UpdateComponent = false;
+            IsInitialization = false;
             OnDispose?.Invoke(this);
         }
     }

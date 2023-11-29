@@ -47,8 +47,23 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
 
         public void UpdateComponent()
         {
+            if (!IsInitialization)
+                return;
+            
+            foreach (var targetAbleEntity in _self.EntityTargetingComponent.AvailableTargets)
+            {
+                if (targetAbleEntity.EntityType == EntityType.Core)
+                {
+                    _self.EntityTargetingComponent.SetAttackTarget(targetAbleEntity);
+                    IsAttckingCore = true;
+                }
+            }
+
             if (IsAttckingCore)
+            {
                 _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);
+                _self.EntityHealthComponent.StartDeathSequence();
+            }
 
             if (_currentDecisionInterval < 0)
             {
@@ -59,10 +74,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                         if (_self.EntityTargetingComponent.HaveTarget)
                         {
                             _isAttacking  = true;
-                            _self.EntityMovementComponent.CanMove = false;
-#if UNITY_EDITOR            
                             Logger.Log($"{GameEntity.name} InstanceID: {GameEntity.EntityInstanceID} is attacking {_self.EntityTargetingComponent.CurrentTarget.GameEntity.name}",ENEMY_LOG_GROUP);
-#endif
                         }
                     }
                 }

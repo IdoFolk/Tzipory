@@ -16,18 +16,19 @@ MonoBehaviour:
   _unitType: 1
   HealthComponentConfig:
     HealthComponentType: 2
-    HealthStat: 0
+    HealthStat: 70
     InvincibleTimeStat: 0
     RegenSpeedStat: 0
   TargetingComponentConfig:
     TargetingRange: 3
     EntityType: 2
     TargetedEntity: 9
-    TargetingPriorityType: 0
+    TargetingPriorityType: 2
   VisualComponentConfig:
     Sprite: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
     Icon: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
     HpBar: 0
+    HaveSilhouette: 0
     UIIndicator: 0
     UiIndicatorConfig:
       Image: {fileID: 0}
@@ -93,7 +94,7 @@ MonoBehaviour:
       _effectActionContainers: []
   _combatComponent: 1
   CombatComponentConfig:
-    CombatComponentType: 0
+    CombatComponentType: 1
     AttackDamage: 30
     AttackRate: 2
     AttackCooldown: 0

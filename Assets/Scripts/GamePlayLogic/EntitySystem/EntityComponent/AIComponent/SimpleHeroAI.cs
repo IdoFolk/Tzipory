@@ -33,13 +33,17 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
 
         public void UpdateComponent()
         {
+            if (_self.EntityTargetingComponent.CurrentTarget == null ||
+                _self.EntityTargetingComponent.CurrentTarget.EntityHealthComponent.IsEntityDead)
+                _self.EntityTargetingComponent.TrySetNewTarget();
+            
             if (_self.EntityMovementComponent.IsMoving)
             {
-                _self.EntityAbilitiesComponent.CancelCast();
+                _self.EntityAbilitiesComponent?.CancelCast();
                 return;
             }
             
-            _self.EntityAbilitiesComponent.CastAbility(_self.EntityTargetingComponent.AvailableTargets);
+            _self.EntityAbilitiesComponent?.CastAbility(_self.EntityTargetingComponent.AvailableTargets);
             
             _currentDecisionInterval -= GAME_TIME.GameDeltaTime;
             

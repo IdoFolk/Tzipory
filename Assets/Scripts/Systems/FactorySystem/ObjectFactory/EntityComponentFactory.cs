@@ -66,7 +66,7 @@ namespace Tzipory.Systems.FactorySystem
                 case CombatComponentType.Range:
                     return new SimpleRangeCombatComponent();
                 case CombatComponentType.Melee:
-                    throw new NotImplementedException();
+                    return new SimpleMeleeCombatComponent();
                 default:
                     throw new ArgumentOutOfRangeException();
             }

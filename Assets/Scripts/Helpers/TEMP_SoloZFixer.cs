@@ -5,14 +5,13 @@ namespace Tzipory.Helpers
 {
     public class TEMP_SoloZFixer : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private bool _doGoOn;
+        [SerializeField] private bool _destroyOnStart;
         
         private void Start()
         {
             FixZ();
 
-            if (!_doGoOn)
+            if (_destroyOnStart)
                 Destroy(this);
         }
 
@@ -21,11 +20,11 @@ namespace Tzipory.Helpers
 
         private void FixZ()
         {
-            var localPosition = _spriteRenderer.transform.localPosition;
+            var localPosition = transform.localPosition;
             localPosition = new Vector3(localPosition.x,
                 
                 localPosition.y, TEMP_UnitFlipAndZFix.GetZForLocalPosition(transform));
-            _spriteRenderer.transform.localPosition = localPosition;
+            transform.localPosition = localPosition;
         }
     }
 }

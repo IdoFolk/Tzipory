@@ -13,9 +13,7 @@ namespace Tzipory.SerializeData.PlayerData.Party
     [System.Serializable]
     public class PartySerializeData : ISerializeData , IInitialization<UnitEntityConfig[]>
     {
-#if UNITY_EDITOR
         [SerializeField] private List<ShamanSerializeData> _shamanSerializeDatas;
-#endif
         
         //all shamans
         
@@ -28,14 +26,13 @@ namespace Tzipory.SerializeData.PlayerData.Party
 
         public void Init(UnitEntityConfig[] parameter)//for testing
         {
-#if UNITY_EDITOR
             _shamanSerializeDatas = new List<ShamanSerializeData>();
-#endif
             
             foreach (var shamanConfig in parameter)
             {
                 var shamanSerializeData = new ShamanSerializeData();
                 shamanSerializeData.Init(shamanConfig);
+                _shamanSerializeDatas.Add(shamanSerializeData);
             }
             
             IsInitialization = true;

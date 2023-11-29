@@ -31,7 +31,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public BaseGameEntity GameEntity { get;private set;  }
 
         public Stat TargetingRange => Stats[(int)Constant.StatsId.TargetingRange];
-        public EntityType EntityType { get; private set;  }
         public IPriorityTargeting PriorityTargeting { get; private set; }
         public IEnumerable<ITargetAbleEntity> AvailableTargets => _availableTargets;
 
@@ -62,7 +61,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 {(int)Constant.StatsId.TargetingRange, new Stat(Constant.StatsId.TargetingRange,componentConfig.TargetingRange)}
             };
             
-            EntityType = componentConfig.EntityType;
             _targetedEntities = componentConfig.TargetedEntity;
             
             colidierInitialization.Init(this);
@@ -90,7 +88,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         public float GetDistanceToTarget(ITargetAbleEntity targetAbleEntity)
         {
-            throw new System.NotImplementedException();
+            return Vector2.Distance(GameEntity.EntityTransform.position, targetAbleEntity.GameEntity.transform.position);
         }
 
         public bool TrySetNewTarget(IPriorityTargeting priorityTargeting = null)

@@ -16,8 +16,8 @@ namespace Tzipory.Systems.Entity.EntityComponents
 
     public interface IEntityDamageComponent
     {
-        public Action<bool> OnHit { get; }
-        public Action<Action> OnDeath { get; }
+        public event Action<bool> OnHit;
+        public event Action OnDeath;
         public void Heal(float amount);
         public void TakeDamage(float damage,bool isCrit);
     }

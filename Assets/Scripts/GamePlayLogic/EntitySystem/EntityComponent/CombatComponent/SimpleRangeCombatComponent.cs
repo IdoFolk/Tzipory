@@ -15,6 +15,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         private Temp_ShotVisual _shotVisual;
         private float _currentAttackRate;
         private bool _canAttack;
+        private IEntityVisualComponent _entityVisualComponent;
 
         public bool IsInitialization { get; private set; }
 
@@ -32,16 +33,18 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             GameEntity = parameter;
         }
         
-        public void Init(BaseGameEntity parameter1, CombatComponentConfig config)
+        public void Init(BaseGameEntity baseGameEntity, CombatComponentConfig config)
         {
-            Init(parameter1);
+            Init(baseGameEntity);
             
             _shotVisual = GameEntity.GetComponentInChildren<Temp_ShotVisual>();//temp may need to change
-
+            
+            _entityVisualComponent = baseGameEntity.RequestComponent<IEntityVisualComponent>();
+            
             if (_shotVisual is null)
                 throw new Exception($"Can not find Temp_ShotVisual in {GameEntity.name}");
             
-            _shotVisual.Init(config.ProjectilePrefab,config.ProjectileSpeed,config.ProjectileTimeToDie);
+            _shotVisual.Init(baseGameEntity,config.ProjectilePrefab,config.ProjectileSpeed,config.ProjectileTimeToDie);
 
             Stats = new Dictionary<int, Stat>()
             {
@@ -83,12 +86,12 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             
             if (CritChance.CurrentValue > Random.Range(0, 100))
             {
-                targetAbleEntity.EntityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);//may need to by
+                _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
                 _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true);
                 return;
             }
             
-            targetAbleEntity.EntityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
+            _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
             _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue,false);
         }
     }

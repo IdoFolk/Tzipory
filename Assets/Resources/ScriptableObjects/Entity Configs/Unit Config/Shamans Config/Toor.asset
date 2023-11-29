@@ -12,29 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea472f36b2a4dc0b0810fdfb6687265, type: 3}
   m_Name: Toor
   m_EditorClassIdentifier: 
-  _entityId: 0
+  _entityId: -1670867242
   _unitType: 0
   HealthComponentConfig:
     HealthComponentType: 2
-    HealthStat: 0
+    HealthStat: 450
     InvincibleTimeStat: 0
     RegenSpeedStat: 0
   TargetingComponentConfig:
-    TargetingRange: 0
+    TargetingRange: 5
     EntityType: 1
     TargetedEntity: 2
     TargetingPriorityType: 2
   VisualComponentConfig:
     Sprite: {fileID: 21300000, guid: f4e62ad13a5770c44aac2a924dab6155, type: 3}
     Icon: {fileID: 21300000, guid: 97554a74e79997844a27c96e13c4e3dd, type: 3}
-    HpBar: 0
-    UIIndicator: 0
+    HpBar: 1
+    HaveSilhouette: 1
+    UIIndicator: 1
     UiIndicatorConfig:
-      Image: {fileID: 0}
-      Color: {r: 0, g: 0, b: 0, a: 0}
+      Image: {fileID: 21300000, guid: 97554a74e79997844a27c96e13c4e3dd, type: 3}
+      Color: {r: 1, g: 1, b: 1, a: 1}
       AllwaysShow: 0
       DisposOnClick: 0
-      OffSetRadios: 0
+      OffSetRadios: 0.1
       StartFlashing: 0
       FlashConfig:
         SizeFactor: 0
@@ -44,79 +45,80 @@ MonoBehaviour:
         OverrideFlashingColor: 0
         FlashingColor: {r: 0, g: 0, b: 0, a: 0}
     OnDeath:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnDeath
+      _id: 1
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
     OnAttack:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnAttack
+      _id: 2
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
     OnCritAttack:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnCritAttack
+      _id: 3
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
     OnMove:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnMove
+      _id: 4
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
     OnGetHit:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnGetHit
+      _id: 5
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
     OnGetCritHit:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnGetCritHit
+      _id: 6
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
-  _combatComponent: 0
+  _combatComponent: 1
   CombatComponentConfig:
     CombatComponentType: 0
-    AttackDamage: 0
-    AttackRate: 0
+    AttackDamage: 35
+    AttackRate: 0.8
     AttackCooldown: 0
-    CritDamage: 0
-    CritChance: 0
-    AttackRange: 0
-    ProjectileTimeToDie: 0
-    ProjectileSpeed: 0
-    ProjectilePrefab: {fileID: 0}
-  _movementComponent: 0
+    CritDamage: 25
+    CritChance: 5
+    AttackRange: 12
+    ProjectileTimeToDie: 20
+    ProjectileSpeed: 15
+    ProjectilePrefab: {fileID: 6820444270360034478, guid: e64a8a0f859a6954cab1ec02005d3f61, type: 3}
+  _movementComponent: 1
   MovementComponentConfig:
     MovementComponentType: 0
-    MoveSpeed: 0
+    MoveSpeed: 2.5
     PathCreator: {fileID: 0}
-    privateRabbitIncrement: 0
-    acceptableDistanceFromPath: 0
-    acceptableDistanceToCompletion: 0
+    MaxDistanceFromPath: 0
+    PrivateRabbitIncrement: 0
+    PrivateRabbitDistanceToUpdate: 0
   _abilityComponent: 0
   AbilityComponentConfig:
-    _abilityConfigs: []
-  _aiComponent: 0
+    _abilityConfigs:
+    - {fileID: 11400000, guid: 1ae853bb9bae2264d947b505396fb4e8, type: 2}
+  _aiComponent: 1
   AIComponentConfig:
     AIType: 0
-    DecisionInterval: 0
+    DecisionInterval: 2
     AggroLevel: 0
     ReturnLevel: 0

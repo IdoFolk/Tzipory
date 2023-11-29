@@ -12,13 +12,13 @@ public class Silhouetter : MonoBehaviour
     #region Unity Callbacks (OnEnable and OnDisable subs)
     private void OnEnable()
     {
-        _unit.OnSetSprite += SetSprite;
-        _unit.OnSpriteFlipX += SetFlipX;
+        // _unit.OnSetSprite += SetSprite;
+        // _unit.OnSpriteFlipX += SetFlipX;
     }
     private void OnDisable()
     {
-        _unit.OnSetSprite -= SetSprite;
-        _unit.OnSpriteFlipX -= SetFlipX;
+        // _unit.OnSetSprite -= SetSprite;
+        // _unit.OnSpriteFlipX -= SetFlipX;
     }
     #endregion
     #region Private Methods

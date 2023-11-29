@@ -4,21 +4,19 @@ using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.ConfigFiles.PopUpText;
 using Tzipory.Helpers;
 using Tzipory.Helpers.Consts;
-using Tzipory.SerializeData.StatSystemSerializeData;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
-using Tzipory.Tools.Debag;
-using Tzipory.Tools.Interface;
 using Tzipory.Tools.TimeSystem;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 {
     public class StandardHealthComponent : IEntityHealthComponent
     {
-        public Action<bool> OnHit { get; }
-        public Action<Action> OnDeath { get; }
+        public event Action<bool> OnHit;
+        public event Action OnDeath;
 
         private float _currentInvincibleTime;
         
@@ -45,6 +43,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         {
             Init(baseGameEntity);
 
+            _startedDeathSequence = false;
+            
             Stats = new Dictionary<int, Stat>()
             {
                 {(int)Constant.StatsId.Health, new Stat(Constant.StatsId.Health,config.HealthStat)},
@@ -67,6 +67,10 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 IsDamageable = true;
                 _currentInvincibleTime = InvincibleTime.CurrentValue;
             }
+
+
+            if (IsEntityDead && !_startedDeathSequence)
+                StartDeathSequence();
         }
 
         public void Heal(float amount)
@@ -93,7 +97,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 popUpTextConfig = PopUpTextManager.Instance.GetHitDefaultConfig;
                 processName = "Hit";
             }
-
+            
+            OnHit?.Invoke(isCrit);
+            
             Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),processName,popUpTextConfig);
             IsDamageable = false;
         }
@@ -106,13 +112,14 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             
             IsDamageable = false;
             
-            OnDeath?.Invoke(EntityDied);
+            EntityDied();
         }
         
         private void EntityDied()
         {
             IsInitialization = false;
             Logger.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{GameEntity.name}</color> as died!",BaseGameEntity.ENTITY_LOG_GROUP);
+            OnDeath?.Invoke();
         }
 
         public IEnumerable<IStatHolder> GetNestedStatHolders()

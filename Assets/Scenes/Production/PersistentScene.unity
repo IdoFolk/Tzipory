@@ -1619,7 +1619,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4f2d74627138d124a8d7fbe33105365e, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 0.5
   Loop: 1
@@ -1720,21 +1720,21 @@ MonoBehaviour:
   _audioReverbFilter: {fileID: 1426615428}
   audioLowPassFilter: {fileID: 1426615427}
   _serializedAudioFilters:
-  - Name: 1
+  - Name: 0
     DefaultValue: 0
     SlowMotionValue: -1345
-  - Name: 2
+  - Name: 1
     DefaultValue: -10000
     SlowMotionValue: 600
-  - Name: 3
+  - Name: 2
     DefaultValue: 1
     SlowMotionValue: 1.5
-  - Name: 4
+  - Name: 3
     DefaultValue: 22000
     SlowMotionValue: 1100
-  - Name: 5
+  - Name: 4
     DefaultValue: 1
-    SlowMotionValue: 0.5
+    SlowMotionValue: 0.9
 --- !u!169 &1426615427
 AudioLowPassFilter:
   m_ObjectHideFlags: 0
@@ -2523,7 +2523,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1133403119959084057, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: orthographic size
-      value: 8.999998
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2794710943949227540, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: _enableEdgeScroll
@@ -2535,7 +2535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3389486412246985101, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3
       objectReference: {fileID: 0}
     - target: {fileID: 3493536373832206464, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_LocalPosition.x

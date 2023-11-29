@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Tzipory.Helpers;
+using Tzipory.Tools.Sound;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -19,13 +20,6 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
 
         private bool _isValidClick;
 
-        private float _previousTimeRate;
-
-        [SerializeField] private AnimationCurve _startSlowTimeCurve;
-        [SerializeField] private AnimationCurve _endSlowTimeCurve;
-        [SerializeField] private float _slowTimeTransitionTime;
-        [SerializeField] private float _slowTime;
-        
         [SerializeField] private Shadow _shadow;
 
         
@@ -53,9 +47,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             _shadow.SetShadow(target.transform, shadowSprite, range);
 
             Cursor.visible = false;
-            _previousTimeRate = GAME_TIME.GetCurrentTimeRate;
-            GAME_TIME.SetTimeStep(_slowTime,_slowTimeTransitionTime,_startSlowTimeCurve);
-            BgMusicManager.Instance.SetSlowMotionEffect(); //temp
+            SlowMotionManager.Instance.StartSlowMotionEffect();
             OnAnyShamanSelected?.Invoke();
         }
 
@@ -66,9 +58,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             Cursor.visible = true;
             isCooldown = true;
             StartCoroutine(SetIsCooldownWaitOneFrame(false));
-            
-            GAME_TIME.SetTimeStep(_previousTimeRate,_slowTimeTransitionTime,_endSlowTimeCurve);
-            BgMusicManager.Instance.SetDefaultEffect(); //temp
+            SlowMotionManager.Instance.EndSlowMotionEffect();
             OnAnyShamanDeselected?.Invoke();
         }
         private IEnumerator SetIsCooldownWaitOneFrame(bool isIt)

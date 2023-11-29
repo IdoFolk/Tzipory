@@ -10,6 +10,7 @@ using Tzipory.Systems.SceneSystem;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Enums;
 using Tzipory.Tools.GameSettings;
+using Tzipory.Tools.Sound;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -98,6 +99,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         private void Start()
         {
+            BgMusicManager.Instance.PlayMusic();
             GameManager.CameraHandler.ToggleCameraLock(false);
             GameManager.CameraHandler.ResetCamera();
             WaveManager.StartLevel();
@@ -153,6 +155,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             OnEndGame?.Invoke(isWon);
             UIManager.HidUIGroup(UIGroup.GameUI);
             UIManager.ShowUIGroup(UIGroup.EndGameUI,true);
+            BgMusicManager.Instance.StopMusic();
             IsGameRunning = false;
         }
 

@@ -25,8 +25,7 @@ namespace Tzipory.Tools.Sound
         #endregion
 
 
-        [Header("Slow Motion Effect Audio Filters")] [SerializeField, TabGroup("Slow Motion Effects")]
-        private AudioFilter[] _serializedAudioFilters;
+        
 
         private static AnimationCurve _defaultCurve = AnimationCurve.Linear(0, 0, 1, 1);
 
@@ -60,25 +59,31 @@ namespace Tzipory.Tools.Sound
 
         public void SetSlowMotionEffect(float transitionTime = 1, AnimationCurve curve = null)
         {
-            if (_serializedAudioFilters is null) return;
-            foreach (var audioFilter in _serializedAudioFilters)
+            if (_audioFilters is null) return;
+            foreach (var audioFilter in _audioFilters)
             {
-                StartCoroutine(FadeMusic(audioFilter, audioFilter.DefaultValue, audioFilter.SlowMotionValue,
-                    transitionTime, curve));
+                foreach (var value in audioFilter.AudioFilterValues)
+                {
+                    StartCoroutine(FadeMusic(value, value.DefaultValue, value.SlowMotionValue,
+                        transitionTime, curve));
+                }
             }
         }
 
         public void SetDefaultEffect(float transitionTime = 1, AnimationCurve curve = null)
         {
-            if (_serializedAudioFilters is null) return;
-            foreach (var audioFilter in _serializedAudioFilters)
+            if (_audioFilters is null) return;
+            foreach (var audioFilter in _audioFilters)
             {
-                StartCoroutine(FadeMusic(audioFilter, audioFilter.SlowMotionValue, audioFilter.DefaultValue,
-                    transitionTime, curve));
+                foreach (var value in audioFilter.AudioFilterValues)
+                {
+                    StartCoroutine(FadeMusic(value, value.SlowMotionValue, value.DefaultValue,
+                        transitionTime, curve));
+                }
             }
         }
 
-        private IEnumerator FadeMusic(AudioFilter audioFilter, float oldValue, float newValue, float transitionTime,
+        private IEnumerator FadeMusic(AudioFilterValue audioFilter, float oldValue, float newValue, float transitionTime,
             AnimationCurve curve)
         {
             float transitionTimeCount = 0;

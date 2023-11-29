@@ -1,4 +1,5 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using Logger = Tzipory.Tools.Debag.Logger;
 
@@ -7,34 +8,81 @@ namespace Tzipory.Tools.Sound
     public abstract class AudioFilters : MonoBehaviour
     {
         protected const string AUDIO_LOG_GROUP = "Audio";
-
         [SerializeField] protected AudioSource _audioSource;
-        [SerializeField] protected AudioReverbFilter _audioReverbFilter;
-        [SerializeField] protected AudioLowPassFilter _audioLowPassFilter;
+        [SerializeField,ShowIf(nameof(_audioReverbFilterEnabled))] protected AudioReverbFilter _audioReverbFilter;
+        [SerializeField,ShowIf(nameof(_audioLowPassFilterEnabled))] protected AudioLowPassFilter _audioLowPassFilter;
+        [Header("Slow Motion Effect Audio Filters")] [SerializeField, TabGroup("Slow Motion Effects")] protected AudioFilter[] _audioFilters;
+
+        private bool _audioReverbFilterEnabled;
+        private bool _audioLowPassFilterEnabled;
         protected virtual void OnValidate()
         {
-            _audioSource ??= GetComponent<AudioSource>();
-            _audioReverbFilter ??= GetComponent<AudioReverbFilter>();
-            _audioLowPassFilter ??= GetComponent<AudioLowPassFilter>();
+            _audioSource ??= TryGetComponent<AudioSource>(out var audioSource)
+                ? audioSource
+                : gameObject.AddComponent<AudioSource>();
+
+            if (_audioFilters is not null)
+            {
+                foreach (var audioFilter in _audioFilters)
+                {
+                    switch (audioFilter.Type)
+                    {
+                        case AudioFilterType.LowPass:
+                            _audioLowPassFilterEnabled = audioFilter.Enabled;
+                            break;
+                        case AudioFilterType.Reverb:
+                            _audioReverbFilterEnabled = audioFilter.Enabled;
+                            break;
+                    }
+                }
+            }
+            
+            if (_audioReverbFilterEnabled)
+            {
+                gameObject.AddComponent<AudioReverbFilter>();
+                _audioReverbFilter ??= GetComponent<AudioReverbFilter>();
+            }
+            else
+            {
+                var filter = GetComponent<AudioReverbFilter>();
+                if (filter is not null) Destroy(filter);
+            }
+            if (_audioLowPassFilterEnabled)
+            {
+                gameObject.AddComponent<AudioLowPassFilter>();
+                _audioLowPassFilter ??= GetComponent<AudioLowPassFilter>();
+            }
+            else
+            {
+                var filter = GetComponent<AudioLowPassFilter>();
+                if (filter is not null) Destroy(filter);
+            }
+
+            
         }
         
-        public bool SetAudioFilterValue(AudioFilter audioFilter, float value)
+        public bool SetAudioFilterValue(AudioFilterValue audioFilter, float value)
         {
             switch (audioFilter.Name)
             {
-                case AudioFilterType.cutoffFrequency:
+                case AudioFilterValueType.cutoffFrequency:
+                    if (!_audioLowPassFilterEnabled) return false;
                     _audioLowPassFilter.cutoffFrequency = value;
                     return true;
-                case AudioFilterType.lowpassResonanceQ:
+                case AudioFilterValueType.lowpassResonanceQ:
+                    if (!_audioLowPassFilterEnabled) return false;
                     _audioLowPassFilter.lowpassResonanceQ = value;
                     return true;
-                case AudioFilterType.revebLevel:
+                case AudioFilterValueType.revebLevel:
+                    if (!_audioReverbFilter) return false;
                     _audioReverbFilter.reverbLevel = value;
                     return true;
-                case AudioFilterType.dryLevel:
+                case AudioFilterValueType.dryLevel:
+                    if (!_audioReverbFilter) return false;
                     _audioReverbFilter.dryLevel = value;
                     return true;
-                case AudioFilterType.pitch:
+                case AudioFilterValueType.pitch:
+                    if (!_audioSource) return false;
                     _audioSource.pitch = value;
                     return true;
                 default:
@@ -44,14 +92,28 @@ namespace Tzipory.Tools.Sound
 
         }
     }
+    
     [Serializable]
     public struct AudioFilter
     {
-        public AudioFilterType Name;
+        public bool Enabled;
+        public AudioFilterType Type;
+        public AudioFilterValue[] AudioFilterValues;
+    }
+    [Serializable]
+    public struct AudioFilterValue
+    {
+        public AudioFilterValueType Name;
         public float DefaultValue;
         public float SlowMotionValue;
     }
     public enum AudioFilterType
+    {
+        AudioSource,
+        Reverb,
+        LowPass
+    }
+    public enum AudioFilterValueType
     {
         dryLevel = 0,
         revebLevel = 1,

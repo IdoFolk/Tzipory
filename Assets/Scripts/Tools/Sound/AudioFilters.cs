@@ -42,23 +42,11 @@ namespace Tzipory.Tools.Sound
                 gameObject.AddComponent<AudioReverbFilter>();
                 _audioReverbFilter ??= GetComponent<AudioReverbFilter>();
             }
-            else
-            {
-                var filter = GetComponent<AudioReverbFilter>();
-                if (filter is not null) Destroy(filter);
-            }
             if (_audioLowPassFilterEnabled)
             {
                 gameObject.AddComponent<AudioLowPassFilter>();
                 _audioLowPassFilter ??= GetComponent<AudioLowPassFilter>();
             }
-            else
-            {
-                var filter = GetComponent<AudioLowPassFilter>();
-                if (filter is not null) Destroy(filter);
-            }
-
-            
         }
         
         public bool SetAudioFilterValue(AudioFilterValue audioFilter, float value)

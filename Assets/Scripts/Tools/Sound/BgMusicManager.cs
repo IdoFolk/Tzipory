@@ -1,44 +1,22 @@
 using System.Collections;
 using Sirenix.OdinInspector;
+using Tzipory.GameplayLogic.VisualSystem.EffectType;
+using Tzipory.Helpers;
 using UnityEngine;
 
 namespace Tzipory.Tools.Sound
 {
-    public class BgMusicManager : AudioFilters
+    public class BgMusicManager: MonoSingleton<BgMusicManager>
     {
-        #region Singleton
+        [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioReverbFilter _audioReverbFilter;
+        [SerializeField] private AudioLowPassFilter _audioLowPassFilter;
 
-        private static BgMusicManager _instance;
-        public static BgMusicManager Instance => _instance;
+        public AudioSource AudioSource => _audioSource;
 
-        public virtual void Awake()
-        {
-            if (isActiveAndEnabled)
-            {
-                if (Instance == null)
-                    _instance = this;
-                else if (Instance != this)
-                    Destroy(this);
-            }
-        }
+        public AudioReverbFilter AudioReverbFilter => _audioReverbFilter;
 
-        #endregion
-
-
-        
-
-        private static AnimationCurve _defaultCurve = AnimationCurve.Linear(0, 0, 1, 1);
-
-
-        protected virtual void OnDestroy()
-        {
-            _instance = null;
-        }
-
-        private void Start()
-        {
-            SetDefaultEffect();
-        }
+        public AudioLowPassFilter AudioLowPassFilter => _audioLowPassFilter;
 
         public void PlayMusic()
         {
@@ -54,54 +32,7 @@ namespace Tzipory.Tools.Sound
 
         public void ChangeMusicVolume(float volume)
         {
-            _audioSource.volume = volume;
-        }
-
-        public void SetSlowMotionEffect(float transitionTime = 1, AnimationCurve curve = null)
-        {
-            if (_audioFilters is null) return;
-            foreach (var audioFilter in _audioFilters)
-            {
-                foreach (var value in audioFilter.AudioFilterValues)
-                {
-                    StartCoroutine(FadeMusic(value, value.DefaultValue, value.SlowMotionValue,
-                        transitionTime, curve));
-                }
-            }
-        }
-
-        public void SetDefaultEffect(float transitionTime = 1, AnimationCurve curve = null)
-        {
-            if (_audioFilters is null) return;
-            foreach (var audioFilter in _audioFilters)
-            {
-                foreach (var value in audioFilter.AudioFilterValues)
-                {
-                    StartCoroutine(FadeMusic(value, value.SlowMotionValue, value.DefaultValue,
-                        transitionTime, curve));
-                }
-            }
-        }
-
-        private IEnumerator FadeMusic(AudioFilterValue audioFilter, float oldValue, float newValue, float transitionTime,
-            AnimationCurve curve)
-        {
-            float transitionTimeCount = 0;
-            var animationCurve = curve ?? _defaultCurve;
-
-            while (transitionTimeCount < transitionTime)
-            {
-                transitionTimeCount += Time.deltaTime;
-
-                float evaluateValue = animationCurve.Evaluate(transitionTimeCount / transitionTime);
-
-                float value = Mathf.Lerp(oldValue, newValue, evaluateValue);
-                SetAudioFilterValue(audioFilter, value);
-
-                yield return null;
-            }
-
-            SetAudioFilterValue(audioFilter, newValue);
+           _audioSource.volume = volume;
         }
     }
 }

@@ -1144,10 +1144,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4141272437573713113, guid: cc3d66b2784e30f4aac4ad4b7f4be1ef, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 9212708706191391417}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc3d66b2784e30f4aac4ad4b7f4be1ef, type: 3}
 --- !u!198 &1723696041110385429 stripped
 ParticleSystem:
@@ -1159,32 +1156,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7105149816320229087, guid: cc3d66b2784e30f4aac4ad4b7f4be1ef, type: 3}
   m_PrefabInstance: {fileID: 5843599364140556604}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &7521121320734137829 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4141272437573713113, guid: cc3d66b2784e30f4aac4ad4b7f4be1ef, type: 3}
-  m_PrefabInstance: {fileID: 5843599364140556604}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &9212708706191391417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7521121320734137829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0edd1a74a0841204aba5c0ecfc2c7d28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _curlyWindParticles: {fileID: 1723696041110385429}
-  _basicWindParticles: {fileID: 7608386612141696339}
-  _particleAnimationValues:
-  - Type: 0
-    DefaultValue: 1
-    SlowMotionValue: 0.5
-  - Type: 1
-    DefaultValue: 1
-    SlowMotionValue: 0.5
 --- !u!198 &7608386612141696339 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 4075416784767861871, guid: cc3d66b2784e30f4aac4ad4b7f4be1ef, type: 3}
@@ -1566,6 +1537,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: _particleSystemsSerialize.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
       propertyPath: _powerStructuresSerialize.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -1593,6 +1568,14 @@ PrefabInstance:
       propertyPath: _waveSpawnersSerialize.Array.data[5]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: _particleSystemsSerialize.Array.data[0]
+      value: 
+      objectReference: {fileID: 1723696041110385429}
+    - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: _particleSystemsSerialize.Array.data[1]
+      value: 
+      objectReference: {fileID: 7608386612141696339}
     - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
       propertyPath: _powerStructuresSerialize.Array.data[0]
       value: 

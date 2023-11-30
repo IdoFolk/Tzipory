@@ -48,11 +48,9 @@ namespace Tzipory.Systems.CameraSystem
         [TabGroup("Cameras"),SerializeField] private Transform _cameraFollowObject;
         [TabGroup("Cameras"),SerializeField] private CinemachineBrain _cinemachineBrain;
         [TabGroup("Post Process"),SerializeField] private Volume _postProcessVolume;
-        private Vignette _postProcessVignette;
-        private Bloom _postProcessBloom;
 
-        [TabGroup("Post Process"), SerializeField]
-        private PostProcessLerp[] _postProcessesLerp;
+        public Volume PostProcessVolume => _postProcessVolume;
+
         #endregion
         
         #region Fields
@@ -345,23 +343,6 @@ namespace Tzipory.Systems.CameraSystem
             _cameraFollowObject.position = newPos;
             StartCoroutine(ChangeDampingUntilCameraFinishFollowUp(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY));
         }
-
-        public void SetSlowMotionVisualFX(float transitionTime = 1, AnimationCurve curve = null)
-        {
-            foreach (var postProcessLerp in _postProcessesLerp)
-            {
-                StartCoroutine(FadePostProcess(postProcessLerp.Type, postProcessLerp.DefaultValue,
-                    postProcessLerp.SlowMotionValue, transitionTime, curve));
-            }
-        }
-        public void EndSlowMotionVisualFX(float transitionTime = 1, AnimationCurve curve = null)
-        {
-            foreach (var postProcessLerp in _postProcessesLerp)
-            {
-                StartCoroutine(FadePostProcess(postProcessLerp.Type, postProcessLerp.SlowMotionValue,
-                    postProcessLerp.DefaultValue, transitionTime, curve));
-            }
-        }
         #endregion
 
         #region PrivateMethods
@@ -420,58 +401,6 @@ namespace Tzipory.Systems.CameraSystem
                 yield return null;
             }
         }
-        private IEnumerator FadePostProcess(PostProcessType type, float oldValue, float newValue, float transitionTime,
-            AnimationCurve curve)
-        {
-            float transitionTimeCount = 0;
-            var animationCurve = curve ?? _defaultCurve;
-
-            while (transitionTimeCount < transitionTime)
-            {
-                transitionTimeCount += Time.deltaTime;
-
-                float evaluateValue = animationCurve.Evaluate(transitionTimeCount / transitionTime);
-
-                float value = Mathf.Lerp(oldValue, newValue, evaluateValue);
-                SetPostProcessValue(type, value);
-
-                yield return null;
-            }
-
-            SetPostProcessValue(type, newValue);
-        }
-        private void SetPostProcessValue(PostProcessType type, float value)
-        {
-            switch (type)
-            {
-                case PostProcessType.Bloom:
-                    if (_postProcessVolume.profile.TryGet(out Bloom bloom))
-                    {
-                        bloom.intensity.value = value;
-                    }
-                    break;
-                case PostProcessType.Vignette:
-                    if (_postProcessVolume.profile.TryGet(out Vignette vignette))
-                    {
-                        vignette.intensity.value = value;
-                    }
-                    break;
-            }
-        }
         #endregion
-    }
-    
-    [Serializable]
-    public struct PostProcessLerp
-    {
-        public PostProcessType Type;
-        public float DefaultValue;
-        public float SlowMotionValue;
-    }
-
-    public enum PostProcessType
-    {
-        Bloom,
-        Vignette
     }
 }

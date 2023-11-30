@@ -48,7 +48,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             _shadow.SetShadow(target.transform, shadowSprite, range);
 
             Cursor.visible = false;
-            SlowMotionManager.Instance.StartSlowMotionEffect();
+            SlowMotionManager.Instance.StartSlowMotionEffects();
             OnAnyShamanSelected?.Invoke();
         }
 
@@ -59,7 +59,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             Cursor.visible = true;
             isCooldown = true;
             StartCoroutine(SetIsCooldownWaitOneFrame(false));
-            SlowMotionManager.Instance.EndSlowMotionEffect();
+            SlowMotionManager.Instance.EndSlowMotionEffects();
             OnAnyShamanDeselected?.Invoke();
         }
         private IEnumerator SetIsCooldownWaitOneFrame(bool isIt)

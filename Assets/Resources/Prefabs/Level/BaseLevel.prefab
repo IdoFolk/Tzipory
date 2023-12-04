@@ -118,6 +118,7 @@ MonoBehaviour:
   _bgRenderer: {fileID: 5506317258539102969}
   _fakeForward: {x: 1, y: -35, z: 0}
   _cameraBorders: {x: 20, y: 20}
+  _cameraMaxZoom: 0
   _overrideCameraStartPositionAndZoom: 1
   _cameraStartPosition: {x: 0, y: -5}
   _cameraStartZoom: 7

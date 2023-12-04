@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 241633881055855448}
   - component: {fileID: 4544959671847762149}
   - component: {fileID: 7511123639222003332}
+  - component: {fileID: 2706409471022555997}
   m_Layer: 0
   m_Name: AbilityHolder
   m_TagString: Untagged
@@ -76,6 +77,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2706409471022555997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4093213661136829145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd8d2b06d242554b8becd0bbcd2370a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7524779648489561825
 GameObject:
   m_ObjectHideFlags: 0

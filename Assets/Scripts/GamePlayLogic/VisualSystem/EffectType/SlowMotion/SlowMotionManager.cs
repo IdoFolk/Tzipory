@@ -37,7 +37,6 @@ namespace Tzipory.GameplayLogic.VisualSystem.EffectType
             _audioFilters.StartTransitionEffect();
             _windEffectHandler.StartTransitionEffect();
             _postProcessFilters.StartTransitionEffect();
-            
         }
 
         public void EndSlowMotionEffects()

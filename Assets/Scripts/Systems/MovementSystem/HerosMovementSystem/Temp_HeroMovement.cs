@@ -1,4 +1,5 @@
 ﻿using ProjectDawn.Navigation.Hybrid;
+using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.EntityComponents;
@@ -14,7 +15,9 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
         [SerializeField] Tzipory.GameplayLogic.EntitySystem.Shamans.Shaman _shaman;
 
         public bool IsMoveing => _moveComponent.IsMoveing;
-        
+
+        public Shaman Shaman => _shaman;
+
         private void Start()
         {
             _moveComponent.Init(_shaman.StatHandler.GetStat(Constant.StatsId.MovementSpeed));

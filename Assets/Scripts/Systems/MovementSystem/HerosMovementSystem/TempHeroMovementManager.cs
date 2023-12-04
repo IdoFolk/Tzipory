@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections;
+using Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI;
 using Tzipory.GameplayLogic.VisualSystem.EffectType;
 using Tzipory.Helpers;
-using Tzipory.Tools.Sound;
-using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -49,6 +48,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
 
             Cursor.visible = false;
             SlowMotionManager.Instance.StartSlowMotionEffects();
+            HeroSelectionUI.Instance.ShowSelectionUI(target.Shaman);
             OnAnyShamanSelected?.Invoke();
         }
 
@@ -60,6 +60,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             isCooldown = true;
             StartCoroutine(SetIsCooldownWaitOneFrame(false));
             SlowMotionManager.Instance.EndSlowMotionEffects();
+            HeroSelectionUI.Instance.HideSelectionUI();
             OnAnyShamanDeselected?.Invoke();
         }
         private IEnumerator SetIsCooldownWaitOneFrame(bool isIt)

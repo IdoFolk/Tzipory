@@ -44,7 +44,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             if (isCooldown)
                 return;
             _currentTarget = target;
-            _shadow.SetShadow(target.transform, shadowSprite, range);
+            _shadow.SetShadow(target.Shaman, target.transform, shadowSprite, range);
 
             Cursor.visible = false;
             SlowMotionManager.Instance.StartSlowMotionEffects();

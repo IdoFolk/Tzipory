@@ -17,9 +17,17 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
             {
                 if (stats.TryGetValue((int)statBlock.StatId,out var stat))
                 {
-                    statBlock.Init(stat.Name,stat.BaseValue,stat.CurrentValue);
-                    stat.OnValueChanged += statBlock.UpdateUI; //add unsubscribe
+                    statBlock.Init(stat.Name,stat.CurrentValue);
                 }
+            }
+        }
+
+        public void UpdateStatBlocks(Stat stat, float value)
+        {
+            foreach (var statBlock in _statBlocks)
+            {
+                if ((int)statBlock.StatId == stat.Id)
+                    statBlock.UpdateUI(value);
             }
         }
     }

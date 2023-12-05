@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
+using Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.StatusSystem;
 using UnityEngine;
@@ -114,7 +115,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             }
         }
 
-        private void OnShadowShamanEnter(int ringId)
+        private void OnShadowShamanEnter(int ringId, Shaman shaman)
         {
             if (_testing) Logger.Log($"Shadow Enter: {ringId}",POWER_STRUCTURE_LOG_GROUP);
 
@@ -127,11 +128,11 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
                 currentActiveRing.ToggleSprite(true);
                 _currentActiveRingId = currentActiveRing.Id;
 
-                ShowStatPopupWindows(currentActiveRing);
+                ShowStatPopupWindows(currentActiveRing, shaman);
             }
         }
 
-        private void OnShadowShamanExit(int ringId)
+        private void OnShadowShamanExit(int ringId, Shaman shaman)
         {
             if (_testing) Logger.Log($"Shadow Exit: {ringId}",POWER_STRUCTURE_LOG_GROUP);
 
@@ -142,31 +143,42 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             if (_currentActiveRingId > proximityRingsManager.RingHandlers.Length) _currentActiveRingId = proximityRingsManager.RingHandlers.Length;
 
             if (_currentActiveRingId >= proximityRingsManager.RingHandlers.Length)
-                StatEffectPopupManager.HidePopupWindows(EntityInstanceID);
+            {
+                HideStatPopupWindows(shaman);
+            }
             else
             {
                 proximityRingsManager.ToggleRingSprite(_currentActiveRingId, true);
                 currentActiveRing = proximityRingsManager.RingHandlers[_currentActiveRingId];
-                ShowStatPopupWindows(currentActiveRing);
+                ShowStatPopupWindows(currentActiveRing,shaman);
             }
         }
 
-        private void ShowStatPopupWindows(ProximityRingHandler ringHandler)
+        private void ShowStatPopupWindows(ProximityRingHandler ringHandler, Shaman shaman)
         {
             var modifiedStatEffectValue = ModifyStatEffectByRing(ringHandler);
             var modifiedStatEffectPrecent = CalculateStatPercent(modifiedStatEffectValue);
             var roundedValue = MathF.Round(modifiedStatEffectPrecent);
-            var statEffectName = _powerStructureConfig.StatEffectConfig.AffectedStatType.ToString();
             
             Color color = _powerStructureConfig.PowerStructureTypeColor;
             float alpha = _powerStructureConfig.DefaultSpriteAlpha - _powerStructureConfig.SpriteAlphaFade * ringHandler.Id;
             color.a = alpha;
             bool isPercent = _powerStructureConfig.StatEffectConfig.StatModifier.StatusModifierType == StatusModifierType.Multiplication;
-
-
-            StatEffectPopupManager.ShowPopupWindows(EntityInstanceID, statEffectName, roundedValue, isPercent, color);
-
             
+            if (shaman.Stats.TryGetValue((int)_powerStructureConfig.StatEffectConfig.AffectedStatType,out var stat))
+            {
+                StatEffectPopupManager.ShowPopupWindows(EntityInstanceID, stat, roundedValue, isPercent, color);
+                HeroSelectionUI.Instance.UpdateSelectionUI(stat, roundedValue);
+            }
+        }
+
+        private void HideStatPopupWindows(Shaman shaman)
+        {
+            StatEffectPopupManager.HidePopupWindows(EntityInstanceID);
+            if (shaman.Stats.TryGetValue((int)_powerStructureConfig.StatEffectConfig.AffectedStatType, out var stat))
+            {
+                HeroSelectionUI.Instance.UpdateSelectionUI(stat, 0);
+            }
         }
 
         private float ModifyStatEffectByRing(ProximityRingHandler ringHandler)
@@ -191,6 +203,15 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             }
 
             return statPercent;
+        }
+    }
+
+    public class ActiveStatusEffect : IDisposable
+    {
+        //figure out what disposable means
+        public void Dispose()
+        {
+            // TODO release managed resources here
         }
     }
 }

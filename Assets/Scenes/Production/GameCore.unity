@@ -827,9 +827,6 @@ MonoBehaviour:
     - ValueType: 1
       DefaultValue: -10000
       SlowMotionValue: 600
-    - ValueType: 4
-      DefaultValue: 1
-      SlowMotionValue: 0.95
   _postProcessFilters:
     LerpValueConfig:
       TransitionCurve:

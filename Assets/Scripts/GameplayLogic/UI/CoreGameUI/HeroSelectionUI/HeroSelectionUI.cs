@@ -1,5 +1,6 @@
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Helpers;
+using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,6 +29,11 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
             Pos.y += 150;
             transform.position = Pos;
             IsActive = true;
+        }
+
+        public void UpdateSelectionUI(Stat stat, float bonusValue)
+        {
+            _statBlockPanel.UpdateStatBlocks(stat, bonusValue);
         }
 
         public void HideSelectionUI()

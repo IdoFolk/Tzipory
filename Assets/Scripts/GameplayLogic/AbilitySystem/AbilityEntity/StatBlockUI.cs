@@ -1,8 +1,6 @@
-using System;
 using TMPro;
 using Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI;
 using Tzipory.Helpers.Consts;
-using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
 public class StatBlockUI : MonoBehaviour
@@ -12,21 +10,18 @@ public class StatBlockUI : MonoBehaviour
 
     private string _name;
     private float _baseValue;
-
     public Constant.StatsId StatId => _statId;
     
-    public void Init(string statName, float baseValue, float currentValue)
+    public void Init(string statName, float currentValue)
     {
         _name = statName;
-        _baseValue = baseValue;
-        var _delta = currentValue - baseValue;
-        SetStatText(baseValue,_delta);
+        _baseValue = currentValue;
+        SetStatText(_baseValue,0);
     }
-    public void UpdateUI(StatChangeData statChangeData)
+    public void UpdateUI(float currentValue)
     {
         if(!HeroSelectionUI.Instance.IsActive) return;
-        var _delta = statChangeData.NewValue -_baseValue;
-        SetStatText(_baseValue,_delta);
+        SetStatText(_baseValue,currentValue);
     }
 
     private void SetStatText(float baseValue, float bonusValue)
@@ -40,7 +35,7 @@ public class StatBlockUI : MonoBehaviour
                 break;
             case Constant.StatsId.AttackRate:
                 statName = "Attack Speed";
-                modifier = "Sc";
+                modifier = "Sec";
                 break;
             case Constant.StatsId.AttackRange:
                 statName = "Range";
@@ -56,8 +51,18 @@ public class StatBlockUI : MonoBehaviour
                 modifier = "%";
                 break;
         }
-        
-        if (bonusValue == 0) _statText.text = $"{statName}: {baseValue}{modifier}";
-        else _statText.text = $"{statName}: {baseValue} + {bonusValue}{modifier}";
+
+        switch (bonusValue)
+        {
+            case > 0:
+                _statText.text = $"{statName}: {baseValue} (+{bonusValue}{modifier})";
+                break;
+            case < 0:
+                _statText.text = $"{statName}: {baseValue} (-{-bonusValue}{modifier})";
+                break;
+            case 0:
+                _statText.text = $"{statName}: {baseValue}{modifier}";
+                break;
+        }
     }
 }

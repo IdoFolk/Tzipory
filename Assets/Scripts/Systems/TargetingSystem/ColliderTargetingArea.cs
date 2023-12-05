@@ -44,7 +44,7 @@ namespace Tzipory.Systems.TargetingSystem
             if (_testing)
                 Debug.Log($"On target exit {other.name} from {gameObject.name}");
 
-            _collisionReciever?.RecieveCollision(other, IOType.In);
+            _collisionReciever?.RecieveCollision(other, IOType.Out);
 
             if (!other.TryGetComponent<ITargetAbleEntity>(out var targetAbleComponent)) return;
             

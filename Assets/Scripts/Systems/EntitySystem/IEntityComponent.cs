@@ -7,7 +7,7 @@ namespace Tzipory.Systems.Entity
         public void UpdateComponent();
     }
     
-    public interface IEntity : IInitialization<BaseGameEntity>
+    public interface IEntity
     {
         public BaseGameEntity GameEntity { get; }
     }

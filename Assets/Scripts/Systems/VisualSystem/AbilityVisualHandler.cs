@@ -20,6 +20,7 @@ namespace Tzipory.Systems.VisualSystem
         public void Init(AnimationConfig parameter)
         {
             _animationConfig = parameter;
+            Play();
             IsInitialization = true;
         }
     

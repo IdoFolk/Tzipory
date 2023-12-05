@@ -20,7 +20,7 @@ namespace Tzipory.GameplayLogic.TargetingPriorities
 
             foreach (var target in targets)
             {
-                var distance = Vector3.Distance(CoreTemple.CoreTrans.position, target.GameEntity.transform.position);
+                var distance = Vector3.Distance(CoreTemple.CoreTransform.position, target.GameEntity.transform.position);
 
                 if (distance > currentLongestDistance)
                 {

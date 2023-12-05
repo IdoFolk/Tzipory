@@ -33,8 +33,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public bool IsEntityDead => Health.CurrentValue <= 0;
         
         public bool IsInitialization { get; private set; }
-        
-        public void Init(BaseGameEntity baseGameEntity)
+
+        private void Init(BaseGameEntity baseGameEntity)
         {
             GameEntity = baseGameEntity;
         }

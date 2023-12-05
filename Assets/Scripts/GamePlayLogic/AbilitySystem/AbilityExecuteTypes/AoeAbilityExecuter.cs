@@ -2,27 +2,23 @@
 using System.Collections.Generic;
 using Tzipory.ConfigFiles.AbilitySystem;
 using Tzipory.ConfigFiles.StatusSystem;
-using Tzipory.ConfigFiles.Visual;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.AbilitySystem.AbilityEntity;
-using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
+using Tzipory.Tools.Interface;
 using UnityEngine;
-using UnityEngine.Playables;
 using Object = UnityEngine.Object;
 
 namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 {
-    public class AoeAbilityExecuter :  IAbilityExecutor , IStatHolder
+    public class AoeAbilityExecuter :  IAbilityExecutor , IStatHolder , IInitialization<ITargetAbleEntity>
     {
         private const string  AOE_PREFAB_PATH = "Prefabs/Ability/AoeAbilityEntity";
         
         private readonly GameObject _aoePrefab;
 
-        public readonly AnimationConfig AnimationConfig;
-
-        public readonly PlayableAsset Visual;
+        private readonly AbilityConfig _abilityConfig;
         
         private List<BaseModifyStatEffect> _statusEffects;
         public AbilityExecuteType AbilityExecuteType => AbilityExecuteType.AOE;
@@ -34,28 +30,6 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
         
         public Dictionary<int, Stat> Stats { get; }
         
-        private Stat Radius
-        {
-            get
-            {
-                if (Stats.TryGetValue((int)Constant.StatsId.AoeRadius, out var aoeRadius))
-                    return aoeRadius;
-
-                throw new Exception($"aoeRadius not found in entity {Caster.GameEntity.name}");
-            }
-        }
-
-        private Stat Duration
-        {
-            get
-            {
-                if (Stats.TryGetValue((int)Constant.StatsId.AoeDuration, out var aoeDuration))
-                    return aoeDuration;
-
-                throw new Exception($"aoeDuration not found in entity {Caster.GameEntity.name}");
-            }
-        }
-
         [Obsolete("Use AbilitySerializeData")]
         public AoeAbilityExecuter(ITargetAbleEntity caster,AbilityConfig abilityConfig)
         {
@@ -66,23 +40,27 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
             EnterStatusEffects = new List<StatEffectConfig>();
             ExitStatusEffects = new List<StatEffectConfig>();
 
-            AnimationConfig = abilityConfig.AnimationConfig;
+            _abilityConfig = abilityConfig;
             
             EnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
             if(abilityConfig.DoExitEffects)
-                ExitStatusEffects.AddRange(abilityConfig.OnExitStatusEffectConfigs);
+                ExitStatusEffects.AddRange(abilityConfig.ExitStatusEffectConfigs);
             
             Stats.Add((int)Constant.StatsId.AoeRadius,new Stat("AoeRadius", abilityConfig.AoeRadius, int.MaxValue, (int)Constant.StatsId.AoeRadius));
             Stats.Add((int)Constant.StatsId.AoeDuration, new Stat("AoeDuration", abilityConfig.AoeDuration, int.MaxValue, (int)Constant.StatsId.AoeDuration));
             
             _aoePrefab = Resources.Load<GameObject>(AOE_PREFAB_PATH);
+            IsInitialization = false;
         }
-        
+
+        public bool IsInitialization { get; private set; }
+
         public void Init(ITargetAbleEntity target)//temp
         {
             var aoeGameObject = Object.Instantiate(_aoePrefab).GetComponent<AoeAbilityEntity>();
-            aoeGameObject.gameObject.SetActive(false);
-            aoeGameObject.Init(Radius.CurrentValue,Duration.CurrentValue,this); //Here the settings need to be changed
+            //aoeGameObject.Init(this,_abilityConfig,Stats); //Here the settings need to be changed
+            Execute(target);
+            IsInitialization = true;
         }
 
         public void Execute(ITargetAbleEntity target)
@@ -92,8 +70,8 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 
             foreach (var statusEffect in EnterStatusEffects)
                 target.EntityStatComponent.AddStatEffect(statusEffect);
-            
-            target.EntityVisualComponent.StartAnimationEffect(AnimationConfig);
+            if (_abilityConfig.AbilityVisualConfig.HaveEffectOnEntity)
+                target.EntityVisualComponent?.StartAnimationEffect(_abilityConfig.AbilityVisualConfig.TargetAnimationConfig);
         }
         
         public void ExecuteOnExit(ITargetAbleEntity target)

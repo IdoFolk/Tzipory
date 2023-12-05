@@ -230,13 +230,24 @@ MonoBehaviour:
   _timerHandler:
     _timerSerializeDatas: []
   _visualTransform: {fileID: 2606180687319934652}
-  _renderer: {fileID: 0}
+  _abilityVisualHandler: {fileID: 5157583472346975004}
   _colliderTargetingArea: {fileID: 5767230331226046982}
 --- !u!4 &2606180687319934652 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4943192798936546052, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
   m_PrefabInstance: {fileID: 6967838487786659256}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5157583472346975004 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2819771204170897060, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}
+  m_PrefabInstance: {fileID: 6967838487786659256}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d11477e400186d64ab9acb54d2e72a30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6759074531638166618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4431456642009094626, guid: 1dae34f03049acf4489678e375ca7d8b, type: 3}

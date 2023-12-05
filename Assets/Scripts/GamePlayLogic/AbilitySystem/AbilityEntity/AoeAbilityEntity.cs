@@ -16,12 +16,12 @@ namespace Tzipory.Systems.AbilitySystem.AbilityEntity
     
         public void Init(float radius, float duration, AoeAbilityExecuter abilityExecutor)
         {
-            base.Init(abilityExecutor);
+           // base.Init(abilityExecutor);
             
             _aoeAbilityExecuter = abilityExecutor;
             _duration = duration;
             _colliderTargetingArea.Init(this);
-            _visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
+            //_visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
         }
 
         public void RecieveTargetableEntry(ITargetAbleEntity targetable)

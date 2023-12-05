@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Tzipory.ConfigFiles.AbilitySystem;
 using Tzipory.Helpers.Consts;
-using Tzipory.Systems.AbilitySystem.AbilityEntity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using UnityEngine;
@@ -17,36 +16,18 @@ namespace Tzipory.Systems.AbilitySystem
         private const string PROJECTILE_PREFAB_PATH = "Prefabs/Ability/ProjectileAbilityEntity";
         
         public IEntityTargetingComponent EntityCasterTargetingComponent { get; }
+
+        private readonly AbilityConfig _abilityConfig;
         
         public Dictionary<int, Stat> Stats { get; }
-
-        private Stat ProjectileSpeed   
-        {
-            get
-            {
-                if (Stats.TryGetValue((int)Constant.StatsId.ProjectileSpeed, out var projectileSpeed))
-                    return projectileSpeed;
-                
-                throw new Exception($"ProjectileSpeed not found in entity {EntityCasterTargetingComponent.GameEntity.name}");
-            }
-        }
-        
-        private Stat ProjectilePenetration 
-        {
-            get
-            {
-                if (Stats.TryGetValue((int)Constant.StatsId.ProjectilePenetration, out var projectilePenetration))
-                    return projectilePenetration;
-                
-                throw new Exception($"CastTime not found in entity {EntityCasterTargetingComponent.GameEntity.name}");
-            }
-        }
 
         private readonly GameObject _projectilePrefab;
 
         public ProjectileAbilityCaster(IEntityTargetingComponent entityCasterTargetingComponent, AbilityConfig config)
         {
             EntityCasterTargetingComponent = entityCasterTargetingComponent;
+            
+            _abilityConfig = config;
             
             Stats = new Dictionary<int, Stat>
             {
@@ -72,7 +53,7 @@ namespace Tzipory.Systems.AbilitySystem
         {
             OnCast?.Invoke();
             var projectilePrefab = Object.Instantiate(_projectilePrefab,EntityCasterTargetingComponent.GameEntity.transform.position,Quaternion.identity);
-            projectilePrefab.GetComponent<ProjectileAbilityEntity>().Init(target,ProjectileSpeed.CurrentValue,ProjectilePenetration.CurrentValue,abilityExecutor);
+            //projectilePrefab.GetComponent<AbilityEntity>().Init(abilityExecutor,_abilityConfig,Stats);
         }
 
         public IEnumerable<IStatHolder> GetNestedStatHolders()

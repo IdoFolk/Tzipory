@@ -137,8 +137,17 @@ MonoBehaviour:
         m_RotationOrder: 4
   _doExitEffects: 0
   _statusEffectConfigsOnExit: []
-  _abilityProjectileSprite: {fileID: 0}
-  _abilityAoeSprite: {fileID: 21300000, guid: 448119b726adddd45ab436830a4f6560, type: 3}
-  _abilityChainSprite: {fileID: 0}
-  _haveEffectOnEntity: 1
-  _timelineAsset: {fileID: 11400000, guid: 7b0e21277756f264cb84447d24a6b0c2, type: 2}
+  _abilityVisualConfig:
+    AbilityAnimationConfig:
+      HaveEnterAndExit: 0
+      EntryTimeLine: {fileID: 0}
+      LoopTimeLine: {fileID: 0}
+      ExitTimeLine: {fileID: 0}
+      LoopTime: 0
+    HaveEffectOnEntity: 0
+    TargetAnimationConfig:
+      HaveEnterAndExit: 0
+      EntryTimeLine: {fileID: 0}
+      LoopTimeLine: {fileID: 0}
+      ExitTimeLine: {fileID: 0}
+      LoopTime: 0

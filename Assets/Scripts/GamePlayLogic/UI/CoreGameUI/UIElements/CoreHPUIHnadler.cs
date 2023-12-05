@@ -9,14 +9,14 @@ namespace Tzipory.GameplayLogic.UIElements
 
         public override void Init()
         {
-            _maxCount.text = $"/{LevelManager.CoreTemplete.Health.BaseValue}";
+            _maxCount.text = $"/{LevelManager.CoreTemplete.EntityHealthComponent.Health.BaseValue}";
             base.Init();
         }
 
         public override void Show()
         {
 
-            LevelManager.CoreTemplete.Health.OnValueChanged += UpdateCoreUI;
+            LevelManager.CoreTemplete.EntityHealthComponent.Health.OnValueChanged += UpdateCoreUI;
             base.Show();
         }
 
@@ -28,12 +28,12 @@ namespace Tzipory.GameplayLogic.UIElements
         public override void UpdateUIVisual()
         {
             base.UpdateUIVisual();
-            UpdateUiData(LevelManager.CoreTemplete.Health.CurrentValue);
+            UpdateUiData(LevelManager.CoreTemplete.EntityHealthComponent.Health.CurrentValue);
         }
 
         public override void Hide()
         {
-            LevelManager.CoreTemplete.Health.OnValueChanged -= UpdateCoreUI;
+            LevelManager.CoreTemplete.EntityHealthComponent.Health.OnValueChanged -= UpdateCoreUI;
             base.Hide();
         }
     }

@@ -10,11 +10,15 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
         public AbilityExecuteType AbilityExecuteType { get; }
         public ITargetAbleEntity Caster { get; }
         public List<StatEffectConfig> EnterStatusEffects { get; }
+        
+        private readonly AbilityVisualConfig _abilityVisualConfig;
 
         public SingleAbilityExecuter(ITargetAbleEntity caster,AbilityConfig abilityConfig)
         {
             Caster = caster;
             EnterStatusEffects = new List<StatEffectConfig>();
+
+            _abilityVisualConfig = abilityConfig.AbilityVisualConfig;
 
            EnterStatusEffects.AddRange(abilityConfig.StatusEffectConfigs);
         }
@@ -27,6 +31,9 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
         {
             foreach (var statusEffect in EnterStatusEffects)
                 target.EntityStatComponent.AddStatEffect(statusEffect);
+            
+            if (_abilityVisualConfig.HaveEffectOnEntity)
+                target.EntityVisualComponent?.StartAnimationEffect(_abilityVisualConfig.TargetAnimationConfig);
         }
     }
 }

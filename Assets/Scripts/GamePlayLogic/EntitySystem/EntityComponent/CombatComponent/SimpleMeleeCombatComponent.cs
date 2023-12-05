@@ -65,22 +65,23 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             return new IStatHolder[] { this };
         }
         
-        public void Attack(ITargetAbleEntity targetAbleEntity)
+        public bool Attack(ITargetAbleEntity targetAbleEntity)
         {
             if(!_canAttack)
-                return;
+                return false;
             
             _canAttack = false;
             
             if (CritChance.CurrentValue > Random.Range(0, 100))
             {
-                targetAbleEntity.EntityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);//may need to by
+                targetAbleEntity.EntityVisualComponent?.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);//may need to by
                 targetAbleEntity.EntityHealthComponent.TakeDamage(AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true);
-                return;
+                return true;
             }
             
-            targetAbleEntity.EntityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
+            targetAbleEntity.EntityVisualComponent?.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
             targetAbleEntity.EntityHealthComponent.TakeDamage(AttackDamage.CurrentValue,false);
+            return true;
         }
     }
 }

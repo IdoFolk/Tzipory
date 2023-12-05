@@ -6,6 +6,7 @@ using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.TimeSystem;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
@@ -77,10 +78,13 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             return new IStatHolder[] { this };
         }
         
-        public void Attack(ITargetAbleEntity targetAbleEntity)
+        public bool Attack(ITargetAbleEntity targetAbleEntity)
         {
-            if(!_canAttack)
-                return;
+            if (!_canAttack)
+                return false;
+
+            if (Vector2.Distance(GameEntity.EntityTransform.position,targetAbleEntity.GameEntity.EntityTransform.position) > AttackRange.CurrentValue)
+                return false;
             
             _canAttack = false;
             
@@ -88,11 +92,12 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             {
                 _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
                 _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true);
-                return;
+                return true;
             }
             
             _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
             _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue,false);
+            return true;
         }
     }
 }

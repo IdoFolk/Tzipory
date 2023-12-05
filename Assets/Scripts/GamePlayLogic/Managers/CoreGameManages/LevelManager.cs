@@ -94,6 +94,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             EnemyManager = new EnemyManager(_enemiesParent);
             WaveManager = new WaveManager(_levelConfig,_uiIndicatorConfig); //temp!!!
             CoreTemplete = FindObjectOfType<CoreTemple>(); //temp!!!
+            CoreTemplete.Init();
             PartyManager.SpawnShaman();
         }
 
@@ -118,7 +119,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             if (GameSetting.CantLose)
                 return;
 
-            if (CoreTemplete.IsEntityDead)
+            if (CoreTemplete.EntityHealthComponent.IsEntityDead)
             {
                 IsWon  = false;
                 EndGame(IsWon);

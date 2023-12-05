@@ -12,6 +12,6 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public Stat AttackRate { get; }
         public Stat AttackRange { get; }
 
-        public void Attack(ITargetAbleEntity targetAbleEntity);//may need to target parameter
+        public bool Attack(ITargetAbleEntity targetAbleEntity);//may need to target parameter
     }
 }

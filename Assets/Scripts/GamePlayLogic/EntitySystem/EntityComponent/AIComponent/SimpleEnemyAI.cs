@@ -61,8 +61,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
 
             if (IsAttckingCore)
             {
-                _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);
-                _self.EntityHealthComponent.StartDeathSequence();
+                if(_self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget))
+                    _self.EntityHealthComponent.StartDeathSequence();
             }
 
             if (_currentDecisionInterval < 0)

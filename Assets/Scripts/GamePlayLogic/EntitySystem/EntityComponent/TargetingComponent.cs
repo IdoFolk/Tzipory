@@ -118,7 +118,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         
         public void RecieveTargetableEntry(ITargetAbleEntity targetable)
         {
-            if (!targetable.EntityType.HasFlag(_targetedEntities))
+            if (!_targetedEntities.HasFlag(targetable.EntityType))
                 return;
             
             Logger.Log($"Entity: <color=#de05f2>{GameEntity.name}</color>: added {targetable.GameEntity.name} to targets list",TARGETING_HANDLER_LOG_GROUP);

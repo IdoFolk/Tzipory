@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.StatusSystem;
-using Tzipory.ConfigFiles.Visual;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.TargetingSystem;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.Timeline;
 
 namespace Tzipory.ConfigFiles.AbilitySystem
 {
     [CreateAssetMenu(fileName = "NewAbilityConfig", menuName = "ScriptableObjects/EntitySystem/AbilitySystem/New ability config", order = 0)]
     public class AbilityConfig : ScriptableObject , IConfigFile
     {
+        public readonly string  AbilityPrefabPath = "Configs/AbilitySystem/AbilityConfig";
         [SerializeField,Tooltip("")] private int _abilityId;
         [SerializeField,Tooltip("")] private string _abilityName;
         
@@ -36,13 +34,7 @@ namespace Tzipory.ConfigFiles.AbilitySystem
         [SerializeField,TabGroup("Ability parameters"),Tooltip(""), ShowIf(nameof(_abilityExecuteType), AbilityExecuteType.AOE)] private bool _doExitEffects;
         [SerializeField,TabGroup("Ability parameters"),Tooltip(""), ShowIf(nameof(_doExitEffects))] private List<StatEffectConfig> _statusEffectConfigsOnExit;
         
-        //abilityVisualConfig
-        [SerializeField,TabGroup("Ability Visual Config"),Tooltip("")] private PlayableAsset _abilityProjectileSprite;
-        [SerializeField,TabGroup("Ability Visual Config"),Tooltip("")]
-        private bool _haveEffectOnEntity;
-
-        [SerializeField, TabGroup("Ability Visual Config"), Tooltip(""), ShowIf(nameof(_haveEffectOnEntity))]
-        private AnimationConfig _animationConfig;
+        [SerializeField,TabGroup("Ability Visual Config"),Tooltip("")] private AbilityVisualConfig _abilityVisualConfig;
         
         public string AbilityName => _abilityName;
         public int AbilityId => _abilityId;
@@ -53,11 +45,7 @@ namespace Tzipory.ConfigFiles.AbilitySystem
 
         public List<StatEffectConfig> StatusEffectConfigsOnExit => _statusEffectConfigsOnExit;
 
-        public PlayableAsset AbilityProjectileSprite => _abilityProjectileSprite;
-        
-        public bool HaveEffectOnEntity => _haveEffectOnEntity;
-
-        public AnimationConfig AnimationConfig => _animationConfig;
+        public AbilityVisualConfig AbilityVisualConfig => _abilityVisualConfig;
 
         public float ProjectileSpeed => _projectileSpeed;
 
@@ -82,7 +70,7 @@ namespace Tzipory.ConfigFiles.AbilitySystem
         public int ObjectId => _abilityId;
         public int ConfigTypeId => Constant.DataId.ABILITY_DATA_ID;
         public bool DoExitEffects => _doExitEffects;
-        public List<StatEffectConfig> OnExitStatusEffectConfigs => _doExitEffects? _statusEffectConfigsOnExit : null;
+        public List<StatEffectConfig> ExitStatusEffectConfigs => _doExitEffects? _statusEffectConfigsOnExit : null;
     }
 
     public enum AbilityExecuteType

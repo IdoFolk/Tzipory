@@ -22,14 +22,12 @@ public class Shadow : MonoBehaviour, IEntityStatComponent
 
     public void SetShadow(Shaman shaman,Transform shamanTrans, Sprite shadowSprite, float range)
     {
+        Stats = shaman.Stats;
         StatHandler = new StatHandler(this);
-        StatHandler = shaman.StatHandler; //fix this!!!
-
         gameObject.SetActive(true);
         IsOn = true;
         //_agentNavMesh = agentNavMesh;
         Shaman = shaman;
-        Stats = shaman.Stats;
         _shamanTrans = shamanTrans;
         _shadowRenderer.sprite = shadowSprite;
         _mask.sprite = shadowSprite;

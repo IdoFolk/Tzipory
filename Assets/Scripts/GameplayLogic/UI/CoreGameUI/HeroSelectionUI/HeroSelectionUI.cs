@@ -31,9 +31,9 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
             IsActive = true;
         }
 
-        public void UpdateSelectionUI(Stat stat, float bonusValue)
+        public void UpdateSelectionUI(Stat shamanStat, Stat shadowStat)
         {
-            _statBlockPanel.UpdateStatBlocks(stat, bonusValue);
+            _statBlockPanel.UpdateStatBlocks(shamanStat, shadowStat);
         }
 
         public void HideSelectionUI()

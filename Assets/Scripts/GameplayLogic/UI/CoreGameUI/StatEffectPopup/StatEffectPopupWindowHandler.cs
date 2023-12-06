@@ -33,13 +33,13 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             _isActive = true;
             _statBonusText = statBonusText;
             transform.localPosition = new Vector3(0,yAxisModifier,0);
-            _popupText.text = isPercent ? $"{_statBonusText} + {value}%" : $"{_statBonusText} + {value}";
+            _popupText.text = isPercent ? $"{_statBonusText} +{value}%" : $"{_statBonusText} +{value}";
             _popupVisual.color = color;
         }
 
         public void UpdatePopupWindow(float value,bool isPercent, Color color)
         {
-            _popupText.text = isPercent ? $"{_statBonusText} + {value}%" : $"{_statBonusText} + {value}";
+            _popupText.text = isPercent ? $"{_statBonusText} +{value}%" : $"{_statBonusText} +{value}";
             _popupVisual.color = color;
         }
 

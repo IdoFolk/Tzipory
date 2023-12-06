@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _parentHolder: {fileID: 1618776912504356253}
-  _statBonusPopHandlerPrefab: {fileID: 6736740130189679859, guid: bcd83c4f77dba6a43b4d45f0cd4453b8, type: 3}
+  _statEffectPopupHandlerPrefab: {fileID: 0}
 --- !u!1 &5249046983319933460
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 7673678306335734228}
   - component: {fileID: 7693390801151820247}
   - component: {fileID: 6404782579656315629}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ShadowSprite
   m_TagString: ShadowShaman
   m_Icon: {fileID: 0}

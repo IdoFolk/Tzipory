@@ -10,8 +10,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 {
     public class ProximityRingHandler : MonoBehaviour, ITargetableReciever
     {
-        public event Action<int,Shaman> OnShadowEnter;
-        public event Action<int,Shaman> OnShadowExit;
+        public event Action<int,Shaman,Shadow> OnShadowEnter;
+        public event Action<int,Shaman,Shadow> OnShadowExit;
         public event Action<int,Shaman> OnShamanEnter;
         public event Action<int,Shaman> OnShamanExit;
         [HideInInspector]public int Id { get; private set; }
@@ -51,28 +51,40 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             {
                 if (ioType == IOType.In)
                 {
-                    OnShadowEnter?.Invoke(Id,other.gameObject.GetComponent<Shadow>().Shaman);
+                    if (other.gameObject.TryGetComponent<Shadow>(out var shadow))
+                        OnShadowEnter?.Invoke(Id,shadow.Shaman,shadow);
                 }
 
                 if (ioType == IOType.Out)
                 {
-                    OnShadowExit?.Invoke(Id,other.gameObject.GetComponent<Shadow>().Shaman);
+                    if (other.gameObject.TryGetComponent<Shadow>(out var shadow))
+                        OnShadowExit?.Invoke(Id,shadow.Shaman,shadow);
+                }
+            }
+            if (other.gameObject.CompareTag("Shaman"))
+            {
+                if (ioType == IOType.In)
+                {
+                    if (other.gameObject.transform.parent.TryGetComponent<Shaman>(out var shaman))
+                        OnShamanEnter?.Invoke(Id,shaman);
+                }
+
+                if (ioType == IOType.Out)
+                {
+                    if (other.gameObject.transform.parent.TryGetComponent<Shaman>(out var shaman))
+                        OnShamanExit?.Invoke(Id,shaman);
                 }
             }
         }
 
         public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
         {
-            if (targetable is not Shaman shaman) return;
             
-            OnShamanEnter?.Invoke(Id,shaman);
         }
 
         public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
         {
-            if (targetable is not Shaman shaman) return;
-
-            OnShamanExit?.Invoke(Id,shaman);
+            
         }
     }
 }

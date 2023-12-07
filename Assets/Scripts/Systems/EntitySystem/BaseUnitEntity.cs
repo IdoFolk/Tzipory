@@ -62,6 +62,8 @@ namespace Tzipory.Systems.Entity
         #endregion
 
         #region Proprty
+        
+        public string Name { get; private set; }
 
         public Dictionary<int, Stat> Stats { get; private set; }
         
@@ -248,6 +250,8 @@ namespace Tzipory.Systems.Entity
         
         public virtual void Init(UnitEntitySerializeData parameter, BaseUnitEntityVisualConfig visualConfig)
         {
+            Name = parameter.VisualName;
+
             gameObject.name =  $"{parameter.EntityName} InstanceID: {EntityInstanceID}";
             
             Stats = new Dictionary<int, Stat>();
@@ -273,6 +277,7 @@ namespace Tzipory.Systems.Entity
         [Obsolete("may need to use UnitEntitySerializeData only")]
         public virtual void Init(BaseUnitEntityConfig parameter)//need to oder logic to many responsibility
         {
+            Name = parameter.UnitEntityVisualConfig.Name;
             gameObject.name =  $"{parameter.name} InstanceID: {EntityInstanceID}";
             
             Stats = new Dictionary<int, Stat>();

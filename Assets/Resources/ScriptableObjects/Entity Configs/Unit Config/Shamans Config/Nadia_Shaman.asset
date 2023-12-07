@@ -34,6 +34,7 @@ MonoBehaviour:
   _abilityConfigs:
   - {fileID: 11400000, guid: 75928f8badccef2498c77125ef0f7375, type: 2}
   _unitEntityVisualConfig:
+    _name: Nadia
     _sprite: {fileID: 21300000, guid: fc2805c32b6ccbe429d23e618777dbee, type: 3}
     _icon: {fileID: 1908098078, guid: 2a862c0ebda887f42a111fbbce4d7fc0, type: 3}
   _targetingPriority: 6

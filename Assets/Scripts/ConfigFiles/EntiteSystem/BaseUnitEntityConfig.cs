@@ -11,6 +11,8 @@ namespace Tzipory.ConfigFiles.EntitySystem
 {
     public abstract class BaseUnitEntityConfig : ScriptableObject, IConfigFile
     {
+
+        
         [SerializeField, Tooltip(""), TabGroup("StatsId")]
         protected List<StatConfig> _statConfigs;
 

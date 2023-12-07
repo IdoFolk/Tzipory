@@ -1,11 +1,7 @@
-using System.Collections.Generic;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
-using Tzipory.Systems.Entity;
-using Tzipory.Systems.Entity.EntityComponents;
-using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
-public class Shadow : MonoBehaviour, IEntityStatComponent
+public class Shadow : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _shadowRenderer;
     [SerializeField] private SpriteRenderer _proximityRenderer;
@@ -22,8 +18,6 @@ public class Shadow : MonoBehaviour, IEntityStatComponent
 
     public void SetShadow(Shaman shaman,Transform shamanTrans, Sprite shadowSprite, float range)
     {
-        Stats = shaman.Stats;
-        StatHandler = new StatHandler(this);
         gameObject.SetActive(true);
         IsOn = true;
         //_agentNavMesh = agentNavMesh;
@@ -57,17 +51,4 @@ public class Shadow : MonoBehaviour, IEntityStatComponent
             //END TEMP!
         }
     }
-
-    public int EntityInstanceID { get; }
-    public Transform EntityTransform { get; }
-    public BaseGameEntity GameEntity { get; }
-    public Dictionary<int, Stat> Stats { get; private set; }
-    public IEnumerable<IStatHolder> GetNestedStatHolders()
-    {
-        List<IStatHolder> statHolders = new List<IStatHolder>() {this};
-
-        return statHolders;
-    }
-
-    public StatHandler StatHandler { get; private set; }
 }

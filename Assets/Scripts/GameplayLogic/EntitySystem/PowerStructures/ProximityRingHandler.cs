@@ -10,8 +10,8 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 {
     public class ProximityRingHandler : MonoBehaviour, ITargetableReciever
     {
-        public event Action<int,Shaman,Shadow> OnShadowEnter;
-        public event Action<int,Shaman,Shadow> OnShadowExit;
+        public event Action<int,Shaman> OnShadowEnter;
+        public event Action<int,Shaman> OnShadowExit;
         public event Action<int,Shaman> OnShamanEnter;
         public event Action<int,Shaman> OnShamanExit;
         [HideInInspector]public int Id { get; private set; }
@@ -52,13 +52,13 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
                 if (ioType == IOType.In)
                 {
                     if (other.gameObject.TryGetComponent<Shadow>(out var shadow))
-                        OnShadowEnter?.Invoke(Id,shadow.Shaman,shadow);
+                        OnShadowEnter?.Invoke(Id,shadow.Shaman);
                 }
 
                 if (ioType == IOType.Out)
                 {
                     if (other.gameObject.TryGetComponent<Shadow>(out var shadow))
-                        OnShadowExit?.Invoke(Id,shadow.Shaman,shadow);
+                        OnShadowExit?.Invoke(Id,shadow.Shaman);
                 }
             }
             if (other.gameObject.CompareTag("Shaman"))

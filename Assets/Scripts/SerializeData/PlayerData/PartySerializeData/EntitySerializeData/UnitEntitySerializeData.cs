@@ -15,6 +15,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
     [Serializable]
     public class UnitEntitySerializeData : ISerializeData , IUpdateData<BaseUnitEntity>
     {
+        [SerializeField,TabGroup("General"),ReadOnly] private string _visualName;
         [SerializeField,TabGroup("General"),ReadOnly] private string _entityName;
         [SerializeField,TabGroup("General"),ReadOnly] private int _targetingPriority;
         [SerializeField,TabGroup("StatsId"),ReadOnly] private List<StatSerializeData> _statSerializeDatas;
@@ -23,6 +24,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         [SerializeField, TabGroup("Ability"), ReadOnly] private AbilityConfig[] _abilityConfigs;//temp
 
         public string EntityName => _entityName;
+        public string VisualName => _visualName;
 
         public int TargetingPriority => _targetingPriority;
 
@@ -44,6 +46,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
             _statSerializeDatas  = new List<StatSerializeData>();
             
             _entityName = baseUnitEntityConfig.name;
+            _visualName = baseUnitEntityConfig.UnitEntityVisualConfig.Name;
             
             _abilityConfigs  = baseUnitEntityConfig.AbilityConfigs;
             

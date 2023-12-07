@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI;
+using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.StatusSystem;
 using UnityEngine;
@@ -22,13 +23,12 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         [SerializeField] private SpriteRenderer _powerStructureSpriteRenderer;
         [Space] [SerializeField] private bool _testing;
 
-        private Dictionary<int, IDisposable> _activeStatusEffectOnShamans;
-        private IDisposable _activeStatusEffectOnShadow;
+        private Dictionary<int, IStatEffectProcess> _activeStatusEffectOnShamans;
         private int _currentActiveRingId = 4;
 
         public void Init()
         {
-            _activeStatusEffectOnShamans = new Dictionary<int, IDisposable>();
+            _activeStatusEffectOnShamans = new Dictionary<int, IStatEffectProcess>();
 
             if (_powerStructureConfig.PowerStructureSprite is null)
             {
@@ -85,11 +85,16 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
                 ringModifiedStatEffectConfig.StatModifier.RingModifiers[ringId];
 
             if (_activeStatusEffectOnShamans.TryGetValue(shaman.EntityInstanceID, out var currentActiveStatusEffect))
+            {
                 currentActiveStatusEffect.Dispose();
-
-            IDisposable shamanDisposable = shaman.StatHandler.AddStatEffect(ringModifiedStatEffectConfig);
-
-            _activeStatusEffectOnShamans[shaman.EntityInstanceID] = shamanDisposable;
+                IStatEffectProcess shamanDisposable = shaman.StatHandler.AddStatEffect(ringModifiedStatEffectConfig);
+                _activeStatusEffectOnShamans[shaman.EntityInstanceID] = shamanDisposable;
+            }
+            else
+            {
+                IStatEffectProcess shamanDisposable = shaman.StatHandler.AddStatEffect(ringModifiedStatEffectConfig);
+                _activeStatusEffectOnShamans.Add(shaman.EntityInstanceID, shamanDisposable);
+            }
         }
 
         private void OnShamanRingExit(int ringId, Shaman shaman)
@@ -100,28 +105,31 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
             if (ringId == proximityRingsManager.RingHandlers.Length - 1)
             {
-                if (!_activeStatusEffectOnShamans.TryGetValue(shaman.EntityInstanceID,
-                        out IDisposable currentActiveStatusEffect)) return;
-                currentActiveStatusEffect.Dispose();
-                _activeStatusEffectOnShamans.Remove(shaman.EntityInstanceID);
-            }
-            else if (ringId < proximityRingsManager.RingHandlers.Length - 1)
-            {
-                if (_activeStatusEffectOnShamans.TryGetValue(shaman.EntityInstanceID,
-                        out IDisposable currentActiveStatusEffect))
+                if (_activeStatusEffectOnShamans.TryGetValue(shaman.EntityInstanceID, out var currentActiveStatusEffect))
                 {
                     currentActiveStatusEffect.Dispose();
                     _activeStatusEffectOnShamans.Remove(shaman.EntityInstanceID);
                 }
-
+            }
+            else if (ringId < proximityRingsManager.RingHandlers.Length - 1)
+            {
                 ringModifiedStatEffectConfig.StatModifier.Modifier =
                     ringModifiedStatEffectConfig.StatModifier.RingModifiers[ringId + 1];
-                IDisposable disposable = shaman.StatHandler.AddStatEffect(ringModifiedStatEffectConfig);
-                _activeStatusEffectOnShamans.Add(shaman.EntityInstanceID, disposable);
+                if (_activeStatusEffectOnShamans.TryGetValue(shaman.EntityInstanceID, out var currentActiveStatusEffect))
+                {
+                    currentActiveStatusEffect.Dispose();
+                    IStatEffectProcess shamanDisposable = shaman.StatHandler.AddStatEffect(ringModifiedStatEffectConfig);
+                    _activeStatusEffectOnShamans[shaman.EntityInstanceID] = shamanDisposable;
+                }
+                else
+                {
+                    IStatEffectProcess disposable = shaman.StatHandler.AddStatEffect(ringModifiedStatEffectConfig);
+                    _activeStatusEffectOnShamans.Add(shaman.EntityInstanceID, disposable);
+                }
             }
         }
 
-        private void OnShadowShamanEnter(int ringId, Shaman shaman, Shadow shadow)
+        private void OnShadowShamanEnter(int ringId, Shaman shaman)
         {
             if (_testing) Logger.Log($"Shadow Enter: {ringId}", POWER_STRUCTURE_LOG_GROUP);
 
@@ -134,21 +142,11 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
                 currentActiveRing.ToggleSprite(true);
                 _currentActiveRingId = currentActiveRing.Id;
 
-                if (_activeStatusEffectOnShadow is not null)
-                {
-                    _activeStatusEffectOnShadow.Dispose();
-                    _activeStatusEffectOnShadow = null;
-                }
-                var statEffectConfig = _powerStructureConfig.StatEffectConfig;
-                statEffectConfig.StatModifier.Modifier = _powerStructureConfig.StatEffectConfig.StatModifier.RingModifiers[ringId];
-                IDisposable disposable = shadow.StatHandler.AddStatEffect(statEffectConfig);
-                _activeStatusEffectOnShadow = disposable;
-
-                ShowStatPopupWindows(currentActiveRing, shaman, shadow);
+                ShowStatPopupWindows(currentActiveRing, shaman);
             }
         }
 
-        private void OnShadowShamanExit(int ringId, Shaman shaman, Shadow shadow)
+        private void OnShadowShamanExit(int ringId, Shaman shaman)
         {
             if (_testing) Logger.Log($"Shadow Exit: {ringId}", POWER_STRUCTURE_LOG_GROUP);
 
@@ -161,69 +159,48 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 
             if (_currentActiveRingId >= proximityRingsManager.RingHandlers.Length)
             {
-                if (_activeStatusEffectOnShadow is not null)
-                {
-                    _activeStatusEffectOnShadow.Dispose();
-                    _activeStatusEffectOnShadow = null;
-                }
-                HideStatPopupWindows(shaman, shadow);
+                HideStatPopupWindows(shaman);
             }
             else
             {
-                if (_activeStatusEffectOnShadow is not null)
-                {
-                    _activeStatusEffectOnShadow.Dispose();
-                    _activeStatusEffectOnShadow = null;
-                }
-                var statEffectConfig = _powerStructureConfig.StatEffectConfig;
-                statEffectConfig.StatModifier.Modifier = _powerStructureConfig.StatEffectConfig.StatModifier.RingModifiers[ringId];
-                IDisposable disposable = shadow.StatHandler.AddStatEffect(statEffectConfig);
-                _activeStatusEffectOnShadow = disposable;
-                
                 proximityRingsManager.ToggleRingSprite(_currentActiveRingId, true);
                 currentActiveRing = proximityRingsManager.RingHandlers[_currentActiveRingId];
-                ShowStatPopupWindows(currentActiveRing, shaman, shadow);
+                ShowStatPopupWindows(currentActiveRing, shaman);
             }
         }
 
-        private void ShowStatPopupWindows(ProximityRingHandler ringHandler, Shaman shaman, Shadow shadow)
+        private void ShowStatPopupWindows(ProximityRingHandler ringHandler, Shaman shaman)
         {
-            var modifiedStatEffectValue = ModifyStatEffectByRing(ringHandler);
-            var modifiedStatEffectPrecent = CalculateStatPercent(modifiedStatEffectValue);
-            var roundedValue = MathF.Round(modifiedStatEffectPrecent);
-
             Color color = _powerStructureConfig.PowerStructureTypeColor;
             float alpha = _powerStructureConfig.DefaultSpriteAlpha -
                           _powerStructureConfig.SpriteAlphaFade * ringHandler.Id;
             color.a = alpha;
-            bool isPercent = _powerStructureConfig.StatEffectConfig.StatModifier.StatusModifierType ==
-                             StatusModifierType.Multiplication;
-
-            if (shaman.Stats.TryGetValue((int)_powerStructureConfig.StatEffectConfig.AffectedStatType,
-                    out var shamanStat))
+            if (shaman.Stats.TryGetValue((int)_powerStructureConfig.StatEffectConfig.AffectedStatType, out var shamanStat))
             {
-                StatEffectPopupManager.ShowPopupWindows(EntityInstanceID, shamanStat, roundedValue, isPercent, color);
-                if (shadow.Stats.TryGetValue((int)_powerStructureConfig.StatEffectConfig.AffectedStatType, out var shadowStat))
-                {
-                    HeroSelectionUI.Instance.UpdateSelectionUI(shamanStat, shadowStat);
-                }
+                bool isPercent = _powerStructureConfig.StatEffectConfig.StatModifier.StatusModifierType == StatusModifierType.Multiplication;
+                
+                var statEffectValue = GetStatEffectByRing(ringHandler);
+                var modifiedStatEffect = ModifyStatEffectForDisplay(shamanStat,statEffectValue, true);
+                StatEffectPopupManager.ShowPopupWindows(EntityInstanceID, shamanStat, modifiedStatEffect, true, color);
+
+                var changedValue = GetDeltaFromStatEffectOnShaman(statEffectValue, shamanStat, true);
+                HeroSelectionUI.Instance.UpdateSelectionUI(shamanStat, changedValue);
             }
         }
 
-        private void HideStatPopupWindows(Shaman shaman, Shadow shadow)
+        private void HideStatPopupWindows(Shaman shaman)
         {
             StatEffectPopupManager.HidePopupWindows(EntityInstanceID);
-            if (shaman.Stats.TryGetValue((int)_powerStructureConfig.StatEffectConfig.AffectedStatType,
-                    out var shamanStat))
+
+            if (shaman.Stats.TryGetValue((int)_powerStructureConfig.StatEffectConfig.AffectedStatType, out var shamanStat))
             {
-                if (shadow.Stats.TryGetValue((int)_powerStructureConfig.StatEffectConfig.AffectedStatType, out var shadowStat))
-                {
-                    HeroSelectionUI.Instance.UpdateSelectionUI(shamanStat, shadowStat);
-                }
+                var changedValue = shamanStat.BaseValue - shamanStat.CurrentValue;
+                var roundedValue = Mathf.Round(changedValue);
+                HeroSelectionUI.Instance.UpdateSelectionUI(shamanStat, roundedValue);
             }
         }
 
-        private float ModifyStatEffectByRing(ProximityRingHandler ringHandler)
+        private float GetStatEffectByRing(ProximityRingHandler ringHandler)
         {
             float statEffectModifiedValue =
                 _powerStructureConfig.StatEffectConfig.StatModifier.RingModifiers[ringHandler.Id];
@@ -231,30 +208,49 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             return statEffectModifiedValue;
         }
 
-        private float CalculateStatPercent(float modifiedStatValue)
+        private float ModifyStatEffectForDisplay(Stat shamanStat,float modifiedStatValue, bool rounded)
         {
+            float statValue = 0;
             float statPercent = 0;
-            float unModifiedStatValue = _powerStructureConfig.StatEffectConfig.StatModifier.Modifier;
+            switch ((Constant.StatsId)shamanStat.Id)
+            {
+                case Constant.StatsId.CritChance:
+                    statPercent = (modifiedStatValue * shamanStat.BaseValue) / shamanStat.BaseValue;
+                    statValue = (statPercent - 1) * 100;
+                    break;
+                case Constant.StatsId.AttackDamage:
+                    statPercent = (modifiedStatValue * shamanStat.BaseValue) / shamanStat.BaseValue;
+                    statValue = (statPercent - 1) * 100;
+                    break;
+                case Constant.StatsId.CritDamage:
+                    statPercent = (modifiedStatValue * shamanStat.BaseValue) / shamanStat.BaseValue;
+                    statValue = (statPercent - 1) * 100;
+                    break;
+            }
+            
+
+            if (!rounded) return statValue;
+            float roundedValue = MathF.Round(statValue);
+            return roundedValue;
+        }
+
+        private float GetDeltaFromStatEffectOnShaman(float StatEffectValue, Stat shamanStat, bool rounded)
+        {
+            float value = StatEffectValue;
             switch (_powerStructureConfig.StatEffectConfig.StatModifier.StatusModifierType)
             {
                 case StatusModifierType.Addition:
-                    statPercent = modifiedStatValue;
+                    break;
+                case StatusModifierType.Reduce:
                     break;
                 case StatusModifierType.Multiplication:
-                    statPercent = (modifiedStatValue - 1) * 100;
+                    value = (shamanStat.BaseValue * StatEffectValue) - shamanStat.CurrentValue;
                     break;
             }
 
-            return statPercent;
-        }
-    }
-
-    public class ActiveStatusEffect : IDisposable
-    {
-        //figure out what disposable means
-        public void Dispose()
-        {
-            // TODO release managed resources here
+            if (!rounded) return value;
+            float roundedValue = MathF.Round(value);
+            return roundedValue;
         }
     }
 }

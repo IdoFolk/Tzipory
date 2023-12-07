@@ -69,7 +69,7 @@ namespace Tzipory.Systems.StatusSystem
             }
         }
         
-        public IDisposable AddStatEffect(StatEffectConfig statEffectConfig)
+        public IStatEffectProcess AddStatEffect(StatEffectConfig statEffectConfig)
         {
             var statToEffect = GetStat(statEffectConfig.AffectedStatId);
             

@@ -1,3 +1,4 @@
+using TMPro;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Helpers;
 using Tzipory.Systems.StatusSystem;
@@ -12,6 +13,7 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
         public bool IsInitialization { get; }
 
         [SerializeField] private Image _shamanSprite;
+        [SerializeField] private TextMeshProUGUI _shamanName;
         [SerializeField] private StatBlockPanel _statBlockPanel;
         
         public bool IsActive { get; private set; }
@@ -19,6 +21,7 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
         {
             _statBlockPanel.Init(shaman.Stats);
             _shamanSprite.sprite = shaman.VisualConfig.Icon;
+            _shamanName.text = shaman.Name;
         }
 
         public void ShowSelectionUI(Shaman shaman)
@@ -26,20 +29,20 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
             Init(shaman);
             
             var Pos = transform.position;
-            Pos.y += 150;
+            Pos.y += 180;
             transform.position = Pos;
             IsActive = true;
         }
 
-        public void UpdateSelectionUI(Stat shamanStat, Stat shadowStat)
+        public void UpdateSelectionUI(Stat shamanStat, float newValue)
         {
-            _statBlockPanel.UpdateStatBlocks(shamanStat, shadowStat);
+            _statBlockPanel.UpdateStatBlocks(shamanStat, newValue);
         }
 
         public void HideSelectionUI()
         {
             var Pos = transform.position;
-            Pos.y -= 150;
+            Pos.y -= 180;
             transform.position = Pos;
             IsActive = false;
         }

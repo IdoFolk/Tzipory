@@ -34,6 +34,7 @@ MonoBehaviour:
   _abilityConfigs:
   - {fileID: 11400000, guid: 1ae853bb9bae2264d947b505396fb4e8, type: 2}
   _unitEntityVisualConfig:
+    _name: Toor
     _sprite: {fileID: 21300000, guid: f4e62ad13a5770c44aac2a924dab6155, type: 3}
     _icon: {fileID: 1885256787, guid: 2a862c0ebda887f42a111fbbce4d7fc0, type: 3}
   _targetingPriority: 2

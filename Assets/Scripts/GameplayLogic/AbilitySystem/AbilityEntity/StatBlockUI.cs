@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI;
 using Tzipory.Helpers;
@@ -8,6 +9,7 @@ public class StatBlockUI : MonoBehaviour
 {
     [SerializeField] private Constant.StatsId _statId;
     [SerializeField] private TextMeshProUGUI _statText;
+    [SerializeField] private TextMeshProUGUI _statValue;
     
     private Color _statBonusAdditionColor;
     private Color _statBonusReductionColor;
@@ -19,7 +21,7 @@ public class StatBlockUI : MonoBehaviour
     public void Init(string statName, float currentValue, Color addColor, Color reduceColor)
     {
         _name = statName;
-        _baseValue = currentValue;
+        _baseValue = MathF.Round(currentValue);
         _statBonusAdditionColor = addColor;
         _statBonusReductionColor = reduceColor;
         SetStatText(_baseValue,0);
@@ -41,7 +43,6 @@ public class StatBlockUI : MonoBehaviour
                 break;
             case Constant.StatsId.AttackRate:
                 statName = "Attack Speed";
-                modifier = "Sec";
                 break;
             case Constant.StatsId.AttackRange:
                 statName = "Range";
@@ -58,22 +59,22 @@ public class StatBlockUI : MonoBehaviour
                 break;
         }
 
-        string statNameText = $"{statName}{modifier}: ";
+        _statText.text = statName;
         string modifierText = $"{modifier}";
-        string baseValueText = $"{baseValue} ";
+        string baseValueText = $"{baseValue}";
         string bonusValueText;
         switch (bonusValue)
         {
             case > 0:
-                bonusValueText = ColorLogHelper.SetColorToString($"(+{bonusValue}{modifier})", _statBonusAdditionColor);;
-                _statText.text = statNameText + baseValueText + bonusValueText;
+                bonusValueText = ColorLogHelper.SetColorToString($" (+{bonusValue})", _statBonusAdditionColor);;
+                _statValue.text =  baseValueText + modifierText + bonusValueText;
                 break;
             case < 0:
-                bonusValueText = ColorLogHelper.SetColorToString($"(-{-bonusValue}{modifier})", _statBonusReductionColor);;
-                _statText.text = statNameText + baseValueText + bonusValueText;
+                bonusValueText = ColorLogHelper.SetColorToString($" (-{-bonusValue})", _statBonusReductionColor);;
+                _statValue.text = baseValueText + modifierText + bonusValueText;
                 break;
             case 0:
-                _statText.text = statNameText + baseValueText + modifierText;
+                _statValue.text = baseValueText + modifierText;
                 break;
         }
     }

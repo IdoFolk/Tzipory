@@ -9,7 +9,7 @@ namespace Tzipory.Systems.CameraSystem
 {
     public class CameraHandler : MonoBehaviour
     {
-        private const float ORTHOGRAPHIC_DETECT_RANGE = 0.2f;
+        private const float ORTHOGRAPHIC_DETECT_RANGE = 0.01f;
         private const float CAMERA_MOVEMENT_DETECT_RANGE = 0.5f;
 
         private const float FULL_HD_PIXELS_X = 1920;
@@ -289,6 +289,11 @@ namespace Tzipory.Systems.CameraSystem
             _cinemachineBrain.enabled = !state;
         }
 
+        public void LockCameraWithEase(Vector2 lockedCameraPos, int lockedCameraZoom)
+        {
+            StartCoroutine(LockCameraAfterCameraFinishZoom(lockedCameraPos,lockedCameraZoom));
+        }
+
         public void LockCamera(Vector2 lockedCameraPos, int lockedCameraZoom)
         {
             _mainCamera.GetComponent<CinemachineBrain>().enabled = false;
@@ -353,6 +358,22 @@ namespace Tzipory.Systems.CameraSystem
                 {
                     _cinemachineTransposer.m_XDamping = _cameraSettings.XDamping;
                     _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
+                    yield break;
+                }
+
+                yield return null;
+            }
+        }
+        IEnumerator LockCameraAfterCameraFinishZoom(Vector2 lockedCameraPos, int lockedCameraZoom)
+        {
+            SetCameraPosition(lockedCameraPos);
+            _targetOrthographicSize = lockedCameraZoom;
+
+            while (true)
+            {
+                if (CameraFinishedZoom())
+                {
+                    LockCamera(_mainCamera.transform.position, (int)_targetOrthographicSize);
                     yield break;
                 }
 

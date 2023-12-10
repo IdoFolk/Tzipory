@@ -9,16 +9,21 @@ using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 {
     [SerializeField] private PathCreator _patrolPath;
     [SerializeField] private UIIndicatorConfig _uiIndicatorConfig;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private SpriteRenderer _defaultCoreSpriteRenderer;
+    [SerializeField] private GameObject _brokenCoreSpriteRenderer;
+    [SerializeField] private ParticleSystem _glowParticleSystem;
+    [SerializeField] private Animator _coreAnimator;
     
-    [SerializeField]
-    float _hp;
+    [SerializeField] float _hp;
+    [SerializeField] float _deathAnimationTime;
+    [SerializeField] int _animationCameraZoom;
 
     [SerializeField,ReadOnly] private Stat _hpStat;
     
@@ -27,6 +32,9 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
     private IObjectDisposable _uiIndicator;
 
     private Action CanacleFlash;
+    private bool _leftCrackAnimationHappened;
+    private bool _rightCrackAnimationHappened;
+    private bool _BreakAnimationHappened;
     
     public event Action<IEntityTargetAbleComponent> OnTargetDisable;
     public bool IsTargetAble => true;
@@ -40,7 +48,6 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
     public bool IsDamageable => true; //temp
 
     public Stat Health => _hpStat;
-    public bool IsEntityDead => Health.CurrentValue <= 0;
 
     public StatHandler StatHandler => throw new System.NotImplementedException();
 
@@ -49,6 +56,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
     //SUPER TEMP! this needs to move to the Blackboard if we're really doing it
     public static Transform CoreTrans;
 
+    public bool IsEntityDead { get; private set; }
     
     public Dictionary<int, Stat> Stats { get; }
     
@@ -64,7 +72,7 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 
         _uiIndicator = UIIndicatorHandler.SetNewIndicator(CoreTrans, new UIIndicatorConfig()
         {
-            Image = _spriteRenderer.sprite,
+            Image = _defaultCoreSpriteRenderer.sprite,
             Color = Color.white,
             AllwaysShow = false,
             DisposOnClick = false,
@@ -112,19 +120,47 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
 
     public void TakeDamage(float damage, bool isCrit)
     {
-        if (_hpStat.CurrentValue <= 0)
+        if (_hpStat.CurrentValue <= 0 && !_BreakAnimationHappened)
+        {
+            _brokenCoreSpriteRenderer.SetActive(true);
+            _defaultCoreSpriteRenderer.enabled = false;
+            GameManager.CameraHandler.SetCameraPosition(transform.position);
+            GameManager.CameraHandler.LockCameraWithEase(transform.position,_animationCameraZoom);
+            _glowParticleSystem.gameObject.SetActive(true);
+            _glowParticleSystem.Play();
+            Invoke(nameof(DeathAnimation),_deathAnimationTime);
+            _BreakAnimationHappened = true;
             return;
+        }
+        var hpRatio = _hpStat.CurrentValue / _hpStat.BaseValue;
+        if (hpRatio <= 0.6667 && !_rightCrackAnimationHappened)
+        {
+            _coreAnimator.SetBool("R_Crack",true);
+            _rightCrackAnimationHappened = true;
+        }
+        if (hpRatio <= 0.3336 && !_leftCrackAnimationHappened)
+        {
+            _coreAnimator.SetBool("L_Crack",true);
+            _leftCrackAnimationHappened = true;
+        }
+       
         
         _hpStat.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),"Damage");
         OnHealthChanged?.Invoke();
 
-        if (IsEntityDead)
-            StartDeathSequence();
     }
 
     public void StartDeathSequence()
     {
         print("GAME OVER!");
+        IsEntityDead = true;
+    }
+
+    private void DeathAnimation()
+    {
+        _coreAnimator.SetBool("Break",true);
+        _glowParticleSystem.gameObject.SetActive(false);
+        Invoke(nameof(StartDeathSequence), _deathAnimationTime);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

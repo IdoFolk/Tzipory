@@ -184,7 +184,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
                 StatEffectPopupManager.ShowPopupWindows(EntityInstanceID, shamanStat, modifiedStatEffect, true, color);
 
                 var changedValue = GetDeltaFromStatEffectOnShaman(statEffectValue, shamanStat, true);
-                HeroSelectionUI.Instance.UpdateSelectionUI(shamanStat, changedValue);
+                HeroSelectionUI.Instance.UpdateStatBlocks(shamanStat, changedValue);
             }
         }
 
@@ -196,7 +196,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             {
                 var changedValue = shamanStat.BaseValue - shamanStat.CurrentValue;
                 var roundedValue = Mathf.Round(changedValue);
-                HeroSelectionUI.Instance.UpdateSelectionUI(shamanStat, roundedValue);
+                HeroSelectionUI.Instance.UpdateStatBlocks(shamanStat, roundedValue);
             }
         }
 

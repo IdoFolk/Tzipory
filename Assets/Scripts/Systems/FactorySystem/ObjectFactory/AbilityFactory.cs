@@ -8,41 +8,65 @@ namespace Tzipory.Systems.FactorySystem.ObjectFactory
 {
     public class AbilityFactory
     {
-        
         [Obsolete("Use AbilitySerializeData")]
-        public static IAbilityCaster GetAbilityCaster(IEntityTargetingComponent entityCasterTargetingComponent,AbilityConfig abilityConfig)
+        public static IAbilityExecutor GetAbilityExecutor(ITargetAbleEntity caster,AbilityConfig parameter)
         {
-            switch (abilityConfig.AbilityCastType)
+            IAbilityExecutor secondaryAbilityExecute;
+            
+            if (parameter.HaveSecondaryAbilityExecuteType)
+                secondaryAbilityExecute = GetSecondaryAbilityExecute(caster,parameter);
+            else
             {
-                case AbilityCastType.Projectile:
-                    return new ProjectileAbilityCaster(entityCasterTargetingComponent,abilityConfig);
-                case AbilityCastType.Instant:
-                    return  new InstantAbilityCaster(entityCasterTargetingComponent,abilityConfig);
-                case AbilityCastType.Self:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                var statEffectExecuter = new StatEffectExecuter();
+                statEffectExecuter.Init(parameter.StatusEffectConfigs);
+                secondaryAbilityExecute = statEffectExecuter;
             }
-
-            return null; //temp
-        }
-
-        [Obsolete("Use AbilitySerializeData")]
-        public static IAbilityExecutor GetAbilityExecutor(ITargetAbleEntity caster,AbilityConfig abilityConfig)
-        {
-            switch (abilityConfig.AbilityExecuteType)
+            
+            switch (parameter.AbilityExecute.AbilityExecuteType)
             {
                 case AbilityExecuteType.AOE:
-                    return  new StatEffectExecuter(caster,abilityConfig);
-                case AbilityExecuteType.Single:
-                    return new AoeInstantiateExecuter(caster,abilityConfig);
+                    var aoeExecuter = new AoeInstantiateExecuter();
+                    aoeExecuter.Init(caster,parameter.AbilityExecute,secondaryAbilityExecute);
+                    return aoeExecuter;
+                case AbilityExecuteType.StatExecuter:
+                    return new StatEffectExecuter();
                 case AbilityExecuteType.Chain:
                     break;
+                case AbilityExecuteType.Projectile:
+                    var projectileExecuter = new ProjectileInstantiateExecuter();
+                    projectileExecuter.Init(caster,parameter.AbilityExecute,secondaryAbilityExecute);
+                    return projectileExecuter;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
             
-            return  null;//temp
+            return null;//temp
+        }
+        
+        private static IAbilityExecutor GetSecondaryAbilityExecute(ITargetAbleEntity caster,AbilityConfig parameter)
+        {
+            StatEffectExecuter statEffectExecuter = new StatEffectExecuter();
+            statEffectExecuter.Init(parameter.StatusEffectConfigs);
+            
+            switch (parameter.SecondaryAbilityExecute.AbilityExecuteType)
+            {
+                case AbilityExecuteType.AOE:
+                    var aoeExecuter = new AoeInstantiateExecuter();
+                    aoeExecuter.Init(caster,parameter.SecondaryAbilityExecute,statEffectExecuter);
+                    return aoeExecuter;
+                case AbilityExecuteType.StatExecuter:
+                    return new StatEffectExecuter();
+                case AbilityExecuteType.Chain:
+                    break;
+                case AbilityExecuteType.Projectile:
+                    var projectileExecuter = new ProjectileInstantiateExecuter();
+                    projectileExecuter.Init(caster,parameter.SecondaryAbilityExecute,statEffectExecuter);
+                    return projectileExecuter;
+                default:
+                    return null;
+            }
+
+            return null;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Tzipory.Tools.RegularExpressions
      * $ - Ends with
      * [] - Range
      * () - Group
-     * . - Single character once
+     * . - StatExecuter character once
      * + - one or more characters in a row
      * ? - optional preceding character match
      * \ - escape character

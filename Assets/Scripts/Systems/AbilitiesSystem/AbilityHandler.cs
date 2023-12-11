@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using Tzipory.ConfigFiles.AbilitySystem;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
@@ -12,67 +10,62 @@ namespace Tzipory.Systems.AbilitySystem
 {
     public class AbilityHandler : IEntityAbilitiesComponent
     {
-        private ITargetAbleEntity Caster { get; }
-        public Dictionary<string, Ability> Abilities { get; }
+        private ITargetAbleEntity _caster;
+        private Dictionary<string, Ability> _abilities;
+        public Dictionary<int, Stat> Stats { get; private set; }
+        public bool IsCasting => _abilities.Any(ability => ability.Value.IsCasting);
+        public BaseGameEntity GameEntity { get; private set; }
         
-        public bool IsCasting => Abilities.Any(ability => ability.Value.IsCasting);
+        public bool IsInitialization { get; private set; }
         
-        [Obsolete("Use AbilitySerializeData")]
-        public AbilityHandler(ITargetAbleEntity caster,IEntityTargetingComponent entityTargetingComponent,IEnumerable<AbilityConfig> abilitiesConfig)//temp
+        public void Init(BaseGameEntity parameter1, AbilityComponentConfig parameter2)
         {
-            Abilities = new Dictionary<string, Ability>();
-            Caster = caster;
+            _abilities = new Dictionary<string, Ability>();
+            _caster = parameter1 as ITargetAbleEntity;
+            
+            GameEntity = parameter1;
 
-            foreach (var abilityConfig in abilitiesConfig)
-                Abilities.Add(abilityConfig.AbilityName,new Ability(caster,entityTargetingComponent,abilityConfig));
+            IEntityTargetingComponent entityTargetingComponent = GameEntity.RequestComponent<IEntityTargetingComponent>();
+
+            foreach (var abilityConfig in parameter2._abilityConfigs)
+                _abilities.Add(abilityConfig.AbilityName,new Ability(_caster,entityTargetingComponent,abilityConfig));
+
+            Stats = new Dictionary<int, Stat>();
+            
+            IsInitialization = true;
         }
-
+        
         public void CastAbilityByName(string abilityName,IEnumerable<ITargetAbleEntity> availableTargets)
         {
-            if (Abilities.TryGetValue(abilityName, out var ability))
+            if (_abilities.TryGetValue(abilityName, out var ability))
                 ability.ExecuteAbility(availableTargets);
             else
-                Debug.LogError($"{Caster.GameEntity.name} cant find ability {abilityName}");
+                Debug.LogError($"{_caster.GameEntity.name} cant find ability {abilityName}");
         }
 
         public void CastAbility(IEnumerable<ITargetAbleEntity> availableTargets)
         {
-            if (Abilities.Count == 0)
+            if (_abilities.Count == 0)
                 return;
-            Abilities.First().Value?.ExecuteAbility(availableTargets);
+            _abilities.First().Value?.ExecuteAbility(availableTargets);
         }
 
         public void CancelCast()
         {
-            foreach (var abilities in Abilities.Values)
+            foreach (var abilities in _abilities.Values)
             {
                 if (abilities.IsCasting)
                     abilities.CancelCast();
             }
         }
-
-
-        public bool IsInitialization { get; }
-        public void Init(BaseGameEntity parameter1, AbilityComponentConfig parameter2)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Init(BaseGameEntity parameter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public BaseGameEntity GameEntity { get; }
+        
         public void UpdateComponent()
         {
-            throw new NotImplementedException();
         }
-
-        public Dictionary<int, Stat> Stats { get; }
+        
         public IEnumerable<IStatHolder> GetNestedStatHolders()
         {
-            throw new NotImplementedException();
+            return _abilities.Values.SelectMany(ability => ability.GetNestedStatHolders());
         }
     }
 }

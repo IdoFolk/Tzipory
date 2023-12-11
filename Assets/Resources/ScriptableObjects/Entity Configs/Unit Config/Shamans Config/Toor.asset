@@ -112,7 +112,7 @@ MonoBehaviour:
     MaxDistanceFromPath: 0
     PrivateRabbitIncrement: 0
     PrivateRabbitDistanceToUpdate: 0
-  _abilityComponent: 0
+  _abilityComponent: 1
   AbilityComponentConfig:
     _abilityConfigs:
     - {fileID: 11400000, guid: 1ae853bb9bae2264d947b505396fb4e8, type: 2}

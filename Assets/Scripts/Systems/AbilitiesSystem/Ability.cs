@@ -15,7 +15,6 @@ namespace Tzipory.Systems.AbilitySystem
         private const string ABILITY_LOG_GROUP = "AbilityHandler";
         
         private readonly IEntityTargetingComponent _entityTargetingComponent;
-        private readonly IAbilityCaster _abilityCaster;
         private readonly IAbilityExecutor _abilityExecutor;
         private readonly IPriorityTargeting _priorityTargeting;
         
@@ -66,10 +65,7 @@ namespace Tzipory.Systems.AbilitySystem
             Stats.Add((int)Constant.StatsId.AbilityCastTime,new Stat(Constant.StatsId.AbilityCastTime.ToString(), config.CastTime, int.MaxValue,
                 (int)Constant.StatsId.AbilityCastTime));
             
-            _abilityCaster = FactorySystem.ObjectFactory.AbilityFactory.GetAbilityCaster(entityTargetingComponent,config);
             _abilityExecutor = FactorySystem.ObjectFactory.AbilityFactory.GetAbilityExecutor(caster,config);
-
-            _abilityCaster.OnCast += StartCooldown;
             
             _priorityTargeting =
                 FactorySystem.ObjectFactory.TargetingPriorityFactory.GetTargetingPriority(entityTargetingComponent,
@@ -81,9 +77,6 @@ namespace Tzipory.Systems.AbilitySystem
         public IEnumerable<IStatHolder> GetNestedStatHolders()
         {
             List<IStatHolder> statHolders = new List<IStatHolder> { this };
-
-            if (_abilityCaster is IStatHolder abilityCaster)
-                statHolders.AddRange(abilityCaster.GetNestedStatHolders());
             
             if (_abilityExecutor is IStatHolder abilityExecutor)
                 statHolders.AddRange(abilityExecutor.GetNestedStatHolders());
@@ -107,12 +100,16 @@ namespace Tzipory.Systems.AbilitySystem
         private void Cast(IEnumerable<ITargetAbleEntity> availableTarget)
         {
             var currentTarget = _priorityTargeting.GetPriorityTarget(availableTarget);
-            
+
             if (currentTarget == null)
+            {
+                CancelCast();
                 return;
+            }
             
             Logger.Log($"{_entityTargetingComponent.GameEntity.name} cast ability {AbilityName} on {currentTarget.GameEntity.name}",ABILITY_LOG_GROUP);
-            _abilityCaster.Cast(currentTarget,_abilityExecutor);
+            _abilityExecutor.Execute(currentTarget);
+            StartCooldown();
         }
         
         public void CancelCast()
@@ -131,10 +128,5 @@ namespace Tzipory.Systems.AbilitySystem
 
         private void ResetAbility() =>
             _isReady = true;
-
-        ~Ability()
-        {
-            _abilityCaster.OnCast -= StartCooldown;
-        }
     }
 }

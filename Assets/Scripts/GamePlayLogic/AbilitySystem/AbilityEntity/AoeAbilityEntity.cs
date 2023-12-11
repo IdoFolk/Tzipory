@@ -1,5 +1,4 @@
-﻿using Tzipory.ConfigFiles.AbilitySystem;
-using Tzipory.GamePlayLogic.AbilitySystem;
+﻿using Tzipory.GamePlayLogic.AbilitySystem;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.AbilitySystem;
 using Tzipory.Systems.Entity.EntityComponents;
@@ -9,14 +8,16 @@ using UnityEngine;
 
 namespace GamePlayLogic.AbilitySystem.AbilityEntity
 {
-    public class AOEAbility : BaseAbility , ITargetableExitReciever
+    public class AoeAbilityEntity : BaseAbilityEntity , ITargetableExitReciever
     {
         private float _duration;
         
-        protected override void Init(ITargetAbleEntity caster, Vector2 parameter, IAbilityExecutor executor, AbilityConfig config)
+        public override void Init(ITargetAbleEntity caster, Vector2 parameter, IAbilityExecutor executor)
         {
-            base.Init(caster, parameter, executor, config);
+            base.Init(caster, parameter, executor);
             _duration = caster.EntityStatComponent.GetStat(Constant.StatsId.AoeDuration).CurrentValue;
+            
+            _abilityVisualHandler.Play();
             
             //_visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
         }

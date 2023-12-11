@@ -2,7 +2,7 @@
 
 namespace Tzipory.Systems.AbilitySystem
 {
-    public interface IAbilityExecutor
+    public interface IAbilityExecutor 
     {
         public void Execute(ITargetAbleEntity target);
     }

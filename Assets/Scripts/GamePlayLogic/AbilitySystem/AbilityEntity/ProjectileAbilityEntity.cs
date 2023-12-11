@@ -1,6 +1,4 @@
-﻿using System;
-using Tzipory.ConfigFiles.AbilitySystem;
-using Tzipory.GamePlayLogic.AbilitySystem;
+﻿using Tzipory.GamePlayLogic.AbilitySystem;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.AbilitySystem;
 using Tzipory.Systems.Entity.EntityComponents;
@@ -9,15 +7,15 @@ using UnityEngine;
 
 namespace GamePlayLogic.AbilitySystem.AbilityEntity
 {
-    public class ProjectileAbilityEntity : BaseAbility
+    public class ProjectileAbilityEntity : BaseAbilityEntity
     {
         private float _penetrationNumber;
         private float _speed;
         private Vector3 _dir;
         
-        protected override void Init(ITargetAbleEntity caster, Vector2 parameter,IAbilityExecutor executor, AbilityConfig config)
+        public override void Init(ITargetAbleEntity caster, Vector2 parameter,IAbilityExecutor executor)
         {
-            base.Init(caster, parameter,executor, config);
+            base.Init(caster, parameter,executor);
             _speed = caster.EntityStatComponent.GetStat(Constant.StatsId.ProjectileSpeed).CurrentValue;
             _penetrationNumber = caster.EntityStatComponent.GetStat(Constant.StatsId.ProjectilePenetration).CurrentValue;
             

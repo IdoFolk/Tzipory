@@ -3,6 +3,7 @@ using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.GamePlayLogic.EntitySystem.AIComponent;
 using Tzipory.GamePlayLogic.EntitySystem.EntityComponent;
 using Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents;
+using Tzipory.Systems.AbilitySystem;
 using Tzipory.Systems.Entity.EntityComponents;
 
 namespace Tzipory.Systems.FactorySystem
@@ -52,8 +53,7 @@ namespace Tzipory.Systems.FactorySystem
     {
         public static IEntityAbilitiesComponent GetAbilitiesComponent(AbilityComponentConfig abilityComponentConfig)
         {
-            
-            throw new NotImplementedException();
+            return new AbilityHandler();
         }
     }
     

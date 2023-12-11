@@ -1,68 +1,41 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.GamePlayLogic.AbilitySystem;
 using Tzipory.Helpers.Consts;
+using Tzipory.Systems.AbilitySystem;
 using Tzipory.Systems.Entity.EntityComponents;
-using Tzipory.Systems.StatusSystem;
-using Tzipory.Systems.TargetingSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace Tzipory.Systems.AbilitySystem
+namespace GamePlayLogic.AbilitySystem.AbilityEntity
 {
-    public class ProjectileAbilityEntity : BaseAbilityEntity , ITargetableEntryReciever
+    public class ProjectileAbilityEntity : BaseAbility
     {
-        [SerializeField] private ColliderTargetingArea _colliderTargeting;
-        
         private float _penetrationNumber;
         private float _speed;
         private Vector3 _dir;
-
-        protected override void Init(ITargetAbleEntity target,IAbilityExecutor parameter1, AbilityConfig parameter2, Dictionary<int, Stat> stats)
+        
+        protected override void Init(ITargetAbleEntity caster, Vector2 parameter,IAbilityExecutor executor, AbilityConfig config)
         {
-           // base.Init(parameter1, parameter2, stats);
-
-            float speed = 0;
-            float penetrationNumber = 1;
-
-            if (stats.TryGetValue((int)Constant.StatsId.ProjectileSpeed, out var speedStat))
-            {
-                speed = speedStat.CurrentValue;
-            }
-
-            if (stats.TryGetValue((int)Constant.StatsId.ProjectilePenetration, out var penetrationNumberStat))
-            {
-                penetrationNumber = penetrationNumberStat.CurrentValue;
-            }
+            base.Init(caster, parameter,executor, config);
+            _speed = caster.EntityStatComponent.GetStat(Constant.StatsId.ProjectileSpeed).CurrentValue;
+            _penetrationNumber = caster.EntityStatComponent.GetStat(Constant.StatsId.ProjectilePenetration).CurrentValue;
             
-            _colliderTargeting.Init(this);
-            _speed = speed;
-            _penetrationNumber = penetrationNumber;
-            _dir = (target.GameEntity.transform.position - transform.position).normalized;
+            _dir = parameter - (Vector2)transform.position.normalized;
             transform.up = _dir;
         }
 
-        public void Init(ITargetAbleEntity target,float speed, float penetrationNumber,IAbilityExecutor abilityExecutor) 
+        private void Update()
         {
-         //   base.Init(abilityExecutor);
-            
-            
-        }
-
-        protected override void Update()
-        {
-            base.Update();
-            
             transform.Translate(_dir * (_speed * GAME_TIME.GameDeltaTime));
 
             if (_penetrationNumber <= 0)
                 Destroy(gameObject);
         }
 
-        public void RecieveTargetableEntry(ITargetAbleEntity targetable)
+        public override void RecieveTargetableEntry(ITargetAbleEntity targetable)
         {
-           // if (targetable.GameEntity.EntityInstanceID == AbilityExecutor.Caster.GameEntity.EntityInstanceID) return;
-            
-            //AbilityExecutor.Execute(targetable);
+            AbilityExecutor.Execute(targetable);
             _penetrationNumber--;
         }
     }

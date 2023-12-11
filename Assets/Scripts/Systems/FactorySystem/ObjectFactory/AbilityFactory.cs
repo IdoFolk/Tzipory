@@ -33,9 +33,9 @@ namespace Tzipory.Systems.FactorySystem.ObjectFactory
             switch (abilityConfig.AbilityExecuteType)
             {
                 case AbilityExecuteType.AOE:
-                    return  new AoeAbilityExecuter(caster,abilityConfig);
+                    return  new StatEffectExecuter(caster,abilityConfig);
                 case AbilityExecuteType.Single:
-                    return new SingleAbilityExecuter(caster,abilityConfig);
+                    return new AoeInstantiateExecuter(caster,abilityConfig);
                 case AbilityExecuteType.Chain:
                     break;
                 default:

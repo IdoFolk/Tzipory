@@ -438,6 +438,7 @@ MonoBehaviour:
   _configManager:
     _shamanConfig:
       _config:
+      - {fileID: 11400000, guid: a45bc0a20042937459cda815bc4439e7, type: 2}
       - {fileID: 11400000, guid: cde60de47b1ebb04a872a5813e15c9be, type: 2}
     _enemyConfig:
       _config:

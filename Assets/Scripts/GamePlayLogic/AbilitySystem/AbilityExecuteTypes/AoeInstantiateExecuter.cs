@@ -13,7 +13,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 {
     public class AoeInstantiateExecuter : IAbilityExecutor , IStatHolder , IInitialization<ITargetAbleEntity,ExecuterConfig,IAbilityExecutor,AbilityVisualConfig>
     {
-        private const string AOE_PREFAB_PATH = "";
+        private const string AOE_PREFAB_PATH = "Prefabs/Ability/AoeAbilityEntity";
 
         private GameObject _gameObject;
         

@@ -6903,11 +6903,11 @@ PrefabInstance:
     - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: _shamanConfigs.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
+      objectReference: {fileID: 11400000, guid: cde60de47b1ebb04a872a5813e15c9be, type: 2}
     - target: {fileID: 6586841249859402961, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: _shamanConfigs.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
+      objectReference: {fileID: 11400000, guid: a45bc0a20042937459cda815bc4439e7, type: 2}
     - target: {fileID: 7947276915454292336, guid: 610576e94ee865c468f8c76e8287a909, type: 3}
       propertyPath: m_Name
       value: MapNode (1)

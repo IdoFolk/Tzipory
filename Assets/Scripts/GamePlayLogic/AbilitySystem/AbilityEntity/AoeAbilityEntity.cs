@@ -23,9 +23,12 @@ namespace GamePlayLogic.AbilitySystem.AbilityEntity
             _abilityVisualConfig = abilityVisualConfig;
             
             Instantiate(abilityVisualConfig.VisualObject, _abilityVisualHandler.transform);
-            
-            abilityVisualConfig.TargetAnimationConfig.LoopTime = _duration;
-            _abilityVisualHandler.Play();
+
+            if (abilityVisualConfig._abilityVisualType == AbilityVisualType.TimeLine)
+            {
+                abilityVisualConfig.TargetAnimationConfig.LoopTime = _duration;
+                _abilityVisualHandler.Play();
+            }
             
             //_visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
         }

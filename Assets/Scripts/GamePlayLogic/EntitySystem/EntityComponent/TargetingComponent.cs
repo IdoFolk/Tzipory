@@ -6,6 +6,7 @@ using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.TargetingSystem;
 using Tzipory.Tools.Interface;
+using Unity.VisualScripting;
 using UnityEngine;
 using Logger = Tzipory.Tools.Debag.Logger;
 
@@ -157,9 +158,12 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 
                 targetAbleEntity.OnTargetDisable -= RemoveTarget;
                 _availableTargets.Remove(targetAbleEntity);
-                
-                if (targetAbleEntity.GameEntity.EntityInstanceID == CurrentTarget.GameEntity.EntityInstanceID)
-                    TrySetNewTarget();
+
+                if (HaveTarget)
+                {
+                    if (targetAbleEntity.GameEntity.EntityInstanceID == CurrentTarget.GameEntity.EntityInstanceID)
+                        TrySetNewTarget();
+                }
             }
         }
 

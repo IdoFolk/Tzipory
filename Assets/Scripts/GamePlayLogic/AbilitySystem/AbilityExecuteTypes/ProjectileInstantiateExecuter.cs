@@ -11,7 +11,7 @@ using Object = UnityEngine.Object;
 
 namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 {
-    public class ProjectileInstantiateExecuter : IAbilityExecutor , IStatHolder , IInitialization<ITargetAbleEntity,ExecuterConfig,IAbilityExecutor>
+    public class ProjectileInstantiateExecuter : IAbilityExecutor , IStatHolder , IInitialization<ITargetAbleEntity,ExecuterConfig,IAbilityExecutor,AbilityVisualConfig>
     {
         private const string PROJECTILE_PREFAB_PATH = "Prefabs/Ability/ProjectileAbilityEntity";
         
@@ -21,12 +21,16 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 
         private IAbilityExecutor _abilityExecutor;
         
+        private AbilityVisualConfig  _abilityVisualConfig;
+        
         public Dictionary<int, Stat> Stats { get; private set; }
         public bool IsInitialization { get; private set; }
         
-        public void Init(ITargetAbleEntity caster,ExecuterConfig parameter,IAbilityExecutor abilityExecutor)
+        public void Init(ITargetAbleEntity caster,ExecuterConfig parameter,IAbilityExecutor abilityExecutor,AbilityVisualConfig abilityVisualConfig)
         {
             _caster = caster;
+            
+            _abilityVisualConfig = abilityVisualConfig;
             
             Stats = new Dictionary<int, Stat>
             {
@@ -55,12 +59,17 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
         public void Execute(ITargetAbleEntity target)
         {
             var projectilePrefab = Object.Instantiate(_projectilePrefab,_caster.GameEntity.transform.position,Quaternion.identity);
-            projectilePrefab.GetComponent<ProjectileAbilityEntity>().Init(_caster,target.GameEntity.transform.position,_abilityExecutor);
+            projectilePrefab.GetComponent<ProjectileAbilityEntity>().Init(_caster,target.GameEntity.transform.position,_abilityExecutor,_abilityVisualConfig);
         }
         
         public IEnumerable<IStatHolder> GetNestedStatHolders()
         {
-            return new IStatHolder[] { this };
+            List<IStatHolder> statHolders = new List<IStatHolder> {this};
+
+            if (_abilityExecutor is IStatHolder statHolder)
+                statHolders.Add(statHolder);
+
+            return statHolders;
         }
     }
 }

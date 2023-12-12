@@ -35,8 +35,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             Init(baseGameEntity);
             
             _statHolders = new List<IStatHolder>();
-            
-            _statHolders.AddRange(statHolders);  
+
+            foreach (var statHolder in statHolders)
+                _statHolders.AddRange(statHolder.GetNestedStatHolders());
             
             IsInitialization = true;
         }

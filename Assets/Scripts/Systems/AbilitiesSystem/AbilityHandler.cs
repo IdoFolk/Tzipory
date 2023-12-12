@@ -65,7 +65,12 @@ namespace Tzipory.Systems.AbilitySystem
         
         public IEnumerable<IStatHolder> GetNestedStatHolders()
         {
-            return _abilities.Values.SelectMany(ability => ability.GetNestedStatHolders());
+            List<IStatHolder> statHolders  = new List<IStatHolder>();
+
+            foreach (var abilitiesValue in _abilities.Values)
+                statHolders.AddRange(abilitiesValue.GetNestedStatHolders());
+
+            return statHolders;
         }
     }
 }

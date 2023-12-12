@@ -103,7 +103,8 @@ namespace Tzipory.Systems.AbilitySystem
 
             if (currentTarget == null)
             {
-                CancelCast();
+                IsCasting = false;
+                _isReady = true;
                 return;
             }
             

@@ -62,7 +62,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents
 
         public IEnumerable<IStatHolder> GetNestedStatHolders()
         {
-            throw new System.NotImplementedException();
+            return new IStatHolder[] {this};
         }
 
         public void SetDestination(Vector3 destination, MoveType moveType)

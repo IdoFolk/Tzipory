@@ -117,6 +117,9 @@ namespace Tzipory.Tools.TimeSystem
         
         public void TickAllTimers()
         {
+            if (_timersList.Count == 0)
+                return;
+            
             for (int i = 0; i < _timersList.Count; i++)
                 _timersList[i].TickTimer();
 #if UNITY_EDITOR
@@ -146,8 +149,9 @@ namespace Tzipory.Tools.TimeSystem
                 _timersList.Remove(timer);
                 return;
             }
-
-            Logger.LogError("Could not find time to remove");
+#if UNITY_EDITOR
+            Logger.LogError($"{_gameEntity.name} Could not find time to remove"); 
+#endif
         }
     }
 }

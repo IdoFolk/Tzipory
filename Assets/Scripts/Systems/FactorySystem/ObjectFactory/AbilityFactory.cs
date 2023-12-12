@@ -26,7 +26,7 @@ namespace Tzipory.Systems.FactorySystem.ObjectFactory
             {
                 case AbilityExecuteType.AOE:
                     var aoeExecuter = new AoeInstantiateExecuter();
-                    aoeExecuter.Init(caster,parameter.AbilityExecute,secondaryAbilityExecute);
+                    aoeExecuter.Init(caster,parameter.AbilityExecute,secondaryAbilityExecute,parameter.AbilityVisualConfig);
                     return aoeExecuter;
                 case AbilityExecuteType.StatExecuter:
                     return new StatEffectExecuter();
@@ -34,7 +34,7 @@ namespace Tzipory.Systems.FactorySystem.ObjectFactory
                     break;
                 case AbilityExecuteType.Projectile:
                     var projectileExecuter = new ProjectileInstantiateExecuter();
-                    projectileExecuter.Init(caster,parameter.AbilityExecute,secondaryAbilityExecute);
+                    projectileExecuter.Init(caster,parameter.AbilityExecute,secondaryAbilityExecute,parameter.AbilityVisualConfig);
                     return projectileExecuter;
                 default:
                     throw new ArgumentOutOfRangeException();
@@ -52,7 +52,7 @@ namespace Tzipory.Systems.FactorySystem.ObjectFactory
             {
                 case AbilityExecuteType.AOE:
                     var aoeExecuter = new AoeInstantiateExecuter();
-                    aoeExecuter.Init(caster,parameter.SecondaryAbilityExecute,statEffectExecuter);
+                    aoeExecuter.Init(caster,parameter.SecondaryAbilityExecute,statEffectExecuter,parameter.AbilityVisualConfig);
                     return aoeExecuter;
                 case AbilityExecuteType.StatExecuter:
                     return new StatEffectExecuter();
@@ -60,7 +60,7 @@ namespace Tzipory.Systems.FactorySystem.ObjectFactory
                     break;
                 case AbilityExecuteType.Projectile:
                     var projectileExecuter = new ProjectileInstantiateExecuter();
-                    projectileExecuter.Init(caster,parameter.SecondaryAbilityExecute,statEffectExecuter);
+                    projectileExecuter.Init(caster,parameter.SecondaryAbilityExecute,statEffectExecuter,parameter.AbilityVisualConfig);
                     return projectileExecuter;
                 default:
                     return null;

@@ -7,8 +7,8 @@ namespace Tzipory.ConfigFiles.AbilitySystem
     [System.Serializable]
     public struct AbilityVisualConfig
     {
-        //[SerializeField] public AnimationConfig AbilityAnimationConfig;
-        [SerializeField] private GameObject _gameObject;
+        [SerializeField] public AnimationConfig AbilityAnimationConfig;
+        [SerializeField] public GameObject VisualObject;
         [SerializeField,TabGroup("Ability Visual Config"),Tooltip("")] public bool HaveEffectOnEntity;
         [SerializeField, TabGroup("Ability Visual Config"), Tooltip(""), ShowIf(nameof(HaveEffectOnEntity))]
         public AnimationConfig TargetAnimationConfig;

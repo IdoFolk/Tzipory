@@ -26,7 +26,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
             IsInitialization = true;
         }
 
-        public void Init(BaseGameEntity parameter)
+        private void Init(BaseGameEntity parameter)
         {
             GameEntity = parameter;
         }
@@ -37,14 +37,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                 _self.EntityTargetingComponent.CurrentTarget.EntityHealthComponent.IsEntityDead)
                 _self.EntityTargetingComponent.TrySetNewTarget();
             
-            if (_self.EntityMovementComponent.IsMoving)
-            {
-                _self.EntityAbilitiesComponent?.CancelCast();
-                return;
-            }
-            
-            _self.EntityAbilitiesComponent?.CastAbility(_self.EntityTargetingComponent.AvailableTargets);
-            
             _currentDecisionInterval -= GAME_TIME.GameDeltaTime;
             
             if (_currentDecisionInterval < 0)
@@ -52,6 +44,16 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                 _self.EntityTargetingComponent.TrySetNewTarget();
                 _currentDecisionInterval = _baseDecisionInterval;
             }
+            
+            if (_self.EntityMovementComponent.IsMoving)
+            {
+                if (_self.EntityAbilitiesComponent.IsCasting)
+                    _self.EntityAbilitiesComponent?.CancelCast();
+                
+                return;
+            }
+            
+            _self.EntityAbilitiesComponent?.CastAbility(_self.EntityTargetingComponent.AvailableTargets);
 
             if (_self.EntityTargetingComponent.HaveTarget)//temp
                 _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);

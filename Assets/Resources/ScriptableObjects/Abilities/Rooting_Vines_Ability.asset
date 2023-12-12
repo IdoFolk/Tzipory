@@ -12,142 +12,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 929bf20fee544513a43c5c82f42f499a, type: 3}
   m_Name: Rooting_Vines_Ability
   m_EditorClassIdentifier: 
-  _abilityId: 11
-  _abilityName: Rooting Vines
+  AbilityId: 0
+  AbilityName: 
   _targetingPriorityType: 0
-  _abilityCastType: 1
-  _projectileSpeed: 0
-  _projectilePenetration: 0
-  _abilityExecuteType: 0
-  _aoeRadius: 5
-  _aoeDuration: 1
-  _chainRadius: 0
-  _chainDuration: 0
-  _chainAmount: 0
-  _cooldown: 8
-  _castTime: 1
-  _statusEffectConfigs:
-  - _statusEffectName: 
-    _statProcessPriority: 0
-    _affectedStatId: 0
-    _statEffectType: 1
-    _duration: 0
-    _interval: 0
-    StatModifier:
-      _statusModifierType: 2
-      Modifier: 20
-      _ringModifiers: []
-    _effectSequence:
-      _sequenceName: 
-      _id: 0
-      _startDelay: 0
-      _endDelay: 0
-      _isStackable: 0
-      _isInterruptable: 0
-      _effectActionContainers: []
-    _overrideGlobalPopUpTextConfig: 1
-    _popUpTextConfig:
-      DisablePopUp: 0
-      PopUpTextType: 3
-      RepeatPattern: 0
-      RoundNumbers: 1
-      Text: Rooted
-      Color: {r: 0.31428504, g: 1, b: 0, a: 0}
-      OverrideSize: 0
-      FontSize: 0
-      OverrideRiseSpeedAndTTL: 0
-      RiseSpeed: 0
-      TimeToLive: 0
-      OverrideStartSize: 0
-      StartSize: {x: 0, y: 0}
-      AddRandomMoveOffSet: 0
-      MoveOffSet: {x: 0, y: 0}
-      OverrideAnimationCurve: 0
-      PopUpTextMoveCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      PopUpTextScaleCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      PopUpTextAlphaCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  - _statusEffectName: Root
-    _statProcessPriority: 999
-    _affectedStatId: 5
-    _statEffectType: 0
-    _duration: 5
-    _interval: 0
-    StatModifier:
-      _statusModifierType: 0
-      Modifier: 0
-      _ringModifiers: []
-    _effectSequence:
-      _sequenceName: 
-      _id: 0
-      _startDelay: 0
-      _endDelay: 0
-      _isStackable: 0
-      _isInterruptable: 0
-      _effectActionContainers: []
-    _overrideGlobalPopUpTextConfig: 1
-    _popUpTextConfig:
-      DisablePopUp: 1
-      PopUpTextType: 3
-      RepeatPattern: 0
-      RoundNumbers: 0
-      Text: 
-      Color: {r: 0.010145942, g: 0.7169812, b: 0.020953974, a: 1}
-      OverrideSize: 0
-      FontSize: 0
-      OverrideRiseSpeedAndTTL: 0
-      RiseSpeed: 0
-      TimeToLive: 0
-      OverrideStartSize: 0
-      StartSize: {x: 0, y: 0}
-      AddRandomMoveOffSet: 0
-      MoveOffSet: {x: 0, y: 0}
-      OverrideAnimationCurve: 0
-      PopUpTextMoveCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      PopUpTextScaleCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      PopUpTextAlphaCurve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-  _doExitEffects: 0
-  _statusEffectConfigsOnExit: []
-  _abilityVisualConfig:
+  AbilityExecute:
+    _abilityExecuteType: 0
+    _projectileSpeed: 0
+    _projectilePenetration: 0
+    _aoeRadius: 0
+    _aoeDuration: 0
+    _chainRadius: 0
+    _chainDuration: 0
+    _chainAmount: 0
+  HaveSecondaryAbilityExecuteType: 0
+  SecondaryAbilityExecute:
+    _abilityExecuteType: 0
+    _projectileSpeed: 0
+    _projectilePenetration: 0
+    _aoeRadius: 0
+    _aoeDuration: 0
+    _chainRadius: 0
+    _chainDuration: 0
+    _chainAmount: 0
+  StatusEffectConfigs: []
+  DoExitEffects: 0
+  StatusEffectConfigsOnExit: []
+  Cooldown: 0
+  CastTime: 0
+  AbilityVisualConfig:
     AbilityAnimationConfig:
       HaveEnterAndExit: 0
       EntryTimeLine: {fileID: 0}
       LoopTimeLine: {fileID: 0}
       ExitTimeLine: {fileID: 0}
       LoopTime: 0
-    HaveEffectOnEntity: 0
+    VisualObject: {fileID: 6357766935703885941, guid: 62dd00187a9228647b130c089199ee6e, type: 3}
+    HaveEffectOnEntity: 1
     TargetAnimationConfig:
-      HaveEnterAndExit: 0
-      EntryTimeLine: {fileID: 0}
-      LoopTimeLine: {fileID: 0}
-      ExitTimeLine: {fileID: 0}
+      HaveEnterAndExit: 1
+      EntryTimeLine: {fileID: 11400000, guid: 7b0e21277756f264cb84447d24a6b0c2, type: 2}
+      LoopTimeLine: {fileID: 11400000, guid: 7b0e21277756f264cb84447d24a6b0c2, type: 2}
+      ExitTimeLine: {fileID: 11400000, guid: df695a72a85cb7842b00dfb0913230f1, type: 2}
       LoopTime: 0

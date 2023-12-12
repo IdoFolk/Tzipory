@@ -26,7 +26,7 @@ namespace Tzipory.Systems.Entity
 
         protected virtual void Awake()
         {
-            EntityTimer = new TimerHandler();
+            EntityTimer = new TimerHandler(this);
             EntityTransform = transform;
             EntityInstanceID = InstanceIDGenerator.GetInstanceID();
             EntityComponent = new List<IEntityComponent>();

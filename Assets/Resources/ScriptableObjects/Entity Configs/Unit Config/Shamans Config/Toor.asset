@@ -27,7 +27,7 @@ MonoBehaviour:
     TargetingPriorityType: 2
   VisualComponentConfig:
     Sprite: {fileID: 21300000, guid: f4e62ad13a5770c44aac2a924dab6155, type: 3}
-    Icon: {fileID: 21300000, guid: 97554a74e79997844a27c96e13c4e3dd, type: 3}
+    Icon: {fileID: 1885256787, guid: 2a862c0ebda887f42a111fbbce4d7fc0, type: 3}
     HpBar: 1
     HaveSilhouette: 1
     UIIndicator: 1

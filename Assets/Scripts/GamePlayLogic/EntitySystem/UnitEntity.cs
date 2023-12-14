@@ -86,7 +86,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             gameObject.name =  $"{_config.name} InstanceID: {EntityInstanceID}";
 
             gameObject.tag = _config.UnitType.ToString();
-            _groundCollider.tag = _config.UnitType.ToString();
+            _groundCollider.gameObject.tag = _config.UnitType.ToString();
 
             List<IStatHolder> statHolders = new List<IStatHolder>();
             

@@ -48,7 +48,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents
             AgentMoveComponent = agentMoveComponent;
 
             _privateRabbitIncrement = config.PrivateRabbitIncrement;
-            _privateRabbitDistanceToUpdate = config.PrivateRabbitDistanceToUpdate;
+            _privateRabbitDistanceToUpdate = config.DistanceTORabbitToUpdate;
             _maxDistanceFromPath = config.MaxDistanceFromPath;
 
             _pathCreator = config.PathCreator;

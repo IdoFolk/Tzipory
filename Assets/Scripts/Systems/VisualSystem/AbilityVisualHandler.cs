@@ -1,4 +1,3 @@
-using Tzipory.ConfigFiles.AbilitySystem;
 using Tzipory.ConfigFiles.Visual;
 using Tzipory.Tools.Interface;
 using Tzipory.Tools.TimeSystem;
@@ -9,7 +8,7 @@ namespace Tzipory.Systems.VisualSystem
 {
     public class AbilityVisualHandler : MonoBehaviour , IInitialization<AnimationConfig>
     {
-        [SerializeField] private PlayableDirector _playableDirector;
+        private PlayableDirector _currentPlayableDirector;
 
         private AnimationConfig _animationConfig;
     
@@ -26,24 +25,31 @@ namespace Tzipory.Systems.VisualSystem
     
         public void Play()
         {
-            _playableDirector.playableAsset = _animationConfig.EntryTimeLine;
-            _playableDirector.Play();
+            if (_currentPlayableDirector is not null)
+                Destroy(_currentPlayableDirector);
+            
+            _currentPlayableDirector = Instantiate(_animationConfig.EntryTimeLine, transform);
+            _currentPlayableDirector.Play();
 
             _currentActiveTimer = GAME_TIME.TimerHandler.StartNewTimer(_animationConfig.EntryTime, "Ability animation Entry Time",SetToLoopStat);
         }
 
         private void SetToLoopStat()
         {
-            _playableDirector.playableAsset = _animationConfig.LoopTimeLine;
-            _playableDirector.Play();
+            Destroy(_currentPlayableDirector.gameObject);
+            
+            _currentPlayableDirector = Instantiate(_animationConfig.LoopTimeLine, transform);
+            _currentPlayableDirector.Play();
         
             _currentActiveTimer = GAME_TIME.TimerHandler.StartNewTimer(_animationConfig.LoopTime, "Ability animation Loop Time",SetToExitStat);
         }
 
         private void SetToExitStat()
         {
-            _playableDirector.playableAsset = _animationConfig.ExitTimeLine;
-            _playableDirector.Play();
+            Destroy(_currentPlayableDirector);
+            
+            _currentPlayableDirector = Instantiate(_animationConfig.LoopTimeLine, transform);
+            _currentPlayableDirector.Play();
         
             _currentActiveTimer = GAME_TIME.TimerHandler.StartNewTimer(_animationConfig.ExitTime, "Ability animation Exit Time",Stop);
         }
@@ -52,13 +58,12 @@ namespace Tzipory.Systems.VisualSystem
         {
             _currentActiveTimer.StopTimer();
         
-            if (_playableDirector is not null)
-                _playableDirector.Stop();
+            if (_currentPlayableDirector is not null)
+                Destroy(_currentPlayableDirector);
         }
 
         private void OnValidate()
         {
-            _playableDirector ??= GetComponentInChildren<PlayableDirector>();
         }
     }
 }

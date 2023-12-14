@@ -22,13 +22,7 @@ namespace Tzipory.SerializeData.StatSystemSerializeData
 
         public int SerializeObjectId => _id;
         public int SerializeTypeId => Constant.DataId.STAT_DATA_ID;
-
-        public StatSerializeData(StatConfig statConfig)
-        {
-             _name  = statConfig.Name;
-             _id = statConfig.ID;
-             _value = 0;
-        }
+        
 
         public StatSerializeData(Stat stat)
         {

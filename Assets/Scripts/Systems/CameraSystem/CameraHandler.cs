@@ -4,8 +4,10 @@ using Cinemachine;
 using Sirenix.OdinInspector;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Helpers;
-using Tzipory.Tools.TimeSystem;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.CameraSystem
@@ -20,6 +22,8 @@ namespace Tzipory.Systems.CameraSystem
         private const float FULL_HD_PIXELS_Y = 1080;
         private const int LOCKED_CAMERA_ZOOM = 9;
         private const string CAMERA_LOG_GROUP = "CameraSystem";
+        
+        private static AnimationCurve _defaultCurve = AnimationCurve.Linear(0, 0, 1, 1);
         #endregion
         
         #region SerialzedFields
@@ -37,13 +41,16 @@ namespace Tzipory.Systems.CameraSystem
 
         [SerializeField, Tooltip("toggle whether the camera moves to the mouse position when zooming")]
         private bool _enableZoomMovesCamera = false;
+        
+        [Header("Game Objects")]
+        [TabGroup("Cameras"),SerializeField] private Camera _mainCamera;
+        [TabGroup("Cameras"),SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
+        [TabGroup("Cameras"),SerializeField] private Transform _cameraFollowObject;
+        [TabGroup("Cameras"),SerializeField] private CinemachineBrain _cinemachineBrain;
+        [TabGroup("Post Process"),SerializeField] private Volume _postProcessVolume;
 
-        [Header("Gameobjects")] 
-        [SerializeField] private Camera _mainCamera;
+        public Volume PostProcessVolume => _postProcessVolume;
 
-        [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
-        [SerializeField] private Transform _cameraFollowObject;
-        [SerializeField] private CinemachineBrain _cinemachineBrain;
         #endregion
         
         #region Fields
@@ -89,6 +96,7 @@ namespace Tzipory.Systems.CameraSystem
             //caching
             _cinemachineTransposer = _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
             _cinemachineBrain = _mainCamera.GetComponent<CinemachineBrain>();
+            
             _cinemachineTransposer.m_XDamping = _cameraSettings.XDamping;
             _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
             _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;

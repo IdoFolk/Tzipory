@@ -1,5 +1,4 @@
-﻿using Tzipory.Tools.Interface;
-
+﻿
 namespace Tzipory.Systems.Entity
 {
     public interface IEntityComponent :  IEntity

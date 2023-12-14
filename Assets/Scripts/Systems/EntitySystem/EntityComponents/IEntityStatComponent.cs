@@ -12,7 +12,7 @@ namespace Tzipory.Systems.Entity.EntityComponents
     {
         event Action<EffectSequenceConfig> OnStatusEffectAdded;//Temp!
 
-        public IDisposable AddStatEffect(StatEffectConfig statEffectConfig);
+        public IStatEffectProcess AddStatEffect(StatEffectConfig statEffectConfig);
         public Stat GetStat(Constant.StatsId statIdToFind);
 
         public Stat GetStat(int id);

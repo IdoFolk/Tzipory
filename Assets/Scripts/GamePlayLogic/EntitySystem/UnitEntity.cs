@@ -65,7 +65,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public EntityType EntityType { get; private set; }
         
         public bool IsInitialization { get; private set; }
-        
+
+        public UnitEntityConfig Config => _config;
+
         public void Init(BaseGameEntity parameter)
         {
             throw new NotImplementedException();

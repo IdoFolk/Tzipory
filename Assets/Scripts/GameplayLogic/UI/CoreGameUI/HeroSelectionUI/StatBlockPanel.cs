@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
 {
-    public class StatBlockPanel : MonoBehaviour, IInitialization<Dictionary<int, Stat>>
+    public class StatBlockPanel : MonoBehaviour, IInitialization<IEnumerable<Stat>>
     {
         [SerializeField] private StatBlockUI[] _statBlocks;
         [SerializeField] private StatBarHandler[] _statBarHandlers;
@@ -14,21 +14,23 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
 
         public bool IsInitialization { get; }
 
-        public void Init(Dictionary<int, Stat> stats)
+        public void Init(IEnumerable<Stat> stats)
         {
             foreach (var statBlock in _statBlocks)
             {
-                if (stats.TryGetValue((int)statBlock.StatId, out var stat))
+                foreach (var stat in stats)
                 {
-                    statBlock.Init(stat.Name, stat.CurrentValue, _statBonusAdditionColor, _statBonusReductionColor);
+                    if ((int)statBlock.StatId == stat.Id)
+                        statBlock.Init(stat.Name, stat.CurrentValue, _statBonusAdditionColor, _statBonusReductionColor);
                 }
             }
 
             foreach (var statBar in _statBarHandlers)
             {
-                if (stats.TryGetValue((int)statBar.StatType, out var stat))
+                foreach (var stat in stats)
                 {
-                    statBar.Init(stat);
+                    if ((int)statBar.StatType == stat.Id)
+                        statBar.Init(stat);
                 }
             }
         }

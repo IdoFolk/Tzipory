@@ -95,7 +95,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             return  null;
         }
         
-        public IDisposable AddStatEffect(StatEffectConfig statEffectConfig)
+        public IStatEffectProcess AddStatEffect(StatEffectConfig statEffectConfig)
         {
             var statToEffect = GetStat(statEffectConfig.AffectedStatId);
             var statusEffect =  StatusEffectFactory.GetStatusEffect(statEffectConfig,statToEffect);

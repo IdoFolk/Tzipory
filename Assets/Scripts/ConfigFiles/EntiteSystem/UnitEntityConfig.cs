@@ -10,6 +10,7 @@ namespace Tzipory.ConfigFiles.EntitySystem
     [CreateAssetMenu(fileName = "UnitEntityConfig", menuName = "ScriptableObjects/Entity/NewEntity")]
     public class UnitEntityConfig : ScriptableObject, IConfigFile
     {
+        [SerializeField] private string _entityName;
         [SerializeField,ReadOnly] private int _entityId;
         [SerializeField,TabGroup("Main config")] private UnitType _unitType;
 
@@ -30,7 +31,9 @@ namespace Tzipory.ConfigFiles.EntitySystem
         
         [SerializeField,TabGroup("Optional Component")] private bool _aiComponent;
         [SerializeField,ShowIf(nameof(_aiComponent)),TabGroup("Optional Component")] public AIComponentConfig AIComponentConfig;
-        
+
+        public string EntityName => _entityName;
+
         public UnitType UnitType => _unitType;
         
         public bool AIComponent => _aiComponent;

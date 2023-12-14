@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using TMPro;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Helpers;
 using Tzipory.Systems.StatusSystem;
@@ -8,7 +10,7 @@ using UnityEngine.UI;
 
 namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
 {
-    public class HeroSelectionUI : MonoSingleton<HeroSelectionUI>, IInitialization<Shaman>
+    public class HeroSelectionUI : MonoSingleton<HeroSelectionUI>, IInitialization<UnitEntity>
     {
         public bool IsInitialization { get; }
 
@@ -19,15 +21,17 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
 
         public bool IsActive { get; private set; }
 
-        public void Init(Shaman shaman)
+        public void Init(UnitEntity shaman)
         {
-            _statBlockPanel.Init(shaman.Stats);
-            _psBonusUIHandler.Show(shaman.Stats);
-            _shamanSprite.sprite = shaman.VisualConfig.Icon;
-            _shamanName.text = shaman.Name;
+            IEnumerable<Stat> stats = shaman.EntityStatComponent.GetAllStats();
+            
+            _statBlockPanel.Init(stats);
+            _psBonusUIHandler.Show(stats);
+            _shamanSprite.sprite = shaman.Config.VisualComponentConfig.Icon;
+            _shamanName.text = shaman.Config.EntityName;
         }
 
-        public void ShowSelectionUI(Shaman shaman)
+        public void ShowSelectionUI(UnitEntity shaman)
         {
             Init(shaman);
 

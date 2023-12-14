@@ -23,6 +23,7 @@ namespace Tzipory.Systems.EntityComponents
         {
             _speedStat = newSpeed;
             _speedStat.OnValueChanged += AdjustAgentSpeed;
+            GAME_TIME.OnTimeRateChange += AdjustAgentTime; 
             
             AgentSteering aS = _agent.DefaultSteering;
             aS.Speed = _speedStat.CurrentValue * GAME_TIME.GetCurrentTimeRate;
@@ -30,8 +31,7 @@ namespace Tzipory.Systems.EntityComponents
             
             _lastPosition = transform.position;
         }
-
-
+        
         public void SetAgentDestination(Vector3 destination)
         {
             _agent.SetDestination(destination);
@@ -54,7 +54,7 @@ namespace Tzipory.Systems.EntityComponents
             IsMoveing = false;
         }
 
-        private void AdjustAgentSpeed(StatChangeData statChangeData) //subs to OnTimeRateChange
+        private void AdjustAgentSpeed(StatChangeData statChangeData)
         {
             //AgentSteering aS = agent.EntitySteering;
             AgentSteering aS = _agent.DefaultSteering;
@@ -62,7 +62,7 @@ namespace Tzipory.Systems.EntityComponents
             _agent.EntitySteering = aS;
         }
         
-        private void AdjustAgentTime() //subs to OnTimeRateChange
+        private void AdjustAgentTime()
         {
             if (_speedStat == null)
                 return;
@@ -70,11 +70,7 @@ namespace Tzipory.Systems.EntityComponents
             aS.Speed = _speedStat.CurrentValue * GAME_TIME.GetCurrentTimeRate;
             _agent.EntitySteering = aS;
         }
-
-        private void OnEnable()
-        {
-            GAME_TIME.OnTimeRateChange += AdjustAgentTime; //?
-        }
+        
         private void OnDisable()
         {
             GAME_TIME.OnTimeRateChange -= AdjustAgentTime;

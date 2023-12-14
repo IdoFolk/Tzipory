@@ -50,7 +50,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public void Init(BaseGameEntity parameter,VisualComponentConfig config)
         {
             Init(parameter);
-        
+            VisualComponentConfig = config;
             config.OnDeath.ID = Constant.EffectSequenceIds.DEATH;
             config.OnAttack.ID = Constant.EffectSequenceIds.ATTACK;
             config.OnCritAttack.ID = Constant.EffectSequenceIds.CRIT_ATTACK;

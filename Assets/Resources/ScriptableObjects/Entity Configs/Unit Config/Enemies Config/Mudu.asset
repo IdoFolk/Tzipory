@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea472f36b2a4dc0b0810fdfb6687265, type: 3}
   m_Name: Mudu
   m_EditorClassIdentifier: 
+  _entityName: M
   _entityId: 83432869
   _unitType: 1
   HealthComponentConfig:
@@ -25,9 +26,9 @@ MonoBehaviour:
     TargetedEntity: 9
     TargetingPriorityType: 2
   VisualComponentConfig:
-    Sprite: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
+    Sprite: {fileID: 21300000, guid: 896b3c0626f9f004b8a76282dd0cdc85, type: 3}
     Icon: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
-    HpBar: 0
+    HpBar: 1
     HaveSilhouette: 0
     UIIndicator: 0
     UiIndicatorConfig:
@@ -111,7 +112,7 @@ MonoBehaviour:
     PathCreator: {fileID: 0}
     MaxDistanceFromPath: 0.4
     PrivateRabbitIncrement: 0.1
-    PrivateRabbitDistanceToUpdate: 1
+    PrivateRabbitDistanceToUpdate: 0.2
   _abilityComponent: 0
   AbilityComponentConfig:
     _abilityConfigs: []

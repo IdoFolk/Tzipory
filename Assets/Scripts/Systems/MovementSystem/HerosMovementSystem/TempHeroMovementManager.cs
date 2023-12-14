@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
+using Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI;
+using Tzipory.GameplayLogic.VisualSystem.EffectType;
 using Tzipory.Helpers;
 using Tzipory.Systems.EntityComponents;
 using Tzipory.Tools.TimeSystem;
@@ -37,16 +40,18 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             _camera = GameManager.CameraHandler.MainCamera;
         }
         
-        public void SelectTarget(AgentMoveComponent target, Sprite shadowSprite, float range)
+        public void SelectTarget(UnitEntity target, Sprite shadowSprite, float range)
         {
             if (_isCooldown)
                 return;
-            _currentTarget = target;
-            _shadow.SetShadow(target.transform, shadowSprite, range);
+            _currentTarget = target.EntityMovementComponent.AgentMoveComponent;
+            _shadow.SetShadow(target, shadowSprite, range);
 
             Cursor.visible = false;
-            _previousTimeRate = GAME_TIME.GetCurrentTimeRate;
-            GAME_TIME.SetTimeStep(_slowTime,_slowTimeTransitionTime,_startSlowTimeCurve);
+            
+            SlowMotionManager.Instance.StartSlowMotionEffects();
+            HeroSelectionUI.Instance.ShowSelectionUI(target);
+            
             OnAnyShamanSelected?.Invoke();
         }
 
@@ -58,7 +63,9 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             _isCooldown = true;
             StartCoroutine(SetIsCooldownWaitOneFrame(false));
             
-            GAME_TIME.SetTimeStep(_previousTimeRate,_slowTimeTransitionTime,_endSlowTimeCurve);
+            SlowMotionManager.Instance.EndSlowMotionEffects();
+            HeroSelectionUI.Instance.HideSelectionUI();
+            
             OnAnyShamanDeselected?.Invoke();
         }
         

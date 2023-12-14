@@ -6,11 +6,11 @@ using UnityEngine;
 public class PSBonusUIHandler : MonoBehaviour
 {
     [SerializeField] private PSBonusUI[] _bonusBlocks;
-    public void Show(Dictionary<int,Stat> stats)
+    public void Show(IEnumerable<Stat> stats)
     {
         foreach (var bonusBlock in _bonusBlocks)
         {
-            if (stats.TryGetValue((int)bonusBlock.StatBonusType,out var stat))
+            foreach (var stat in stats)
             {
                 var bonusValue = MathF.Round((stat.CurrentValue / stat.BaseValue - 1) * 100);
                 if (bonusValue <= 0) continue;

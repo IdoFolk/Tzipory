@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea472f36b2a4dc0b0810fdfb6687265, type: 3}
   m_Name: Nadia
   m_EditorClassIdentifier: 
+  _entityName: Nadia
   _entityId: -166019025
   _unitType: 0
   HealthComponentConfig:
@@ -45,48 +46,48 @@ MonoBehaviour:
         OverrideFlashingColor: 0
         FlashingColor: {r: 0, g: 0, b: 0, a: 0}
     OnDeath:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnDeath
+      _id: 1
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
     OnAttack:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnAttack
+      _id: 2
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
     OnCritAttack:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnCritAttack
+      _id: 3
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
     OnMove:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnMove
+      _id: 4
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
     OnGetHit:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnGetHit
+      _id: 5
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
     OnGetCritHit:
-      _sequenceName: 
-      _id: 0
+      _sequenceName: OnGetCritHit
+      _id: 6
       _startDelay: 0
       _endDelay: 0
       _isStackable: 0

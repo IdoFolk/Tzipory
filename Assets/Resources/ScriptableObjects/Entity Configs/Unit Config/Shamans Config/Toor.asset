@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea472f36b2a4dc0b0810fdfb6687265, type: 3}
   m_Name: Toor
   m_EditorClassIdentifier: 
+  _entityName: Toor
   _entityId: -1670867242
   _unitType: 0
   HealthComponentConfig:

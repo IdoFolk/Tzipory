@@ -12,9 +12,12 @@ public class PSBonusUIHandler : MonoBehaviour
         {
             foreach (var stat in stats)
             {
-                var bonusValue = MathF.Round((stat.CurrentValue / stat.BaseValue - 1) * 100);
-                if (bonusValue <= 0) continue;
-                bonusBlock.Show(bonusValue);
+                if (stat.Id == (int)bonusBlock.StatBonusType)
+                {
+                    var bonusValue = MathF.Round((stat.CurrentValue / stat.BaseValue - 1) * 100);
+                    if (bonusValue <= 0) continue;
+                    bonusBlock.Show(bonusValue);
+                }
             }
         }
     }

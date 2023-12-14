@@ -77,9 +77,8 @@ namespace Tzipory.Tools.Debag
 #endif
         }
 
-        public static void LogError(object message, string groupName = null)
+        public static void LogError(object message, string groupName = null)//may make problem!! in build
         {
-#if UNITY_EDITOR
             if (groupName == null)
             {
                 Debug.LogError(message);
@@ -96,7 +95,6 @@ namespace Tzipory.Tools.Debag
                 return;
             
             Debug.LogError(ProcessMessage(message, logGroup));
-#endif
         }
 
         private static string ProcessMessage(object message, LogGroup logGroup)

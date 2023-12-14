@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
+using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.SerializeData.PlayerData.Party;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
+using Tzipory.Systems.FactorySystem.GameObjectFactory;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -12,37 +15,38 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 {
     public class PartyManager : IDisposable
     {
-        private readonly Shaman  _shamanPrefab;
+        private readonly UnitEntity  _shamanPrefab;
         private readonly Transform _partyParent;
         private readonly Dictionary<Vector3, bool> _partySpawnPoints;
         private readonly PartySerializeData _partySerializeData;
         private const string SHAMAN_PREFAB_PATH = "Prefabs/Entities/Shaman/BaseShamanEntity";
 
-        public Shaman[] Party;//Temp fix
+        public UnitEntity[] Party;//Temp fix
 
         public PartyManager(PartySerializeData partySerializeData,Transform partyParent)
         {
             _partySerializeData  = partySerializeData;
             _partySpawnPoints = new Dictionary<Vector3,bool>();
-            _shamanPrefab = Resources.Load<Shaman>(SHAMAN_PREFAB_PATH);
+            _shamanPrefab = Resources.Load<UnitEntity>(SHAMAN_PREFAB_PATH);
             _partyParent = partyParent;
         }
 
         public void SpawnShaman()
         {
-            Party = CreateParty(_partySerializeData.ShamansPartyDataContainers).ToArray();
+            Party = CreateParty(_partySerializeData.ShamanSerializeDatas).ToArray();
         }
 
         public void AddSpawnPoint(Vector3 spawnPoint)=>
             _partySpawnPoints.Add(spawnPoint, false);
 
-        private IEnumerable<Shaman> CreateParty(IEnumerable<ShamanDataContainer> party)
+        private IEnumerable<UnitEntity> CreateParty(IEnumerable<ShamanSerializeData> party)
         {
-            foreach (var shamanDataContainer in party)
+            foreach (var shamanSerializeData in party)
             {
-                var shaman = Object.Instantiate(_shamanPrefab,GetSpawnPoint(),Quaternion.identity,_partyParent);
-                
-                shaman.Init(shamanDataContainer.ShamanSerializeData,shamanDataContainer.UnitEntityVisualConfig);
+                var shaman = PoolManager.UnitEntityPool.GetObject();
+                shaman.transform.position = GetSpawnPoint();
+                shaman.transform.SetParent(_partyParent);
+                shaman.Init(shamanSerializeData);
                 yield return shaman;
             }
         }

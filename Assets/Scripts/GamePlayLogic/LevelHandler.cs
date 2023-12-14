@@ -10,10 +10,23 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
     public class LevelHandler : MonoBehaviour
     {
         public static Vector3 FakeForward { get; private set;}
+
         /// <summary>
         /// Basically, the Map's resolution
         /// </summary>
-        public static Vector2 MapSize { get; private set; }
+        public Bounds MapBounds {
+            get
+            {
+                if (_bgRenderer is null)
+                {
+                    return default;
+                }
+
+                return _bgRenderer.bounds;
+            }
+        }
+
+        public static Vector2 MapStartWordPosition { get; private set; }
 
         public Vector2 CameraBorder => _cameraBorders;
         public float CameraMaxZoom => _cameraMaxZoom;
@@ -27,14 +40,15 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         /// The renderer for the map/floor
         /// </summary>
         [SerializeField] SpriteRenderer _bgRenderer; 
-        [SerializeField] private Vector3 _fakeForward;
+        [SerializeField,TabGroup("Map config")] private Vector3 _fakeForward;
+        [SerializeField,TabGroup("Map config")] private MapStartPosition _mapStartPosition;
         [Header("Camera setting")]
-        [SerializeField] private Vector2 _cameraBorders;
-        [SerializeField] private float _cameraMaxZoom;
-        [SerializeField] private bool _overrideCameraStartPositionAndZoom;
-        [SerializeField,ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private Vector2 _cameraStartPosition;
-        [SerializeField,ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private float _cameraStartZoom;
-        [SerializeField] private bool _enableGizmos = true;
+        [SerializeField,TabGroup("Camera config")] private Vector2 _cameraBorders;
+        [SerializeField,TabGroup("Camera config")] private float _cameraMaxZoom;
+        [SerializeField,TabGroup("Camera config")] private bool _overrideCameraStartPositionAndZoom;
+        [SerializeField,TabGroup("Camera config"),ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private Vector2 _cameraStartPosition;
+        [SerializeField,TabGroup("Camera config"),ShowIf(nameof(_overrideCameraStartPositionAndZoom))] private float _cameraStartZoom;
+        [SerializeField,TabGroup("Camera config")] private bool _enableGizmos = true;
         [Header("Serialized Components")]
         [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         [SerializeField] private List<PowerStructure> _powerStructuresSerialize;
@@ -62,8 +76,10 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         private void Awake()
         {
             FakeForward = _fakeForward.normalized;
+            MapStartWordPosition = GetMapStartPosition();
+            
             ParticleSystems = _particleSystemsSerialize;
-            MapSize = new Vector2(_bgRenderer.sprite.texture.width, _bgRenderer.sprite.texture.height);
+
             foreach (var powerStructure in _powerStructuresSerialize)
             {
                 powerStructure.Init();
@@ -136,5 +152,43 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
                 _waveSpawnersSerialize[i].SetId(i);
             }
         }
+
+        private Vector2 GetMapStartPosition()
+        {
+            float mapX;
+            float mapY;
+
+            switch (_mapStartPosition)
+            {
+                case MapStartPosition.TopLeft:
+                    mapX = MapBounds.center.x - MapBounds.extents.x;
+                    mapY = MapBounds.center.y + MapBounds.extents.y;
+                    break;
+                case MapStartPosition.TopRight:
+                    mapX = MapBounds.center.x + MapBounds.extents.x;
+                    mapY = MapBounds.center.y + MapBounds.extents.y;
+                    break;
+                case MapStartPosition.BottomLeft:
+                    mapX = MapBounds.center.x - MapBounds.extents.x;
+                    mapY = MapBounds.center.y - MapBounds.extents.y;
+                    break;
+                case MapStartPosition.BottomRight:
+                    mapX = MapBounds.center.x + MapBounds.extents.x;
+                    mapY = MapBounds.center.y - MapBounds.extents.y;
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+            
+            return new Vector2(mapX, mapY);
+        }
     }
+}
+
+public enum MapStartPosition
+{
+    TopLeft,
+    TopRight,
+    BottomLeft,
+    BottomRight,
 }

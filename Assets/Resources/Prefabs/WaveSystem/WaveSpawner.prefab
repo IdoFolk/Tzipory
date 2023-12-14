@@ -509,7 +509,7 @@ MonoBehaviour:
   - {fileID: 5817519935316844203}
   - {fileID: 5662734289844567177}
   - {fileID: 1671020999881895457}
-  myPathCreator: {fileID: 1501144478277227792}
+  _path: {fileID: 1501144478277227792}
 --- !u!1 &6902967483193495810
 GameObject:
   m_ObjectHideFlags: 0

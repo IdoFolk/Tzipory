@@ -1,3 +1,4 @@
+using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
@@ -7,7 +8,7 @@ public class Temp_Projectile : MonoBehaviour
     [SerializeField] private ParticleSystem _particleSystem;
     [SerializeField] private float _midDisToDeadTarget;
     
-    private IEntityTargetAbleComponent _target;
+    private ITargetAbleEntity _target;
     private float _speed;
 
     private float _damage;
@@ -17,32 +18,29 @@ public class Temp_Projectile : MonoBehaviour
     private int _casterId;
 
     private Vector3 _dir;
+    private Vector3 _lastTargetPosition;
 
     
-    public void Init(IEntityTargetAbleComponent target,float speed,float damage,float timeToDie,bool isCrit)
+    public void Init(BaseGameEntity baseGameEntity,ITargetAbleEntity target,float speed,float damage,float timeToDie,bool isCrit)
     {
         _timeToDie = timeToDie;
         _speed = speed;
         _target = target;
         _damage = damage;
         _isCrit = isCrit;
-        _dir = (_target.EntityTransform.position - transform.position).normalized;
+        _dir = (_target.GameEntity.transform.position - baseGameEntity.EntityTransform.position).normalized;
         transform.up = _dir;
+        _lastTargetPosition = _target.GameEntity.transform.position;
     }
 
     void Update()
     {
-        var lastTargetPosition = _target.EntityTransform.position;
-        
         _particleSystem.playbackSpeed = 1 * GAME_TIME.GetCurrentTimeRate;
-
-        if (_target.IsEntityDead)
-            if (Vector2.Distance(lastTargetPosition,transform.position) < _midDisToDeadTarget)
-                _timeToDie = 0;
-            else
-                _timeToDie -= GAME_TIME.GameDeltaTime;
+        
+        if (Vector2.Distance(_lastTargetPosition,transform.position) < _midDisToDeadTarget)
+            _timeToDie = 0;
         else
-            _dir = (lastTargetPosition - transform.position).normalized;
+            _timeToDie -= GAME_TIME.GameDeltaTime;
         
         transform.position += _dir * (_speed * GAME_TIME.GameDeltaTime);
         
@@ -52,12 +50,11 @@ public class Temp_Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<IEntityTargetAbleComponent>(out var hitedTarget))
+        if (other.TryGetComponent<ITargetAbleEntity>(out var hitedTarget))
         {
             if (hitedTarget.EntityType == EntityType.Hero) return;
-            //if (target.EntityInstanceID == _casterId) return;
             
-            hitedTarget.TakeDamage(_damage,_isCrit);
+            hitedTarget.EntityHealthComponent.TakeDamage(_damage,_isCrit);
             Destroy(gameObject);
         }
     }

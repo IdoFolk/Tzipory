@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Tzipory.GameplayLogic.EntitySystem.Enemies;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GamePlayLogic.ObjectPools;
 using UnityEngine;
 
@@ -8,7 +8,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 {
     public class EnemyManager : IDisposable
     {
-        private readonly List<Enemy> _enemies;
+        private readonly List<UnitEntity> _enemies;
         private Transform _enemiesParent;
 
         public bool AllEnemiesArDead => _enemies.Count == 0;
@@ -19,18 +19,18 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         {
             _enemiesParent = enemiesParent;
             NumberOfEnemiesKilled = 0;
-            _enemies = new List<Enemy>();
-            PoolManager.EnemyPool.OnObjectGet += AddEnemy;
+            _enemies = new List<UnitEntity>();
+            PoolManager.UnitEntityPool.OnObjectGet += AddEnemy;
         }
 
-        public void AddEnemy(Enemy enemy)
+        public void AddEnemy(UnitEntity enemy)
         {
             _enemies.Add(enemy);
             enemy.transform.SetParent(_enemiesParent);
             enemy.OnDispose += OnEnemyKilled;
         }
 
-        private void OnEnemyKilled(Enemy enemy)
+        private void OnEnemyKilled(UnitEntity enemy)
         {
             NumberOfEnemiesKilled++;
             _enemies.Remove(enemy);
@@ -38,7 +38,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
 
         public void Dispose()
         {
-            PoolManager.EnemyPool.OnObjectGet -= AddEnemy;
+            PoolManager.UnitEntityPool.OnObjectGet -= AddEnemy;
             NumberOfEnemiesKilled = 0;
         }
     }

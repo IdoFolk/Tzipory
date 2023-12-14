@@ -48,11 +48,13 @@ namespace Tzipory.GameplayLogic.VisualSystem.EffectType
 
         public override void StartEffectAction()
         {
-            _originalPosition = VisualComponent.EntityTransform.position;
-            _originalScale = VisualComponent.EntityTransform.localScale;
-            _originalRotation = VisualComponent.EntityTransform.eulerAngles;
+            var transform = VisualComponent.GameEntity.transform;
             
-            VisualComponent.EntityTransform.Transition(_transformEffectActionConfig);
+            _originalPosition = transform.position;
+            _originalScale = transform.localScale;
+            _originalRotation = transform.eulerAngles;
+            
+            transform.Transition(_transformEffectActionConfig);
         }
 
         public override void ProcessEffectAction()
@@ -61,9 +63,9 @@ namespace Tzipory.GameplayLogic.VisualSystem.EffectType
 
         public override void CompleteEffectAction()
         {
-            VisualComponent.EntityTransform.Move(_originalPosition,_transformEffectActionConfig);
-            VisualComponent.EntityTransform.Scale(_originalScale,_transformEffectActionConfig);
-            VisualComponent.EntityTransform.Rotate(_originalRotation,_transformEffectActionConfig);
+            VisualComponent.GameEntity.transform.Move(_originalPosition,_transformEffectActionConfig);
+            VisualComponent.GameEntity.transform.Scale(_originalScale,_transformEffectActionConfig);
+            VisualComponent.GameEntity.transform.Rotate(_originalRotation,_transformEffectActionConfig);
         }
 
         public override void UndoEffectAction()

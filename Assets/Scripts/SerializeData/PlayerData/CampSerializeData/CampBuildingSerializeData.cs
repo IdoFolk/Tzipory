@@ -22,6 +22,7 @@ namespace Tzipory.SerializeData.PlayerData.Camp
         
         public bool IsInitialization { get; private set; }
 
+        public int SerializeObjectId { get; }
         public int SerializeTypeId => Constant.DataId.CAMP_BUILDING_DATA_ID;
 
         //use as id for factrory

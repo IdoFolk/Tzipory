@@ -23,6 +23,8 @@ namespace Tzipory.Tools.TimeSystem
         public event Action<ITimer,bool> OnTimerComplete;
 
         private readonly Action _onComplete;
+
+        private bool _isTimerStopped;
         
         public string TimerName { get; }
         
@@ -30,13 +32,16 @@ namespace Tzipory.Tools.TimeSystem
 
         public float TimeRemaining { get; private set; }
 
-        public bool IsDone => TimeRemaining <= 0;
+        public bool IsDone => TimeRemaining <= 0 || _isTimerStopped;
 
         public Timer(string timerName,float time,Action onComplete = null)
         {
             TimerName = timerName;
             TimeRemaining = time;
             _onComplete = onComplete;
+
+            _isTimerStopped = false;
+            
 #if UNITY_EDITOR
             if (onComplete != null)
                 CompleteMethodName = onComplete.Method.Name;
@@ -45,6 +50,9 @@ namespace Tzipory.Tools.TimeSystem
 
         public void TickTimer()
         {
+            if (_isTimerStopped)
+                return;
+            
             TimeRemaining -= GAME_TIME.GameDeltaTime;
 
             if (TimeRemaining <= 0)
@@ -55,12 +63,13 @@ namespace Tzipory.Tools.TimeSystem
         }
 
         public void StopTimer(bool executeOnComplete = false)
-        {   
-            TimeRemaining = 0;
-            OnTimerComplete?.Invoke(this,true);
+        {
+            _isTimerStopped = true;
             
             if (executeOnComplete)
                 _onComplete?.Invoke();
+            
+            OnTimerComplete?.Invoke(this,true);
         }
     }
     
@@ -69,6 +78,8 @@ namespace Tzipory.Tools.TimeSystem
         public event Action<ITimer,bool> OnTimerComplete;
         
         private readonly Action<T> _onComplete;
+        
+        private bool _isTimerStopped;
 
         private T _parameter;
         
@@ -78,13 +89,15 @@ namespace Tzipory.Tools.TimeSystem
 
         public float TimeRemaining { get; private set; }
         
-        public bool IsDone => TimeRemaining <= 0;
+        public bool IsDone => TimeRemaining <= 0 || _isTimerStopped;
 
         public Timer(string timerName,float time,Action<T> onComplete,ref T parameter)
         {
             TimerName = timerName;
             TimeRemaining = time;
             _onComplete = onComplete;
+            
+            _isTimerStopped = false;
             
             CompleteMethodName  = onComplete.Method.Name;
 
@@ -93,6 +106,9 @@ namespace Tzipory.Tools.TimeSystem
 
         public void TickTimer()
         {
+            if (_isTimerStopped)
+                return;
+            
             TimeRemaining -= GAME_TIME.GameDeltaTime;
 
             if (TimeRemaining <= 0)
@@ -104,11 +120,12 @@ namespace Tzipory.Tools.TimeSystem
 
         public void StopTimer(bool executeOnComplete = false)
         {
-            TimeRemaining = 0;
-            OnTimerComplete?.Invoke(this,true);
+            _isTimerStopped = true;
             
             if (executeOnComplete)
                 _onComplete?.Invoke(_parameter);
+            
+            OnTimerComplete?.Invoke(this,true);
         }
     }
     
@@ -117,6 +134,8 @@ namespace Tzipory.Tools.TimeSystem
         public event Action<ITimer,bool>  OnTimerComplete;
         
         private readonly Action<T1,T2> _onComplete;
+        
+        private bool _isTimerStopped;
 
         private T1 _parameter1;
         private T2 _parameter2;
@@ -127,13 +146,15 @@ namespace Tzipory.Tools.TimeSystem
 
         public float TimeRemaining { get; private set; }
         
-        public bool IsDone => TimeRemaining <= 0;
+        public bool IsDone => TimeRemaining <= 0 || _isTimerStopped;
 
         public Timer(string timerName,float time,Action<T1,T2> onComplete,ref T1 parameter1,ref T2 parameter2)
         {
             TimerName = timerName;
             TimeRemaining = time;
             _onComplete = onComplete;
+            
+            _isTimerStopped = false;
             
             CompleteMethodName  = onComplete.Method.Name;
 
@@ -143,6 +164,9 @@ namespace Tzipory.Tools.TimeSystem
 
         public void TickTimer()
         {
+            if (_isTimerStopped)
+                return;
+            
             TimeRemaining -= GAME_TIME.GameDeltaTime;
 
             if (TimeRemaining <= 0)
@@ -154,11 +178,12 @@ namespace Tzipory.Tools.TimeSystem
 
         public void StopTimer(bool executeOnComplete = false)
         {
-            TimeRemaining = 0;
-            OnTimerComplete?.Invoke(this,true);
+            _isTimerStopped = true;
             
             if (executeOnComplete)
                 _onComplete?.Invoke(_parameter1,_parameter2);
+            
+            OnTimerComplete?.Invoke(this,true);
         }
     }
     
@@ -167,6 +192,8 @@ namespace Tzipory.Tools.TimeSystem
         public event Action<ITimer,bool> OnTimerComplete;
         
         private readonly Action<T1,T2,T3> _onComplete;
+        
+        private bool _isTimerStopped;
 
         private T1 _parameter1;
         private T2 _parameter2;
@@ -178,13 +205,15 @@ namespace Tzipory.Tools.TimeSystem
 
         public float TimeRemaining { get; private set; }
         
-        public bool IsDone => TimeRemaining <= 0;
+        public bool IsDone => TimeRemaining <= 0 || _isTimerStopped;
 
         public Timer(string timerName,float time,Action<T1,T2,T3> onComplete,ref T1 parameter1,ref T2 parameter2,ref T3 parameter3)
         {
             TimerName = timerName;
             TimeRemaining = time;
             _onComplete = onComplete;
+            
+            _isTimerStopped = false;
             
             CompleteMethodName  = onComplete.Method.Name;
 
@@ -195,6 +224,9 @@ namespace Tzipory.Tools.TimeSystem
 
         public void TickTimer()
         {
+            if (_isTimerStopped)
+                return;
+            
             TimeRemaining -= GAME_TIME.GameDeltaTime;
 
             if (TimeRemaining <= 0)
@@ -206,11 +238,12 @@ namespace Tzipory.Tools.TimeSystem
 
         public void StopTimer(bool executeOnComplete = false)
         {
-            TimeRemaining = 0;
-            OnTimerComplete?.Invoke(this,true);
+            _isTimerStopped = true;
             
             if (executeOnComplete)
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3);
+            
+            OnTimerComplete?.Invoke(this,true);
         }
     }
     
@@ -219,6 +252,8 @@ namespace Tzipory.Tools.TimeSystem
         public event Action<ITimer,bool> OnTimerComplete;
         
         private readonly Action<T1,T2,T3,T4> _onComplete;
+        
+        private bool _isTimerStopped;
 
         private T1 _parameter1;
         private T2 _parameter2;
@@ -231,13 +266,15 @@ namespace Tzipory.Tools.TimeSystem
 
         public float TimeRemaining { get; private set; }
         
-        public bool IsDone => TimeRemaining <= 0;
+        public bool IsDone => TimeRemaining <= 0 || _isTimerStopped;
 
         public Timer(string timerName,float time,Action<T1,T2,T3,T4> onComplete,ref T1 parameter1,ref T2 parameter2,ref T3 parameter3,ref T4 parameter4)
         {
             TimerName = timerName;
             TimeRemaining = time;
             _onComplete = onComplete;
+            
+            _isTimerStopped = false;
             
             CompleteMethodName  = onComplete.Method.Name;
 
@@ -249,6 +286,9 @@ namespace Tzipory.Tools.TimeSystem
 
         public void TickTimer()
         {
+            if (_isTimerStopped)
+                return;
+            
             TimeRemaining -= GAME_TIME.GameDeltaTime;
 
             if (TimeRemaining <= 0)
@@ -260,11 +300,12 @@ namespace Tzipory.Tools.TimeSystem
 
         public void StopTimer(bool executeOnComplete = false)
         {
-            TimeRemaining = 0;
-            OnTimerComplete?.Invoke(this,true);
+            _isTimerStopped = true;
             
             if (executeOnComplete)
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3,_parameter4);
+            
+            OnTimerComplete?.Invoke(this,true);
         }
     }
     
@@ -273,6 +314,8 @@ namespace Tzipory.Tools.TimeSystem
         public event Action<ITimer,bool> OnTimerComplete;
         
         private readonly Action<T1,T2,T3,T4,T5> _onComplete;
+        
+        private bool _isTimerStopped;
 
         private T1 _parameter1;
         private T2 _parameter2;
@@ -286,13 +329,15 @@ namespace Tzipory.Tools.TimeSystem
 
         public float TimeRemaining { get; private set; }
         
-        public bool IsDone => TimeRemaining <= 0;
+        public bool IsDone => TimeRemaining <= 0 || _isTimerStopped;
 
         public Timer(string timerName,float time,Action<T1,T2,T3,T4,T5> onComplete,ref T1 parameter1,ref T2 parameter2,ref T3 parameter3, ref T4 parameter4,ref T5 parameter5)
         {
             TimerName = timerName;
             TimeRemaining = time;
             _onComplete = onComplete;
+            
+            _isTimerStopped = false;
             
             CompleteMethodName  = onComplete.Method.Name;
 
@@ -305,6 +350,9 @@ namespace Tzipory.Tools.TimeSystem
 
         public void TickTimer()
         {
+            if (_isTimerStopped)
+                return;
+            
             TimeRemaining -= GAME_TIME.GameDeltaTime;
 
             if (TimeRemaining <= 0)
@@ -316,11 +364,12 @@ namespace Tzipory.Tools.TimeSystem
 
         public void StopTimer(bool executeOnComplete = false)
         {
-            TimeRemaining = 0;
-            OnTimerComplete?.Invoke(this,true);
+            _isTimerStopped = true;
             
             if (executeOnComplete)
                 _onComplete?.Invoke(_parameter1,_parameter2,_parameter3,_parameter4,_parameter5);
+            
+            OnTimerComplete?.Invoke(this,true);
         }
     }
 }

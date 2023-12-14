@@ -10,9 +10,9 @@ namespace Tzipory.GameplayLogic.TargetingPriorities
         {
         }
 
-        public override IEntityTargetAbleComponent GetPriorityTarget(IEnumerable<IEntityTargetAbleComponent> targets)
+        public override ITargetAbleEntity GetPriorityTarget(IEnumerable<ITargetAbleEntity> targets)
         {
-            IEntityTargetAbleComponent currentClosestTarget = null;
+            ITargetAbleEntity currentClosestTarget = null;
             
             float currentClosestTargetDistance = float.MaxValue;
 

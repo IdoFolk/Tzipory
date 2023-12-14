@@ -12,6 +12,6 @@ namespace Tzipory.Systems.TargetingSystem
             TargetingComponent  = targetingComponent;
         }
         
-        public abstract IEntityTargetAbleComponent GetPriorityTarget(IEnumerable<IEntityTargetAbleComponent> targets);
+        public abstract ITargetAbleEntity GetPriorityTarget(IEnumerable<ITargetAbleEntity> targets);
     }
 }

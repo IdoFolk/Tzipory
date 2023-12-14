@@ -1,3 +1,4 @@
+using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
 namespace GameplayLogic.UI.HPBar
@@ -11,23 +12,23 @@ namespace GameplayLogic.UI.HPBar
 
         private void Awake()
         {
-            hP_Bar.Init(coreTemple.Health.BaseValue);
+            hP_Bar.Init(coreTemple.EntityHealthComponent.Health.BaseValue);
         }
 
         private void OnEnable()
         {
-            coreTemple.OnHealthChanged += SetBarToHealth;
+            coreTemple.EntityHealthComponent.Health.OnValueChanged += SetBarToHealth;
         }
 
         private void OnDisable()
         {
-            coreTemple.OnHealthChanged -= SetBarToHealth;
+            coreTemple.EntityHealthComponent.Health.OnValueChanged -= SetBarToHealth;
         }
 
-        void SetBarToHealth()
+        void SetBarToHealth(StatChangeData statChangeData)
         {
             //hP_Bar.SetBarValueSmoothly(coreTemple.Health.CurrentValue);
-            hP_Bar.SetBarValue(coreTemple.Health.CurrentValue);
+            hP_Bar.SetBarValue(statChangeData.NewValue);
         }
 
 

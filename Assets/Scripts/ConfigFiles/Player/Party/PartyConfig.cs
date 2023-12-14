@@ -7,9 +7,9 @@ namespace Tzipory.ConfigFiles.Player.Party
     [System.Serializable]
     public class PartyConfig : IConfigFile
     {
-        [SerializeField] private ShamanConfig[] _partyMembers;
+        [SerializeField] private UnitEntityConfig[] _partyMembers;
 
-        public ShamanConfig[] PartyMembers => _partyMembers;
+        public UnitEntityConfig[] PartyMembers => _partyMembers;
 
         public int ObjectId => 0;
         

@@ -1,4 +1,5 @@
 using System;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.TargetingSystem;
@@ -8,12 +9,12 @@ using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
 {
-    public class ProximityRingHandler : MonoBehaviour, ITargetableReciever
+    public class ProximityRingHandler : MonoBehaviour, ITargetableCollisionReciever
     {
-        public event Action<int> OnShadowEnter;
-        public event Action<int> OnShadowExit;
-        public event Action<int,Shaman> OnShamanEnter;
-        public event Action<int,Shaman> OnShamanExit;
+        public event Action<int,ITargetAbleEntity> OnShadowEnter;
+        public event Action<int,ITargetAbleEntity> OnShadowExit;
+        public event Action<int,ITargetAbleEntity> OnShamanEnter;
+        public event Action<int,ITargetAbleEntity> OnShamanExit;
         [HideInInspector]public int Id { get; private set; }
         
         [SerializeField] private SpriteRenderer _spriteRenderer;
@@ -51,28 +52,36 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
             {
                 if (ioType == IOType.In)
                 {
-                    OnShadowEnter?.Invoke(Id);
+                    if (other.gameObject.TryGetComponent<Shadow>(out var shadow))
+                        OnShadowEnter?.Invoke(Id,shadow.Shaman);
                 }
 
                 if (ioType == IOType.Out)
                 {
-                    OnShadowExit?.Invoke(Id);
+                    if (other.gameObject.TryGetComponent<Shadow>(out var shadow))
+                        OnShadowExit?.Invoke(Id,shadow.Shaman);
                 }
             }
-        }
+            if (other.gameObject.CompareTag("Shaman"))
+            {
+                if (ioType == IOType.In)
+                {
+                    if (other.gameObject.transform.parent.TryGetComponent<UnitEntity>(out var unitEntity))
+                    {
+                        if (unitEntity.EntityType == EntityType.Hero)
+                            OnShamanEnter?.Invoke(Id,unitEntity);
+                    }
+                }
 
-        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
-        {
-            if (targetable is not Shaman shaman) return;
-            
-            OnShamanEnter?.Invoke(Id,shaman);
-        }
-
-        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
-        {
-            if (targetable is not Shaman shaman) return;
-
-            OnShamanExit?.Invoke(Id,shaman);
+                if (ioType == IOType.Out)
+                {
+                    if (other.gameObject.transform.parent.TryGetComponent<UnitEntity>(out var unitEntity))
+                    {
+                        if (unitEntity.EntityType == EntityType.Hero)
+                            OnShamanExit?.Invoke(Id,unitEntity);
+                    }
+                }
+            }
         }
     }
 }

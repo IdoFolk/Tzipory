@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1413134937648979510}
   - component: {fileID: 7105337688250088895}
-  - component: {fileID: 7391518783491069100}
+  - component: {fileID: 3798650999462425505}
   m_Layer: 0
   m_Name: Tools
   m_TagString: Untagged
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfec8b7f57746b9418d2ec45131d7d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7391518783491069100
+--- !u!114 &3798650999462425505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -82,5 +82,4 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    TransitionTime: 1
-    NewValue: 0
+    TransitionTime: 0.25

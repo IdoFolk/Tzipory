@@ -438,13 +438,12 @@ MonoBehaviour:
   _configManager:
     _shamanConfig:
       _config:
-      - {fileID: 11400000, guid: 1860914778f26304ebb1455b9221a5ef, type: 2}
-      - {fileID: 11400000, guid: 925702d674a6a934dba0f1756768bd2b, type: 2}
-      - {fileID: 11400000, guid: 6f0661d872d45c5479a0f50592326857, type: 2}
+      - {fileID: 11400000, guid: cde60de47b1ebb04a872a5813e15c9be, type: 2}
+      - {fileID: 11400000, guid: a45bc0a20042937459cda815bc4439e7, type: 2}
     _enemyConfig:
       _config:
-      - {fileID: 11400000, guid: 575c840c7d3084544891f596944635b7, type: 2}
-      - {fileID: 11400000, guid: e81e5d6c33b1ca845a4caf36f8b3a399, type: 2}
+      - {fileID: 11400000, guid: 6ef0118ed9a2aa543aea2a183043ed3b, type: 2}
+      - {fileID: 11400000, guid: d3920b0b141d8b942aba5017b1762808, type: 2}
     _abilityConfig:
       _config:
       - {fileID: 11400000, guid: 1ae853bb9bae2264d947b505396fb4e8, type: 2}

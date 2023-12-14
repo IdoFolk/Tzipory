@@ -2,6 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.ConfigFiles.Level;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GamePlayLogic.ObjectPools;
 using Tzipory.GameplayLogic.UI.Indicator;
@@ -34,7 +35,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         public bool IsGameRunning { get; private set; }
 
         [SerializeField, TabGroup("Party manager")]
-        private ShamanConfig[] _shamanConfigs;
+        private UnitEntityConfig[] _shamanConfigs;
 
         [SerializeField, TabGroup("Level manager"), Tooltip("Make the level that you can lose or win the game")]
         private bool _cantLose;
@@ -92,8 +93,9 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             #endregion
             
             EnemyManager = new EnemyManager(_enemiesParent);
-            WaveManager = new WaveManager(_levelConfig,_uiIndicatorConfig); //temp!
+            WaveManager = new WaveManager(_levelConfig,_uiIndicatorConfig); //temp!!!
             CoreTemplete = FindObjectOfType<CoreTemple>(); //temp!!!
+            CoreTemplete.Init();
             PartyManager.SpawnShaman();
         }
 
@@ -119,7 +121,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             if (GameSetting.CantLose)
                 return;
 
-            if (CoreTemplete.IsEntityDead)
+            if (CoreTemplete.EntityHealthComponent.IsEntityDead)
             {
                 IsWon  = false;
                 EndGame(IsWon);

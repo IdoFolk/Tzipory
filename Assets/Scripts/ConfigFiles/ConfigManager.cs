@@ -9,8 +9,8 @@ namespace Tzipory.ConfigFiles
     [System.Serializable]
     public class ConfigManager
     {
-        [SerializeField] private ConfigHandler<ShamanConfig> _shamanConfig;
-        [SerializeField] private ConfigHandler<EnemyConfig> _enemyConfig;
+        [SerializeField] private ConfigHandler<UnitEntityConfig> _shamanConfig;
+        [SerializeField] private ConfigHandler<UnitEntityConfig> _enemyConfig;
         [SerializeField] private ConfigHandler<AbilityConfig> _abilityConfig;
         [SerializeField] private ConfigHandler<ItemConfig> _itemConfig;
         

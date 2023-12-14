@@ -1,68 +1,66 @@
 using System;
 using System.Collections.Generic;
+using GameplayLogic.UI.HPBar;
 using PathCreation;
-using Sirenix.OdinInspector;
-using Tzipory.GameplayLogic.EntitySystem.Enemies;
+using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
+using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
+using Tzipory.Systems.FactorySystem;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
 using UnityEngine;
 
-public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
+public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
 {
     [SerializeField] private PathCreator _patrolPath;
     [SerializeField] private UIIndicatorConfig _uiIndicatorConfig;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private TEMP_HP_Bar _hpBar;
     
-    [SerializeField]
-    float _hp;
-
-    [SerializeField,ReadOnly] private Stat _hpStat;
+    [SerializeField] private float _hp;
     
-    private List<Enemy> _enemies = new List<Enemy>();
+    private readonly List<UnitEntity> _enemies = new();
     
     private IObjectDisposable _uiIndicator;
 
-    private Action CanacleFlash;
+    private Action _canacleFlash;
+
+    public static Transform CoreTransform { get; private set; }
     
-    public event Action<IEntityTargetAbleComponent> OnTargetDisable;
+    public event Action<ITargetAbleEntity> OnTargetDisable;
+    
     public bool IsTargetAble => true;
 
     public PathCreator PatrolPath => _patrolPath;
 
     public EntityType EntityType => EntityType.Core;
-
-    public Stat InvincibleTime => throw new System.NotImplementedException();
-
-    public bool IsDamageable => true; //temp
-
-    public Stat Health => _hpStat;
-    public bool IsEntityDead => Health.CurrentValue <= 0;
-
-    public StatHandler StatHandler => throw new System.NotImplementedException();
-
-    public System.Action OnHealthChanged;
-
-    //SUPER TEMP! this needs to move to the Blackboard if we're really doing it
-    public static Transform CoreTrans;
-
+    public IEntityHealthComponent EntityHealthComponent { get; private set; }
+    public IEntityStatComponent EntityStatComponent { get; }//not in use
+    public IEntityVisualComponent EntityVisualComponent { get; }// not in use
     
-    public Dictionary<int, Stat> Stats { get; }
-    
-    public IEnumerable<IStatHolder> GetNestedStatHolders()
+    public bool IsInitialization { get; private set; }
+    public void Init()
     {
-        throw new System.NotImplementedException();
-    }
-    
-    protected override void Awake()
-    {
-        CoreTrans = transform;
-        _hpStat = new Stat("Health", _hp, int.MaxValue, 0); //TEMP! Requires a config
-
-        _uiIndicator = UIIndicatorHandler.SetNewIndicator(CoreTrans, new UIIndicatorConfig()
+        CoreTransform = transform;
+        
+        var config = new HealthComponentConfig()
+        {
+            HealthComponentType = HealthComponentType.Standard,
+            HealthStat = _hp,
+        };
+        
+        EntityHealthComponent = HealthComponentFactory.GetHealthComponent(config);
+        AddComponent(EntityHealthComponent);
+        EntityHealthComponent.Init(this,config);
+        
+        _hpBar.Init(EntityHealthComponent.Health.BaseValue);
+        
+        EntityHealthComponent.Health.OnValueChanged += OnHealthChanage;
+        
+        _uiIndicator = UIIndicatorHandler.SetNewIndicator(transform, new UIIndicatorConfig()
         {
             Image = _spriteRenderer.sprite,
             Color = Color.white,
@@ -80,8 +78,12 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
                 FlashingColor = Color.red
             }
         },null,GoToCore);
-        
-        base.Awake();
+
+    }
+
+    private void OnHealthChanage(StatChangeData statChangeData)
+    {
+        _hpBar.SetBarValue(statChangeData.NewValue);
     }
 
     private void GoToCore()
@@ -94,52 +96,25 @@ public class CoreTemple : BaseGameEntity, IEntityTargetAbleComponent
         base.Update();
 
         if (_enemies.Count > 0)
-            CanacleFlash = UIIndicatorHandler.StartFlashOnIndicator(_uiIndicator.ObjectInstanceId);
+            _canacleFlash = UIIndicatorHandler.StartFlashOnIndicator(_uiIndicator.ObjectInstanceId);
         else
-            CanacleFlash?.Invoke();
-    }
-
-    private void OnDisable() //override OnDestroy() instead?
-    {
-        CoreTrans = null;
-    }
-
-    public void Heal(float amount)
-    {
-        _hpStat.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition),"Heal");
-        OnHealthChanged?.Invoke();
-    }
-
-    public void TakeDamage(float damage, bool isCrit)
-    {
-        if (_hpStat.CurrentValue <= 0)
-            return;
-        
-        _hpStat.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),"Damage");
-        OnHealthChanged?.Invoke();
-
-        if (IsEntityDead)
-            StartDeathSequence();
-    }
-
-    public void StartDeathSequence()
-    {
-        print("GAME OVER!");
+            _canacleFlash?.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<Enemy>(out var enemy))
-        {
+        if (other.TryGetComponent<UnitEntity>(out var enemy))
             _enemies.Add(enemy);
-        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent<Enemy>(out var enemy))
-        {
+        if (other.TryGetComponent<UnitEntity>(out var enemy))
             _enemies.Remove(enemy);
-        }
+    }
+
+    private void OnDestroy()
+    {
+        EntityHealthComponent.Health.OnValueChanged -= OnHealthChanage;
     }
 }

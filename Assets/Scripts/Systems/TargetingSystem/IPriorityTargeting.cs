@@ -5,6 +5,6 @@ namespace Tzipory.Systems.TargetingSystem
 {
     public interface IPriorityTargeting
     {
-        public IEntityTargetAbleComponent GetPriorityTarget(IEnumerable<IEntityTargetAbleComponent> targets);
+        public ITargetAbleEntity GetPriorityTarget(IEnumerable<ITargetAbleEntity> targets);
     }
 }

@@ -1,4 +1,4 @@
-﻿using Tzipory.GameplayLogic.EntitySystem.Shamans;
+﻿using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.UISystem;
@@ -12,13 +12,13 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private Image _fill;
         [SerializeField] private Slider _healthBar;
         [SerializeField] private Image _splash;
-        private Shaman _shaman;
+        private UnitEntity _shaman;
 
         
-        public void SetShamanData(Shaman shaman)
+        public void SetShamanData(UnitEntity shaman)
         {
             _shaman = shaman;
-            _splash.sprite = _shaman.VisualConfig.Icon;
+            _splash.sprite = _shaman.EntityVisualComponent.VisualComponentConfig.Icon;
         }
 
         private void GoToShaman()=>
@@ -26,14 +26,14 @@ namespace Tzipory.GameplayLogic.UIElements
 
         public override void Show()
         {
-            _shaman.Health.OnValueChanged += OnHealthChange;
+            _shaman.EntityHealthComponent.Health.OnValueChanged += OnHealthChange;
             OnClickEvent += GoToShaman;
             base.Show();
         }
 
         public override void Hide()
         {
-            _shaman.Health.OnValueChanged -= OnHealthChange;
+            _shaman.EntityHealthComponent.Health.OnValueChanged -= OnHealthChange;
             OnClickEvent -= GoToShaman;
             base.Hide();
         }
@@ -44,8 +44,8 @@ namespace Tzipory.GameplayLogic.UIElements
         public override void UpdateUIVisual()
         {
             base.UpdateUIVisual();
-            _healthBar.value  = _shaman.Health.CurrentValue / _shaman.Health.BaseValue;
-            _fill.color = Color.Lerp(Color.red,Color.green,_shaman.Health.CurrentValue/_shaman.Health.BaseValue);
+            _healthBar.value  = _shaman.EntityHealthComponent.Health.CurrentValue / _shaman.EntityHealthComponent.Health.BaseValue;
+            _fill.color = Color.Lerp(Color.red,Color.green,_shaman.EntityHealthComponent.Health.CurrentValue/_shaman.EntityHealthComponent.Health.BaseValue);
         }
     }
 }

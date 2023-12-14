@@ -163,7 +163,7 @@ MonoBehaviour:
   _powerStructureConfig: {fileID: 11400000, guid: 1a4e9022cb9a97643971c8100e6a9848, type: 2}
   proximityRingsManager: {fileID: 8966001170857930187}
   _powerStructureSpriteRenderer: {fileID: 4273722055985562272}
-  _testing: 0
+  _testing: 1
 --- !u!114 &4228493472124563496
 MonoBehaviour:
   m_ObjectHideFlags: 0

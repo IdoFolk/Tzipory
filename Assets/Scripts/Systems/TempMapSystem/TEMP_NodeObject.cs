@@ -8,7 +8,7 @@ using UnityEngine;
 public class TEMP_NodeObject : MonoBehaviour
 {
     [SerializeField] private LevelConfig _levelConfig;
-    [SerializeField] private ShamanConfig[] _shamanConfigs;
+    [SerializeField] private UnitEntityConfig[] _shamanConfigs;
     
     [SerializeField] private TEMP_NodeObject[] _nextNodes;
     [SerializeField] private ClickHelper _clickHelper;

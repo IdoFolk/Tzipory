@@ -28,7 +28,7 @@ namespace Tzipory.GameplayLogic.Managers.MapManagers
             foreach (var nodeObject in _nodeObjects)
                 nodeObject.OnNodeClick += NodeClicked;
             
-            Init(GameManager.PlayerManager.PlayerSerializeData.WorldMapProgression);
+            Init(GameManager.PlayerManager.PlayerSerializeData.WorldMapProgressionSerializeData);
         }
         
         public void Init(WorldMapProgressionSerializeData parameter)

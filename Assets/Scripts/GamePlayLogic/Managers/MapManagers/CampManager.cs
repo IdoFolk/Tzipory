@@ -40,13 +40,13 @@ namespace Tzipory.GameplayLogic.Managers.MapManagers
         //Here for TESTING!!
         private void Start()
         {
-            Init(GameManager.PlayerManager.PlayerSerializeData.CampSerializeData);
+            //Init(GameManager.PlayerManager.PlayerSerializeData.CampSerializeData);
         }
 
         public void OpenCamp()
         {
             //Open Camp
-            _campUIManager.NewMainShamanSelected(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData.ShamanRosterDataContainers[0]);
+            //_campUIManager.NewMainShamanSelected(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData.[0]);
             UIManager.Init(UIGroup.MainCampUI,true,true);
             //UIManager.Init(UIGroup.CampFireUI,true,true); disable!
             Debug.Log("Open camp");
@@ -109,11 +109,6 @@ namespace Tzipory.GameplayLogic.Managers.MapManagers
         #endregion
 
         #region Party
-        
-        public void ModifyPartyMember(int targetShamanID, CollectionActionType actionType)
-        {
-            GameManager.PlayerManager.PlayerSerializeData.ModifyPartyMember(targetShamanID, actionType);
-        }
 
         // List<int> GetSelectedShamans()
         // {

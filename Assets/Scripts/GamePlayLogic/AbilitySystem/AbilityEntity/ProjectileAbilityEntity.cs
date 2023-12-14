@@ -1,58 +1,51 @@
-﻿using Tzipory.Systems.Entity.EntityComponents;
-using Tzipory.Systems.TargetingSystem;
-using Tzipory.Tools.Enums;
+﻿using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.GamePlayLogic.AbilitySystem;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.AbilitySystem;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace Tzipory.Systems.AbilitySystem.AbilityEntity
+namespace GamePlayLogic.AbilitySystem.AbilityEntity
 {
-    public class ProjectileAbilityEntity : BaseAbilityEntity , ITargetableReciever
+    public class ProjectileAbilityEntity : BaseAbilityEntity
     {
-        [SerializeField] private ColliderTargetingArea _colliderTargeting;
-        
         private float _penetrationNumber;
         private float _speed;
         private Vector3 _dir;
         
-        public void Init(IEntityTargetAbleComponent target,float speed, float penetrationNumber,IAbilityExecutor abilityExecutor) 
+        public override void Init(ITargetAbleEntity caster, Vector2 parameter,IAbilityExecutor executor,AbilityVisualConfig abilityVisualConfig)
         {
-            base.Init(target, abilityExecutor);
-            _colliderTargeting.Init(this);
-            _speed = speed;
-            _penetrationNumber = penetrationNumber;
-            _dir = (target.EntityTransform.position - transform.position).normalized;
-            visualTransform.up = _dir;
+            base.Init(caster, parameter,executor,abilityVisualConfig);
+            _speed = caster.EntityStatComponent.GetStat(Constant.StatsId.ProjectileSpeed).CurrentValue;
+            _penetrationNumber = caster.EntityStatComponent.GetStat(Constant.StatsId.ProjectilePenetration).CurrentValue;
+
+            Instantiate(abilityVisualConfig.VisualObject, _abilityVisualHandler.transform);
+            
+            _dir = (parameter - (Vector2)transform.position).normalized;
+            transform.up = _dir;
         }
 
-        protected override void Update()
+        private void Update()
         {
-            base.Update();
+            transform.position += transform.up * (_speed * GAME_TIME.GameDeltaTime);
             
-            transform.Translate(_dir * (_speed * GAME_TIME.GameDeltaTime));
-
             if (_penetrationNumber <= 0)
                 Destroy(gameObject);
         }
 
-        public void RecieveCollision(Collider2D other, IOType ioType)
+        public override void RecieveTargetableEntry(ITargetAbleEntity targetable)
         {
+            if (targetable.EntityType == Caster.EntityType)
+                return;
             
-        }
-
-        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
-        {
-            if (targetable.EntityInstanceID == _abilityExecutor.Caster.EntityInstanceID) return;
-            
-            // if (targetable.EntityType == Caster.EntityType)
-            //     return;
-
-            _abilityExecutor.Init(targetable);
+            AbilityExecutor.Execute(targetable);
             _penetrationNumber--;
         }
 
-        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
+        private void OnDrawGizmos()
         {
-            
+            Gizmos.DrawLine(transform.position, transform.position + _dir * 5);
         }
     }
 }

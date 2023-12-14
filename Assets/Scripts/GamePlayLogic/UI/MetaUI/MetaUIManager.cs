@@ -10,7 +10,7 @@ namespace Tzipory.GamePlayLogic.UI.MetaUI
 
         private void Awake()
         {
-            _characterRosterUI.Init(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData.ShamanRosterDataContainers);
+            //_characterRosterUI.Init(GameManager.PlayerManager.PlayerSerializeData.PartySerializeData.ShamanRosterDataContainers);
             _characterRosterUI.OnCharacterRosterSlotClicked += _campUIManager.NewMainShamanSelected;
             _characterRosterUI.Show();
         }

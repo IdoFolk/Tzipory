@@ -1491,6 +1491,10 @@ PrefabInstance:
       propertyPath: _powerStructureConfig
       value: 
       objectReference: {fileID: 11400000, guid: c642747ead76cf94e9eb6ebb50f7f679, type: 2}
+    - target: {fileID: 2033006501395873653, guid: 7badee3b3b0e154448b85d707d74efaa, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b1a33335676bae348b7c9e4bc0a7554a, type: 3}
     - target: {fileID: 3248058890782170975, guid: 7badee3b3b0e154448b85d707d74efaa, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.15
@@ -1532,6 +1536,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4273722055985562272, guid: 7badee3b3b0e154448b85d707d74efaa, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b1a33335676bae348b7c9e4bc0a7554a, type: 3}
+    - target: {fileID: 6315390276740483597, guid: 7badee3b3b0e154448b85d707d74efaa, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b1a33335676bae348b7c9e4bc0a7554a, type: 3}
@@ -1604,6 +1612,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 14.22
       objectReference: {fileID: 0}
+    - target: {fileID: 1762213935341147574, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 03c364836e9bd9e4290ae0855d457cad, type: 3}
     - target: {fileID: 2448031738073051684, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
       propertyPath: m_Name
       value: Testing Map
@@ -1681,6 +1693,10 @@ PrefabInstance:
       value: -15.46
       objectReference: {fileID: 0}
     - target: {fileID: 4543387695451711587, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 03c364836e9bd9e4290ae0855d457cad, type: 3}
+    - target: {fileID: 6045749792662921422, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 03c364836e9bd9e4290ae0855d457cad, type: 3}

@@ -1,32 +1,30 @@
+using Tzipory.Tools.ZFixTool;
 using UnityEngine;
 
 namespace Tzipory.Helpers
 {
     public class TEMP_SoloZFixer : MonoBehaviour
     {
-        [SerializeField] SpriteRenderer _spriteRenderer;
-
-        /// <summary>
-        /// Tick this V to keep this script in the sceneType. If this is false -> the script will destory itself after start
-        /// </summary>
-        [SerializeField] bool doGoOn;
-
-        Vector3 _cachedScaledMapSize;
-
-        void Start()
+        [SerializeField] private bool _destroyOnStart;
+        
+        private void Start()
         {
-            _spriteRenderer.transform.localPosition = new Vector3(_spriteRenderer.transform.localPosition.x,
-                _spriteRenderer.transform.localPosition.y, TEMP_UnitFlipAndZFix.GetZForLocalPosition(transform));
+            FixZ();
 
-            if (!doGoOn)
+            if (_destroyOnStart)
                 Destroy(this);
         }
 
-        private void Update()
-        {
+        private void Update()=>
+            FixZ();
 
-            _spriteRenderer.transform.localPosition = new Vector3(_spriteRenderer.transform.localPosition.x,
-                _spriteRenderer.transform.localPosition.y, TEMP_UnitFlipAndZFix.GetZForLocalPosition(transform));
+        private void FixZ()
+        {
+            var localPosition = transform.localPosition;
+            localPosition = new Vector3(localPosition.x,
+                
+                localPosition.y, TEMP_UnitFlipAndZFix.GetZForLocalPosition(transform));
+            transform.localPosition = localPosition;
         }
     }
 }

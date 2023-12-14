@@ -1,5 +1,6 @@
 using System;
 using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.Helpers.Consts;
 using UnityEngine;
 
 namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures

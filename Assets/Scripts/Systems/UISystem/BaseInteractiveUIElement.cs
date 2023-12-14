@@ -35,9 +35,9 @@ namespace Tzipory.Systems.UISystem
             
             _doubleClickTimer -= Time.deltaTime;
             
-            if (_doubleClickTimer <= _doubleClickSpeed)
+            if (_doubleClickTimer <= 0)
             {
-                _clickNum  = 0;
+                _clickNum = 0;
                 _doubleClickTimer  = 0;
             }
         }
@@ -102,6 +102,9 @@ namespace Tzipory.Systems.UISystem
         protected virtual void OnClick(PointerEventData eventData)
         {
             OnClickEvent?.Invoke();
+
+            if (!_enableDoubleClick) return;
+            
             _clickNum++;
             _doubleClickTimer = _doubleClickSpeed;
         }

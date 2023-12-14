@@ -1,57 +1,61 @@
-using Tzipory.Systems.AbilitySystem.AbilityExecuteTypes;
+﻿using Tzipory.ConfigFiles.AbilitySystem;
+using Tzipory.GamePlayLogic.AbilitySystem;
+using Tzipory.Helpers.Consts;
+using Tzipory.Systems.AbilitySystem;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.TargetingSystem;
-using Tzipory.Tools.Enums;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 
-namespace Tzipory.Systems.AbilitySystem.AbilityEntity
+namespace GamePlayLogic.AbilitySystem.AbilityEntity
 {
-    public class AoeAbilityEntity : BaseAbilityEntity, ITargetableReciever
+    public class AoeAbilityEntity : BaseAbilityEntity , ITargetableExitReciever
     {
-        [SerializeField] private ColliderTargetingArea _colliderTargetingArea;
-        
         private float _duration;
-        private AoeAbilityExecuter _aoeAbilityExecuter;
-    
-        public void Init(IEntityTargetAbleComponent target, float radius, float duration, AoeAbilityExecuter abilityExecutor)
-        {
-            base.Init(target,abilityExecutor);
-            _aoeAbilityExecuter = abilityExecutor;
-            _duration = duration;
-            _colliderTargetingArea.Init(this);
-            visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
-        }
 
-        public void RecieveCollision(Collider2D other, IOType ioType)
+        private AbilityVisualConfig _abilityVisualConfig;
+        
+        public override void Init(ITargetAbleEntity caster, Vector2 parameter, IAbilityExecutor executor,AbilityVisualConfig abilityVisualConfig)
         {
+            base.Init(caster, parameter, executor,abilityVisualConfig);
+            _duration = caster.EntityStatComponent.GetStat(Constant.StatsId.AoeDuration).CurrentValue;
             
-        }
+            _abilityVisualConfig = abilityVisualConfig;
+            
+            Instantiate(abilityVisualConfig.VisualObject, _abilityVisualHandler.transform);
 
-        public void RecieveTargetableEntry(IEntityTargetAbleComponent targetable)
-        {
-            if (targetable == _aoeAbilityExecuter.Caster)
-                return;
-        
-            _aoeAbilityExecuter.Execute(targetable);
-        }
+            // if (abilityVisualConfig._abilityVisualType == AbilityVisualType.TimeLine)
+            // {
+            //     abilityVisualConfig.TargetAnimationConfig.LoopTime = _duration;
+            //     _abilityVisualHandler.Play();
+            // }
 
-        public void RecieveTargetableExit(IEntityTargetAbleComponent targetable)
-        {
-            if (targetable == _aoeAbilityExecuter.Caster)
-                return;
-        
-            _aoeAbilityExecuter.ExecuteOnExit(targetable);
+            _abilityVisualConfig.TargetAnimationConfig.LoopTime = _duration;
+            //_visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
         }
-
-        protected override void Update()
-        {
-            base.Update();
         
+        private void Update()
+        {
             _duration -= GAME_TIME.GameDeltaTime;//need to be a timer
         
             if(_duration <= 0)
                 Destroy(gameObject);//TODO: add a pool to the ability entity system
+        }
+
+        public override void RecieveTargetableEntry(ITargetAbleEntity targetable)
+        {
+            if (targetable.EntityType == Caster.EntityType)
+                return;
+            
+            AbilityExecutor.Execute(targetable);
+
+            if (_abilityVisualConfig.HaveEffectOnEntity)
+                targetable.EntityVisualComponent.StartAnimationEffect(_abilityVisualConfig.TargetAnimationConfig);
+            
+        }
+
+        public void RecieveTargetableExit(ITargetAbleEntity targetable)
+        {
         }
     }
 }

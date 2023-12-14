@@ -9,7 +9,7 @@ namespace Tzipory.Tools
 
         private void Awake()
         {
-            _text.text = $"{Application.productName} V_{Application.version}";
+            _text.text = $"{Application.productName} v_{Application.version}";
             Destroy(this);
         }
     }

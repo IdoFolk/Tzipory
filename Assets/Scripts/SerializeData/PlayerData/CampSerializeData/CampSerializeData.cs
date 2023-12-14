@@ -12,7 +12,8 @@ namespace Tzipory.SerializeData.PlayerData.Camp
         private List<CampBuildingSerializeData> _campBuildingSerializeDatas;
 
         public List<CampBuildingSerializeData> CampBuildingSerializeDatas => _campBuildingSerializeDatas;
-        
+
+        public int SerializeObjectId { get; }
         public int SerializeTypeId { get; }
         public bool IsInitialization { get; private set; }
         

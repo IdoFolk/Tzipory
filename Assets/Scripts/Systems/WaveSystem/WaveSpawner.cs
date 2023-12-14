@@ -3,9 +3,6 @@ using PathCreation;
 using Tzipory.ConfigFiles.Level;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.GamePlayLogic.ObjectPools;
-using Tzipory.Helpers;
-using Tzipory.SerializeData.PlayerData.Party.Entity;
-using Tzipory.Systems.MovementSystem;
 using Tzipory.Tools.Enums;
 using Tzipory.Tools.Interface;
 using UnityEngine;
@@ -19,7 +16,7 @@ namespace Tzipory.Systems.WaveSystem
         [SerializeField, HideInInspector] private int _id;
         [SerializeField] private Transform _waveIndicatorPosition;
         [SerializeField] private Transform[] _spawnPositions;
-        [SerializeField] private PathCreator myPathCreator;
+        [SerializeField] private PathCreator _path;
 
         private List<IProgress> _completedEnemyGroups;
 
@@ -132,13 +129,10 @@ namespace Tzipory.Systems.WaveSystem
                 if (!enemyGroup.TryGetEnemy(out var entityConfig))
                     continue;
 
-                var enemy = PoolManager.EnemyPool.GetObject();
-
+                var enemy = PoolManager.UnitEntityPool.GetObject();
+                entityConfig.MovementComponentConfig.PathCreator = _path;
                 enemy.Init(entityConfig);
                 enemy.transform.position = _spawnPositions[Random.Range(0, _spawnPositions.Length)].position;
-                var enemyMoveComponent = enemy.GetComponent<MovementOnPath>(); //temp!
-                enemyMoveComponent.SetPath(myPathCreator);
-                enemyMoveComponent.AdvanceOnPath();
             }
         }
 

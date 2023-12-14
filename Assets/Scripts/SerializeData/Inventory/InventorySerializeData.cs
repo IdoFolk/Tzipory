@@ -56,6 +56,7 @@ namespace Tzipory.SerializeData.Inventory
             
         }
 
+        public int SerializeObjectId { get; }
         public int SerializeTypeId => Constant.DataId.INVENTORY_DATA_ID;
     }
 }

@@ -22,7 +22,7 @@ namespace Tzipory.Helpers
             => $"<color={ToRGBHex(color)}>{message}</color>";
         
         public static string SetColorToString(string message, string hexCode)
-            => $"<color={hexCode}>{message}</color>";
+            => $"<color={hexCode}>{message}/<color>";
         
         private static string ToRGBHex(Color c)
             => $"#{ToByte(c.r):X2}{ToByte(c.g):X2}{ToByte(c.b):X2}";

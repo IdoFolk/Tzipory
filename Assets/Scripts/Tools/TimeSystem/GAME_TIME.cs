@@ -27,6 +27,8 @@ namespace Tzipory.Tools.TimeSystem
 
         private static Coroutine _fadeCoroutine;
 
+        private static float _transitionTimeCount = 0;
+
         private void Awake()
         {
             _monoBehaviour = this;
@@ -62,20 +64,21 @@ namespace Tzipory.Tools.TimeSystem
         private static IEnumerator FadeTime(float time,float transitionTime = 1 ,AnimationCurve curve = null)
         {
             float currentTimeRate = GetCurrentTimeRate;
-            float transitionTimeCount = 0;
+            
             var animationCurve = curve ?? _defaultCurve;
 
-            while (transitionTimeCount < transitionTime)
+            while (_transitionTimeCount < transitionTime)
             {
-                transitionTimeCount += Time.deltaTime;
+                _transitionTimeCount += Time.deltaTime;
 
-                float evaluateValue = animationCurve.Evaluate(transitionTimeCount / transitionTime);
+                float evaluateValue = animationCurve.Evaluate(_transitionTimeCount / transitionTime);
 
-                _timeRate = Mathf.Lerp(currentTimeRate, time, evaluateValue);
+                SetTime(Mathf.Lerp(currentTimeRate, time, evaluateValue));
                 
                 yield return null;
             }
-            
+
+            _transitionTimeCount = 0;
             SetTime(time);
         }
 
@@ -84,6 +87,7 @@ namespace Tzipory.Tools.TimeSystem
             _timeRate = timeRate;
             
             Logger.Log($"Set time to {timeRate}",LOG_GROUP_NAME);
+            
             OnTimeRateChange?.Invoke();
         }
 

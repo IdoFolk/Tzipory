@@ -1,3 +1,4 @@
+using Tzipory.GamePlayLogic.EntitySystem;
 using UnityEngine;
 
 public class Shadow : MonoBehaviour
@@ -8,16 +9,20 @@ public class Shadow : MonoBehaviour
 
     [SerializeField] private LineRenderer _lineRenderer;
 
+
     public bool IsOn;
 
     private Transform _shamanTrans;
 
-    public void SetShadow(Transform shaman, Sprite shadowSprite, float range)
+    public UnitEntity Shaman { get; private set; }
+
+    public void SetShadow(UnitEntity shaman, Sprite shadowSprite, float range)
     {
         gameObject.SetActive(true);
         IsOn = true;
         //_agentNavMesh = agentNavMesh;
-        _shamanTrans = shaman;
+        Shaman = shaman;
+        _shamanTrans = shaman.transform;
         _shadowRenderer.sprite = shadowSprite;
         _mask.sprite = shadowSprite;
         _lineRenderer.gameObject.SetActive(true);

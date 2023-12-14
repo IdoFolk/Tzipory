@@ -19,8 +19,8 @@ MonoBehaviour:
     _abilityExecuteType: 0
     _projectileSpeed: 0
     _projectilePenetration: 0
-    _aoeRadius: 0
-    _aoeDuration: 0
+    _aoeRadius: 5
+    _aoeDuration: 1
     _chainRadius: 0
     _chainDuration: 0
     _chainAmount: 0
@@ -34,12 +34,67 @@ MonoBehaviour:
     _chainRadius: 0
     _chainDuration: 0
     _chainAmount: 0
-  StatusEffectConfigs: []
+  StatusEffectConfigs:
+  - _statusEffectName: 
+    _statProcessPriority: 999
+    _affectedStatId: 0
+    _statEffectType: 0
+    _duration: 20
+    _interval: 0
+    StatModifier:
+      _statusModifierType: 3
+      Modifier: 0
+      _ringModifiers: []
+    _effectSequence:
+      _sequenceName: 
+      _id: 0
+      _startDelay: 0
+      _endDelay: 0
+      _isStackable: 0
+      _isInterruptable: 0
+      _effectActionContainers: []
+    _overrideGlobalPopUpTextConfig: 0
+    _popUpTextConfig:
+      DisablePopUp: 0
+      PopUpTextType: 0
+      RepeatPattern: 0
+      RoundNumbers: 0
+      Text: 
+      Color: {r: 0, g: 0, b: 0, a: 0}
+      OverrideSize: 0
+      FontSize: 0
+      OverrideRiseSpeedAndTTL: 0
+      RiseSpeed: 0
+      TimeToLive: 0
+      OverrideStartSize: 0
+      StartSize: {x: 0, y: 0}
+      AddRandomMoveOffSet: 0
+      MoveOffSet: {x: 0, y: 0}
+      OverrideAnimationCurve: 0
+      PopUpTextMoveCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      PopUpTextScaleCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      PopUpTextAlphaCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
   DoExitEffects: 0
   StatusEffectConfigsOnExit: []
-  Cooldown: 0
-  CastTime: 0
+  Cooldown: 10
+  CastTime: 1
   AbilityVisualConfig:
+    _abilityVisualType: 0
     AbilityAnimationConfig:
       HaveEnterAndExit: 0
       EntryTimeLine: {fileID: 0}

@@ -17,9 +17,10 @@ namespace Tzipory.Systems.AbilitySystem
         private readonly IEntityTargetingComponent _entityTargetingComponent;
         private readonly IAbilityExecutor _abilityExecutor;
         private readonly IPriorityTargeting _priorityTargeting;
-        
+
         private bool _isReady;
-        
+
+
         private ITimer _castTimer;
         private ITimer _cooldownTimer;
 
@@ -28,6 +29,17 @@ namespace Tzipory.Systems.AbilitySystem
         public bool IsCasting { get; private set; }
         
         public Dictionary<int, Stat> Stats { get; }
+
+        public AbilityConfig Config { get; private set; }
+
+        public float CooldownTimeRemaining
+        {
+            get
+            {
+                if (_cooldownTimer is null) return 0;
+                return _cooldownTimer.TimeRemaining;
+            }
+        }
 
         private Stat Cooldown
         {
@@ -54,6 +66,7 @@ namespace Tzipory.Systems.AbilitySystem
         public Ability(ITargetAbleEntity caster,IEntityTargetingComponent entityTargetingComponent, AbilityConfig config)
         {
             _entityTargetingComponent = entityTargetingComponent;
+            Config = config;
 
             Stats = new Dictionary<int, Stat>();
             
@@ -124,7 +137,7 @@ namespace Tzipory.Systems.AbilitySystem
         private void StartCooldown()
         {
             IsCasting  = false;
-            _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(Cooldown.CurrentValue,"Ability cooldown",ResetAbility);
+            _cooldownTimer = _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(Cooldown.CurrentValue,"Ability cooldown",ResetAbility);
         }
 
         private void ResetAbility() =>

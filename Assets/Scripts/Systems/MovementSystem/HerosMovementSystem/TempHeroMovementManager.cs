@@ -50,7 +50,7 @@ namespace Tzipory.Systems.MovementSystem.HerosMovementSystem
             Cursor.visible = false;
             
             SlowMotionManager.Instance.StartSlowMotionEffects();
-            HeroSelectionUI.Instance.ShowSelectionUI(target);
+            HeroSelectionUI.Instance.Init(target);
             
             OnAnyShamanSelected?.Invoke();
         }

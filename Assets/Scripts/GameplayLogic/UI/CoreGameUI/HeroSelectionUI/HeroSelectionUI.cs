@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using Tzipory.GamePlayLogic.EntitySystem;
-using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.Helpers;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
@@ -18,8 +18,14 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
         [SerializeField] private TextMeshProUGUI _shamanName;
         [SerializeField] private StatBlockPanel _statBlockPanel;
         [SerializeField] private PSBonusUIHandler _psBonusUIHandler;
+        [SerializeField] private AbilityUIHandler _abilityUIHandler;
 
         public bool IsActive { get; private set; }
+
+        private void Start()
+        {
+            gameObject.SetActive(false);
+        }
 
         public void Init(UnitEntity shaman)
         {
@@ -27,14 +33,10 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
             
             _statBlockPanel.Init(stats);
             _psBonusUIHandler.Show(stats);
+            _abilityUIHandler.Show(shaman.EntityAbilitiesComponent.Abilities);
             _shamanSprite.sprite = shaman.Config.VisualComponentConfig.Icon;
             _shamanName.text = shaman.Config.EntityName;
-        }
-
-        public void ShowSelectionUI(UnitEntity shaman)
-        {
-            Init(shaman);
-
+            
             IsActive = true;
             gameObject.SetActive(true);
         }
@@ -48,6 +50,7 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
         {
             _statBlockPanel.HideStatBlocks();
             _psBonusUIHandler.Hide();
+            _abilityUIHandler.Hide();
 
             IsActive = false;
             gameObject.SetActive(false);

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3247378696362300497}
   - component: {fileID: 4817176237645050738}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ProximityRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -60,7 +60,7 @@ GameObject:
   - component: {fileID: 6761376093834743448}
   - component: {fileID: 89707611866070887}
   - component: {fileID: 1749552138762399494}
-  m_Layer: 3
+  m_Layer: 13
   m_Name: ProximityRingTargeting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8229431923981427744}
   - component: {fileID: 7026605730497799101}
-  m_Layer: 10
+  m_Layer: 13
   m_Name: ProximityRingVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2157103246662016059}
   - component: {fileID: 2018185763070135403}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ProximityRingMask
   m_TagString: Untagged
   m_Icon: {fileID: 0}

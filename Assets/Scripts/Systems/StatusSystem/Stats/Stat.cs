@@ -143,13 +143,13 @@ namespace Tzipory.Systems.StatusSystem
             }
         }
         
-        public IDisposable AddStatusEffect(IStatEffectProcess statEffectProcess,PopUpTextConfig popUpTextConfig)=>
+        public IStatEffectProcess AddStatusEffect(IStatEffectProcess statEffectProcess,PopUpTextConfig popUpTextConfig)=>
             AddStatusEffect(statEffectProcess, true,popUpTextConfig);
         
-        public IDisposable AddStatusEffect(IStatEffectProcess statEffectProcess)=>
+        public IStatEffectProcess AddStatusEffect(IStatEffectProcess statEffectProcess)=>
             AddStatusEffect(statEffectProcess, false);
 
-        private IDisposable AddStatusEffect(IStatEffectProcess statEffectProcess, bool usePopUpText,
+        private IStatEffectProcess AddStatusEffect(IStatEffectProcess statEffectProcess, bool usePopUpText,
             PopUpTextConfig popUpTextConfig = default)
         {
             //TODO: need to work on the overTime logic

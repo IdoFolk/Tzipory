@@ -6,7 +6,9 @@ using UnityEngine;
 
 namespace Tzipory.Tools.Debag
 {
+#if UNITY_EDITOR 
     [InitializeOnLoad]
+#endif
     public class Logger
     {
         public static readonly string LOGGroupPath = $"{Application.dataPath}/GameSetting/LogGroups";

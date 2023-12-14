@@ -52,6 +52,7 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
         [Header("Serialized Components")]
         [SerializeField,OnCollectionChanged(nameof(GetWaveSpawners))] private List<WaveSpawner> _waveSpawnersSerialize;
         [SerializeField] private List<PowerStructure> _powerStructuresSerialize;
+        [SerializeField] private ParticleSystem[] _particleSystemsSerialize;
         private static List<WaveSpawner> _waveSpawners;
 
         private readonly List<Color> _spawnerColors = new()
@@ -65,6 +66,8 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
             Color.yellow
         };
 
+        public static ParticleSystem[] ParticleSystems { get; private set; }
+
         public IEnumerable<WaveSpawner> WaveSpawners => _waveSpawners;
         public IEnumerable<WaveSpawner> WaveSpawnersSerialize => _waveSpawnersSerialize;
         
@@ -75,7 +78,8 @@ namespace Tzipory.SerializeData.PlayerData.Party.Entity
             FakeForward = _fakeForward.normalized;
             MapStartWordPosition = GetMapStartPosition();
             
-            
+            ParticleSystems = _particleSystemsSerialize;
+
             foreach (var powerStructure in _powerStructuresSerialize)
             {
                 powerStructure.Init();

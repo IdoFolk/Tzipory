@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1413134937648979510}
   - component: {fileID: 7105337688250088895}
+  - component: {fileID: 7391518783491069100}
   m_Layer: 0
-  m_Name: GameTimeManager
+  m_Name: Tools
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,3 +45,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfec8b7f57746b9418d2ec45131d7d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7391518783491069100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8507602071715402607}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0060ad6cc008a35449cc5938e45a6b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _defaultConfig:
+    TransitionCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1
+        outSlope: 1
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    TransitionTime: 1
+    NewValue: 0

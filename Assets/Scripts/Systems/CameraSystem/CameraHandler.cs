@@ -2,19 +2,31 @@ using System;
 using System.Collections;
 using Cinemachine;
 using Sirenix.OdinInspector;
+using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Helpers;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
+using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.CameraSystem
 {
     public class CameraHandler : MonoBehaviour
     {
+        #region Consts
         private const float ORTHOGRAPHIC_DETECT_RANGE = 0.2f;
         private const float CAMERA_MOVEMENT_DETECT_RANGE = 0.5f;
 
         private const float FULL_HD_PIXELS_X = 1920;
-        private const float FULL_HD_PIXELS_y = 1080;
-
+        private const float FULL_HD_PIXELS_Y = 1080;
+        private const int LOCKED_CAMERA_ZOOM = 9;
+        private const string CAMERA_LOG_GROUP = "CameraSystem";
+        
+        private static AnimationCurve _defaultCurve = AnimationCurve.Linear(0, 0, 1, 1);
+        #endregion
+        
+        #region SerialzedFields
         [SerializeField, Tooltip("attach a camera setting config file to determine all of the camera variables")]
         private CameraSettings _cameraSettings;
 
@@ -23,39 +35,47 @@ namespace Tzipory.Systems.CameraSystem
 
         [SerializeField, Tooltip("toggle mouse edge scroll camera movement")]
         private bool _enableEdgeScroll = false;
-        
+
         [SerializeField, Tooltip("toggle mouse Pan scroll camera movement")]
         private bool _enablePanScroll = true;
-        
+
         [SerializeField, Tooltip("toggle whether the camera moves to the mouse position when zooming")]
         private bool _enableZoomMovesCamera = false;
+        
+        [Header("Game Objects")]
+        [TabGroup("Cameras"),SerializeField] private Camera _mainCamera;
+        [TabGroup("Cameras"),SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
+        [TabGroup("Cameras"),SerializeField] private Transform _cameraFollowObject;
+        [TabGroup("Cameras"),SerializeField] private CinemachineBrain _cinemachineBrain;
+        [TabGroup("Post Process"),SerializeField] private Volume _postProcessVolume;
 
-        [Header("Gameobjects")] 
-        [SerializeField] private Camera _mainCamera;
-        [SerializeField] private CinemachineVirtualCamera _cinemachineVirtualCamera;
-        [SerializeField] private Transform _cameraFollowObject;
-        [SerializeField] private CinemachineBrain _cinemachineBrain;
+        public Volume PostProcessVolume => _postProcessVolume;
 
-        public Camera MainCamera => _mainCamera;
+        #endregion
+        
+        #region Fields
         private readonly Vector3 _lockedCameraPosition = new (0, -3, -80);
-        private readonly int _lockedCameraZoom = 9;
-
         private Vector2 _cameraBorders;
-        private Vector2 _cameraStartPosition;
         private float _cameraMaxZoom;
+        private Vector2 _cameraStartPosition;
         private float _cameraStartZoom;
-        private float _targetOrthographicSize;
         private CinemachineTransposer _cinemachineTransposer;
 
         private float _currentAspectRatioX;
         private float _currentAspectRatioY;
+
+        private bool _dragPanMoveActive = false;
+        private Vector2 _dragPanSpeed;
         private float _edgePaddingX;
         private float _edgePaddingY;
-        private float _zoomPadding;
-        
-        private bool _dragPanMoveActive = false;
         private Vector2 _lastMousePosition;
+        private float _targetOrthographicSize;
+        private float _zoomPadding;
 
+        public Camera MainCamera => _mainCamera;
+        #endregion
+
+        #region Init
         private void Awake()
         {
             //only 1 camera in the scene
@@ -76,14 +96,22 @@ namespace Tzipory.Systems.CameraSystem
             //caching
             _cinemachineTransposer = _cinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>();
             _cinemachineBrain = _mainCamera.GetComponent<CinemachineBrain>();
+            
             _cinemachineTransposer.m_XDamping = _cameraSettings.XDamping;
             _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
             _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
             _edgePaddingY = _cameraSettings.DefaultEdgePaddingY;
             _cameraMaxZoom = _cameraSettings.ZoomMaxClamp;
-            LockCamera(_lockedCameraPosition, _lockedCameraZoom);
+            _dragPanSpeed.x = _cameraSettings.CameraDragPanSpeed * _mainCamera.aspect;
+            _dragPanSpeed.y = _cameraSettings.CameraDragPanSpeed;
+            LockCamera(_lockedCameraPosition, LOCKED_CAMERA_ZOOM);
+#if !UNITY_EDITOR
+            Cursor.lockState = CursorLockMode.Confined;
+#endif
         }
+        #endregion
 
+        #region Update
         private void Update()
         {
             //here we control the camera movement and zoom
@@ -106,7 +134,7 @@ namespace Tzipory.Systems.CameraSystem
             if (Input.GetKey(KeyCode.S)) inputDir.y = -1f;
             if (Input.GetKey(KeyCode.A)) inputDir.x = -1f;
             if (Input.GetKey(KeyCode.D)) inputDir.x = +1f;
-
+#if !UNITY_EDITOR
             //Edge Scrolling Detection
             if (_enableEdgeScroll)
             {
@@ -119,37 +147,37 @@ namespace Tzipory.Systems.CameraSystem
                 if (Input.mousePosition.y > Screen.height - (Screen.height * _cameraSettings.EdgeScrollDetectSizeY))
                     inputDir.y = +1f;
             }
-
-            if (_enablePanScroll)
+#endif
+            if (!_enablePanScroll) return inputDir;
+            
+            
+            if (Input.GetMouseButtonDown(1))
             {
-                if (Input.GetMouseButtonDown(1))
-                {
-                    _dragPanMoveActive = true;
-                    _lastMousePosition = Input.mousePosition;
-                }
-                if (Input.GetMouseButtonUp(1))
-                {
-                    _dragPanMoveActive = false;
-                }
-
-                if (_dragPanMoveActive)
-                {
-                    var dragPanSpeed = _cameraSettings.CameraDragPanSpeed;
-                    Vector2 mouseMovementDelta = (Vector2)Input.mousePosition - _lastMousePosition;
-                    inputDir.x = -mouseMovementDelta.x * dragPanSpeed;
-                    inputDir.y = -mouseMovementDelta.y * dragPanSpeed;
-
-                    _lastMousePosition = Input.mousePosition;
-                }
+                _dragPanMoveActive = true;
+                _lastMousePosition = GameManager.CameraHandler._mainCamera.ScreenToViewportPoint(Input.mousePosition);
+            }
+            if (Input.GetMouseButtonUp(1))
+            {
+                _dragPanMoveActive = false;
             }
 
-            return inputDir;
+            if (!_dragPanMoveActive) return inputDir.normalized;
+            
+            var mouseMovementDelta = _lastMousePosition - (Vector2)GameManager.CameraHandler._mainCamera.ScreenToViewportPoint(Input.mousePosition);
+            
+            _lastMousePosition = GameManager.CameraHandler._mainCamera.ScreenToViewportPoint(Input.mousePosition);
+            _dragPanSpeed.x = _cameraSettings.CameraDragPanSpeed * _mainCamera.aspect;
+            _dragPanSpeed.y = _cameraSettings.CameraDragPanSpeed;
+            var tempLogDragPanSpeed = _dragPanSpeed;
+            _dragPanSpeed *= mouseMovementDelta.magnitude;
+            Logger.Log($"drag speed: {tempLogDragPanSpeed}, Magnitude: {_dragPanSpeed}",CAMERA_LOG_GROUP);
+            return mouseMovementDelta.normalized;
         }
 
         private void HandleZoom()
         {
             //Mouse Scroll Zoom 
-            var zoomMoveCameraValue = _cameraSettings.ZoomMoveCameraValue;
+            float zoomMoveCameraValue = _cameraSettings.ZoomMoveCameraValue;
             var zoomCameraDirection =
                 _mainCamera.ScreenToWorldPoint(Input.mousePosition) - _cameraFollowObject.position;
             
@@ -161,16 +189,13 @@ namespace Tzipory.Systems.CameraSystem
                     if (_targetOrthographicSize > _cameraSettings.ZoomMinClamp - 1)
                     {
                         _cameraFollowObject.Translate(zoomCameraDirection * zoomMoveCameraValue); //move the camera towards the mouse
-                        StartCoroutine(ChangeDampingUntilConditional(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY, CameraFinishedFollowUp()));
+                        StartCoroutine(ChangeDampingUntilCameraFinishZoom(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY));
                     }
-                }
-                else
-                {
-                    StartCoroutine(ChangeDampingUntilConditional(0, 0, CameraFinishedZoom()));
+                    else
+                        StartCoroutine(ChangeDampingUntilCameraFinishZoom(0, 0));
                 }
             }
 
-            
             if (Input.mouseScrollDelta.y < 0) //zoom out
             {
                 _targetOrthographicSize += _cameraSettings.ZoomChangeValue;
@@ -179,15 +204,13 @@ namespace Tzipory.Systems.CameraSystem
                     if (_targetOrthographicSize < _zoomPadding + 1)
                     {
                         _cameraFollowObject.Translate(-zoomCameraDirection * zoomMoveCameraValue); //move the camera away from the mouse
-                        StartCoroutine(ChangeDampingUntilConditional(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY, CameraFinishedFollowUp()));
+                        StartCoroutine(ChangeDampingUntilCameraFinishZoom(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY));
                     }
-                }
-                else
-                {
-                    StartCoroutine(ChangeDampingUntilConditional(0, 0, CameraFinishedZoom()));
+                    else
+                        StartCoroutine(ChangeDampingUntilCameraFinishZoom(0, 0));
                 }
             }
-            
+
             CameraZoomClamp();
         }
 
@@ -205,6 +228,11 @@ namespace Tzipory.Systems.CameraSystem
                 (_zoomPadding - _cameraSettings.ZoomMinClamp);
             float zoomSpeedChangeValue = currentZoomNormalizedValue * _cameraSettings.CameraSpeedZoomChangeValue;
             float fixedCameraSpeed = _cameraSettings.MoveSpeedMinimum + zoomSpeedChangeValue;
+            if (_dragPanMoveActive)
+            {
+                moveDir.x *= _dragPanSpeed.x;
+                moveDir.y *= _dragPanSpeed.y;
+            }
 
             //moving the camera
             cameraPosition += moveDir * (fixedCameraSpeed * Time.deltaTime);
@@ -235,7 +263,9 @@ namespace Tzipory.Systems.CameraSystem
             _cinemachineVirtualCamera.m_Lens.OrthographicSize = Mathf.Lerp(_cinemachineVirtualCamera.m_Lens.OrthographicSize, _targetOrthographicSize,
                 Time.deltaTime * _cameraSettings.ZoomSpeed);
         }
+        #endregion
 
+        #region PublicMethods
         public void SetCameraSettings(Vector2 cameraBorders, float cameraMaxZoom, bool overWrite, Vector2 startPos, float startZoom)
         {
             _cameraBorders = cameraBorders;
@@ -251,21 +281,25 @@ namespace Tzipory.Systems.CameraSystem
         public void ResetCamera()
         {
             //calculating the current aspect ratio according to screen resolution
-            if (FULL_HD_PIXELS_X / FULL_HD_PIXELS_y == _mainCamera.aspect)
+            if (FULL_HD_PIXELS_X / FULL_HD_PIXELS_Y == _mainCamera.aspect)
             {
                 _edgePaddingX = _cameraSettings.DefaultEdgePaddingX;
                 _edgePaddingY = _cameraSettings.DefaultEdgePaddingY;
+                _dragPanSpeed.x = _cameraSettings.CameraDragPanSpeed * _mainCamera.aspect;
+                _dragPanSpeed.y = _cameraSettings.CameraDragPanSpeed;
                 _zoomPadding = _cameraMaxZoom;
                 if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
             }
             else
             {
                 _currentAspectRatioX = FULL_HD_PIXELS_X / _mainCamera.pixelWidth;
-                _currentAspectRatioY = FULL_HD_PIXELS_y / _mainCamera.pixelHeight;
+                _currentAspectRatioY = FULL_HD_PIXELS_Y / _mainCamera.pixelHeight;
                 
                 //calculating the current padding for movement borders and zoom
                 _edgePaddingX = _cameraSettings.DefaultEdgePaddingX / _currentAspectRatioX;
                 _edgePaddingY = _cameraSettings.DefaultEdgePaddingY / _currentAspectRatioY;
+                // _dragPanSpeedX = (_cameraSettings.CameraDragPanSpeed * 100f) / _currentAspectRatioX;
+                // _dragPanSpeedY = (_cameraSettings.CameraDragPanSpeed * 100f) / _currentAspectRatioY;
                 _zoomPadding = _cameraMaxZoom * _currentAspectRatioX;
                 if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
             }
@@ -306,10 +340,12 @@ namespace Tzipory.Systems.CameraSystem
         {
             //move the camera to Event Position
             var newPos = new Vector3(eventPosition.x, eventPosition.y, -80);
-            StartCoroutine(ChangeDampingUntilConditional(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY, CameraFinishedFollowUp()));
             _cameraFollowObject.position = newPos;
+            StartCoroutine(ChangeDampingUntilCameraFinishFollowUp(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY));
         }
+        #endregion
 
+        #region PrivateMethods
         private bool CameraFinishedFollowUp()
         {
             var mainCameraPos = _mainCamera.transform.position;
@@ -330,14 +366,14 @@ namespace Tzipory.Systems.CameraSystem
             return cameraFinishedZoom;
         }
 
-        IEnumerator ChangeDampingUntilConditional(float xdamping, float ydamping, bool condition)
+        private IEnumerator ChangeDampingUntilCameraFinishFollowUp(float xdamping, float ydamping)
         {
             _cinemachineTransposer.m_XDamping = xdamping;
             _cinemachineTransposer.m_YDamping = ydamping;
 
             while (true)
             {
-                if (condition)
+                if (CameraFinishedFollowUp())
                 {
                     _cinemachineTransposer.m_XDamping = _cameraSettings.XDamping;
                     _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
@@ -347,5 +383,24 @@ namespace Tzipory.Systems.CameraSystem
                 yield return null;
             }
         }
+
+        private IEnumerator ChangeDampingUntilCameraFinishZoom(float xdamping, float ydamping)
+        {
+            _cinemachineTransposer.m_XDamping = xdamping;
+            _cinemachineTransposer.m_YDamping = ydamping;
+
+            while (true)
+            {
+                if (CameraFinishedZoom())
+                {
+                    _cinemachineTransposer.m_XDamping = _cameraSettings.XDamping;
+                    _cinemachineTransposer.m_YDamping = _cameraSettings.YDamping;
+                    yield break;
+                }
+
+                yield return null;
+            }
+        }
+        #endregion
     }
 }

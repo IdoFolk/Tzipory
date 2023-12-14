@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea472f36b2a4dc0b0810fdfb6687265, type: 3}
   m_Name: Nadia
   m_EditorClassIdentifier: 
-  _entityName: 
+  _entityName: Nadia
   _entityId: -166019025
   _unitType: 0
   HealthComponentConfig:
@@ -96,7 +96,7 @@ MonoBehaviour:
   _combatComponent: 1
   CombatComponentConfig:
     CombatComponentType: 0
-    AttackDamage: 0
+    AttackDamage: 35
     AttackRate: 0.8
     AttackCooldown: 0
     CritDamage: 125
@@ -112,7 +112,7 @@ MonoBehaviour:
     PathCreator: {fileID: 0}
     MaxDistanceFromPath: 0
     PrivateRabbitIncrement: 0
-    DistanceTORabbitToUpdate: 0
+    PrivateRabbitDistanceToUpdate: 0
   _abilityComponent: 1
   AbilityComponentConfig:
     _abilityConfigs:

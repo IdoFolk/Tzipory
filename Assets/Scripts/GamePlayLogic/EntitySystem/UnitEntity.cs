@@ -32,6 +32,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         [SerializeField,TabGroup("Component")] private SoundHandler _soundHandler;
         [SerializeField,TabGroup("Component")] private TargetingComponent _entityTargetingComponent;//temp
         [SerializeField,TabGroup("Component")] private ColliderTargetingArea _colliderTargeting;
+        [SerializeField,TabGroup("Component")] private CircleCollider2D _groundCollider;
         [SerializeField,TabGroup("Component")] private AgentMoveComponent _agentMoveComponent;
         //[SerializeField,TabGroup("Component")] private ClickHelper _clickHelper;
         [Header("Visual components")]
@@ -83,6 +84,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             _config = DataManager.DataRequester.GetConfigData<UnitEntityConfig>(parameter);
             
             gameObject.name =  $"{_config.name} InstanceID: {EntityInstanceID}";
+
+            gameObject.tag = _config.UnitType.ToString();
+            _groundCollider.gameObject.tag = _config.UnitType.ToString();
 
             List<IStatHolder> statHolders = new List<IStatHolder>();
             

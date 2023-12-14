@@ -78,7 +78,7 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
                     if (other.gameObject.transform.parent.TryGetComponent<UnitEntity>(out var unitEntity))
                     {
                         if (unitEntity.EntityType == EntityType.Hero)
-                            OnShamanEnter?.Invoke(Id,unitEntity);
+                            OnShamanExit?.Invoke(Id,unitEntity);
                     }
                 }
             }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dea472f36b2a4dc0b0810fdfb6687265, type: 3}
   m_Name: Toor
   m_EditorClassIdentifier: 
+  _entityName: Toor
   _entityId: -1670867242
   _unitType: 0
   HealthComponentConfig:
@@ -26,7 +27,7 @@ MonoBehaviour:
     TargetingPriorityType: 2
   VisualComponentConfig:
     Sprite: {fileID: 21300000, guid: f4e62ad13a5770c44aac2a924dab6155, type: 3}
-    Icon: {fileID: 21300000, guid: 97554a74e79997844a27c96e13c4e3dd, type: 3}
+    Icon: {fileID: 1885256787, guid: 2a862c0ebda887f42a111fbbce4d7fc0, type: 3}
     HpBar: 1
     HaveSilhouette: 1
     UIIndicator: 1

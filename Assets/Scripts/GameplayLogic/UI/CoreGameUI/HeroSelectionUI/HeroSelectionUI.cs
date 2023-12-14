@@ -35,10 +35,8 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
         {
             Init(shaman);
 
-            var Pos = transform.position;
-            Pos.y += 180;
-            transform.position = Pos;
             IsActive = true;
+            gameObject.SetActive(true);
         }
 
         public void UpdateStatBlocks(Stat shamanStat, float newValue)
@@ -50,10 +48,9 @@ namespace Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI
         {
             _statBlockPanel.HideStatBlocks();
             _psBonusUIHandler.Hide();
-            var Pos = transform.position;
-            Pos.y -= 180;
-            transform.position = Pos;
+
             IsActive = false;
+            gameObject.SetActive(false);
         }
     }
 }

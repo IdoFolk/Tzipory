@@ -112,7 +112,7 @@ MonoBehaviour:
     PathCreator: {fileID: 0}
     MaxDistanceFromPath: 0.4
     PrivateRabbitIncrement: 0.1
-    DistanceTORabbitToUpdate: 0.5
+    PrivateRabbitDistanceToUpdate: 0.5
   _abilityComponent: 0
   AbilityComponentConfig:
     _abilityConfigs: []

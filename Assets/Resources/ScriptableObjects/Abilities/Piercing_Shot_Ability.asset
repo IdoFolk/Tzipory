@@ -17,7 +17,7 @@ MonoBehaviour:
   _targetingPriorityType: 0
   AbilityExecute:
     _abilityExecuteType: 3
-    _projectileSpeed: 10
+    _projectileSpeed: 15
     _projectilePenetration: 5
     _aoeRadius: 0
     _aoeDuration: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
     _duration: 0
     _interval: 0
     StatModifier:
-      _statusModifierType: 0
+      _statusModifierType: 2
       Modifier: 50
       _ringModifiers: []
     _effectSequence:
@@ -101,7 +101,7 @@ MonoBehaviour:
       LoopTimeLine: {fileID: 0}
       ExitTimeLine: {fileID: 0}
       LoopTime: 0
-    VisualObject: {fileID: 3812313340286487072, guid: ff4f8ccc159b53844b7dd42aba31127a, type: 3}
+    VisualObject: {fileID: 436556174153103882, guid: 3c016fc902c9a0f409cb74f6e9c7b136, type: 3}
     AbilityIcon: {fileID: -1125000930, guid: bc5335bd6010ad24b9dcf7a94d8d3f31, type: 3}
     HaveEffectOnEntity: 0
     TargetAnimationConfig:

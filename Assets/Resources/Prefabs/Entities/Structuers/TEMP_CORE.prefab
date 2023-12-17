@@ -14932,7 +14932,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2769440070172495311}
   - component: {fileID: 1167462101981618686}
-  - component: {fileID: 7795062874603676070}
   - component: {fileID: 2379804171807722926}
   m_Layer: 3
   m_Name: TEMP_CORE
@@ -14991,21 +14990,8 @@ MonoBehaviour:
       FlashingColor: {r: 0, g: 0, b: 0, a: 0}
   _spriteRenderer: {fileID: 4402990407033082094}
   _hpBar: {fileID: 2526815238407367546}
+  _coreAnimator: {fileID: 9140744131601393012}
   _hp: 1000
---- !u!114 &7795062874603676070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3870130507137683738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c8364834d7ce294eae6758d53a84fad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hP_Bar: {fileID: 2526815238407367546}
-  coreTemple: {fileID: 1167462101981618686}
 --- !u!58 &2379804171807722926
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -88,4 +88,19 @@ namespace Tzipory.Systems.FactorySystem
             }
         }
     }
+    public class AnimatorComponentFactory
+    {
+        public static IEntityAnimatorComponent GetAIComponent(AnimatorComponentConfig animatorComponentConfig)
+        {
+            switch (animatorComponentConfig.AnimatorType)
+            {
+                case AnimatorComponentType.Hero:
+                    return new HeroAnimator();
+                case AnimatorComponentType.Enemy:
+                    return  new BasicEnemyAnimator();
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
+    }
 }

@@ -34,6 +34,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         [SerializeField,TabGroup("Component")] private ColliderTargetingArea _colliderTargeting;
         [SerializeField,TabGroup("Component")] private CircleCollider2D _groundCollider;
         [SerializeField,TabGroup("Component")] private AgentMoveComponent _agentMoveComponent;
+        [SerializeField,TabGroup("Component")] private Animator _entityAnimator;
         //[SerializeField,TabGroup("Component")] private ClickHelper _clickHelper;
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private UnitEntityVisualComponent _entityVisualComponent;//temp
@@ -51,7 +52,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         #endregion
 
         #region Proprty
-        
+
+        public Animator EntityAnimator => _entityAnimator;
         public IEntityVisualComponent EntityVisualComponent => _entityVisualComponent;
         public IEntityTargetingComponent EntityTargetingComponent => _entityTargetingComponent;
         public IEntityMovementComponent EntityMovementComponent { get; private set; }
@@ -59,6 +61,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public IEntityHealthComponent EntityHealthComponent { get; private set; }
         public IEntityStatComponent EntityStatComponent { get; private set; }
         public IEntityCombatComponent  EntityCombatComponent { get; private set; }
+        public IEntityAnimatorComponent  EntityAnimatorComponent { get; private set; }
+
         public IEntityExperienceComponent EntityExperienceComponent { get; private set; }
         private IEntityAIComponent EntityAIComponent { get; set; }
         
@@ -126,6 +130,11 @@ namespace Tzipory.GamePlayLogic.EntitySystem
                 EntityAIComponent = AIComponentFactory.GetAIComponent(_config.AIComponentConfig);
                 AddComponent(EntityAIComponent);
             }
+            if (_config.AnimatorComponent)
+            {
+                EntityAnimatorComponent = AnimatorComponentFactory.GetAIComponent(_config.AnimatorComponentConfig);
+                AddComponent(EntityAnimatorComponent);
+            }
             
             EntityStatComponent = new StatHandlerComponent();//may need to work in init!
             AddComponent(EntityStatComponent);
@@ -138,6 +147,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             EntityAbilitiesComponent?.Init(this,_config.AbilityComponentConfig);
             EntityMovementComponent?.Init(this,_config.MovementComponentConfig,_agentMoveComponent);
             EntityCombatComponent?.Init(this,_config.CombatComponentConfig);
+            EntityAnimatorComponent?.Init(this,this,_config.AnimatorComponentConfig);
             EntityAIComponent?.Init(this,this,_config.AIComponentConfig);
             
             EntityType = _config.TargetingComponentConfig.EntityType;

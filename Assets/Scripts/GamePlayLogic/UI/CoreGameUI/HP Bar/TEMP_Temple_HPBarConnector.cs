@@ -10,7 +10,7 @@ namespace GameplayLogic.UI.HPBar
         //IEntityHealthComponent healthComponent; //TBF after IEntityHealthComponent has its own method for subbing to an OnValueChanged
         [SerializeField] CoreTemple coreTemple;
 
-        private void Awake()
+        private void Start()
         {
             hP_Bar.Init(coreTemple.EntityHealthComponent.Health.BaseValue);
         }

@@ -31,6 +31,9 @@ namespace Tzipory.ConfigFiles.EntitySystem
         
         [SerializeField,TabGroup("Optional Component")] private bool _aiComponent;
         [SerializeField,ShowIf(nameof(_aiComponent)),TabGroup("Optional Component")] public AIComponentConfig AIComponentConfig;
+        
+        [SerializeField,TabGroup("Optional Component")] private bool _animatorComponent;
+        [SerializeField,ShowIf(nameof(_animatorComponent)),TabGroup("Optional Component")] public AnimatorComponentConfig AnimatorComponentConfig;
 
         public string EntityName => _entityName;
 
@@ -39,6 +42,7 @@ namespace Tzipory.ConfigFiles.EntitySystem
         public bool AIComponent => _aiComponent;
 
         public bool CombatComponent => _combatComponent;
+        public bool AnimatorComponent => _animatorComponent;
 
         public bool MovementComponent => _movementComponent;
 

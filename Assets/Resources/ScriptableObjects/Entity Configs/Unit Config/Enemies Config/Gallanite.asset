@@ -28,7 +28,7 @@ MonoBehaviour:
   VisualComponentConfig:
     Sprite: {fileID: 21300000, guid: 4332a2da08622714ba37ab25e3c9dc89, type: 3}
     Icon: {fileID: 21300000, guid: 4332a2da08622714ba37ab25e3c9dc89, type: 3}
-    HpBar: 0
+    HpBar: 1
     HaveSilhouette: 0
     UIIndicator: 0
     UiIndicatorConfig:
@@ -122,3 +122,7 @@ MonoBehaviour:
     DecisionInterval: 1
     AggroLevel: 0
     ReturnLevel: 0
+  _animatorComponent: 0
+  AnimatorComponentConfig:
+    AnimatorType: 0
+    EntityAnimator: {fileID: 0}

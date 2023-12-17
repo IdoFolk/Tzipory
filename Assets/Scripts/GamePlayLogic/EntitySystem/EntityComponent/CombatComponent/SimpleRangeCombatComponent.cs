@@ -26,6 +26,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public Stat AttackRate => Stats[(int)Constant.StatsId.AttackRate];
         public Stat AttackRange => Stats[(int)Constant.StatsId.AttackRange];
         
+        public event Action OnAttack;
+
         public BaseGameEntity GameEntity { get; private set; }  
         public Dictionary<int, Stat> Stats { get; private set; }
         
@@ -92,11 +94,13 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             {
                 _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
                 _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true);
+                OnAttack?.Invoke();
                 return true;
             }
             
             _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
             _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue,false);
+            OnAttack?.Invoke();
             return true;
         }
     }

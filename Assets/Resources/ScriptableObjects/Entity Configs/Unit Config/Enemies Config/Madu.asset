@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dea472f36b2a4dc0b0810fdfb6687265, type: 3}
-  m_Name: Mudu
+  m_Name: Madu
   m_EditorClassIdentifier: 
-  _entityName: M
-  _entityId: 83432869
+  _entityName: Madu
+  _entityId: 1615759073
   _unitType: 1
   HealthComponentConfig:
     HealthComponentType: 2
@@ -99,7 +99,7 @@ MonoBehaviour:
     AttackDamage: 30
     AttackRate: 2
     AttackCooldown: 0
-    CritDamage: 5
+    CritDamage: 110
     CritChance: 5
     AttackRange: 0
     ProjectileTimeToDie: 0
@@ -108,7 +108,7 @@ MonoBehaviour:
   _movementComponent: 1
   MovementComponentConfig:
     MovementComponentType: 1
-    MoveSpeed: 2
+    MoveSpeed: 1.5
     PathCreator: {fileID: 0}
     MaxDistanceFromPath: 0.4
     PrivateRabbitIncrement: 0.1

@@ -19,6 +19,7 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
     [SerializeField] private UIIndicatorConfig _uiIndicatorConfig;
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private TEMP_HP_Bar _hpBar;
+    [SerializeField] private Animator _coreAnimator;
     
     [SerializeField] private float _hp;
     
@@ -84,6 +85,18 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
     private void OnHealthChanage(StatChangeData statChangeData)
     {
         _hpBar.SetBarValue(statChangeData.NewValue);
+        if (statChangeData.NewValue / EntityHealthComponent.Health.BaseValue < 0.6667f)
+        {
+            _coreAnimator.SetBool("R_Crack",true);
+        }
+        if (statChangeData.NewValue / EntityHealthComponent.Health.BaseValue < 0.3336f)
+        {
+            _coreAnimator.SetBool("L_Crack",true);
+        }
+        if (statChangeData.NewValue / EntityHealthComponent.Health.BaseValue <= 0)
+        {
+            _coreAnimator.SetBool("Break",true);
+        }
     }
 
     private void GoToCore()

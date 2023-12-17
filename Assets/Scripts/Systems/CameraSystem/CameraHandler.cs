@@ -4,10 +4,8 @@ using Cinemachine;
 using Sirenix.OdinInspector;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.Helpers;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
 using Logger = Tzipory.Tools.Debag.Logger;
 
 namespace Tzipory.Systems.CameraSystem
@@ -23,7 +21,6 @@ namespace Tzipory.Systems.CameraSystem
         private const int LOCKED_CAMERA_ZOOM = 9;
         private const string CAMERA_LOG_GROUP = "CameraSystem";
         
-        private static AnimationCurve _defaultCurve = AnimationCurve.Linear(0, 0, 1, 1);
         #endregion
         
         #region SerialzedFields
@@ -31,10 +28,10 @@ namespace Tzipory.Systems.CameraSystem
         private CameraSettings _cameraSettings;
 
         [Header("ON/OFF")] [SerializeField, Tooltip("toggle camera movement and zoom")]
-        private bool _enableCameraMovement = false;
+        private bool _enableCameraMovement = true;
 
         [SerializeField, Tooltip("toggle mouse edge scroll camera movement")]
-        private bool _enableEdgeScroll = false;
+        private bool _enableEdgeScroll = true;
 
         [SerializeField, Tooltip("toggle mouse Pan scroll camera movement")]
         private bool _enablePanScroll = true;
@@ -166,8 +163,10 @@ namespace Tzipory.Systems.CameraSystem
             var mouseMovementDelta = _lastMousePosition - (Vector2)GameManager.CameraHandler._mainCamera.ScreenToViewportPoint(Input.mousePosition);
             
             _lastMousePosition = GameManager.CameraHandler._mainCamera.ScreenToViewportPoint(Input.mousePosition);
+            
             _dragPanSpeed.x = _cameraSettings.CameraDragPanSpeed * _mainCamera.aspect;
             _dragPanSpeed.y = _cameraSettings.CameraDragPanSpeed;
+            
             var tempLogDragPanSpeed = _dragPanSpeed;
             _dragPanSpeed *= mouseMovementDelta.magnitude;
             Logger.Log($"drag speed: {tempLogDragPanSpeed}, Magnitude: {_dragPanSpeed}",CAMERA_LOG_GROUP);
@@ -298,8 +297,8 @@ namespace Tzipory.Systems.CameraSystem
                 //calculating the current padding for movement borders and zoom
                 _edgePaddingX = _cameraSettings.DefaultEdgePaddingX / _currentAspectRatioX;
                 _edgePaddingY = _cameraSettings.DefaultEdgePaddingY / _currentAspectRatioY;
-                // _dragPanSpeedX = (_cameraSettings.CameraDragPanSpeed * 100f) / _currentAspectRatioX;
-                // _dragPanSpeedY = (_cameraSettings.CameraDragPanSpeed * 100f) / _currentAspectRatioY;
+                _dragPanSpeed.x = _cameraSettings.CameraDragPanSpeed * _mainCamera.aspect;
+                _dragPanSpeed.y = _cameraSettings.CameraDragPanSpeed;
                 _zoomPadding = _cameraMaxZoom * _currentAspectRatioX;
                 if (_zoomPadding > _cameraSettings.ZoomMaxClamp) _zoomPadding = _cameraSettings.ZoomMaxClamp;
             }

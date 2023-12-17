@@ -17,11 +17,11 @@ MonoBehaviour:
   _unitType: 0
   HealthComponentConfig:
     HealthComponentType: 2
-    HealthStat: 300
+    HealthStat: 400
     InvincibleTimeStat: 0
     RegenSpeedStat: 0
   TargetingComponentConfig:
-    TargetingRange: 3
+    TargetingRange: 10
     EntityType: 1
     TargetedEntity: 2
     TargetingPriorityType: 2
@@ -96,19 +96,19 @@ MonoBehaviour:
   _combatComponent: 1
   CombatComponentConfig:
     CombatComponentType: 0
-    AttackDamage: 35
+    AttackDamage: 40
     AttackRate: 0.8
     AttackCooldown: 0
-    CritDamage: 125
-    CritChance: 5
+    CritDamage: 130
+    CritChance: 15
     AttackRange: 12
     ProjectileTimeToDie: 20
-    ProjectileSpeed: 15
+    ProjectileSpeed: 10
     ProjectilePrefab: {fileID: 6820444270360034478, guid: e64a8a0f859a6954cab1ec02005d3f61, type: 3}
   _movementComponent: 1
   MovementComponentConfig:
     MovementComponentType: 0
-    MoveSpeed: 2.5
+    MoveSpeed: 3
     PathCreator: {fileID: 0}
     MaxDistanceFromPath: 0
     PrivateRabbitIncrement: 0

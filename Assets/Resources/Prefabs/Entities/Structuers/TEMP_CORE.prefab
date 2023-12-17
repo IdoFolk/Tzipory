@@ -14989,16 +14989,9 @@ MonoBehaviour:
       Time: 0
       OverrideFlashingColor: 0
       FlashingColor: {r: 0, g: 0, b: 0, a: 0}
-  _defaultCoreSpriteRenderer: {fileID: 4402990407033082094}
-  _brokenCoreSpriteRenderer: {fileID: 7370608817371671731}
-  _glowParticleSystem: {fileID: 2861818064390237763}
-  _coreAnimator: {fileID: 9140744131601393012}
+  _spriteRenderer: {fileID: 4402990407033082094}
+  _hpBar: {fileID: 2526815238407367546}
   _hp: 1000
-  _deathAnimationTime: 2
-  _animationCameraZoom: 3
-  _hpStat:
-    _name: 
-    _currentValue: 0
 --- !u!114 &7795062874603676070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30141,8 +30134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0dbe6fe82297d14a9d6158312376708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 513853444230743146}
-  doGoOn: 0
+  _destroyOnStart: 0
 --- !u!1 &7980062549210777298
 GameObject:
   m_ObjectHideFlags: 0
@@ -30414,8 +30406,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0dbe6fe82297d14a9d6158312376708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spriteRenderer: {fileID: 4402990407033082094}
-  doGoOn: 0
+  _destroyOnStart: 0
 --- !u!95 &9140744131601393012
 Animator:
   serializedVersion: 5

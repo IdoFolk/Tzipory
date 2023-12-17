@@ -24,12 +24,13 @@ namespace GamePlayLogic.AbilitySystem.AbilityEntity
             
             Instantiate(abilityVisualConfig.VisualObject, _abilityVisualHandler.transform);
 
-            if (abilityVisualConfig._abilityVisualType == AbilityVisualType.TimeLine)
-            {
-                abilityVisualConfig.TargetAnimationConfig.LoopTime = _duration;
-                _abilityVisualHandler.Play();
-            }
-            
+            // if (abilityVisualConfig._abilityVisualType == AbilityVisualType.TimeLine)
+            // {
+            //     abilityVisualConfig.TargetAnimationConfig.LoopTime = _duration;
+            //     _abilityVisualHandler.Play();
+            // }
+
+            _abilityVisualConfig.TargetAnimationConfig.LoopTime = _duration;
             //_visualTransform.localScale  = new Vector3(radius , radius, 1); //why *2.5?
         }
         
@@ -43,6 +44,9 @@ namespace GamePlayLogic.AbilitySystem.AbilityEntity
 
         public override void RecieveTargetableEntry(ITargetAbleEntity targetable)
         {
+            if (targetable.EntityType == Caster.EntityType)
+                return;
+            
             AbilityExecutor.Execute(targetable);
 
             if (_abilityVisualConfig.HaveEffectOnEntity)

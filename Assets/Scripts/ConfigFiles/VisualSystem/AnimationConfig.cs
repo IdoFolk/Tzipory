@@ -1,5 +1,6 @@
 ﻿using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
 namespace Tzipory.ConfigFiles.Visual
@@ -9,9 +10,9 @@ namespace Tzipory.ConfigFiles.Visual
     {
         [SerializeField] public bool HaveEnterAndExit;
         
-        [SerializeField,ShowIf(nameof(HaveEnterAndExit))] public TimelineAsset EntryTimeLine;
-        [SerializeField] public TimelineAsset LoopTimeLine;
-        [SerializeField,ShowIf(nameof(HaveEnterAndExit))] public TimelineAsset ExitTimeLine;
+        [SerializeField,ShowIf(nameof(HaveEnterAndExit))] public PlayableDirector EntryTimeLine;
+        [SerializeField] public PlayableDirector LoopTimeLine;
+        [SerializeField,ShowIf(nameof(HaveEnterAndExit))] public PlayableDirector ExitTimeLine;
 
         public float EntryTime => (float)EntryTimeLine.duration;
         public float LoopTime;

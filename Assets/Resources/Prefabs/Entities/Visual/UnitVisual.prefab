@@ -265,6 +265,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainSprite: {fileID: 1606500935877454357}
+  _animationVisualTransform: {fileID: 2287106194813289559}
   _visualQueueEffectPosition: {fileID: 277900565620275194}
-  _playableDirector: {fileID: 6099308852592900491}
   _silhouette: {fileID: 368592018585343573}

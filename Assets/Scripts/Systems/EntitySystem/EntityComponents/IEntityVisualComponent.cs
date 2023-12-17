@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
+﻿using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.ConfigFiles.Visual;
-using Tzipory.Systems.StatusSystem;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
 using Tzipory.Tools.Interface;

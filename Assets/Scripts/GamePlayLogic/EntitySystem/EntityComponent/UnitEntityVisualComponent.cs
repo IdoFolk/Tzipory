@@ -20,12 +20,13 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public event Action<bool> OnSpriteFlipX;
     
         [SerializeField] private SpriteRenderer _mainSprite;
-    
+        [SerializeField] private Transform _animationVisualTransform;
+        
         [SerializeField] private Transform _visualQueueEffectPosition;
-        [SerializeField] private PlayableDirector _playableDirector;
         [SerializeField] private SpriteRenderer _silhouette;
         
     
+        private PlayableDirector _currentPlayableDirector;
         private ITimer _currentActiveTimer;
         private AnimationConfig _animationConfig;
     
@@ -39,7 +40,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public EffectSequenceHandler EffectSequenceHandler { get; private set; }
         public SpriteRenderer SpriteRenderer => _mainSprite;
         public IDisposable UIIndicator { get; private set; }
-        public PlayableDirector ParticleEffectPlayableDirector => _playableDirector;
+        public PlayableDirector ParticleEffectPlayableDirector => _currentPlayableDirector;
         public bool IsInitialization { get; private set; }
 
         public void Init(BaseGameEntity parameter)
@@ -142,42 +143,51 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         private void SetEntryAnimation()
         {
-            _playableDirector.playableAsset = _animationConfig.EntryTimeLine;
-            _playableDirector.Play();
+            if (_currentPlayableDirector is not null)
+                Destroy(_currentPlayableDirector.gameObject);
+            
+            _currentPlayableDirector = Instantiate(_animationConfig.EntryTimeLine, _animationVisualTransform);
+            _currentPlayableDirector.Play();
 
-            _currentActiveTimer = GAME_TIME.TimerHandler.StartNewTimer(_animationConfig.EntryTime, "Ability animation Entry Time",SetToLoopAnimation);
+            _currentActiveTimer = GAME_TIME.TimerHandler.StartNewTimer(_animationConfig.EntryTime, "Animation Entry Time",SetToLoopAnimation);
         }
     
         private void SetToLoopAnimation()
         {
-            _playableDirector.playableAsset = _animationConfig.LoopTimeLine;
-            _playableDirector.Play();
+            Destroy(_currentPlayableDirector.gameObject);
+            
+            _currentPlayableDirector = Instantiate(_animationConfig.LoopTimeLine, _animationVisualTransform);
+            _currentPlayableDirector.Play();
+
         
             if (_animationConfig.HaveEnterAndExit)  
-                _currentActiveTimer = GAME_TIME.TimerHandler.StartNewTimer(_animationConfig.LoopTime, "Ability animation Loop Time",SetToExitAnimation);
+                _currentActiveTimer = GAME_TIME.TimerHandler.StartNewTimer(_animationConfig.LoopTime, "Animation Loop Time",SetToExitAnimation);
         }
 
         private void SetToExitAnimation()
         {
-            _playableDirector.playableAsset = _animationConfig.ExitTimeLine;
-            _playableDirector.Play();
+            Destroy(_currentPlayableDirector.gameObject);
+            
+            _currentPlayableDirector = Instantiate(_animationConfig.ExitTimeLine, _animationVisualTransform);
+            _currentPlayableDirector.Play();
         
-            _currentActiveTimer = GAME_TIME.TimerHandler.StartNewTimer(_animationConfig.ExitTime, "Ability animation Exit Time",StopAnimation);
+            _currentActiveTimer = GAME_TIME.TimerHandler.StartNewTimer(_animationConfig.ExitTime, "Animation Exit Time",StopAnimation);
         }
 
         private void StopAnimation()
         {
             _currentActiveTimer.StopTimer();
-        
-            if (_playableDirector is not null)
-                _playableDirector.Stop();
+
+            if (_currentPlayableDirector is not null)
+                Destroy(_currentPlayableDirector.gameObject);
+
+            _currentPlayableDirector = null;
         }
 
         private void OnValidate()
         {
             _mainSprite  ??= GetComponent<SpriteRenderer>();
             _visualQueueEffectPosition ??= transform.Find("VisualQueueEffectPosition");
-            _playableDirector ??= GetComponent<PlayableDirector>();
         }
 
         public void ResetVisual()

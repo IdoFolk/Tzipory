@@ -35,11 +35,11 @@ MonoBehaviour:
     _chainDuration: 0
     _chainAmount: 0
   StatusEffectConfigs:
-  - _statusEffectName: 
+  - _statusEffectName: Rooted
     _statProcessPriority: 999
-    _affectedStatId: 0
+    _affectedStatId: 5
     _statEffectType: 0
-    _duration: 20
+    _duration: 5
     _interval: 0
     StatModifier:
       _statusModifierType: 3
@@ -53,14 +53,14 @@ MonoBehaviour:
       _isStackable: 0
       _isInterruptable: 0
       _effectActionContainers: []
-    _overrideGlobalPopUpTextConfig: 0
+    _overrideGlobalPopUpTextConfig: 1
     _popUpTextConfig:
       DisablePopUp: 0
-      PopUpTextType: 0
+      PopUpTextType: 3
       RepeatPattern: 0
       RoundNumbers: 0
-      Text: 
-      Color: {r: 0, g: 0, b: 0, a: 0}
+      Text: Rooted!
+      Color: {r: 0, g: 1, b: 0.065570354, a: 1}
       OverrideSize: 0
       FontSize: 0
       OverrideRiseSpeedAndTTL: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
         m_RotationOrder: 4
   DoExitEffects: 0
   StatusEffectConfigsOnExit: []
-  Cooldown: 10
+  Cooldown: 2
   CastTime: 1
   AbilityVisualConfig:
     _abilityVisualType: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
     HaveEffectOnEntity: 1
     TargetAnimationConfig:
       HaveEnterAndExit: 1
-      EntryTimeLine: {fileID: 11400000, guid: 7b0e21277756f264cb84447d24a6b0c2, type: 2}
-      LoopTimeLine: {fileID: 11400000, guid: 7b0e21277756f264cb84447d24a6b0c2, type: 2}
-      ExitTimeLine: {fileID: 11400000, guid: df695a72a85cb7842b00dfb0913230f1, type: 2}
+      EntryTimeLine: {fileID: 348856386130945019, guid: 454090e1f91243f4198cce31441648a2, type: 3}
+      LoopTimeLine: {fileID: 348856386130945019, guid: fe483aa54e47e7241ab91ac7e490e99c, type: 3}
+      ExitTimeLine: {fileID: 3723212262371651683, guid: 1e34c4dd3f2d2a54189857dcadee2c28, type: 3}
       LoopTime: 0

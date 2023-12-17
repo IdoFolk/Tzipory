@@ -43,7 +43,7 @@ namespace Tzipory.Systems.AbilitySystem
                 Debug.LogError($"{_caster.GameEntity.name} cant find ability {abilityName}");
         }
 
-        public void CastAbility(IEnumerable<ITargetAbleEntity> availableTargets)
+        public void CastAbility(IEnumerable<ITargetAbleEntity> availableTargets)//Temp!
         {
             if (Abilities.Count == 0)
                 return;

@@ -19,8 +19,8 @@ namespace Tzipory.Systems.Entity
         public Transform EntityTransform { get; private set; }
         public TimerHandler EntityTimer { get; private set; }
         public BaseGameEntity GameEntity => this;
-        
-        protected List<IEntityComponent> EntityComponent;
+
+        private List<IEntityComponent> _entityComponent;
 
         protected bool UpdateComponent;
 
@@ -29,7 +29,7 @@ namespace Tzipory.Systems.Entity
             EntityTimer = new TimerHandler(this);
             EntityTransform = transform;
             EntityInstanceID = InstanceIDGenerator.GetInstanceID();
-            EntityComponent = new List<IEntityComponent>();
+            _entityComponent = new List<IEntityComponent>();
 #if UNITY_EDITOR
             _timerHandler = EntityTimer;
 #endif
@@ -39,7 +39,7 @@ namespace Tzipory.Systems.Entity
         {
             EntityTimer.TickAllTimers();
             
-            foreach (var entityComponent in EntityComponent)
+            foreach (var entityComponent in _entityComponent)
                 entityComponent?.UpdateComponent();
         }
         
@@ -51,17 +51,17 @@ namespace Tzipory.Systems.Entity
             if (component is null)
                 throw new ArgumentNullException(nameof(component));
             
-            EntityComponent.Add(component);
+            _entityComponent.Add(component);
         }
 
         public void RemoveComponent(IEntityComponent component)
         {
-            EntityComponent.Remove(component);//temp need error handle
+            _entityComponent.Remove(component);//temp need error handle
         }
 
         public T RequestComponent<T>() where T : class, IEntityComponent
         {
-            foreach (var entityComponent in EntityComponent)
+            foreach (var entityComponent in _entityComponent)
             {
                 if (entityComponent is T component)
                     return component;

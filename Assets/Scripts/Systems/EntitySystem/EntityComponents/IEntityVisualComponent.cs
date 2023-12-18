@@ -1,4 +1,5 @@
-﻿using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
+﻿using System;
+using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.ConfigFiles.Visual;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
@@ -10,9 +11,11 @@ namespace Tzipory.Systems.Entity.EntityComponents
 {
     public interface IEntityVisualComponent : IEntityComponent , IInitialization<BaseGameEntity,VisualComponentConfig>
     {
+        public event Action<Sprite> OnSetSprite;
+        public event Action<bool> OnSpriteFlipX;
         public VisualComponentConfig VisualComponentConfig { get; }
         public EffectSequenceHandler EffectSequenceHandler { get; }
-        public SpriteRenderer SpriteRenderer { get; }
+        public SpriteRenderer MainSpriteRenderer { get; }
         public PlayableDirector ParticleEffectPlayableDirector { get; }
         public PopUpTexter PopUpTexter { get; }
 

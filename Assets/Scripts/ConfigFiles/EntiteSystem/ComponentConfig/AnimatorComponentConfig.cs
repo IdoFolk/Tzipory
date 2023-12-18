@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEditor.Animations;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ namespace Tzipory.ConfigFiles.EntitySystem.ComponentConfig
     {
         [SerializeField] public AnimatorComponentType AnimatorType;
         [SerializeField] public AnimatorController EntityAnimator;
+        [SerializeField, ShowIf(nameof(AnimatorType),AnimatorComponentType.Hero)] public GameObject AbilityCastAnimationPrefab;
+
     }
 
     public enum AnimatorComponentType

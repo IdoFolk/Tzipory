@@ -19,4 +19,9 @@ public class BasicEnemyAnimator : IEntityAnimatorComponent
     {
         throw new System.NotImplementedException();
     }
+
+    public void Dispose()
+    {
+        // TODO release managed resources here
+    }
 }

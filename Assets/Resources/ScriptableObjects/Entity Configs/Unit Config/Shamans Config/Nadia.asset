@@ -127,3 +127,4 @@ MonoBehaviour:
   AnimatorComponentConfig:
     AnimatorType: 0
     EntityAnimator: {fileID: 9100000, guid: 0cd45dd2bd38be642a0562447966bb64, type: 2}
+    AbilityCastAnimationPrefab: {fileID: 7581611203057679771, guid: e3f9eed2e75512844ac4cea2bc18d346, type: 3}

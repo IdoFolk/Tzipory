@@ -16,8 +16,8 @@ MonoBehaviour:
   _entityId: -657904259
   _unitType: 1
   HealthComponentConfig:
-    HealthComponentType: 0
-    HealthStat: 200
+    HealthComponentType: 2
+    HealthStat: 800
     InvincibleTimeStat: 0
     RegenSpeedStat: 1
   TargetingComponentConfig:
@@ -126,3 +126,4 @@ MonoBehaviour:
   AnimatorComponentConfig:
     AnimatorType: 0
     EntityAnimator: {fileID: 0}
+    AbilityCastAnimationPrefab: {fileID: 0}

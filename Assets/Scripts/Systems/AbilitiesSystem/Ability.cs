@@ -27,7 +27,9 @@ namespace Tzipory.Systems.AbilitySystem
         public string AbilityName { get; }
         public int AbilityId { get; }
         public bool IsCasting { get; private set; }
-        
+        public bool IsActive { get; private set; }
+        public event Action<int> OnAbilityCast;
+        public event Action<int> OnAbilityExecute;
         public Dictionary<int, Stat> Stats { get; }
 
         public AbilityConfig Config { get; private set; }
@@ -85,6 +87,7 @@ namespace Tzipory.Systems.AbilitySystem
                     config.TargetingPriorityType);
 
             _isReady = true;
+            IsActive = true;
         }
         
         public IEnumerable<IStatHolder> GetNestedStatHolders()
@@ -99,15 +102,23 @@ namespace Tzipory.Systems.AbilitySystem
 
         public void ExecuteAbility(IEnumerable<ITargetAbleEntity> availableTarget)
         {
+            var currentTarget = _priorityTargeting.GetPriorityTarget(availableTarget);
+            
             if (!_isReady)
                 return;
-
+            
+            if (currentTarget == null)
+            {
+                IsCasting = false;
+                return;
+            }
             _isReady = false;
             IsCasting = true;
             
             Logger.Log($"{_entityTargetingComponent.GameEntity.name} start casting ability {AbilityName} castTime: {CastTime.CurrentValue}",ABILITY_LOG_GROUP);
             
             _castTimer = _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(CastTime.CurrentValue,"Ability cast time",Cast,ref availableTarget);
+            OnAbilityCast?.Invoke(AbilityId);
         }
 
         private void Cast(IEnumerable<ITargetAbleEntity> availableTarget)
@@ -123,6 +134,7 @@ namespace Tzipory.Systems.AbilitySystem
             
             Logger.Log($"{_entityTargetingComponent.GameEntity.name} cast ability {AbilityName} on {currentTarget.GameEntity.name}",ABILITY_LOG_GROUP);
             _abilityExecutor.Execute(currentTarget);
+            OnAbilityExecute?.Invoke(AbilityId);
             StartCooldown();
         }
         

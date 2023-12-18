@@ -53,7 +53,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents
         {
             UnitEntity unitEntity = (UnitEntity)GameEntity;
             
-            TempHeroMovementManager.Instance.SelectTarget(unitEntity,unitEntity.EntityVisualComponent.SpriteRenderer.sprite, unitEntity.EntityTargetingComponent.TargetingRange.CurrentValue);
+            TempHeroMovementManager.Instance.SelectTarget(unitEntity,unitEntity.EntityVisualComponent.MainSpriteRenderer.sprite, unitEntity.EntityTargetingComponent.TargetingRange.CurrentValue);
         }
 
         public void UpdateComponent()

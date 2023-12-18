@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.Systems.Entity;
@@ -47,7 +48,8 @@ namespace Tzipory.Systems.AbilitySystem
         {
             if (Abilities.Count == 0)
                 return;
-            Abilities.First().Value?.ExecuteAbility(availableTargets);
+            var ability = Abilities.First().Value;
+            ability?.ExecuteAbility(availableTargets);
         }
 
         public void CancelCast()

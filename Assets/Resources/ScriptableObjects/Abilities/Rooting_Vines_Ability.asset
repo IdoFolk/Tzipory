@@ -102,6 +102,7 @@ MonoBehaviour:
       ExitTimeLine: {fileID: 0}
       LoopTime: 0
     VisualObject: {fileID: 6357766935703885941, guid: 62dd00187a9228647b130c089199ee6e, type: 3}
+    AbilityIcon: {fileID: -652102046, guid: bc5335bd6010ad24b9dcf7a94d8d3f31, type: 3}
     HaveEffectOnEntity: 1
     TargetAnimationConfig:
       HaveEnterAndExit: 1

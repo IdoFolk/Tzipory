@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.TimeSystem;
-using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 {
@@ -22,6 +23,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public Stat AttackRate => Stats[(int)Constant.StatsId.AttackRate];
         public Stat AttackRange => Stats[(int)Constant.StatsId.AttackRange];
         
+        public event Action OnAttack;
+
         public BaseGameEntity GameEntity { get; private set; }  
         public Dictionary<int, Stat> Stats { get; private set; }
         
@@ -76,11 +79,13 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             {
                 targetAbleEntity.EntityVisualComponent?.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);//may need to by
                 targetAbleEntity.EntityHealthComponent.TakeDamage(AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true);
+                OnAttack?.Invoke();
                 return true;
             }
             
             targetAbleEntity.EntityVisualComponent?.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
             targetAbleEntity.EntityHealthComponent.TakeDamage(AttackDamage.CurrentValue,false);
+            OnAttack?.Invoke();
             return true;
         }
     }

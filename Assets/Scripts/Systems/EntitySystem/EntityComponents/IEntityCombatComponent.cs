@@ -1,4 +1,5 @@
-﻿using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
+﻿using System;
+using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.Systems.StatusSystem;
 using Tzipory.Tools.Interface;
 
@@ -11,6 +12,7 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public Stat CritChance { get; }
         public Stat AttackRate { get; }
         public Stat AttackRange { get; }
+        public event Action OnAttack; 
 
         public bool Attack(ITargetAbleEntity targetAbleEntity);//may need to target parameter
     }

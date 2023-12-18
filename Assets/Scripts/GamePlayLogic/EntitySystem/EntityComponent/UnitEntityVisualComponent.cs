@@ -102,11 +102,13 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             EffectSequenceHandler.UpdateEffectHandler();
 
             var position = (Vector2)transform.position;
-            _lastPos = position;
             var deltaV = position - _lastPos;
-        
+
             if (deltaV.sqrMagnitude >= 0.1f)
+            {
                 SetSpriteFlipX(deltaV.x >= 0);
+                _lastPos = position;
+            }
 
             // if (VisualComponentConfig.HaveSilhouette)
             // {

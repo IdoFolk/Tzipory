@@ -136,6 +136,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bd8d2b06d242554b8becd0bbcd2370a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _abilitySpriteRenderer: {fileID: 3625111664442196689}
+  _cooldownSpriteRenderer: {fileID: 1258964623180657658}
 --- !u!1 &4847790813994615748
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,7 +283,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.621
+  m_FillAmount: 0
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0

@@ -22,7 +22,6 @@ namespace Tzipory.Helpers
         {
             var localPosition = transform.localPosition;
             localPosition = new Vector3(localPosition.x,
-                
                 localPosition.y, TEMP_UnitFlipAndZFix.GetZForLocalPosition(transform));
             transform.localPosition = localPosition;
         }

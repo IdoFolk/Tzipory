@@ -21,6 +21,7 @@ MonoBehaviour:
     InvincibleTimeStat: 0
     RegenSpeedStat: 0
   TargetingComponentConfig:
+    TargetingType: 0
     TargetingRange: 3
     EntityType: 2
     TargetedEntity: 9
@@ -98,7 +99,7 @@ MonoBehaviour:
     CombatComponentType: 1
     AttackDamage: 30
     AttackRate: 2
-    AttackCooldown: 0
+    AttackCooldown: 1
     CritDamage: 110
     CritChance: 5
     AttackRange: 0
@@ -120,8 +121,8 @@ MonoBehaviour:
   AIComponentConfig:
     AIType: 1
     DecisionInterval: 1
-    AggroLevel: 0
-    ReturnLevel: 0
+    AggroLevel: 50
+    ReturnLevel: 30
   _animatorComponent: 0
   AnimatorComponentConfig:
     AnimatorType: 0

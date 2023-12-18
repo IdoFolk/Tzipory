@@ -16,6 +16,7 @@ public class HeroAnimator : IEntityAnimatorComponent
     public bool IsInitialization { get; }
     
     private IEntityMovementComponent _entityMovementComponent;
+    private IEntityHealthComponent _entityHealthComponent;
     private IEntityCombatComponent _entityCombatComponent;
     private IEntityVisualComponent _entityVisualComponent;
     private IEntityAbilitiesComponent _entityAbilitiesComponent;
@@ -39,9 +40,12 @@ public class HeroAnimator : IEntityAnimatorComponent
         _entityCombatComponent = gameEntity.RequestComponent<IEntityCombatComponent>();
         _entityVisualComponent = gameEntity.RequestComponent<IEntityVisualComponent>();
         _entityAbilitiesComponent = gameEntity.RequestComponent<IEntityAbilitiesComponent>();
+        _entityHealthComponent = gameEntity.RequestComponent<IEntityHealthComponent>();
 
         _entityCombatComponent.OnAttack += AttackAnimation; 
         _entityVisualComponent.OnSpriteFlipX += FlipAnimations;
+        _entityHealthComponent.OnHit += GetHitAnimation;
+        _entityHealthComponent.OnDeath += DeathAnimation;
         foreach (var ability in _entityAbilitiesComponent.Abilities.Select(keyValuePair => keyValuePair.Value).Where(ability => ability.IsActive))
         {
             ability.OnAbilityCast += AbilityCastAnimation;
@@ -52,6 +56,16 @@ public class HeroAnimator : IEntityAnimatorComponent
         {
             _abilityCastEffect = Object.Instantiate(_config.AbilityCastAnimationPrefab, _unitEntity.GroundCollider.transform).GetComponent<ParticleSystem>();
         }
+    }
+
+    private void DeathAnimation()
+    {
+        
+    }
+
+    private void GetHitAnimation(bool obj)
+    {
+        
     }
 
     private void AbilityExecuteAnimation(int abilityId)

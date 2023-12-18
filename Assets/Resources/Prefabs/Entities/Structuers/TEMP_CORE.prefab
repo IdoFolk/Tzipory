@@ -14933,7 +14933,7 @@ GameObject:
   - component: {fileID: 2769440070172495311}
   - component: {fileID: 1167462101981618686}
   - component: {fileID: 2379804171807722926}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: TEMP_CORE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15026,7 +15026,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 6.5
+  m_Radius: 4.37
 --- !u!1 &4462206068331755263
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,7 @@ MonoBehaviour:
     InvincibleTimeStat: 0
     RegenSpeedStat: 0
   TargetingComponentConfig:
+    TargetingType: 0
     TargetingRange: 12
     EntityType: 1
     TargetedEntity: 2
@@ -96,7 +97,7 @@ MonoBehaviour:
   _combatComponent: 1
   CombatComponentConfig:
     CombatComponentType: 0
-    AttackDamage: 35
+    AttackDamage: 0
     AttackRate: 0.8
     AttackCooldown: 0
     CritDamage: 125

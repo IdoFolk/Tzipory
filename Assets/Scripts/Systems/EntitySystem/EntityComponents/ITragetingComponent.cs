@@ -14,6 +14,7 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public Stat TargetingRange { get; }
         public ITargetAbleEntity CurrentTarget { get;}
         public bool HaveTarget { get; }
+        public bool HaveTargetInRange { get; }
         public IPriorityTargeting PriorityTargeting { get; }
         IEnumerable<ITargetAbleEntity> AvailableTargets { get; }
         public float GetDistanceToTarget(ITargetAbleEntity targetAbleEntity);

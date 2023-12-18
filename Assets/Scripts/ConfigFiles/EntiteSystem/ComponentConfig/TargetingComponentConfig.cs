@@ -8,10 +8,16 @@ namespace Tzipory.ConfigFiles.EntitySystem.ComponentConfig
     [Serializable]
     public struct TargetingComponentConfig
     {
+        [SerializeField] public TargetingType TargetingType;
         [SerializeField] public float TargetingRange;
         [SerializeField] public EntityType EntityType;
         [SerializeField] public EntityType TargetedEntity;
         [SerializeField] public TargetingPriorityType TargetingPriorityType;
-        
+    }
+
+    public enum TargetingType
+    {
+        Manual,
+        Turret
     }
 }

@@ -120,5 +120,9 @@ MonoBehaviour:
   AIComponentConfig:
     AIType: 1
     DecisionInterval: 1
-    AggroLevel: 0
+    AggroLevel: 100
     ReturnLevel: 0
+  _animatorComponent: 0
+  AnimatorComponentConfig:
+    AnimatorType: 0
+    EntityAnimator: {fileID: 0}

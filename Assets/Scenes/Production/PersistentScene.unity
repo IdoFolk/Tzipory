@@ -2588,7 +2588,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1133403119959084057, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: orthographic size
-      value: 9.999999
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2794710943949227540, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: _enableEdgeScroll
@@ -2684,7 +2684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8209895816503717536, guid: a21658bf9c933454991365eeebc7d402, type: 3}
       propertyPath: m_Lens.OrthographicSize
-      value: 9.999999
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

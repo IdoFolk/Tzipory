@@ -13,7 +13,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 {
     public class ProjectileInstantiateExecuter : IAbilityExecutor , IStatHolder , IInitialization<ITargetAbleEntity,ExecuterConfig,IAbilityExecutor,AbilityVisualConfig>
     {
-        private const string PROJECTILE_PREFAB_PATH = "Prefabs/Ability/ProjectileAbilityEntity";
+        private const string PROJECTILE_PREFAB_PATH = "Prefabs/Ability/AbilityEntity/ProjectileAbilityEntity";
         
         private GameObject _projectilePrefab;
 

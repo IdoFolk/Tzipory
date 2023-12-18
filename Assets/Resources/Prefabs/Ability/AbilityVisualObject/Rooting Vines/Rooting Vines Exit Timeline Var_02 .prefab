@@ -305,6 +305,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719800617302369763}
   - component: {fileID: 3723212262371651683}
+  - component: {fileID: 2245304541981583768}
   m_Layer: 0
   m_Name: 'Rooting Vines Exit Timeline Var_02 '
   m_TagString: Untagged
@@ -389,6 +390,18 @@ PlayableDirector:
     value: {fileID: 3788662613029968953}
   m_ExposedReferences:
     m_References: []
+--- !u!210 &2245304541981583768
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6789028272386428940}
+  m_Enabled: 1
+  m_SortingLayerID: -1006772987
+  m_SortingLayer: 1
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &7611099791984593600
 GameObject:
   m_ObjectHideFlags: 0

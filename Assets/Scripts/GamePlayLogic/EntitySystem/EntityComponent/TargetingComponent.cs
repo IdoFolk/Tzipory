@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity;
@@ -22,11 +23,14 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         private EntityType _targetedEntities;
 
+        private TargetingType _targetingType;
+
         #endregion
 
         #region Proprtys
 
         public bool HaveTarget => CurrentTarget != null;
+        public bool HaveTargetInRange => _availableTargets.Count > 0;
         public ITargetAbleEntity CurrentTarget { get; private set; }
         
         public BaseGameEntity GameEntity { get;private set;  }
@@ -61,6 +65,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             {
                 {(int)Constant.StatsId.TargetingRange, new Stat(Constant.StatsId.TargetingRange,componentConfig.TargetingRange)}
             };
+
+            _targetingType = componentConfig.TargetingType;
             
             _targetedEntities = componentConfig.TargetedEntity;
             
@@ -80,6 +86,11 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         public void UpdateComponent()
         {
+            if (_targetingType == TargetingType.Turret)
+            {
+                if (HaveTargetInRange)
+                    TrySetNewTarget();
+            }
         }
         
         public IEnumerable<IStatHolder> GetNestedStatHolders()

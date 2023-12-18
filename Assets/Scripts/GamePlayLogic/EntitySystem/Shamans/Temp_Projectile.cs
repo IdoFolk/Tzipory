@@ -20,6 +20,8 @@ public class Temp_Projectile : MonoBehaviour
     private Vector3 _dir;
     private Vector3 _lastTargetPosition;
 
+    private bool _hitTarget;
+
     
     public void Init(BaseGameEntity baseGameEntity,ITargetAbleEntity target,float speed,float damage,float timeToDie,bool isCrit)
     {
@@ -31,6 +33,7 @@ public class Temp_Projectile : MonoBehaviour
         _dir = (_target.GameEntity.transform.position - baseGameEntity.EntityTransform.position).normalized;
         transform.up = _dir;
         _lastTargetPosition = _target.GameEntity.transform.position;
+        _hitTarget = false;
     }
 
     void Update()
@@ -53,8 +56,13 @@ public class Temp_Projectile : MonoBehaviour
         if (other.TryGetComponent<ITargetAbleEntity>(out var hitedTarget))
         {
             if (hitedTarget.EntityType == EntityType.Hero) return;
+
+            if (!_hitTarget)
+            {
+                hitedTarget.EntityHealthComponent.TakeDamage(_damage,_isCrit);
+                _hitTarget = true;
+            }
             
-            hitedTarget.EntityHealthComponent.TakeDamage(_damage,_isCrit);
             Destroy(gameObject);
         }
     }

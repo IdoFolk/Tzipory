@@ -411,6 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7938629577173727441}
   - component: {fileID: 348856386130945019}
+  - component: {fileID: 6889979041740356267}
   m_Layer: 0
   m_Name: Rooting Vines Entry Timeline Var_02
   m_TagString: Untagged
@@ -487,6 +488,18 @@ PlayableDirector:
     value: {fileID: 4940897426055787864}
   m_ExposedReferences:
     m_References: []
+--- !u!210 &6889979041740356267
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7157788274958173542}
+  m_Enabled: 1
+  m_SortingLayerID: -1006772987
+  m_SortingLayer: 1
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &8877365212302118403
 GameObject:
   m_ObjectHideFlags: 0

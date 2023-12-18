@@ -41,7 +41,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             {
                 {(int)Constant.StatsId.AttackDamage,new Stat(Constant.StatsId.AttackDamage,parameter2.AttackDamage)},
                 {(int)Constant.StatsId.AttackRate,new Stat(Constant.StatsId.AttackRate,parameter2.AttackRate)},
-                {(int)Constant.StatsId.AttackRange,new Stat(Constant.StatsId.AttackRange,parameter2.AttackRange)},
+                {(int)Constant.StatsId.AttackRange,new Stat(Constant.StatsId.AttackRange,1f)},
                 {(int)Constant.StatsId.CritChance,new Stat(Constant.StatsId.CritChance,parameter2.CritChance)},
                 {(int)Constant.StatsId.CritDamage,new Stat(Constant.StatsId.CritDamage,parameter2.CritDamage)},
             };

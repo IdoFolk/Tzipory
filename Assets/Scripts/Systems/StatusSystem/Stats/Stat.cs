@@ -83,20 +83,6 @@ namespace Tzipory.Systems.StatusSystem
 
         #region Constructors
 
-        [Obsolete("Use StatSerializeData as a parameter")]
-        public Stat(StatConfig statConfig,StatSerializeData statSerializeData)
-        {
-            Name = statConfig.Name;
-            Id = statConfig.ID;
-            BaseValue = statConfig.BaseValue;
-            MaxValue = StatLimiters.MaxStatValue;
-            _zeroSetModifier = 1;
-#if UNITY_EDITOR
-            _currentValue = BaseValue;
-            _name = Name;
-#endif
-        }
-
         public Stat(Constant.StatsId statsId,float value)
         {
             Name = statsId.ToString();

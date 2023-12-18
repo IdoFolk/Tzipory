@@ -21,6 +21,7 @@ MonoBehaviour:
     InvincibleTimeStat: 0
     RegenSpeedStat: 0
   TargetingComponentConfig:
+    TargetingType: 0
     TargetingRange: 12
     EntityType: 1
     TargetedEntity: 2

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PathCreation;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.GameplayLogic.Managers.CoreGameManagers;
@@ -76,6 +77,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents
         {
             if (_pathCreator == null || !CanMove)
                 return;
+
+            if (!OnPath)
+                SetDestination(_currentPointOnPath,MoveType.Guided);
             
             if (_privateRabbitProgress >= 1)
             {
@@ -128,6 +132,13 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents
 
         public void SetDestination(Vector3 destination, MoveType moveType)
         {
+            OnPath = moveType switch
+            {
+                MoveType.Free => false,
+                MoveType.Guided => true,
+                _ => throw new ArgumentOutOfRangeException(nameof(moveType), moveType, null)
+            };
+
             Destination = destination;
             AgentMoveComponent.SetAgentDestination(destination);
         }

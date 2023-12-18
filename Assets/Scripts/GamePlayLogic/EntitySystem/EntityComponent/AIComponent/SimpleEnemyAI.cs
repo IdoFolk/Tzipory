@@ -50,65 +50,73 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
             if (!IsInitialization)
                 return;
             
-            foreach (var targetAbleEntity in _self.EntityTargetingComponent.AvailableTargets)
+            if (_currentDecisionInterval  < 0)
+                _currentDecisionInterval = _baseDecisionInterval;
+            
+            _currentDecisionInterval -= GAME_TIME.GameDeltaTime;
+            
+            if (!_self.EntityTargetingComponent.HaveTarget)
             {
-                if (targetAbleEntity.EntityType == EntityType.Core)
+                if (_self.EntityTargetingComponent.HaveTargetInRange)
                 {
-                    _self.EntityTargetingComponent.SetAttackTarget(targetAbleEntity);
-                    IsAttckingCore = true;
+                    _self.EntityTargetingComponent.TrySetNewTarget();
+                    
+                    foreach (var targetAbleEntity in _self.EntityTargetingComponent.AvailableTargets)
+                    {
+                        if (targetAbleEntity.EntityType == EntityType.Core)
+                        {
+                            _self.EntityTargetingComponent.SetAttackTarget(targetAbleEntity);
+                            IsAttckingCore = true;
+                            break;
+                        }
+                    }
                 }
+                
+                _self.EntityMovementComponent.CanMove = true;
+                return;
             }
-
+            
             if (IsAttckingCore)
             {
                 if(_self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget))
                     _self.EntityHealthComponent.StartDeathSequence();
             }
-
+            
             if (_currentDecisionInterval < 0)
             {
                 if (!_isAttacking)
                 {
                     if (Random.Range(0, 100) < _aggroLevel)
                     {
-                        if (_self.EntityTargetingComponent.HaveTarget)
-                        {
-                            _isAttacking  = true;
-                            Logger.Log($"{GameEntity.name} InstanceID: {GameEntity.EntityInstanceID} is attacking {_self.EntityTargetingComponent.CurrentTarget.GameEntity.name}",ENEMY_LOG_GROUP);
-                        }
+                        _isAttacking  = true;
+                        _self.EntityMovementComponent.CanMove = false;
+                        Logger.Log($"{GameEntity.name} InstanceID: {GameEntity.EntityInstanceID} is attacking {_self.EntityTargetingComponent.CurrentTarget.GameEntity.name}",ENEMY_LOG_GROUP);
                     }
                 }
 
                 if (_isAttacking)
                 {
                     _self.EntityMovementComponent.SetDestination(_self.EntityTargetingComponent.CurrentTarget.GameEntity.EntityTransform.position, MoveType.Free);//temp!
-
-                    if (Random.Range(0, 100) < _returnLevel +
-                        Vector3.Distance(GameEntity.EntityTransform.position,_self.EntityMovementComponent.Destination) ||
-                        _self.EntityTargetingComponent.CurrentTarget.EntityHealthComponent.IsEntityDead)
-                    {
-                        _isAttacking = false;
-                        _self.EntityMovementComponent.CanMove = true;
-                        Debug.Log($"{GameEntity.name} return to path");
-                    }
+                    
+                    if (Vector3.Distance(GameEntity.transform.position, _self.EntityTargetingComponent.CurrentTarget.GameEntity.EntityTransform.position) < _self.EntityCombatComponent.AttackRange.CurrentValue)
+                        _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);
                 }
-
-                _currentDecisionInterval = _baseDecisionInterval;
             }
             
-            if (_isAttacking)
+            if (!_self.EntityTargetingComponent.HaveTarget)
             {
-                if (!_self.EntityTargetingComponent.HaveTarget)
-                {
-                    _isAttacking = false;
-                    return;
-                }//plastr
-
-                if (Vector3.Distance(GameEntity.transform.position, _self.EntityTargetingComponent.CurrentTarget.GameEntity.EntityTransform.position) < _self.EntityCombatComponent.AttackRange.CurrentValue)
-                    _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);
+                _isAttacking = false;
+                return;
+            }//plastr
+          
+            if (Random.Range(0, 100) < _returnLevel +
+                Vector3.Distance(GameEntity.EntityTransform.position,_self.EntityMovementComponent.Destination) ||
+                _self.EntityTargetingComponent.CurrentTarget.EntityHealthComponent.IsEntityDead)
+            {
+                _isAttacking = false;
+                _self.EntityMovementComponent.CanMove = true;
+                Debug.Log($"{GameEntity.name} return to path");
             }
-            
-            _currentDecisionInterval -= GAME_TIME.GameDeltaTime;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
 {
     public class AoeInstantiateExecuter : IAbilityExecutor , IStatHolder , IInitialization<ITargetAbleEntity,ExecuterConfig,IAbilityExecutor,AbilityVisualConfig>
     {
-        private const string AOE_PREFAB_PATH = "Prefabs/Ability/AoeAbilityEntity";
+        private const string AOE_PREFAB_PATH = "Prefabs/Ability/AbilityEntity/AoeAbilityEntity";
 
         private GameObject _gameObject;
         
@@ -49,7 +49,7 @@ namespace Tzipory.Systems.AbilitySystem.AbilityExecuteTypes
             _gameObject = Resources.Load<GameObject>(AOE_PREFAB_PATH);
             
             if (_gameObject is null)
-                throw new Exception($"{nameof(ProjectileInstantiateExecuter)} ProjectilePrefab not found");
+                throw new Exception($"{nameof(AoeInstantiateExecuter)} AOEPrefab not found");
 
             _abilityExecutor = abilityExecutor;
             

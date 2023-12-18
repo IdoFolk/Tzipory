@@ -22,6 +22,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         [SerializeField] private SpriteRenderer _silhouette;
 
         private IEntityTargetingComponent _entityTargetingComponent;
+        private IEntityHealthComponent _entityHealthComponent;
         private PlayableDirector _currentPlayableDirector;
         private ITimer _currentActiveTimer;
         private AnimationConfig _animationConfig;
@@ -53,6 +54,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             VisualComponentConfig = config;
 
             _entityTargetingComponent = parameter.RequestComponent<IEntityTargetingComponent>();
+            _entityHealthComponent = parameter.RequestComponent<IEntityHealthComponent>();
             
             config.OnDeath.ID = Constant.EffectSequenceIds.DEATH;
             config.OnAttack.ID = Constant.EffectSequenceIds.ATTACK;
@@ -129,13 +131,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             //     }
             // }
         }
-    
-        private void SetSprite(Sprite newSprite)
-        {
-            MainSpriteRenderer.sprite = newSprite;
-            OnSetSprite?.Invoke(newSprite);
-        }
-    
+        
         public void SetSpriteFlipX(bool doFlip)
         {
             MainSpriteRenderer.flipX = doFlip;
@@ -152,6 +148,17 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 SetToLoopAnimation();
         }
 
+        public void DeathAnimationEnded()
+        {
+            _entityHealthComponent.EntityDied();
+        }
+        
+        private void SetSprite(Sprite newSprite)
+        {
+            MainSpriteRenderer.sprite = newSprite;
+            OnSetSprite?.Invoke(newSprite);
+        }
+        
         private void SetEntryAnimation()
         {
             if (_currentPlayableDirector is not null)

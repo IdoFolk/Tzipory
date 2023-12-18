@@ -260,10 +260,10 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             throw new NotImplementedException();
         }
 
-        public void Dispose()
+        public override void Dispose()
         {
-            EntityMovementComponent?.Dispose();
-            EntityAnimatorComponent?.Dispose();
+            base.Dispose();
+            
             gameObject.SetActive(false);
             UpdateComponent = false;
             IsInitialization = false;

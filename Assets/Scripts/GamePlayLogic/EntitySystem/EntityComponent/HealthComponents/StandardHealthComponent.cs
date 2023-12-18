@@ -17,9 +17,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
     {
         public event Action<bool> OnHit;
         public event Action OnDeath;
-
-        private float _currentInvincibleTime;
+        public event Action OnDeathAnimation;
         
+        private float _currentInvincibleTime;
         private bool _startedDeathSequence;
         
         public BaseGameEntity GameEntity { get; private set;  }
@@ -54,6 +54,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             IsDamageable = true;
             
             IsInitialization = true;
+
         }
         
         public void UpdateComponent()
@@ -112,10 +113,10 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             
             IsDamageable = false;
             
-            EntityDied();
+            OnDeathAnimation?.Invoke();
         }
         
-        private void EntityDied()
+        public void EntityDied()
         {
             IsInitialization = false;
             Logger.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{GameEntity.name}</color> as died!",BaseGameEntity.ENTITY_LOG_GROUP);

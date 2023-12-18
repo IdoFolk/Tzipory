@@ -4,14 +4,14 @@ using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
-using UnityEditor.Animations;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 public class HeroAnimator : IEntityAnimatorComponent
 {
     public BaseGameEntity GameEntity { get; }
-    public AnimatorController EntityAnimatorController { get; private set; }
+    public RuntimeAnimatorController EntityAnimatorController { get; private set; }
+    public event Action OnDeathAnimationEnd;
 
     public bool IsInitialization { get; }
     
@@ -45,7 +45,7 @@ public class HeroAnimator : IEntityAnimatorComponent
         _entityCombatComponent.OnAttack += AttackAnimation; 
         _entityVisualComponent.OnSpriteFlipX += FlipAnimations;
         _entityHealthComponent.OnHit += GetHitAnimation;
-        _entityHealthComponent.OnDeath += DeathAnimation;
+        _entityHealthComponent.OnDeathAnimation += DeathAnimation;
         foreach (var ability in _entityAbilitiesComponent.Abilities.Select(keyValuePair => keyValuePair.Value).Where(ability => ability.IsActive))
         {
             ability.OnAbilityCast += AbilityCastAnimation;
@@ -60,12 +60,20 @@ public class HeroAnimator : IEntityAnimatorComponent
 
     private void DeathAnimation()
     {
+        if (_isFlipped)
+            _entityAnimator.SetTrigger("Death_Flipped");
+        else
+            _entityAnimator.SetTrigger("Death");
         
+        _entityAnimator.SetBool("Dead",true);
     }
 
-    private void GetHitAnimation(bool obj)
+    private void GetHitAnimation(bool isCrit)
     {
-        
+        if (_isFlipped)
+            _entityAnimator.SetTrigger("GetHit_Flipped");
+        else
+            _entityAnimator.SetTrigger("GetHit");
     }
 
     private void AbilityExecuteAnimation(int abilityId)
@@ -95,7 +103,7 @@ public class HeroAnimator : IEntityAnimatorComponent
     private void AttackAnimation()
     {
         if (_isFlipped)
-            _entityAnimator.SetTrigger("Attack_Reverse");
+            _entityAnimator.SetTrigger("Attack_Flipped");
         else
             _entityAnimator.SetTrigger("Attack");
     }
@@ -104,6 +112,8 @@ public class HeroAnimator : IEntityAnimatorComponent
     {
         _entityCombatComponent.OnAttack -= AttackAnimation;
         _entityVisualComponent.OnSpriteFlipX -= FlipAnimations;
+        _entityHealthComponent.OnHit -= GetHitAnimation;
+        _entityHealthComponent.OnDeathAnimation -= DeathAnimation;
         foreach (var ability in _entityAbilitiesComponent.Abilities.Select(keyValuePair => keyValuePair.Value).Where(ability => ability.IsActive))
         {
             ability.OnAbilityCast -= AbilityCastAnimation;

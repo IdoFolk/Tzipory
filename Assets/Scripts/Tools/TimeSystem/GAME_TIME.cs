@@ -23,6 +23,8 @@ namespace Tzipory.Tools.TimeSystem
         public static float GameDeltaTime => Time.deltaTime * _timeRate;
         public static TimerHandler TimerHandler { get; private set; }
 
+        public static bool IsTimeStopped => _timeRate == 0;
+
         private static MonoBehaviour _monoBehaviour;
 
         private static Coroutine _fadeCoroutine;

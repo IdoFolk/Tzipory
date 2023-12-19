@@ -109,7 +109,10 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 CurrentTarget = null;
 
             if (_availableTargets.Count == 0)
+            {
+                CurrentTarget = null;
                 return false;
+            }
 
             if (priorityTargeting == null)
                 CurrentTarget = PriorityTargeting.GetPriorityTarget(_availableTargets);

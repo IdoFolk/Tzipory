@@ -99,7 +99,6 @@ MonoBehaviour:
     CombatComponentType: 0
     AttackDamage: 35
     AttackRate: 0.8
-    AttackCooldown: 0
     CritDamage: 125
     CritChance: 5
     AttackRange: 12
@@ -118,7 +117,7 @@ MonoBehaviour:
   AbilityComponentConfig:
     _abilityConfigs:
     - {fileID: 11400000, guid: 1ae853bb9bae2264d947b505396fb4e8, type: 2}
-  _aiComponent: 1
+  _aiComponent: 0
   AIComponentConfig:
     AIType: 0
     DecisionInterval: 2

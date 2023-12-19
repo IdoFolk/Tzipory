@@ -24,7 +24,7 @@ namespace Tzipory.Systems.Entity
 
         protected bool UpdateComponent => gameObject.activeInHierarchy;
 
-        protected virtual void Awake()
+        private void Awake()
         {
             EntityTimer = new TimerHandler(this);
             EntityTransform = transform;
@@ -35,9 +35,12 @@ namespace Tzipory.Systems.Entity
 #endif
         }
 
-        protected virtual void Update()
+        private void Update()
         {
             EntityTimer.TickAllTimers();
+
+            if (GAME_TIME.IsTimeStopped)
+                return;
             
             if (!UpdateComponent) return;
             

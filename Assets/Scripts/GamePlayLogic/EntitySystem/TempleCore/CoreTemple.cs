@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using GameplayLogic.UI.HPBar;
 using PathCreation;
@@ -43,6 +44,7 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
     public IEntityVisualComponent EntityVisualComponent { get; }// not in use
     
     public bool IsInitialization { get; private set; }
+    
     public void Init()
     {
         CoreTransform = transform;
@@ -80,6 +82,8 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
             }
         },null,GoToCore);
 
+
+        StartCoroutine(nameof(UpdateUIIndicator));
     }
 
     private void OnHealthChanage(StatChangeData statChangeData)
@@ -104,14 +108,14 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
         GameManager.CameraHandler.SetCameraPosition(transform.position);
     }
 
-    protected override void Update()
+    private IEnumerable UpdateUIIndicator()
     {
-        base.Update();
-
         if (_enemies.Count > 0)
             _canacleFlash = UIIndicatorHandler.StartFlashOnIndicator(_uiIndicator.ObjectInstanceId);
         else
             _canacleFlash?.Invoke();
+
+        yield return null;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

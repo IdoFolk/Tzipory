@@ -15,7 +15,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 {
     public class UnitEntityVisualComponent : MonoBehaviour , IEntityVisualComponent 
     {
-        [SerializeField] private SpriteRenderer _mainMainSprite;
+        [SerializeField] private SpriteRenderer _mainSpriteRenderer;
         [SerializeField] private Transform _animationVisualTransform;
         
         [SerializeField] private Transform _visualQueueEffectPosition;
@@ -25,6 +25,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         private PlayableDirector _currentPlayableDirector;
         private ITimer _currentActiveTimer;
         private AnimationConfig _animationConfig;
+        private Color _defaultColor = Color.white;
     
         private Vector2 _lastPos;
 
@@ -36,7 +37,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public event Action<bool> OnSpriteFlipX;
         public VisualComponentConfig VisualComponentConfig { get; private set; }
         public EffectSequenceHandler EffectSequenceHandler { get; private set; }
-        public SpriteRenderer MainSpriteRenderer => _mainMainSprite;
+        public SpriteRenderer MainSpriteRenderer => _mainSpriteRenderer;
         
         public IDisposable UIIndicator { get; private set; }
         public PlayableDirector ParticleEffectPlayableDirector => _currentPlayableDirector;
@@ -94,7 +95,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 _silhouette.gameObject.SetActive(false);
             
             
-            SetSprite(config.Sprite);
+            SetSprite(config.Sprite,_defaultColor);
         
             IsInitialization = true;
         }
@@ -130,8 +131,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             // }
         }
     
-        private void SetSprite(Sprite newSprite)
+        private void SetSprite(Sprite newSprite, Color color)
         {
+            MainSpriteRenderer.color = color;
             MainSpriteRenderer.sprite = newSprite;
             OnSetSprite?.Invoke(newSprite);
         }
@@ -150,6 +152,11 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 SetEntryAnimation();
             else
                 SetToLoopAnimation();
+        }
+
+        public void DeathAnimationEnded()
+        {
+            GameEntity.gameObject.SetActive(false);
         }
 
         private void SetEntryAnimation()
@@ -197,7 +204,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         private void OnValidate()
         {
-            _mainMainSprite ??= GetComponent<SpriteRenderer>();
+            _mainSpriteRenderer ??= GetComponent<SpriteRenderer>();
             _visualQueueEffectPosition ??= transform.Find("VisualQueueEffectPosition");
         }
 

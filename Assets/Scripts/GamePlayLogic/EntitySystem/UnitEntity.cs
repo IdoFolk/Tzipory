@@ -273,7 +273,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             base.Dispose();
 
             //gameObject.SetActive(false);
-            _agentMoveComponent.Stop();
+            _agentMoveComponent.Agent.enabled = false;
             _hpBarConnector.gameObject.SetActive(false);
             _boxCollider.enabled = false;
             IsInitialization = false;

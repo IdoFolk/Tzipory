@@ -292,6 +292,10 @@ PrefabInstance:
       propertyPath: m_Size.y
       value: 2.3504872
       objectReference: {fileID: 0}
+    - target: {fileID: 1565228757226791273, guid: 2e88db100e0d5744ea9a3b0fbc4a40a9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2061232940235249866, guid: 2e88db100e0d5744ea9a3b0fbc4a40a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.25
@@ -531,9 +535,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3050176629895901538, guid: 9269dec163eba4548ad23545f9d185cc, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3614203361962477390}
-    - targetCorrespondingSourceObject: {fileID: 3050176629895901538, guid: 9269dec163eba4548ad23545f9d185cc, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3469393393823201923}
   m_SourcePrefab: {fileID: 100100000, guid: 9269dec163eba4548ad23545f9d185cc, type: 3}
 --- !u!1 &1420442367539004591 stripped
 GameObject:
@@ -649,6 +650,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 2892904847313465777}
+  colliderRadius: 0
 --- !u!114 &2892904847313465777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -711,18 +713,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Radius: 0.15
---- !u!114 &3469393393823201923
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420442367539004591}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f286de0aa42c5e848b17b9eec5f0f820, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &7921501042575430128 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6056453708549399613, guid: 9269dec163eba4548ad23545f9d185cc, type: 3}
@@ -906,7 +896,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f235469da383c846acbcd2e6df32a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainMainSprite: {fileID: 2750211597899472799}
+  _mainSpriteRenderer: {fileID: 2750211597899472799}
   _animationVisualTransform: {fileID: 3448816137356898781}
   _visualQueueEffectPosition: {fileID: 3727445444298982000}
   _silhouette: {fileID: 3854032941879993311}

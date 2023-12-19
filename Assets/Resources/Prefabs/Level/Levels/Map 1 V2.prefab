@@ -1518,11 +1518,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
       propertyPath: _fakeForward.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
       propertyPath: _fakeForward.y
-      value: -35
+      value: -0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8414148819223502613, guid: d30cbde7f0032a441ac92b2cd9910395, type: 3}
       propertyPath: _cameraBorders.x

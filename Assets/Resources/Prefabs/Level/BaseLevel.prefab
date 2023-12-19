@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bgRenderer: {fileID: 5506317258539102969}
-  _fakeForward: {x: 0, y: 0, z: 0}
+  _fakeForward: {x: 0.5, y: -0.4, z: 0}
   _mapStartPosition: 0
   _cameraBorders: {x: 20, y: 20}
   _cameraMaxZoom: 0
@@ -133,6 +133,7 @@ MonoBehaviour:
   - {fileID: 3305929984018943941}
   - {fileID: 3567861849261377222}
   - {fileID: 581538213994666406}
+  _particleSystemsSerialize: []
 --- !u!1 &6935278741487808698
 GameObject:
   m_ObjectHideFlags: 0

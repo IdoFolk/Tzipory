@@ -30,9 +30,9 @@ namespace Tzipory.GameplayLogic.VisualSystem.EffectType
         public override void StartEffectAction()
         {
             var newColor = new UnityEngine.Color(_color.r, _color.g, _color.b, _alpha);
-            _originalColor = VisualComponent.SpriteRenderer.color;
+            _originalColor = VisualComponent.MainSpriteRenderer.color;
             
-            VisualComponent.SpriteRenderer.color = newColor;
+            VisualComponent.MainSpriteRenderer.color = newColor;
         }
 
         public override void ProcessEffectAction()
@@ -45,7 +45,7 @@ namespace Tzipory.GameplayLogic.VisualSystem.EffectType
 
         public override void UndoEffectAction()
         {
-            VisualComponent.SpriteRenderer.color = UnityEngine.Color.white;
+            VisualComponent.MainSpriteRenderer.color = UnityEngine.Color.white;
         }
 
         public override void InterruptEffectAction()

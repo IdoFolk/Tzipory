@@ -1,3 +1,4 @@
+using System;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.Tools.Interface;
@@ -6,7 +7,7 @@ using UnityEngine;
 
 namespace Tzipory.Systems.Entity.EntityComponents
 {
-    public interface IEntityAnimatorComponent : IEntityComponent,IInitialization<BaseGameEntity,UnitEntity,AnimatorComponentConfig>
+    public interface IEntityAnimatorComponent : IEntityComponent,IInitialization<BaseGameEntity,UnitEntity,AnimatorComponentConfig> , IDisposable
     {
         public AnimatorController EntityAnimatorController { get; }
     }

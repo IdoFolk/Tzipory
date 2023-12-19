@@ -36,6 +36,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         [SerializeField,TabGroup("Component")] private AgentMoveComponent _agentMoveComponent;
         [SerializeField,TabGroup("Component")] private Animator _entityAnimator;
         //[SerializeField,TabGroup("Component")] private ClickHelper _clickHelper;
+
         [Header("Visual components")]
         [SerializeField,TabGroup("Component")] private UnitEntityVisualComponent _entityVisualComponent;//temp
         
@@ -56,6 +57,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         #region Proprty
 
         public Animator EntityAnimator => _entityAnimator;
+        public CircleCollider2D GroundCollider => _groundCollider;
         public IEntityVisualComponent EntityVisualComponent => _entityVisualComponent;
         public IEntityTargetingComponent EntityTargetingComponent => _entityTargetingComponent;
         public IEntityMovementComponent EntityMovementComponent { get; private set; }
@@ -256,6 +258,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public void Dispose()
         {
             EntityMovementComponent?.Dispose();
+            EntityAnimatorComponent?.Dispose();
             gameObject.SetActive(false);
             UpdateComponent = false;
             IsInitialization = false;

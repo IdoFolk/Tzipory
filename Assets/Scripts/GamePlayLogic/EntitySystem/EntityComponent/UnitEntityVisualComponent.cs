@@ -15,17 +15,13 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 {
     public class UnitEntityVisualComponent : MonoBehaviour , IEntityVisualComponent 
     {
-        public event Action<Sprite> OnSetSprite;
-    
-        public event Action<bool> OnSpriteFlipX;
-    
-        [SerializeField] private SpriteRenderer _mainSprite;
+        [SerializeField] private SpriteRenderer _mainMainSprite;
         [SerializeField] private Transform _animationVisualTransform;
         
         [SerializeField] private Transform _visualQueueEffectPosition;
         [SerializeField] private SpriteRenderer _silhouette;
-        
-    
+
+        private IEntityTargetingComponent _entityTargetingComponent;
         private PlayableDirector _currentPlayableDirector;
         private ITimer _currentActiveTimer;
         private AnimationConfig _animationConfig;
@@ -36,9 +32,12 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
     
         public PopUpTexter PopUpTexter { get; private set; }
 
+        public event Action<Sprite> OnSetSprite;
+        public event Action<bool> OnSpriteFlipX;
         public VisualComponentConfig VisualComponentConfig { get; private set; }
         public EffectSequenceHandler EffectSequenceHandler { get; private set; }
-        public SpriteRenderer SpriteRenderer => _mainSprite;
+        public SpriteRenderer MainSpriteRenderer => _mainMainSprite;
+        
         public IDisposable UIIndicator { get; private set; }
         public PlayableDirector ParticleEffectPlayableDirector => _currentPlayableDirector;
         public bool IsInitialization { get; private set; }
@@ -52,6 +51,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         {
             Init(parameter);
             VisualComponentConfig = config;
+
+            _entityTargetingComponent = parameter.RequestComponent<IEntityTargetingComponent>();
+            
             config.OnDeath.ID = Constant.EffectSequenceIds.DEATH;
             config.OnAttack.ID = Constant.EffectSequenceIds.ATTACK;
             config.OnCritAttack.ID = Constant.EffectSequenceIds.CRIT_ATTACK;
@@ -110,6 +112,12 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 _lastPos = position;
             }
 
+            if (_entityTargetingComponent.HaveTarget)
+            {
+                var targetDelta = position.x - _entityTargetingComponent.CurrentTarget.GameEntity.transform.position.x;
+                SetSpriteFlipX(targetDelta < 0);
+            }
+
             // if (VisualComponentConfig.HaveSilhouette)
             // {
             //     if (Physics.Raycast(transform.position, -Vector3.forward, out var hit, 100f))
@@ -124,13 +132,14 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
     
         private void SetSprite(Sprite newSprite)
         {
-            SpriteRenderer.sprite = newSprite;
+            MainSpriteRenderer.sprite = newSprite;
             OnSetSprite?.Invoke(newSprite);
         }
     
         public void SetSpriteFlipX(bool doFlip)
         {
-            SpriteRenderer.flipX = doFlip;
+            MainSpriteRenderer.flipX = doFlip;
+            _silhouette.flipX = doFlip;
             OnSpriteFlipX?.Invoke(doFlip);
         }
     
@@ -188,7 +197,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         private void OnValidate()
         {
-            _mainSprite  ??= GetComponent<SpriteRenderer>();
+            _mainMainSprite  ??= GetComponent<SpriteRenderer>();
             _visualQueueEffectPosition ??= transform.Find("VisualQueueEffectPosition");
         }
 

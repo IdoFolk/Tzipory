@@ -149,9 +149,8 @@ namespace Tzipory.Tools.TimeSystem
                 _timersList.Remove(timer);
                 return;
             }
-#if UNITY_EDITOR
-            Logger.LogError($"{_gameEntity.name} Could not find time to remove"); 
-#endif
+            
+            Logger.LogError($"{_gameEntity.name} Could not find time to remove {timer.TimerName } {timer.IsDone}"); 
         }
     }
 }

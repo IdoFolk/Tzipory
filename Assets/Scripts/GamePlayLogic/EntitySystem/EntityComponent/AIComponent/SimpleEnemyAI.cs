@@ -82,7 +82,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                     _self.EntityHealthComponent.StartDeathSequence();
             }
             
-            if (_currentDecisionInterval < 0)
+            if (_currentDecisionInterval < 0 && _self.EntityTargetingComponent.HaveTarget)
             {
                 if (!_isAttacking)
                 {

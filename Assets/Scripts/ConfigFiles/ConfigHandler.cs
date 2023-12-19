@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Tzipory.ConfigFiles
 {
@@ -14,8 +15,8 @@ namespace Tzipory.ConfigFiles
                 if (configFile.ObjectId == id)
                     return configFile;
             }
-            
-            return  default;
+
+            throw new Exception($"Can not find {typeof(T).Name} with id {id} in {nameof(ConfigHandler<T>)}.{nameof(GetConfigFile)}(). Enter the missing config file to the config manager in the PersistentScene");
         }
     }
 }

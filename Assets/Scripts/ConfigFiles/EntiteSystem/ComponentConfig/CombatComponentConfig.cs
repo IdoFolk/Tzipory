@@ -9,7 +9,6 @@ namespace Tzipory.ConfigFiles.EntitySystem.ComponentConfig
         [SerializeField] public CombatComponentType CombatComponentType;
         [SerializeField] public float AttackDamage;
         [SerializeField] public float AttackRate;
-        [SerializeField] public float AttackCooldown;
         [SerializeField] public float CritDamage;
         [SerializeField] public float CritChance;
         [SerializeField,ShowIf(nameof(CombatComponentType), CombatComponentType.Range)] public float AttackRange;

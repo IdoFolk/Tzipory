@@ -50,6 +50,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         private UnitEntitySerializeData _serializeData;
         private UnitEntityConfig _config;
 
+        private bool _isUsingConfig;
+
         #endregion
 
         #region Proprty
@@ -74,11 +76,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public bool IsInitialization { get; private set; }
 
         public UnitEntityConfig Config => _config;
-
-        public void Init(BaseGameEntity parameter)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         #endregion
         
@@ -87,7 +85,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public void Init(UnitEntitySerializeData parameter)
         {
             _serializeData = parameter;
-            _config = DataManager.DataRequester.GetConfigData<UnitEntityConfig>(parameter);
+
+            if (!_isUsingConfig)
+                _config = DataManager.DataRequester.GetConfigData<UnitEntityConfig>(parameter);
             
             gameObject.name =  $"{_config.name} InstanceID: {EntityInstanceID}";
 
@@ -192,6 +192,10 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public void Init(UnitEntityConfig parameter)//need to oder logic to many responsibility
         {
             var serializeData = DataManager.DataRequester.GetSerializeData<UnitEntitySerializeData>(parameter);
+
+            _isUsingConfig = true;
+
+            _config = parameter;
             
             Init(serializeData);
         }
@@ -199,15 +203,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         #endregion    
         
         #region UnityCallBacks
-        
-        protected override void Update()
-        {
-            base.Update();
-
-            if (!IsInitialization)
-                return;
-        }
-        
 
         private void OnValidate()
         {

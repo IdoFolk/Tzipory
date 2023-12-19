@@ -5,6 +5,7 @@ using GameplayLogic.UI.HPBar;
 using PathCreation;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.GamePlayLogic.EntitySystem;
+using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.Systems.Entity;
@@ -18,11 +19,13 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
 {
     [SerializeField] private PathCreator _patrolPath;
     [SerializeField] private UIIndicatorConfig _uiIndicatorConfig;
-    [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private SpriteRenderer coreSpriteRenderer;
+    [SerializeField] private Transform brokenCoreSpriteRenderer;
+    [SerializeField] private SpriteRenderer cracksSpriteRenderer;
+    [SerializeField] private ParticleSystem cracksGlowParticleSystem;
     [SerializeField] private TEMP_HP_Bar _hpBar;
     [SerializeField] private Animator _coreAnimator;
     [SerializeField] private float hp;
-    [SerializeField] private Color hpBarColor;
     
     private readonly List<UnitEntity> _enemies = new();
     
@@ -30,7 +33,7 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
 
     private Action _canacleFlash;
 
-    public static Transform CoreTransform { get; private set; }
+    public static Transform CoreTransform { get; private set; }        
     
     public event Action<ITargetAbleEntity> OnTargetDisable;
     
@@ -39,6 +42,7 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
     public PathCreator PatrolPath => _patrolPath;
 
     public EntityType EntityType => EntityType.Core;
+    public bool IsDestroyed { get; private set; }
     public IEntityHealthComponent EntityHealthComponent { get; private set; }
     public IEntityStatComponent EntityStatComponent { get; }//not in use
     public IEntityVisualComponent EntityVisualComponent { get; }// not in use
@@ -47,6 +51,8 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
     
     public void Init()
     {
+        IsDestroyed = false;
+        
         CoreTransform = transform;
         
         var config = new HealthComponentConfig()
@@ -59,13 +65,13 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
         AddComponent(EntityHealthComponent);
         EntityHealthComponent.Init(this,config);
         
-        _hpBar.Init(EntityHealthComponent.Health.BaseValue,hpBarColor);
+        _hpBar.Init(EntityHealthComponent.Health.BaseValue,EntityType);
         
         EntityHealthComponent.Health.OnValueChanged += OnHealthChanage;
         
         _uiIndicator = UIIndicatorHandler.SetNewIndicator(transform, new UIIndicatorConfig()
         {
-            Image = _spriteRenderer.sprite,
+            Image = coreSpriteRenderer.sprite,
             Color = Color.white,
             AllwaysShow = false,
             DisposOnClick = false,
@@ -82,7 +88,7 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
             }
         },null,GoToCore);
 
-
+        IsInitialization = true;
         StartCoroutine(nameof(UpdateUIIndicator));
     }
 
@@ -99,10 +105,29 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
         }
         if (statChangeData.NewValue / EntityHealthComponent.Health.BaseValue <= 0)
         {
-            _coreAnimator.SetBool("Break",true);
+            GameManager.CameraHandler.SetCameraPosition(transform.position);
+            GameManager.CameraHandler.SetCameraZoom(4);
+            _hpBar.gameObject.SetActive(false);
+            if (!cracksGlowParticleSystem.isPlaying)
+                cracksGlowParticleSystem.Play();
+            Invoke(nameof(DestroyCoreAnimation),2);
         }
     }
 
+    private void DestroyCoreAnimation()
+    {
+        brokenCoreSpriteRenderer.gameObject.SetActive(true);
+        coreSpriteRenderer.enabled = false;
+        cracksSpriteRenderer.enabled = false;
+        cracksGlowParticleSystem.gameObject.SetActive(false);
+        _coreAnimator.SetBool("Break",true);
+        Invoke(nameof(EndGame),2);
+    }
+
+    private void EndGame()
+    {
+        IsDestroyed = true;
+    }
     private void GoToCore()
     {
         GameManager.CameraHandler.SetCameraPosition(transform.position);

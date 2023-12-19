@@ -10,7 +10,6 @@ namespace Tzipory.ConfigFiles.EntitySystem.ComponentConfig
         [SerializeField] public Sprite Sprite;
         [SerializeField] public Sprite Icon;
         [SerializeField] public bool HpBar;
-        [SerializeField,ShowIf(nameof(HpBar))] public Color HpBarColor;
         [SerializeField] public bool HaveSilhouette;
         
         [SerializeField, TabGroup("UI Indicator")] public bool UIIndicator;

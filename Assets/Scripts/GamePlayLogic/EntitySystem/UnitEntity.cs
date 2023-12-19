@@ -189,7 +189,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             if (_config.VisualComponentConfig.HpBar)
             {
                 _hpBarConnector.gameObject.SetActive(true);
-                _hpBarConnector.Init(this,_config.VisualComponentConfig.HpBarColor);
+                _hpBarConnector.Init(this,EntityType);
                 EntityHealthComponent.Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
             }
             else

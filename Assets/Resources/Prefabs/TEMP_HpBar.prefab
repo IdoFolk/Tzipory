@@ -190,7 +190,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -247,5 +247,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fillSprite: {fileID: 2482432304323612586}
-  defaultBarColor: {r: 1, g: 0, b: 0, a: 0}
   drainDuration: 1
+  defaultBarColor: {r: 1, g: 1, b: 1, a: 1}
+  heroHealthColor: {r: 0, g: 1, b: 0.027116776, a: 1}
+  enemyHealthColor: {r: 1, g: 0, b: 0, a: 1}
+  coreHealthColor: {r: 0, g: 1, b: 0.8881693, a: 1}

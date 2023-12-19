@@ -187,8 +187,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         private void StopAnimation()
         {
-            _currentActiveTimer.StopTimer();
-
+            _currentActiveTimer = null;
+            
             if (_currentPlayableDirector is not null)
                 Destroy(_currentPlayableDirector.gameObject);
 
@@ -197,7 +197,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         private void OnValidate()
         {
-            _mainMainSprite  ??= GetComponent<SpriteRenderer>();
+            _mainMainSprite ??= GetComponent<SpriteRenderer>();
             _visualQueueEffectPosition ??= transform.Find("VisualQueueEffectPosition");
         }
 

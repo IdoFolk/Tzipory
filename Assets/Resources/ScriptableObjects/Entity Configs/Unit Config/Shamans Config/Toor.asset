@@ -117,7 +117,7 @@ MonoBehaviour:
   AbilityComponentConfig:
     _abilityConfigs:
     - {fileID: 11400000, guid: 1ae853bb9bae2264d947b505396fb4e8, type: 2}
-  _aiComponent: 0
+  _aiComponent: 1
   AIComponentConfig:
     AIType: 0
     DecisionInterval: 2

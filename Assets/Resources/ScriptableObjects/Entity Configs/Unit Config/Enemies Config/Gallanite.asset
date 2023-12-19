@@ -21,6 +21,7 @@ MonoBehaviour:
     InvincibleTimeStat: 0
     RegenSpeedStat: 1
   TargetingComponentConfig:
+    TargetingType: 0
     TargetingRange: 3
     EntityType: 2
     TargetedEntity: 9
@@ -122,8 +123,8 @@ MonoBehaviour:
     DecisionInterval: 1
     AggroLevel: 0
     ReturnLevel: 0
-  _animatorComponent: 0
+  _animatorComponent: 1
   AnimatorComponentConfig:
-    AnimatorType: 0
-    EntityAnimator: {fileID: 0}
+    AnimatorType: 1
+    EntityAnimator: {fileID: 9100000, guid: 9a2fa0a9203435143934a6900fe251ba, type: 2}
     AbilityCastAnimationPrefab: {fileID: 0}

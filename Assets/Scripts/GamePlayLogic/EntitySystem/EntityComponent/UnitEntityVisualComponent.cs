@@ -10,6 +10,7 @@ using Tzipory.Systems.VisualSystem.PopUpSystem;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.Playables;
+using VInspector.Libs;
 
 namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 {
@@ -22,7 +23,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         [SerializeField] private SpriteRenderer _silhouette;
 
         private IEntityTargetingComponent _entityTargetingComponent;
-        private IEntityHealthComponent _entityHealthComponent;
         private PlayableDirector _currentPlayableDirector;
         private ITimer _currentActiveTimer;
         private AnimationConfig _animationConfig;
@@ -54,7 +54,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             VisualComponentConfig = config;
 
             _entityTargetingComponent = parameter.RequestComponent<IEntityTargetingComponent>();
-            _entityHealthComponent = parameter.RequestComponent<IEntityHealthComponent>();
             
             config.OnDeath.ID = Constant.EffectSequenceIds.DEATH;
             config.OnAttack.ID = Constant.EffectSequenceIds.ATTACK;
@@ -150,9 +149,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         public void DeathAnimationEnded()
         {
-            _entityHealthComponent.EntityDied();
+            GameEntity.gameObject.SetActive(false);
         }
-        
         private void SetSprite(Sprite newSprite)
         {
             MainSpriteRenderer.sprite = newSprite;

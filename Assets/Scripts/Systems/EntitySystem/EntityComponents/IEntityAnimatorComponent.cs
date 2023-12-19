@@ -10,6 +10,5 @@ namespace Tzipory.Systems.Entity.EntityComponents
     public interface IEntityAnimatorComponent : IEntityComponent,IInitialization<BaseGameEntity,UnitEntity,AnimatorComponentConfig> , IDisposable
     {
         public RuntimeAnimatorController EntityAnimatorController { get; }
-        public event Action OnDeathAnimationEnd;
     }
 }

@@ -4,6 +4,7 @@ using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -11,7 +12,6 @@ public class HeroAnimator : IEntityAnimatorComponent
 {
     public BaseGameEntity GameEntity { get; }
     public RuntimeAnimatorController EntityAnimatorController { get; private set; }
-    public event Action OnDeathAnimationEnd;
 
     public bool IsInitialization { get; }
     
@@ -23,15 +23,11 @@ public class HeroAnimator : IEntityAnimatorComponent
 
     private bool _movementChange;
     private bool _isFlipped;
-    private AnimatorComponentConfig _config;
     private Animator _entityAnimator;
-    private UnitEntity _unitEntity;
     private ParticleSystem _abilityCastEffect;
 
     public void Init(BaseGameEntity gameEntity,UnitEntity unitEntity, AnimatorComponentConfig config)
     {
-        _config = config;
-        _unitEntity = unitEntity;
         _entityAnimator = unitEntity.EntityAnimator;
         EntityAnimatorController = config.EntityAnimator;
         unitEntity.EntityAnimator.runtimeAnimatorController = EntityAnimatorController;
@@ -45,7 +41,7 @@ public class HeroAnimator : IEntityAnimatorComponent
         _entityCombatComponent.OnAttack += AttackAnimation; 
         _entityVisualComponent.OnSpriteFlipX += FlipAnimations;
         _entityHealthComponent.OnHit += GetHitAnimation;
-        _entityHealthComponent.OnDeathAnimation += DeathAnimation;
+        _entityHealthComponent.OnDeath += DeathAnimation;
         foreach (var ability in _entityAbilitiesComponent.Abilities.Select(keyValuePair => keyValuePair.Value).Where(ability => ability.IsActive))
         {
             ability.OnAbilityCast += AbilityCastAnimation;
@@ -54,26 +50,20 @@ public class HeroAnimator : IEntityAnimatorComponent
 
         if (config.AbilityCastAnimationPrefab is not null)
         {
-            _abilityCastEffect = Object.Instantiate(_config.AbilityCastAnimationPrefab, _unitEntity.GroundCollider.transform).GetComponent<ParticleSystem>();
+            _abilityCastEffect = Object.Instantiate(config.AbilityCastAnimationPrefab, unitEntity.GroundCollider.transform).GetComponent<ParticleSystem>();
         }
     }
 
     private void DeathAnimation()
     {
-        if (_isFlipped)
-            _entityAnimator.SetTrigger("Death_Flipped");
-        else
-            _entityAnimator.SetTrigger("Death");
-        
         _entityAnimator.SetBool("Dead",true);
+        _entityAnimator.SetTrigger(_isFlipped ? "Death_Flipped" : "Death");
+        
     }
 
     private void GetHitAnimation(bool isCrit)
     {
-        if (_isFlipped)
-            _entityAnimator.SetTrigger("GetHit_Flipped");
-        else
-            _entityAnimator.SetTrigger("GetHit");
+        _entityAnimator.SetTrigger(_isFlipped ? "GetHit_Flipped" : "GetHit");
     }
 
     private void AbilityExecuteAnimation(int abilityId)
@@ -102,10 +92,7 @@ public class HeroAnimator : IEntityAnimatorComponent
     
     private void AttackAnimation()
     {
-        if (_isFlipped)
-            _entityAnimator.SetTrigger("Attack_Flipped");
-        else
-            _entityAnimator.SetTrigger("Attack");
+        _entityAnimator.SetTrigger(_isFlipped ? "Attack_Flipped" : "Attack");
     }
 
     public void Dispose()
@@ -113,7 +100,7 @@ public class HeroAnimator : IEntityAnimatorComponent
         _entityCombatComponent.OnAttack -= AttackAnimation;
         _entityVisualComponent.OnSpriteFlipX -= FlipAnimations;
         _entityHealthComponent.OnHit -= GetHitAnimation;
-        _entityHealthComponent.OnDeathAnimation -= DeathAnimation;
+        _entityHealthComponent.OnDeath -= DeathAnimation;
         foreach (var ability in _entityAbilitiesComponent.Abilities.Select(keyValuePair => keyValuePair.Value).Where(ability => ability.IsActive))
         {
             ability.OnAbilityCast -= AbilityCastAnimation;

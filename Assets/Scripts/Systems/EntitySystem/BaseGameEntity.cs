@@ -77,7 +77,6 @@ namespace Tzipory.Systems.Entity
                 if (entityComponent is IDisposable disposable)
                     disposable.Dispose();
             }
-            // TODO release managed resources here
         }
     }
 }

@@ -17,7 +17,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
     {
         public event Action<bool> OnHit;
         public event Action OnDeath;
-        public event Action OnDeathAnimation;
         
         private float _currentInvincibleTime;
         private bool _startedDeathSequence;
@@ -113,7 +112,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             
             IsDamageable = false;
             
-            OnDeathAnimation?.Invoke();
+            EntityDied();
         }
         
         public void EntityDied()

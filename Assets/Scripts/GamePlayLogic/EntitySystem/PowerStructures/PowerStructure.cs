@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Tzipory.GamePlayLogic.EntitySystem;
-using Tzipory.GameplayLogic.EntitySystem.Shamans;
 using Tzipory.GameplayLogic.UI.CoreGameUI.HeroSelectionUI;
 using Tzipory.Helpers.Consts;
 using Tzipory.Systems.Entity;

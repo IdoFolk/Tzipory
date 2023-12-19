@@ -10,34 +10,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dea472f36b2a4dc0b0810fdfb6687265, type: 3}
-  m_Name: Toor
+  m_Name: Madu Tesrt
   m_EditorClassIdentifier: 
-  _entityName: Toor
-  _entityId: -1670867242
-  _unitType: 0
+  _entityName: Madu
+  _entityId: 1408023749
+  _unitType: 1
   HealthComponentConfig:
     HealthComponentType: 2
-    HealthStat: 450
+    HealthStat: 1000000
     InvincibleTimeStat: 0
     RegenSpeedStat: 0
   TargetingComponentConfig:
     TargetingType: 0
-    TargetingRange: 12
-    EntityType: 1
-    TargetedEntity: 2
+    TargetingRange: 3
+    EntityType: 2
+    TargetedEntity: 9
     TargetingPriorityType: 2
   VisualComponentConfig:
-    Sprite: {fileID: 21300000, guid: f4e62ad13a5770c44aac2a924dab6155, type: 3}
-    Icon: {fileID: 21300000, guid: 97554a74e79997844a27c96e13c4e3dd, type: 3}
-    HpBar: 1
-    HaveSilhouette: 1
-    UIIndicator: 1
+    Sprite: {fileID: 21300000, guid: 896b3c0626f9f004b8a76282dd0cdc85, type: 3}
+    Icon: {fileID: 21300000, guid: 72b74f5cc71304545b6202cb2faff0df, type: 3}
+    HpBar: 0
+    HaveSilhouette: 0
+    UIIndicator: 0
     UiIndicatorConfig:
-      Image: {fileID: 21300000, guid: 97554a74e79997844a27c96e13c4e3dd, type: 3}
-      Color: {r: 1, g: 1, b: 1, a: 1}
+      Image: {fileID: 0}
+      Color: {r: 0, g: 0, b: 0, a: 0}
       AllwaysShow: 0
       DisposOnClick: 0
-      OffSetRadios: 0.1
+      OffSetRadios: 0
       StartFlashing: 0
       FlashConfig:
         SizeFactor: 0
@@ -96,34 +96,33 @@ MonoBehaviour:
       _effectActionContainers: []
   _combatComponent: 1
   CombatComponentConfig:
-    CombatComponentType: 0
-    AttackDamage: 35
-    AttackRate: 0.8
-    CritDamage: 125
+    CombatComponentType: 1
+    AttackDamage: 30
+    AttackRate: 2
+    CritDamage: 110
     CritChance: 5
-    AttackRange: 12
-    ProjectileTimeToDie: 20
-    ProjectileSpeed: 10
-    ProjectilePrefab: {fileID: 6820444270360034478, guid: e64a8a0f859a6954cab1ec02005d3f61, type: 3}
+    AttackRange: 0
+    ProjectileTimeToDie: 0
+    ProjectileSpeed: 0
+    ProjectilePrefab: {fileID: 0}
   _movementComponent: 1
   MovementComponentConfig:
-    MovementComponentType: 0
-    MoveSpeed: 2.5
+    MovementComponentType: 1
+    MoveSpeed: 0
     PathCreator: {fileID: 0}
-    MaxDistanceFromPath: 0
-    PrivateRabbitIncrement: 0
-    DistanceTORabbitToUpdate: 0
-  _abilityComponent: 1
+    MaxDistanceFromPath: 0.4
+    PrivateRabbitIncrement: 0.1
+    DistanceTORabbitToUpdate: 0.5
+  _abilityComponent: 0
   AbilityComponentConfig:
-    _abilityConfigs:
-    - {fileID: 11400000, guid: 1ae853bb9bae2264d947b505396fb4e8, type: 2}
-  _aiComponent: 0
+    _abilityConfigs: []
+  _aiComponent: 1
   AIComponentConfig:
-    AIType: 0
-    DecisionInterval: 2
-    AggroLevel: 0
+    AIType: 1
+    DecisionInterval: 1
+    AggroLevel: 100
     ReturnLevel: 0
-  _animatorComponent: 1
+  _animatorComponent: 0
   AnimatorComponentConfig:
     AnimatorType: 0
-    EntityAnimator: {fileID: 9100000, guid: 0cd45dd2bd38be642a0562447966bb64, type: 2}
+    EntityAnimator: {fileID: 0}

@@ -22,7 +22,7 @@ namespace Tzipory.Systems.Entity
 
         private List<IEntityComponent> _entityComponent;
 
-        protected bool UpdateComponent;
+        protected bool UpdateComponent => gameObject.activeInHierarchy;
 
         protected virtual void Awake()
         {
@@ -38,6 +38,8 @@ namespace Tzipory.Systems.Entity
         protected virtual void Update()
         {
             EntityTimer.TickAllTimers();
+            
+            if (!UpdateComponent) return;
             
             foreach (var entityComponent in _entityComponent)
                 entityComponent?.UpdateComponent();

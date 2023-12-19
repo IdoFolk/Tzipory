@@ -20,7 +20,7 @@ MonoBehaviour:
     _projectileSpeed: 0
     _projectilePenetration: 0
     _aoeRadius: 5
-    _aoeDuration: 1
+    _aoeDuration: 1.5
     _chainRadius: 0
     _chainDuration: 0
     _chainAmount: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
         m_RotationOrder: 4
   DoExitEffects: 0
   StatusEffectConfigsOnExit: []
-  Cooldown: 2
+  Cooldown: 5
   CastTime: 1
   AbilityVisualConfig:
     _abilityVisualType: 0

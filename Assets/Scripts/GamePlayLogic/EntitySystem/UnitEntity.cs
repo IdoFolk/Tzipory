@@ -40,6 +40,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         private ColliderTargetingArea _colliderTargeting;
 
         [SerializeField, TabGroup("Component")]
+        private BoxCollider2D _boxCollider;
+        
+        [SerializeField, TabGroup("Component")]
         private CircleCollider2D _groundCollider;
 
         [SerializeField, TabGroup("Component")]
@@ -105,6 +108,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
 
             gameObject.tag = _config.UnitType.ToString();
             _groundCollider.gameObject.tag = _config.UnitType.ToString();
+            _boxCollider.enabled = true;
 
             List<IStatHolder> statHolders = new List<IStatHolder>();
 
@@ -195,8 +199,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem
 
             IsTargetAble = true;
 
-            UpdateComponent = true;
-
             gameObject.SetActive(true);
 
             IsInitialization = true;
@@ -217,7 +219,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         protected override void Update()
         {
             base.Update();
-
+            
             if (!IsInitialization)
                 return;
         }
@@ -232,6 +234,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             _hpBarConnector ??= GetComponentInChildren<TEMP_UNIT_HPBarConnector>();
             _agentMoveComponent ??= GetComponent<AgentMoveComponent>();
             _entityAnimator ??= GetComponentInChildren<Animator>();
+            _boxCollider ??= GetComponent<BoxCollider2D>();
         }
 
         private void OnDrawGizmosSelected()
@@ -279,8 +282,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             base.Dispose();
 
             //gameObject.SetActive(false);
+            _agentMoveComponent.Stop();
             _hpBarConnector.gameObject.SetActive(false);
-            UpdateComponent = false;
+            _boxCollider.enabled = false;
             IsInitialization = false;
             IsTargetAble = false;
             OnDispose?.Invoke(this);

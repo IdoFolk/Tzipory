@@ -43,7 +43,7 @@ MonoBehaviour:
     _interval: 0
     StatModifier:
       _statusModifierType: 2
-      Modifier: 50
+      Modifier: 75
       _ringModifiers: []
     _effectSequence:
       _sequenceName: 

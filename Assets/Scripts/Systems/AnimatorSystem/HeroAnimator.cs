@@ -56,9 +56,9 @@ public class HeroAnimator : IEntityAnimatorComponent
 
     private void DeathAnimation()
     {
+        _entityMovementComponent.CanMove = false;
         _entityAnimator.SetBool("Dead",true);
         _entityAnimator.SetTrigger(_isFlipped ? "Death_Flipped" : "Death");
-        
     }
 
     private void GetHitAnimation(bool isCrit)

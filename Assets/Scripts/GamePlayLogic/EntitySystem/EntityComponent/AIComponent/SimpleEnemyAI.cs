@@ -115,7 +115,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
             {
                 _isAttacking = false;
                 _self.EntityMovementComponent.CanMove = true;
-                Debug.Log($"{GameEntity.name} return to path");
+                Logger.Log($"{GameEntity.name} return to path",ENEMY_LOG_GROUP);
             }
         }
     }

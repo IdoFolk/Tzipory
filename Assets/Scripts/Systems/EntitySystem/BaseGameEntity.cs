@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Tzipory.Systems.Entity
 {
-    public abstract class BaseGameEntity : MonoBehaviour
+    public abstract class BaseGameEntity : MonoBehaviour , IDisposable
     {
         public const string ENTITY_LOG_GROUP = "Entity";
         
@@ -22,7 +22,7 @@ namespace Tzipory.Systems.Entity
 
         private List<IEntityComponent> _entityComponent;
 
-        protected bool UpdateComponent;
+        protected bool UpdateComponent => gameObject.activeInHierarchy;
 
         private void Awake()
         {
@@ -41,6 +41,8 @@ namespace Tzipory.Systems.Entity
 
             if (GAME_TIME.IsTimeStopped)
                 return;
+            
+            if (!UpdateComponent) return;
             
             foreach (var entityComponent in _entityComponent)
                 entityComponent?.UpdateComponent();
@@ -71,6 +73,15 @@ namespace Tzipory.Systems.Entity
             }
 
             return null;
+        }
+
+        public virtual void Dispose()
+        {
+            foreach (var entityComponent in _entityComponent)
+            {
+                if (entityComponent is IDisposable disposable)
+                    disposable.Dispose();
+            }
         }
     }
 }

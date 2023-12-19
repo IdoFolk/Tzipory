@@ -30,6 +30,7 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: fc2805c32b6ccbe429d23e618777dbee, type: 3}
     Icon: {fileID: 1908098078, guid: 2a862c0ebda887f42a111fbbce4d7fc0, type: 3}
     HpBar: 1
+    HpBarColor: {r: 0, g: 1, b: 0.009653807, a: 1}
     HaveSilhouette: 1
     UIIndicator: 1
     UiIndicatorConfig:

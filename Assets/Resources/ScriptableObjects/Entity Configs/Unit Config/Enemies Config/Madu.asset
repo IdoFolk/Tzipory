@@ -30,6 +30,7 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: 896b3c0626f9f004b8a76282dd0cdc85, type: 3}
     Icon: {fileID: 21300000, guid: 896b3c0626f9f004b8a76282dd0cdc85, type: 3}
     HpBar: 1
+    HpBarColor: {r: 1, g: 0, b: 0, a: 1}
     HaveSilhouette: 0
     UIIndicator: 0
     UiIndicatorConfig:
@@ -99,7 +100,6 @@ MonoBehaviour:
     CombatComponentType: 1
     AttackDamage: 30
     AttackRate: 2
-    AttackCooldown: 1
     CritDamage: 110
     CritChance: 5
     AttackRange: 0
@@ -123,8 +123,8 @@ MonoBehaviour:
     DecisionInterval: 1
     AggroLevel: 50
     ReturnLevel: 30
-  _animatorComponent: 0
+  _animatorComponent: 1
   AnimatorComponentConfig:
-    AnimatorType: 0
-    EntityAnimator: {fileID: 0}
+    AnimatorType: 1
+    EntityAnimator: {fileID: 9100000, guid: 9a2fa0a9203435143934a6900fe251ba, type: 2}
     AbilityCastAnimationPrefab: {fileID: 0}

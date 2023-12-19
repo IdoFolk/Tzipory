@@ -6,21 +6,37 @@ namespace GameplayLogic.UI.HPBar
     public class TEMP_HP_Bar : MonoBehaviour
     {
         [SerializeField] Transform fillSprite;
+        [SerializeField] Color defaultBarColor;
         [SerializeField] float drainDuration;
 
         float _maxValue;
 
         Vector3 _originalScale;
+        private SpriteRenderer _fillSpriteRenderer;
 
         //float targetValue;
         Coroutine _runningSmoothBar;
 
+        public void Init(float max, Color color)
+        {
+            //fillImage.fillAmount = 1f; //just to make sure. later on this will be removed and it will just read the value
+            _originalScale = fillSprite.localScale;
+            fillSprite.localScale = new Vector3(1f, _originalScale.y, _originalScale.z);
+            
+            _fillSpriteRenderer = fillSprite.GetComponentInChildren<SpriteRenderer>();
+            _fillSpriteRenderer.color = color;
+            
+            _maxValue = max;
+        }
         public void Init(float max)
         {
             //fillImage.fillAmount = 1f; //just to make sure. later on this will be removed and it will just read the value
             _originalScale = fillSprite.localScale;
             fillSprite.localScale = new Vector3(1f, _originalScale.y, _originalScale.z);
-
+            
+            _fillSpriteRenderer = fillSprite.GetComponentInChildren<SpriteRenderer>();
+            _fillSpriteRenderer.color = defaultBarColor;
+            
             _maxValue = max;
         }
 

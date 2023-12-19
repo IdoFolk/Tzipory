@@ -9,6 +9,6 @@ namespace Tzipory.Systems.Entity.EntityComponents
 {
     public interface IEntityAnimatorComponent : IEntityComponent,IInitialization<BaseGameEntity,UnitEntity,AnimatorComponentConfig> , IDisposable
     {
-        public AnimatorController EntityAnimatorController { get; }
+        public RuntimeAnimatorController EntityAnimatorController { get; }
     }
 }

@@ -21,6 +21,7 @@ MonoBehaviour:
     InvincibleTimeStat: 0
     RegenSpeedStat: 1
   TargetingComponentConfig:
+    TargetingType: 0
     TargetingRange: 3
     EntityType: 2
     TargetedEntity: 9
@@ -29,6 +30,7 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: 4332a2da08622714ba37ab25e3c9dc89, type: 3}
     Icon: {fileID: 21300000, guid: 4332a2da08622714ba37ab25e3c9dc89, type: 3}
     HpBar: 1
+    HpBarColor: {r: 1, g: 0, b: 0, a: 1}
     HaveSilhouette: 0
     UIIndicator: 0
     UiIndicatorConfig:
@@ -98,7 +100,6 @@ MonoBehaviour:
     CombatComponentType: 1
     AttackDamage: 35
     AttackRate: 1.5
-    AttackCooldown: 0
     CritDamage: 150
     CritChance: 30
     AttackRange: 0
@@ -122,8 +123,8 @@ MonoBehaviour:
     DecisionInterval: 1
     AggroLevel: 0
     ReturnLevel: 0
-  _animatorComponent: 0
+  _animatorComponent: 1
   AnimatorComponentConfig:
-    AnimatorType: 0
-    EntityAnimator: {fileID: 0}
+    AnimatorType: 1
+    EntityAnimator: {fileID: 9100000, guid: 9a2fa0a9203435143934a6900fe251ba, type: 2}
     AbilityCastAnimationPrefab: {fileID: 0}

@@ -10,12 +10,16 @@ namespace Tzipory.Systems.EntityComponents
     {
         [SerializeField]
         private AgentAuthoring _agent;
+
+
+        [SerializeField] private float colliderRadius;
         
         private Stat _speedStat;
         
         private Vector3 _lastPosition;
 
         private Vector2 _destination = Vector2.zero;
+        public AgentAuthoring Agent => _agent;
         
         public bool IsMoveing { get; private set; }    
         
@@ -23,11 +27,14 @@ namespace Tzipory.Systems.EntityComponents
         {
             _speedStat = newSpeed;
             _speedStat.OnValueChanged += AdjustAgentSpeed;
-            GAME_TIME.OnTimeRateChange += AdjustAgentTime; 
+            GAME_TIME.OnTimeRateChange += AdjustAgentTime;
+
+            _agent.enabled = true;
             
             AgentSteering aS = _agent.DefaultSteering;
             aS.Speed = _speedStat.CurrentValue * GAME_TIME.GetCurrentTimeRate;
             _agent.EntitySteering = aS;
+
             
             _lastPosition = transform.position;
         }

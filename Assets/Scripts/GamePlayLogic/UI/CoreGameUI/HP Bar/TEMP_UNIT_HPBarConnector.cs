@@ -16,6 +16,11 @@ namespace GameplayLogic.UI.HPBar
             _unit = unit;
             hP_Bar.Init(_unit.EntityHealthComponent.Health.BaseValue);
         }
+        public void Init(UnitEntity unit, Color color)
+        {
+            _unit = unit;
+            hP_Bar.Init(_unit.EntityHealthComponent.Health.BaseValue,color);
+        }
         
         public void SetBarToHealth(StatChangeData statChangeData)
         {

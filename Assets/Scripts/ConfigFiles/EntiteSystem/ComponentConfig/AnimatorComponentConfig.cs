@@ -8,7 +8,7 @@ namespace Tzipory.ConfigFiles.EntitySystem.ComponentConfig
     public struct AnimatorComponentConfig
     {
         [SerializeField] public AnimatorComponentType AnimatorType;
-        [SerializeField] public AnimatorController EntityAnimator;
+        [SerializeField] public RuntimeAnimatorController EntityAnimator;
         [SerializeField, ShowIf(nameof(AnimatorType),AnimatorComponentType.Hero)] public GameObject AbilityCastAnimationPrefab;
 
     }

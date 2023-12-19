@@ -20,5 +20,6 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public event Action OnDeath;
         public void Heal(float amount);
         public void TakeDamage(float damage,bool isCrit);
+        public void EntityDied();
     }
 }

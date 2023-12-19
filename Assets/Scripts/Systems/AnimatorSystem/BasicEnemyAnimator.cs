@@ -1,27 +1,80 @@
+using System;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
-using UnityEditor.Animations;
+using UnityEngine;
 
 public class BasicEnemyAnimator : IEntityAnimatorComponent
 {
     public BaseGameEntity GameEntity { get; }
-    
-    public AnimatorController EntityAnimatorController { get; private set; }
+    public RuntimeAnimatorController EntityAnimatorController { get; private set; }
 
     public bool IsInitialization { get; }
-    public void Init(BaseGameEntity parameter1, UnitEntity parameter2, AnimatorComponentConfig parameter3)
+    
+    private IEntityMovementComponent _entityMovementComponent;
+    private IEntityHealthComponent _entityHealthComponent;
+    private IEntityCombatComponent _entityCombatComponent;
+    private IEntityVisualComponent _entityVisualComponent;
+    
+    private Animator _entityAnimator;
+
+    private bool _isFlipped;
+    private bool _movementChange;
+    
+    public void Init(BaseGameEntity gameEntity, UnitEntity unitEntity, AnimatorComponentConfig config)
     {
-        EntityAnimatorController = parameter3.EntityAnimator;
+        EntityAnimatorController = config.EntityAnimator;
+        _entityAnimator = unitEntity.EntityAnimator;
+        unitEntity.EntityAnimator.runtimeAnimatorController = EntityAnimatorController;
+        
+        _entityMovementComponent = gameEntity.RequestComponent<IEntityMovementComponent>();
+        _entityHealthComponent = gameEntity.RequestComponent<IEntityHealthComponent>();
+        _entityCombatComponent = gameEntity.RequestComponent<IEntityCombatComponent>();
+        _entityVisualComponent = gameEntity.RequestComponent<IEntityVisualComponent>();
+        
+        _entityHealthComponent.OnHit += GetHitAnimation;
+        _entityHealthComponent.OnDeath += DeathAnimation;
+        _entityCombatComponent.OnAttack += AttackAnimation; 
+        _entityVisualComponent.OnSpriteFlipX += FlipAnimations;
     }
+
+    private void FlipAnimations(bool state)
+    {
+        _isFlipped = state;
+    }
+
+    private void AttackAnimation()
+    {
+        _entityAnimator.SetTrigger(_isFlipped ? "Attack_Flipped" : "Attack");
+    }
+
+    private void DeathAnimation()
+    {
+        _entityMovementComponent.CanMove = false;
+        _entityAnimator.SetBool("Dead",true);
+        _entityAnimator.SetTrigger("Death");
+    }
+
+    private void GetHitAnimation(bool isCrit)
+    {
+        _entityAnimator.SetTrigger(_isFlipped ? "GetHit_Flipped" : "GetHit");
+    }
+
     public void UpdateComponent()
     {
-        throw new System.NotImplementedException();
+        if (_entityMovementComponent.IsMoving != _movementChange)
+        {
+            _movementChange = _entityMovementComponent.IsMoving; 
+            _entityAnimator.SetBool("Walking", _movementChange);
+        }
     }
 
     public void Dispose()
     {
-        // TODO release managed resources here
+        _entityHealthComponent.OnHit -= GetHitAnimation;
+        _entityHealthComponent.OnDeath -= DeathAnimation;
+        _entityCombatComponent.OnAttack -= AttackAnimation; 
+        _entityVisualComponent.OnSpriteFlipX -= FlipAnimations;
     }
 }

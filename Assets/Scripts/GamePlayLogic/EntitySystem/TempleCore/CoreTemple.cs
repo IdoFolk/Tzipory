@@ -21,8 +21,8 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private TEMP_HP_Bar _hpBar;
     [SerializeField] private Animator _coreAnimator;
-    
-    [SerializeField] private float _hp;
+    [SerializeField] private float hp;
+    [SerializeField] private Color hpBarColor;
     
     private readonly List<UnitEntity> _enemies = new();
     
@@ -52,14 +52,14 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
         var config = new HealthComponentConfig()
         {
             HealthComponentType = HealthComponentType.Standard,
-            HealthStat = _hp,
+            HealthStat = hp,
         };
         
         EntityHealthComponent = HealthComponentFactory.GetHealthComponent(config);
         AddComponent(EntityHealthComponent);
         EntityHealthComponent.Init(this,config);
         
-        _hpBar.Init(EntityHealthComponent.Health.BaseValue);
+        _hpBar.Init(EntityHealthComponent.Health.BaseValue,hpBarColor);
         
         EntityHealthComponent.Health.OnValueChanged += OnHealthChanage;
         

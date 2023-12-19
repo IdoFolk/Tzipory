@@ -3332,6 +3332,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3216714463152588658, guid: 9c3032910c8036644bde17d12bf15cbe, type: 3}
   m_PrefabInstance: {fileID: 1610192906}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1703832967 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6670336082971456682, guid: bbd211a654e793a41b57e70a4668cabb, type: 3}
+  m_PrefabInstance: {fileID: 7370862401892331291}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34270675066302344b5f9bcecc47e746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1715907248
 GameObject:
   m_ObjectHideFlags: 0
@@ -4310,6 +4321,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: StatBlockPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 5804839319703659197, guid: bbd211a654e793a41b57e70a4668cabb, type: 3}
+      propertyPath: _statBarHandlers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5804839319703659197, guid: bbd211a654e793a41b57e70a4668cabb, type: 3}
+      propertyPath: _statBarHandlers.Array.data[0]
+      value: 
+      objectReference: {fileID: 1703832967}
     - target: {fileID: 7573517347861688314, guid: bbd211a654e793a41b57e70a4668cabb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4388,6 +4407,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7573517347861688314, guid: bbd211a654e793a41b57e70a4668cabb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8773415821735500777, guid: bbd211a654e793a41b57e70a4668cabb, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

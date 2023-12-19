@@ -848,11 +848,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9049190174793075535, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
       propertyPath: m_Size.x
-      value: 0.64
+      value: 1.2047058
       objectReference: {fileID: 0}
     - target: {fileID: 9049190174793075535, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
       propertyPath: m_Size.y
-      value: 0.64
+      value: 1.2047058
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049190174793075535, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049190174793075535, guid: 4ae6e4d42beb135478c1c8dd1ec28626, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -912,7 +920,7 @@ Animator:
   m_GameObject: {fileID: 7669193949609386206}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0cd45dd2bd38be642a0562447966bb64, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

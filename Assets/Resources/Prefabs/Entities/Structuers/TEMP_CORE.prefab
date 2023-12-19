@@ -14991,7 +14991,8 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 4402990407033082094}
   _hpBar: {fileID: 2526815238407367546}
   _coreAnimator: {fileID: 9140744131601393012}
-  _hp: 1000
+  hp: 1000
+  hpBarColor: {r: 0, g: 1, b: 0.96124196, a: 1}
 --- !u!58 &2379804171807722926
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -15074,6 +15075,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fillSprite: {fileID: 3303911698658268840}
+  defaultBarColor: {r: 0, g: 0, b: 0, a: 0}
   drainDuration: 1
 --- !u!1 &5205057584750563598
 GameObject:

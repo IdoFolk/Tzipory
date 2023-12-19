@@ -41,7 +41,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
 
         [SerializeField, TabGroup("Component")]
         private BoxCollider2D _boxCollider;
-        
+
         [SerializeField, TabGroup("Component")]
         private CircleCollider2D _groundCollider;
 
@@ -189,7 +189,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             if (_config.VisualComponentConfig.HpBar)
             {
                 _hpBarConnector.gameObject.SetActive(true);
-                _hpBarConnector.Init(this);
+                _hpBarConnector.Init(this,_config.VisualComponentConfig.HpBarColor);
                 EntityHealthComponent.Health.OnValueChanged += _hpBarConnector.SetBarToHealth;
             }
             else
@@ -215,15 +215,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         #endregion
 
         #region UnityCallBacks
-
-        protected override void Update()
-        {
-            base.Update();
-            
-            if (!IsInitialization)
-                return;
-        }
-
 
         private void OnValidate()
         {

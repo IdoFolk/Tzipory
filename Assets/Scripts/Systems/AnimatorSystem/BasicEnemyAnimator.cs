@@ -26,6 +26,7 @@ public class BasicEnemyAnimator : IEntityAnimatorComponent
     {
         EntityAnimatorController = config.EntityAnimator;
         _entityAnimator = unitEntity.EntityAnimator;
+        unitEntity.EntityAnimator.runtimeAnimatorController = EntityAnimatorController;
         
         _entityMovementComponent = gameEntity.RequestComponent<IEntityMovementComponent>();
         _entityHealthComponent = gameEntity.RequestComponent<IEntityHealthComponent>();
@@ -52,7 +53,7 @@ public class BasicEnemyAnimator : IEntityAnimatorComponent
     {
         _entityMovementComponent.CanMove = false;
         _entityAnimator.SetBool("Dead",true);
-        _entityAnimator.SetTrigger(_isFlipped ? "Death_Flipped" : "Death");
+        _entityAnimator.SetTrigger("Death");
     }
 
     private void GetHitAnimation(bool isCrit)
@@ -62,11 +63,11 @@ public class BasicEnemyAnimator : IEntityAnimatorComponent
 
     public void UpdateComponent()
     {
-        // if (_entityMovementComponent.IsMoving != _movementChange)
-        // {
-        //     _movementChange = _entityMovementComponent.IsMoving; 
-        //     _entityAnimator.SetBool("Walking", _movementChange);
-        // }
+        if (_entityMovementComponent.IsMoving != _movementChange)
+        {
+            _movementChange = _entityMovementComponent.IsMoving; 
+            _entityAnimator.SetBool("Walking", _movementChange);
+        }
     }
 
     public void Dispose()

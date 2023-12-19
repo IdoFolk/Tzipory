@@ -24,13 +24,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 158581863444105605}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5617180991050575516}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1565228757226791273
 SpriteRenderer:
@@ -107,6 +107,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295643392809047306}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.292, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -114,7 +115,6 @@ Transform:
   m_Children:
   - {fileID: 8033533437316201363}
   m_Father: {fileID: 5617180991050575516}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4523217570999484467
 GameObject:
@@ -140,13 +140,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4523217570999484467}
+  serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.2920003, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2482432304323612586}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4002182410603616698
 SpriteRenderer:
@@ -190,7 +190,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 0.23137254, g: 1, b: 0.94875824, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -224,6 +224,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5994928142813065113}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.39, y: 1.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -232,7 +233,6 @@ Transform:
   - {fileID: 2061232940235249866}
   - {fileID: 2482432304323612586}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2689548972255456975
 MonoBehaviour:
@@ -247,4 +247,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fillSprite: {fileID: 2482432304323612586}
+  defaultBarColor: {r: 1, g: 0, b: 0, a: 0}
   drainDuration: 1

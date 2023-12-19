@@ -16,7 +16,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 {
     public class UnitEntityVisualComponent : MonoBehaviour , IEntityVisualComponent 
     {
-        [SerializeField] private SpriteRenderer _mainMainSprite;
+        [SerializeField] private SpriteRenderer _mainSpriteRenderer;
         [SerializeField] private Transform _animationVisualTransform;
         
         [SerializeField] private Transform _visualQueueEffectPosition;
@@ -37,7 +37,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public event Action<bool> OnSpriteFlipX;
         public VisualComponentConfig VisualComponentConfig { get; private set; }
         public EffectSequenceHandler EffectSequenceHandler { get; private set; }
-        public SpriteRenderer MainSpriteRenderer => _mainMainSprite;
+        public SpriteRenderer MainSpriteRenderer => _mainSpriteRenderer;
         
         public IDisposable UIIndicator { get; private set; }
         public PlayableDirector ParticleEffectPlayableDirector => _currentPlayableDirector;
@@ -52,7 +52,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         {
             Init(parameter);
             VisualComponentConfig = config;
-
             _entityTargetingComponent = parameter.RequestComponent<IEntityTargetingComponent>();
             
             config.OnDeath.ID = Constant.EffectSequenceIds.DEATH;
@@ -153,7 +152,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         }
         private void SetSprite(Sprite newSprite)
         {
-            MainSpriteRenderer.sprite = newSprite;
+            _mainSpriteRenderer.color = Color.white;
+            _mainSpriteRenderer.sprite = newSprite;
             OnSetSprite?.Invoke(newSprite);
         }
         
@@ -202,7 +202,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         private void OnValidate()
         {
-            _mainMainSprite  ??= GetComponent<SpriteRenderer>();
+            _mainSpriteRenderer  ??= GetComponent<SpriteRenderer>();
             _visualQueueEffectPosition ??= transform.Find("VisualQueueEffectPosition");
         }
 

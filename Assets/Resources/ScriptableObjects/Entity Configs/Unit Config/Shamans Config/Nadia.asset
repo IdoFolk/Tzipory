@@ -101,18 +101,18 @@ MonoBehaviour:
   _combatComponent: 1
   CombatComponentConfig:
     CombatComponentType: 0
-    AttackDamage: 35
-    AttackRate: 0.8
-    CritDamage: 125
+    AttackDamage: 40
+    AttackRate: 0.9
+    CritDamage: 130
     CritChance: 5
-    AttackRange: 12
+    AttackRange: 10
     ProjectileTimeToDie: 20
     ProjectileSpeed: 15
     ProjectilePrefab: {fileID: 6820444270360034478, guid: e64a8a0f859a6954cab1ec02005d3f61, type: 3}
   _movementComponent: 1
   MovementComponentConfig:
     MovementComponentType: 0
-    MoveSpeed: 2.5
+    MoveSpeed: 3.5
     PathCreator: {fileID: 0}
     MaxDistanceFromPath: 0
     PrivateRabbitIncrement: 0

@@ -112,7 +112,7 @@ MonoBehaviour:
   _movementComponent: 1
   MovementComponentConfig:
     MovementComponentType: 0
-    MoveSpeed: 2.5
+    MoveSpeed: 3
     PathCreator: {fileID: 0}
     MaxDistanceFromPath: 0
     PrivateRabbitIncrement: 0

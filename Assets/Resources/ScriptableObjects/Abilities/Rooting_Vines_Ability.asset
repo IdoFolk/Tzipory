@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityId: 0
   AbilityName: 
-  _targetingPriorityType: 0
+  _targetingPriorityType: 4
   AbilityExecute:
     _abilityExecuteType: 0
     _projectileSpeed: 0

@@ -20,7 +20,6 @@ public class Shadow : MonoBehaviour
     {
         gameObject.SetActive(true);
         IsOn = true;
-        //_agentNavMesh = agentNavMesh;
         Shaman = shaman;
         _shamanTrans = shaman.transform;
         _shadowRenderer.sprite = shadowSprite;
@@ -28,10 +27,6 @@ public class Shadow : MonoBehaviour
         _lineRenderer.gameObject.SetActive(true);
         _shadowRenderer.gameObject.SetActive(true);
         _proximityRenderer.transform.localScale = new Vector3(range, range, 1);
-        //_agent.transform.position = _shamanTrans.position;
-
-        //_agent.speed = 0; //make sure it doesnt really move
-        //_agent.SetDestination(transform.position);
     }
 
     public void ClearShadow()
@@ -47,8 +42,6 @@ public class Shadow : MonoBehaviour
         {
             _lineRenderer.positionCount = 2;
             _lineRenderer.SetPositions(new Vector3[] { _shamanTrans.position, transform.position });
-            //TEMP!
-            //END TEMP!
         }
     }
 }

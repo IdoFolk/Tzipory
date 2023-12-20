@@ -64,8 +64,8 @@ namespace Tzipory.Systems.StatusSystem
                     }
                 }
                 
-                if (output < 0) // make sure sure that CurrentValue don't get less than 0 
-                    output = 0;
+                // if (output < 0) // make sure sure that CurrentValue don't get less than 1
+                //     output = 0;
 
                 // if (output > MaxValue)
                 //     output = MaxValue;

@@ -42,6 +42,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents
             
             AgentMoveComponent = agentMoveComponent;
             
+            AgentMoveComponent.Init(MovementSpeed);
+            
             _clickHelper = GameEntity.GetComponentInChildren<ClickHelper>();//Temp
             
             _clickHelper.OnClick += SelectHero;

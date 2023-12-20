@@ -154,11 +154,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 SetToLoopAnimation();
         }
 
-        public void DeathAnimationEnded()
-        {
-            GameEntity.gameObject.SetActive(false);
-        }
-
         private void SetEntryAnimation()
         {
             if (_currentPlayableDirector is not null)

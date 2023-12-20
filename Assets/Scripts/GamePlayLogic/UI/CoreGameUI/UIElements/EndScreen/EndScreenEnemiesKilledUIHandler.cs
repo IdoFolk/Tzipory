@@ -13,7 +13,7 @@ namespace Tzipory.GameplayLogic.UIElements.EndScreen
         public override void UpdateUIVisual()
         {
             base.UpdateUIVisual();
-            _countText.text = LevelManager.EnemyManager.NumberOfEnemiesKilled.ToString();
+            _countText.text = EnemyManager.NumberOfEnemiesKilled.ToString();
         }
     }
 }

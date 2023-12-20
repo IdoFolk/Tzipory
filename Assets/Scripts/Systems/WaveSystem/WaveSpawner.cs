@@ -132,6 +132,7 @@ namespace Tzipory.Systems.WaveSystem
                 var enemy = PoolManager.UnitEntityPool.GetObject();
                 entityConfig.MovementComponentConfig.PathCreator = _path;
                 enemy.Init(entityConfig);
+                EnemyManager.AddEnemy(enemy);
                 enemy.transform.position = _spawnPositions[Random.Range(0, _spawnPositions.Length)].position;
             }
         }

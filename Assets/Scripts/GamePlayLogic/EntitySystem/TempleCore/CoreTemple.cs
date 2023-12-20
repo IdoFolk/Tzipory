@@ -5,7 +5,6 @@ using GameplayLogic.UI.HPBar;
 using PathCreation;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.GamePlayLogic.EntitySystem;
-using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.Systems.Entity;
@@ -89,7 +88,7 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
         },null,GoToCore);
 
         IsInitialization = true;
-        StartCoroutine(nameof(UpdateUIIndicator));
+        StartCoroutine(UpdateUIIndicator());
     }
 
     private void OnHealthChanage(StatChangeData statChangeData)
@@ -133,7 +132,7 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
         GameManager.CameraHandler.SetCameraPosition(transform.position);
     }
 
-    private IEnumerable UpdateUIIndicator()
+    private IEnumerator UpdateUIIndicator()
     {
         if (_enemies.Count > 0)
             _canacleFlash = UIIndicatorHandler.StartFlashOnIndicator(_uiIndicator.ObjectInstanceId);

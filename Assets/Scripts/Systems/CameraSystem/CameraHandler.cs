@@ -342,6 +342,11 @@ namespace Tzipory.Systems.CameraSystem
             _cameraFollowObject.position = newPos;
             StartCoroutine(ChangeDampingUntilCameraFinishFollowUp(_cameraSettings.EventTransitionDampingX, _cameraSettings.EventTransitionDampingY));
         }
+        public void SetCameraZoom(int zoom)
+        {
+            //move the camera to Event Position
+            _targetOrthographicSize = zoom;
+        }
         #endregion
 
         #region PrivateMethods

@@ -121,7 +121,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
             if (GameSetting.CantLose)
                 return;
 
-            if (CoreTemplete.EntityHealthComponent.IsEntityDead)
+            if (CoreTemplete.IsDestroyed && CoreTemplete.IsInitialization)
             {
                 IsWon  = false;
                 EndGame(IsWon);

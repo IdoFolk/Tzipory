@@ -1,4 +1,5 @@
 using Tzipory.GamePlayLogic.EntitySystem;
+using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.StatusSystem;
 using UnityEngine;
 
@@ -16,10 +17,10 @@ namespace GameplayLogic.UI.HPBar
             _unit = unit;
             hP_Bar.Init(_unit.EntityHealthComponent.Health.BaseValue);
         }
-        public void Init(UnitEntity unit, Color color)
+        public void Init(UnitEntity unit, EntityType entityType)
         {
             _unit = unit;
-            hP_Bar.Init(_unit.EntityHealthComponent.Health.BaseValue,color);
+            hP_Bar.Init(_unit.EntityHealthComponent.Health.BaseValue,entityType);
         }
         
         public void SetBarToHealth(StatChangeData statChangeData)

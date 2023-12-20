@@ -56,6 +56,7 @@ public class Temp_Projectile : MonoBehaviour
         if (other.TryGetComponent<ITargetAbleEntity>(out var hitedTarget))
         {
             if (hitedTarget.EntityType == EntityType.Hero) return;
+            if (hitedTarget.EntityType == EntityType.Core) return;
 
             if (!_hitTarget)
             {

@@ -9,7 +9,6 @@ namespace Tzipory.Systems.Entity.EntityComponents
     {
         public Stat InvincibleTime { get; }
         public Stat Health { get; }
-        public bool IsDamageable { get; }
         public bool IsEntityDead { get; }
         public void StartDeathSequence();
     }

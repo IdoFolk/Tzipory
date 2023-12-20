@@ -16,7 +16,6 @@ using UnityEngine;
 
 public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
 {
-    [SerializeField] private PathCreator _patrolPath;
     [SerializeField] private UIIndicatorConfig _uiIndicatorConfig;
     [SerializeField] private SpriteRenderer coreSpriteRenderer;
     [SerializeField] private Transform brokenCoreSpriteRenderer;
@@ -37,8 +36,6 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
     public event Action<ITargetAbleEntity> OnTargetDisable;
     
     public bool IsTargetAble => true;
-
-    public PathCreator PatrolPath => _patrolPath;
 
     public EntityType EntityType => EntityType.Core;
     public bool IsDestroyed { get; private set; }

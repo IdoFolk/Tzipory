@@ -69,6 +69,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         private UnitEntitySerializeData _serializeData;
         private UnitEntityConfig _config;
 
+        private bool _isUsingConfig;
+
         #endregion
 
         #region Proprty
@@ -106,8 +108,10 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public void Init(UnitEntitySerializeData parameter)
         {
             _serializeData = parameter;
-            _config = DataManager.DataRequester.GetConfigData<UnitEntityConfig>(parameter);
 
+            if (!_isUsingConfig)
+                _config = DataManager.DataRequester.GetConfigData<UnitEntityConfig>(parameter);
+            
             gameObject.name = $"{_config.name} InstanceID: {EntityInstanceID}";
 
             gameObject.tag = _config.UnitType.ToString();
@@ -214,6 +218,10 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         {
             var serializeData = DataManager.DataRequester.GetSerializeData<UnitEntitySerializeData>(parameter);
 
+            _isUsingConfig = true;
+
+            _config = parameter;
+            
             Init(serializeData);
         }
 
@@ -279,7 +287,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         {
             base.Dispose();
 
-             if (!_config.AnimatorComponent) gameObject.SetActive(false);
+            if (!_config.AnimatorComponent) gameObject.SetActive(false);
             _agentMoveComponent.Agent.enabled = false;
             _hpBarConnector.gameObject.SetActive(false);
             _boxCollider.enabled = false;

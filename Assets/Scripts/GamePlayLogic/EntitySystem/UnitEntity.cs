@@ -50,6 +50,10 @@ namespace Tzipory.GamePlayLogic.EntitySystem
 
         [SerializeField, TabGroup("Component")]
         private Animator _entityAnimator;
+        
+        [SerializeField, TabGroup("Component")]
+        private EntityAnimatorEventReader eventReader;
+        
         //[SerializeField,TabGroup("Component")] private ClickHelper _clickHelper;
 
         [Header("Visual components")] [SerializeField, TabGroup("Component")]
@@ -153,6 +157,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             {
                 EntityAnimatorComponent = AnimatorComponentFactory.GetAIComponent(_config.AnimatorComponentConfig);
                 AddComponent(EntityAnimatorComponent);
+                eventReader.OnDeathAnimationEnded += DisableGameObject;
             }
 
             EntityStatComponent = new StatHandlerComponent(); //may need to work in init!
@@ -249,6 +254,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
 
             EntityHealthComponent.Health.OnValueChanged -= _hpBarConnector.SetBarToHealth;
             EntityHealthComponent.OnDeath -= Dispose;
+            
+            if (_config.AnimatorComponent) eventReader.OnDeathAnimationEnded -= DisableGameObject;
 
             foreach (var stat in EntityStatComponent.GetAllStats())
                 stat.OnValueChanged -= EntityVisualComponent.PopUpTexter.SpawnPopUp;
@@ -272,13 +279,18 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         {
             base.Dispose();
 
-            //gameObject.SetActive(false);
+             if (!_config.AnimatorComponent) gameObject.SetActive(false);
             _agentMoveComponent.Agent.enabled = false;
             _hpBarConnector.gameObject.SetActive(false);
             _boxCollider.enabled = false;
             IsInitialization = false;
             IsTargetAble = false;
             OnDispose?.Invoke(this);
+        }
+
+        private void DisableGameObject()
+        {
+            gameObject.SetActive(false);
         }
     }
 }

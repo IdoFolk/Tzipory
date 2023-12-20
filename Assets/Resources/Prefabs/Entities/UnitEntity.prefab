@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7894426495575293297}
   - component: {fileID: 434554952623311169}
   - component: {fileID: 3512584249028108041}
+  - component: {fileID: 5858913017132492545}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -95,17 +96,29 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: fc2805c32b6ccbe429d23e618777dbee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.2047058, y: 1.2047058}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5858913017132492545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025683216076494408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b713e6fcc5f3e54ba78e73cc52966f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2771099964150039521
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,7 +295,7 @@ Transform:
   m_GameObject: {fileID: 3203495198915761416}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -314,7 +327,7 @@ Transform:
   m_GameObject: {fileID: 4976036447681103247}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -430,6 +443,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4002182410603616698, guid: 2e88db100e0d5744ea9a3b0fbc4a40a9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4523217570999484467, guid: 2e88db100e0d5744ea9a3b0fbc4a40a9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5617180991050575516, guid: 2e88db100e0d5744ea9a3b0fbc4a40a9, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -452,7 +473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5617180991050575516, guid: 2e88db100e0d5744ea9a3b0fbc4a40a9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.15
       objectReference: {fileID: 0}
     - target: {fileID: 5617180991050575516, guid: 2e88db100e0d5744ea9a3b0fbc4a40a9, type: 3}
       propertyPath: m_LocalPosition.z
@@ -666,6 +687,7 @@ MonoBehaviour:
   _groundCollider: {fileID: 4045777630457921773}
   _agentMoveComponent: {fileID: 2259655722107573104}
   _entityAnimator: {fileID: 434554952623311169}
+  eventReader: {fileID: 5858913017132492545}
   _entityVisualComponent: {fileID: 5391081591062971151}
   _hpBarConnector: {fileID: 3862765461723033286}
 --- !u!50 &3188068211414569984
@@ -839,7 +861,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7354884609600520318, guid: 98ce3d48f1894a54997c2e0461744687, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7354884609600520318, guid: 98ce3d48f1894a54997c2e0461744687, type: 3}
       propertyPath: m_LocalPosition.z

@@ -72,7 +72,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -142,7 +142,7 @@ Transform:
   m_GameObject: {fileID: 4523217570999484467}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.2920003, y: 0, z: 0}
+  m_LocalPosition: {x: 2.272, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -188,13 +188,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 4.6, y: 2.522494}
+  m_Size: {x: 4.639933, y: 2.522494}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -249,6 +249,6 @@ MonoBehaviour:
   fillSprite: {fileID: 2482432304323612586}
   drainDuration: 1
   defaultBarColor: {r: 1, g: 1, b: 1, a: 1}
-  heroHealthColor: {r: 0, g: 1, b: 0.027116776, a: 1}
-  enemyHealthColor: {r: 1, g: 0, b: 0, a: 1}
-  coreHealthColor: {r: 0, g: 1, b: 0.8881693, a: 1}
+  heroHealthColor: {r: 0.40784317, g: 0.59607846, b: 0.1254902, a: 1}
+  enemyHealthColor: {r: 0.57254905, g: 0.14117648, b: 0.08235294, a: 1}
+  coreHealthColor: {r: 0.08627451, g: 0.627451, b: 0.49411768, a: 1}

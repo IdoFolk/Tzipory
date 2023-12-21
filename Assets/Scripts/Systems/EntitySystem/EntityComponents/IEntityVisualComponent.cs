@@ -4,6 +4,7 @@ using Tzipory.ConfigFiles.Visual;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
 using Tzipory.Tools.Interface;
+using Tzipory.Tools.Sound;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -16,6 +17,7 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public VisualComponentConfig VisualComponentConfig { get; }
         public EffectSequenceHandler EffectSequenceHandler { get; }
         public SpriteRenderer MainSpriteRenderer { get; }
+        public SoundHandler SoundHandler { get; }//Temp need to make a sound component
         public PlayableDirector ParticleEffectPlayableDirector { get; }
         public PopUpTexter PopUpTexter { get; }
 

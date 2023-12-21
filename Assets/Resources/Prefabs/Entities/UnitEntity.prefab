@@ -168,6 +168,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitVisual
       objectReference: {fileID: 0}
+    - target: {fileID: 8840916618353522309, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
+      propertyPath: _soundHandler
+      value: 
+      objectReference: {fileID: 1458640161773333807}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

@@ -48,7 +48,7 @@ namespace Tzipory.GameplayLogic.VisualSystem.EffectType
 
             _selectedAudioClip = _audioClips[Random.Range(0, _audioClips.Length)];
 
-            //VisualComponent.SoundHandler.PlayAudioClip(_selectedAudioClip,pitch ,volume);
+            VisualComponent.SoundHandler.PlayAudioClip(_selectedAudioClip,pitch ,volume);
         }
 
         public override void ProcessEffectAction()

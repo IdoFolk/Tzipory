@@ -97,16 +97,22 @@ MonoBehaviour:
     _abilityVisualType: 0
     AbilityAnimationConfig:
       HaveEnterAndExit: 0
-      EntryTimeLine: {fileID: 0}
-      LoopTimeLine: {fileID: 0}
-      ExitTimeLine: {fileID: 0}
+      _entryTimeLine: []
+      _loopTimeLine: []
+      _exitTimeLine: []
       LoopTime: 0
     VisualObject: {fileID: 6357766935703885941, guid: 62dd00187a9228647b130c089199ee6e, type: 3}
     AbilityIcon: {fileID: -652102046, guid: bc5335bd6010ad24b9dcf7a94d8d3f31, type: 3}
     HaveEffectOnEntity: 1
     TargetAnimationConfig:
       HaveEnterAndExit: 1
-      EntryTimeLine: {fileID: 348856386130945019, guid: 454090e1f91243f4198cce31441648a2, type: 3}
-      LoopTimeLine: {fileID: 348856386130945019, guid: fe483aa54e47e7241ab91ac7e490e99c, type: 3}
-      ExitTimeLine: {fileID: 3723212262371651683, guid: 1e34c4dd3f2d2a54189857dcadee2c28, type: 3}
+      _entryTimeLine:
+      - {fileID: 348856386130945019, guid: 4e3d6997289a56c42ae9f97ea95f5dec, type: 3}
+      - {fileID: 348856386130945019, guid: 454090e1f91243f4198cce31441648a2, type: 3}
+      _loopTimeLine:
+      - {fileID: 348856386130945019, guid: 00222a0c97a6f8c4e94dd9d7a77f3b41, type: 3}
+      - {fileID: 348856386130945019, guid: fe483aa54e47e7241ab91ac7e490e99c, type: 3}
+      _exitTimeLine:
+      - {fileID: 3723212262371651683, guid: 20cd325ce5c577447bf49e09f37f769a, type: 3}
+      - {fileID: 3723212262371651683, guid: 1e34c4dd3f2d2a54189857dcadee2c28, type: 3}
       LoopTime: 0

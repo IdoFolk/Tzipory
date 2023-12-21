@@ -2,7 +2,6 @@ using System;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.Tools.Interface;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Tzipory.Systems.Entity.EntityComponents

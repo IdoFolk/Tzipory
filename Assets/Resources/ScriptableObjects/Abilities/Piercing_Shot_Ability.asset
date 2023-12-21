@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AbilityId: 0
   AbilityName: 
-  _targetingPriorityType: 0
+  _targetingPriorityType: 3
   AbilityExecute:
     _abilityExecuteType: 3
     _projectileSpeed: 15
@@ -43,7 +43,7 @@ MonoBehaviour:
     _interval: 0
     StatModifier:
       _statusModifierType: 2
-      Modifier: 75
+      Modifier: 100
       _ringModifiers: []
     _effectSequence:
       _sequenceName: 

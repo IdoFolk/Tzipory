@@ -30,6 +30,7 @@ namespace Tzipory.Systems.AbilitySystem
         public bool IsActive { get; private set; }
         public event Action<int> OnAbilityCast;
         public event Action<int> OnAbilityExecute;
+        public event Action<int> OnAbilityReady;
         public Dictionary<int, Stat> Stats { get; }
 
         public AbilityConfig Config { get; private set; }
@@ -152,7 +153,10 @@ namespace Tzipory.Systems.AbilitySystem
             _cooldownTimer = _entityTargetingComponent.GameEntity.EntityTimer.StartNewTimer(Cooldown.CurrentValue,"Ability cooldown",ResetAbility);
         }
 
-        private void ResetAbility() =>
+        private void ResetAbility()
+        {
             _isReady = true;
+            OnAbilityReady?.Invoke(AbilityId);
+        }
     }
 }

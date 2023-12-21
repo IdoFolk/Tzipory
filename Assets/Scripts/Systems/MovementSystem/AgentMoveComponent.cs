@@ -54,7 +54,7 @@ namespace Tzipory.Systems.EntityComponents
         private void Update()
         {
             if (_destination == Vector2.zero) return;
-            
+
             if (Vector2.Distance(_destination, transform.position) > 0.2f) return;
             
             _destination = Vector2.zero;

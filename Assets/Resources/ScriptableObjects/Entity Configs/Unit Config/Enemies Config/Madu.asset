@@ -30,7 +30,6 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: 896b3c0626f9f004b8a76282dd0cdc85, type: 3}
     Icon: {fileID: 21300000, guid: 896b3c0626f9f004b8a76282dd0cdc85, type: 3}
     HpBar: 1
-    HpBarColor: {r: 0.5660378, g: 0.09344962, b: 0.09344962, a: 1}
     HaveSilhouette: 0
     UIIndicator: 0
     UiIndicatorConfig:
@@ -54,7 +53,11 @@ MonoBehaviour:
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
-      _effectActionContainers: []
+      _effectActionContainers:
+      - _disableUndo: 0
+        _startDelay: 0
+        _effectActionStart: 0
+        _effectActionConfig: {fileID: 11400000, guid: 6c0015ba36e55234b97a8e707264ae82, type: 2}
     OnAttack:
       _sequenceName: OnAttack
       _id: 2
@@ -86,7 +89,11 @@ MonoBehaviour:
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
-      _effectActionContainers: []
+      _effectActionContainers:
+      - _disableUndo: 0
+        _startDelay: 0
+        _effectActionStart: 0
+        _effectActionConfig: {fileID: 11400000, guid: a623487578b155d448fa5c0657da923b, type: 2}
     OnGetCritHit:
       _sequenceName: OnGetCritHit
       _id: 6
@@ -94,7 +101,11 @@ MonoBehaviour:
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
-      _effectActionContainers: []
+      _effectActionContainers:
+      - _disableUndo: 0
+        _startDelay: 0
+        _effectActionStart: 0
+        _effectActionConfig: {fileID: 11400000, guid: 1b22e0a237eeefa448293adc8adacc19, type: 2}
   _combatComponent: 1
   CombatComponentConfig:
     CombatComponentType: 1

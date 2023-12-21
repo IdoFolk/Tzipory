@@ -30,7 +30,6 @@ MonoBehaviour:
     Sprite: {fileID: 21300000, guid: fc2805c32b6ccbe429d23e618777dbee, type: 3}
     Icon: {fileID: 1908098078, guid: 2a862c0ebda887f42a111fbbce4d7fc0, type: 3}
     HpBar: 1
-    HpBarColor: {r: 0, g: 1, b: 0.009653807, a: 1}
     HaveSilhouette: 1
     UIIndicator: 1
     UiIndicatorConfig:
@@ -62,7 +61,11 @@ MonoBehaviour:
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
-      _effectActionContainers: []
+      _effectActionContainers:
+      - _disableUndo: 0
+        _startDelay: 0
+        _effectActionStart: 0
+        _effectActionConfig: {fileID: 11400000, guid: 6081846283e0d3c409354e7b11a1bd3a, type: 2}
     OnCritAttack:
       _sequenceName: OnCritAttack
       _id: 3
@@ -98,18 +101,18 @@ MonoBehaviour:
   _combatComponent: 1
   CombatComponentConfig:
     CombatComponentType: 0
-    AttackDamage: 35
-    AttackRate: 0.8
-    CritDamage: 125
+    AttackDamage: 40
+    AttackRate: 0.9
+    CritDamage: 130
     CritChance: 5
-    AttackRange: 12
+    AttackRange: 10
     ProjectileTimeToDie: 20
     ProjectileSpeed: 15
     ProjectilePrefab: {fileID: 6820444270360034478, guid: e64a8a0f859a6954cab1ec02005d3f61, type: 3}
   _movementComponent: 1
   MovementComponentConfig:
     MovementComponentType: 0
-    MoveSpeed: 2.5
+    MoveSpeed: 3.5
     PathCreator: {fileID: 0}
     MaxDistanceFromPath: 0
     PrivateRabbitIncrement: 0

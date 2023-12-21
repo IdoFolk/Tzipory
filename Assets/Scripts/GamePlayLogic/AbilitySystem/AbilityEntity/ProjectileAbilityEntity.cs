@@ -38,6 +38,8 @@ namespace GamePlayLogic.AbilitySystem.AbilityEntity
         {
             if (targetable.EntityType == Caster.EntityType)
                 return;
+            if (targetable.EntityType == EntityType.Core)
+                return;
             
             AbilityExecutor.Execute(targetable);
             _penetrationNumber--;

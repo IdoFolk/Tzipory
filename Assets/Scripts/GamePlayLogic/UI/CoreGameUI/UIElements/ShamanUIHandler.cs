@@ -12,6 +12,7 @@ namespace Tzipory.GameplayLogic.UIElements
         [SerializeField] private Image _fill;
         [SerializeField] private Slider _healthBar;
         [SerializeField] private Image _splash;
+        [SerializeField, Range(0, 1)] private float spriteDeathAlpha;
         private UnitEntity _shaman;
 
         
@@ -27,17 +28,23 @@ namespace Tzipory.GameplayLogic.UIElements
         public override void Show()
         {
             _shaman.EntityHealthComponent.Health.OnValueChanged += OnHealthChange;
+            _shaman.EntityHealthComponent.OnDeath += ShamanDeathUI;
             OnClickEvent += GoToShaman;
             base.Show();
         }
-
         public override void Hide()
         {
             _shaman.EntityHealthComponent.Health.OnValueChanged -= OnHealthChange;
+            _shaman.EntityHealthComponent.OnDeath -= ShamanDeathUI;
             OnClickEvent -= GoToShaman;
             base.Hide();
         }
-
+        private void ShamanDeathUI()
+        {
+            var lowAlphaColor = _splash.color;
+            lowAlphaColor.a = spriteDeathAlpha;
+            _splash.color = lowAlphaColor;
+        }
         private void OnHealthChange(StatChangeData statChangeData)=>
             UpdateUIVisual();
 

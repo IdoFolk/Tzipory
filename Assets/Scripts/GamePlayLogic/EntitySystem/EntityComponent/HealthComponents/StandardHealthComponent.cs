@@ -30,7 +30,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         
         public Dictionary<int, Stat> Stats { get; private set; }
         
-        public bool IsDamageable { get; private set; }
         public bool IsEntityDead => Health.CurrentValue <= 0;
         
         public bool IsInitialization { get; private set; }
@@ -54,7 +53,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 {(int)Constant.StatsId.InvincibleTime, new Stat(Constant.StatsId.InvincibleTime,config.InvincibleTimeStat)},
             };
             
-            IsDamageable = true;
             
             IsInitialization = true;
 
@@ -62,13 +60,10 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         
         public void UpdateComponent()
         {
-            if (IsDamageable) return;
-            
             _currentInvincibleTime -= GAME_TIME.GameDeltaTime;
 
             if (_currentInvincibleTime < 0)
             {
-                IsDamageable = true;
                 _currentInvincibleTime = InvincibleTime.CurrentValue;
             }
 
@@ -84,9 +79,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         public void TakeDamage(float damage, bool isCrit)
         {
-            if (!IsDamageable) return;
-            
-            IsDamageable = false; // Is this what turns on InvincibleTime?
 
             PopUpTextConfig popUpTextConfig;
             string processName;
@@ -94,19 +86,18 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             if (isCrit)
             {
                 popUpTextConfig = PopUpTextManager.Instance.GetCritHitDefaultConfig;
-                _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.GET_CRIT_HIT);
+                _entityVisualComponent?.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.GET_CRIT_HIT);
                 processName = "Crit Hit";
             }
             else
             {
                 popUpTextConfig = PopUpTextManager.Instance.GetHitDefaultConfig;
-                _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.GET_HIT);
+                _entityVisualComponent?.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.GET_HIT);
                 processName = "Hit";
             }
             
             OnHit?.Invoke(isCrit);
             Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),processName,popUpTextConfig);
-            IsDamageable = false;
         }
 
         public void StartDeathSequence()
@@ -114,8 +105,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             _startedDeathSequence = true;
             
             Logger.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{GameEntity.name}</color> as started death sequence",BaseGameEntity.ENTITY_LOG_GROUP);
-            _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.DEATH);
-            IsDamageable = false;
+            _entityVisualComponent?.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.DEATH);
+
             
             EntityDied();
         }

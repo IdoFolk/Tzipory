@@ -80,13 +80,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent.MovementComponents
 
             if (!OnPath)
                 SetDestination(_currentPointOnPath,MoveType.Guided);
-            
-            if (_privateRabbitProgress >= 1)
-            {
-                _finalDestinaion = LevelManager.CoreTemplete.PatrolPath;
-                CircleFinalDestination();
-                return;
-            }
 
             var position = GameEntity.transform.position;
             

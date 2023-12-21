@@ -122,6 +122,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
 
             AddComponent(EntityVisualComponent);
             AddComponent(EntityTargetingComponent);
+            _entityTargetingComponent.gameObject.SetActive(true);
 
             statHolders.Add(EntityTargetingComponent);
 
@@ -289,6 +290,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
 
             if (!_config.AnimatorComponent) gameObject.SetActive(false);
             _agentMoveComponent.Agent.enabled = false;
+            _entityTargetingComponent.gameObject.SetActive(false);
             _hpBarConnector.gameObject.SetActive(false);
             _boxCollider.enabled = false;
             IsInitialization = false;

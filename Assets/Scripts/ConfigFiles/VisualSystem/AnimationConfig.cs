@@ -26,11 +26,11 @@ namespace Tzipory.ConfigFiles.Visual
             {
                 _currentTimeLine = Random.Range(0, _entryTimeLine.Length);
                 
-                return  _entryTimeLine[_currentTimeLine];
+                return  _entryTimeLine[1];
             }
         }
 
-        public PlayableDirector LoopTimeLine => _loopTimeLine[_currentTimeLine];
-        public PlayableDirector ExitTimeLine => _exitTimeLine[_currentTimeLine];
+        public PlayableDirector LoopTimeLine => _loopTimeLine[1];
+        public PlayableDirector ExitTimeLine => _exitTimeLine[1];
     }
 }

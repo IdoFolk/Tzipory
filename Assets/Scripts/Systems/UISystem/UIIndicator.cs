@@ -107,7 +107,7 @@ namespace Tzipory.Systems.UISystem.Indicators
 
             if (!_config.AllwaysShow)
             {
-                if (_objectTransform.InVisibleOnScreen())
+                if (_objectTransform.InVisibleOnScreen() || !_objectTransform.gameObject.activeInHierarchy)
                 {
                     _objectVisual.SetActive(false);
                     return;

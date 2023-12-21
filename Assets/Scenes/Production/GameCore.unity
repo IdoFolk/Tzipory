@@ -3601,11 +3601,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2635694667160917268, guid: d19fb54693b7826499855fa1d571382f, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 80
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 2635694667160917268, guid: d19fb54693b7826499855fa1d571382f, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 20
+      value: 27
       objectReference: {fileID: 0}
     - target: {fileID: 2635694667160917268, guid: d19fb54693b7826499855fa1d571382f, type: 3}
       propertyPath: m_LocalScale.x
@@ -3708,6 +3708,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4747067722746740744, guid: d19fb54693b7826499855fa1d571382f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747067722746740744, guid: d19fb54693b7826499855fa1d571382f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 4747067722746740744, guid: d19fb54693b7826499855fa1d571382f, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.35
       objectReference: {fileID: 0}
@@ -3755,8 +3763,31 @@ PrefabInstance:
       propertyPath: _uiGroupTags
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7592662342617400602, guid: d19fb54693b7826499855fa1d571382f, type: 3}
+      propertyPath: _timeButtons.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592662342617400602, guid: d19fb54693b7826499855fa1d571382f, type: 3}
+      propertyPath: _timeButtons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1796887658}
+    - target: {fileID: 7592662342617400602, guid: d19fb54693b7826499855fa1d571382f, type: 3}
+      propertyPath: _timeButtons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1796887657}
+    - target: {fileID: 7592662342617400602, guid: d19fb54693b7826499855fa1d571382f, type: 3}
+      propertyPath: _timeButtons.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592662342617400602, guid: d19fb54693b7826499855fa1d571382f, type: 3}
+      propertyPath: _timeButtons.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6358932586668653419, guid: d19fb54693b7826499855fa1d571382f, type: 3}
+    - {fileID: 1990068814651232259, guid: d19fb54693b7826499855fa1d571382f, type: 3}
+    - {fileID: 5229920701397220917, guid: d19fb54693b7826499855fa1d571382f, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d19fb54693b7826499855fa1d571382f, type: 3}
@@ -3765,6 +3796,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2635694667160917268, guid: d19fb54693b7826499855fa1d571382f, type: 3}
   m_PrefabInstance: {fileID: 1796887655}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1796887657 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7544149396634255463, guid: d19fb54693b7826499855fa1d571382f, type: 3}
+  m_PrefabInstance: {fileID: 1796887655}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84586c41ca542fb85d3d1baa623cbff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1796887658 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4827542702400533437, guid: d19fb54693b7826499855fa1d571382f, type: 3}
+  m_PrefabInstance: {fileID: 1796887655}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84586c41ca542fb85d3d1baa623cbff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1904543970
 GameObject:
   m_ObjectHideFlags: 0

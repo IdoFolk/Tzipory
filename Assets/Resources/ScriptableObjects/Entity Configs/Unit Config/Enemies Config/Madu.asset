@@ -81,11 +81,7 @@ MonoBehaviour:
       _endDelay: 0
       _isStackable: 0
       _isInterruptable: 0
-      _effectActionContainers:
-      - _disableUndo: 0
-        _startDelay: 0
-        _effectActionStart: 0
-        _effectActionConfig: {fileID: 11400000, guid: 49159070ef0b08b49a80a472313757fa, type: 2}
+      _effectActionContainers: []
     OnGetHit:
       _sequenceName: OnGetHit
       _id: 5

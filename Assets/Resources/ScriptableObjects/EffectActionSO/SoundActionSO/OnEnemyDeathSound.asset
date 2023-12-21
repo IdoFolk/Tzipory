@@ -12,14 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f16aef66cbee4e868f58a5cfe141edb4, type: 3}
   m_Name: OnEnemyDeathSound
   m_EditorClassIdentifier: 
-  _isStackable: 1
-  _disableUndo: 1
-  _startDelay: 0
-  _endDelay: 0
-  _effectActionStart: 0
   audioClips:
   - {fileID: 8300000, guid: bef7e706103bcca49985730193c2c612, type: 3}
-  _randomPitch: 0
-  _randomVolume: 0
-  _volumeRange: {x: 0, y: 0}
-  _pitchRange: {x: 0, y: 0}
+  _randomPitch: 1
+  _randomVolume: 1
+  _volumeRange: {x: 0.7857382, y: 1}
+  _pitchRange: {x: 1.0113827, y: 1.2122533}

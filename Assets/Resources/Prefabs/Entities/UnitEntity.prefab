@@ -168,6 +168,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UnitVisual
       objectReference: {fileID: 0}
+    - target: {fileID: 8840916618353522309, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
+      propertyPath: _soundHandler
+      value: 
+      objectReference: {fileID: 1458640161773333807}
     - target: {fileID: 9219337313115973841, guid: 2e1f23141a7b02f429ca4ff039dcaefc, type: 3}
       propertyPath: m_Size.x
       value: 1.2047058

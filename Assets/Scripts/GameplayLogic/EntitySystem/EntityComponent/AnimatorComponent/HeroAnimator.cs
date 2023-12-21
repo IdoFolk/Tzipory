@@ -3,7 +3,6 @@ using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
 using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -43,7 +42,7 @@ public class HeroAnimator : IEntityAnimatorComponent
         _entityHealthComponent.OnDeath += DeathAnimation;
         foreach (var ability in _entityAbilitiesComponent.Abilities.Select(keyValuePair => keyValuePair.Value).Where(ability => ability.IsActive))
         {
-            ability.OnAbilityCast += AbilityCastAnimation;
+            ability.OnAbilityReady += AbilityReadyAnimation;
             ability.OnAbilityExecute += AbilityExecuteAnimation;
         }
 
@@ -70,7 +69,7 @@ public class HeroAnimator : IEntityAnimatorComponent
         _abilityCastEffect.Stop();
     }
 
-    private void AbilityCastAnimation(int abilityId)
+    private void AbilityReadyAnimation(int abilityId)
     {
         _abilityCastEffect.Play();
     }
@@ -102,7 +101,7 @@ public class HeroAnimator : IEntityAnimatorComponent
         _entityHealthComponent.OnDeath -= DeathAnimation;
         foreach (var ability in _entityAbilitiesComponent.Abilities.Select(keyValuePair => keyValuePair.Value).Where(ability => ability.IsActive))
         {
-            ability.OnAbilityCast -= AbilityCastAnimation;
+            ability.OnAbilityReady -= AbilityReadyAnimation;
             ability.OnAbilityExecute -= AbilityExecuteAnimation;
         }
     }

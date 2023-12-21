@@ -1,5 +1,4 @@
 using Sirenix.OdinInspector;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace Tzipory.ConfigFiles.EntitySystem.ComponentConfig

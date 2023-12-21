@@ -50,3 +50,6 @@ TagManager:
   - name: Entity
     uniqueID: 1521814549
     locked: 0
+  - name: InGame UI
+    uniqueID: 2713033419
+    locked: 0

@@ -8,14 +8,29 @@ namespace Tzipory.ConfigFiles.Visual
     [System.Serializable]
     public struct AnimationConfig
     {
+        private int _currentTimeLine;
+        
         [SerializeField] public bool HaveEnterAndExit;
         
-        [SerializeField,ShowIf(nameof(HaveEnterAndExit))] public PlayableDirector EntryTimeLine;
-        [SerializeField] public PlayableDirector LoopTimeLine;
-        [SerializeField,ShowIf(nameof(HaveEnterAndExit))] public PlayableDirector ExitTimeLine;
+        [SerializeField,ShowIf(nameof(HaveEnterAndExit))] public PlayableDirector[] _entryTimeLine;
+        [SerializeField] public PlayableDirector[] _loopTimeLine;
+        [SerializeField,ShowIf(nameof(HaveEnterAndExit))] public PlayableDirector[] _exitTimeLine;
 
         public float EntryTime => (float)EntryTimeLine.duration;
         public float LoopTime;
         public float ExitTime => (float)ExitTimeLine.duration;
+
+        public PlayableDirector EntryTimeLine
+        {
+            get
+            {
+                _currentTimeLine = Random.Range(0, _entryTimeLine.Length);
+                
+                return  _entryTimeLine[_currentTimeLine];
+            }
+        }
+
+        public PlayableDirector LoopTimeLine => _loopTimeLine[_currentTimeLine];
+        public PlayableDirector ExitTimeLine => _exitTimeLine[_currentTimeLine];
     }
 }

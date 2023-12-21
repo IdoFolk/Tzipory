@@ -62,6 +62,10 @@ MonoBehaviour:
     - _id: 1
       _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
+      _enemyGroups: []
+    - _id: 2
+      _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
       _enemyGroups:
       - _enemyConfig: {fileID: 11400000, guid: 6ef0118ed9a2aa543aea2a183043ed3b, type: 2}
         _groupStartDelay: 0
@@ -70,10 +74,6 @@ MonoBehaviour:
         _spawnInterval: 1
         _startType: 0
         _startTime: 33
-    - _id: 2
-      _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
-      _delayBetweenEnemyGroup: 0
-      _enemyGroups: []
     _levelConfig: {fileID: 11400000}
   - _name: Wave 3
     _waveSpawnerConfig:
@@ -85,9 +85,9 @@ MonoBehaviour:
       _waveSpawnerColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
       _delayBetweenEnemyGroup: 0
       _enemyGroups:
-      - _enemyConfig: {fileID: 11400000, guid: 6ef0118ed9a2aa543aea2a183043ed3b, type: 2}
+      - _enemyConfig: {fileID: 11400000, guid: d3920b0b141d8b942aba5017b1762808, type: 2}
         _groupStartDelay: 0
-        _totalSpawnAmount: 9
+        _totalSpawnAmount: 1
         _spawnAmountPreInterval: 1
         _spawnInterval: 1
         _startType: 0
@@ -109,20 +109,20 @@ MonoBehaviour:
       _enemyGroups:
       - _enemyConfig: {fileID: 11400000, guid: 6ef0118ed9a2aa543aea2a183043ed3b, type: 2}
         _groupStartDelay: 0
+        _totalSpawnAmount: 6
+        _spawnAmountPreInterval: 1
+        _spawnInterval: 1
+        _startType: 0
+        _startTime: 80
+    - _id: 2
+      _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
+      _delayBetweenEnemyGroup: 0
+      _enemyGroups:
+      - _enemyConfig: {fileID: 11400000, guid: 6ef0118ed9a2aa543aea2a183043ed3b, type: 2}
+        _groupStartDelay: 15
         _totalSpawnAmount: 4
         _spawnAmountPreInterval: 1
         _spawnInterval: 1
         _startType: 0
-        _startTime: 88
-      - _enemyConfig: {fileID: 11400000, guid: 6ef0118ed9a2aa543aea2a183043ed3b, type: 2}
-        _groupStartDelay: 6
-        _totalSpawnAmount: 1
-        _spawnAmountPreInterval: 1
-        _spawnInterval: 1
-        _startType: 0
-        _startTime: 88
-    - _id: 2
-      _waveSpawnerColor: {r: 0, g: 1, b: 0, a: 1}
-      _delayBetweenEnemyGroup: 0
-      _enemyGroups: []
+        _startTime: 80
     _levelConfig: {fileID: 11400000}

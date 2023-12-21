@@ -4,6 +4,7 @@ using GameplayLogic.UI.HPBar;
 using Sirenix.OdinInspector;
 using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.GamePlayLogic.EntitySystem.EntityComponent;
+using Tzipory.Helpers;
 using Tzipory.SerializeData.PlayerData.Party.Entity;
 using Tzipory.Systems.DataManager;
 using Tzipory.Systems.Entity;
@@ -54,7 +55,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         [SerializeField, TabGroup("Component")]
         private EntityAnimatorEventReader eventReader;
         
-        //[SerializeField,TabGroup("Component")] private ClickHelper _clickHelper;
+        [SerializeField,TabGroup("Component")] private ClickHelper _clickHelper;
 
         [Header("Visual components")] [SerializeField, TabGroup("Component")]
         private UnitEntityVisualComponent _entityVisualComponent; //temp
@@ -113,6 +114,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
                 _config = DataManager.DataRequester.GetConfigData<UnitEntityConfig>(parameter);
             
             gameObject.name = $"{_config.name} InstanceID: {EntityInstanceID}";
+            
+            _clickHelper.gameObject.SetActive(_config.UnitType != UnitType.Enemy);
 
             gameObject.tag = _config.UnitType.ToString();
             _groundCollider.gameObject.tag = _config.UnitType.ToString();

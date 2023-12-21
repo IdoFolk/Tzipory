@@ -93,30 +93,29 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                         Logger.Log($"{GameEntity.name} InstanceID: {GameEntity.EntityInstanceID} is attacking {_self.EntityTargetingComponent.CurrentTarget.GameEntity.name}",ENEMY_LOG_GROUP);
                     }
                 }
-
-                if (_isAttacking)
+                
+                if (_isAttacking && Random.Range(0, 100) < _returnLevel ||
+                    _self.EntityTargetingComponent.CurrentTarget.EntityHealthComponent.IsEntityDead)
                 {
-                    _self.EntityMovementComponent.SetDestination(_self.EntityTargetingComponent.CurrentTarget.GameEntity.EntityTransform.position, MoveType.Free);//temp!
-                    
-                    if (Vector3.Distance(GameEntity.transform.position, _self.EntityTargetingComponent.CurrentTarget.GameEntity.EntityTransform.position) < _self.EntityCombatComponent.AttackRange.CurrentValue)
-                        _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);
+                    _isAttacking = false;
+                    _self.EntityMovementComponent.CanMove = true;
+                    Logger.Log($"{GameEntity.name} return to path",ENEMY_LOG_GROUP);
                 }
+            }
+            
+            if (_isAttacking)
+            {
+                _self.EntityMovementComponent.SetDestination(_self.EntityTargetingComponent.CurrentTarget.GameEntity.EntityTransform.position, MoveType.Free);//temp!
+                    
+                if (Vector3.Distance(GameEntity.transform.position, _self.EntityTargetingComponent.CurrentTarget.GameEntity.EntityTransform.position) < _self.EntityCombatComponent.AttackRange.CurrentValue)
+                    _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);
             }
             
             if (!_self.EntityTargetingComponent.HaveTarget)
             {
                 _isAttacking = false;
-                return;
-            }//plastr
-          
-            if (Random.Range(0, 100) < _returnLevel +
-                Vector3.Distance(GameEntity.EntityTransform.position,_self.EntityMovementComponent.Destination) ||
-                _self.EntityTargetingComponent.CurrentTarget.EntityHealthComponent.IsEntityDead)
-            {
-                _isAttacking = false;
                 _self.EntityMovementComponent.CanMove = true;
-                Logger.Log($"{GameEntity.name} return to path",ENEMY_LOG_GROUP);
-            }
+            }//plastr
         }
     }
 }

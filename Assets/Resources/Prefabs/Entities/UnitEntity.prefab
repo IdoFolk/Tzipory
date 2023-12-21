@@ -559,6 +559,7 @@ MonoBehaviour:
   _agentMoveComponent: {fileID: 2259655722107573104}
   _entityAnimator: {fileID: 6530731023721508854}
   eventReader: {fileID: 48887724758609483}
+  _clickHelper: {fileID: 7253919473454123803}
   _entityVisualComponent: {fileID: 7700981559855006294}
   _hpBarConnector: {fileID: 3862765461723033286}
 --- !u!50 &3188068211414569984
@@ -776,6 +777,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7354884609600520318, guid: 98ce3d48f1894a54997c2e0461744687, type: 3}
   m_PrefabInstance: {fileID: 4268701462107972985}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7253919473454123803 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6887798271774256738, guid: 98ce3d48f1894a54997c2e0461744687, type: 3}
+  m_PrefabInstance: {fileID: 4268701462107972985}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b39dd1ea33517b5438b87610edefebab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6825582365965666706
 PrefabInstance:
   m_ObjectHideFlags: 0

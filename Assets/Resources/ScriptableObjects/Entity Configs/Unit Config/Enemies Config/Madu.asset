@@ -22,7 +22,7 @@ MonoBehaviour:
     RegenSpeedStat: 0
   TargetingComponentConfig:
     TargetingType: 0
-    TargetingRange: 3
+    TargetingRange: 8
     EntityType: 2
     TargetedEntity: 9
     TargetingPriorityType: 2
@@ -131,9 +131,9 @@ MonoBehaviour:
   _aiComponent: 1
   AIComponentConfig:
     AIType: 1
-    DecisionInterval: 1
+    DecisionInterval: 3
     AggroLevel: 50
-    ReturnLevel: 30
+    ReturnLevel: 25
   _animatorComponent: 1
   AnimatorComponentConfig:
     AnimatorType: 1

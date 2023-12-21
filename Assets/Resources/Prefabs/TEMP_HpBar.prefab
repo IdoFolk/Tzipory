@@ -249,6 +249,6 @@ MonoBehaviour:
   fillSprite: {fileID: 2482432304323612586}
   drainDuration: 1
   defaultBarColor: {r: 1, g: 1, b: 1, a: 1}
-  heroHealthColor: {r: 0.40784317, g: 0.59607846, b: 0.1254902, a: 1}
+  heroHealthColor: {r: 0.5405711, g: 0.7735849, b: 0.22988607, a: 1}
   enemyHealthColor: {r: 0.57254905, g: 0.14117648, b: 0.08235294, a: 1}
-  coreHealthColor: {r: 0.08627451, g: 0.627451, b: 0.49411768, a: 1}
+  coreHealthColor: {r: 0.30562478, g: 0.6415094, b: 0.5594043, a: 1}

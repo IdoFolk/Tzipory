@@ -96,7 +96,10 @@ namespace Tzipory.Systems.VisualSystem.EffectSequenceSystem
         private void PlayActions()
         {
             if (_effectActionConfigs.Length == 0)
+            {
+                OnCompleteEffectSequence();
                 return;
+            }
             
             var effectActionConfig = _effectActionConfigs[_currentEffectActionIndex];
             
@@ -141,15 +144,10 @@ namespace Tzipory.Systems.VisualSystem.EffectSequenceSystem
             
             if (_activeEffectActions.TryGetValue(effectActionTime,out var activeEffectAction))
             {
-                if (activeEffectAction.DisableUndo)
-                {
-                    activeEffectAction.CompleteEffectAction();
-                }
-                else
-                {
+                if (!activeEffectAction.DisableUndo)
                     activeEffectAction.UndoEffectAction();
-                    activeEffectAction.CompleteEffectAction();
-                }
+                
+                activeEffectAction.CompleteEffectAction();
 
                 effectActionTime.OnTimerComplete -= OnActionTimerComplete;
                 _activeEffectActions.Remove(effectActionTime);

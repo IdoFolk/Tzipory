@@ -7,6 +7,7 @@ using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Systems.VisualSystem.EffectSequenceSystem;
 using Tzipory.Systems.VisualSystem.PopUpSystem;
+using Tzipory.Tools.Sound;
 using Tzipory.Tools.TimeSystem;
 using UnityEngine;
 using UnityEngine.Playables;
@@ -17,6 +18,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
     {
         [SerializeField] private SpriteRenderer _mainSpriteRenderer;
         [SerializeField] private Transform _animationVisualTransform;
+        [SerializeField] private SoundHandler _soundHandler;//Temp need to make a sound component
+        
         
         [SerializeField] private Transform _visualQueueEffectPosition;
         [SerializeField] private SpriteRenderer _silhouette;
@@ -38,7 +41,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public VisualComponentConfig VisualComponentConfig { get; private set; }
         public EffectSequenceHandler EffectSequenceHandler { get; private set; }
         public SpriteRenderer MainSpriteRenderer => _mainSpriteRenderer;
-        
+        public SoundHandler SoundHandler => _soundHandler;
+
         public IDisposable UIIndicator { get; private set; }
         public PlayableDirector ParticleEffectPlayableDirector => _currentPlayableDirector;
         public bool IsInitialization { get; private set; }

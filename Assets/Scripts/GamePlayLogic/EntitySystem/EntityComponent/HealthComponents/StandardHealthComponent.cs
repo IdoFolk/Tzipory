@@ -20,6 +20,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         
         private float _currentInvincibleTime;
         private bool _startedDeathSequence;
+
+        private IEntityVisualComponent _entityVisualComponent;
         
         public BaseGameEntity GameEntity { get; private set;  }
 
@@ -43,6 +45,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             Init(baseGameEntity);
 
             _startedDeathSequence = false;
+
+            _entityVisualComponent = baseGameEntity.RequestComponent<IEntityVisualComponent>();
             
             Stats = new Dictionary<int, Stat>()
             {
@@ -90,16 +94,17 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             if (isCrit)
             {
                 popUpTextConfig = PopUpTextManager.Instance.GetCritHitDefaultConfig;
+                _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.GET_CRIT_HIT);
                 processName = "Crit Hit";
             }
             else
             {
                 popUpTextConfig = PopUpTextManager.Instance.GetHitDefaultConfig;
+                _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.GET_HIT);
                 processName = "Hit";
             }
             
             OnHit?.Invoke(isCrit);
-            
             Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),processName,popUpTextConfig);
             IsDamageable = false;
         }
@@ -109,7 +114,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             _startedDeathSequence = true;
             
             Logger.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{GameEntity.name}</color> as started death sequence",BaseGameEntity.ENTITY_LOG_GROUP);
-            
+            _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.DEATH);
             IsDamageable = false;
             
             EntityDied();

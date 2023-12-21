@@ -487,6 +487,7 @@ MonoBehaviour:
   _fill: {fileID: 2203700212569915012}
   _healthBar: {fileID: 8223283540287803632}
   _splash: {fileID: 1019704610706600701}
+  spriteDeathAlpha: 0.209
 --- !u!1 &7712052634203454266
 GameObject:
   m_ObjectHideFlags: 0

@@ -86,13 +86,13 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             if (isCrit)
             {
                 popUpTextConfig = PopUpTextManager.Instance.GetCritHitDefaultConfig;
-                _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.GET_CRIT_HIT);
+                _entityVisualComponent?.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.GET_CRIT_HIT);
                 processName = "Crit Hit";
             }
             else
             {
                 popUpTextConfig = PopUpTextManager.Instance.GetHitDefaultConfig;
-                _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.GET_HIT);
+                _entityVisualComponent?.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.GET_HIT);
                 processName = "Hit";
             }
             
@@ -105,7 +105,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             _startedDeathSequence = true;
             
             Logger.Log($"<color={ColorLogHelper.ENTITY_COLOR}>{GameEntity.name}</color> as started death sequence",BaseGameEntity.ENTITY_LOG_GROUP);
-            _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.DEATH);
+            _entityVisualComponent?.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.DEATH);
 
             
             EntityDied();

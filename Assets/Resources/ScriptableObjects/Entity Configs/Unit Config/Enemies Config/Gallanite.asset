@@ -113,7 +113,7 @@ MonoBehaviour:
   _combatComponent: 1
   CombatComponentConfig:
     CombatComponentType: 1
-    AttackDamage: 35
+    AttackDamage: 50
     AttackRate: 1.5
     CritDamage: 150
     CritChance: 30

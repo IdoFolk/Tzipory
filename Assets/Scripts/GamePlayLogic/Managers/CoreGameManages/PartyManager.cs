@@ -35,10 +35,19 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         {
             Party = CreateParty(_partySerializeData.ShamanSerializeDatas).ToArray();
         }
-
+        
         public void AddSpawnPoint(Vector3 spawnPoint)=>
             _partySpawnPoints.Add(spawnPoint, false);
 
+        public UnitEntity GetShaman(int shamanId)
+        {
+            foreach (var shaman in Party)
+            {
+                if (shaman.EntityInstanceID == shamanId) return shaman;
+            }
+
+            return null;
+        }
         private IEnumerable<UnitEntity> CreateParty(IEnumerable<ShamanSerializeData> party)
         {
             foreach (var shamanSerializeData in party)
@@ -50,7 +59,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
                 yield return shaman;
             }
         }
-
+        
         private Vector3 GetSpawnPoint()
         {
             if (_partySpawnPoints.All(spawnPoint => spawnPoint.Value))

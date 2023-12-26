@@ -88,6 +88,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public IEntityAnimatorComponent EntityAnimatorComponent { get; private set; }
 
         public IEntityExperienceComponent EntityExperienceComponent { get; private set; }
+        public Action<UnitEntity> OnKill;
         private IEntityAIComponent EntityAIComponent { get; set; }
 
         public bool IsTargetAble { get; set; }

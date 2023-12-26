@@ -27,6 +27,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         public Stat AttackRange => Stats[(int)Constant.StatsId.AttackRange];
         
         public event Action OnAttack;
+        
+        public event Action OnKill;
 
         public BaseGameEntity GameEntity { get; private set; }  
         public Dictionary<int, Stat> Stats { get; private set; }

@@ -32,6 +32,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         private List<Stat> _stats;
 #endif
         [SerializeField, TabGroup("Component")]
+        private AbilityNew ability;
+
+        [SerializeField, TabGroup("Component")]
         private SoundHandler _soundHandler;
 
         [SerializeField, TabGroup("Component")]
@@ -96,6 +99,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public bool IsInitialization { get; private set; }
 
         public UnitEntityConfig Config => _config;
+
+        public AbilityNew Ability { get => ability;}
 
         public void Init(BaseGameEntity parameter)
         {

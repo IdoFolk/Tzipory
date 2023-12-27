@@ -551,6 +551,7 @@ MonoBehaviour:
   _timerHandler:
     _timerSerializeDatas: []
   _stats: []
+  ability: {fileID: 11400000, guid: 19d83f84093cf0d448ed6355758f7c5c, type: 2}
   _soundHandler: {fileID: 1458640161773333807}
   _entityTargetingComponent: {fileID: 6714340459238886645}
   _colliderTargeting: {fileID: 5681348044168406484}

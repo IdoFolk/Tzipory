@@ -22,10 +22,10 @@ TagManager:
   - Clickable
   - Shadow
   - Ground
-  - 
-  - 
-  - 
-  - 
+  - Shaman
+  - Enemy
+  - ShamanAttack
+  - EnemyAttack
   - 
   - 
   - 

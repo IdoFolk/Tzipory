@@ -14,7 +14,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
         
         private float _currentDecisionInterval = 0;
         private float _baseDecisionInterval;
-        
+
+        private float lastCast;
+
         public void Init(BaseGameEntity parameter1, UnitEntity parameter2,AIComponentConfig config)
         {
             Init(parameter1);
@@ -46,9 +48,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                 _self.EntityTargetingComponent.TrySetNewTarget();
                 _currentDecisionInterval = _baseDecisionInterval;
             }
-            
-            
-            if (_self.EntityMovementComponent.IsMoving)
+
+
+            /*if (_self.EntityMovementComponent.IsMoving)
             {
                 if (_self.EntityAbilitiesComponent.IsCasting)
                     _self.EntityAbilitiesComponent?.CancelCast();
@@ -56,7 +58,16 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                 return;
             }
             
-            _self.EntityAbilitiesComponent?.CastAbility(_self.EntityTargetingComponent.AvailableTargets);
+            _self.EntityAbilitiesComponent?.CastAbility(_self.EntityTargetingComponent.AvailableTargets);*/
+
+            if (UnityEngine.Time.time - lastCast >= _self.Ability.CoolDown)
+            {
+                _self.Ability.CastAbility(_self);
+                lastCast = UnityEngine.Time.time;
+                return;
+            }
+
+
             if (_self.EntityTargetingComponent.HaveTarget)//temp
                 _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);
         }

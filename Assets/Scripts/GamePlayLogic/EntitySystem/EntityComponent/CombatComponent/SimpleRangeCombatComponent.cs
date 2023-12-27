@@ -95,7 +95,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             if (CritChance.CurrentValue > Random.Range(0, 100))
             {
                 _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
-                _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true, GameEntity);
+                _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true, GameEntity); //bad math
                 OnAttack?.Invoke();
                 return true;
             }

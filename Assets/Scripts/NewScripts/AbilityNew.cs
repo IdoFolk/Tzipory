@@ -11,4 +11,6 @@ public abstract class AbilityNew : ScriptableObject
     public float CoolDown { get => coolDown; }
 
     public abstract void CastAbility(UnitEntity caster);
+
+    //2 abilities that are direct improvements of this ability
 }

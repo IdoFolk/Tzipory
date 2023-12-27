@@ -14,8 +14,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
         public bool IsInitialization { get; private set; }
         public BaseGameEntity GameEntity { get; private set; }
 
-        public bool IsAttckingCore;
-        
         private UnitEntity _self;
         
         private float _currentDecisionInterval = 0;
@@ -60,30 +58,15 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                 if (_self.EntityTargetingComponent.HaveTargetInRange)
                 {
                     _self.EntityTargetingComponent.TrySetNewTarget();
-                    
-                    foreach (var targetAbleEntity in _self.EntityTargetingComponent.AvailableTargets)
-                    {
-                        if (targetAbleEntity.EntityType == EntityType.Core)
-                        {
-                            _self.EntityTargetingComponent.SetAttackTarget(targetAbleEntity);
-                            IsAttckingCore = true;
-                            break;
-                        }
-                    }
                 }
-                
                 _self.EntityMovementComponent.CanMove = true;
                 return;
             }
             
-            if (IsAttckingCore)
-            {
-                if(_self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget))
-                    _self.EntityHealthComponent.StartDeathSequence();
-            }
-            
             if (_currentDecisionInterval < 0 && _self.EntityTargetingComponent.HaveTarget)
             {
+                if (_self.EntityTargetingComponent.CurrentTarget.EntityType == EntityType.Core) return;
+                
                 if (!_isAttacking)
                 {
                     if (Random.Range(0, 100) < _aggroLevel)
@@ -103,7 +86,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                 }
             }
             
-            if (_isAttacking)
+            if (_isAttacking && _self.EntityTargetingComponent.CurrentTarget is not null)
             {
                 _self.EntityMovementComponent.SetDestination(_self.EntityTargetingComponent.CurrentTarget.GameEntity.EntityTransform.position, MoveType.Free);//temp!
                     

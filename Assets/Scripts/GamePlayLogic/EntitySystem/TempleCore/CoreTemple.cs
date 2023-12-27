@@ -25,7 +25,7 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
     [SerializeField] private Animator _coreAnimator;
     [SerializeField] private float hp;
     
-    private readonly List<UnitEntity> _enemies = new();
+    private readonly List<Enemy> _enemies = new();
     
     private IObjectDisposable _uiIndicator;
 
@@ -141,13 +141,13 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<UnitEntity>(out var enemy))
+        if (other.TryGetComponent<Enemy>(out var enemy))
             _enemies.Add(enemy);
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent<UnitEntity>(out var enemy))
+        if (other.TryGetComponent<Enemy>(out var enemy))
             _enemies.Remove(enemy);
     }
 

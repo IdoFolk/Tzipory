@@ -1,3 +1,5 @@
+using Tzipory.GamePlayLogic.EntitySystem;
+using Tzipory.GameplayLogic.Managers.CoreGameManagers;
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Tools.TimeSystem;
@@ -23,8 +25,9 @@ public class Temp_Projectile : MonoBehaviour
     private bool _hitTarget;
 
     
-    public void Init(BaseGameEntity baseGameEntity,ITargetAbleEntity target,float speed,float damage,float timeToDie,bool isCrit)
+    public void Init(BaseGameEntity baseGameEntity,ITargetAbleEntity target,float speed,float damage,float timeToDie,bool isCrit, BaseGameEntity caster)
     {
+        _casterId = caster.EntityInstanceID;
         _timeToDie = timeToDie;
         _speed = speed;
         _target = target;
@@ -61,6 +64,11 @@ public class Temp_Projectile : MonoBehaviour
             if (!_hitTarget)
             {
                 hitedTarget.EntityHealthComponent.TakeDamage(_damage,_isCrit);
+                if (hitedTarget.EntityHealthComponent.Health.CurrentValue <= 0)
+                {
+                    var shaman = LevelManager.PartyManager.GetShaman(_casterId);
+                    shaman.OnKill?.Invoke((UnitEntity)hitedTarget);
+                }
                 _hitTarget = true;
             }
             

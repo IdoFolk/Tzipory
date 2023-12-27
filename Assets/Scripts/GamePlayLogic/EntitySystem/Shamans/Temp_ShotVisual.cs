@@ -20,9 +20,9 @@ public class Temp_ShotVisual : MonoBehaviour
         _baseGameEntity = baseGameEntity;
     }
     
-    public void Shot(ITargetAbleEntity target,float damage,bool isCrit)
+    public void Shot(ITargetAbleEntity target,float damage,bool isCrit, BaseGameEntity caster)
     {
         var projectile = Instantiate(_projectile, _shotPosition.position, Quaternion.identity,_shotPosition);
-        projectile.Init(_baseGameEntity,target,_projectileSpeed,damage,_timeToDie,isCrit);
+        projectile.Init(_baseGameEntity,target,_projectileSpeed,damage,_timeToDie,isCrit, caster);
     }
 }

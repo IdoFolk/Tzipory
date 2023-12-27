@@ -129,7 +129,7 @@ namespace Tzipory.Systems.WaveSystem
                 if (!enemyGroup.TryGetEnemy(out var entityConfig))
                     continue;
 
-                var enemy = PoolManager.UnitEntityPool.GetObject();
+                var enemy = PoolManager.EnemyPool.GetObject();
                 entityConfig.MovementComponentConfig.PathCreator = _path;
                 enemy.Init(entityConfig);
                 EnemyManager.AddEnemy(enemy);

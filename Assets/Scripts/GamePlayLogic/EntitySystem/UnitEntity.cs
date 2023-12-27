@@ -91,6 +91,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem
         public IEntityAnimatorComponent EntityAnimatorComponent { get; private set; }
 
         public IEntityExperienceComponent EntityExperienceComponent { get; private set; }
+        public Action<UnitEntity> OnKill;
         private IEntityAIComponent EntityAIComponent { get; set; }
 
         public bool IsTargetAble { get; set; }
@@ -120,8 +121,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             
             gameObject.name = $"{_config.name} InstanceID: {EntityInstanceID}";
             
-            _clickHelper.gameObject.SetActive(_config.UnitType != UnitType.Enemy);
-
             gameObject.tag = _config.UnitType.ToString();
             _groundCollider.gameObject.tag = _config.UnitType.ToString();
             _boxCollider.enabled = true;

@@ -40,6 +40,8 @@ public class HeroAnimator : IEntityAnimatorComponent
         _entityVisualComponent.OnSpriteFlipX += FlipAnimations;
         _entityHealthComponent.OnHit += GetHitAnimation;
         _entityHealthComponent.OnDeath += DeathAnimation;
+        
+        
         foreach (var ability in _entityAbilitiesComponent.Abilities.Select(keyValuePair => keyValuePair.Value).Where(ability => ability.IsActive))
         {
             ability.OnAbilityReady += AbilityReadyAnimation;

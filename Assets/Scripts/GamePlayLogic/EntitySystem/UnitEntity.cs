@@ -116,8 +116,6 @@ namespace Tzipory.GamePlayLogic.EntitySystem
             
             gameObject.name = $"{_config.name} InstanceID: {EntityInstanceID}";
             
-            _clickHelper.gameObject.SetActive(_config.UnitType != UnitType.Enemy);
-
             gameObject.tag = _config.UnitType.ToString();
             _groundCollider.gameObject.tag = _config.UnitType.ToString();
             _boxCollider.enabled = true;

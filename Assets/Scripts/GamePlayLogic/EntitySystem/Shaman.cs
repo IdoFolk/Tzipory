@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Tzipory.GamePlayLogic.EntitySystem;
+using Tzipory.Systems.PoolSystem;
 using UnityEngine;
 
-public class Shaman : UnitEntity
+public class Shaman : UnitEntity , IPoolable<Shaman>
 {
-    
+    public event Action<Shaman> OnDispose;
 }

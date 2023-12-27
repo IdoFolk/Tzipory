@@ -22,5 +22,6 @@ namespace Tzipory.Systems.FactorySystem
             monoBehaviour.gameObject.SetActive(false);
             return monoBehaviour;
         }
+        
     }
 }

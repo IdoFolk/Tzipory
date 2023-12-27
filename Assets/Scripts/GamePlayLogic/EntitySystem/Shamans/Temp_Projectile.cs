@@ -25,8 +25,9 @@ public class Temp_Projectile : MonoBehaviour
     private bool _hitTarget;
 
     
-    public void Init(BaseGameEntity baseGameEntity,ITargetAbleEntity target,float speed,float damage,float timeToDie,bool isCrit)
+    public void Init(BaseGameEntity baseGameEntity,ITargetAbleEntity target,float speed,float damage,float timeToDie,bool isCrit, BaseGameEntity caster)
     {
+        _casterId = caster.EntityInstanceID;
         _timeToDie = timeToDie;
         _speed = speed;
         _target = target;

@@ -95,13 +95,13 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             if (CritChance.CurrentValue > Random.Range(0, 100))
             {
                 _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.CRIT_ATTACK);
-                _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true);
+                _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue * (CritDamage.CurrentValue / 100),true, GameEntity);
                 OnAttack?.Invoke();
                 return true;
             }
             
             _entityVisualComponent.EffectSequenceHandler.PlaySequenceById(Constant.EffectSequenceIds.ATTACK);
-            _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue,false);
+            _shotVisual.Shot(targetAbleEntity,AttackDamage.CurrentValue,false, GameEntity);
             OnAttack?.Invoke();
             return true;
         }

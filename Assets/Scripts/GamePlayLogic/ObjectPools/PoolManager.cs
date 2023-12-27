@@ -13,7 +13,8 @@ namespace Tzipory.GamePlayLogic.ObjectPools
     public class PoolManager
     {
         public static VisualSystemPool  VisualSystemPool { get; private set; }
-        public static ObjectPool<UnitEntity> UnitEntityPool { get; private set; }
+        public static ObjectPool<Enemy> EnemyPool { get; private set; }
+        public static ObjectPool<Shaman> ShamanPool { get; private set; }
         public static ObjectPool<UIIndicator> IndicatorPool { get; private set; }
         
         public static ObjectPool<PopupText> PopUpTextPool { get; private set; }
@@ -23,7 +24,8 @@ namespace Tzipory.GamePlayLogic.ObjectPools
         public PoolManager()
         {
             VisualSystemPool  = new VisualSystemPool();
-            UnitEntityPool = new ObjectPool<UnitEntity>(new UnitEntityFactory(),50);
+            EnemyPool = new ObjectPool<Enemy>(new EnemyFactory(),50);
+            ShamanPool = new ObjectPool<Shaman>(new HeroFactory(),10);
             IndicatorPool  = new ObjectPool<UIIndicator>(new IndicatorFactory());
             PopUpTextPool = new ObjectPool<PopupText>(new PopUpTextFactory(),50);
         }

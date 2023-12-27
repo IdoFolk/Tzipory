@@ -52,7 +52,7 @@ namespace Tzipory.GameplayLogic.Managers.CoreGameManagers
         {
             foreach (var shamanSerializeData in party)
             {
-                var shaman = PoolManager.UnitEntityPool.GetObject();
+                var shaman = PoolManager.ShamanPool.GetObject();
                 shaman.transform.position = GetSpawnPoint();
                 shaman.transform.SetParent(_partyParent);
                 shaman.Init(shamanSerializeData);

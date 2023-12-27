@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4905909738664598696}
   - component: {fileID: 1709409268931860727}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: GroundCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 4940823210958721944}
   - component: {fileID: 3537039333127990012}
   - component: {fileID: 7913140821953131204}
-  m_Layer: 14
+  m_Layer: 11
   m_Name: Clicker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5559365851164241227}
   - component: {fileID: 7394318654340704021}
-  m_Layer: 14
+  m_Layer: 0
   m_Name: ProjectileShotPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 782446682829124349, guid: 72a338c44fa1ea545a26a4eff168fb99, type: 3}
       propertyPath: m_Layer
-      value: 14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1575195379841899507, guid: 72a338c44fa1ea545a26a4eff168fb99, type: 3}
       propertyPath: m_LocalPosition.x
@@ -258,11 +258,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8422558717809771838, guid: 72a338c44fa1ea545a26a4eff168fb99, type: 3}
       propertyPath: m_Layer
-      value: 14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8910869067711447683, guid: 72a338c44fa1ea545a26a4eff168fb99, type: 3}
       propertyPath: m_Layer
-      value: 14
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -493,7 +493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3050176629895901538, guid: 9269dec163eba4548ad23545f9d185cc, type: 3}
       propertyPath: m_Layer
-      value: 14
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6056453708549399613, guid: 9269dec163eba4548ad23545f9d185cc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -954,7 +954,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 183341782724073016, guid: c768b96f8438e524e9c4782b8837a09a, type: 3}
       propertyPath: m_Layer
-      value: 14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9075051816834661077, guid: c768b96f8438e524e9c4782b8837a09a, type: 3}
       propertyPath: m_RootOrder

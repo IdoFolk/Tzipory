@@ -35,7 +35,7 @@ namespace Tzipory.Systems.Entity
 #endif
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             EntityTimer.TickAllTimers();
 

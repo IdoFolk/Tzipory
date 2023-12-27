@@ -1,10 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using GameplayLogic.UI.HPBar;
-using PathCreation;
 using Tzipory.ConfigFiles.EntitySystem.ComponentConfig;
-using Tzipory.GamePlayLogic.EntitySystem;
 using Tzipory.GameplayLogic.Managers.MainGameManagers;
 using Tzipory.GameplayLogic.UI.Indicator;
 using Tzipory.Systems.Entity;
@@ -24,8 +20,8 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
     [SerializeField] private TEMP_HP_Bar _hpBar;
     [SerializeField] private Animator _coreAnimator;
     [SerializeField] private float hp;
-    
-    private readonly List<Enemy> _enemies = new();
+
+    private int _enemiesNearCoreNum;
     
     private IObjectDisposable _uiIndicator;
 
@@ -85,7 +81,17 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
         },null,GoToCore);
 
         IsInitialization = true;
-        StartCoroutine(UpdateUIIndicator());
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        
+        if (_enemiesNearCoreNum > 0)
+            _canacleFlash = UIIndicatorHandler.StartFlashOnIndicator(_uiIndicator.ObjectInstanceId);
+        else
+            _canacleFlash?.Invoke();
+        
     }
 
     private void OnHealthChanage(StatChangeData statChangeData)
@@ -128,27 +134,19 @@ public class CoreTemple : BaseGameEntity, ITargetAbleEntity , IInitialization
     {
         GameManager.CameraHandler.SetCameraPosition(transform.position);
     }
-
-    private IEnumerator UpdateUIIndicator()
-    {
-        if (_enemies.Count > 0)
-            _canacleFlash = UIIndicatorHandler.StartFlashOnIndicator(_uiIndicator.ObjectInstanceId);
-        else
-            _canacleFlash?.Invoke();
-
-        yield return null;
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<Enemy>(out var enemy))
-            _enemies.Add(enemy);
+        if (other.gameObject.CompareTag("Enemy"))
+            _enemiesNearCoreNum++;
     }
 
     private void OnTriggerExit2D(Collider2D other)
     {
-        if (other.TryGetComponent<Enemy>(out var enemy))
-            _enemies.Remove(enemy);
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            _enemiesNearCoreNum--;
+            if (_enemiesNearCoreNum < 0) _enemiesNearCoreNum = 0;
+        }
     }
 
     private void OnDestroy()

@@ -24,6 +24,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
             _baseDecisionInterval = config.DecisionInterval;
             
             IsInitialization = true;
+            
+            
         }
 
         private void Init(BaseGameEntity parameter)
@@ -45,17 +47,16 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                 _currentDecisionInterval = _baseDecisionInterval;
             }
             
-            /*
+            
             if (_self.EntityMovementComponent.IsMoving)
             {
                 if (_self.EntityAbilitiesComponent.IsCasting)
                     _self.EntityAbilitiesComponent?.CancelCast();
                 
                 return;
-            }*/
+            }
             
-          //  _self.EntityAbilitiesComponent?.CastAbility(_self.EntityTargetingComponent.AvailableTargets);
-          //insert new logic here
+            _self.EntityAbilitiesComponent?.CastAbility(_self.EntityTargetingComponent.AvailableTargets);
             if (_self.EntityTargetingComponent.HaveTarget)//temp
                 _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);
         }

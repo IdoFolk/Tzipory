@@ -138,10 +138,10 @@ public class UnitEntity : BaseGameEntity, ITargetAbleEntity, IInitialization<Uni
         List<IStatHolder> statHolders = new List<IStatHolder>();
 
         AddComponent(EntityVisualComponent);
-        AddComponent(EntityTargetingComponent);
-        _entityTargetingComponent.gameObject.SetActive(true);
+        //AddComponent(EntityTargetingComponent);
+        //_entityTargetingComponent.gameObject.SetActive(true);
 
-        statHolders.Add(EntityTargetingComponent);
+        //statHolders.Add(EntityTargetingComponent);
 
         EntityHealthComponent = HealthComponentFactory.GetHealthComponent(_config.HealthComponentConfig);
         AddComponent(EntityHealthComponent);
@@ -189,7 +189,7 @@ public class UnitEntity : BaseGameEntity, ITargetAbleEntity, IInitialization<Uni
 
         EntityVisualComponent.Init(this, _config.VisualComponentConfig);
         EntityHealthComponent.Init(this, _config.HealthComponentConfig);
-        EntityTargetingComponent.Init(this, _colliderTargeting, _config.TargetingComponentConfig);
+        //EntityTargetingComponent.Init(this, _colliderTargeting, _config.TargetingComponentConfig);
         EntityAbilitiesComponent?.Init(this, _config.AbilityComponentConfig);
         EntityMovementComponent?.Init(this, _config.MovementComponentConfig, _agentMoveComponent);
         EntityCombatComponent?.Init(this, _config.CombatComponentConfig);

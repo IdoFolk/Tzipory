@@ -6,7 +6,6 @@ using Tzipory.Systems.Entity.EntityComponents;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Projectile : MonoBehaviour
 {
-
     [SerializeField] private float speed;
     [SerializeField] private float lifeTime;
     [SerializeField] private int maxNumberOfHits;
@@ -20,7 +19,6 @@ public class Projectile : MonoBehaviour
     private void OnEnable()
     {
         Invoke("Disable", lifeTime);
-        
     }
 
     public void Fire(Vector2 direction)

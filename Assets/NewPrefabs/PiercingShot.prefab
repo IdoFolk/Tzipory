@@ -130,3 +130,4 @@ MonoBehaviour:
   maxNumberOfHits: 3
   limitedNumberOfHits: 1
   baseDamage: 15
+  rb: {fileID: 5647184112388245466}

@@ -9,17 +9,19 @@ using UnityEngine;
 
 namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoSingleton<GameManager>
     {
         public static ISceneHandler SceneHandler { get; private set; }
 
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private SceneHandler _sceneHandler;
+        [SerializeField] private PoolsManager newPoolManager;
 
         private static CameraHandler _cameraHandler;
 
         public static GameData GameData { get; private set; }
         public static PlayerManager PlayerManager { get; private set; }
+        public PoolsManager NewPoolManager { get => newPoolManager; }
 
         public static CameraHandler CameraHandler
         {
@@ -40,6 +42,7 @@ namespace Tzipory.GameplayLogic.Managers.MainGameManagers
 
         private void Awake()
         {
+            base.Awake();
             if (SceneHandler == null)
                 SceneHandler = _sceneHandler;
 

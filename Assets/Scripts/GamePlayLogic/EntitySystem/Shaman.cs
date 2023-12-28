@@ -1,4 +1,5 @@
 using System;
+using Tzipory.ConfigFiles.EntitySystem;
 using Tzipory.Systems.PoolSystem;
 using UnityEngine;
 
@@ -9,9 +10,16 @@ public class Shaman : UnitEntity, IPoolable<Shaman>
 
     [SerializeField] private EnemyTargeter enemyTargeter;
 
-    private void Start()
+    public override void Init(UnitEntityConfig parameter)
     {
+        base.Init(parameter);
         EnemyTargeter.Init(this);
+        EntityCombatComponent.OnKill += GetEnergyFromKill;
+    }
+
+    private void GetEnergyFromKill(UnitEntity killedEntity)
+    {
+        
     }
 
     public EnemyTargeter EnemyTargeter { get => enemyTargeter; }

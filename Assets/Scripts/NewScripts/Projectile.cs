@@ -12,6 +12,7 @@ public class Projectile : MonoBehaviour
     [SerializeField] private int maxNumberOfHits;
     [SerializeField] private bool limitedNumberOfHits;
     [SerializeField] private float baseDamage;
+    [SerializeField] private Rigidbody2D rb;
     private int currentNumberOfHits = 0;
     private UnitEntity caster;
     private bool crit;
@@ -19,7 +20,14 @@ public class Projectile : MonoBehaviour
     private void OnEnable()
     {
         Invoke("Disable", lifeTime);
+        
     }
+
+    public void Fire(Vector2 direction)
+    {
+        rb.velocity = direction * speed;
+    }
+
 
     public void InitProjectile(UnitEntity givenCaster, float baseDamage, bool critical)
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PoolsManager : MonoBehaviour
 {
-    [SerializeField] private ProjectilePool PiercingShotPool;
+    [SerializeField] private ProjectilePool piercingShotPool;
 
-    public ProjectilePool PiercingShotPool1 { get => PiercingShotPool;}
+    public ProjectilePool PiercingShotPool { get => piercingShotPool;}
 }

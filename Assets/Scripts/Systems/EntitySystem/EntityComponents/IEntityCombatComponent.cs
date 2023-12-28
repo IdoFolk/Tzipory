@@ -13,8 +13,9 @@ namespace Tzipory.Systems.Entity.EntityComponents
         public Stat AttackRate { get; }
         public Stat AttackRange { get; }
         public event Action OnAttack; 
-        public event Action OnKill; 
+        public event Action<UnitEntity> OnKill; 
 
         public bool Attack(ITargetAbleEntity targetAbleEntity);//may need to target parameter
+        public void OnKillEvent(UnitEntity killedTarget);
     }
 }

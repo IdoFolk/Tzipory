@@ -194,7 +194,7 @@ namespace Tzipory.Systems.StatusSystem
         /// Set a zero set modifier
         /// </summary>
         /// <param name="amount">A value 0 or 1 to set the stat to 0 or its original value</param>
-        public void SetValue(int amount)
+        public void SetZeroValue(int amount)
         {
             if (amount is 0 or 1)
                 _zeroSetModifier = amount;

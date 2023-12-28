@@ -87,6 +87,7 @@ namespace Tzipory.Helpers.Consts
         public enum StatsId
         {
             Health,
+            Energy,
             AttackDamage,
             AttackRate,
             AttackRange,

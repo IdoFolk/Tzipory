@@ -56,7 +56,7 @@ public class Temp_Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.TryGetComponent<ITargetAbleEntity>(out var hitedTarget))
+        if (other.TryGetComponent<UnitEntity>(out var hitedTarget))
         {
             if (hitedTarget.EntityType == EntityType.Hero) return;
             if (hitedTarget.EntityType == EntityType.Core) return;
@@ -67,7 +67,7 @@ public class Temp_Projectile : MonoBehaviour
                 if (hitedTarget.EntityHealthComponent.Health.CurrentValue <= 0)
                 {
                     var shaman = LevelManager.PartyManager.GetShaman(_casterId);
-                    shaman.OnKill?.Invoke((UnitEntity)hitedTarget);
+                    shaman.EntityCombatComponent.OnKillEvent(hitedTarget);
                 }
                 _hitTarget = true;
             }

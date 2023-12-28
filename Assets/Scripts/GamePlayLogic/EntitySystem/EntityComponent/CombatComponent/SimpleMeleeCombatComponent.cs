@@ -25,7 +25,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
         
         public event Action OnAttack;
         
-        public event Action OnKill;
+        public event Action<UnitEntity> OnKill;
 
         public BaseGameEntity GameEntity { get; private set; }  
         public Dictionary<int, Stat> Stats { get; private set; }
@@ -89,6 +89,11 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             targetAbleEntity.EntityHealthComponent.TakeDamage(AttackDamage.CurrentValue,false);
             OnAttack?.Invoke();
             return true;
+        }
+
+        public void OnKillEvent(UnitEntity killedUnitEntity)
+        {
+            OnKill?.Invoke(killedUnitEntity);
         }
     }
 }

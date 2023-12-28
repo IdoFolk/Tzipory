@@ -13,6 +13,8 @@ namespace Tzipory.ConfigFiles.EntitySystem
         [SerializeField] private string _entityName;
         [SerializeField,ReadOnly] private int _entityId;
         [SerializeField,TabGroup("Main config")] private UnitType _unitType;
+        [SerializeField,TabGroup("Main config"),ShowIf(nameof(_unitType),UnitType.Enemy)] private EnemyType _enemyType;
+
 
         [SerializeField,TabGroup("Base Component")] public HealthComponentConfig HealthComponentConfig;
 
@@ -38,6 +40,7 @@ namespace Tzipory.ConfigFiles.EntitySystem
         public string EntityName => _entityName;
 
         public UnitType UnitType => _unitType;
+        public EnemyType EnemyType => _enemyType;
         
         public bool AIComponent => _aiComponent;
 

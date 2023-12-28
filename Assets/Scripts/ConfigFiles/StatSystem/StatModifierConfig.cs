@@ -8,12 +8,12 @@ namespace Tzipory.ConfigFiles.StatusSystem
     [Serializable]
     public struct StatModifierConfig
     {
-        [SerializeField] private StatusModifierType _statusModifierType;
+        [SerializeField] private StatModifierType _statModifierType;
         [SerializeField, HideIf("_enableRingModifiers")] public float Modifier;
         [SerializeField, ShowIf("_enableRingModifiers")] public float[] _ringModifiers;
         private bool _enableRingModifiers;
 
-        public StatusModifierType StatusModifierType => _statusModifierType;
+        public StatModifierType StatModifierType => _statModifierType;
 
         public float[] RingModifiers => _ringModifiers;
 

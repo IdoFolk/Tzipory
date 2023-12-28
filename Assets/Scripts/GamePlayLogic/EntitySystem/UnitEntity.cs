@@ -93,7 +93,6 @@ public class UnitEntity : BaseGameEntity, ITargetAbleEntity, IInitialization<Uni
     public IEntityAnimatorComponent EntityAnimatorComponent { get; private set; }
 
     public IEntityExperienceComponent EntityExperienceComponent { get; private set; }
-    public Action<UnitEntity> OnKill;
     private IEntityAIComponent EntityAIComponent { get; set; }
 
     public bool IsTargetAble { get; set; }
@@ -113,7 +112,16 @@ public class UnitEntity : BaseGameEntity, ITargetAbleEntity, IInitialization<Uni
     #endregion
 
     #region Inits
+    public virtual void Init(UnitEntityConfig parameter) //need to oder logic to many responsibility
+    {
+        var serializeData = DataManager.DataRequester.GetSerializeData<UnitEntitySerializeData>(parameter);
 
+        _isUsingConfig = true;
+
+        _config = parameter;
+
+        Init(serializeData);
+    }
     public void Init(UnitEntitySerializeData parameter)
     {
         _serializeData = parameter;
@@ -224,16 +232,7 @@ public class UnitEntity : BaseGameEntity, ITargetAbleEntity, IInitialization<Uni
     }
 
     [Obsolete("may need to use UnitEntitySerializeData only")]
-    public void Init(UnitEntityConfig parameter) //need to oder logic to many responsibility
-    {
-        var serializeData = DataManager.DataRequester.GetSerializeData<UnitEntitySerializeData>(parameter);
-
-        _isUsingConfig = true;
-
-        _config = parameter;
-
-        Init(serializeData);
-    }
+    
 
     #endregion
 

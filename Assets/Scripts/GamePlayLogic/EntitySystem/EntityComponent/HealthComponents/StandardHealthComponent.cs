@@ -74,7 +74,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
 
         public void Heal(float amount)
         {
-            Health.ProcessStatModifier(new StatModifier(amount,StatusModifierType.Addition),"Heal",PopUpTextManager.Instance.HealDefaultConfig);
+            Health.ProcessStatModifier(new StatModifier(amount,StatModifierType.Addition),"Heal",PopUpTextManager.Instance.HealDefaultConfig);
         }
 
         public void TakeDamage(float damage, bool isCrit)
@@ -97,7 +97,7 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
             }
             
             OnHit?.Invoke(isCrit);
-            Health.ProcessStatModifier(new StatModifier(damage,StatusModifierType.Reduce),processName,popUpTextConfig);
+            Health.ProcessStatModifier(new StatModifier(damage,StatModifierType.Reduce),processName,popUpTextConfig);
         }
 
         public void StartDeathSequence()

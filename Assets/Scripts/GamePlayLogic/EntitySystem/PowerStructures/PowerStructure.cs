@@ -237,13 +237,13 @@ namespace Tzipory.GameplayLogic.EntitySystem.PowerStructures
         private float GetDeltaFromStatEffectOnShaman(float StatEffectValue, Stat shamanStat, bool rounded)
         {
             float value = StatEffectValue;
-            switch (_powerStructureConfig.StatEffectConfig.StatModifier.StatusModifierType)
+            switch (_powerStructureConfig.StatEffectConfig.StatModifier.StatModifierType)
             {
-                case StatusModifierType.Addition:
+                case StatModifierType.Addition:
                     break;
-                case StatusModifierType.Reduce:
+                case StatModifierType.Reduce:
                     break;
-                case StatusModifierType.Multiplication:
+                case StatModifierType.Multiplication:
                     value = (shamanStat.BaseValue * StatEffectValue) - shamanStat.CurrentValue;
                     break;
             }

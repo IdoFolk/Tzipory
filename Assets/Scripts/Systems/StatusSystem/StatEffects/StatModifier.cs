@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using Tzipory.ConfigFiles.StatusSystem;
+using Tzipory.Systems.StatusSystem;
 
-namespace Tzipory.Systems.StatusSystem
+namespace Tzipory
 {
     public readonly struct StatModifier
     {
-        public readonly StatusModifierType ModifierType;
+        public readonly StatModifierType ModifierType;
 
         public float Modifier { get; }
 
-        public StatModifier(float modifier,StatusModifierType statusModifierType,bool useDynamicModifier = false)
+        public StatModifier(float modifier,StatModifierType statModifierType,bool useDynamicModifier = false)
         {
-            ModifierType = statusModifierType;
+            ModifierType = statModifierType;
             Modifier = modifier;
         }
         
         public StatModifier(StatModifierConfig statusModifierType,bool useDynamicModifier = false)
         {
-            ModifierType = statusModifierType.StatusModifierType;
+            ModifierType = statusModifierType.StatModifierType;
             Modifier = statusModifierType.Modifier;
         }
 
@@ -29,20 +30,20 @@ namespace Tzipory.Systems.StatusSystem
             
             switch (ModifierType)
             {
-                case StatusModifierType.Addition:
+                case StatModifierType.Addition:
                     return value + Modifier;
-                case StatusModifierType.Reduce:
+                case StatModifierType.Reduce:
                     return value - Modifier;
-                case StatusModifierType.Multiplication:
+                case StatModifierType.Multiplication:
                     return value * Modifier;
-                case StatusModifierType.Divide:
+                case StatModifierType.Divide:
                     if (Modifier is 0 or < 0)
                         throw new Exception("StatModifier set to Divide and the value is smaller than 0 or 0");
                     return value / Modifier;
-                case StatusModifierType.Percentage:
+                case StatModifierType.Percentage:
                     float percentage = Modifier / 100;
                     return value * percentage;
-                case StatusModifierType.SetToZero:
+                case StatModifierType.SetToZero:
                     return value * 0;//set the value to Zero need to Test
                 default:
                     throw new ArgumentOutOfRangeException(nameof(ModifierType), ModifierType, null);
@@ -53,17 +54,17 @@ namespace Tzipory.Systems.StatusSystem
         {
             switch (ModifierType)
             {
-                case StatusModifierType.Addition:
+                case StatModifierType.Addition:
                     return value - Modifier;
-                case StatusModifierType.Multiplication:
+                case StatModifierType.Multiplication:
                     return value / Modifier;
-                case StatusModifierType.Percentage:
+                case StatModifierType.Percentage:
                     return value / Modifier;
-                case StatusModifierType.SetToZero:
+                case StatModifierType.SetToZero:
                     return value - Modifier;
-                case StatusModifierType.Reduce:
+                case StatModifierType.Reduce:
                     return value + Modifier;
-                case StatusModifierType.Divide:
+                case StatModifierType.Divide:
                     return value * Modifier;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(ModifierType),ModifierType,null);
@@ -76,7 +77,7 @@ namespace Tzipory.Systems.StatusSystem
         }
     }
         
-    public enum StatusModifierType
+    public enum StatModifierType
     {
         SetToZero,
         Addition,

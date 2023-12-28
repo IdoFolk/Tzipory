@@ -117,11 +117,11 @@ namespace Tzipory.GamePlayLogic.EntitySystem.EntityComponent
                 _lastPos = position;
             }
 
-            if (_entityTargetingComponent.HaveTarget)
+            /*if (_entityTargetingComponent.HaveTarget)
             {
                 var targetDelta = position.x - _entityTargetingComponent.CurrentTarget.GameEntity.transform.position.x;
                 SetSpriteFlipX(targetDelta < 0);
-            }
+            }*/
 
             // if (VisualComponentConfig.HaveSilhouette)
             // {

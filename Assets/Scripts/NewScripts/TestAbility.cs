@@ -6,14 +6,14 @@ public class TestAbility : AbilityNew
 {
     public override void CastAbility(UnitEntity caster)
     {
-        if (ReferenceEquals(caster.EntityTargetingComponent.CurrentTarget, null))
+        if (ReferenceEquals(((Shaman)caster).EnemyTargeter.ClosestTarget, null))
         {
             return;
         }
         Projectile newProjectile = GameManager.Instance.NewPoolManager.PiercingShotPool.GetPooledObject();
         newProjectile.transform.position = caster.transform.position;
         newProjectile.gameObject.SetActive(true);
-        newProjectile.Fire((caster.EntityTargetingComponent.CurrentTarget.GameEntity.transform.position - caster.transform.position).normalized);
+        newProjectile.Fire((((Shaman)caster).EnemyTargeter.ClosestTarget.transform.position - caster.transform.position).normalized);//for now:)
 
     }
 }

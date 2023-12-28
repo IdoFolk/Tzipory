@@ -52,8 +52,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                 _currentDecisionInterval = _baseDecisionInterval;
             
             _currentDecisionInterval -= GAME_TIME.GameDeltaTime;
-            
-            if (!_self.EntityTargetingComponent.HaveTarget)
+
+            /*if (!_self.EntityTargetingComponent.HaveTarget)
             {
                 if (_self.EntityTargetingComponent.HaveTargetInRange)
                 {
@@ -98,7 +98,9 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
             {
                 _isAttacking = false;
                 _self.EntityMovementComponent.CanMove = true;
-            }//plastr
+            }//plastr*/
+
+            _self.EntityMovementComponent.CanMove = true;
         }
     }
 }

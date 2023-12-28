@@ -37,15 +37,15 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
 
         public void UpdateComponent()
         {
-            if (_self.EntityTargetingComponent.CurrentTarget == null ||
+           /* if (_self.EntityTargetingComponent.CurrentTarget == null ||
                 _self.EntityTargetingComponent.CurrentTarget.EntityHealthComponent.IsEntityDead)
-                _self.EntityTargetingComponent.TrySetNewTarget();
+                _self.EntityTargetingComponent.TrySetNewTarget();*/
             
             _currentDecisionInterval -= GAME_TIME.GameDeltaTime;
             
             if (_currentDecisionInterval < 0)
             {
-                _self.EntityTargetingComponent.TrySetNewTarget();
+                //_self.EntityTargetingComponent.TrySetNewTarget();
                 _currentDecisionInterval = _baseDecisionInterval;
             }
 
@@ -68,8 +68,8 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
             }
 
 
-            if (_self.EntityTargetingComponent.HaveTarget)//temp
-                _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);
+           /* if (_self.EntityTargetingComponent.HaveTarget)//temp
+                _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);*/
         }
     }
 }

@@ -2,6 +2,8 @@
 using Tzipory.Systems.Entity;
 using Tzipory.Systems.Entity.EntityComponents;
 using Tzipory.Tools.TimeSystem;
+using System;
+using UnityEngine;
 
 namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
 {
@@ -11,23 +13,23 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
         public BaseGameEntity GameEntity { get; private set; }
 
         private UnitEntity _self;
-        
+
         private float _currentDecisionInterval = 0;
         private float _baseDecisionInterval;
 
         private float lastCast;
 
-        public void Init(BaseGameEntity parameter1, UnitEntity parameter2,AIComponentConfig config)
+        public void Init(BaseGameEntity parameter1, UnitEntity parameter2, AIComponentConfig config)
         {
             Init(parameter1);
 
             _self = parameter2;
-            
+
             _baseDecisionInterval = config.DecisionInterval;
-            
+
             IsInitialization = true;
-            
-            
+
+
         }
 
         private void Init(BaseGameEntity parameter)
@@ -37,12 +39,12 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
 
         public void UpdateComponent()
         {
-           /* if (_self.EntityTargetingComponent.CurrentTarget == null ||
-                _self.EntityTargetingComponent.CurrentTarget.EntityHealthComponent.IsEntityDead)
-                _self.EntityTargetingComponent.TrySetNewTarget();*/
-            
+            /* if (_self.EntityTargetingComponent.CurrentTarget == null ||
+                 _self.EntityTargetingComponent.CurrentTarget.EntityHealthComponent.IsEntityDead)
+                 _self.EntityTargetingComponent.TrySetNewTarget();*/
+
             _currentDecisionInterval -= GAME_TIME.GameDeltaTime;
-            
+
             if (_currentDecisionInterval < 0)
             {
                 //_self.EntityTargetingComponent.TrySetNewTarget();
@@ -67,9 +69,15 @@ namespace Tzipory.GamePlayLogic.EntitySystem.AIComponent
                 return;
             }
 
+            //need to create a targeter at base then inherit and change with each type of unit 
+            if (!ReferenceEquals(((Shaman)_self).EnemyTargeter.ClosestTarget, null))
+            {
+                Vector2 dir = (((Shaman)_self).EnemyTargeter.ClosestTarget.transform.position - _self.transform.position).normalized;
+                //attack handler. attack 
+            }
 
-           /* if (_self.EntityTargetingComponent.HaveTarget)//temp
-                _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);*/
+            /* if (_self.EntityTargetingComponent.HaveTarget)//temp
+                 _self.EntityCombatComponent.Attack(_self.EntityTargetingComponent.CurrentTarget);*/
         }
     }
 }
